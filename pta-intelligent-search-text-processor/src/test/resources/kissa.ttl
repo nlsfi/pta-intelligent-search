@@ -1,0 +1,46 @@
+@prefix : <http://www.yso.fi/onto/ysa/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdau: <http://rdaregistry.info/Elements/u/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ysa: <http://www.yso.fi/onto/ysa/> .
+@prefix ysa-meta: <http://www.yso.fi/onto/ysa-meta/> .
+@prefix yso: <http://www.yso.fi/onto/yso/> .
+
+:Y96241 a skos:Concept ;
+    dct:created "1985-01-01"^^xsd:date ;
+    dct:modified "2016-05-23T16:10:39+03:00"^^xsd:dateTime ;
+    skos:altLabel "kesykissa"@fi,
+        "kissat"@fi,
+        "kotikissa"@fi ;
+    skos:broader :Y101826,
+        :Y96840 ;
+    skos:exactMatch <http://www.yso.fi/onto/allars/Y20635>,
+        yso:p19378 ;
+    skos:inScheme : ;
+    skos:narrower :Y172596,
+        :Y172597,
+        :Y172598,
+        :Y172599,
+        :Y172601,
+        :Y174568,
+        :Y175258,
+        :Y175430,
+        :Y175431,
+        :Y176977 ;
+    skos:prefLabel "kissa"@fi ;
+    skos:related :Y182265 .
+
+:Y96999 a skos:Concept ;
+    dct:created "1985-01-01"^^xsd:date ;
+    dct:modified "2016-05-23T16:10:39+03:00"^^xsd:dateTime ;
+    skos:altLabel "kissa"@fi ;
+    skos:prefLabel "kisu"@fi .
+
+

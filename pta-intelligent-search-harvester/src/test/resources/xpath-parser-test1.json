@@ -1,0 +1,25 @@
+{
+  "namespaces": {
+    "gmd": "http://www.isotc211.org/2005/gmd",
+    "gco": "http://www.isotc211.org/2005/gco"
+  },
+  "fieldExtractors": [{
+    "field": "@id",
+    "type": "FIRST_MATCHING_VALUE",
+    "xpath": "//gmd:fileIdentifier/*/text()"
+  },{
+    "field": "avainsanat",
+    "type": "ALL_MATCHING_VALUES",
+    "xpath": "//gmd:fileIdentifier/*/text()",
+    "processingChain": "keywords"
+  }],
+  "textProcessingChains": [{
+    "name": "keywords",
+    "chain": [{
+      "class": "fi.maanmittauslaitos.pta.search.processor.SplitFinnishWords"
+    },
+    {
+      "class": "fi.maanmittauslaitos.pta.search.processor.SplitFinnishWords"
+    }]
+  }]
+}
