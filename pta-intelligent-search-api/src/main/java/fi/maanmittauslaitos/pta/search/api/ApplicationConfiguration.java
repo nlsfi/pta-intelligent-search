@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
-import fi.maanmittauslaitos.pta.search.text.stemmer.FinnishShowballStemmerImpl;
+import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
 
 @Configuration
 public class ApplicationConfiguration {
@@ -28,7 +28,7 @@ public class ApplicationConfiguration {
 		RDFTerminologyMatcherProcessor terminologyProcessor = new RDFTerminologyMatcherProcessor();
 		terminologyProcessor.setModel(terminologyModel);
 		terminologyProcessor.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL)); // TODO: lisää SKOS.EXACT_MATCH ?
-		terminologyProcessor.setStemmer(new FinnishShowballStemmerImpl());
+		terminologyProcessor.setStemmer(StemmerFactor.createStemmer());
 		return terminologyProcessor;
 	}
 	

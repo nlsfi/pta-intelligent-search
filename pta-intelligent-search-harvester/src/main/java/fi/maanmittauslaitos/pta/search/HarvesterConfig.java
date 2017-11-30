@@ -22,7 +22,7 @@ import fi.maanmittauslaitos.pta.search.text.RegexProcessor;
 import fi.maanmittauslaitos.pta.search.text.StopWordsProcessor;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 import fi.maanmittauslaitos.pta.search.text.TextSplitterProcessor;
-import fi.maanmittauslaitos.pta.search.text.stemmer.FinnishShowballStemmerImpl;
+import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
 import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.XPathExtractionConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.XPathProcessor;
@@ -111,7 +111,7 @@ public class HarvesterConfig {
 		RDFTerminologyMatcherProcessor terminologyProcessor = new RDFTerminologyMatcherProcessor();
 		terminologyProcessor.setModel(getTerminologyModel());
 		terminologyProcessor.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
-		terminologyProcessor.setStemmer(new FinnishShowballStemmerImpl());
+		terminologyProcessor.setStemmer(StemmerFactor.createStemmer());
 		return terminologyProcessor;
 	}
 
