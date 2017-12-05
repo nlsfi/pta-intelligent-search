@@ -106,6 +106,10 @@ body {
   display: none;
 }
 
+#pta-tulokset-osumat-lista .pta-tulokset-osumat-osuma .pta-tulokset-osumat-osuma-title {
+  font-weight: bold;
+}
+
 #pta-tulokset #pta-tulokset-vinkit span, #pta-tulokset #pta-tulokset-vinkit #pta-tulokset-vinkit-lista {
   display: inline-block;
 }

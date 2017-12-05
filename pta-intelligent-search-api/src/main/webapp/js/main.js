@@ -55,7 +55,12 @@ $(document).ready(function() {
 			result.osumat.forEach(function(osuma) {
 				var tmp = $('<div></div>');
 				tmp.addClass('pta-tulokset-osumat-osuma');
-				tmp.text('foo: '+JSON.stringify(osuma));
+				
+				var title = $('<p></p>');
+				title.text(osuma.title);
+				title.addClass('pta-tulokset-osumat-osuma-title')
+				tmp.append(title);
+				//tmp.text('foo: '+JSON.stringify(osuma));
 				osumaLista.append(tmp);
 			});
 			
