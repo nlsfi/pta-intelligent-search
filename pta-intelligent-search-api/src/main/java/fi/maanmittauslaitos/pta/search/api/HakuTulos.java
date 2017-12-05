@@ -24,8 +24,26 @@ public class HakuTulos {
 	}
 	
 	public static class Osuma {
+		private String title;
+		private String abstractText;
 		private String url;
 		private Double relevanssi;
+		
+		public void setTitle(String title) {
+			this.title = title;
+		}
+		
+		public String getTitle() {
+			return title;
+		}
+		
+		public void setAbstractText(String abstractText) {
+			this.abstractText = abstractText;
+		}
+		
+		public String getAbstractText() {
+			return abstractText;
+		}
 		
 		public void setRelevanssi(Double relevanssi) {
 			this.relevanssi = relevanssi;
