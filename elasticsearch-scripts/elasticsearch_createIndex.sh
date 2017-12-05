@@ -9,8 +9,7 @@ curl -XPUT 'localhost:9200/catalog?pretty' -H 'Content-Type: application/json' -
     "mappings" : {
         "_default_" : {
             "properties" : {
-		"avainsanat": { "type": "text" },
-                "sisalto": { "type": "text" }
+		"abstract_uri": { "type": "text" }
             }
         }
     }

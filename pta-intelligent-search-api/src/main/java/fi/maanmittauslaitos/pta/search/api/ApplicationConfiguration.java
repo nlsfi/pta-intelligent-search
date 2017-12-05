@@ -67,10 +67,18 @@ public class ApplicationConfiguration {
 	
 	@Bean
 	public HakuKone hakuKone(RDFTerminologyMatcherProcessor textProcessor, RestHighLevelClient elasticsearchClient, Model model) throws IOException {
-		AbstractElasticsearchHakuKoneImpl ret = new SimpleElasticsearchHakuKoneImpl();
-		ret.setTextProcessor(textProcessor);
+		ElasticsearchHakuKoneImpl ret = new ElasticsearchHakuKoneImpl();
 		ret.setClient(elasticsearchClient);
-		ret.setModel(model);
+		
+		OntologyElasticsearchQueryProviderImpl queryProvider = new OntologyElasticsearchQueryProviderImpl();
+		queryProvider.setRelationPredicate(SKOS.NARROWER);
+		queryProvider.setTextProcessor(textProcessor);
+		queryProvider.setModel(model);
+		queryProvider.setOntologyLevels(2);
+		queryProvider.setWeightFactor(0.5);
+		
+		ret.setQueryProvider(queryProvider);
+		
 		return ret;
 	}
 }
