@@ -1,9 +1,12 @@
 package fi.maanmittauslaitos.pta.search;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
 
@@ -48,7 +51,18 @@ public class HarvesterConfig {
 		abstractChain.getChain().add(new TextSplitterProcessor());
 		
 		StopWordsProcessor stopWordsProcessor = new StopWordsProcessor();
-		stopWordsProcessor.setStopwords(Arrays.asList("ja", "tai", "on", "jonka", "mitä", "koska")); // TODO .. tämä ei riitä, ehei
+		try (InputStreamReader isr = new InputStreamReader(HarvesterConfig.class.getResourceAsStream("/stopwords-fi.txt"))) {
+			List<String> stopWords = new ArrayList<>();
+			BufferedReader br = new BufferedReader(isr);
+			String line;
+			while ((line = br.readLine()) != null) {
+				String tmp = line.toLowerCase().trim();
+				if (tmp.length() > 0) {
+					stopWords.add(tmp);
+				}
+			}
+			stopWordsProcessor.setStopwords(stopWords);
+		}
 		abstractChain.getChain().add(stopWordsProcessor);
 		
 		RDFTerminologyMatcherProcessor terminologyProcessor = createTerminologyMatcher();
@@ -81,8 +95,17 @@ public class HarvesterConfig {
 		}
 		
 		{
+			FieldExtractorConfiguration titleExtractor = new FieldExtractorConfiguration();
+			titleExtractor.setField("title");
+			titleExtractor.setType(FieldExtractorType.FIRST_MATCHING_VALUE);
+			titleExtractor.setXpath("//gmd:identificationInfo/*/gmd:citation/*/gmd:title/*/text()");
+			
+			configuration.getFieldExtractors().add(titleExtractor);
+		}
+		
+		{
 			FieldExtractorConfiguration keywordExtractor = new FieldExtractorConfiguration();
-			keywordExtractor.setField("avainsanat");
+			keywordExtractor.setField("avainsanat_uri");
 			keywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 			keywordExtractor.setXpath("//gmd:MD_Keywords/gmd:keyword/*/text()");
 			
@@ -93,13 +116,22 @@ public class HarvesterConfig {
 		
 		{
 			FieldExtractorConfiguration abstractExtractor = new FieldExtractorConfiguration();
-			abstractExtractor.setField("sisalto");
+			abstractExtractor.setField("abstract_uri");
 			abstractExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 			abstractExtractor.setXpath("//gmd:abstract/*/text()");
 			
 			abstractExtractor.setTextProcessorName("abstractProcessor");
 			
 			configuration.getFieldExtractors().add(abstractExtractor);
+		}
+		
+		{
+			FieldExtractorConfiguration abstractAsTextExtractor = new FieldExtractorConfiguration();
+			abstractAsTextExtractor.setField("abstract");
+			abstractAsTextExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
+			abstractAsTextExtractor.setXpath("//gmd:abstract/*/text()");
+			
+			configuration.getFieldExtractors().add(abstractAsTextExtractor);
 		}
 		
 		
