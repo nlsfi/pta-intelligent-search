@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-	console.log('hello world');
+	document.getElementById("pta-haku-input-search-text").focus();
 
 	$('#pta-haku-input-container input').keypress(function (e) {
 		if (e.which == 13) {
@@ -17,8 +17,6 @@ $(document).ready(function() {
 		var query = {
 			hakusanat: hakusanat.split(/\s+/).filter(function(v) { return v.length > 0; })
 		};
-
-		console.log('query', query);
 
 		var vinkit = $('#pta-tulokset #pta-tulokset-vinkit');
 		vinkit.hide();
@@ -58,8 +56,25 @@ $(document).ready(function() {
 				
 				var title = $('<p></p>');
 				title.text(osuma.title + ' ('+Math.round(osuma.relevanssi*100)/100+')');
-				title.addClass('pta-tulokset-osumat-osuma-title')
+				title.addClass('pta-tulokset-osumat-osuma-title');
 				tmp.append(title);
+				
+				var desc = $('<div></div>');
+				desc.addClass('pta-tulokset-osumat-osuma-desc');
+				desc.text(osuma.abstractText);
+				desc.hide();
+				title.click(function() { desc.toggle(); });
+				desc.click(function() { desc.toggle(); });
+				
+				tmp.append(desc);
+				
+				var link = $('<a></a>');
+				link.text('Avaa paikkatietohakemistossa');
+				link.attr('href', 'http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/'+osuma.url);
+				link.attr('target', '_blank');
+				
+				tmp.append(link);
+				
 				//tmp.text('foo: '+JSON.stringify(osuma));
 				osumaLista.append(tmp);
 			});

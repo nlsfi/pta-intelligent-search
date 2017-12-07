@@ -106,9 +106,28 @@ body {
   display: none;
 }
 
+#pta-tulokset-osumat-lista .pta-tulokset-osumat-osuma {
+  border: 1px solid #eee;
+  border-radius: 2px;
+  margin-bottom: 1em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
 #pta-tulokset-osumat-lista .pta-tulokset-osumat-osuma .pta-tulokset-osumat-osuma-title {
   font-weight: bold;
+  cursor: pointer;
 }
+
+#pta-tulokset-osumat-lista .pta-tulokset-osumat-osuma .pta-tulokset-osumat-osuma-desc {
+  white-space: pre-wrap;
+}
+
+#pta-tulokset-osumat-lista .pta-tulokset-osumat-osuma a {
+  color: #312f79;
+}
+
+/* Vinkit */
 
 #pta-tulokset #pta-tulokset-vinkit span, #pta-tulokset #pta-tulokset-vinkit #pta-tulokset-vinkit-lista {
   display: inline-block;
@@ -121,6 +140,8 @@ body {
   padding: .25em .5em .25em .5em;
   border-radius: 3px;
 }
+
+/* Virheet */
 
 #pta-tulokset #pta-tulokset-virhe .pta-virhe {
   display: inline-block;
