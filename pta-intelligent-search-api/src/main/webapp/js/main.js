@@ -57,7 +57,7 @@ $(document).ready(function() {
 				tmp.addClass('pta-tulokset-osumat-osuma');
 				
 				var title = $('<p></p>');
-				title.text(osuma.title);
+				title.text(osuma.title + ' ('+Math.round(osuma.relevanssi*100)/100+')');
 				title.addClass('pta-tulokset-osumat-osuma-title')
 				tmp.append(title);
 				//tmp.text('foo: '+JSON.stringify(osuma));
