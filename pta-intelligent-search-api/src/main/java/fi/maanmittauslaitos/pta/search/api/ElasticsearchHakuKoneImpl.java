@@ -66,7 +66,7 @@ public class ElasticsearchHakuKoneImpl implements HakuKone {
 				
 				osuma.setTitle(extractStringValue(t.getSourceAsMap().get("title")));
 				osuma.setAbstractText(extractStringValue(t.getSourceAsMap().get("abstract")));
-				osuma.setUrl(t.getId());
+				osuma.setUrl("http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/" + t.getId());
 				osuma.setRelevanssi((double)t.getScore());
 				tulos.getOsumat().add(osuma);
 			}
