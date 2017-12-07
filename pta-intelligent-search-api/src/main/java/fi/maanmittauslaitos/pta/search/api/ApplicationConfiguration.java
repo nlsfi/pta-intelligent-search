@@ -71,7 +71,9 @@ public class ApplicationConfiguration {
 		ret.setClient(elasticsearchClient);
 		
 		OntologyElasticsearchQueryProviderImpl queryProvider = new OntologyElasticsearchQueryProviderImpl();
-		queryProvider.setRelationPredicate(SKOS.NARROWER);
+		// TODO: we need weights per relationship, not one weight to rule them all
+		queryProvider.addRelationPredicate(SKOS.NARROWER);
+		queryProvider.addRelationPredicate(SKOS.RELATED); // TODO: ... yeah, not really
 		queryProvider.setTextProcessor(textProcessor);
 		queryProvider.setModel(model);
 		queryProvider.setOntologyLevels(2);

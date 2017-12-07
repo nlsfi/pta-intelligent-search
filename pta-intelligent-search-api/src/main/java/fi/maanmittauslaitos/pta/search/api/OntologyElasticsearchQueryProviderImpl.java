@@ -19,13 +19,13 @@ import fi.maanmittauslaitos.pta.search.text.TextProcessor;
 
 
 public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQueryProvider {
-	private IRI relationPredicate;
+	private Set<IRI> relationPredicates = new HashSet<>();
 	private TextProcessor textProcessor;
 	private Model model;
 	
 	private int ontologyLevels = 1;
 	private double weightFactor = 0.5; // weightForLevel(1) = 1.0, weightForLevel(x) = weightForLevel(x-1) * weightFactor  
-	
+	private double basicWordMatchWeight = 1.0;
 	
 	private final ValueFactory vf = SimpleValueFactory.getInstance();
 	
@@ -54,16 +54,20 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		return weightFactor;
 	}
 	
-	public void setRelationPredicate(IRI relationPredicate) {
-		this.relationPredicate = relationPredicate;
+	public void setRelationPredicates(Set<IRI> relationPredicates) {
+		this.relationPredicates = relationPredicates;
 	}
 	
-	public void setRelationPredicate(String relationPredicate) {
-		this.relationPredicate = vf.createIRI(relationPredicate);
+	public Set<IRI> getRelationPredicates() {
+		return relationPredicates;
 	}
 	
-	public IRI getRelationPredicate() {
-		return relationPredicate;
+	public void addRelationPredicate(IRI relationPredicate) {
+		this.relationPredicates.add(relationPredicate);
+	}
+	
+	public void addRelationPredicate(String relationPredicate) {
+		addRelationPredicate(vf.createIRI(relationPredicate));
 	}
 	
 	public void setTextProcessor(TextProcessor textProcessor) {
@@ -75,12 +79,32 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	}
 	
 	@Override
-	public SearchSourceBuilder buildSearchSource(Set<SearchTerm> termit) {
+	public SearchSourceBuilder buildSearchSource(HakuPyynto pyynto) {
+		
 		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder(); 
 		
 		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
 
-		// TODO: avainsanat, teksti
+		lisaaOntologisetTermit(pyynto, boolQuery);
+		lisaaVapaaSanahaku(pyynto, boolQuery);
+
+		sourceBuilder.query(boolQuery);
+		
+		return sourceBuilder;
+	}
+
+	private void lisaaVapaaSanahaku(HakuPyynto pyynto, BoolQueryBuilder boolQuery) {
+		for (String sana : pyynto.getHakusanat()) {
+			MatchQueryBuilder tmp = QueryBuilders.matchQuery("abstract", sana);
+			tmp.operator(Operator.OR);
+			tmp.boost((float)basicWordMatchWeight);
+			boolQuery.should().add(tmp);
+		}
+	}
+
+	private void lisaaOntologisetTermit(HakuPyynto pyynto, BoolQueryBuilder boolQuery) {
+		Set<SearchTerm> termit = getSearchTerms(pyynto);
+
 		for (SearchTerm term : termit) {
 			MatchQueryBuilder tmp = QueryBuilders.matchQuery("abstract_uri", term.resource);
 			tmp.operator(Operator.OR);
@@ -88,14 +112,9 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 			tmp.boost((float)term.weight);
 			boolQuery.should().add(tmp);
 		}
-
-		sourceBuilder.query(boolQuery);
-		
-		return sourceBuilder;
 	}
 
-	@Override
-	public Set<SearchTerm> getSearchTerms(HakuPyynto pyynto) {
+	private Set<SearchTerm> getSearchTerms(HakuPyynto pyynto) {
 		Set<SearchTerm> termit = new HashSet<>();
 		
 		Set<String> prosessoidutYlakasitteet = new HashSet<>(); // Vältetään uudelleenkäsittely
@@ -133,8 +152,10 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		
 		for (String ylakasite : ylakasitteet) {
 			IRI resource = vf.createIRI(ylakasite);
-			for (Statement statement : getModel().filter(resource, getRelationPredicate(), null)) {
-				ret.add(statement.getObject().stringValue());
+			for (IRI predicate : getRelationPredicates()) {
+				for (Statement statement : getModel().filter(resource, predicate, null)) {
+					ret.add(statement.getObject().stringValue());
+				}
 			}
 		}
 		

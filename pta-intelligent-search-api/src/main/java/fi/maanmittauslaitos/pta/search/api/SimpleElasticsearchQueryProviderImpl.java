@@ -27,7 +27,8 @@ public class SimpleElasticsearchQueryProviderImpl implements ElasticsearchQueryP
 	}
 	
 	@Override
-	public SearchSourceBuilder buildSearchSource(Set<SearchTerm> termit) {
+	public SearchSourceBuilder buildSearchSource(HakuPyynto pyynto) {
+		Set<SearchTerm> termit = getSearchTerms(pyynto);
 		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
 		
@@ -47,8 +48,7 @@ public class SimpleElasticsearchQueryProviderImpl implements ElasticsearchQueryP
 		return sourceBuilder;
 	}
 
-	@Override
-	public Set<SearchTerm> getSearchTerms(HakuPyynto pyynto) {
+	private Set<SearchTerm> getSearchTerms(HakuPyynto pyynto) {
 		Set<SearchTerm> termit = new HashSet<>();
 		
 		// TODO: tämähän ei riitä, vaan nyt pitää purkaa ontologiaa auki!

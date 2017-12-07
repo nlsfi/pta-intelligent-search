@@ -41,12 +41,11 @@ public class ElasticsearchHakuKoneImpl implements HakuKone {
 	public HakuTulos haku(HakuPyynto pyynto) throws IOException {
 		HakuTulos tulos = new HakuTulos();
 		
-		Set<SearchTerm> termit = getQueryProvider().getSearchTerms(pyynto);
-		if (termit.size() == 0) {
+		if (pyynto.getHakusanat().size() == 0) {
 			return new HakuTulos();
 		}
 		
-		SearchSourceBuilder sourceBuilder = getQueryProvider().buildSearchSource(termit);
+		SearchSourceBuilder sourceBuilder = getQueryProvider().buildSearchSource(pyynto);
 		sourceBuilder.from(0);
 		sourceBuilder.size(10);
 		sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));

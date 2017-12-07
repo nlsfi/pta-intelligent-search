@@ -1,13 +1,9 @@
 package fi.maanmittauslaitos.pta.search.api;
 
-import java.util.Set;
-
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 public interface ElasticsearchQueryProvider {
-	public SearchSourceBuilder buildSearchSource(Set<SearchTerm> termit);
-	
-	public Set<SearchTerm> getSearchTerms(HakuPyynto pyynto);
+	public SearchSourceBuilder buildSearchSource(HakuPyynto pyynto);
 	
 	public class SearchTerm {
 		public final String resource;
