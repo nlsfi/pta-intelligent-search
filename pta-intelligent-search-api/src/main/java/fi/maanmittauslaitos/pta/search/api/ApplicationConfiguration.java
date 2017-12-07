@@ -34,11 +34,11 @@ public class ApplicationConfiguration {
 	
 	@Bean
 	public RestHighLevelClient elasticsearchClient() throws UnknownHostException {
+		RestHighLevelClient client = new RestHighLevelClient(
+		        RestClient.builder(
+		                new HttpHost("localhost", 9200, "http")));
 		
-		RestClient restClient = RestClient.builder(
-		        new HttpHost("localhost", 9200, "http")).build();
-		    
-		return new RestHighLevelClient(restClient);
+		return client;
 	}
 	
 	@Bean
