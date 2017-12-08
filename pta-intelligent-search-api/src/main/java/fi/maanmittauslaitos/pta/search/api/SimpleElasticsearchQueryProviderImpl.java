@@ -52,7 +52,7 @@ public class SimpleElasticsearchQueryProviderImpl implements ElasticsearchQueryP
 		Set<SearchTerm> termit = new HashSet<>();
 		
 		// TODO: tämähän ei riitä, vaan nyt pitää purkaa ontologiaa auki!
-		for (String hakusana : pyynto.getHakusanat()) {
+		for (String hakusana : pyynto.getQuery()) {
 			for (String termi : getTextProcessor().process(hakusana)) {
 				termit.add(new SearchTerm(termi, 1.0));
 			}

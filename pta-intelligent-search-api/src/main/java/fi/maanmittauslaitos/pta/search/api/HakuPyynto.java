@@ -7,13 +7,32 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class HakuPyynto {
-	private List<String> hakusanat = new ArrayList<>();
+	private Long skip;
+	private Long pageSize;
+	private List<String> query = new ArrayList<>();
 	
-	public void setHakusanat(List<String> hakusanat) {
-		this.hakusanat = hakusanat;
+	public void setQuery(List<String> query) {
+		this.query = query;
 	}
 	
-	public List<String> getHakusanat() {
-		return hakusanat;
+	public List<String> getQuery() {
+		return query;
 	}
+	
+	public Long getSkip() {
+		return skip;
+	}
+	
+	public void setSkip(Long skip) {
+		this.skip = skip;
+	}
+	
+	public Long getPageSize() {
+		return pageSize;
+	}
+	
+	public void setPageSize(Long pageSize) {
+		this.pageSize = pageSize;
+	}
+	
 }

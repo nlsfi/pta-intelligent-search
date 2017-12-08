@@ -94,7 +94,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	}
 
 	private void lisaaVapaaSanahaku(HakuPyynto pyynto, BoolQueryBuilder boolQuery) {
-		for (String sana : pyynto.getHakusanat()) {
+		for (String sana : pyynto.getQuery()) {
 			MatchQueryBuilder tmp = QueryBuilders.matchQuery("abstract", sana);
 			tmp.operator(Operator.OR);
 			tmp.boost((float)basicWordMatchWeight);
@@ -121,7 +121,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		Set<String> prosessoimattomatYlakasitteet = new HashSet<>();
 		
 		double weight = 1.0;
-		for (String hakusana : pyynto.getHakusanat()) {
+		for (String hakusana : pyynto.getQuery()) {
 			for (String termi : getTextProcessor().process(hakusana)) {
 				termit.add(new SearchTerm(termi, weight));
 				prosessoimattomatYlakasitteet.add(termi);

@@ -11,10 +11,11 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import fi.maanmittauslaitos.pta.search.api.ElasticsearchQueryProvider.SearchTerm;
-import fi.maanmittauslaitos.pta.search.api.HakuTulos.Osuma;
+import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
 
 public class ElasticsearchHakuKoneImpl implements HakuKone {
 	private RestHighLevelClient client;
@@ -41,13 +42,26 @@ public class ElasticsearchHakuKoneImpl implements HakuKone {
 	public HakuTulos haku(HakuPyynto pyynto) throws IOException {
 		HakuTulos tulos = new HakuTulos();
 		
-		if (pyynto.getHakusanat().size() == 0) {
+		if (pyynto.getQuery().size() == 0) {
 			return new HakuTulos();
 		}
 		
 		SearchSourceBuilder sourceBuilder = getQueryProvider().buildSearchSource(pyynto);
-		sourceBuilder.from(0);
-		sourceBuilder.size(10);
+		
+		if (pyynto.getSkip() != null) {
+			tulos.setStartIndex(pyynto.getSkip());
+			sourceBuilder.from(pyynto.getSkip().intValue());
+		} else {
+			tulos.setStartIndex(0l);
+			sourceBuilder.from(0);
+		}
+		
+		if (pyynto.getPageSize() != null) {
+			sourceBuilder.size(pyynto.getPageSize().intValue());
+		} else {
+			sourceBuilder.size(10);
+		}
+		
 		sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
 		sourceBuilder.fetchSource("*", null);
 
@@ -57,17 +71,20 @@ public class ElasticsearchHakuKoneImpl implements HakuKone {
 		
 		SearchResponse response = client.search(request);
 		
-		response.getHits().forEach(new Consumer<SearchHit>() {
+		SearchHits hits = response.getHits();
+		
+		tulos.setTotalHits(hits.getTotalHits());
+		hits.forEach(new Consumer<SearchHit>() {
 			@Override
 			public void accept(SearchHit t) {
-				Osuma osuma = new Osuma();
+				Hit osuma = new Hit();
 				
 				
 				osuma.setTitle(extractStringValue(t.getSourceAsMap().get("title")));
 				osuma.setAbstractText(extractStringValue(t.getSourceAsMap().get("abstract")));
 				osuma.setUrl("http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/" + t.getId());
-				osuma.setRelevanssi((double)t.getScore());
-				tulos.getOsumat().add(osuma);
+				osuma.setScore((double)t.getScore());
+				tulos.getHits().add(osuma);
 			}
 
 			private String extractStringValue(Object obj) {

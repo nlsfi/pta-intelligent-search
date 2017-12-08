@@ -8,14 +8,19 @@ $(document).ready(function() {
 		}
 	});
 
-	$('#pta-haku-input-container button').click(teeHaku);
+	$('#pta-haku-input-container button').click(function() { teeHaku(); });
 
-	function teeHaku() {
+	var pageSize = 10;
+
+	function teeHaku(skip) {
+		skip = skip || 0;
 		var hakusanat = $('#pta-haku-input-container input').val();
 
 
 		var query = {
-			hakusanat: hakusanat.split(/\s+/).filter(function(v) { return v.length > 0; })
+			query: hakusanat.split(/\s+/).filter(function(v) { return v.length > 0; }),
+			skip: skip,
+			pageSize: pageSize
 		};
 
 		var vinkit = $('#pta-tulokset #pta-tulokset-vinkit');
@@ -28,7 +33,7 @@ $(document).ready(function() {
 		virhe.hide();
 
 		$.ajax({
-			url: 'hae',
+			url: 'search',
 			method: 'POST',
 			data: JSON.stringify(query),
 			contentType: 'application/json',
@@ -39,7 +44,7 @@ $(document).ready(function() {
 			// Vinkit
 			var vinkkiLista = $('#pta-tulokset-vinkit-lista', vinkit);
 			vinkkiLista.empty();
-			result.hakusanavinkit.forEach(function(vinkki) {
+			result.hints.forEach(function(vinkki) {
 				var tmp = $('<div></div>');
 				tmp.addClass('pta-tulokset-vinkit-vinkki');
 				tmp.text(vinkki);
@@ -50,12 +55,12 @@ $(document).ready(function() {
 			// Tulokset
 			var osumaLista = $('#pta-tulokset-osumat-lista', osumat);
 			osumaLista.empty();
-			result.osumat.forEach(function(osuma) {
+			result.hits.forEach(function(osuma) {
 				var tmp = $('<div></div>');
 				tmp.addClass('pta-tulokset-osumat-osuma');
 				
 				var title = $('<p></p>');
-				title.text(osuma.title + ' ('+Math.round(osuma.relevanssi*100)/100+')');
+				title.text(osuma.title + ' ('+Math.round(osuma.score*100)/100+')');
 				title.addClass('pta-tulokset-osumat-osuma-title');
 				tmp.append(title);
 				
@@ -79,8 +84,20 @@ $(document).ready(function() {
 				osumaLista.append(tmp);
 			});
 			
-			osumat.show();
+			if (skip > 0) {
+				osumaLista.append($('<span class="pta-tulokset-osumat-previous">Edelliset</span>').click(function() {
+					teeHaku(skip-pageSize);
+				}));
+			}
+
+			if ((skip + result.hits.length) < result.totalHits) {
+				osumaLista.append($('<span class="pta-tulokset-osumat-next">Seuraavat</span>').click(function() {
+					teeHaku(skip+pageSize);
+				}));
+			}
 			
+			osumat.show();
+
 		}).fail(function(err) {
 			virhe.empty();
 			console.error(err);

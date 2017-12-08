@@ -1,0 +1,232 @@
+
+Tässä ohjeet siitä, miten hakukoneen saa asennettua palvelinympäristöön. Ohjeet on tehty RHEL 7.4 -ympäristössä, mutta ohjeiden pitäisi pääosin toimia missä tahansa modernissa (2017) Linux-ympäristössä.
+
+Ohjeet asentavat komponentit /opt/pta-haku -hakemistoon, git-repository kloonataan $HOME:een, josta buildit voidaan kopioida /opt/pta-haku:n alle
+
+Puutteet: RHEL 7.4:lle ei löydy libvoikkoa (ainakaan riittävän uutta versiota)
+
+Esivalmistelut
+
+1. Hae Oraclen JDK (käytetty 8u152:sta, Linux x64, .tar.gz) selaimella
+	http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+
+2. Kopioi tiedost sftp:llä palvelimelle $HOME:een
+
+Asennuskohde: Kaikki asennukset suoritetaan hakemistoon /opt/pta-haku
+
+
+##########################################################################################################
+##### Asennusohjeet
+##### - Haetaan ohjelmistot ja työkalut Elasticsearchin, haku-API:n ja harvesterin pyörittämiseen
+##### - Luodaan unix-käyttäjätunnukset, joiden nimissä prosessit pyörivät
+##### - Luodaan käynnistysskriptit ja konfiguroidaan skriptit käynnistettävän buuttauksen yhteydessä
+
+## Esiasetukset, jotta wget-haut toimivat
+
+export http_proxy=http://proxy2.nls.fi:800
+export https_proxy=$http_proxy
+
+sudo mkdir -p /opt/pta-haku/logs
+mkdir -p $HOME/.m2/
+
+sudo yum install git jq screen
+
+cd $HOME
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.0.1.tar.gz
+wget http://www.nic.funet.fi/pub/mirrors/apache.org/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
+
+## Asennetaan ohjelmistot
+
+cd /opt/pta-haku
+
+sudo tar xf ~/elasticsearch-6.0.1.tar.gz
+sudo ln -s elasticsearch-6.0.1/ elasticsearch
+
+sudo tar xf ~/jdk-8u152-linux-x64.tar.gz
+sudo ln -s jdk1.8.0_152/ jdk
+
+sudo tar xf ~/apache-maven-3.5.2-bin.tar.gz
+sudo ln -s apache-maven-3.5.2/ apache-maven
+
+## Ympäristön konfigurointi
+
+cat << 'EOF' | sudo tee /opt/pta-haku/env.sh
+#!/bin/bash
+
+export JAVA_HOME=/opt/pta-haku/jdk
+export PATH=$JAVA_HOME/bin/:/opt/pta-haku/apache-maven/bin/:/opt/pta-haku/elasticsearch/bin/:$PATH
+
+export http_proxy=http://proxy2.nls.fi:800
+export https_proxy=$http_proxy
+
+EOF
+
+sudo chmod +x /opt/pta-haku/env.sh
+
+. /opt/pta-haku/env.sh
+
+cat << 'EOF' > $HOME/.m2/settings.xml
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      https://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <localRepository/>
+  <interactiveMode/>
+  <usePluginRegistry/>
+  <offline/>
+  <pluginGroups/>
+  <servers/>
+  <mirrors/>
+  <proxies>
+   <proxy>
+      <id>NLS</id>
+      <active>true</active>
+      <protocol>http</protocol>
+      <host>proxy2.nls.fi</host>
+      <port>800</port>
+    </proxy>
+  </proxies>
+  <profiles/>
+  <activeProfiles/>
+</settings>
+EOF
+
+cat << 'EOF' | sudo tee /opt/pta-haku/start-es.sh
+#!/bin/bash
+
+. /opt/pta-haku/env.sh
+
+cd /opt/pta-haku/elasticsearch
+elasticsearch $*
+
+EOF
+
+sudo chmod +x /opt/pta-haku/start-es.sh
+
+
+cat << 'EOF' | sudo tee /opt/pta-haku/start-api.sh
+#!/bin/bash
+
+. /opt/pta-haku/env.sh
+
+cd /opt/pta-haku/
+java -jar pta-intelligent-search-api.jar >& /opt/pta-haku/logs/api-$(date +%Y-%m-%d_%H%M).log
+
+EOF
+
+sudo chmod +x /opt/pta-haku/start-api.sh
+
+
+## Hakupalikka
+
+cd $HOME
+git clone https://github.com/nlsfi/pta-intelligent-search.git
+cd pta-intelligent-search
+git checkout feature-no-voikko
+mvn install
+
+## Käyttäjät
+
+sudo adduser pta-haku-es
+sudo adduser pta-haku-api
+
+sudo groupadd pta-haku
+sudo usermod -g pta-haku pta-haku-es
+sudo usermod -g pta-haku pta-haku-api
+
+
+sudo chgrp pta-haku -R /opt/pta-haku/
+sudo chmod g+w -R /opt/pta-haku/elasticsearch-*/ /opt/pta-haku/logs
+
+
+## Käynnistysskriptit: Elasticsearch
+cat << 'EOF' | sudo -u pta-haku-es tee /home/pta-haku-es/start.sh
+#!/bin/bash
+
+PIDFILE=/home/pta-haku-es/start.pid
+cd /home/pta-haku-es/
+nohup /opt/pta-haku/start-es.sh > /dev/null 2>&1 & echo $! > $PIDFILE
+EOF
+
+sudo chmod +x /home/pta-haku-es/start.sh
+
+
+cat << 'EOF' | sudo -u pta-haku-es tee /home/pta-haku-es/stop.sh
+#!/bin/bash
+
+PIDFILE=/home/pta-haku-es/start.pid
+if [ ! -f $PIDFILE ]; then
+  exit
+fi
+
+pkill -P $(cat $PIDFILE)
+rm $PIDFILE
+EOF
+
+sudo chmod +x /home/pta-haku-es/stop.sh
+
+echo "@reboot /home/pta-haku-es/start.sh" | sudo -u pta-haku-es crontab
+
+
+
+## Käynnistysskriptit: API
+cat << 'EOF' | sudo -u pta-haku-api tee /home/pta-haku-api/start.sh
+#!/bin/bash
+
+PIDFILE=/home/pta-haku-api/start.pid
+cd /home/pta-haku-api/
+nohup /opt/pta-haku/start-api.sh > /dev/null 2>&1 & echo $! > $PIDFILE
+EOF
+
+sudo chmod +x /home/pta-haku-api/start.sh
+
+
+cat << 'EOF' | sudo -u pta-haku-api tee /home/pta-haku-api/stop.sh
+#!/bin/bash
+
+PIDFILE=/home/pta-haku-api/start.pid
+if [ ! -f $PIDFILE ]; then
+  exit
+fi
+
+pkill -P $(cat $PIDFILE)
+rm $PIDFILE
+EOF
+
+sudo chmod +x /home/pta-haku-api/stop.sh
+
+echo "@reboot /home/pta-haku-api/start.sh" | sudo -u pta-haku-api crontab
+
+
+
+##########################################################################################################
+##### Ajo-ohjeet
+
+#### Harvestointi - ajetaan 
+## Tämä prosessi harvestoi kaikki dokumentit paikkatietohakemistosta ja indeksoi ne elasticsearchiin
+
+. /opt/pta-haku/env.sh
+
+cd $HOME/pta-intelligent-search/
+mvn clean install
+
+cd $HOME/pta-intelligent-search/pta-intelligent-search-harvester
+mvn exec:java \
+	-Dhttp.proxyHost=proxy2.nls.fi \
+	-Dhttp.proxyPort=800 \
+	-Dhttps.proxyHost=proxy2.nls.fi \
+	-Dhttps.proxyPort=800 \
+	-Dexec.mainClass="fi.maanmittauslaitos.pta.search.Harvester"
+
+#### API
+## (ei vielä valmis lähellekään)
+
+. /opt/pta-haku/env.sh
+
+cd $HOME/pta-intelligent-search/
+mvn clean install
+
+sudo cp $HOME/pta-intelligent-search/pta-intelligent-search-api/target/pta-intelligent-search-api-0.0.1-SNAPSHOT.jar /opt/pta-haku/
+cd /opt/pta-haku/
+sudo ln -s pta-intelligent-search-api-0.0.1-SNAPSHOT.jar pta-intelligent-search-api.jar
+

@@ -4,30 +4,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HakuTulos {
-	private List<Osuma> osumat = new ArrayList<>();
-	private List<String> hakusanavinkit = new ArrayList<>();
+	private Long startIndex;
+	private Long totalHits;
+	private List<Hit> hits = new ArrayList<>();
+	private List<String> hints = new ArrayList<>();
 	
-	public List<String> getHakusanavinkit() {
-		return hakusanavinkit;
+	public void setStartIndex(Long startIndex) {
+		this.startIndex = startIndex;
 	}
 	
-	public void setHakusanavinkit(List<String> hakusanavinkit) {
-		this.hakusanavinkit = hakusanavinkit;
+	public Long getStartIndex() {
+		return startIndex;
 	}
 	
-	public List<Osuma> getOsumat() {
-		return osumat;
+	public void setTotalHits(Long totalResults) {
+		this.totalHits = totalResults;
 	}
 	
-	public void setOsumat(List<Osuma> osumat) {
-		this.osumat = osumat;
+	public Long getTotalHits() {
+		return totalHits;
 	}
 	
-	public static class Osuma {
+	public List<String> getHints() {
+		return hints;
+	}
+	
+	public void setHints(List<String> hints) {
+		this.hints = hints;
+	}
+	
+	public List<Hit> getHits() {
+		return hits;
+	}
+	
+	public void setHits(List<Hit> hits) {
+		this.hits = hits;
+	}
+	
+	public static class Hit {
 		private String title;
 		private String abstractText;
 		private String url;
-		private Double relevanssi;
+		private Double score;
 		
 		public void setTitle(String title) {
 			this.title = title;
@@ -45,12 +63,12 @@ public class HakuTulos {
 			return abstractText;
 		}
 		
-		public void setRelevanssi(Double relevanssi) {
-			this.relevanssi = relevanssi;
+		public void setScore(Double score) {
+			this.score = score;
 		}
 		
-		public Double getRelevanssi() {
-			return relevanssi;
+		public Double getScore() {
+			return score;
 		}
 		
 		public void setUrl(String url) {
@@ -61,12 +79,12 @@ public class HakuTulos {
 			return url;
 		}
 		
-		public Osuma withRelevanssi(Double relevanssi) {
-			setRelevanssi(relevanssi);
+		public Hit withRelevanssi(Double relevanssi) {
+			setScore(relevanssi);
 			return this;
 		}
 		
-		public Osuma withUrl(String url) {
+		public Hit withUrl(String url) {
 			setUrl(url);
 			return this;
 		}
