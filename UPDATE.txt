@@ -1,0 +1,102 @@
+Ylläpito- ja päivitysohje PTA:n hakupilottiin
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Toimenpiteet:
+ - Henkilökohtainen setup
+ - Uudelleenharvestointi
+ - API:n päivitys
+
+
+Henkilökohtainen setup
+----------------------
+Tämä tarvitsee tehdä vain kerran, jotta pystyy buildaamaan sovelluksen osia palvelimella.
+
+Kirjaudu palvelimelle ssh:lla ja aja seuraavat komennot:
+
+. /opt/pta-haku/env.sh
+mkdir -p $HOME/.m2/
+
+cat << 'EOF' > $HOME/.m2/settings.xml
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      https://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <localRepository/>
+  <interactiveMode/>
+  <usePluginRegistry/>
+  <offline/>
+  <pluginGroups/>
+  <servers/>
+  <mirrors/>
+  <proxies>
+   <proxy>
+      <id>NLS</id>
+      <active>true</active>
+      <protocol>http</protocol>
+      <host>proxy2.nls.fi</host>
+      <port>800</port>
+    </proxy>
+  </proxies>
+  <profiles/>
+  <activeProfiles/>
+</settings>
+EOF
+
+git clone https://github.com/nlsfi/pta-intelligent-search.git
+cd pta-intelligent-search
+git checkout feature-no-voikko
+mvn install
+
+
+
+Uudelleenharvestointi
+---------------------
+
+Tämä täytyy tehdä silloin, kun harvestointikoodi on muuttunut ja/tai halutaan päivittää indeksoidut dokumentit. Elasticsearchin (ja paikkatietohakemiston) tulee olla käynnissä tätä varten, mutta API:n ei. Prosessi lataa Paikkatietohakemistosta dokumentit, käsittelee ne ja tallentaa ne Elasticsearchiin.
+
+Kirjaudu palvelimelle ssh:lla ja aja seuraavat komennot:
+
+. /opt/pta-haku/env.sh
+
+cd pta-intelligent-search/
+
+## Tässä välissä haetaan uusin versio / tietty branchi tms. mikä sitten onkaan oikea toimintatapa
+git pull
+
+
+mvn clean install
+
+cd pta-intelligent-search-harvester
+mvn exec:java \
+	-Dhttp.proxyHost=proxy2.nls.fi \
+	-Dhttp.proxyPort=800 \
+	-Dhttps.proxyHost=proxy2.nls.fi \
+	-Dhttps.proxyPort=800 \
+	-Dexec.mainClass="fi.maanmittauslaitos.pta.search.Harvester"
+
+
+API:n päivitys
+^^^^^^^^^^^^^^
+
+Kun hakulogiikkaan tulee muutoksia ja ne halutaan käytöön, tulee päivittää ajossa oleva koodi.
+
+Kirjaudu palvelimelle ssh:lla ja aja seuraavat komennot:
+
+. /opt/pta-haku/env.sh
+
+cd pta-intelligent-search/
+
+## Tässä välissä haetaan uusin versio / tietty branchi tms. mikä sitten onkaan oikea toimintatapa
+git pull
+
+
+mvn clean install
+
+## Huom! Skriptit käynnistävät /opt/pta-haku/pta-intelligent-search-api.jar:in, joka on symlinkki nykyiseen versioon. Jos uusi tiedosto on eri niminen kuin aiempi, tulee symlinkki päivittää
+
+sudo cp pta-intelligent-search-api/target/pta-intelligent-search-api-0.0.1-SNAPSHOT.jar /opt/pta-haku/
+
+sudo -u pta-haku-api /home/pta-haku-api/stop.sh
+sudo -u pta-haku-api /home/pta-haku-api/start.sh
+
+
