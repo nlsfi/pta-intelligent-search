@@ -14,7 +14,7 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import fi.maanmittauslaitos.pta.search.api.ElasticsearchQueryProvider.SearchTerm;
-import fi.maanmittauslaitos.pta.search.api.HakuTulos.Osuma;
+import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
 
 public class ElasticsearchHakuKoneImpl implements HakuKone {
 	private RestHighLevelClient client;
@@ -41,7 +41,7 @@ public class ElasticsearchHakuKoneImpl implements HakuKone {
 	public HakuTulos haku(HakuPyynto pyynto) throws IOException {
 		HakuTulos tulos = new HakuTulos();
 		
-		if (pyynto.getHakusanat().size() == 0) {
+		if (pyynto.getQuery().size() == 0) {
 			return new HakuTulos();
 		}
 		
@@ -60,14 +60,14 @@ public class ElasticsearchHakuKoneImpl implements HakuKone {
 		response.getHits().forEach(new Consumer<SearchHit>() {
 			@Override
 			public void accept(SearchHit t) {
-				Osuma osuma = new Osuma();
+				Hit osuma = new Hit();
 				
 				
 				osuma.setTitle(extractStringValue(t.getSourceAsMap().get("title")));
 				osuma.setAbstractText(extractStringValue(t.getSourceAsMap().get("abstract")));
 				osuma.setUrl("http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/" + t.getId());
-				osuma.setRelevanssi((double)t.getScore());
-				tulos.getOsumat().add(osuma);
+				osuma.setScore((double)t.getScore());
+				tulos.getHits().add(osuma);
 			}
 
 			private String extractStringValue(Object obj) {

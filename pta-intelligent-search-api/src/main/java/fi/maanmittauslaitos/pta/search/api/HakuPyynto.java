@@ -7,13 +7,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class HakuPyynto {
-	private List<String> hakusanat = new ArrayList<>();
+	private List<String> query = new ArrayList<>();
 	
-	public void setHakusanat(List<String> hakusanat) {
-		this.hakusanat = hakusanat;
+	public void setQuery(List<String> query) {
+		this.query = query;
 	}
 	
-	public List<String> getHakusanat() {
-		return hakusanat;
+	public List<String> getQuery() {
+		return query;
 	}
+	
 }

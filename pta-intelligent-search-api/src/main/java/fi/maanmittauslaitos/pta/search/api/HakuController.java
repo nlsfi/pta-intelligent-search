@@ -14,7 +14,7 @@ public class HakuController {
 	@Autowired
 	private HakuKone hakukone;
 
-	@RequestMapping(value = "/hae", method = RequestMethod.POST)
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public HakuTulos hae(@RequestBody HakuPyynto pyynto) throws IOException
 	{
 		HakuTulos tulos = hakukone.haku(pyynto);
