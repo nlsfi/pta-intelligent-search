@@ -11,6 +11,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import fi.maanmittauslaitos.pta.search.api.ElasticsearchQueryProvider.SearchTerm;
@@ -46,8 +47,21 @@ public class ElasticsearchHakuKoneImpl implements HakuKone {
 		}
 		
 		SearchSourceBuilder sourceBuilder = getQueryProvider().buildSearchSource(pyynto);
-		sourceBuilder.from(0);
-		sourceBuilder.size(10);
+		
+		if (pyynto.getSkip() != null) {
+			tulos.setStartIndex(pyynto.getSkip());
+			sourceBuilder.from(pyynto.getSkip().intValue());
+		} else {
+			tulos.setStartIndex(0l);
+			sourceBuilder.from(0);
+		}
+		
+		if (pyynto.getPageSize() != null) {
+			sourceBuilder.size(pyynto.getPageSize().intValue());
+		} else {
+			sourceBuilder.size(10);
+		}
+		
 		sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
 		sourceBuilder.fetchSource("*", null);
 
@@ -57,7 +71,10 @@ public class ElasticsearchHakuKoneImpl implements HakuKone {
 		
 		SearchResponse response = client.search(request);
 		
-		response.getHits().forEach(new Consumer<SearchHit>() {
+		SearchHits hits = response.getHits();
+		
+		tulos.setTotalHits(hits.getTotalHits());
+		hits.forEach(new Consumer<SearchHit>() {
 			@Override
 			public void accept(SearchHit t) {
 				Hit osuma = new Hit();

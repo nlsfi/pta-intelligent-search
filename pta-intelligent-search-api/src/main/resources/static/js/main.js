@@ -8,14 +8,19 @@ $(document).ready(function() {
 		}
 	});
 
-	$('#pta-haku-input-container button').click(teeHaku);
+	$('#pta-haku-input-container button').click(function() { teeHaku(); });
 
-	function teeHaku() {
+	var pageSize = 10;
+
+	function teeHaku(skip) {
+		skip = skip || 0;
 		var hakusanat = $('#pta-haku-input-container input').val();
 
 
 		var query = {
-			query: hakusanat.split(/\s+/).filter(function(v) { return v.length > 0; })
+			query: hakusanat.split(/\s+/).filter(function(v) { return v.length > 0; }),
+			skip: skip,
+			pageSize: pageSize
 		};
 
 		var vinkit = $('#pta-tulokset #pta-tulokset-vinkit');
@@ -79,8 +84,20 @@ $(document).ready(function() {
 				osumaLista.append(tmp);
 			});
 			
-			osumat.show();
+			if (skip > 0) {
+				osumaLista.append($('<span class="pta-tulokset-osumat-previous">Edelliset</span>').click(function() {
+					teeHaku(skip-pageSize);
+				}));
+			}
+
+			if ((skip + result.hits.length) < result.totalHits) {
+				osumaLista.append($('<span class="pta-tulokset-osumat-next">Seuraavat</span>').click(function() {
+					teeHaku(skip+pageSize);
+				}));
+			}
 			
+			osumat.show();
+
 		}).fail(function(err) {
 			virhe.empty();
 			console.error(err);

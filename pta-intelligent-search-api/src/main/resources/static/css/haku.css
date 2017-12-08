@@ -127,6 +127,13 @@ body {
   color: #312f79;
 }
 
+#pta-tulokset-osumat-lista .pta-tulokset-osumat-previous,
+#pta-tulokset-osumat-lista .pta-tulokset-osumat-next {
+  cursor: pointer;
+  padding-right: 1em;
+  color: #312f79;
+}
+
 /* Vinkit */
 
 #pta-tulokset #pta-tulokset-vinkit span, #pta-tulokset #pta-tulokset-vinkit #pta-tulokset-vinkit-lista {

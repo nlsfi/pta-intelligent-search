@@ -4,8 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HakuTulos {
+	private Long startIndex;
+	private Long totalHits;
 	private List<Hit> hits = new ArrayList<>();
 	private List<String> hints = new ArrayList<>();
+	
+	public void setStartIndex(Long startIndex) {
+		this.startIndex = startIndex;
+	}
+	
+	public Long getStartIndex() {
+		return startIndex;
+	}
+	
+	public void setTotalHits(Long totalResults) {
+		this.totalHits = totalResults;
+	}
+	
+	public Long getTotalHits() {
+		return totalHits;
+	}
 	
 	public List<String> getHints() {
 		return hints;
