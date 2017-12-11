@@ -23,6 +23,8 @@ import org.opengis.parameter.ParameterValueGroup;
 import org.xml.sax.SAXException;
 
 import fi.maanmittauslaitos.pta.search.Document;
+import fi.maanmittauslaitos.pta.search.HarvesterSource;
+import fi.maanmittauslaitos.pta.search.HarvestingException;
 import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.XPathExtractionConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.XPathProcessor;
@@ -57,7 +59,7 @@ public class CSWHarvesterSource extends HarvesterSource {
 				catalogServicesClient = (CatalogServicesClient) cswClientFactory.open(clientFactoryParams);
 			
 			} catch(DataStoreException | MalformedURLException ex) {
-				throw new CSWProcessingException(ex);
+				throw new HarvestingException(ex);
 			}
 			
 			idsInBatch = new LinkedList<>();
@@ -107,7 +109,7 @@ public class CSWHarvesterSource extends HarvesterSource {
 			try {
 				return req.getResponseStream();
 			} catch(IOException e) {
-				throw new CSWProcessingException(e);
+				throw new HarvestingException(e);
 			}
 		}
 
@@ -152,7 +154,7 @@ public class CSWHarvesterSource extends HarvesterSource {
 				numberOfRecordsInService = Integer.parseInt(doc.getFields().get("numberOfRecordsMatched").get(0));
 			} catch(IOException | ParserConfigurationException | XPathException | SAXException e) {
 				failed = true;
-				throw new CSWProcessingException(e);
+				throw new HarvestingException(e);
 			}
 			
 		}

@@ -18,7 +18,6 @@ import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
 import fi.maanmittauslaitos.pta.search.csw.CSWHarvesterSource;
-import fi.maanmittauslaitos.pta.search.csw.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import fi.maanmittauslaitos.pta.search.index.ElasticsearchDocumentSink;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;

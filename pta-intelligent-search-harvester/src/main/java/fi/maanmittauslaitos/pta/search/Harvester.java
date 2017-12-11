@@ -2,7 +2,6 @@ package fi.maanmittauslaitos.pta.search;
 
 import java.io.InputStream;
 
-import fi.maanmittauslaitos.pta.search.csw.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink.IndexResult;
 import fi.maanmittauslaitos.pta.search.xpath.XPathProcessor;
