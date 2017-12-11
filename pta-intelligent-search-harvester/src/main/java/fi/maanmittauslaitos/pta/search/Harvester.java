@@ -2,7 +2,7 @@ package fi.maanmittauslaitos.pta.search;
 
 import java.io.InputStream;
 
-import fi.maanmittauslaitos.pta.search.csw.CSWSource;
+import fi.maanmittauslaitos.pta.search.csw.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink.IndexResult;
 import fi.maanmittauslaitos.pta.search.xpath.XPathProcessor;
@@ -12,7 +12,7 @@ public class Harvester {
 	{		
 		HarvesterConfig config = new HarvesterConfig();
 		
-		CSWSource source = config.getCSWSource();
+		HarvesterSource source = config.getCSWSource();
 		
 		XPathProcessor processor = config.getRecordProcessor();
 		

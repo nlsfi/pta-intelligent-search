@@ -29,27 +29,8 @@ import fi.maanmittauslaitos.pta.search.xpath.XPathProcessor;
 import fi.maanmittauslaitos.pta.search.xpath.XPathProcessorFactory;
 import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration.FieldExtractorType;
 
-public class CSWSource implements Iterable<InputStream> {
-	private static Logger logger = Logger.getLogger(CSWSource.class);
-	
-	private String onlineResource;
-	private int batchSize = 1024;
-	
-	public String getOnlineResource() {
-		return onlineResource;
-	}
-	
-	public void setOnlineResource(String onlineResource) {
-		this.onlineResource = onlineResource;
-	}
-	
-	public void setBatchSize(int batchSize) {
-		this.batchSize = batchSize;
-	}
-	
-	public int getBatchSize() {
-		return batchSize;
-	}
+public class CSWHarvesterSource extends HarvesterSource {
+	private static Logger logger = Logger.getLogger(CSWHarvesterSource.class);
 	
 	@Override
 	public Iterator<InputStream> iterator() {
@@ -129,9 +110,6 @@ public class CSWSource implements Iterable<InputStream> {
 				throw new CSWProcessingException(e);
 			}
 		}
-
-
-
 
 		private void getNextBatch() {
 			logger.debug("Requesting records starting at position "+(1+numberOfRecordsProcessed)+", batch size is "+getBatchSize());

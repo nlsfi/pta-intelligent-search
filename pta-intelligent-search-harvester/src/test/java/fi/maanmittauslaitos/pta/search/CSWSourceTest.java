@@ -4,11 +4,11 @@ import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
 
-import fi.maanmittauslaitos.pta.search.csw.CSWSource;
+import fi.maanmittauslaitos.pta.search.csw.HarvesterSource;
 
 public class CSWSourceTest {
 	public static void main(String[] args) throws Exception {
-		CSWSource source = new CSWSource();
+		HarvesterSource source = new HarvesterSource();
 		source.setBatchSize(10);
 		source.setOnlineResource("http://paikkatietohakemisto.fi/geonetwork/srv/en/csw");
 		

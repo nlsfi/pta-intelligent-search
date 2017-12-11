@@ -17,7 +17,8 @@ import org.eclipse.rdf4j.model.vocabulary.SKOS;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
-import fi.maanmittauslaitos.pta.search.csw.CSWSource;
+import fi.maanmittauslaitos.pta.search.csw.CSWHarvesterSource;
+import fi.maanmittauslaitos.pta.search.csw.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import fi.maanmittauslaitos.pta.search.index.ElasticsearchDocumentSink;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
@@ -33,8 +34,8 @@ import fi.maanmittauslaitos.pta.search.xpath.XPathProcessorFactory;
 import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration.FieldExtractorType;
 
 public class HarvesterConfig {
-	public CSWSource getCSWSource() {
-		CSWSource source = new CSWSource();
+	public HarvesterSource getCSWSource() {
+		HarvesterSource source = new CSWHarvesterSource();
 		source.setBatchSize(10);
 		source.setOnlineResource("http://paikkatietohakemisto.fi/geonetwork/srv/en/csw");
 		
