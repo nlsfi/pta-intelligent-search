@@ -55,6 +55,7 @@ public class XPathProcessorFactory {
 				org.w3c.dom.Document doc = builder.parse(is);
 				
 				Document ret = new Document();
+				ret.setDom(doc);
 				
 				for (FieldExtractorConfiguration fec : configuration.getFieldExtractors()) {
 					List<String> value = processField(doc, fec);
