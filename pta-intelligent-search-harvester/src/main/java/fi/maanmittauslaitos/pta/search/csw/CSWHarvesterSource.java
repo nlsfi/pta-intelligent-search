@@ -34,7 +34,6 @@ public class CSWHarvesterSource extends HarvesterSource {
 		private int numberOfRecordsProcessed = 0;
 		private int numberOfRecordsInService;
 		private LinkedList<String> idsInBatch = null;
-		private boolean failed = false;
 
 		public CSWIterator() {
 			idsInBatch = new LinkedList<>();
@@ -44,9 +43,6 @@ public class CSWHarvesterSource extends HarvesterSource {
 
 		@Override
 		public boolean hasNext() {
-			if (failed) {
-				return false;
-			}
 			return numberOfRecordsProcessed < numberOfRecordsInService;
 		}
 
