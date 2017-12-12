@@ -3,6 +3,9 @@ package fi.maanmittauslaitos.pta.search;
 public class HarvestingException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
+	public HarvestingException() {
+	}
+	
 	public HarvestingException(Throwable cause) {
 		super(cause);
 	}
