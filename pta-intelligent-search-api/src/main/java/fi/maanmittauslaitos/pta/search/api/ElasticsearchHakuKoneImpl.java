@@ -1,8 +1,9 @@
 package fi.maanmittauslaitos.pta.search.api;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Set;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
@@ -14,13 +15,13 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
-import fi.maanmittauslaitos.pta.search.api.ElasticsearchQueryProvider.SearchTerm;
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
 
 public class ElasticsearchHakuKoneImpl implements HakuKone {
 	private RestHighLevelClient client;
 	
 	private ElasticsearchQueryProvider queryProvider;
+	private HintProvider hintProvider;
 	
 	public void setQueryProvider(ElasticsearchQueryProvider queryProvider) {
 		this.queryProvider = queryProvider;
@@ -36,6 +37,14 @@ public class ElasticsearchHakuKoneImpl implements HakuKone {
 	
 	public RestHighLevelClient getClient() {
 		return client;
+	}
+	
+	public void setHintProvider(HintProvider hintProvider) {
+		this.hintProvider = hintProvider;
+	}
+	
+	public HintProvider getHintProvider() {
+		return hintProvider;
 	}
 	
 	@Override
@@ -79,12 +88,28 @@ public class ElasticsearchHakuKoneImpl implements HakuKone {
 			public void accept(SearchHit t) {
 				Hit osuma = new Hit();
 				
-				
 				osuma.setTitle(extractStringValue(t.getSourceAsMap().get("title")));
+				osuma.setAbstractUris(extractListValue(t.getSourceAsMap().get("abstract_uri")));
 				osuma.setAbstractText(extractStringValue(t.getSourceAsMap().get("abstract")));
 				osuma.setUrl("http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/" + t.getId());
 				osuma.setScore((double)t.getScore());
 				tulos.getHits().add(osuma);
+			}
+
+			private List<String> extractListValue(Object obj) {
+				List<String> ret = new ArrayList<>();
+				if (obj != null) {
+					if (obj instanceof Collection<?>) {
+						Collection<?> tmp = (Collection<?>)obj;
+						
+						for (Object o : tmp) {
+							ret.add(o.toString());
+						}
+					} else {
+						ret.add(obj.toString());
+					}
+				}
+				return ret;
 			}
 
 			private String extractStringValue(Object obj) {
@@ -116,7 +141,7 @@ public class ElasticsearchHakuKoneImpl implements HakuKone {
 			}
 		});
 		
-		// TODO: vinkit
+		tulos.setHints(getHintProvider().getHints(pyynto, tulos.getHits()));
 		
 		return tulos;
 	}

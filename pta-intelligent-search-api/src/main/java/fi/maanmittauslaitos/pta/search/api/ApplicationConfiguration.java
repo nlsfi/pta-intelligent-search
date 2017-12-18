@@ -4,10 +4,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.UnknownHostException;
+import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map.Entry;
 import java.util.zip.GZIPInputStream;
 
 import org.apache.http.HttpHost;
+import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.vocabulary.SKOS;
 import org.eclipse.rdf4j.rio.RDFFormat;
@@ -63,10 +68,26 @@ public class ApplicationConfiguration {
 		
 		return ret;
 	}
+	
+	@Bean
+	public HintProvider hintProvider(Model terminologyModel) {
+		NodeColorizationHintProviderImpl ret = new NodeColorizationHintProviderImpl();
+		
+		ret.setModel(terminologyModel);
+		
+		List<Entry<IRI, Double>> weights = new ArrayList<>();
+		
+		weights.add(new AbstractMap.SimpleEntry<>(SKOS.BROADER, 0.25));
+		weights.add(new AbstractMap.SimpleEntry<>(SKOS.BROADER, 0.25));
+		
+		ret.setRelationsAndWeights(weights);
+		
+		return ret;
+	}
 
 	
 	@Bean
-	public HakuKone hakuKone(RDFTerminologyMatcherProcessor textProcessor, RestHighLevelClient elasticsearchClient, Model model) throws IOException {
+	public HakuKone hakuKone(RDFTerminologyMatcherProcessor textProcessor, RestHighLevelClient elasticsearchClient, Model model, HintProvider hintProvider) throws IOException {
 		ElasticsearchHakuKoneImpl ret = new ElasticsearchHakuKoneImpl();
 		ret.setClient(elasticsearchClient);
 		
@@ -80,6 +101,7 @@ public class ApplicationConfiguration {
 		queryProvider.setWeightFactor(0.5);
 		
 		ret.setQueryProvider(queryProvider);
+		ret.setHintProvider(hintProvider);
 		
 		return ret;
 	}

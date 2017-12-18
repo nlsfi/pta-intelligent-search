@@ -44,6 +44,7 @@ public class HakuTulos {
 	public static class Hit {
 		private String title;
 		private String abstractText;
+		private List<String> abstractUris;
 		private String url;
 		private Double score;
 		
@@ -87,6 +88,14 @@ public class HakuTulos {
 		public Hit withUrl(String url) {
 			setUrl(url);
 			return this;
+		}
+
+		public void setAbstractUris(List<String> abstractUris) {
+			this.abstractUris = abstractUris;
+		}
+		
+		public List<String> getAbstractUris() {
+			return abstractUris;
 		}
 	}
 }
