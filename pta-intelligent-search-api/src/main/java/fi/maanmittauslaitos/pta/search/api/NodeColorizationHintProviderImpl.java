@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Optional;
 
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
@@ -16,6 +17,8 @@ import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.Value;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
+import org.eclipse.rdf4j.model.util.Models;
+import org.eclipse.rdf4j.model.vocabulary.SKOS;
 
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
 
@@ -88,7 +91,12 @@ public class NodeColorizationHintProviderImpl implements HintProvider {
 		
 		List<String> ret = new ArrayList<>();
 		for (int i = 0; i < getMaxHints() && i < entries.size(); i++) {
-			ret.add(entries.get(i).getKey().stringValue());
+			IRI resource = vf.createIRI(entries.get(i).getKey().stringValue());
+			Optional<Value> value = Models.getProperty(getModel(), resource, SKOS.PREF_LABEL);
+			if (value.isPresent()) { 
+				String label = value.get().stringValue();
+				ret.add(label);
+			}
 		}
 		
 		return ret;
