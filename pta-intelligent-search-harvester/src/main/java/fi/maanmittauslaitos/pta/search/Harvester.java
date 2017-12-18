@@ -13,7 +13,7 @@ public class Harvester {
 		
 		HarvesterSource source = config.getCSWSource();
 		
-		XPathProcessor processor = config.getRecordProcessor();
+		XPathProcessor processor = config.getCSWRecordProcessor();
 		
 		DocumentSink sink = config.getDocumentSink();
 		

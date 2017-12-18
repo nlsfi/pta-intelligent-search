@@ -42,7 +42,7 @@ public class HarvesterConfig {
 	}
 	
 	
-	public XPathProcessor getRecordProcessor() throws ParserConfigurationException, IOException {
+	public XPathProcessor getCSWRecordProcessor() throws ParserConfigurationException, IOException {
 		XPathExtractionConfiguration configuration = new XPathExtractionConfiguration();
 		configuration.getNamespaces().put("gmd", "http://www.isotc211.org/2005/gmd");
 		configuration.getNamespaces().put("gco", "http://www.isotc211.org/2005/gco");
