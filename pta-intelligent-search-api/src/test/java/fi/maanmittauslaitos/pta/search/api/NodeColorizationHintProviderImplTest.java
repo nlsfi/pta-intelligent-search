@@ -186,8 +186,8 @@ public class NodeColorizationHintProviderImplTest {
 		List<String> hints = hintProvider.getHints(new HakuPyynto(), Arrays.asList(fakeHit));
 		
 		assertEquals(2, hints.size());
-		assertEquals("http://www.yso.fi/onto/ysa/Y98495", hints.get(0));
-		assertEquals("http://www.yso.fi/onto/ysa/Y165908", hints.get(1));
+		assertEquals("rangaistukset", hints.get(0));
+		assertEquals("sakon muuntorangaistus", hints.get(1));
 		
 	}
 
