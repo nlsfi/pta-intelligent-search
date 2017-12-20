@@ -18,7 +18,7 @@ public class OntologyModelTest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		model = new ApplicationConfiguration().terminologyModel();
+		model = ApplicationConfiguration.loadModels("/ysa-skos.ttl.gz");
 	}
 
 	@Test

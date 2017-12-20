@@ -29,8 +29,7 @@ public class NodeColorizationHintProviderImplTest {
 	
 	@BeforeClass
 	public static void setUpClass() throws Exception {
-		model = new ApplicationConfiguration().terminologyModel();
-		
+		model = ApplicationConfiguration.loadModels("/ysa-skos.ttl.gz");
 	}
 	
 	@Before

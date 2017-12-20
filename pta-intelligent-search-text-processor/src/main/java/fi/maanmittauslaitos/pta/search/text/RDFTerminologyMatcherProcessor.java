@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Resource;
@@ -19,7 +20,8 @@ import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
  * This is not thread safe due to how the snowball stemmer has been done
  */
 public class RDFTerminologyMatcherProcessor implements TextProcessor {
-
+	private static Logger logger = Logger.getLogger(RDFTerminologyMatcherProcessor.class);
+	
 	// Setters, getters
 	private Model model;
 	private List<IRI> terminologyLabels;
@@ -66,6 +68,7 @@ public class RDFTerminologyMatcherProcessor implements TextProcessor {
 	
 	
 	private Map<String, List<String>> createDict() {
+		logger.info("Building dict from RDF model");
 		Map<String, List<String>> ret = new HashMap<>();
 		
 		for (Resource r : getModel().subjects()) {

@@ -48,10 +48,11 @@ public class ApplicationConfiguration {
 	
 	@Bean
 	public Model terminologyModel() throws IOException {
+		//return loadModels("/koko-skos.ttl.gz");
 		return loadModels("/ysa-skos.ttl.gz");
 	}
 
-	private static Model loadModels(String...files) throws IOException {
+	public static Model loadModels(String...files) throws IOException {
 		Model ret = null;
 		
 		for (String file : files) {
@@ -72,7 +73,7 @@ public class ApplicationConfiguration {
 	@Bean
 	public HintProvider hintProvider(Model terminologyModel) {
 		NodeColorizationHintProviderImpl ret = new NodeColorizationHintProviderImpl();
-		
+		ret.setMaxColorizationDepth(2);
 		ret.setModel(terminologyModel);
 		
 		List<Entry<IRI, Double>> weights = new ArrayList<>();
