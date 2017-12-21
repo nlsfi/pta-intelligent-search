@@ -79,7 +79,7 @@ public class ApplicationConfiguration {
 		List<Entry<IRI, Double>> weights = new ArrayList<>();
 		
 		weights.add(new AbstractMap.SimpleEntry<>(SKOS.BROADER, 0.25));
-		weights.add(new AbstractMap.SimpleEntry<>(SKOS.BROADER, 0.25));
+		weights.add(new AbstractMap.SimpleEntry<>(SKOS.RELATED, 0.25));
 		
 		ret.setRelationsAndWeights(weights);
 		

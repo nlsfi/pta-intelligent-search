@@ -48,6 +48,14 @@ $(document).ready(function() {
 				var tmp = $('<div></div>');
 				tmp.addClass('pta-tulokset-vinkit-vinkki');
 				tmp.text(vinkki);
+				tmp.click(function() {
+				    var text = $('#pta-haku-input-container input').val();
+				    text += ' ';
+				    text += vinkki;
+				    $('#pta-haku-input-container input').val(text);
+				    teeHaku(0);
+				    
+				});
 				vinkkiLista.append(tmp);
 			});
 			vinkit.show();
