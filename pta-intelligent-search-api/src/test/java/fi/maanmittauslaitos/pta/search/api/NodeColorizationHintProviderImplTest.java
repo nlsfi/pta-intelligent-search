@@ -76,6 +76,19 @@ public class NodeColorizationHintProviderImplTest {
 		assertEquals(0.5, weightForYlioppilaat.doubleValue(), 0.00001);
 	}
 	
+	@Test
+	public void testColorizesTheTermItself() {
+		List<String> uris = Arrays.asList("http://www.yso.fi/onto/ysa/Y108634"); // abiturientit
+		hintProvider.setMaxColorizationDepth(1);
+		
+		Map<IRI, Double> colors = hintProvider.colorize(toResources(uris));
+	
+		// The term itself
+		Double weightForAbiturientit = colors.get(vf.createIRI("http://www.yso.fi/onto/ysa/Y108634"));
+		assertNotNull(weightForAbiturientit);
+		assertEquals(1.0, weightForAbiturientit.doubleValue(), 0.00001);
+	}
+	
 
 	@Test
 	public void testDepth1TwoTerms() {
@@ -183,13 +196,18 @@ public class NodeColorizationHintProviderImplTest {
 		Hit fakeHit = new Hit();
 		fakeHit.setAbstractUris(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711")); // Sakko
 		
-		List<String> hints = hintProvider.getHints(new HakuPyynto(), Arrays.asList(fakeHit));
+
+		HakuPyynto pyynto = new HakuPyynto();
+		pyynto.setQuery(Arrays.asList("sakko"));
+		
+		List<String> hints = hintProvider.getHints(pyynto, Arrays.asList(fakeHit));
 		
 		assertEquals(2, hints.size());
 		assertEquals("rangaistukset", hints.get(0));
 		assertEquals("sakon muuntorangaistus", hints.get(1));
 		
 	}
+
 	
 	
 	@Test

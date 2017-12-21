@@ -133,7 +133,7 @@ public class NodeColorizationHintProviderImpl implements HintProvider {
 		Map<IRI, Double> ret = new HashMap<>();
 		
 		for (IRI resource : resources) {
-			
+			increment(resource, 1.0, ret);
 			colorizeResource(resource, 1, 1.0, ret);
 		}
 		
