@@ -21,6 +21,7 @@ import org.eclipse.rdf4j.model.util.Models;
 import org.eclipse.rdf4j.model.vocabulary.SKOS;
 
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
+import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 
 public class NodeColorizationHintProviderImpl implements HintProvider {
 	private ValueFactory vf = SimpleValueFactory.getInstance();
@@ -29,6 +30,7 @@ public class NodeColorizationHintProviderImpl implements HintProvider {
 	private List<Entry<IRI, Double>> relationsAndWeights;
 	private int maxColorizationDepth = 3;
 	private int maxHints = 5;
+	private Stemmer stemmer;
 	
 	public void setModel(Model model) {
 		this.model = model;
@@ -36,6 +38,14 @@ public class NodeColorizationHintProviderImpl implements HintProvider {
 	
 	public Model getModel() {
 		return model;
+	}
+	
+	public void setStemmer(Stemmer stemmer) {
+		this.stemmer = stemmer;
+	}
+	
+	public Stemmer getStemmer() {
+		return stemmer;
 	}
 	
 	public void setMaxColorizationDepth(int maxColorizationDepth) {
@@ -76,6 +86,7 @@ public class NodeColorizationHintProviderImpl implements HintProvider {
 		
 		List<Entry<IRI, Double>> entries = new ArrayList<>(colorized.entrySet());
 		
+		// Sort by score
 		Collections.sort(entries, new Comparator<Entry<IRI, Double>>() {
 			@Override
 			public int compare(Entry<IRI, Double> o1, Entry<IRI, Double> o2) {
@@ -89,13 +100,28 @@ public class NodeColorizationHintProviderImpl implements HintProvider {
 			}
 		});
 		
+		// Pick at most maxHints values, skipping terms used in the query
+		Set<String> stemmedQueryTerms = new HashSet<>();
+		for (String str : pyynto.getQuery()) {
+			stemmedQueryTerms.add(getStemmer().stem(str));
+		}
+		
 		List<String> ret = new ArrayList<>();
-		for (int i = 0; i < getMaxHints() && i < entries.size(); i++) {
-			IRI resource = vf.createIRI(entries.get(i).getKey().stringValue());
+		for (Entry<IRI, Double> entry : entries) {
+			IRI resource = entry.getKey();
 			Optional<Value> value = Models.getProperty(getModel(), resource, SKOS.PREF_LABEL);
-			if (value.isPresent()) { 
-				String label = value.get().stringValue();
+			if (!value.isPresent()) {
+				continue;
+			}
+			
+			String label = value.get().stringValue();
+			
+			if (!stemmedQueryTerms.contains(getStemmer().stem(label))) {
 				ret.add(label);
+
+				if (ret.size() >= getMaxHints()) {
+					break;
+				}
 			}
 		}
 		

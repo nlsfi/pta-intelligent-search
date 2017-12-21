@@ -21,6 +21,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
+import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
 
 public class NodeColorizationHintProviderImplTest {
 	private ValueFactory vf = SimpleValueFactory.getInstance();
@@ -36,7 +37,7 @@ public class NodeColorizationHintProviderImplTest {
 	public void setUp() throws Exception { 
 		hintProvider = new NodeColorizationHintProviderImpl();
 		hintProvider.setMaxColorizationDepth(3);
-		
+		hintProvider.setStemmer(StemmerFactor.createStemmer());
 		hintProvider.setModel(model);
 		
 		List<Entry<IRI, Double>> weights = new ArrayList<>();
@@ -188,6 +189,38 @@ public class NodeColorizationHintProviderImplTest {
 		assertEquals("rangaistukset", hints.get(0));
 		assertEquals("sakon muuntorangaistus", hints.get(1));
 		
+	}
+	
+	
+	@Test
+	public void testSearchOriginalQueryTermsNotReturned() {
+		//                  Rangaistukset
+		//              0.5 /       | 0.5 * 0.1
+		//            Sakko   ---  Sakon muuntorangaistus
+		//                     0.1
+
+		hintProvider.setMaxColorizationDepth(2);
+		hintProvider.setMaxHints(2);
+		List<Entry<IRI, Double>> weights = new ArrayList<>();
+		
+		weights.add(new AbstractMap.SimpleEntry<>(SKOS.BROADER, 0.5));
+		weights.add(new AbstractMap.SimpleEntry<>(SKOS.RELATED, 0.1));
+		hintProvider.setRelationsAndWeights(weights);
+		
+		Hit fakeHit1 = new Hit();
+		fakeHit1.setAbstractUris(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711")); // Sakko
+		
+		Hit fakeHit2 = new Hit();
+		fakeHit2.setAbstractUris(Arrays.asList("http://www.yso.fi/onto/ysa/Y165908")); // Sakon muuntorangaistus
+		
+		HakuPyynto pyynto = new HakuPyynto();
+		pyynto.setQuery(Arrays.asList("sakko", "sakon muuntorangaistus"));
+		
+		List<String> hints = hintProvider.getHints(pyynto, Arrays.asList(fakeHit1, fakeHit2));
+		System.out.println(hints);
+		assertEquals(2, hints.size());
+		assertEquals("rangaistukset", hints.get(0));
+		assertEquals("tuomiot", hints.get(1));
 	}
 
 	private Set<IRI> toResources(List<String> uris) {

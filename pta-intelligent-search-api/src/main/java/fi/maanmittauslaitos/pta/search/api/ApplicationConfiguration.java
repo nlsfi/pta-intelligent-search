@@ -23,18 +23,24 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
+import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
 
 @Configuration
 public class ApplicationConfiguration {
 
 	@Bean
-	public RDFTerminologyMatcherProcessor terminologyMatcher(Model terminologyModel) throws IOException {
+	public RDFTerminologyMatcherProcessor terminologyMatcher(Model terminologyModel, Stemmer stemmer) throws IOException {
 		RDFTerminologyMatcherProcessor terminologyProcessor = new RDFTerminologyMatcherProcessor();
 		terminologyProcessor.setModel(terminologyModel);
 		terminologyProcessor.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL)); // TODO: lisää SKOS.EXACT_MATCH ?
-		terminologyProcessor.setStemmer(StemmerFactor.createStemmer());
+		terminologyProcessor.setStemmer(stemmer);
 		return terminologyProcessor;
+	}
+	
+	@Bean
+	public Stemmer stemmer() {
+		return StemmerFactor.createStemmer();
 	}
 	
 	@Bean
@@ -71,15 +77,16 @@ public class ApplicationConfiguration {
 	}
 	
 	@Bean
-	public HintProvider hintProvider(Model terminologyModel) {
+	public HintProvider hintProvider(Model terminologyModel, Stemmer stemmer) {
 		NodeColorizationHintProviderImpl ret = new NodeColorizationHintProviderImpl();
 		ret.setMaxColorizationDepth(2);
+		ret.setStemmer(stemmer);
 		ret.setModel(terminologyModel);
 		
 		List<Entry<IRI, Double>> weights = new ArrayList<>();
 		
 		weights.add(new AbstractMap.SimpleEntry<>(SKOS.BROADER, 0.25));
-		weights.add(new AbstractMap.SimpleEntry<>(SKOS.RELATED, 0.25));
+		weights.add(new AbstractMap.SimpleEntry<>(SKOS.RELATED, 0.15));
 		
 		ret.setRelationsAndWeights(weights);
 		
@@ -93,9 +100,7 @@ public class ApplicationConfiguration {
 		ret.setClient(elasticsearchClient);
 		
 		OntologyElasticsearchQueryProviderImpl queryProvider = new OntologyElasticsearchQueryProviderImpl();
-		// TODO: we need weights per relationship, not one weight to rule them all
 		queryProvider.addRelationPredicate(SKOS.NARROWER);
-		queryProvider.addRelationPredicate(SKOS.RELATED); // TODO: ... yeah, not really
 		queryProvider.setTextProcessor(textProcessor);
 		queryProvider.setModel(model);
 		queryProvider.setOntologyLevels(2);
