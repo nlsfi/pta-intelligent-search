@@ -33,8 +33,9 @@ public class ApplicationConfiguration {
 	public RDFTerminologyMatcherProcessor terminologyMatcher(Model terminologyModel, Stemmer stemmer) throws IOException {
 		RDFTerminologyMatcherProcessor terminologyProcessor = new RDFTerminologyMatcherProcessor();
 		terminologyProcessor.setModel(terminologyModel);
-		terminologyProcessor.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL)); // TODO: lisää SKOS.EXACT_MATCH ?
+		terminologyProcessor.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
 		terminologyProcessor.setStemmer(stemmer);
+		terminologyProcessor.setLanguage("fi");
 		return terminologyProcessor;
 	}
 	
@@ -54,8 +55,7 @@ public class ApplicationConfiguration {
 	
 	@Bean
 	public Model terminologyModel() throws IOException {
-		//return loadModels("/koko-skos.ttl.gz");
-		return loadModels("/ysa-skos.ttl.gz");
+		return loadModels("/koko-skos.ttl.gz");
 	}
 
 	public static Model loadModels(String...files) throws IOException {
@@ -78,15 +78,17 @@ public class ApplicationConfiguration {
 	
 	@Bean
 	public HintProvider hintProvider(Model terminologyModel, Stemmer stemmer) {
-		NodeColorizationHintProviderImpl ret = new NodeColorizationHintProviderImpl();
+		NodeColorizationHitScoreHintProviderImpl ret = new NodeColorizationHitScoreHintProviderImpl();
 		ret.setMaxColorizationDepth(2);
 		ret.setStemmer(stemmer);
 		ret.setModel(terminologyModel);
+		ret.setLanguage("fi");
 		
 		List<Entry<IRI, Double>> weights = new ArrayList<>();
 		
-		weights.add(new AbstractMap.SimpleEntry<>(SKOS.BROADER, 0.25));
-		weights.add(new AbstractMap.SimpleEntry<>(SKOS.RELATED, 0.15));
+		weights.add(new AbstractMap.SimpleEntry<>(SKOS.BROADER, 0.5));
+		//weights.add(new AbstractMap.SimpleEntry<>(SKOS.NARROWER, 0.4));
+		weights.add(new AbstractMap.SimpleEntry<>(SKOS.RELATED, 0.3));
 		
 		ret.setRelationsAndWeights(weights);
 		

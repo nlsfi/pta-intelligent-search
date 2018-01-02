@@ -144,6 +144,7 @@ public class HarvesterConfig {
 		terminologyProcessor.setModel(getTerminologyModel());
 		terminologyProcessor.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
 		terminologyProcessor.setStemmer(StemmerFactor.createStemmer());
+		terminologyProcessor.setLanguage("fi");
 		return terminologyProcessor;
 	}
 
@@ -162,8 +163,7 @@ public class HarvesterConfig {
 	
 
 	private Model getTerminologyModel() throws IOException {
-		return loadModels("/ysa-skos.ttl.gz");
-		//return loadModels("/koko-skos.ttl.gz");
+		return loadModels("/koko-skos.ttl.gz");
 	}
 
 	private static Model loadModels(String...files) throws IOException {
