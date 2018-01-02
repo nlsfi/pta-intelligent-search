@@ -67,4 +67,51 @@ public class RDFTerminologyMatcherProcessorTest {
 		assertTrue(result.contains("http://www.yso.fi/onto/ysa/Y96999"));
 	}
 
+	
+	@Test
+	public void testVillagesNoStemmerAllLanguages() throws Exception {
+		RDFTerminologyMatcherProcessor processor = new RDFTerminologyMatcherProcessor();
+		
+		FileReader reader = new FileReader("src/test/resources/koko-villages.ttl");
+		Model model = Rio.parse(reader, "", RDFFormat.TURTLE);
+		
+		processor.setModel(model);
+		processor.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
+		
+		List<String> result;
+		
+		result = processor.process("villages");
+		
+		assertEquals(1, result.size());
+		assertTrue(result.contains("http://www.yso.fi/onto/koko/p32440"));
+		
+		result = processor.process("kylät");
+		
+		assertEquals(1, result.size());
+		assertTrue(result.contains("http://www.yso.fi/onto/koko/p32440"));
+	}
+	
+	@Test
+	public void testVillagesNoStemmerOnlyFinnish() throws Exception {
+		RDFTerminologyMatcherProcessor processor = new RDFTerminologyMatcherProcessor();
+		
+		FileReader reader = new FileReader("src/test/resources/koko-villages.ttl");
+		Model model = Rio.parse(reader, "", RDFFormat.TURTLE);
+		
+		processor.setModel(model);
+		processor.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
+		processor.setLanguage("fi");
+		
+		List<String> result;
+		
+		result = processor.process("villages");
+		
+		assertEquals(0, result.size());
+		
+		result = processor.process("kylät");
+		
+		assertEquals(1, result.size());
+		assertTrue(result.contains("http://www.yso.fi/onto/koko/p32440"));
+	}
+	
 }

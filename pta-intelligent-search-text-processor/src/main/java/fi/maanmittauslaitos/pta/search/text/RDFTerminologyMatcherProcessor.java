@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.rdf4j.model.IRI;
+import org.eclipse.rdf4j.model.Literal;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Resource;
 import org.eclipse.rdf4j.model.Statement;
@@ -26,6 +27,7 @@ public class RDFTerminologyMatcherProcessor implements TextProcessor {
 	private Model model;
 	private List<IRI> terminologyLabels;
 	private Stemmer stemmer;
+	private String language;
 	
 	// Private lazily populated field, access only through getDict()
 	private Map<String, List<String>> dict;
@@ -37,6 +39,20 @@ public class RDFTerminologyMatcherProcessor implements TextProcessor {
 	
 	public Model getModel() {
 		return model;
+	}
+	
+	/**
+	 * If the language is set, only labels in this language are read into the dictionary.
+	 *  
+	 * @param language For example "fi", "en"
+	 */
+	public void setLanguage(String language) {
+		this.language = language;
+		this.dict = null;
+	}
+	
+	public String getLanguage() {
+		return language;
 	}
 	
 	public void setTerminologyLabels(List<IRI> terminologyLabels) {
@@ -80,16 +96,29 @@ public class RDFTerminologyMatcherProcessor implements TextProcessor {
 			
 			for (IRI resource : getTerminologyLabels()) {
 				for (Statement statement : model.filter(r, resource, null)) {
+					boolean shouldAdd = true;
 					
-					String value = statement.getObject().stringValue();
-					
-					value = stem(value);
-					
-					if (values == null) {
-						values = new HashSet<>();
+					if (getLanguage() != null && statement.getObject() instanceof Literal) {
+						Literal literal = (Literal)statement.getObject();
+						if (literal.getLanguage().isPresent()) {
+							String lang = literal.getLanguage().get();
+							if (!getLanguage().equals(lang)) {
+								shouldAdd = false;
+							}
+						}
 					}
 					
-					values.add(value);
+					if (shouldAdd) {
+						String value = statement.getObject().stringValue();
+						
+						value = stem(value);
+						
+						if (values == null) {
+							values = new HashSet<>();
+						}
+						
+						values.add(value);
+					}
 				}
 			}
 			

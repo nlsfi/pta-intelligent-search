@@ -1,0 +1,69 @@
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix koko: <http://www.yso.fi/onto/koko/> .
+@prefix koko-meta: <http://www.yso.fi/onto/koko-meta/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosext: <http://purl.org/finnonto/schema/skosext#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yso: <http://www.yso.fi/onto/yso/> .
+
+koko:p32440 a skos:Concept,
+        <http://www.yso.fi/onto/afo-meta/Concept>,
+        <http://www.yso.fi/onto/juho-meta/Concept>,
+        <http://www.yso.fi/onto/jupo-meta/Concept>,
+        <http://www.yso.fi/onto/kauno-meta/Concept>,
+        <http://www.yso.fi/onto/kulo-meta/Concept>,
+        <http://www.yso.fi/onto/liito-meta/Concept>,
+        <http://www.yso.fi/onto/mao-meta/Concept>,
+        <http://www.yso.fi/onto/yso-meta/Concept> ;
+    dc:source "Helecon"^^xsd:string,
+        "JHS"^^xsd:string,
+        "ysa" ;
+    skos:altLabel "village"@en,
+        "kylä"@fi,
+        "by"@sv ;
+    skos:broader koko:p25281 ;
+    skos:closeMatch <http://id.loc.gov/authorities/subjects/sh85143356> ;
+    skos:exactMatch <http://www.yso.fi/onto/afo/p2540>,
+        <http://www.yso.fi/onto/allars/Y16478>,
+        <http://www.yso.fi/onto/juho/p7638>,
+        <http://www.yso.fi/onto/jupo/p588>,
+        <http://www.yso.fi/onto/kauno/p4632>,
+        koko:p32440,
+        <http://www.yso.fi/onto/kulo/k1930>,
+        <http://www.yso.fi/onto/liito/p3632>,
+        <http://www.yso.fi/onto/mao/p1283>,
+        <http://www.yso.fi/onto/ysa/Y96638>,
+        yso:p10998 ;
+    skos:inScheme koko: ;
+    skos:narrower koko:p13003,
+        koko:p33119,
+        koko:p39074,
+        koko:p39320,
+        koko:p40420,
+        koko:p40660,
+        koko:p41087,
+        koko:p5290,
+        koko:p76567,
+        koko:p7954 ;
+    skos:prefLabel "villages"@en,
+        "kylät"@fi,
+        "byar"@sv ;
+    skos:related koko:p1877,
+        koko:p25842,
+        koko:p30809,
+        koko:p31258,
+        koko:p31460,
+        koko:p33091,
+        koko:p33424,
+        koko:p35742,
+        koko:p36859,
+        koko:p63111,
+        koko:p73346,
+        koko:p77256 .
+
