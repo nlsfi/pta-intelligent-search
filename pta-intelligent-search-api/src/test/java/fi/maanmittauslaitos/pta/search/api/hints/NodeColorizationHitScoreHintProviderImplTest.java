@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -26,9 +27,9 @@ import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
 import fi.maanmittauslaitos.pta.search.api.hints.NodeColorizationHintProviderImpl;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
 
-public class NodeColorizationHintProviderImplTest {
+public class NodeColorizationHitScoreHintProviderImplTest {
 	private ValueFactory vf = SimpleValueFactory.getInstance();
-	private NodeColorizationHintProviderImpl hintProvider;
+	private NodeColorizationHitScoreHintProviderImpl hintProvider;
 	private static Model model;
 	
 	@BeforeClass
@@ -38,10 +39,11 @@ public class NodeColorizationHintProviderImplTest {
 	
 	@Before
 	public void setUp() throws Exception { 
-		hintProvider = new NodeColorizationHintProviderImpl();
+		hintProvider = new NodeColorizationHitScoreHintProviderImpl();
 		hintProvider.setMaxColorizationDepth(3);
 		hintProvider.setStemmer(StemmerFactor.createStemmer());
 		hintProvider.setModel(model);
+		hintProvider.setLanguage("fi");
 		
 		List<Entry<IRI, Double>> weights = new ArrayList<>();
 		
@@ -53,11 +55,11 @@ public class NodeColorizationHintProviderImplTest {
 	}
 
 	@Test
-	public void testDepth1SingleTerm() {
+	public void testDepth1SingleTermScore2() {
 		List<String> uris = Arrays.asList("http://www.yso.fi/onto/ysa/Y108634"); // abiturientit
 		hintProvider.setMaxColorizationDepth(1);
 		
-		Map<IRI, Double> colors = hintProvider.colorize(toResources(uris));
+		Map<IRI, Double> colors = hintProvider.colorize(toResources(uris, Arrays.asList(2.0)));
 		
 		// Not related (directly)
 		Double weightForAmmattikoululaiset = colors.get(vf.createIRI("http://www.yso.fi/onto/ysa/Y151201"));
@@ -66,17 +68,17 @@ public class NodeColorizationHintProviderImplTest {
 		// Broader
 		Double weightForKoululaiset = colors.get(vf.createIRI("http://www.yso.fi/onto/ysa/Y96403"));
 		assertNotNull(weightForKoululaiset);
-		assertEquals(0.25, weightForKoululaiset.doubleValue(), 0.00001);
+		assertEquals(0.5, weightForKoululaiset.doubleValue(), 0.00001);
 		
 		
 		// Associative
 		Double weightForPenkinpainajaiset = colors.get(vf.createIRI("http://www.yso.fi/onto/ysa/Y108579"));
 		assertNotNull(weightForPenkinpainajaiset);
-		assertEquals(0.5, weightForPenkinpainajaiset.doubleValue(), 0.00001);
+		assertEquals(1.0, weightForPenkinpainajaiset.doubleValue(), 0.00001);
 		
 		Double weightForYlioppilaat = colors.get(vf.createIRI("http://www.yso.fi/onto/ysa/Y104928"));
 		assertNotNull(weightForYlioppilaat);
-		assertEquals(0.5, weightForYlioppilaat.doubleValue(), 0.00001);
+		assertEquals(1.0, weightForYlioppilaat.doubleValue(), 0.00001);
 	}
 	
 	@Test
@@ -84,12 +86,26 @@ public class NodeColorizationHintProviderImplTest {
 		List<String> uris = Arrays.asList("http://www.yso.fi/onto/ysa/Y108634"); // abiturientit
 		hintProvider.setMaxColorizationDepth(1);
 		
-		Map<IRI, Double> colors = hintProvider.colorize(toResources(uris));
+		Map<IRI, Double> colors = hintProvider.colorize(toResources(uris, Arrays.asList(1.0)));
 	
 		// The term itself
 		Double weightForAbiturientit = colors.get(vf.createIRI("http://www.yso.fi/onto/ysa/Y108634"));
 		assertNotNull(weightForAbiturientit);
 		assertEquals(1.0, weightForAbiturientit.doubleValue(), 0.00001);
+	}
+	
+	@Test
+	public void testColorizesTheTermItselfScoreMatters() {
+		List<String> uris = Arrays.asList("http://www.yso.fi/onto/ysa/Y108634"); // abiturientit
+		hintProvider.setMaxColorizationDepth(1);
+		
+		// Score of 3.3 
+		Map<IRI, Double> colors = hintProvider.colorize(toResources(uris, Arrays.asList(3.3)));
+	
+		// The term itself
+		Double weightForAbiturientit = colors.get(vf.createIRI("http://www.yso.fi/onto/ysa/Y108634"));
+		assertNotNull(weightForAbiturientit);
+		assertEquals(3.3, weightForAbiturientit.doubleValue(), 0.00001);
 	}
 	
 
@@ -107,7 +123,7 @@ public class NodeColorizationHintProviderImplTest {
 		hintProvider.setRelationsAndWeights(weights);
 		
 
-		Map<IRI, Double> colors = hintProvider.colorize(toResources(uris));
+		Map<IRI, Double> colors = hintProvider.colorize(toResources(uris, Arrays.asList(1.0, 1.0)));
 		
 		// Common "broader"
 		Double weightForKoulujuhlat = colors.get(vf.createIRI("http://www.yso.fi/onto/ysa/Y102734"));
@@ -134,7 +150,7 @@ public class NodeColorizationHintProviderImplTest {
 		hintProvider.setRelationsAndWeights(weights);
 		
 
-		Map<IRI, Double> colors = hintProvider.colorize(toResources(uris));
+		Map<IRI, Double> colors = hintProvider.colorize(toResources(uris, Arrays.asList(1.0, 1.0)));
 		
 		// Broarder only for uhkasakko
 		Double weightForSakko = colors.get(vf.createIRI("http://www.yso.fi/onto/ysa/Y98711")); // sakko
@@ -167,7 +183,7 @@ public class NodeColorizationHintProviderImplTest {
 		hintProvider.setRelationsAndWeights(weights);
 		
 
-		Map<IRI, Double> colors = hintProvider.colorize(toResources(uris));
+		Map<IRI, Double> colors = hintProvider.colorize(toResources(uris, Arrays.asList(1.0)));
 		
 		// Associative
 		Double weightForSakko = colors.get(vf.createIRI("http://www.yso.fi/onto/ysa/Y165908")); // sakon muuntorangaistus
@@ -198,7 +214,7 @@ public class NodeColorizationHintProviderImplTest {
 		
 		Hit fakeHit = new Hit();
 		fakeHit.setAbstractUris(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711")); // Sakko
-		
+		fakeHit.setScore(1.0);
 
 		HakuPyynto pyynto = new HakuPyynto();
 		pyynto.setQuery(Arrays.asList("sakko"));
@@ -211,7 +227,6 @@ public class NodeColorizationHintProviderImplTest {
 		
 	}
 
-	
 	
 	@Test
 	public void testSearchOriginalQueryTermsNotReturned() {
@@ -230,24 +245,28 @@ public class NodeColorizationHintProviderImplTest {
 		
 		Hit fakeHit1 = new Hit();
 		fakeHit1.setAbstractUris(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711")); // Sakko
+		fakeHit1.setScore(1.0);
 		
 		Hit fakeHit2 = new Hit();
 		fakeHit2.setAbstractUris(Arrays.asList("http://www.yso.fi/onto/ysa/Y165908")); // Sakon muuntorangaistus
+		fakeHit2.setScore(1.0);
 		
 		HakuPyynto pyynto = new HakuPyynto();
 		pyynto.setQuery(Arrays.asList("sakko", "sakon muuntorangaistus"));
 		
 		List<String> hints = hintProvider.getHints(pyynto, Arrays.asList(fakeHit1, fakeHit2));
-		System.out.println(hints);
 		assertEquals(2, hints.size());
 		assertEquals("rangaistukset", hints.get(0));
 		assertEquals("tuomiot", hints.get(1));
 	}
 
-	private Set<IRI> toResources(List<String> uris) {
-		Set<IRI> ret = new HashSet<>();
-		for (String uri : uris) {
-			ret.add(vf.createIRI(uri));
+	private Set<Map.Entry<IRI, Double>> toResources(List<String> uris, List<Double> scores) {
+		Set<Map.Entry<IRI, Double>> ret = new HashSet<>();
+		if (uris.size() != scores.size()) {
+			throw new IllegalArgumentException("Size of uris and scores need to be equal");
+		}
+		for (int i = 0; i < uris.size(); i++) {
+			ret.add(new AbstractMap.SimpleEntry<>(vf.createIRI(uris.get(i)), scores.get(i)));
 		}
 		return ret;
 	}

@@ -83,6 +83,30 @@ public class NodeColorizationHitScoreHintProviderImpl implements HintProvider {
 		return maxHints;
 	}
 	
+	/**
+	 * This HintProvider selects hints based on terms found in the returned hits. It searches recursively for
+	 * related terms in the given ontology model. Terms are scored in the following manner:
+	 *  
+	 * 1. Each term found in each hit is given the score of that particular hit
+	 * 2. These terms + scores form the first group to be processed
+	 * 3. Create the next empty batch of terms + scores
+	 * 4. For each term and score (t, s) in the group:
+	 *    I) For each configured pair of relation and weight (r and w)
+	 *      a) Define relation score rs = s * w
+	 *      b) For each term T in the model model that have the relation r between t and T
+	 *        1) Increment the score for T by rs
+	 *        2) Add (T, rs) to the next batch to be processed
+	 *    II) If there are recursion levels to go through, go to step 3 using the collected batch of terms + scores
+	 *    III) Otherwise, go to step 5
+	 * 5. Order terms based on their score (highest score first)
+	 * 6. Remove terms that were already used as search terms
+	 * 7. Return labels for these terms (in the selected language) as search hints
+	 *
+	 * In English, the algorithm follows the configured relations starting from terms found in the current hits.
+	 * Each related term is scored based on the weight of the relation and the score applied to the original term
+	 * during that stage. The scores in the first stage are the scores of the hits the term were mentioned in. 
+	 * This process is done recursively until the configured level of recursion has been reached.   
+	 */
 	@Override
 	public List<String> getHints(HakuPyynto pyynto, List<Hit> hits) {
 		
