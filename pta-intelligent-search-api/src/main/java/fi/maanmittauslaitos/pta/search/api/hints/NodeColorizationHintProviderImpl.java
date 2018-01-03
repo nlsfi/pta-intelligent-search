@@ -1,4 +1,4 @@
-package fi.maanmittauslaitos.pta.search.api;
+package fi.maanmittauslaitos.pta.search.api.hints;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,6 +20,7 @@ import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.util.Models;
 import org.eclipse.rdf4j.model.vocabulary.SKOS;
 
+import fi.maanmittauslaitos.pta.search.api.HakuPyynto;
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 

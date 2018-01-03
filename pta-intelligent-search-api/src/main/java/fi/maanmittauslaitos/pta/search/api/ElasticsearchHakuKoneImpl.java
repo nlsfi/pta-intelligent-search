@@ -16,6 +16,7 @@ import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
+import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
 
 public class ElasticsearchHakuKoneImpl implements HakuKone {
 	private RestHighLevelClient client;

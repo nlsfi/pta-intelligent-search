@@ -1,4 +1,4 @@
-package fi.maanmittauslaitos.pta.search.api;
+package fi.maanmittauslaitos.pta.search.api.hints;
 
 import static org.junit.Assert.*;
 
@@ -20,7 +20,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fi.maanmittauslaitos.pta.search.api.ApplicationConfiguration;
+import fi.maanmittauslaitos.pta.search.api.HakuPyynto;
+import fi.maanmittauslaitos.pta.search.api.HakuTulos;
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
+import fi.maanmittauslaitos.pta.search.api.hints.NodeColorizationHintProviderImpl;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
 
 public class NodeColorizationHintProviderImplTest {

@@ -90,6 +90,8 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 
 		sourceBuilder.query(boolQuery);
 		
+		// TODO: tarvitaan jonkinasteinen limitti
+		
 		return sourceBuilder;
 	}
 

@@ -22,6 +22,8 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
+import fi.maanmittauslaitos.pta.search.api.hints.NodeColorizationHitScoreHintProviderImpl;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
