@@ -40,6 +40,7 @@ public class FieldExtractorConfiguration {
 	
 	public enum FieldExtractorType {
 		FIRST_MATCHING_VALUE,
-		ALL_MATCHING_VALUES
+		ALL_MATCHING_VALUES,
+		TRUE_IF_MATCHES_OTHERWISE_FALSE
 	}
 }

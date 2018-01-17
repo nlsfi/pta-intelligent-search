@@ -37,6 +37,7 @@ public class HarvesterConfig {
 		HarvesterSource source = new CSWHarvesterSource();
 		source.setBatchSize(10);
 		source.setOnlineResource("http://paikkatietohakemisto.fi/geonetwork/srv/en/csw");
+		//source.setOnlineResource("http://demo.paikkatietohakemisto.fi/geonetwork/srv/en/csw");
 		
 		return source;
 	}
@@ -46,6 +47,7 @@ public class HarvesterConfig {
 		XPathExtractionConfiguration configuration = new XPathExtractionConfiguration();
 		configuration.getNamespaces().put("gmd", "http://www.isotc211.org/2005/gmd");
 		configuration.getNamespaces().put("gco", "http://www.isotc211.org/2005/gco");
+		configuration.getNamespaces().put("srv", "http://www.isotc211.org/2005/srv");
 		
 		TextProcessingChain abstractChain = new TextProcessingChain();
 		abstractChain.getChain().add(new TextSplitterProcessor());
@@ -134,6 +136,34 @@ public class HarvesterConfig {
 			configuration.getFieldExtractors().add(abstractAsTextExtractor);
 		}
 		
+		{
+			FieldExtractorConfiguration onlineResourceExtractor = new FieldExtractorConfiguration();
+			onlineResourceExtractor.setField("onlineResource");
+			onlineResourceExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
+			// Select linkage URL in onLine transferoptions where protocol contains "wfs"
+			onlineResourceExtractor.setXpath("//gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine/*[contains(translate(gmd:protocol/*/text(),\"WFS\",\"wfs\"),\"wfs\")]/gmd:linkage/gmd:URL/text()");
+			
+			configuration.getFieldExtractors().add(onlineResourceExtractor);
+		}
+		
+		{
+			FieldExtractorConfiguration isServiceExtractor = new FieldExtractorConfiguration();
+			isServiceExtractor.setField("isService");
+			isServiceExtractor.setType(FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE);
+			isServiceExtractor.setXpath("//gmd:identificationInfo/srv:SV_ServiceIdentification");
+			
+			configuration.getFieldExtractors().add(isServiceExtractor);
+		}
+		
+		{
+			FieldExtractorConfiguration isDatasetExtractor = new FieldExtractorConfiguration();
+			isDatasetExtractor.setField("isDataset");
+			isDatasetExtractor.setType(FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE);
+			isDatasetExtractor.setXpath("//gmd:identificationInfo/gmd:MD_DataIdentification");
+			
+			configuration.getFieldExtractors().add(isDatasetExtractor);
+			
+		}
 		
 		return new XPathProcessorFactory().createProcessor(configuration);
 	}

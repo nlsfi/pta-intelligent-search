@@ -3,7 +3,6 @@ package fi.maanmittauslaitos.pta.search.xpath;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -81,13 +80,26 @@ public class XPathProcessorFactory {
 				switch(fec.getType()) {
 				case FIRST_MATCHING_VALUE:
 					if (nodeList.getLength() > 0) {
-						ret.add(nodeList.item(0).getNodeValue());
+						String value = nodeList.item(0).getNodeValue();
+						if (value != null) {
+							value = value.trim();
+						}
+						ret.add(value);
 					}
 					break;
 				case ALL_MATCHING_VALUES:
 					for (int i = 0; i < nodeList.getLength(); i++) {
-						ret.add(nodeList.item(i).getNodeValue());
+						String value = nodeList.item(i).getNodeValue();
+						if (value != null) {
+							value = value.trim();
+						}
+						ret.add(value);
 					}
+					break;
+				case TRUE_IF_MATCHES_OTHERWISE_FALSE:
+					boolean matches = nodeList.getLength() > 0;
+					ret.add(matches ? "true" : "false");
+					break;
 				}
 				
 				return ret;
@@ -95,7 +107,4 @@ public class XPathProcessorFactory {
 		};
 	}
 
-	private Map<String, TextProcessingChain> createTextProcessingChains(XPathExtractionConfiguration configuration) {
-		return new HashMap<>();
-	}
 }

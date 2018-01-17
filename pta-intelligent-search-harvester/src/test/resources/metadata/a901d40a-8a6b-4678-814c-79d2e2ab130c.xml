@@ -1,0 +1,821 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd"
+	xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gco="http://www.isotc211.org/2005/gco"
+	xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://www.isotc211.org/2005/gmd/gmd.xsd&#xA;                  http://www.isotc211.org/2005/gmx http://www.isotc211.org/2005/gmx/gmx.xsd&#xA;                  http://www.isotc211.org/2005/srv http://schemas.opengis.net/iso/19139/20060504/srv/srv.xsd&#xA;  ">
+	<gmd:fileIdentifier xmlns:xlink="http://www.w3.org/1999/xlink"
+		xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gmx="http://www.isotc211.org/2005/gmx">
+		<gco:CharacterString>a901d40a-8a6b-4678-814c-79d2e2ab130c
+		</gco:CharacterString>
+	</gmd:fileIdentifier>
+	<gmd:language>
+		<gco:CharacterString>fin</gco:CharacterString>
+	</gmd:language>
+	<gmd:hierarchyLevel>
+		<gmd:MD_ScopeCode codeListValue="series"
+			codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#MD_ScopeCode" />
+	</gmd:hierarchyLevel>
+	<gmd:hierarchyLevelName>
+		<gco:CharacterString>Aineisto</gco:CharacterString>
+	</gmd:hierarchyLevelName>
+	<gmd:contact>
+		<gmd:CI_ResponsibleParty>
+			<gmd:organisationName xsi:type="gmd:PT_FreeText_PropertyType">
+				<gco:CharacterString>Tilastokeskus</gco:CharacterString>
+				<gmd:PT_FreeText>
+					<gmd:textGroup>
+						<gmd:LocalisedCharacterString locale="#EN">Statistics
+							Finland</gmd:LocalisedCharacterString>
+					</gmd:textGroup>
+					<gmd:textGroup>
+						<gmd:LocalisedCharacterString locale="#SW">Statistikcentralen</gmd:LocalisedCharacterString>
+					</gmd:textGroup>
+				</gmd:PT_FreeText>
+			</gmd:organisationName>
+			<gmd:contactInfo>
+				<gmd:CI_Contact>
+					<gmd:address>
+						<gmd:CI_Address>
+							<gmd:electronicMailAddress>
+								<gco:CharacterString>inspire@stat.fi</gco:CharacterString>
+							</gmd:electronicMailAddress>
+						</gmd:CI_Address>
+					</gmd:address>
+				</gmd:CI_Contact>
+			</gmd:contactInfo>
+			<gmd:role>
+				<gmd:CI_RoleCode codeListValue="originator"
+					codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_RoleCode" />
+			</gmd:role>
+		</gmd:CI_ResponsibleParty>
+	</gmd:contact>
+	<gmd:dateStamp>
+		<gco:DateTime xmlns:xlink="http://www.w3.org/1999/xlink"
+			xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gmx="http://www.isotc211.org/2005/gmx">2016-05-24T17:16:03
+		</gco:DateTime>
+	</gmd:dateStamp>
+	<gmd:locale>
+		<gmd:PT_Locale xmlns:xlink="http://www.w3.org/1999/xlink"
+			xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gmx="http://www.isotc211.org/2005/gmx"
+			id="EN">
+			<gmd:languageCode>
+				<gmd:LanguageCode codeList="" codeListValue="eng" />
+			</gmd:languageCode>
+			<gmd:characterEncoding>
+				<gmd:MD_CharacterSetCode codeList=""
+					codeListValue="" />
+			</gmd:characterEncoding>
+		</gmd:PT_Locale>
+	</gmd:locale>
+	<gmd:locale>
+		<gmd:PT_Locale xmlns:xlink="http://www.w3.org/1999/xlink"
+			xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gmx="http://www.isotc211.org/2005/gmx"
+			id="SW">
+			<gmd:languageCode>
+				<gmd:LanguageCode codeList="" codeListValue="swe" />
+			</gmd:languageCode>
+			<gmd:characterEncoding>
+				<gmd:MD_CharacterSetCode codeList=""
+					codeListValue="" />
+			</gmd:characterEncoding>
+		</gmd:PT_Locale>
+	</gmd:locale>
+	<gmd:referenceSystemInfo>
+		<gmd:MD_ReferenceSystem>
+			<gmd:referenceSystemIdentifier>
+				<gmd:RS_Identifier>
+					<gmd:code xsi:type="gmd:PT_FreeText_PropertyType">
+						<gco:CharacterString>ETRS89 / ETRS-TM35FIN (EPSG:3067)
+						</gco:CharacterString>
+						<gmd:PT_FreeText>
+							<gmd:textGroup>
+								<gmd:LocalisedCharacterString
+									locale="#EN">ETRS89 / ETRS-TM35FIN (EPSG:3067)</gmd:LocalisedCharacterString>
+							</gmd:textGroup>
+							<gmd:textGroup>
+								<gmd:LocalisedCharacterString
+									locale="#SW">ETRS89 / ETRS-TM35FIN (EPSG:3067)</gmd:LocalisedCharacterString>
+							</gmd:textGroup>
+						</gmd:PT_FreeText>
+					</gmd:code>
+					<gmd:codeSpace>
+						<gco:CharacterString>EPSG</gco:CharacterString>
+					</gmd:codeSpace>
+					<gmd:version>
+						<gco:CharacterString>7.4</gco:CharacterString>
+					</gmd:version>
+				</gmd:RS_Identifier>
+			</gmd:referenceSystemIdentifier>
+		</gmd:MD_ReferenceSystem>
+	</gmd:referenceSystemInfo>
+	<gmd:referenceSystemInfo>
+		<gmd:MD_ReferenceSystem />
+	</gmd:referenceSystemInfo>
+	<gmd:identificationInfo>
+		<gmd:MD_DataIdentification>
+			<gmd:citation>
+				<gmd:CI_Citation>
+					<gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+						<gco:CharacterString>Väestöruutuaineisto 1 km x 1 km
+						</gco:CharacterString>
+						<gmd:PT_FreeText>
+							<gmd:textGroup>
+								<gmd:LocalisedCharacterString
+									locale="#EN">Population grid data 1 km x 1 km</gmd:LocalisedCharacterString>
+							</gmd:textGroup>
+							<gmd:textGroup>
+								<gmd:LocalisedCharacterString
+									locale="#SW">Rutdata om folkmängd 1 km x 1 km</gmd:LocalisedCharacterString>
+							</gmd:textGroup>
+						</gmd:PT_FreeText>
+					</gmd:title>
+					<gmd:date>
+						<gmd:CI_Date>
+							<gmd:date>
+								<gco:Date>2005-12-31</gco:Date>
+							</gmd:date>
+							<gmd:dateType>
+								<gmd:CI_DateTypeCode codeListValue="publication"
+									codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode" />
+							</gmd:dateType>
+						</gmd:CI_Date>
+					</gmd:date>
+					<gmd:date>
+						<gmd:CI_Date>
+							<gmd:date>
+								<gco:Date>2010-12-31</gco:Date>
+							</gmd:date>
+							<gmd:dateType>
+								<gmd:CI_DateTypeCode
+									codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+									codeListValue="publication" />
+							</gmd:dateType>
+						</gmd:CI_Date>
+					</gmd:date>
+					<gmd:date>
+						<gmd:CI_Date>
+							<gmd:date>
+								<gco:Date>2011-12-31</gco:Date>
+							</gmd:date>
+							<gmd:dateType>
+								<gmd:CI_DateTypeCode
+									codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+									codeListValue="publication" />
+							</gmd:dateType>
+						</gmd:CI_Date>
+					</gmd:date>
+					<gmd:date>
+						<gmd:CI_Date>
+							<gmd:date>
+								<gco:Date>2012-12-31</gco:Date>
+							</gmd:date>
+							<gmd:dateType>
+								<gmd:CI_DateTypeCode
+									codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+									codeListValue="publication" />
+							</gmd:dateType>
+						</gmd:CI_Date>
+					</gmd:date>
+					<gmd:date>
+						<gmd:CI_Date>
+							<gmd:date>
+								<gco:Date>2013-12-31</gco:Date>
+							</gmd:date>
+							<gmd:dateType>
+								<gmd:CI_DateTypeCode
+									codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+									codeListValue="publication" />
+							</gmd:dateType>
+						</gmd:CI_Date>
+					</gmd:date>
+					<gmd:date>
+						<gmd:CI_Date>
+							<gmd:date>
+								<gco:Date>2014-12-31</gco:Date>
+							</gmd:date>
+							<gmd:dateType>
+								<gmd:CI_DateTypeCode
+									codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+									codeListValue="publication" />
+							</gmd:dateType>
+						</gmd:CI_Date>
+					</gmd:date>
+					<gmd:date>
+						<gmd:CI_Date>
+							<gmd:date>
+								<gco:Date>2015-12-31</gco:Date>
+							</gmd:date>
+							<gmd:dateType>
+								<gmd:CI_DateTypeCode
+									codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+									codeListValue="publication" />
+							</gmd:dateType>
+						</gmd:CI_Date>
+					</gmd:date>
+					<gmd:identifier>
+						<gmd:RS_Identifier>
+							<gmd:code xsi:type="gmd:PT_FreeText_PropertyType">
+								<gco:CharacterString>1000191</gco:CharacterString>
+								<gmd:PT_FreeText>
+									<gmd:textGroup>
+										<gmd:LocalisedCharacterString
+											locale="#EN">1000191</gmd:LocalisedCharacterString>
+									</gmd:textGroup>
+									<gmd:textGroup>
+										<gmd:LocalisedCharacterString
+											locale="#SW">1000191</gmd:LocalisedCharacterString>
+									</gmd:textGroup>
+								</gmd:PT_FreeText>
+							</gmd:code>
+							<gmd:codeSpace>
+								<gco:CharacterString>FI</gco:CharacterString>
+							</gmd:codeSpace>
+						</gmd:RS_Identifier>
+					</gmd:identifier>
+				</gmd:CI_Citation>
+			</gmd:citation>
+			<gmd:abstract xsi:type="gmd:PT_FreeText_PropertyType">
+				<gco:CharacterString>Väestömäärä 1 km x 1 km -ruuduittain. Väestön
+					lukumäärä viitevuoden viimeisenä päivänä (31.12) ikäryhmittäin.
+					Aineisto sisältää vain asutut ruudut.
+					Aineiston tilastomuuttujia ovat:
+					väestömäärä yhteensä (vaesto), miesten (miehet) ja naisten (naiset) lukumäärä,
+					alle 15-vuotiaat (ika_0_14), 15-64 -vuotiaat (ika_15_64) ja 65
+					vuotta täyttäneet (ika_65_).
+					Alle 10 asukkaan ruuduista ilmoitetaan vain väestömäärä.
+
+					Ruudun tunniste ilmoitetaan koordinaateista johdetulla kansallisella
+					identifiointitunnuksella (id_nro (num)) sekä INSPIRE:n standardilla
+					identifiointitunnuksella (grd_id (char)). Aineisto sisältää myös
+					ruudun vasemman alanurkan koordinaatit (xkoord, ykoord (num)).
+
+					Aineisto kuvaa väestömäärää ruuduittain hallinnollisista
+					aluejaoista (esim. kuntarajoista) riippumatta. Aineisto soveltuu
+					väestöjakauman tarkasteluun ja erilaisten alueellisten analyysien
+					tekemiseen. Aineisto on käytettävissä sekä alueina että ruutujen
+					keskipisteinä.
+				</gco:CharacterString>
+				<gmd:PT_FreeText>
+					<gmd:textGroup>
+						<gmd:LocalisedCharacterString locale="#EN">Number
+							of population by 1 km x 1 km grids. The number of population on
+							the last day of the reference year (31 December) by age group.
+							Data includes only inhabited grids.
+
+							The statistical variables of the data are:
+							Total population (vaesto), number of men (miehet) and women (naiset),
+							under 15 year-olds (ika_0_14), 15-64 year-olds (ika_15_64), and
+							aged over 65 (ika_65_).
+
+							A grid identifier is expressed using a national identification
+							code derived from the coordinates (idD_nro (num)) and INSPIRE's
+							standard identification code (grd_id (char)). The data also
+							contains the coordinates of the lower left-hand corner of a grid
+							(xkoord, ykoord (num)).
+
+							The data describes the population distribution independent of
+							administrative areas (such as municipal borders). The data is
+							suitable for examination of population distribution and making
+							various spatial analysis. Data is available as polygons and as
+							centroids of grid cells.</gmd:LocalisedCharacterString>
+					</gmd:textGroup>
+					<gmd:textGroup>
+						<gmd:LocalisedCharacterString locale="#SW">Folkmängd
+							per 1 km x 1 km ruta. Folkmängd på referensårets sista dag
+							(31.12) efter åldersgrupp.
+
+							Statistikvariabler i materialet:
+							folkmängd totalt (vaesto), antal män (miehet) och kvinnor (naiset), yngre
+							än 15 år (ika_0_14), 15–64 år (ika_15_64) och 65 år fyllda
+							(ika_65_).
+							Koden för rutan anges i materialet med en nationell id-kod (id_nro
+							(num)) som härletts ur koordinaterna samt med INSPIRE:s
+							standardenliga id-kod (grd_id (char)). Materialet omfattar också
+							koordinaterna för varje bebodd rutas vänstra nedre hörn (xkoord,
+							ykoord (num)).
+
+							Materialet beskriver folkmängden per ruta oberoende av administrativ
+							områdesindelning (t.ex. kommungränser). Materialet lämpar sig för
+							genomgång av folkmängder och för utförande av olika regionala
+							analyser. Datat finns tillgänligt både som polygoner och som
+							rutmittpunkter.</gmd:LocalisedCharacterString>
+					</gmd:textGroup>
+				</gmd:PT_FreeText>
+			</gmd:abstract>
+			<gmd:pointOfContact>
+				<gmd:CI_ResponsibleParty>
+					<gmd:organisationName xsi:type="gmd:PT_FreeText_PropertyType">
+						<gco:CharacterString>Tilastokeskus</gco:CharacterString>
+						<gmd:PT_FreeText>
+							<gmd:textGroup>
+								<gmd:LocalisedCharacterString
+									locale="#EN">Statistics Finland</gmd:LocalisedCharacterString>
+							</gmd:textGroup>
+							<gmd:textGroup>
+								<gmd:LocalisedCharacterString
+									locale="#SW">Statistikcentralen</gmd:LocalisedCharacterString>
+							</gmd:textGroup>
+						</gmd:PT_FreeText>
+					</gmd:organisationName>
+					<gmd:contactInfo>
+						<gmd:CI_Contact>
+							<gmd:phone>
+								<gmd:CI_Telephone>
+									<gmd:voice>
+										<gco:CharacterString>09 17341</gco:CharacterString>
+									</gmd:voice>
+								</gmd:CI_Telephone>
+							</gmd:phone>
+							<gmd:address>
+								<gmd:CI_Address>
+									<gmd:deliveryPoint>
+										<gco:CharacterString>Työpajankatu 13</gco:CharacterString>
+									</gmd:deliveryPoint>
+									<gmd:city>
+										<gco:CharacterString>TILASTOKESKUS</gco:CharacterString>
+									</gmd:city>
+									<gmd:postalCode>
+										<gco:CharacterString>00022</gco:CharacterString>
+									</gmd:postalCode>
+									<gmd:country>
+										<gco:CharacterString>Suomi</gco:CharacterString>
+									</gmd:country>
+									<gmd:electronicMailAddress>
+										<gco:CharacterString>inspire@stat.fi</gco:CharacterString>
+									</gmd:electronicMailAddress>
+								</gmd:CI_Address>
+							</gmd:address>
+							<gmd:contactInstructions gco:nilReason="missing">
+								<gco:CharacterString />
+							</gmd:contactInstructions>
+						</gmd:CI_Contact>
+					</gmd:contactInfo>
+					<gmd:role>
+						<gmd:CI_RoleCode codeListValue="originator"
+							codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_RoleCode" />
+					</gmd:role>
+				</gmd:CI_ResponsibleParty>
+			</gmd:pointOfContact>
+			<gmd:graphicOverview xmlns:srv="http://www.isotc211.org/2005/srv">
+				<gmd:MD_BrowseGraphic>
+					<gmd:fileName>
+						<gco:CharacterString>vaesto_ruutu__s.png</gco:CharacterString>
+					</gmd:fileName>
+					<gmd:fileDescription>
+						<gco:CharacterString>thumbnail</gco:CharacterString>
+					</gmd:fileDescription>
+					<gmd:fileType>
+						<gco:CharacterString>png</gco:CharacterString>
+					</gmd:fileType>
+				</gmd:MD_BrowseGraphic>
+			</gmd:graphicOverview>
+			<gmd:descriptiveKeywords>
+				<gmd:MD_Keywords>
+					<gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+						<gco:CharacterString>Väestöjakauma</gco:CharacterString>
+						<gmd:PT_FreeText>
+							<gmd:textGroup>
+								<gmd:LocalisedCharacterString
+									locale="#SW">Befolkningsfördelning</gmd:LocalisedCharacterString>
+							</gmd:textGroup>
+							<gmd:textGroup>
+								<gmd:LocalisedCharacterString
+									locale="#EN">Population distribution</gmd:LocalisedCharacterString>
+							</gmd:textGroup>
+						</gmd:PT_FreeText>
+					</gmd:keyword>
+					<gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+						<gco:CharacterString>Väestömäärä</gco:CharacterString>
+						<gmd:PT_FreeText>
+							<gmd:textGroup>
+								<gmd:LocalisedCharacterString
+									locale="#EN">Population</gmd:LocalisedCharacterString>
+							</gmd:textGroup>
+							<gmd:textGroup>
+								<gmd:LocalisedCharacterString
+									locale="#SW">Folkmängd</gmd:LocalisedCharacterString>
+							</gmd:textGroup>
+						</gmd:PT_FreeText>
+					</gmd:keyword>
+					<gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+						<gco:CharacterString>Väestöruutu</gco:CharacterString>
+						<gmd:PT_FreeText>
+							<gmd:textGroup>
+								<gmd:LocalisedCharacterString
+									locale="#EN">Inhabited grid</gmd:LocalisedCharacterString>
+							</gmd:textGroup>
+							<gmd:textGroup>
+								<gmd:LocalisedCharacterString
+									locale="#SW">Bebodd rut</gmd:LocalisedCharacterString>
+							</gmd:textGroup>
+						</gmd:PT_FreeText>
+					</gmd:keyword>
+					<gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+						<gco:CharacterString>Ruutu</gco:CharacterString>
+						<gmd:PT_FreeText>
+							<gmd:textGroup>
+								<gmd:LocalisedCharacterString
+									locale="#SW">Rut</gmd:LocalisedCharacterString>
+							</gmd:textGroup>
+							<gmd:textGroup>
+								<gmd:LocalisedCharacterString
+									locale="#EN">Grid</gmd:LocalisedCharacterString>
+							</gmd:textGroup>
+						</gmd:PT_FreeText>
+					</gmd:keyword>
+					<gmd:keyword>
+						<gco:CharacterString>avoindata.fi</gco:CharacterString>
+					</gmd:keyword>
+					<gmd:type>
+						<gmd:MD_KeywordTypeCode codeListValue="theme"
+							codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" />
+					</gmd:type>
+					<gmd:thesaurusName>
+						<gmd:CI_Citation>
+							<gmd:title>
+								<gco:CharacterString>Paikkatietohakemiston asiasanasto
+								</gco:CharacterString>
+							</gmd:title>
+							<gmd:date>
+								<gmd:CI_Date>
+									<gmd:date>
+										<gco:Date>2010-02-05</gco:Date>
+									</gmd:date>
+									<gmd:dateType>
+										<gmd:CI_DateTypeCode codeListValue="publication"
+											codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode" />
+									</gmd:dateType>
+								</gmd:CI_Date>
+							</gmd:date>
+						</gmd:CI_Citation>
+					</gmd:thesaurusName>
+				</gmd:MD_Keywords>
+			</gmd:descriptiveKeywords>
+			<gmd:descriptiveKeywords>
+				<gmd:MD_Keywords>
+					<gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+						<gco:CharacterString>Väestöjakauma – demografia
+						</gco:CharacterString>
+						<gmd:PT_FreeText>
+							<gmd:textGroup>
+								<gmd:LocalisedCharacterString
+									locale="#EN">Population distribution</gmd:LocalisedCharacterString>
+							</gmd:textGroup>
+							<gmd:textGroup>
+								<gmd:LocalisedCharacterString
+									locale="#SW">Befolkningsfördelning – demografi</gmd:LocalisedCharacterString>
+							</gmd:textGroup>
+						</gmd:PT_FreeText>
+					</gmd:keyword>
+					<gmd:type>
+						<gmd:MD_KeywordTypeCode
+							codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"
+							codeListValue="theme" />
+					</gmd:type>
+					<gmd:thesaurusName>
+						<gmd:CI_Citation>
+							<gmd:title>
+								<gco:CharacterString>GEMET - INSPIRE themes, version 1.0
+								</gco:CharacterString>
+							</gmd:title>
+							<gmd:date>
+								<gmd:CI_Date>
+									<gmd:date>
+										<gco:Date>2009-09-22</gco:Date>
+									</gmd:date>
+									<gmd:dateType>
+										<gmd:CI_DateTypeCode
+											codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+											codeListValue="publication" />
+									</gmd:dateType>
+								</gmd:CI_Date>
+							</gmd:date>
+						</gmd:CI_Citation>
+					</gmd:thesaurusName>
+				</gmd:MD_Keywords>
+			</gmd:descriptiveKeywords>
+			<gmd:resourceConstraints>
+				<gmd:MD_Constraints>
+					<gmd:useLimitation xsi:type="gmd:PT_FreeText_PropertyType">
+						<gco:CharacterString>http://tilastokeskus.fi/org/lainsaadanto/yleiset_kayttoehdot.html
+						</gco:CharacterString>
+						<gmd:PT_FreeText>
+							<gmd:textGroup>
+								<gmd:LocalisedCharacterString
+									locale="#EN">http://tilastokeskus.fi/org/lainsaadanto/copyright_en.html</gmd:LocalisedCharacterString>
+							</gmd:textGroup>
+							<gmd:textGroup>
+								<gmd:LocalisedCharacterString
+									locale="#SW">http://tilastokeskus.fi/org/lainsaadanto/copyright_sv.html</gmd:LocalisedCharacterString>
+							</gmd:textGroup>
+						</gmd:PT_FreeText>
+					</gmd:useLimitation>
+				</gmd:MD_Constraints>
+			</gmd:resourceConstraints>
+			<gmd:resourceConstraints>
+				<gmd:MD_LegalConstraints>
+					<gmd:accessConstraints>
+						<gmd:MD_RestrictionCode codeListValue="license"
+							codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#MD_RestrictionCode" />
+					</gmd:accessConstraints>
+					<gmd:otherConstraints>
+						<gco:CharacterString>Ei muita rajoitteita.</gco:CharacterString>
+					</gmd:otherConstraints>
+				</gmd:MD_LegalConstraints>
+			</gmd:resourceConstraints>
+			<gmd:resourceConstraints>
+				<gmd:MD_SecurityConstraints>
+					<gmd:classification>
+						<gmd:MD_ClassificationCode
+							codeListValue="unclassified"
+							codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#MD_ClassificationCode" />
+					</gmd:classification>
+				</gmd:MD_SecurityConstraints>
+			</gmd:resourceConstraints>
+			<gmd:spatialRepresentationType>
+				<gmd:MD_SpatialRepresentationTypeCode
+					codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#MD_SpatialRepresentationTypeCode"
+					codeListValue="vector" />
+			</gmd:spatialRepresentationType>
+			<gmd:spatialResolution>
+				<gmd:MD_Resolution>
+					<gmd:equivalentScale>
+						<gmd:MD_RepresentativeFraction>
+							<gmd:denominator>
+								<gco:Integer>1000</gco:Integer>
+							</gmd:denominator>
+						</gmd:MD_RepresentativeFraction>
+					</gmd:equivalentScale>
+				</gmd:MD_Resolution>
+			</gmd:spatialResolution>
+			<gmd:spatialResolution />
+			<gmd:language>
+				<gco:CharacterString>fin</gco:CharacterString>
+			</gmd:language>
+			<gmd:topicCategory>
+				<gmd:MD_TopicCategoryCode>society</gmd:MD_TopicCategoryCode>
+			</gmd:topicCategory>
+			<gmd:extent>
+				<gmd:EX_Extent>
+					<gmd:geographicElement>
+						<gmd:EX_GeographicBoundingBox>
+							<gmd:westBoundLongitude>
+								<gco:Decimal>19.08886999</gco:Decimal>
+							</gmd:westBoundLongitude>
+							<gmd:eastBoundLongitude>
+								<gco:Decimal>31.58671339</gco:Decimal>
+							</gmd:eastBoundLongitude>
+							<gmd:southBoundLatitude>
+								<gco:Decimal>20.3480106</gco:Decimal>
+							</gmd:southBoundLatitude>
+							<gmd:northBoundLatitude>
+								<gco:Decimal>70.09229321</gco:Decimal>
+							</gmd:northBoundLatitude>
+						</gmd:EX_GeographicBoundingBox>
+					</gmd:geographicElement>
+				</gmd:EX_Extent>
+			</gmd:extent>
+		</gmd:MD_DataIdentification>
+	</gmd:identificationInfo>
+	<gmd:distributionInfo xmlns:date="http://exslt.org/dates-and-times"
+		xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:srv="http://www.isotc211.org/2005/srv">
+		<gmd:MD_Distribution>
+			<gmd:transferOptions>
+				<gmd:MD_DigitalTransferOptions>
+
+					<gmd:onLine>
+						<gmd:CI_OnlineResource>
+							<gmd:linkage>
+								<gmd:URL>http://geo.stat.fi/geoserver/vaestoruutu/wfs?service=WFS&amp;request=GetCapabilities&amp;version=1.0.0</gmd:URL>
+							</gmd:linkage>
+							<gmd:protocol>
+								<gco:CharacterString>OGC:WFS</gco:CharacterString>
+							</gmd:protocol>
+							<gmd:name>
+								<gco:CharacterString>Tilastokeskuksen palvelurajapinta (WFS)
+									Väestöruutuaineisto 1 km x 1 km</gco:CharacterString>
+							</gmd:name>
+							<gmd:description xsi:type="gmd:PT_FreeText_PropertyType">
+								<gco:CharacterString>Tilastokeskuksen palvelurajapinta (WFS)
+									Väestöruutuaineisto</gco:CharacterString>
+								<gmd:PT_FreeText>
+									<gmd:textGroup>
+										<gmd:LocalisedCharacterString
+											locale="#SW">Statistikcentralens gränssnittstjänst (WFS) Folkmängd
+											per ruta</gmd:LocalisedCharacterString>
+									</gmd:textGroup>
+									<gmd:textGroup>
+										<gmd:LocalisedCharacterString
+											locale="#EN">Statistics Finland's interface service (WFS)
+											Population grid data</gmd:LocalisedCharacterString>
+									</gmd:textGroup>
+								</gmd:PT_FreeText>
+							</gmd:description>
+						</gmd:CI_OnlineResource>
+					</gmd:onLine>
+					<gmd:onLine>
+						<gmd:CI_OnlineResource>
+							<gmd:linkage>
+								<gmd:URL>http://www.stat.fi/tup/rajapintapalvelut/tuotesyote_vaki_1km.xml</gmd:URL>
+							</gmd:linkage>
+							<gmd:protocol>
+								<gco:CharacterString>WWW:LINK-1.0-http--rss
+								</gco:CharacterString>
+							</gmd:protocol>
+							<gmd:name>
+								<gco:CharacterString>Väestöruutuaineisto 1 km x 1 km tuotesyöte
+								</gco:CharacterString>
+							</gmd:name>
+							<gmd:description xsi:type="gmd:PT_FreeText_PropertyType">
+								<gco:CharacterString>Väestöruutuaineisto 1 km x 1 km tuotesyöte
+									(ATOM)</gco:CharacterString>
+								<gmd:PT_FreeText>
+									<gmd:textGroup>
+										<gmd:LocalisedCharacterString
+											locale="#SW">Statistikcentralens gränssnittstjänst (ATOM) Folkmängd
+											per 1 km x 1 km ruta</gmd:LocalisedCharacterString>
+									</gmd:textGroup>
+									<gmd:textGroup>
+										<gmd:LocalisedCharacterString
+											locale="#EN">Statistics Finland's interface service (ATOM)
+											Population grid data 1 km x 1 km</gmd:LocalisedCharacterString>
+									</gmd:textGroup>
+								</gmd:PT_FreeText>
+							</gmd:description>
+						</gmd:CI_OnlineResource>
+					</gmd:onLine>
+				</gmd:MD_DigitalTransferOptions>
+			</gmd:transferOptions>
+		</gmd:MD_Distribution>
+	</gmd:distributionInfo>
+	<gmd:dataQualityInfo>
+		<gmd:DQ_DataQuality>
+			<gmd:scope>
+				<gmd:DQ_Scope>
+					<gmd:level>
+						<gmd:MD_ScopeCode codeListValue="series"
+							codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#MD_ScopeCode" />
+					</gmd:level>
+				</gmd:DQ_Scope>
+			</gmd:scope>
+			<gmd:report>
+				<gmd:DQ_DomainConsistency>
+					<gmd:result>
+						<gmd:DQ_ConformanceResult>
+							<gmd:specification>
+								<gmd:CI_Citation>
+									<gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+										<gco:CharacterString>Tietotuotemäärittely: Väestöjakauma
+										</gco:CharacterString>
+										<gmd:PT_FreeText>
+											<gmd:textGroup>
+												<gmd:LocalisedCharacterString
+													locale="#EN">Data specification on Population Distiribution</gmd:LocalisedCharacterString>
+											</gmd:textGroup>
+										</gmd:PT_FreeText>
+									</gmd:title>
+									<gmd:date>
+										<gmd:CI_Date>
+											<gmd:date>
+												<gco:Date>2013-12-10</gco:Date>
+											</gmd:date>
+											<gmd:dateType>
+												<gmd:CI_DateTypeCode codeListValue="publication"
+													codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode" />
+											</gmd:dateType>
+										</gmd:CI_Date>
+									</gmd:date>
+								</gmd:CI_Citation>
+							</gmd:specification>
+							<gmd:explanation xsi:type="gmd:PT_FreeText_PropertyType">
+								<gco:CharacterString>Ei vielä tietotuotemäärittelyn mukainen
+								</gco:CharacterString>
+								<gmd:PT_FreeText>
+									<gmd:textGroup>
+										<gmd:LocalisedCharacterString
+											locale="#EN">Conformity according to the regulation has not been
+											estimated yet.</gmd:LocalisedCharacterString>
+									</gmd:textGroup>
+								</gmd:PT_FreeText>
+							</gmd:explanation>
+							<gmd:pass>
+								<gco:Boolean>false</gco:Boolean>
+							</gmd:pass>
+						</gmd:DQ_ConformanceResult>
+					</gmd:result>
+				</gmd:DQ_DomainConsistency>
+			</gmd:report>
+			<gmd:lineage>
+				<gmd:LI_Lineage>
+					<gmd:statement xsi:type="gmd:PT_FreeText_PropertyType">
+						<gco:CharacterString>Aineisto perustuu 31.12. väestörekisterissä
+							olevaan väestöön. Aineisto on muodostettu sijoittamalla
+							koordinaatillinen väestö rakennuksen keskipisteeseen.
+							Väestömäärätiedot aggregoidaan 1 km x 1 km -ruuduittain, käyttäen
+							sijaintireferenssinä ruudun vasenta alakulmaa.
+
+							Aineistosarja sisältää tilastovuodet: 2005, 2010, 2011, 2012, 2013, 2014
+						</gco:CharacterString>
+						<gmd:PT_FreeText>
+							<gmd:textGroup>
+								<gmd:LocalisedCharacterString
+									locale="#EN">The data are based on the population included in the
+									Population Register on 31 December. The data have been created
+									by placing the population with coordinates in the centre of the
+									building. The population data is aggregated by 1 km x 1 km
+									grids using the lower left-hand corner of each grid as the
+									location reference.
+									The data serie contains the statistical reference years: 2005,
+									2010, 2011, 2012, 2013, 2014</gmd:LocalisedCharacterString>
+							</gmd:textGroup>
+							<gmd:textGroup>
+								<gmd:LocalisedCharacterString
+									locale="#SW">Materialet baserar sig på befolkningen i
+									befolkningsregistret per 31.12. Materialet har bildats genom
+									att placera koordinatsatt befolkning i byggnadens mittpunkt.
+									Folkmängdsuppgifterna aggregeras per 1 km x 1 km ruta, genom
+									att använda rutans vänstra nedre hörn som positionsreferens.
+									Materialserien omfattar statistikåren 2005, 2010 , 2011, 2012,
+									2013, 2014</gmd:LocalisedCharacterString>
+							</gmd:textGroup>
+						</gmd:PT_FreeText>
+					</gmd:statement>
+				</gmd:LI_Lineage>
+			</gmd:lineage>
+		</gmd:DQ_DataQuality>
+	</gmd:dataQualityInfo>
+	<gmd:dataQualityInfo>
+		<gmd:DQ_DataQuality>
+			<gmd:scope>
+				<gmd:DQ_Scope />
+			</gmd:scope>
+		</gmd:DQ_DataQuality>
+	</gmd:dataQualityInfo>
+	<gmd:dataQualityInfo xmlns:srv="http://www.isotc211.org/2005/srv">
+		<gmd:DQ_DataQuality>
+			<gmd:scope>
+				<gmd:DQ_Scope>
+					<gmd:level>
+						<gmd:MD_ScopeCode codeListValue="dataset"
+							codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#MD_ScopeCode" />
+					</gmd:level>
+				</gmd:DQ_Scope>
+			</gmd:scope>
+			<gmd:report>
+				<gmd:DQ_DomainConsistency>
+					<gmd:result>
+						<gmd:DQ_ConformanceResult>
+							<gmd:specification>
+								<gmd:CI_Citation>
+									<gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+										<gco:CharacterString>KOMISSION ASETUS (EU) N:o 1089/2010,
+											annettu 23 päivänä marraskuuta 2010, Euroopan parlamentin ja
+											neuvoston direktiivin 2007/2/EY täytäntöönpanosta
+											paikkatietoaineistojen ja -palvelujen yhteentoimivuuden
+											osalta</gco:CharacterString>
+										<gmd:PT_FreeText>
+											<gmd:textGroup>
+												<gmd:LocalisedCharacterString
+													locale="#EN">KOMISSION ASETUS (EU) N:o 1089/2010, annettu 23
+													päivänä marraskuuta 2010, Euroopan parlamentin ja neuvoston
+													direktiivin 2007/2/EY täytäntöönpanosta
+													paikkatietoaineistojen ja -palvelujen yhteentoimivuuden
+													osalta</gmd:LocalisedCharacterString>
+											</gmd:textGroup>
+										</gmd:PT_FreeText>
+									</gmd:title>
+									<gmd:date>
+										<gmd:CI_Date>
+											<gmd:date>
+												<gco:Date>2010-12-08</gco:Date>
+											</gmd:date>
+											<gmd:dateType>
+												<gmd:CI_DateTypeCode
+													codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+													codeListValue="publication" />
+											</gmd:dateType>
+										</gmd:CI_Date>
+									</gmd:date>
+								</gmd:CI_Citation>
+							</gmd:specification>
+							<gmd:explanation xsi:type="gmd:PT_FreeText_PropertyType">
+								<gco:CharacterString>Sääntöjenmukaisuutta ei ole arvioitu.
+								</gco:CharacterString>
+								<gmd:PT_FreeText>
+									<gmd:textGroup>
+										<gmd:LocalisedCharacterString
+											locale="#EN">Conformity according to the regulation has not been
+											estimated yet.</gmd:LocalisedCharacterString>
+									</gmd:textGroup>
+								</gmd:PT_FreeText>
+							</gmd:explanation>
+							<gmd:pass>
+								<gco:Boolean>0</gco:Boolean>
+							</gmd:pass>
+						</gmd:DQ_ConformanceResult>
+					</gmd:result>
+				</gmd:DQ_DomainConsistency>
+			</gmd:report>
+		</gmd:DQ_DataQuality>
+	</gmd:dataQualityInfo>
+</gmd:MD_Metadata>
