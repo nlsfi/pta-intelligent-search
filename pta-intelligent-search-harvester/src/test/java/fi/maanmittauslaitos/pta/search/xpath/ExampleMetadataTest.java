@@ -84,13 +84,12 @@ public class ExampleMetadataTest {
 			document = processor.processDocument(fis);
 		}
 		
-		assertArrayEquals(new String[] { "1719dcdd-0f24-4406-a347-354532c97bde" } , document.getFields().get("@id").toArray());
+		assertEquals("1719dcdd-0f24-4406-a347-354532c97bde", document.getValue("@id", String.class));
 		
-		assertArrayEquals(new String[] { "Eliömaantieteelliset alueet", "Kasvillisuus", "Suo", "Biomaantieteelliset alueet" } , document.getFields().get("avainsanat").toArray());
+		assertArrayEquals(new String[] { "Eliömaantieteelliset alueet", "Kasvillisuus", "Suo", "Biomaantieteelliset alueet" } , document.getListValue("avainsanat", String.class).toArray());
 		
-		assertArrayEquals(new String[] { "false" }, document.getFields().get("isService").toArray());
-		
-		assertArrayEquals(new String[] { "true" }, document.getFields().get("isDataset").toArray());
+		assertFalse(document.getValue("isService", Boolean.class));
+		assertTrue(document.getValue("isDataset", Boolean.class));
 	}
 	
 	@Test
@@ -101,13 +100,12 @@ public class ExampleMetadataTest {
 			document = processor.processDocument(fis);
 		}
 		
-		assertArrayEquals(new String[] { "d47ac165-6abd-4357-a4f9-a6f17e2b0c58" } , document.getFields().get("@id").toArray());
+		assertEquals("d47ac165-6abd-4357-a4f9-a6f17e2b0c58", document.getValue("@id", String.class));
 		
-		assertArrayEquals(new String[] { "Johtoverkot", "Korkeus", "Tieliikenneverkko", "Rataverkko", "Hallinnolliset rajat", "Taajamat", "Rakennukset", "Paikannimet", "Kiintopisteet", "Vesistöt", "Ympäristö", "Vesirakentaminen", "Suojelukohteet", "Maanpeite", "Väylät", "Maankäyttö", "Ei-Inspire", "avoindata.fi" } , document.getFields().get("avainsanat").toArray());
+		assertArrayEquals(new String[] { "Johtoverkot", "Korkeus", "Tieliikenneverkko", "Rataverkko", "Hallinnolliset rajat", "Taajamat", "Rakennukset", "Paikannimet", "Kiintopisteet", "Vesistöt", "Ympäristö", "Vesirakentaminen", "Suojelukohteet", "Maanpeite", "Väylät", "Maankäyttö", "Ei-Inspire", "avoindata.fi" } , document.getListValue("avainsanat", String.class).toArray());
 		
-		assertArrayEquals(new String[] { "false" }, document.getFields().get("isService").toArray());
-		
-		assertArrayEquals(new String[] { "true" }, document.getFields().get("isDataset").toArray());
+		assertFalse(document.getValue("isService", Boolean.class));
+		assertTrue(document.getValue("isDataset", Boolean.class));
 
 	}
 	
@@ -119,17 +117,16 @@ public class ExampleMetadataTest {
 			document = processor.processDocument(fis);
 		}
 		
-		assertArrayEquals(new String[] { "a901d40a-8a6b-4678-814c-79d2e2ab130c" } , document.getFields().get("@id").toArray());
+		assertEquals("a901d40a-8a6b-4678-814c-79d2e2ab130c", document.getValue("@id", String.class));
 		
-		List<String> tmp = document.getFields().get("onlineResource");
+		List<String> tmp = document.getListValue("onlineResource", String.class);
 		System.out.println(tmp);
 		
 		assertEquals(1, tmp.size());
 		assertEquals("http://geo.stat.fi/geoserver/vaestoruutu/wfs?service=WFS&request=GetCapabilities&version=1.0.0", tmp.get(0));
 		
-		assertArrayEquals(new String[] { "false" }, document.getFields().get("isService").toArray());
-		
-		assertArrayEquals(new String[] { "true" }, document.getFields().get("isDataset").toArray());
+		assertFalse(document.getValue("isService", Boolean.class));
+		assertTrue(document.getValue("isDataset", Boolean.class));
 	}
 	
 	@Test
@@ -140,11 +137,10 @@ public class ExampleMetadataTest {
 			document = processor.processDocument(fis);
 		}
 		
-		assertArrayEquals(new String[] { "1895c9c3-ca82-4fbe-b6fd-e71297700afe" } , document.getFields().get("@id").toArray());
+		assertEquals("1895c9c3-ca82-4fbe-b6fd-e71297700afe", document.getValue("@id", String.class));
 		
-		assertArrayEquals(new String[] { "true" }, document.getFields().get("isService").toArray());
-		
-		assertArrayEquals(new String[] { "false" }, document.getFields().get("isDataset").toArray());
+		assertTrue(document.getValue("isService", Boolean.class));
+		assertFalse(document.getValue("isDataset", Boolean.class));
 
 	}
 

@@ -109,11 +109,12 @@ public class WFS200HarvesterSource extends HarvesterSource {
 					
 					logger.debug("\nnext = " + doc.getFields().get("next"));
 
-					List<String> tmp = doc.getFields().get("next");
-					if (tmp == null || tmp.size() == 0) {
+					String urlStr = doc.getValue("next", String.class);
+					
+					if (urlStr == null) {
 						nextURL = null;
 					} else {
-						nextURL = new URL(tmp.get(0));
+						nextURL = new URL(urlStr);
 					}
 					
 					NodeList list = doc.getDom().getElementsByTagNameNS("http://www.opengis.net/wfs/2.0", "member");

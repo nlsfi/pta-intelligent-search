@@ -99,7 +99,7 @@ public class ElasticsearchDocumentSink implements DocumentSink {
 		// TODO: id-kenttä tulee olla jotenkin konfiguroitavissa
 		
 		try {
-			URL url = getURL(doc.getFields().get(getIdField()).get(0));
+			URL url = getURL(doc.getValue(getIdField(), String.class));
 			HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
 			
 			httpCon.setRequestProperty("Content-Type", "application/json");

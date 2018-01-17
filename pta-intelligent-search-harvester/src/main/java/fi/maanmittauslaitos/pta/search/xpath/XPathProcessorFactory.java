@@ -57,12 +57,15 @@ public class XPathProcessorFactory {
 				ret.setDom(doc);
 				
 				for (FieldExtractorConfiguration fec : configuration.getFieldExtractors()) {
-					List<String> value = processField(doc, fec);
+					Object value = processField(doc, fec);
 
 					if (fec.getTextProcessorName() != null) {
 						TextProcessingChain chain = textProcessingChains.get(fec.getTextProcessorName());
 						
-						value = chain.process(value);
+						@SuppressWarnings("unchecked")
+						List<String> asList = (List<String>)value;
+						
+						value = chain.process(asList);
 					}
 					
 					ret.getFields().put(fec.getField(), value);
@@ -71,38 +74,46 @@ public class XPathProcessorFactory {
 				return ret;
 			}
 			
-			private List<String> processField(org.w3c.dom.Document doc, FieldExtractorConfiguration fec) throws XPathException 
+			private Object processField(org.w3c.dom.Document doc, FieldExtractorConfiguration fec) throws XPathException 
 			{
 				NodeList nodeList = (NodeList) xPath.compile(fec.getXpath()).evaluate(doc, XPathConstants.NODESET);
 				
-				List<String> ret = new ArrayList<>();
 				
 				switch(fec.getType()) {
 				case FIRST_MATCHING_VALUE:
-					if (nodeList.getLength() > 0) {
-						String value = nodeList.item(0).getNodeValue();
-						if (value != null) {
-							value = value.trim();
+					{
+						List<String> ret = new ArrayList<>();
+						if (nodeList.getLength() > 0) {
+							String value = nodeList.item(0).getNodeValue();
+							if (value != null) {
+								value = value.trim();
+							}
+							ret.add(value);
 						}
-						ret.add(value);
+						return ret;
 					}
-					break;
 				case ALL_MATCHING_VALUES:
-					for (int i = 0; i < nodeList.getLength(); i++) {
-						String value = nodeList.item(i).getNodeValue();
-						if (value != null) {
-							value = value.trim();
+					{
+						List<String> ret = new ArrayList<>();
+						for (int i = 0; i < nodeList.getLength(); i++) {
+							String value = nodeList.item(i).getNodeValue();
+							if (value != null) {
+								value = value.trim();
+							}
+							ret.add(value);
 						}
-						ret.add(value);
+						return ret;
 					}
-					break;
 				case TRUE_IF_MATCHES_OTHERWISE_FALSE:
-					boolean matches = nodeList.getLength() > 0;
-					ret.add(matches ? "true" : "false");
-					break;
+					{
+						boolean matches = nodeList.getLength() > 0;
+						return Boolean.valueOf(matches);
+					}
+					
+				default:
+					throw new IllegalArgumentException("Unknown type of field extractor: "+fec.getType());
 				}
 				
-				return ret;
 			}
 		};
 	}

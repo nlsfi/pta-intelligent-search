@@ -45,7 +45,7 @@ public class ProcessorTest {
 		
 		Document doc = processor.processDocument(bais);
 		
-		List<String> ids = doc.getFields().get("@id");
+		List<String> ids = doc.getListValue("@id", String.class);
 		assertNotNull(ids);
 		assertEquals(1, ids.size());
 		String id = ids.get(0);
@@ -79,7 +79,7 @@ public class ProcessorTest {
 		
 		Document doc = processor.processDocument(bais);
 		
-		List<String> ids = doc.getFields().get("@id");
+		List<String> ids = doc.getListValue("@id", String.class);
 		assertNotNull(ids);
 		assertEquals(1, ids.size());
 		String id = ids.get(0);
@@ -104,7 +104,7 @@ public class ProcessorTest {
 		
 		Document doc = processor.processDocument(bais);
 		
-		List<String> ids = doc.getFields().get("@id");
+		List<String> ids = doc.getListValue("@id", String.class);
 		assertNotNull(ids);
 		assertEquals(1, ids.size());
 		String id = ids.get(0);
@@ -139,7 +139,7 @@ public class ProcessorTest {
 		
 		Document doc = processor.processDocument(bais);
 		
-		List<String> ids = doc.getFields().get("extra");
+		List<String> ids = doc.getListValue("extra", String.class);
 		assertNotNull(ids);
 		assertEquals(2, ids.size());
 		String id = ids.get(0);

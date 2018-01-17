@@ -6,6 +6,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathException;
@@ -32,7 +33,7 @@ public class CSWHarvesterSource extends HarvesterSource {
 
 	private class CSWIterator implements Iterator<InputStream> {
 		private int numberOfRecordsProcessed = 0;
-		private int numberOfRecordsInService;
+		private Integer numberOfRecordsInService;
 		private LinkedList<String> idsInBatch = null;
 
 		public CSWIterator() {
@@ -50,6 +51,8 @@ public class CSWHarvesterSource extends HarvesterSource {
 		public InputStream next() {
 			if (idsInBatch.size() == 0) {
 				getNextBatch();
+				// BUG: sometimes the next batch of brief records contain no id's and therefore idsInBatch.size() == 0 even after getNextBatch()
+				// Note that if we skip the records with no identifier, we must take that into account in the numberOfRecordsProcessed (or numberOfRecordsInService)
 			}
 
 			if (idsInBatch.size() == 0) {
@@ -134,8 +137,16 @@ public class CSWHarvesterSource extends HarvesterSource {
 					logger.debug("\tReceived ids: " + doc.getFields().get("ids"));
 					logger.debug("\tnumberOfRecordsMatched = " + doc.getFields().get("numberOfRecordsMatched"));
 
-					idsInBatch.addAll(doc.getFields().get("ids"));
-					numberOfRecordsInService = Integer.parseInt(doc.getFields().get("numberOfRecordsMatched").get(0));
+					idsInBatch.addAll(doc.getListValue("ids", String.class));
+					
+					List<String> nRecords = doc.getListValue("numberOfRecordsMatched", String.class);
+					if (nRecords.size() > 0) {
+						numberOfRecordsInService = Integer.parseInt(doc.getValue("numberOfRecordsMatched", String.class));
+					}
+					
+					if (numberOfRecordsInService == null) {
+						throw new IOException("Unable to determine how many records in CSW service");
+					}
 				}
 				
 				
