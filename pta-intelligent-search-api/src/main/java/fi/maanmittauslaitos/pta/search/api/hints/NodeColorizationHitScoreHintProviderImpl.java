@@ -66,13 +66,19 @@ public class NodeColorizationHitScoreHintProviderImpl extends AbstractHintProvid
 		
 		Set<Entry<IRI, Double>> iris = new HashSet<>();
 		for (Hit hit : hits) {
-			for (String uri : hit.getAbstractUris()) {
+			// Topics are stronger hints
+			for (String uri : hit.getAbstractTopicUris()) {
 				iris.add(new AbstractMap.SimpleEntry<IRI, Double>(vf.createIRI(uri), hit.getScore()));
 			}
+
+			// Use raw abstract uris just-in-case
+			for (String uri : hit.getAbstractUris()) {
+				iris.add(new AbstractMap.SimpleEntry<IRI, Double>(vf.createIRI(uri), hit.getScore() * 0.1));
+			}
+
 		}
 		
 		Map<IRI, Double> colorized = colorize(iris);
-		
 		
 		return produceAndOrderHints(pyynto, colorized);
 	}

@@ -8,7 +8,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;

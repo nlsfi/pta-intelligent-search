@@ -34,7 +34,15 @@ public class SimpleElasticsearchQueryProviderImpl implements ElasticsearchQueryP
 		
 		List<MatchQueryBuilder> queries = new ArrayList<>();
 		for (SearchTerm term : termit) {
-			MatchQueryBuilder tmp = QueryBuilders.matchQuery("abstract_uri", term.resource);
+			MatchQueryBuilder tmp;
+			
+			tmp = QueryBuilders.matchQuery("abstract_uri", term.resource);
+			
+			tmp.operator(Operator.OR);
+			tmp.fuzziness(Fuzziness.ZERO);
+			queries.add(tmp);
+			
+			tmp = QueryBuilders.matchQuery("abstract_maui_uri", term.resource);
 			tmp.operator(Operator.OR);
 			tmp.fuzziness(Fuzziness.ZERO);
 			queries.add(tmp);

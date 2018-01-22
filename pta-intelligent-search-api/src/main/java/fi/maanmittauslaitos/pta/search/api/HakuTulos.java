@@ -45,6 +45,7 @@ public class HakuTulos {
 		private String title;
 		private String abstractText;
 		private List<String> abstractUris;
+		private List<String> abstractTopicUris;
 		private String url;
 		private Double score;
 		
@@ -96,6 +97,14 @@ public class HakuTulos {
 		
 		public List<String> getAbstractUris() {
 			return abstractUris;
+		}
+		
+		public void setAbstractTopicUris(List<String> abstractTopicUris) {
+			this.abstractTopicUris = abstractTopicUris;
+		}
+		
+		public List<String> getAbstractTopicUris() {
+			return abstractTopicUris;
 		}
 	}
 }

@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -22,8 +21,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fi.maanmittauslaitos.pta.search.api.ApplicationConfiguration;
-import fi.maanmittauslaitos.pta.search.api.HakuPyynto;
-import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
 
 public class TudhopeBindingBlocksCunliffeHintProviderImplTest {

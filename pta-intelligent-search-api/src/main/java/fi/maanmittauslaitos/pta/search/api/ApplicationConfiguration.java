@@ -79,7 +79,7 @@ public class ApplicationConfiguration {
 	}
 	
 	@Bean
-	public HintProvider hintProvider(Model terminologyModel, Stemmer stemmer) {
+	public HintProvider hintProvider(Model terminologyModel, Stemmer stemmer, RDFTerminologyMatcherProcessor terminologyProcessor) {
 		NodeColorizationHitScoreHintProviderImpl ret = new NodeColorizationHitScoreHintProviderImpl();
 		ret.setMaxColorizationDepth(2);
 		ret.setStemmer(stemmer);
@@ -88,13 +88,30 @@ public class ApplicationConfiguration {
 		
 		List<Entry<IRI, Double>> weights = new ArrayList<>();
 		
-		weights.add(new AbstractMap.SimpleEntry<>(SKOS.BROADER, 0.5));
+		//weights.add(new AbstractMap.SimpleEntry<>(SKOS.BROADER, 0.5));
 		//weights.add(new AbstractMap.SimpleEntry<>(SKOS.NARROWER, 0.4));
-		weights.add(new AbstractMap.SimpleEntry<>(SKOS.RELATED, 0.3));
+		weights.add(new AbstractMap.SimpleEntry<>(SKOS.RELATED, 0.5));
 		
 		ret.setRelationsAndWeights(weights);
 		
 		return ret;
+
+		/*
+		TudhopeBindingBlocksCunliffeHintProvider ret = new TudhopeBindingBlocksCunliffeHintProvider();
+		ret.setStemmer(stemmer);
+		ret.setModel(terminologyModel);
+		ret.setLanguage("fi");
+		ret.setTerminologyProcessor(terminologyProcessor);
+		
+		List<Entry<IRI, Double>> relationsAndTravelCosts = new ArrayList<>();
+		
+		relationsAndTravelCosts.add(new AbstractMap.SimpleEntry<>(SKOS.BROADER, 0.33));
+		relationsAndTravelCosts.add(new AbstractMap.SimpleEntry<>(SKOS.RELATED, 0.5));
+		
+		ret.setRelationsAndTravelCosts(relationsAndTravelCosts);
+		
+		return ret;
+		*/
 	}
 
 	

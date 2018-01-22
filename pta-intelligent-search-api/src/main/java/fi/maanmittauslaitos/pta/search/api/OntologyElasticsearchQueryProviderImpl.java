@@ -1,8 +1,10 @@
 package fi.maanmittauslaitos.pta.search.api;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Statement;
@@ -12,6 +14,7 @@ import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.Operator;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
@@ -19,6 +22,8 @@ import fi.maanmittauslaitos.pta.search.text.TextProcessor;
 
 
 public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQueryProvider {
+	private static Logger logger = Logger.getLogger(OntologyElasticsearchQueryProviderImpl.class);
+	
 	private Set<IRI> relationPredicates = new HashSet<>();
 	private TextProcessor textProcessor;
 	private Model model;
@@ -26,6 +31,8 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	private int ontologyLevels = 1;
 	private double weightFactor = 0.5; // weightForLevel(1) = 1.0, weightForLevel(x) = weightForLevel(x-1) * weightFactor  
 	private double basicWordMatchWeight = 1.0;
+	
+	private int maxQueryTermsToElasticsearch = 500;
 	
 	private final ValueFactory vf = SimpleValueFactory.getInstance();
 	
@@ -78,6 +85,22 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		return textProcessor;
 	}
 	
+	public double getBasicWordMatchWeight() {
+		return basicWordMatchWeight;
+	}
+	
+	public void setBasicWordMatchWeight(double basicWordMatchWeight) {
+		this.basicWordMatchWeight = basicWordMatchWeight;
+	}
+	
+	public int getMaxQueryTermsToElasticsearch() {
+		return maxQueryTermsToElasticsearch;
+	}
+	
+	public void setMaxQueryTermsToElasticsearch(int maxQueryTermsToElasticsearch) {
+		this.maxQueryTermsToElasticsearch = maxQueryTermsToElasticsearch;
+	}
+	
 	@Override
 	public SearchSourceBuilder buildSearchSource(HakuPyynto pyynto) {
 		
@@ -88,9 +111,13 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		lisaaOntologisetTermit(pyynto, boolQuery);
 		lisaaVapaaSanahaku(pyynto, boolQuery);
 
-		sourceBuilder.query(boolQuery);
+		if (boolQuery.should().size() > getMaxQueryTermsToElasticsearch()) {
+			List<QueryBuilder> qb = boolQuery.should().subList(0, getMaxQueryTermsToElasticsearch());
+			logger.warn("Query has more terms ("+boolQuery.should().size()+") than allowed ("+getMaxQueryTermsToElasticsearch()+"), throwing out some terms");
+			boolQuery.should().retainAll(qb);
+		}
 		
-		// TODO: tarvitaan jonkinasteinen limitti
+		sourceBuilder.query(boolQuery);
 		
 		return sourceBuilder;
 	}
@@ -108,11 +135,21 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		Set<SearchTerm> termit = getSearchTerms(pyynto);
 
 		for (SearchTerm term : termit) {
-			MatchQueryBuilder tmp = QueryBuilders.matchQuery("abstract_uri", term.resource);
+			MatchQueryBuilder tmp;
+			
+			
+			tmp = QueryBuilders.matchQuery("abstract_uri", term.resource);
 			tmp.operator(Operator.OR);
 			tmp.fuzziness(Fuzziness.ZERO);
 			tmp.boost((float)term.weight);
 			boolQuery.should().add(tmp);
+			
+			tmp = QueryBuilders.matchQuery("abstract_maui_uri", term.resource);
+			tmp.operator(Operator.OR);
+			tmp.fuzziness(Fuzziness.ZERO);
+			tmp.boost((float)term.weight);
+			boolQuery.should().add(tmp);
+
 		}
 	}
 

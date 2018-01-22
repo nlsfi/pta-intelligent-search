@@ -1,11 +1,9 @@
 package fi.maanmittauslaitos.pta.search.api.hints;
 
-import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -18,6 +16,7 @@ import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 
 import fi.maanmittauslaitos.pta.search.api.HakuPyynto;
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
+import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 
 /**
  * This HintProvider is based on the research paper
@@ -31,6 +30,7 @@ public class TudhopeBindingBlocksCunliffeHintProvider extends AbstractHintProvid
 	private ValueFactory vf = SimpleValueFactory.getInstance();
 	
 	private List<Entry<IRI, Double>> relationsAndTravelCosts;
+	private RDFTerminologyMatcherProcessor terminologyProcessor;
 	
 	public void setRelationsAndTravelCosts(List<Entry<IRI, Double>> relationsAndTravelCosts) {
 		this.relationsAndTravelCosts = relationsAndTravelCosts;
@@ -40,16 +40,32 @@ public class TudhopeBindingBlocksCunliffeHintProvider extends AbstractHintProvid
 		return relationsAndTravelCosts;
 	}
 	
+	public void setTerminologyProcessor(RDFTerminologyMatcherProcessor terminologyProcessor) {
+		this.terminologyProcessor = terminologyProcessor;
+	}
+	
+	public RDFTerminologyMatcherProcessor getTerminologyProcessor() {
+		return terminologyProcessor;
+	}
+	
 	/**
 	 * 
 	 */
 	@Override
 	public List<String> getHints(HakuPyynto pyynto, List<Hit> hits) {
 		// TODO: ehkä vinkit kannattaakin hakea hakusanoista eikä löydetyistä hiteistä?
+		/*
 		Set<IRI> iris = new HashSet<>();
 		for (Hit hit : hits) {
 			for (String uri : hit.getAbstractUris()) {
 				iris.add(vf.createIRI(uri));
+			}
+		}*/
+		Set<IRI> iris = new HashSet<>();
+		for (String termi : pyynto.getQuery()) {
+			
+			for (String iri : getTerminologyProcessor().process(termi)) {
+				iris.add(vf.createIRI(iri));
 			}
 		}
 		

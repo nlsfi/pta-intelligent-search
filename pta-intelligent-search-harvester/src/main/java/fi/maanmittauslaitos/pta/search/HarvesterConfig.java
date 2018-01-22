@@ -17,9 +17,14 @@ import org.eclipse.rdf4j.model.vocabulary.SKOS;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
+import com.entopix.maui.stemmers.FinnishStemmer;
+import com.entopix.maui.stopwords.StopwordsFactory;
+import com.entopix.maui.stopwords.StopwordsFinnish;
+
 import fi.maanmittauslaitos.pta.search.csw.CSWHarvesterSource;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import fi.maanmittauslaitos.pta.search.index.ElasticsearchDocumentSink;
+import fi.maanmittauslaitos.pta.search.text.MauiTextProcessor;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 import fi.maanmittauslaitos.pta.search.text.RegexProcessor;
 import fi.maanmittauslaitos.pta.search.text.StopWordsProcessor;
@@ -49,30 +54,50 @@ public class HarvesterConfig {
 		configuration.getNamespaces().put("gco", "http://www.isotc211.org/2005/gco");
 		configuration.getNamespaces().put("srv", "http://www.isotc211.org/2005/srv");
 		
-		TextProcessingChain abstractChain = new TextProcessingChain();
-		abstractChain.getChain().add(new TextSplitterProcessor());
-		
-		StopWordsProcessor stopWordsProcessor = new StopWordsProcessor();
-		try (InputStreamReader isr = new InputStreamReader(HarvesterConfig.class.getResourceAsStream("/stopwords-fi.txt"))) {
-			List<String> stopWords = new ArrayList<>();
-			BufferedReader br = new BufferedReader(isr);
-			String line;
-			while ((line = br.readLine()) != null) {
-				String tmp = line.toLowerCase().trim();
-				if (tmp.length() > 0) {
-					stopWords.add(tmp);
-				}
-			}
-			stopWordsProcessor.setStopwords(stopWords);
-		}
-		abstractChain.getChain().add(stopWordsProcessor);
 		
 		RDFTerminologyMatcherProcessor terminologyProcessor = createTerminologyMatcher();
 		
-		abstractChain.getChain().add(terminologyProcessor);
+		{
+			TextProcessingChain abstractChain = new TextProcessingChain();
+			abstractChain.getChain().add(new TextSplitterProcessor());
+			
+			StopWordsProcessor stopWordsProcessor = new StopWordsProcessor();
+			try (InputStreamReader isr = new InputStreamReader(HarvesterConfig.class.getResourceAsStream("/stopwords-fi.txt"))) {
+				List<String> stopWords = new ArrayList<>();
+				BufferedReader br = new BufferedReader(isr);
+				String line;
+				while ((line = br.readLine()) != null) {
+					String tmp = line.toLowerCase().trim();
+					if (tmp.length() > 0) {
+						stopWords.add(tmp);
+					}
+				}
+				stopWordsProcessor.setStopwords(stopWords);
+			}
+			abstractChain.getChain().add(stopWordsProcessor);
+			
+			abstractChain.getChain().add(terminologyProcessor);
+			
+			configuration.getTextProcessingChains().put("abstractProcessor", abstractChain);
+		}
 		
-		configuration.getTextProcessingChains().put("abstractProcessor", abstractChain);
-		
+		{
+			TextProcessingChain mauiChain = new TextProcessingChain();
+			
+			MauiTextProcessor mauiTextProcessor = new MauiTextProcessor();
+			mauiTextProcessor.setMauiStemmer(new FinnishStemmer());
+			mauiTextProcessor.setMauiStopWords(new StopwordsFinnish());
+			
+			mauiTextProcessor.setModelResource("/kirjastohoitaja-koko.model");
+			mauiTextProcessor.setVocabularyName("./koko-skos.rdf.gz");
+			mauiTextProcessor.setVocabularyFormat("skos");
+			mauiTextProcessor.setLanguage("fi");
+			
+			mauiTextProcessor.init();
+			mauiChain.getChain().add(mauiTextProcessor);
+			
+			configuration.getTextProcessingChains().put("mauiProcessor", mauiChain);
+		}
 		
 
 		TextProcessingChain keywordChain = new TextProcessingChain();
@@ -125,6 +150,17 @@ public class HarvesterConfig {
 			abstractExtractor.setTextProcessorName("abstractProcessor");
 			
 			configuration.getFieldExtractors().add(abstractExtractor);
+		}
+		
+		{
+			FieldExtractorConfiguration abstractMauiExtractor = new FieldExtractorConfiguration();
+			abstractMauiExtractor.setField("abstract_maui_uri");
+			abstractMauiExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
+			abstractMauiExtractor.setXpath("//gmd:abstract/*/text()");
+			
+			abstractMauiExtractor.setTextProcessorName("mauiProcessor");
+			
+			configuration.getFieldExtractors().add(abstractMauiExtractor);
 		}
 		
 		{
@@ -193,9 +229,13 @@ public class HarvesterConfig {
 	
 
 	private Model getTerminologyModel() throws IOException {
-		return loadModels("/koko-skos.ttl.gz");
+		return loadModels(getTerminologyModelResourceName());
 	}
 
+	private String getTerminologyModelResourceName() {
+		return "/koko-skos.ttl.gz";
+	}
+	
 	private static Model loadModels(String...files) throws IOException {
 		Model ret = null;
 		
