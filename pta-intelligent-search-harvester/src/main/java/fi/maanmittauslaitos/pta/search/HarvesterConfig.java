@@ -18,12 +18,12 @@ import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
 import com.entopix.maui.stemmers.FinnishStemmer;
-import com.entopix.maui.stopwords.StopwordsFactory;
 import com.entopix.maui.stopwords.StopwordsFinnish;
 
 import fi.maanmittauslaitos.pta.search.csw.CSWHarvesterSource;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import fi.maanmittauslaitos.pta.search.index.ElasticsearchDocumentSink;
+import fi.maanmittauslaitos.pta.search.text.ExistsInSetProcessor;
 import fi.maanmittauslaitos.pta.search.text.MauiTextProcessor;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 import fi.maanmittauslaitos.pta.search.text.RegexProcessor;
@@ -53,6 +53,9 @@ public class HarvesterConfig {
 		configuration.getNamespaces().put("gmd", "http://www.isotc211.org/2005/gmd");
 		configuration.getNamespaces().put("gco", "http://www.isotc211.org/2005/gco");
 		configuration.getNamespaces().put("srv", "http://www.isotc211.org/2005/srv");
+		configuration.getNamespaces().put("gmx", "http://www.isotc211.org/2005/gmx");
+		
+		configuration.getNamespaces().put("xlink", "http://www.w3.org/1999/xlink");
 		
 		
 		RDFTerminologyMatcherProcessor terminologyProcessor = createTerminologyMatcher();
@@ -142,6 +145,26 @@ public class HarvesterConfig {
 		}
 		
 		{
+			FieldExtractorConfiguration annotatedKeywordExtractor = new FieldExtractorConfiguration();
+			annotatedKeywordExtractor.setField("annotoidut_avainsanat_uri");
+			annotatedKeywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
+			annotatedKeywordExtractor.setXpath("//gmd:descriptiveKeywords/*/gmd:keyword/gmx:Anchor/@xlink:href");
+			
+			annotatedKeywordExtractor.setTextProcessorName("isInOntologyFilterProcessor");
+			
+			configuration.getFieldExtractors().add(annotatedKeywordExtractor);
+		}
+		
+		TextProcessingChain isInOntologyFilterProcessor = new TextProcessingChain();
+		
+		ExistsInSetProcessor allowInOntology = new ExistsInSetProcessor();
+		allowInOntology.setAcceptedStrings(terminologyProcessor.getAllKnownTerms());
+		isInOntologyFilterProcessor.getChain().add(allowInOntology);
+		
+		configuration.getTextProcessingChains().put("isInOntologyFilterProcessor", isInOntologyFilterProcessor);
+		
+		
+		{
 			FieldExtractorConfiguration abstractExtractor = new FieldExtractorConfiguration();
 			abstractExtractor.setField("abstract_uri");
 			abstractExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
@@ -177,7 +200,8 @@ public class HarvesterConfig {
 			onlineResourceExtractor.setField("onlineResource");
 			onlineResourceExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 			// Select linkage URL in onLine transferoptions where protocol contains "wfs"
-			onlineResourceExtractor.setXpath("//gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine/*[contains(translate(gmd:protocol/*/text(),\"WFS\",\"wfs\"),\"wfs\")]/gmd:linkage/gmd:URL/text()");
+			//onlineResourceExtractor.setXpath("//gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine/*[contains(translate(gmd:protocol/*/text(),\"WFS\",\"wfs\"),\"wfs\")]/gmd:linkage/gmd:URL/text()");
+			onlineResourceExtractor.setXpath("//gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine/gmd:CI_OnlineResource/*/gmd:URL/text()");
 			
 			configuration.getFieldExtractors().add(onlineResourceExtractor);
 		}

@@ -3,6 +3,8 @@ package fi.maanmittauslaitos.pta.search.xpath;
 import static org.junit.Assert.*;
 
 import java.io.FileInputStream;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -10,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fi.maanmittauslaitos.pta.search.Document;
+import fi.maanmittauslaitos.pta.search.text.ExistsInSetProcessor;
 import fi.maanmittauslaitos.pta.search.text.RegexProcessor;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration.FieldExtractorType;
@@ -24,6 +27,10 @@ public class ExampleMetadataTest {
 		configuration.getNamespaces().put("gmd", "http://www.isotc211.org/2005/gmd");
 		configuration.getNamespaces().put("gco", "http://www.isotc211.org/2005/gco");
 		configuration.getNamespaces().put("srv", "http://www.isotc211.org/2005/srv");
+		configuration.getNamespaces().put("gmx", "http://www.isotc211.org/2005/gmx");
+		
+		configuration.getNamespaces().put("xlink", "http://www.w3.org/1999/xlink");
+		
 		
 		FieldExtractorConfiguration idExtractor = new FieldExtractorConfiguration();
 		idExtractor.setField("@id");
@@ -61,6 +68,15 @@ public class ExampleMetadataTest {
 		
 		configuration.getFieldExtractors().add(isDatasetExtractor);
 		
+		FieldExtractorConfiguration annotatedKeywordExtractor = new FieldExtractorConfiguration();
+		annotatedKeywordExtractor.setField("annotoidut_avainsanat_uri");
+		annotatedKeywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
+		annotatedKeywordExtractor.setXpath("//gmd:descriptiveKeywords/*/gmd:keyword/gmx:Anchor/@xlink:href");
+		
+		annotatedKeywordExtractor.setTextProcessorName("isInOntologyFilterProcessor");
+		
+		configuration.getFieldExtractors().add(annotatedKeywordExtractor);
+		
 		
 		TextProcessingChain noWhitespaceProcessingChain = new TextProcessingChain();
 		RegexProcessor whitespaceRemoval = new RegexProcessor();
@@ -71,6 +87,15 @@ public class ExampleMetadataTest {
 		
 		
 		configuration.getTextProcessingChains().put("noWhitespace", noWhitespaceProcessingChain);
+		
+		TextProcessingChain isInOntologyFilterProcessor = new TextProcessingChain();
+		
+		ExistsInSetProcessor allowInOntology = new ExistsInSetProcessor();
+		allowInOntology.setAcceptedStrings(new HashSet<>(Arrays.asList("http://paikkatiedot.fi/def/1001002/p877", "http://paikkatiedot.fi/def/1001001/p296")));
+		isInOntologyFilterProcessor.getChain().add(allowInOntology);
+		
+		configuration.getTextProcessingChains().put("isInOntologyFilterProcessor", isInOntologyFilterProcessor);
+		
 		
 		processor = new XPathProcessorFactory().createProcessor(configuration);
 		
@@ -86,10 +111,14 @@ public class ExampleMetadataTest {
 		
 		assertEquals("1719dcdd-0f24-4406-a347-354532c97bde", document.getValue("@id", String.class));
 		
-		assertArrayEquals(new String[] { "Eliömaantieteelliset alueet", "Kasvillisuus", "Suo", "Biomaantieteelliset alueet" } , document.getListValue("avainsanat", String.class).toArray());
+		assertArrayEquals(new String[] { "Kasvillisuus", "Suo", "Biomaantieteelliset alueet", "Kasvillisuus", "Suot" } , document.getListValue("avainsanat", String.class).toArray());
+		
+		assertArrayEquals(new String[] { "http://paikkatiedot.fi/def/1001002/p877", "http://paikkatiedot.fi/def/1001001/p296" }, document.getListValue("annotoidut_avainsanat_uri", String.class).toArray()); 
 		
 		assertFalse(document.getValue("isService", Boolean.class));
 		assertTrue(document.getValue("isDataset", Boolean.class));
+		
+		
 	}
 	
 	@Test

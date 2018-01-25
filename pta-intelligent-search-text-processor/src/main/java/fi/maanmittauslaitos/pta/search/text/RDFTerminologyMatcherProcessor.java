@@ -82,6 +82,14 @@ public class RDFTerminologyMatcherProcessor implements TextProcessor {
 		return dict;
 	}
 	
+	public Set<String> getAllKnownTerms() {
+		Set<String> ret = new HashSet<>();
+		Map<String, List<String>> tmp = getDict();
+		for (List<String> list : tmp.values()) {
+			ret.addAll(list);
+		}
+		return ret;
+	}
 	
 	private Map<String, List<String>> createDict() {
 		logger.info("Building dict from RDF model");
