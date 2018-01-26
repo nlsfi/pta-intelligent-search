@@ -10,8 +10,8 @@ import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
-import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.MatchPhraseQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -135,21 +135,15 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		Set<SearchTerm> termit = getSearchTerms(pyynto);
 
 		for (SearchTerm term : termit) {
-			MatchQueryBuilder tmp;
+			MatchPhraseQueryBuilder tmp;
 			
-			
-			tmp = QueryBuilders.matchQuery("abstract_uri", term.resource);
-			tmp.operator(Operator.OR);
-			tmp.fuzziness(Fuzziness.ZERO);
+			tmp = QueryBuilders.matchPhraseQuery("abstract_uri", term.resource);
 			tmp.boost((float)term.weight);
 			boolQuery.should().add(tmp);
 			
-			tmp = QueryBuilders.matchQuery("abstract_maui_uri", term.resource);
-			tmp.operator(Operator.OR);
-			tmp.fuzziness(Fuzziness.ZERO);
+			tmp = QueryBuilders.matchPhraseQuery("abstract_maui_uri", term.resource);
 			tmp.boost((float)term.weight);
 			boolQuery.should().add(tmp);
-
 		}
 	}
 
