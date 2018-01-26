@@ -127,7 +127,7 @@ public class GenerateMauiData {
 				String id = doc.getValue("@id", String.class);
 				//System.out.println(id);
 				
-				String text = StringUtils.join(doc.getListValue("abstract", String.class), " ");
+				String text = join(doc.getListValue("abstract", String.class), " ");
 				
 				File outputTxt  = new File(outputDir, id+".txt");
 				File outputSubj = new File(outputDir, id+".subj");
@@ -159,5 +159,16 @@ public class GenerateMauiData {
 			}
 		}
 		
+	}
+
+	private static String join(List<String> listValue, String separator) {
+		StringBuffer buf = new StringBuffer();
+		for (int i = 0; i < listValue.size(); i++) {
+			if (i > 0) {
+				buf.append(separator);
+			}
+			buf.append(listValue.get(i));
+		}
+		return buf.toString();
 	}
 }
