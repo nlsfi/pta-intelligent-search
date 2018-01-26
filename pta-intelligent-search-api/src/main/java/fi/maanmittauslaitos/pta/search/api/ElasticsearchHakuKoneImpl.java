@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
+import org.apache.log4j.Logger;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -19,6 +21,8 @@ import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
 import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
 
 public class ElasticsearchHakuKoneImpl implements HakuKone {
+	private static Logger logger = Logger.getLogger(ElasticsearchHakuKoneImpl.class);
+	
 	private RestHighLevelClient client;
 	
 	private ElasticsearchQueryProvider queryProvider;
@@ -74,7 +78,12 @@ public class ElasticsearchHakuKoneImpl implements HakuKone {
 		
 		sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
 		sourceBuilder.fetchSource("*", null);
-
+		
+		// Only request explanations if trace level logging is enabled
+		if (logger.isTraceEnabled()) {
+			sourceBuilder.explain(true);
+		}
+		
 		SearchRequest request = new SearchRequest("catalog");
 		request.types("doc");
 		request.source(sourceBuilder);
@@ -83,10 +92,15 @@ public class ElasticsearchHakuKoneImpl implements HakuKone {
 		
 		SearchHits hits = response.getHits();
 		
+		final AtomicInteger hitCount = new AtomicInteger(0);
 		tulos.setTotalHits(hits.getTotalHits());
 		hits.forEach(new Consumer<SearchHit>() {
 			@Override
 			public void accept(SearchHit t) {
+				if (hitCount.getAndIncrement() == 0 && logger.isTraceEnabled()) {
+					logger.trace("Explanation for why first hit matched:");
+					logger.trace(t.getExplanation());
+				}
 				Hit osuma = new Hit();
 				
 				osuma.setTitle(extractStringValue(t.getSourceAsMap().get("title")));
