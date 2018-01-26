@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -90,6 +91,21 @@ public class RDFTerminologyMatcherProcessor implements TextProcessor {
 		}
 		return ret;
 	}
+	
+	public Map<String, String> getReverseDict() {
+		Map<String, String> ret = new HashMap<>();
+		Map<String, List<String>> tmp = getDict();
+		for (Entry<String, List<String>> e : tmp.entrySet()) {
+			for (String iri : e.getValue()) {
+				if (ret.containsKey(iri)) {
+					logger.warn("getReverseDict(), multiple labels for resource "+iri);
+				}
+				ret.put(iri, e.getKey());
+			}
+		}
+		return ret;
+	}
+	
 	
 	private Map<String, List<String>> createDict() {
 		logger.info("Building dict from RDF model");
