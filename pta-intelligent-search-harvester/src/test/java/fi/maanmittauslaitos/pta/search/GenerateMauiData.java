@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.vocabulary.SKOS;
 
