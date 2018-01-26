@@ -44,8 +44,8 @@ public class HakuTulos {
 	public static class Hit {
 		private String title;
 		private String abstractText;
-		private List<String> abstractUris;
-		private List<String> abstractTopicUris;
+		private List<String> abstractUris = new ArrayList<>();
+		private List<String> abstractTopicUris = new ArrayList<>();
 		private String url;
 		private Double score;
 		
