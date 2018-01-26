@@ -62,6 +62,10 @@ public class XPathProcessorFactory {
 					if (fec.getTextProcessorName() != null) {
 						TextProcessingChain chain = textProcessingChains.get(fec.getTextProcessorName());
 						
+						if (chain == null) {
+							throw new IllegalArgumentException("Text processor chain '"+fec.getTextProcessorName()+"' not declared");
+						}
+						
 						@SuppressWarnings("unchecked")
 						List<String> asList = (List<String>)value;
 						
