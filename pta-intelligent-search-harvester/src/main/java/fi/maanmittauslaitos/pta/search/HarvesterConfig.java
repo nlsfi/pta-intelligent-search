@@ -91,8 +91,8 @@ public class HarvesterConfig {
 			mauiTextProcessor.setMauiStemmer(new FinnishStemmer());
 			mauiTextProcessor.setMauiStopWords(new StopwordsFinnish());
 			
-			mauiTextProcessor.setModelResource("/kirjastohoitaja-koko.model");
-			mauiTextProcessor.setVocabularyName("./koko-skos.rdf.gz");
+			mauiTextProcessor.setModelResource("/paikkatietohakemisto-pto.model");
+			mauiTextProcessor.setVocabularyName("./pto-skos.rdf.gz");
 			mauiTextProcessor.setVocabularyFormat("skos");
 			mauiTextProcessor.setLanguage("fi");
 			
@@ -252,12 +252,12 @@ public class HarvesterConfig {
 	}
 	
 
-	private Model getTerminologyModel() throws IOException {
+	Model getTerminologyModel() throws IOException {
 		return loadModels(getTerminologyModelResourceName());
 	}
 
 	private String getTerminologyModelResourceName() {
-		return "/koko-skos.ttl.gz";
+		return "/pto-skos.ttl.gz";
 	}
 	
 	private static Model loadModels(String...files) throws IOException {

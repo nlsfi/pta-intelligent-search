@@ -32,13 +32,18 @@ import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
 public class ApplicationConfiguration {
 
 	@Bean
-	public RDFTerminologyMatcherProcessor terminologyMatcher(Model terminologyModel, Stemmer stemmer) throws IOException {
+	public RDFTerminologyMatcherProcessor terminologyMatcher(Model terminologyModel, Stemmer stemmer, List<IRI> terminologyLabels) throws IOException {
 		RDFTerminologyMatcherProcessor terminologyProcessor = new RDFTerminologyMatcherProcessor();
 		terminologyProcessor.setModel(terminologyModel);
-		terminologyProcessor.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
+		terminologyProcessor.setTerminologyLabels(terminologyLabels);
 		terminologyProcessor.setStemmer(stemmer);
 		terminologyProcessor.setLanguage("fi");
 		return terminologyProcessor;
+	}
+	
+	@Bean
+	public List<IRI> terminologyLabels() {
+		return Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL);
 	}
 	
 	@Bean
@@ -57,7 +62,7 @@ public class ApplicationConfiguration {
 	
 	@Bean
 	public Model terminologyModel() throws IOException {
-		return loadModels("/koko-skos.ttl.gz");
+		return loadModels("/pto-skos.ttl.gz");
 	}
 
 	public static Model loadModels(String...files) throws IOException {

@@ -10,7 +10,7 @@ public class StemTest {
 	public static void main(String[] args) throws IOException 
 	{
 		ApplicationConfiguration config = new ApplicationConfiguration();
-		RDFTerminologyMatcherProcessor proc = config.terminologyMatcher(config.terminologyModel(), config.stemmer());
+		RDFTerminologyMatcherProcessor proc = config.terminologyMatcher(config.terminologyModel(), config.stemmer(), config.terminologyLabels());
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		while (true) {
