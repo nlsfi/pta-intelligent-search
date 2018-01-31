@@ -56,7 +56,7 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>com.entopix</groupId>
+			<groupId>com.spatineo</groupId>
 			<artifactId>maui</artifactId>
 			<version>1.3.1-SNAPSHOT</version>
 		</dependency>
