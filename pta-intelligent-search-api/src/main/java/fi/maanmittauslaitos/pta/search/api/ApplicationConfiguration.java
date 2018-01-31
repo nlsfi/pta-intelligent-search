@@ -131,6 +131,7 @@ public class ApplicationConfiguration {
 		queryProvider.setModel(model);
 		queryProvider.setOntologyLevels(2);
 		queryProvider.setWeightFactor(0.5);
+		queryProvider.setBasicWordMatchWeight(0.5);
 		
 		ret.setQueryProvider(queryProvider);
 		ret.setHintProvider(hintProvider);

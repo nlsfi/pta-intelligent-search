@@ -137,13 +137,15 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		for (SearchTerm term : termit) {
 			MatchPhraseQueryBuilder tmp;
 			
-			tmp = QueryBuilders.matchPhraseQuery("abstract_uri", term.resource);
-			tmp.boost((float)term.weight);
-			boolQuery.should().add(tmp);
-			
+
 			tmp = QueryBuilders.matchPhraseQuery("abstract_maui_uri", term.resource);
 			tmp.boost((float)term.weight);
 			boolQuery.should().add(tmp);
+			
+			tmp = QueryBuilders.matchPhraseQuery("abstract_uri", term.resource);
+			tmp.boost((float)term.weight*0.5f);
+			boolQuery.should().add(tmp);
+			
 		}
 	}
 
@@ -165,7 +167,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 			prosessoidutYlakasitteet.addAll(prosessoidutYlakasitteet);
 			
 			Set<String> alakasitteet = haeAlakasitteet(prosessoimattomatYlakasitteet);
-			weight *= weightFactor;
+			weight *= getWeightFactor();
 			
 			prosessoimattomatYlakasitteet = new HashSet<>();
 			
