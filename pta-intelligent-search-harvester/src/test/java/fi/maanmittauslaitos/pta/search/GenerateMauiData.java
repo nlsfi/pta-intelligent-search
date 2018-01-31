@@ -16,9 +16,9 @@ import org.eclipse.rdf4j.model.vocabulary.SKOS;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.xpath.XPathExtractionConfiguration;
+import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessingConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
-import fi.maanmittauslaitos.pta.search.xpath.XPathProcessorFactory;
+import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessorFactory;
 import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration.FieldExtractorType;
 
 /**
@@ -31,7 +31,7 @@ import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration.Fi
 public class GenerateMauiData {
 	public static DocumentProcessor getProcessor() throws Exception {
 		
-		XPathExtractionConfiguration configuration = new XPathExtractionConfiguration();
+		DocumentProcessingConfiguration configuration = new DocumentProcessingConfiguration();
 		configuration.getNamespaces().put("gmd", "http://www.isotc211.org/2005/gmd");
 		configuration.getNamespaces().put("gco", "http://www.isotc211.org/2005/gco");
 		configuration.getNamespaces().put("srv", "http://www.isotc211.org/2005/srv");
@@ -65,7 +65,7 @@ public class GenerateMauiData {
 		
 		configuration.getFieldExtractors().add(annotatedKeywordExtractor);
 		
-		return new XPathProcessorFactory().createProcessor(configuration);
+		return new DocumentProcessorFactory().createProcessor(configuration);
 		
 	}
 	

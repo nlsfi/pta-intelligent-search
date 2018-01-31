@@ -18,13 +18,13 @@ import org.xml.sax.SAXException;
 import fi.maanmittauslaitos.pta.search.Document;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 
-public class XPathProcessorFactory {
+public class DocumentProcessorFactory {
 
 	
-	public XPathProcessorFactory() {
+	public DocumentProcessorFactory() {
 	}
 	
-	public DocumentProcessor createProcessor(XPathExtractionConfiguration configuration) throws ParserConfigurationException {
+	public DocumentProcessor createProcessor(DocumentProcessingConfiguration configuration) throws ParserConfigurationException {
 		
 		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
 		builderFactory.setNamespaceAware(true);

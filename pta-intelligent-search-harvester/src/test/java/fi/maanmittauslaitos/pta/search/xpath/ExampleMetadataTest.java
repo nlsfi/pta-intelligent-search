@@ -23,7 +23,7 @@ public class ExampleMetadataTest {
 	@Before
 	public void setup() throws Exception
 	{
-		XPathExtractionConfiguration configuration = new XPathExtractionConfiguration();
+		DocumentProcessingConfiguration configuration = new DocumentProcessingConfiguration();
 		configuration.getNamespaces().put("gmd", "http://www.isotc211.org/2005/gmd");
 		configuration.getNamespaces().put("gco", "http://www.isotc211.org/2005/gco");
 		configuration.getNamespaces().put("srv", "http://www.isotc211.org/2005/srv");
@@ -97,7 +97,7 @@ public class ExampleMetadataTest {
 		configuration.getTextProcessingChains().put("isInOntologyFilterProcessor", isInOntologyFilterProcessor);
 		
 		
-		processor = new XPathProcessorFactory().createProcessor(configuration);
+		processor = new DocumentProcessorFactory().createProcessor(configuration);
 		
 	}
 	

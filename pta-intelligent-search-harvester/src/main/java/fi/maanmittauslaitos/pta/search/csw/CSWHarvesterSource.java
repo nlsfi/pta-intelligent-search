@@ -19,9 +19,9 @@ import fi.maanmittauslaitos.pta.search.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.HarvestingException;
 import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration.FieldExtractorType;
-import fi.maanmittauslaitos.pta.search.xpath.XPathExtractionConfiguration;
+import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessingConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
-import fi.maanmittauslaitos.pta.search.xpath.XPathProcessorFactory;
+import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessorFactory;
 
 public class CSWHarvesterSource extends HarvesterSource {
 	private static Logger logger = Logger.getLogger(CSWHarvesterSource.class);
@@ -114,7 +114,7 @@ public class CSWHarvesterSource extends HarvesterSource {
 				URL url = new URL(reqUrl.toString());
 				
 				try (InputStream is = url.openStream()) {
-					XPathExtractionConfiguration configuration = new XPathExtractionConfiguration();
+					DocumentProcessingConfiguration configuration = new DocumentProcessingConfiguration();
 					configuration.getNamespaces().put("dc", "http://purl.org/dc/elements/1.1/");
 					configuration.getNamespaces().put("csw", "http://www.opengis.net/cat/csw/2.0.2");
 
@@ -130,7 +130,7 @@ public class CSWHarvesterSource extends HarvesterSource {
 					ids.setXpath("//dc:identifier/text()");
 					configuration.getFieldExtractors().add(ids);
 
-					XPathProcessorFactory xppf = new XPathProcessorFactory();
+					DocumentProcessorFactory xppf = new DocumentProcessorFactory();
 					DocumentProcessor processor = xppf.createProcessor(configuration);
 					Document doc = processor.processDocument(is);
 

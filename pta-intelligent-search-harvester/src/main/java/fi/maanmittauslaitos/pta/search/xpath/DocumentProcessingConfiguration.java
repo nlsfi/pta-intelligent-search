@@ -7,7 +7,7 @@ import java.util.Map;
 
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 
-public class XPathExtractionConfiguration {
+public class DocumentProcessingConfiguration {
 	private Map<String, String> namespaces = new HashMap<>();
 	private List<FieldExtractorConfiguration> fieldExtractors = new ArrayList<>();
 	private Map<String, TextProcessingChain> textProcessingChains = new HashMap<>();

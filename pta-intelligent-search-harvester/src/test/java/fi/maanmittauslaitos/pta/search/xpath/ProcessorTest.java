@@ -15,11 +15,11 @@ import fi.maanmittauslaitos.pta.search.text.TextProcessor;
 import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration.FieldExtractorType;
 
 public class ProcessorTest {
-	private XPathExtractionConfiguration configuration;
+	private DocumentProcessingConfiguration configuration;
 	
 	@Before
 	public void setUp() throws Exception {
-		configuration = new XPathExtractionConfiguration();
+		configuration = new DocumentProcessingConfiguration();
 		configuration.getNamespaces().put("gmd", "http://www.isotc211.org/2005/gmd");
 		configuration.getNamespaces().put("gco", "http://www.isotc211.org/2005/gco");
 		
@@ -41,7 +41,7 @@ public class ProcessorTest {
 			"  </gmd:fileIdentifier>\n" +
 			"</gmd:MD_Metadata>\n").getBytes("UTF-8"));
 		
-		DocumentProcessor processor = new XPathProcessorFactory().createProcessor(configuration);
+		DocumentProcessor processor = new DocumentProcessorFactory().createProcessor(configuration);
 		
 		Document doc = processor.processDocument(bais);
 		
@@ -75,7 +75,7 @@ public class ProcessorTest {
 		((XPathFieldExtractorConfiguration)configuration.getFieldExtractors().get(0)).setTextProcessorName("1to1");
 		configuration.getTextProcessingChains().put("1to1", oneToOne);
 		
-		DocumentProcessor processor = new XPathProcessorFactory().createProcessor(configuration);
+		DocumentProcessor processor = new DocumentProcessorFactory().createProcessor(configuration);
 		
 		Document doc = processor.processDocument(bais);
 		
@@ -100,7 +100,7 @@ public class ProcessorTest {
 			"  </gmd:fileIdentifier>\n" +
 			"</gmd:MD_Metadata>\n").getBytes("UTF-8"));
 		
-		DocumentProcessor processor = new XPathProcessorFactory().createProcessor(configuration);
+		DocumentProcessor processor = new DocumentProcessorFactory().createProcessor(configuration);
 		
 		Document doc = processor.processDocument(bais);
 		
@@ -135,7 +135,7 @@ public class ProcessorTest {
 			"  </gmd:fileIdentifier>\n" +
 			"</gmd:MD_Metadata>\n").getBytes("UTF-8"));
 		
-		DocumentProcessor processor = new XPathProcessorFactory().createProcessor(configuration);
+		DocumentProcessor processor = new DocumentProcessorFactory().createProcessor(configuration);
 		
 		Document doc = processor.processDocument(bais);
 		

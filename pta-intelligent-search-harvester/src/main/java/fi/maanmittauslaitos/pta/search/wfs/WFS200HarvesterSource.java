@@ -26,9 +26,9 @@ import fi.maanmittauslaitos.pta.search.Document;
 import fi.maanmittauslaitos.pta.search.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.HarvestingException;
 import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.xpath.XPathExtractionConfiguration;
+import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessingConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
-import fi.maanmittauslaitos.pta.search.xpath.XPathProcessorFactory;
+import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessorFactory;
 import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration.FieldExtractorType;
 
 public class WFS200HarvesterSource extends HarvesterSource {
@@ -92,7 +92,7 @@ public class WFS200HarvesterSource extends HarvesterSource {
 				logger.trace("WFS GetFeature URL: "+nextURL);
 				
 				try (InputStream is = nextURL.openStream()) {
-					XPathExtractionConfiguration configuration = new XPathExtractionConfiguration();
+					DocumentProcessingConfiguration configuration = new DocumentProcessingConfiguration();
 					configuration.getNamespaces().put("wfs", "http://www.opengis.net/wfs/2.0");
 
 					XPathFieldExtractorConfiguration next = new XPathFieldExtractorConfiguration();
@@ -101,7 +101,7 @@ public class WFS200HarvesterSource extends HarvesterSource {
 					next.setXpath("/wfs:FeatureCollection/@next");
 					configuration.getFieldExtractors().add(next);
 
-					XPathProcessorFactory xppf = new XPathProcessorFactory();
+					DocumentProcessorFactory xppf = new DocumentProcessorFactory();
 					DocumentProcessor processor = xppf.createProcessor(configuration);
 					Document doc = processor.processDocument(is);
 

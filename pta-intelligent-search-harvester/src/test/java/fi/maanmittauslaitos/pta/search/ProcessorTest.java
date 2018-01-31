@@ -18,9 +18,9 @@ import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 import fi.maanmittauslaitos.pta.search.text.TextSplitterProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.FinnishShowballStemmerImpl;
 import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.xpath.XPathExtractionConfiguration;
+import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessingConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
-import fi.maanmittauslaitos.pta.search.xpath.XPathProcessorFactory;
+import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessorFactory;
 import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration.FieldExtractorType;
 
 public class ProcessorTest {
@@ -44,7 +44,7 @@ public class ProcessorTest {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		XPathExtractionConfiguration configuration = new XPathExtractionConfiguration();
+		DocumentProcessingConfiguration configuration = new DocumentProcessingConfiguration();
 		configuration.getNamespaces().put("gmd", "http://www.isotc211.org/2005/gmd");
 		configuration.getNamespaces().put("gco", "http://www.isotc211.org/2005/gco");
 		
@@ -96,7 +96,7 @@ public class ProcessorTest {
 		}
 		
 		
-		DocumentProcessor processor = new XPathProcessorFactory().createProcessor(configuration);
+		DocumentProcessor processor = new DocumentProcessorFactory().createProcessor(configuration);
 		
 		Document document;
 		try (FileInputStream fis = new FileInputStream("src/test/resources/metadata/1719dcdd-0f24-4406-a347-354532c97bde.xml")) {
