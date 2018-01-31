@@ -15,7 +15,7 @@ import fi.maanmittauslaitos.pta.search.Document;
 import fi.maanmittauslaitos.pta.search.text.ExistsInSetProcessor;
 import fi.maanmittauslaitos.pta.search.text.RegexProcessor;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
-import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration.FieldExtractorType;
+import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration.FieldExtractorType;
 
 public class ExampleMetadataTest {
 	private DocumentProcessor processor;
@@ -32,14 +32,14 @@ public class ExampleMetadataTest {
 		configuration.getNamespaces().put("xlink", "http://www.w3.org/1999/xlink");
 		
 		
-		FieldExtractorConfiguration idExtractor = new FieldExtractorConfiguration();
+		XPathFieldExtractorConfiguration idExtractor = new XPathFieldExtractorConfiguration();
 		idExtractor.setField("@id");
 		idExtractor.setType(FieldExtractorType.FIRST_MATCHING_VALUE);
 		idExtractor.setXpath("//gmd:fileIdentifier/*/text()");
 		
 		configuration.getFieldExtractors().add(idExtractor);
 
-		FieldExtractorConfiguration keywordExtractor = new FieldExtractorConfiguration();
+		XPathFieldExtractorConfiguration keywordExtractor = new XPathFieldExtractorConfiguration();
 		keywordExtractor.setField("avainsanat");
 		keywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 		keywordExtractor.setXpath("//gmd:MD_Keywords/gmd:keyword/*/text()");
@@ -47,28 +47,28 @@ public class ExampleMetadataTest {
 		
 		configuration.getFieldExtractors().add(keywordExtractor);
 		
-		FieldExtractorConfiguration onlineResourceExtractor = new FieldExtractorConfiguration();
+		XPathFieldExtractorConfiguration onlineResourceExtractor = new XPathFieldExtractorConfiguration();
 		onlineResourceExtractor.setField("onlineResource");
 		onlineResourceExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 		onlineResourceExtractor.setXpath("//gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine/*[contains(translate(gmd:protocol/*/text(),\"WFS\",\"wfs\"),\"wfs\")]/gmd:linkage/gmd:URL/text()");
 		
 		configuration.getFieldExtractors().add(onlineResourceExtractor);
 		
-		FieldExtractorConfiguration isServiceExtractor = new FieldExtractorConfiguration();
+		XPathFieldExtractorConfiguration isServiceExtractor = new XPathFieldExtractorConfiguration();
 		isServiceExtractor.setField("isService");
 		isServiceExtractor.setType(FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE);
 		isServiceExtractor.setXpath("//gmd:identificationInfo/srv:SV_ServiceIdentification");
 		
 		configuration.getFieldExtractors().add(isServiceExtractor);
 
-		FieldExtractorConfiguration isDatasetExtractor = new FieldExtractorConfiguration();
+		XPathFieldExtractorConfiguration isDatasetExtractor = new XPathFieldExtractorConfiguration();
 		isDatasetExtractor.setField("isDataset");
 		isDatasetExtractor.setType(FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE);
 		isDatasetExtractor.setXpath("//gmd:identificationInfo/gmd:MD_DataIdentification");
 		
 		configuration.getFieldExtractors().add(isDatasetExtractor);
 		
-		FieldExtractorConfiguration annotatedKeywordExtractor = new FieldExtractorConfiguration();
+		XPathFieldExtractorConfiguration annotatedKeywordExtractor = new XPathFieldExtractorConfiguration();
 		annotatedKeywordExtractor.setField("annotoidut_avainsanat_uri");
 		annotatedKeywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 		annotatedKeywordExtractor.setXpath("//gmd:descriptiveKeywords/*/gmd:keyword/gmx:Anchor/@xlink:href");

@@ -15,11 +15,11 @@ import org.eclipse.rdf4j.model.vocabulary.SKOS;
 
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
-import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration;
+import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.XPathExtractionConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.xpath.XPathProcessorFactory;
-import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration.FieldExtractorType;
+import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration.FieldExtractorType;
 
 /**
  * This class is used to produce training data for maui. It uses an input directory of metadata xml and uses
@@ -40,7 +40,7 @@ public class GenerateMauiData {
 		configuration.getNamespaces().put("xlink", "http://www.w3.org/1999/xlink");
 		
 		// Id
-		FieldExtractorConfiguration idExtractor = new FieldExtractorConfiguration();
+		XPathFieldExtractorConfiguration idExtractor = new XPathFieldExtractorConfiguration();
 		idExtractor.setField("@id");
 		idExtractor.setType(FieldExtractorType.FIRST_MATCHING_VALUE);
 		idExtractor.setXpath("//gmd:fileIdentifier/*/text()");
@@ -48,7 +48,7 @@ public class GenerateMauiData {
 		configuration.getFieldExtractors().add(idExtractor);
 		
 		// Abstract text
-		FieldExtractorConfiguration abstractExtractor = new FieldExtractorConfiguration();
+		XPathFieldExtractorConfiguration abstractExtractor = new XPathFieldExtractorConfiguration();
 		abstractExtractor.setField("abstract");
 		abstractExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 		abstractExtractor.setXpath("//gmd:abstract/*/text()");
@@ -56,7 +56,7 @@ public class GenerateMauiData {
 		configuration.getFieldExtractors().add(abstractExtractor);
 		
 		// Annotated keywords
-		FieldExtractorConfiguration annotatedKeywordExtractor = new FieldExtractorConfiguration();
+		XPathFieldExtractorConfiguration annotatedKeywordExtractor = new XPathFieldExtractorConfiguration();
 		annotatedKeywordExtractor.setField("annotoidut_avainsanat_uri");
 		annotatedKeywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 		annotatedKeywordExtractor.setXpath("//gmd:descriptiveKeywords/*/gmd:keyword/gmx:Anchor/@xlink:href");

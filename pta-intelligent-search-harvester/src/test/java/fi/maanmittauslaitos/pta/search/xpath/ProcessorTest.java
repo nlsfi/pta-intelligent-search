@@ -12,7 +12,7 @@ import org.junit.Test;
 import fi.maanmittauslaitos.pta.search.Document;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 import fi.maanmittauslaitos.pta.search.text.TextProcessor;
-import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration.FieldExtractorType;
+import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration.FieldExtractorType;
 
 public class ProcessorTest {
 	private XPathExtractionConfiguration configuration;
@@ -23,7 +23,7 @@ public class ProcessorTest {
 		configuration.getNamespaces().put("gmd", "http://www.isotc211.org/2005/gmd");
 		configuration.getNamespaces().put("gco", "http://www.isotc211.org/2005/gco");
 		
-		FieldExtractorConfiguration idExtractor = new FieldExtractorConfiguration();
+		XPathFieldExtractorConfiguration idExtractor = new XPathFieldExtractorConfiguration();
 		idExtractor.setField("@id");
 		idExtractor.setType(FieldExtractorType.FIRST_MATCHING_VALUE);
 		idExtractor.setXpath("//gmd:fileIdentifier/*/text()");
@@ -72,7 +72,7 @@ public class ProcessorTest {
 			}
 		});
 		
-		configuration.getFieldExtractors().get(0).setTextProcessorName("1to1");
+		((XPathFieldExtractorConfiguration)configuration.getFieldExtractors().get(0)).setTextProcessorName("1to1");
 		configuration.getTextProcessingChains().put("1to1", oneToOne);
 		
 		DocumentProcessor processor = new XPathProcessorFactory().createProcessor(configuration);
@@ -115,7 +115,7 @@ public class ProcessorTest {
 	@Test
 	public void testMultiValueExtractionMultipleInDocument() throws Exception {
 		
-		FieldExtractorConfiguration extraExtractor = new FieldExtractorConfiguration();
+		XPathFieldExtractorConfiguration extraExtractor = new XPathFieldExtractorConfiguration();
 		extraExtractor.setField("extra");
 		extraExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 		extraExtractor.setXpath("//gmd:fileIdentifier/*/text()");

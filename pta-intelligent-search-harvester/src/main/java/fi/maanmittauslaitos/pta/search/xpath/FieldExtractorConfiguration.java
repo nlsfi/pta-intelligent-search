@@ -1,46 +1,28 @@
 package fi.maanmittauslaitos.pta.search.xpath;
 
-public class FieldExtractorConfiguration {
-	private String field;
-	private FieldExtractorType type;
-	private String xpath;
-	private String textProcessorName;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathException;
+
+import org.w3c.dom.Document;
+
+public interface FieldExtractorConfiguration {
+
+	/**
+	 * Name of the field where the extracted value should be stored
+	 * @return
+	 */
+	public String getField();
+
+	/**
+	 * Process the document and returns the raw value. If this configuration has a text processor configured,
+	 * that is not applied within this function.
+	 * 
+	 * @param doc
+	 * @return
+	 */
+	public Object process(Document doc, XPath xpath) throws XPathException;
+
 	
-	public void setField(String field) {
-		this.field = field;
-	}
-	
-	public String getField() {
-		return field;
-	}
-	
-	public void setType(FieldExtractorType type) {
-		this.type = type;
-	}
-	
-	public FieldExtractorType getType() {
-		return type;
-	}
-	
-	public void setXpath(String xpath) {
-		this.xpath = xpath;
-	}
-	
-	public String getXpath() {
-		return xpath;
-	}
-	
-	public String getTextProcessorName() {
-		return textProcessorName;
-	}
-	
-	public void setTextProcessorName(String textProcessorName) {
-		this.textProcessorName = textProcessorName;
-	}
-	
-	public enum FieldExtractorType {
-		FIRST_MATCHING_VALUE,
-		ALL_MATCHING_VALUES,
-		TRUE_IF_MATCHES_OTHERWISE_FALSE
-	}
+	public Object getTextProcessorName();
+
 }

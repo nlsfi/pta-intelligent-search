@@ -17,8 +17,8 @@ import org.xml.sax.SAXException;
 import fi.maanmittauslaitos.pta.search.Document;
 import fi.maanmittauslaitos.pta.search.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.HarvestingException;
-import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration.FieldExtractorType;
+import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration;
+import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration.FieldExtractorType;
 import fi.maanmittauslaitos.pta.search.xpath.XPathExtractionConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.xpath.XPathProcessorFactory;
@@ -118,13 +118,13 @@ public class CSWHarvesterSource extends HarvesterSource {
 					configuration.getNamespaces().put("dc", "http://purl.org/dc/elements/1.1/");
 					configuration.getNamespaces().put("csw", "http://www.opengis.net/cat/csw/2.0.2");
 
-					FieldExtractorConfiguration numberOfRecordsMatched = new FieldExtractorConfiguration();
+					XPathFieldExtractorConfiguration numberOfRecordsMatched = new XPathFieldExtractorConfiguration();
 					numberOfRecordsMatched.setField("numberOfRecordsMatched");
 					numberOfRecordsMatched.setType(FieldExtractorType.FIRST_MATCHING_VALUE);
 					numberOfRecordsMatched.setXpath("//csw:SearchResults/@numberOfRecordsMatched");
 					configuration.getFieldExtractors().add(numberOfRecordsMatched);
 
-					FieldExtractorConfiguration ids = new FieldExtractorConfiguration();
+					XPathFieldExtractorConfiguration ids = new XPathFieldExtractorConfiguration();
 					ids.setField("ids");
 					ids.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 					ids.setXpath("//dc:identifier/text()");

@@ -31,11 +31,11 @@ import fi.maanmittauslaitos.pta.search.text.StopWordsProcessor;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 import fi.maanmittauslaitos.pta.search.text.TextSplitterProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
-import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration;
+import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.XPathExtractionConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.xpath.XPathProcessorFactory;
-import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration.FieldExtractorType;
+import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration.FieldExtractorType;
 
 public class HarvesterConfig {
 	public HarvesterSource getCSWSource() {
@@ -116,7 +116,7 @@ public class HarvesterConfig {
 		configuration.getTextProcessingChains().put("keywordProcessor", keywordChain);
 		
 		{
-			FieldExtractorConfiguration idExtractor = new FieldExtractorConfiguration();
+			XPathFieldExtractorConfiguration idExtractor = new XPathFieldExtractorConfiguration();
 			idExtractor.setField("@id");
 			idExtractor.setType(FieldExtractorType.FIRST_MATCHING_VALUE);
 			idExtractor.setXpath("//gmd:fileIdentifier/*/text()");
@@ -125,7 +125,7 @@ public class HarvesterConfig {
 		}
 		
 		{
-			FieldExtractorConfiguration titleExtractor = new FieldExtractorConfiguration();
+			XPathFieldExtractorConfiguration titleExtractor = new XPathFieldExtractorConfiguration();
 			titleExtractor.setField("title");
 			titleExtractor.setType(FieldExtractorType.FIRST_MATCHING_VALUE);
 			titleExtractor.setXpath("//gmd:identificationInfo/*/gmd:citation/*/gmd:title/*/text()");
@@ -134,7 +134,7 @@ public class HarvesterConfig {
 		}
 		
 		{
-			FieldExtractorConfiguration keywordExtractor = new FieldExtractorConfiguration();
+			XPathFieldExtractorConfiguration keywordExtractor = new XPathFieldExtractorConfiguration();
 			keywordExtractor.setField("avainsanat_uri");
 			keywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 			keywordExtractor.setXpath("//gmd:MD_Keywords/gmd:keyword/*/text()");
@@ -145,7 +145,7 @@ public class HarvesterConfig {
 		}
 		
 		{
-			FieldExtractorConfiguration annotatedKeywordExtractor = new FieldExtractorConfiguration();
+			XPathFieldExtractorConfiguration annotatedKeywordExtractor = new XPathFieldExtractorConfiguration();
 			annotatedKeywordExtractor.setField("annotoidut_avainsanat_uri");
 			annotatedKeywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 			annotatedKeywordExtractor.setXpath("//gmd:descriptiveKeywords/*/gmd:keyword/gmx:Anchor/@xlink:href");
@@ -165,7 +165,7 @@ public class HarvesterConfig {
 		
 		
 		{
-			FieldExtractorConfiguration abstractExtractor = new FieldExtractorConfiguration();
+			XPathFieldExtractorConfiguration abstractExtractor = new XPathFieldExtractorConfiguration();
 			abstractExtractor.setField("abstract_uri");
 			abstractExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 			abstractExtractor.setXpath("//gmd:abstract/*/text()");
@@ -176,7 +176,7 @@ public class HarvesterConfig {
 		}
 		
 		{
-			FieldExtractorConfiguration abstractMauiExtractor = new FieldExtractorConfiguration();
+			XPathFieldExtractorConfiguration abstractMauiExtractor = new XPathFieldExtractorConfiguration();
 			abstractMauiExtractor.setField("abstract_maui_uri");
 			abstractMauiExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 			abstractMauiExtractor.setXpath("//gmd:abstract/*/text()");
@@ -187,7 +187,7 @@ public class HarvesterConfig {
 		}
 		
 		{
-			FieldExtractorConfiguration abstractAsTextExtractor = new FieldExtractorConfiguration();
+			XPathFieldExtractorConfiguration abstractAsTextExtractor = new XPathFieldExtractorConfiguration();
 			abstractAsTextExtractor.setField("abstract");
 			abstractAsTextExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 			abstractAsTextExtractor.setXpath("//gmd:abstract/*/text()");
@@ -196,7 +196,7 @@ public class HarvesterConfig {
 		}
 		
 		{
-			FieldExtractorConfiguration onlineResourceExtractor = new FieldExtractorConfiguration();
+			XPathFieldExtractorConfiguration onlineResourceExtractor = new XPathFieldExtractorConfiguration();
 			onlineResourceExtractor.setField("onlineResource");
 			onlineResourceExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 			// Select linkage URL in onLine transferoptions where protocol contains "wfs"
@@ -207,7 +207,7 @@ public class HarvesterConfig {
 		}
 		
 		{
-			FieldExtractorConfiguration isServiceExtractor = new FieldExtractorConfiguration();
+			XPathFieldExtractorConfiguration isServiceExtractor = new XPathFieldExtractorConfiguration();
 			isServiceExtractor.setField("isService");
 			isServiceExtractor.setType(FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE);
 			isServiceExtractor.setXpath("//gmd:identificationInfo/srv:SV_ServiceIdentification");
@@ -216,7 +216,7 @@ public class HarvesterConfig {
 		}
 		
 		{
-			FieldExtractorConfiguration isDatasetExtractor = new FieldExtractorConfiguration();
+			XPathFieldExtractorConfiguration isDatasetExtractor = new XPathFieldExtractorConfiguration();
 			isDatasetExtractor.setField("isDataset");
 			isDatasetExtractor.setType(FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE);
 			isDatasetExtractor.setXpath("//gmd:identificationInfo/gmd:MD_DataIdentification");

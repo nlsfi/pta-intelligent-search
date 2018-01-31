@@ -17,11 +17,11 @@ import fi.maanmittauslaitos.pta.search.text.StopWordsProcessor;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 import fi.maanmittauslaitos.pta.search.text.TextSplitterProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.FinnishShowballStemmerImpl;
-import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration;
+import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.XPathExtractionConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.xpath.XPathProcessorFactory;
-import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration.FieldExtractorType;
+import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration.FieldExtractorType;
 
 public class ProcessorTest {
 
@@ -65,7 +65,7 @@ public class ProcessorTest {
 		configuration.getTextProcessingChains().put("abstractProcessor", abstractChain);
 		
 		{
-			FieldExtractorConfiguration idExtractor = new FieldExtractorConfiguration();
+			XPathFieldExtractorConfiguration idExtractor = new XPathFieldExtractorConfiguration();
 			idExtractor.setField("@id");
 			idExtractor.setType(FieldExtractorType.FIRST_MATCHING_VALUE);
 			idExtractor.setXpath("//gmd:fileIdentifier/*/text()");
@@ -74,7 +74,7 @@ public class ProcessorTest {
 		}
 		
 		{
-			FieldExtractorConfiguration keywordExtractor = new FieldExtractorConfiguration();
+			XPathFieldExtractorConfiguration keywordExtractor = new XPathFieldExtractorConfiguration();
 			keywordExtractor.setField("avainsanat");
 			keywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 			keywordExtractor.setXpath("//gmd:MD_Keywords/gmd:keyword/*/text()");
@@ -85,7 +85,7 @@ public class ProcessorTest {
 		}
 		
 		{
-			FieldExtractorConfiguration abstractExtractor = new FieldExtractorConfiguration();
+			XPathFieldExtractorConfiguration abstractExtractor = new XPathFieldExtractorConfiguration();
 			abstractExtractor.setField("sisalto");
 			abstractExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 			abstractExtractor.setXpath("//gmd:abstract/*/text()");

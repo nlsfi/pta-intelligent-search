@@ -25,11 +25,11 @@ import org.xml.sax.SAXException;
 import fi.maanmittauslaitos.pta.search.Document;
 import fi.maanmittauslaitos.pta.search.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.HarvestingException;
-import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration;
+import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.XPathExtractionConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.xpath.XPathProcessorFactory;
-import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration.FieldExtractorType;
+import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration.FieldExtractorType;
 
 public class WFS200HarvesterSource extends HarvesterSource {
 	private static Logger logger = Logger.getLogger(WFS200HarvesterSource.class);
@@ -95,7 +95,7 @@ public class WFS200HarvesterSource extends HarvesterSource {
 					XPathExtractionConfiguration configuration = new XPathExtractionConfiguration();
 					configuration.getNamespaces().put("wfs", "http://www.opengis.net/wfs/2.0");
 
-					FieldExtractorConfiguration next = new FieldExtractorConfiguration();
+					XPathFieldExtractorConfiguration next = new XPathFieldExtractorConfiguration();
 					next.setField("next");
 					next.setType(FieldExtractorType.FIRST_MATCHING_VALUE);
 					next.setXpath("/wfs:FeatureCollection/@next");
