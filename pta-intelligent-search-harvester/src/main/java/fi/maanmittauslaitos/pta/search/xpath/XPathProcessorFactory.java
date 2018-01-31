@@ -27,7 +27,7 @@ public class XPathProcessorFactory {
 	public XPathProcessorFactory() {
 	}
 	
-	public XPathProcessor createProcessor(XPathExtractionConfiguration configuration) throws ParserConfigurationException {
+	public DocumentProcessor createProcessor(XPathExtractionConfiguration configuration) throws ParserConfigurationException {
 		
 		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
 		builderFactory.setNamespaceAware(true);
@@ -45,7 +45,7 @@ public class XPathProcessorFactory {
 		
 		Map<String, TextProcessingChain> textProcessingChains = configuration.getTextProcessingChains();
 		
-		return new XPathProcessor() {
+		return new DocumentProcessor() {
 			
 			@Override
 			public Document processDocument(InputStream is) throws IOException, SAXException, XPathException

@@ -9,6 +9,6 @@ import org.xml.sax.SAXException;
 
 import fi.maanmittauslaitos.pta.search.Document;
 
-public interface XPathProcessor {
+public interface DocumentProcessor {
 	public Document processDocument(InputStream is) throws IOException, SAXException, XPathException;
 }

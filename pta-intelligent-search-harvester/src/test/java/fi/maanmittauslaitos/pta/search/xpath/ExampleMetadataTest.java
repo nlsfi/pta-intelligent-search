@@ -18,7 +18,7 @@ import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration.FieldExtractorType;
 
 public class ExampleMetadataTest {
-	private XPathProcessor processor;
+	private DocumentProcessor processor;
 	
 	@Before
 	public void setup() throws Exception

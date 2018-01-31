@@ -27,7 +27,7 @@ import fi.maanmittauslaitos.pta.search.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.HarvestingException;
 import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.XPathExtractionConfiguration;
-import fi.maanmittauslaitos.pta.search.xpath.XPathProcessor;
+import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.xpath.XPathProcessorFactory;
 import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration.FieldExtractorType;
 
@@ -102,7 +102,7 @@ public class WFS200HarvesterSource extends HarvesterSource {
 					configuration.getFieldExtractors().add(next);
 
 					XPathProcessorFactory xppf = new XPathProcessorFactory();
-					XPathProcessor processor = xppf.createProcessor(configuration);
+					DocumentProcessor processor = xppf.createProcessor(configuration);
 					Document doc = processor.processDocument(is);
 
 					

@@ -20,7 +20,7 @@ import fi.maanmittauslaitos.pta.search.HarvestingException;
 import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration.FieldExtractorType;
 import fi.maanmittauslaitos.pta.search.xpath.XPathExtractionConfiguration;
-import fi.maanmittauslaitos.pta.search.xpath.XPathProcessor;
+import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.xpath.XPathProcessorFactory;
 
 public class CSWHarvesterSource extends HarvesterSource {
@@ -131,7 +131,7 @@ public class CSWHarvesterSource extends HarvesterSource {
 					configuration.getFieldExtractors().add(ids);
 
 					XPathProcessorFactory xppf = new XPathProcessorFactory();
-					XPathProcessor processor = xppf.createProcessor(configuration);
+					DocumentProcessor processor = xppf.createProcessor(configuration);
 					Document doc = processor.processDocument(is);
 
 					logger.debug("\tReceived ids: " + doc.getFields().get("ids"));

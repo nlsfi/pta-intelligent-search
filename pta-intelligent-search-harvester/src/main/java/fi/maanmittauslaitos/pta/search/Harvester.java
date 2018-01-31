@@ -4,7 +4,7 @@ import java.io.InputStream;
 
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink.IndexResult;
-import fi.maanmittauslaitos.pta.search.xpath.XPathProcessor;
+import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
 
 public class Harvester {
 	public static void main(String[] args) throws Exception
@@ -13,7 +13,7 @@ public class Harvester {
 		
 		HarvesterSource source = config.getCSWSource();
 		
-		XPathProcessor processor = config.getCSWRecordProcessor();
+		DocumentProcessor processor = config.getCSWRecordProcessor();
 		
 		DocumentSink sink = config.getDocumentSink();
 		

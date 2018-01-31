@@ -33,7 +33,7 @@ import fi.maanmittauslaitos.pta.search.text.TextSplitterProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
 import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.XPathExtractionConfiguration;
-import fi.maanmittauslaitos.pta.search.xpath.XPathProcessor;
+import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.xpath.XPathProcessorFactory;
 import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration.FieldExtractorType;
 
@@ -48,7 +48,7 @@ public class HarvesterConfig {
 	}
 	
 	
-	public XPathProcessor getCSWRecordProcessor() throws ParserConfigurationException, IOException {
+	public DocumentProcessor getCSWRecordProcessor() throws ParserConfigurationException, IOException {
 		XPathExtractionConfiguration configuration = new XPathExtractionConfiguration();
 		configuration.getNamespaces().put("gmd", "http://www.isotc211.org/2005/gmd");
 		configuration.getNamespaces().put("gco", "http://www.isotc211.org/2005/gco");

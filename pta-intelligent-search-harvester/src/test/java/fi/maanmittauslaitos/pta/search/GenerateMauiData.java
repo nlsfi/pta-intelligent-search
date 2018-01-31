@@ -17,7 +17,7 @@ import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.XPathExtractionConfiguration;
-import fi.maanmittauslaitos.pta.search.xpath.XPathProcessor;
+import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.xpath.XPathProcessorFactory;
 import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration.FieldExtractorType;
 
@@ -29,7 +29,7 @@ import fi.maanmittauslaitos.pta.search.xpath.FieldExtractorConfiguration.FieldEx
  *
  */
 public class GenerateMauiData {
-	public static XPathProcessor getProcessor() throws Exception {
+	public static DocumentProcessor getProcessor() throws Exception {
 		
 		XPathExtractionConfiguration configuration = new XPathExtractionConfiguration();
 		configuration.getNamespaces().put("gmd", "http://www.isotc211.org/2005/gmd");
@@ -107,7 +107,7 @@ public class GenerateMauiData {
 			}
 		}
 		
-		XPathProcessor processor = getProcessor();
+		DocumentProcessor processor = getProcessor();
 		
 
 		HarvesterConfig config = new HarvesterConfig();

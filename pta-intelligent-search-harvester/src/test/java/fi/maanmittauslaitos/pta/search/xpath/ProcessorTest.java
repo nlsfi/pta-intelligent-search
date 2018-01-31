@@ -41,7 +41,7 @@ public class ProcessorTest {
 			"  </gmd:fileIdentifier>\n" +
 			"</gmd:MD_Metadata>\n").getBytes("UTF-8"));
 		
-		XPathProcessor processor = new XPathProcessorFactory().createProcessor(configuration);
+		DocumentProcessor processor = new XPathProcessorFactory().createProcessor(configuration);
 		
 		Document doc = processor.processDocument(bais);
 		
@@ -75,7 +75,7 @@ public class ProcessorTest {
 		configuration.getFieldExtractors().get(0).setTextProcessorName("1to1");
 		configuration.getTextProcessingChains().put("1to1", oneToOne);
 		
-		XPathProcessor processor = new XPathProcessorFactory().createProcessor(configuration);
+		DocumentProcessor processor = new XPathProcessorFactory().createProcessor(configuration);
 		
 		Document doc = processor.processDocument(bais);
 		
@@ -100,7 +100,7 @@ public class ProcessorTest {
 			"  </gmd:fileIdentifier>\n" +
 			"</gmd:MD_Metadata>\n").getBytes("UTF-8"));
 		
-		XPathProcessor processor = new XPathProcessorFactory().createProcessor(configuration);
+		DocumentProcessor processor = new XPathProcessorFactory().createProcessor(configuration);
 		
 		Document doc = processor.processDocument(bais);
 		
@@ -135,7 +135,7 @@ public class ProcessorTest {
 			"  </gmd:fileIdentifier>\n" +
 			"</gmd:MD_Metadata>\n").getBytes("UTF-8"));
 		
-		XPathProcessor processor = new XPathProcessorFactory().createProcessor(configuration);
+		DocumentProcessor processor = new XPathProcessorFactory().createProcessor(configuration);
 		
 		Document doc = processor.processDocument(bais);
 		
