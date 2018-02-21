@@ -1,6 +1,5 @@
 package fi.maanmittauslaitos.pta.search.xpath;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
@@ -10,10 +9,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathException;
 import javax.xml.xpath.XPathFactory;
-
-import org.xml.sax.SAXException;
 
 import fi.maanmittauslaitos.pta.search.Document;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
@@ -45,10 +41,16 @@ public class DocumentProcessorFactory {
 		return new DocumentProcessor() {
 			
 			@Override
-			public Document processDocument(InputStream is) throws IOException, SAXException, XPathException
+			public Document processDocument(InputStream is) throws DocumentProcessingException
 			{
 				
-				org.w3c.dom.Document doc = builder.parse(is);
+				org.w3c.dom.Document doc;
+				
+				try {
+					doc = builder.parse(is);
+				} catch(Exception e) {
+					throw new DocumentProcessingException(e);
+				}
 				
 				Document ret = new Document();
 				ret.setDom(doc);

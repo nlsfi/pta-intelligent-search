@@ -9,10 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathException;
 
 import org.apache.log4j.Logger;
-import org.xml.sax.SAXException;
 
 import fi.maanmittauslaitos.pta.search.Document;
 import fi.maanmittauslaitos.pta.search.HarvesterSource;
@@ -20,6 +18,7 @@ import fi.maanmittauslaitos.pta.search.HarvestingException;
 import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration.FieldExtractorType;
 import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessingConfiguration;
+import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessingException;
 import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessorFactory;
 
@@ -150,7 +149,7 @@ public class CSWHarvesterSource extends HarvesterSource {
 				}
 				
 				
-			} catch(IOException | ParserConfigurationException | SAXException | XPathException e) {
+			} catch(IOException | ParserConfigurationException | DocumentProcessingException e) {
 				throw new HarvestingException(e);
 			}
 		}

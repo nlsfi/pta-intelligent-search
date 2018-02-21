@@ -5,24 +5,13 @@ import java.util.List;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathException;
+import javax.xml.xpath.XPathExpressionException;
 
 import org.w3c.dom.NodeList;
 
-public class XPathFieldExtractorConfiguration implements FieldExtractorConfiguration {
-	private String field;
+public class XPathFieldExtractorConfiguration extends AbstractFieldExtractorConfiguration {
 	private FieldExtractorType type;
 	private String xpath;
-	private String textProcessorName;
-	
-	public void setField(String field) {
-		this.field = field;
-	}
-	
-	@Override
-	public String getField() {
-		return field;
-	}
 	
 	public void setType(FieldExtractorType type) {
 		this.type = type;
@@ -40,15 +29,6 @@ public class XPathFieldExtractorConfiguration implements FieldExtractorConfigura
 		return xpath;
 	}
 	
-	@Override
-	public String getTextProcessorName() {
-		return textProcessorName;
-	}
-	
-	public void setTextProcessorName(String textProcessorName) {
-		this.textProcessorName = textProcessorName;
-	}
-	
 	public enum FieldExtractorType {
 		FIRST_MATCHING_VALUE,
 		ALL_MATCHING_VALUES,
@@ -57,10 +37,14 @@ public class XPathFieldExtractorConfiguration implements FieldExtractorConfigura
 	
 
 	@Override
-	public Object process(org.w3c.dom.Document doc, XPath xPath) throws XPathException 
+	public Object process(org.w3c.dom.Document doc, XPath xPath) throws DocumentProcessingException 
 	{
-		NodeList nodeList = (NodeList) xPath.compile(getXpath()).evaluate(doc, XPathConstants.NODESET);
-		
+		NodeList nodeList;
+		try {
+			nodeList = (NodeList) xPath.compile(getXpath()).evaluate(doc, XPathConstants.NODESET);
+		} catch(XPathExpressionException e) {
+			throw new DocumentProcessingException(e);
+		}
 		
 		switch(getType()) {
 		case FIRST_MATCHING_VALUE:

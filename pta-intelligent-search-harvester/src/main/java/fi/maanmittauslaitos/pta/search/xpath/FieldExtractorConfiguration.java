@@ -1,7 +1,6 @@
 package fi.maanmittauslaitos.pta.search.xpath;
 
 import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathException;
 
 import org.w3c.dom.Document;
 
@@ -20,7 +19,7 @@ public interface FieldExtractorConfiguration {
 	 * @param doc
 	 * @return
 	 */
-	public Object process(Document doc, XPath xpath) throws XPathException;
+	public Object process(Document doc, XPath xpath) throws DocumentProcessingException;
 
 	
 	public Object getTextProcessorName();

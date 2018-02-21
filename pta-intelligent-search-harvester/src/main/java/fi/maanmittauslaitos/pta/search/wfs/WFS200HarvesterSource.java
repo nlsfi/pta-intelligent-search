@@ -15,18 +15,17 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.xpath.XPathException;
 
 import org.apache.log4j.Logger;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 import fi.maanmittauslaitos.pta.search.Document;
 import fi.maanmittauslaitos.pta.search.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.HarvestingException;
 import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessingConfiguration;
+import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessingException;
 import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessorFactory;
 import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration.FieldExtractorType;
@@ -125,7 +124,7 @@ public class WFS200HarvesterSource extends HarvesterSource {
 				}
 				
 				
-			} catch(IOException | ParserConfigurationException | SAXException | XPathException e) {
+			} catch(IOException | ParserConfigurationException | DocumentProcessingException e) {
 				throw new HarvestingException(e);
 			}
 		}
