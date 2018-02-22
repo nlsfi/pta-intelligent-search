@@ -138,11 +138,6 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 			tmp.operator(Operator.OR);
 			tmp.boost((float)basicWordMatchWeight);
 			boolQuery.should().add(tmp);
-			
-			tmp = QueryBuilders.matchQuery("avainsanat", sana);
-			tmp.operator(Operator.OR);
-			tmp.boost((float)basicWordMatchWeight);
-			boolQuery.should().add(tmp);
 		}
 	}
 
