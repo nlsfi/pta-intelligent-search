@@ -18,7 +18,8 @@
     dct:modified "2016-05-23T16:10:39+03:00"^^xsd:dateTime ;
     skos:altLabel "kesykissa"@fi,
         "kissat"@fi,
-        "kotikissa"@fi ;
+        "kotikissa"@fi,
+        "yhdistelmä kissa"@fi ;
     skos:broader :Y101826,
         :Y96840 ;
     skos:exactMatch <http://www.yso.fi/onto/allars/Y20635>,
