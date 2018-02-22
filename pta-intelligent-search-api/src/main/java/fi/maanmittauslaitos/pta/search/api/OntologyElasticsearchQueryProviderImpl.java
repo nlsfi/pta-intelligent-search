@@ -25,6 +25,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	private static Logger logger = Logger.getLogger(OntologyElasticsearchQueryProviderImpl.class);
 	
 	private Set<IRI> relationPredicates = new HashSet<>();
+	
 	private TextProcessor textProcessor;
 	private Model model;
 	
@@ -157,7 +158,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		
 		double weight = 1.0;
 		
-		for (String termi : getTextProcessor().process(pyynto.getQuery())) {
+		for (String termi : getPyyntoTerms(pyynto)) {
 			termit.add(new SearchTerm(termi, weight));
 			prosessoimattomatYlakasitteet.add(termi);
 		}
@@ -181,6 +182,11 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		return termit;
 	}
 
+	@Override
+	public List<String> getPyyntoTerms(HakuPyynto pyynto) {
+		return getTextProcessor().process(pyynto.getQuery());
+	}
+	
 	public Set<String> haeAlakasitteet(Set<String> ylakasitteet) {
 		Set<String> ret = new HashSet<>();
 		

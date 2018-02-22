@@ -1,8 +1,11 @@
 package fi.maanmittauslaitos.pta.search.api;
 
+import java.util.List;
+
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 public interface ElasticsearchQueryProvider {
+	public List<String> getPyyntoTerms(HakuPyynto pyynto);
 	public SearchSourceBuilder buildSearchSource(HakuPyynto pyynto);
 	
 	public class SearchTerm {
@@ -18,4 +21,5 @@ public interface ElasticsearchQueryProvider {
 			return resource+"#"+weight;
 		}
 	}
+
 }

@@ -3,7 +3,7 @@ package fi.maanmittauslaitos.pta.search.text;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextProcessingChain {
+public class TextProcessingChain implements TextProcessor {
 	private List<TextProcessor> chain = new ArrayList<>();
 	
 	public List<TextProcessor> getChain() {
@@ -14,6 +14,7 @@ public class TextProcessingChain {
 		this.chain = chain;
 	}
 	
+	@Override
 	public List<String> process(List<String> input) {
 		List<String> ret = input;
 		

@@ -157,7 +157,9 @@ public class ElasticsearchHakuKoneImpl implements HakuKone {
 			}
 		});
 		
-		tulos.setHints(getHintProvider().getHints(pyynto, tulos.getHits()));
+		List<String> terms = getQueryProvider().getPyyntoTerms(pyynto);
+		
+		tulos.setHints(getHintProvider().getHints(terms, tulos.getHits()));
 		
 		return tulos;
 	}

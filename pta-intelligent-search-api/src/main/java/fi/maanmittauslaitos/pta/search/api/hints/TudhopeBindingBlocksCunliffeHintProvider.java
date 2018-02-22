@@ -14,7 +14,6 @@ import org.eclipse.rdf4j.model.Value;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 
-import fi.maanmittauslaitos.pta.search.api.HakuPyynto;
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 
@@ -52,23 +51,15 @@ public class TudhopeBindingBlocksCunliffeHintProvider extends AbstractHintProvid
 	 * 
 	 */
 	@Override
-	public List<String> getHints(HakuPyynto pyynto, List<Hit> hits) {
-		// TODO: ehkä vinkit kannattaakin hakea hakusanoista eikä löydetyistä hiteistä?
-		/*
+	public List<String> getHints(List<String> pyyntoTerms, List<Hit> hits) {
 		Set<IRI> iris = new HashSet<>();
-		for (Hit hit : hits) {
-			for (String uri : hit.getAbstractUris()) {
-				iris.add(vf.createIRI(uri));
-			}
-		}*/
-		Set<IRI> iris = new HashSet<>();
-		for (String iri : getTerminologyProcessor().process(pyynto.getQuery())) {
+		for (String iri : pyyntoTerms) {
 			iris.add(vf.createIRI(iri));
 		}
 		
 		Map<IRI, Double> colorized = colorize(iris);
 		
-		return produceAndOrderHints(pyynto, colorized);
+		return produceAndOrderHints(pyyntoTerms, colorized);
 	}
 	
 	

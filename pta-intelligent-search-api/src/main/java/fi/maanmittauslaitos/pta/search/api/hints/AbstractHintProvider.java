@@ -3,7 +3,6 @@ package fi.maanmittauslaitos.pta.search.api.hints;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,7 +16,6 @@ import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.util.Models;
 import org.eclipse.rdf4j.model.vocabulary.SKOS;
 
-import fi.maanmittauslaitos.pta.search.api.HakuPyynto;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 
 public abstract class AbstractHintProvider implements HintProvider {
@@ -70,7 +68,7 @@ public abstract class AbstractHintProvider implements HintProvider {
 	 * @param colorized
 	 * @return Maximum of maxHits results. Used search terms are never returned as hints.
 	 */
-	protected List<String> produceAndOrderHints(HakuPyynto pyynto, Map<IRI, Double> colorized) {
+	protected List<String> produceAndOrderHints(List<String> pyyntoTerms, Map<IRI, Double> colorized) {
 		List<Entry<IRI, Double>> entries = new ArrayList<>(colorized.entrySet());
 		
 		// Sort by score
@@ -88,17 +86,12 @@ public abstract class AbstractHintProvider implements HintProvider {
 		});
 		
 		// Pick at most maxHints values, skipping terms used in the query
-		Set<String> stemmedQueryTerms = new HashSet<>();
-		for (String str : pyynto.getQuery()) {
-			stemmedQueryTerms.add(getStemmer().stem(str));
-		}
-		
-		List<String> ret = findLabelsForHints(entries, stemmedQueryTerms, getMaxHints());
+		List<String> ret = findLabelsForHints(entries, pyyntoTerms, getMaxHints());
 		
 		return ret;
 	}
 
-	private List<String> findLabelsForHints(List<Entry<IRI, Double>> entries, Set<String> notTheseLabels, int maxSize) {
+	private List<String> findLabelsForHints(List<Entry<IRI, Double>> entries, List<String> pyyntoTerms, int maxSize) {
 		List<String> ret = new ArrayList<>();
 		for (Entry<IRI, Double> entry : entries) {
 			IRI resource = entry.getKey();
@@ -113,7 +106,7 @@ public abstract class AbstractHintProvider implements HintProvider {
 				}
 				String label = value.stringValue();
 				
-				if (!notTheseLabels.contains(getStemmer().stem(label))) {
+				if (!pyyntoTerms.contains(resource.toString())) {
 					ret.add(label);
 	
 					break;

@@ -72,7 +72,7 @@ public class RDFTerminologyMatcherProcessor implements TextProcessor {
 		return stemmer;
 	}
 	
-	private Map<String, List<String>> getDict() {
+	public Map<String, List<String>> getDict() {
 		if (dict != null) {
 			return dict;
 		}

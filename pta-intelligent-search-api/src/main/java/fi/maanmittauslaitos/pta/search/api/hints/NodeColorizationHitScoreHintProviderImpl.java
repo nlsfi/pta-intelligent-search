@@ -12,7 +12,6 @@ import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.Value;
 
-import fi.maanmittauslaitos.pta.search.api.HakuPyynto;
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
 
 public class NodeColorizationHitScoreHintProviderImpl extends AbstractHintProvider {
@@ -62,7 +61,7 @@ public class NodeColorizationHitScoreHintProviderImpl extends AbstractHintProvid
 	 * This process is done recursively until the configured level of recursion has been reached.   
 	 */
 	@Override
-	public List<String> getHints(HakuPyynto pyynto, List<Hit> hits) {
+	public List<String> getHints(List<String> pyyntoTerms, List<Hit> hits) {
 		
 		Set<Entry<IRI, Double>> iris = new HashSet<>();
 		for (Hit hit : hits) {
@@ -80,7 +79,7 @@ public class NodeColorizationHitScoreHintProviderImpl extends AbstractHintProvid
 		
 		Map<IRI, Double> colorized = colorize(iris);
 		
-		return produceAndOrderHints(pyynto, colorized);
+		return produceAndOrderHints(pyyntoTerms, colorized);
 	}
 
 	

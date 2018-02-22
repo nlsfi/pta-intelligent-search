@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -22,9 +21,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fi.maanmittauslaitos.pta.search.api.ApplicationConfiguration;
-import fi.maanmittauslaitos.pta.search.api.HakuPyynto;
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
-import fi.maanmittauslaitos.pta.search.api.hints.NodeColorizationHintProviderImpl;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
 
 public class NodeColorizationHitScoreHintProviderImplTest {
@@ -216,10 +213,7 @@ public class NodeColorizationHitScoreHintProviderImplTest {
 		fakeHit.setAbstractUris(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711")); // Sakko
 		fakeHit.setScore(1.0);
 
-		HakuPyynto pyynto = new HakuPyynto();
-		pyynto.setQuery(Arrays.asList("sakko"));
-		
-		List<String> hints = hintProvider.getHints(pyynto, Arrays.asList(fakeHit));
+		List<String> hints = hintProvider.getHints(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711"), Arrays.asList(fakeHit));
 		
 		assertEquals(2, hints.size());
 		assertEquals("rangaistukset", hints.get(0));
@@ -251,10 +245,7 @@ public class NodeColorizationHitScoreHintProviderImplTest {
 		fakeHit2.setAbstractUris(Arrays.asList("http://www.yso.fi/onto/ysa/Y165908")); // Sakon muuntorangaistus
 		fakeHit2.setScore(1.0);
 		
-		HakuPyynto pyynto = new HakuPyynto();
-		pyynto.setQuery(Arrays.asList("sakko", "sakon muuntorangaistus"));
-		
-		List<String> hints = hintProvider.getHints(pyynto, Arrays.asList(fakeHit1, fakeHit2));
+		List<String> hints = hintProvider.getHints(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711", "http://www.yso.fi/onto/ysa/Y165908"), Arrays.asList(fakeHit1, fakeHit2));
 		assertEquals(2, hints.size());
 		assertEquals("rangaistukset", hints.get(0));
 		assertEquals("tuomiot", hints.get(1));

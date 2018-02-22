@@ -21,7 +21,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fi.maanmittauslaitos.pta.search.api.ApplicationConfiguration;
-import fi.maanmittauslaitos.pta.search.api.HakuPyynto;
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
 import fi.maanmittauslaitos.pta.search.api.hints.NodeColorizationHintProviderImpl;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
@@ -199,11 +198,8 @@ public class NodeColorizationHintProviderImplTest {
 		Hit fakeHit = new Hit();
 		fakeHit.setAbstractUris(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711")); // Sakko
 		
-
-		HakuPyynto pyynto = new HakuPyynto();
-		pyynto.setQuery(Arrays.asList("sakko"));
 		
-		List<String> hints = hintProvider.getHints(pyynto, Arrays.asList(fakeHit));
+		List<String> hints = hintProvider.getHints(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711"), Arrays.asList(fakeHit));
 		
 		assertEquals(2, hints.size());
 		assertEquals("rangaistukset", hints.get(0));
@@ -234,10 +230,7 @@ public class NodeColorizationHintProviderImplTest {
 		Hit fakeHit2 = new Hit();
 		fakeHit2.setAbstractUris(Arrays.asList("http://www.yso.fi/onto/ysa/Y165908")); // Sakon muuntorangaistus
 		
-		HakuPyynto pyynto = new HakuPyynto();
-		pyynto.setQuery(Arrays.asList("sakko", "sakon muuntorangaistus"));
-		
-		List<String> hints = hintProvider.getHints(pyynto, Arrays.asList(fakeHit1, fakeHit2));
+		List<String> hints = hintProvider.getHints(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711", "http://www.yso.fi/onto/ysa/Y165908"), Arrays.asList(fakeHit1, fakeHit2));
 		System.out.println(hints);
 		assertEquals(2, hints.size());
 		assertEquals("rangaistukset", hints.get(0));

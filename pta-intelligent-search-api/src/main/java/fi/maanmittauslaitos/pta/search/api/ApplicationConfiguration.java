@@ -25,6 +25,9 @@ import org.springframework.context.annotation.Configuration;
 import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
 import fi.maanmittauslaitos.pta.search.api.hints.NodeColorizationHitScoreHintProviderImpl;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
+import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
+import fi.maanmittauslaitos.pta.search.text.TextProcessor;
+import fi.maanmittauslaitos.pta.search.text.WordCombinationProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
 
@@ -33,12 +36,38 @@ public class ApplicationConfiguration {
 
 	@Bean
 	public RDFTerminologyMatcherProcessor terminologyMatcher(Model terminologyModel, Stemmer stemmer, List<IRI> terminologyLabels) throws IOException {
-		RDFTerminologyMatcherProcessor terminologyProcessor = new RDFTerminologyMatcherProcessor();
-		terminologyProcessor.setModel(terminologyModel);
-		terminologyProcessor.setTerminologyLabels(terminologyLabels);
-		terminologyProcessor.setStemmer(stemmer);
-		terminologyProcessor.setLanguage("fi");
-		return terminologyProcessor;
+		RDFTerminologyMatcherProcessor ret = new RDFTerminologyMatcherProcessor();
+		ret.setModel(terminologyModel);
+		ret.setTerminologyLabels(terminologyLabels);
+		ret.setStemmer(stemmer);
+		ret.setLanguage("fi");
+		
+		// Initialize
+		ret.getDict();
+		
+		return ret;
+	}
+	
+	@Bean
+	public WordCombinationProcessor wordCombinationProcessor(Model terminologyModel, Stemmer stemmer, List<IRI> terminologyLabels) throws IOException {
+		WordCombinationProcessor ret = new WordCombinationProcessor();
+		ret.setModel(terminologyModel);
+		ret.setTerminologyLabels(terminologyLabels);
+		ret.setStemmer(stemmer);
+		ret.setLanguage("fi");
+
+		// Initialize
+		ret.getDict();
+
+		return ret;
+	}
+	
+	@Bean
+	public TextProcessor queryTextProcessor(WordCombinationProcessor combinator, RDFTerminologyMatcherProcessor terminology) {
+		TextProcessingChain chain = new TextProcessingChain();
+		chain.getChain().add(combinator);
+		chain.getChain().add(terminology);
+		return chain;
 	}
 	
 	@Bean
@@ -121,13 +150,13 @@ public class ApplicationConfiguration {
 
 	
 	@Bean
-	public HakuKone hakuKone(RDFTerminologyMatcherProcessor textProcessor, RestHighLevelClient elasticsearchClient, Model model, HintProvider hintProvider) throws IOException {
+	public HakuKone hakuKone(TextProcessor queryTextProcessor, RestHighLevelClient elasticsearchClient, Model model, HintProvider hintProvider) throws IOException {
 		ElasticsearchHakuKoneImpl ret = new ElasticsearchHakuKoneImpl();
 		ret.setClient(elasticsearchClient);
 		
 		OntologyElasticsearchQueryProviderImpl queryProvider = new OntologyElasticsearchQueryProviderImpl();
 		queryProvider.addRelationPredicate(SKOS.NARROWER);
-		queryProvider.setTextProcessor(textProcessor);
+		queryProvider.setTextProcessor(queryTextProcessor);
 		queryProvider.setModel(model);
 		queryProvider.setOntologyLevels(2);
 		queryProvider.setWeightFactor(0.5);

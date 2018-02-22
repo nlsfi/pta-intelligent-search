@@ -60,7 +60,7 @@ public class WordCombinationProcessor implements TextProcessor {
 		return language;
 	}
 
-	private Map<String, String> getDict() {
+	public Map<String, String> getDict() {
 		if (dict != null) {
 			return dict;
 		}
@@ -93,7 +93,7 @@ public class WordCombinationProcessor implements TextProcessor {
 					if (shouldAdd) {
 						String value = statement.getObject().stringValue();
 						
-						String [] tmp = splitAndStem(value);
+						String [] tmp = value.split("\\s+");
 						
 						if (tmp.length > max) {
 							max = tmp.length;
@@ -106,8 +106,12 @@ public class WordCombinationProcessor implements TextProcessor {
 		return max;
 	}
 
-	private String[] splitAndStem(String value) {		
+	private String[] splitAndStem(String value, int minWordsBeforeStemming) {		
 		String [] parts = value.split("\\s+");
+		
+		if (parts.length < minWordsBeforeStemming) {
+			return parts;
+		}
 		
 		if (getStemmer() != null) {
 			for (int i = 0; i< parts.length; i++) {
@@ -126,6 +130,10 @@ public class WordCombinationProcessor implements TextProcessor {
 				for (Statement statement : model.filter(r, resource, null)) {
 					boolean shouldAdd = true;
 					
+					if (statement.getObject().stringValue().toLowerCase().contains("aerobinen")) {
+						System.out.println("ping!");
+					}
+					
 					if (getLanguage() != null && statement.getObject() instanceof Literal) {
 						Literal literal = (Literal)statement.getObject();
 						if (literal.getLanguage().isPresent()) {
@@ -139,7 +147,7 @@ public class WordCombinationProcessor implements TextProcessor {
 					if (shouldAdd) {
 						String value = statement.getObject().stringValue();
 						
-						String[] tmp = splitAndStem(value);
+						String[] tmp = splitAndStem(value, 2);
 						
 						if (tmp.length > 1) {
 							String key = createKey(tmp);
@@ -160,7 +168,7 @@ public class WordCombinationProcessor implements TextProcessor {
 			}
 			buf.append(tmp[i]);
 		}
-		return buf.toString();
+		return buf.toString().toLowerCase();
 	}
 
 	@Override
@@ -176,40 +184,42 @@ public class WordCombinationProcessor implements TextProcessor {
 				localMaxLength = maxCombinationLengthWords;
 			}
 			
-			if (localMaxLength > 1) {
-				// Start at maximum length since we want to match the longest possible combination
+			if (localMaxLength == 1) {
+				ret.add(str.get(i));
+				continue;
+			}
+			
+			// Start at maximum length since we want to match the longest possible combination
+			
+			String foundCombination = null;
+			int foundCombinationLength = -1;
+			
+			for (int len = localMaxLength; len > 1 && foundCombination == null; len--) {
+				// formulate a possible combination word of length 'len' starting at index 'i'
+				// (stemming each word), but store as an array
 				
-				String foundCombination = null;
-				int foundCombinationLength = -1;
+				String[] possibleWordCombination = produceWordCombinationArray(str, i, len);
 				
-				for (int len = localMaxLength; len > 1 && foundCombination == null; len--) {
-					// formulate a possible combination word of length 'len' starting at index 'i'
-					// (stemming each word), but store as an array
-					
-					String[] possibleWordCombination = produceWordCombinationArray(str, i, len);
-					
-					// Get the key for this word combination
-					String key = createKey(possibleWordCombination);
-					
-					String value = dict.get(key);
-					
-					if (value != null) {
-						foundCombination = value;
-						foundCombinationLength = len;
-					}
-					
+				// Get the key for this word combination
+				String key = createKey(possibleWordCombination);
+				
+				String value = dict.get(key);
+				
+				if (value != null) {
+					foundCombination = value;
+					foundCombinationLength = len;
 				}
 				
-				if (foundCombination != null) {
-					i += foundCombinationLength-1;
-					ret.add(foundCombination);
-				} else {
-					ret.add(str.get(i));
-				}
-				
+			}
+			
+			if (foundCombination != null) {
+				i += foundCombinationLength-1;
+				ret.add(foundCombination);
 			} else {
 				ret.add(str.get(i));
 			}
+			
+		
 		}
 		
 		return ret;

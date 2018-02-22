@@ -20,7 +20,6 @@ import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.util.Models;
 import org.eclipse.rdf4j.model.vocabulary.SKOS;
 
-import fi.maanmittauslaitos.pta.search.api.HakuPyynto;
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 
@@ -74,7 +73,7 @@ public class NodeColorizationHintProviderImpl implements HintProvider {
 	}
 	
 	@Override
-	public List<String> getHints(HakuPyynto pyynto, List<Hit> hits) {
+	public List<String> getHints(List<String> pyyntoTerms, List<Hit> hits) {
 		
 		Set<IRI> iris = new HashSet<>();
 		for (Hit hit : hits) {
@@ -102,11 +101,6 @@ public class NodeColorizationHintProviderImpl implements HintProvider {
 		});
 		
 		// Pick at most maxHints values, skipping terms used in the query
-		Set<String> stemmedQueryTerms = new HashSet<>();
-		for (String str : pyynto.getQuery()) {
-			stemmedQueryTerms.add(getStemmer().stem(str));
-		}
-		
 		List<String> ret = new ArrayList<>();
 		for (Entry<IRI, Double> entry : entries) {
 			IRI resource = entry.getKey();
@@ -117,7 +111,9 @@ public class NodeColorizationHintProviderImpl implements HintProvider {
 			
 			String label = value.get().stringValue();
 			
-			if (!stemmedQueryTerms.contains(getStemmer().stem(label))) {
+			if (!pyyntoTerms.contains(resource.toString())) {
+			
+			//if (!stemmedQueryTerms.contains(getStemmer().stem(label))) {
 				ret.add(label);
 
 				if (ret.size() >= getMaxHints()) {
