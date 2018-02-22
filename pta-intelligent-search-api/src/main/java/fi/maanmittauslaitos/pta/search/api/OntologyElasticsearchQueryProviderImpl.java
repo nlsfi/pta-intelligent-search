@@ -109,7 +109,14 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		
 		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
 
-		lisaaOntologisetTermit(pyynto, boolQuery);
+		List<String> pyyntoTerms = getPyyntoTerms(pyynto);
+		if (logger.isInfoEnabled()) {
+			logger.info("Hakusanat: "+pyynto.getQuery()+", tunnistetut termit: "+pyyntoTerms);
+		}
+		
+		Set<SearchTerm> termit = buildSearchTerms(pyyntoTerms);
+		
+		lisaaOntologisetTermit(termit, boolQuery);
 		lisaaVapaaSanahaku(pyynto, boolQuery);
 
 		if (boolQuery.should().size() > getMaxQueryTermsToElasticsearch()) {
@@ -125,19 +132,27 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 
 	private void lisaaVapaaSanahaku(HakuPyynto pyynto, BoolQueryBuilder boolQuery) {
 		for (String sana : pyynto.getQuery()) {
-			MatchQueryBuilder tmp = QueryBuilders.matchQuery("abstract", sana);
+			MatchQueryBuilder tmp;
+			
+			tmp = QueryBuilders.matchQuery("abstract", sana);
+			tmp.operator(Operator.OR);
+			tmp.boost((float)basicWordMatchWeight);
+			boolQuery.should().add(tmp);
+			
+			tmp = QueryBuilders.matchQuery("avainsanat", sana);
 			tmp.operator(Operator.OR);
 			tmp.boost((float)basicWordMatchWeight);
 			boolQuery.should().add(tmp);
 		}
 	}
 
-	private void lisaaOntologisetTermit(HakuPyynto pyynto, BoolQueryBuilder boolQuery) {
-		Set<SearchTerm> termit = getSearchTerms(pyynto);
-
+	private void lisaaOntologisetTermit(Set<SearchTerm> termit, BoolQueryBuilder boolQuery) {
 		for (SearchTerm term : termit) {
 			MatchPhraseQueryBuilder tmp;
 			
+			tmp = QueryBuilders.matchPhraseQuery("avainsanat_uri", term.resource);
+			tmp.boost((float)term.weight);
+			boolQuery.should().add(tmp);
 
 			tmp = QueryBuilders.matchPhraseQuery("abstract_maui_uri", term.resource);
 			tmp.boost((float)term.weight);
@@ -150,7 +165,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		}
 	}
 
-	private Set<SearchTerm> getSearchTerms(HakuPyynto pyynto) {
+	private Set<SearchTerm> buildSearchTerms(List<String> pyyntoTerms) {
 		Set<SearchTerm> termit = new HashSet<>();
 		
 		Set<String> prosessoidutYlakasitteet = new HashSet<>(); // Vältetään uudelleenkäsittely
@@ -158,7 +173,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		
 		double weight = 1.0;
 		
-		for (String termi : getPyyntoTerms(pyynto)) {
+		for (String termi : pyyntoTerms) {
 			termit.add(new SearchTerm(termi, weight));
 			prosessoimattomatYlakasitteet.add(termi);
 		}
