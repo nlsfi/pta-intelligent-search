@@ -17,6 +17,8 @@ public class Harvester {
 		
 		DocumentSink sink = config.getDocumentSink();
 		
+		int updated = 0;
+		int inserted = 0;
 		
 		for (InputStream is : source) {
 			if (is == null) {
@@ -26,18 +28,23 @@ public class Harvester {
 			try {
 				Document doc = processor.processDocument(is);
 				
-				System.out.println(doc.getFields().get("abstract_maui_uri"));
-				 
-				//if (true) return;
-				
 				IndexResult result = sink.indexDocument(doc);
-				System.out.println(" => "+result);
+				switch(result) {
+				case UPDATED:
+					updated++;
+					break;
+				case INSERTED:
+					inserted++;
+					break;
+				}
+
 			} finally {
 				is.close();
 			}
-			
-			
 		}
+		
+		System.out.println("Inserted "+inserted+" documents");
+		System.out.println("Updated "+updated+" documents");
 	}
 
 }
