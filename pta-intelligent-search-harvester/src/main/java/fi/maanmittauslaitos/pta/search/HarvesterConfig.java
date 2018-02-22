@@ -32,6 +32,7 @@ import fi.maanmittauslaitos.pta.search.text.RegexProcessor;
 import fi.maanmittauslaitos.pta.search.text.StopWordsProcessor;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 import fi.maanmittauslaitos.pta.search.text.TextSplitterProcessor;
+import fi.maanmittauslaitos.pta.search.text.WordCombinationProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
 import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessingConfiguration;
@@ -61,11 +62,14 @@ public class HarvesterConfig {
 		configuration.getNamespaces().put("xlink", "http://www.w3.org/1999/xlink");
 		
 		
-		RDFTerminologyMatcherProcessor terminologyProcessor = createTerminologyMatcher();
+		Model model = getTerminologyModel();
+		RDFTerminologyMatcherProcessor terminologyProcessor = createTerminologyMatcher(model);
+		WordCombinationProcessor wordCombinationProcessor = createWordCombinationProcessor(model);
 		
 		{
 			TextProcessingChain abstractChain = new TextProcessingChain();
 			abstractChain.getChain().add(new TextSplitterProcessor());
+			abstractChain.getChain().add(wordCombinationProcessor);
 			
 			StopWordsProcessor stopWordsProcessor = new StopWordsProcessor();
 			try (InputStreamReader isr = new InputStreamReader(HarvesterConfig.class.getResourceAsStream("/stopwords-fi.txt"))) {
@@ -112,6 +116,7 @@ public class HarvesterConfig {
 		whitespaceRemoval.setIncludeMatches(false);
 		
 		keywordChain.getChain().add(new TextSplitterProcessor());
+		keywordChain.getChain().add(wordCombinationProcessor);
 		keywordChain.getChain().add(whitespaceRemoval);
 		keywordChain.getChain().add(terminologyProcessor);
 		
@@ -271,15 +276,24 @@ public class HarvesterConfig {
 	}
 
 
-	private RDFTerminologyMatcherProcessor createTerminologyMatcher() throws IOException {
-		RDFTerminologyMatcherProcessor terminologyProcessor = new RDFTerminologyMatcherProcessor();
-		terminologyProcessor.setModel(getTerminologyModel());
-		terminologyProcessor.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
-		terminologyProcessor.setStemmer(StemmerFactor.createStemmer());
-		terminologyProcessor.setLanguage("fi");
-		return terminologyProcessor;
+	private RDFTerminologyMatcherProcessor createTerminologyMatcher(Model model) throws IOException {
+		RDFTerminologyMatcherProcessor ret = new RDFTerminologyMatcherProcessor();
+		ret.setModel(model);
+		ret.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
+		ret.setStemmer(StemmerFactor.createStemmer());
+		ret.setLanguage("fi");
+		return ret;
 	}
 
+	private WordCombinationProcessor createWordCombinationProcessor(Model model) throws IOException {
+		WordCombinationProcessor ret = new WordCombinationProcessor();
+		ret.setModel(model);
+		ret.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
+		ret.setStemmer(StemmerFactor.createStemmer());
+		ret.setLanguage("fi");
+		return ret;
+	}
+	
 	public DocumentSink getDocumentSink() {
 		ElasticsearchDocumentSink ret = new ElasticsearchDocumentSink();
 		ret.setHostname("localhost");
