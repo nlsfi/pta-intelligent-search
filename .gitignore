@@ -2,3 +2,5 @@
 .settings
 target/
 pta-intelligent-search-harvester/input/
+pta-intelligent-search-harvester/out/
+pta-intelligent-search-text-processor/out/
