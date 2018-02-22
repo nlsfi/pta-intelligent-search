@@ -3,6 +3,7 @@ package fi.maanmittauslaitos.pta.search.api;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 
@@ -20,7 +21,7 @@ public class StemTest {
 			
 			String stemmed = proc.getStemmer().stem(str);
 			System.out.println("'"+str+"' => '"+stemmed+"'");
-			System.out.println("YSA: "+proc.process(str));
+			System.out.println("YSA: "+proc.process(Arrays.asList(str)));
 		}
 		
 		//proc.getStemmer().stem(str)

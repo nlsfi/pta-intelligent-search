@@ -3,6 +3,7 @@ package fi.maanmittauslaitos.pta.search.xpath;
 import static org.junit.Assert.*;
 
 import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -67,8 +68,12 @@ public class ProcessorTest {
 		oneToOne.getChain().add(new TextProcessor() {
 			
 			@Override
-			public List<String> process(String str) {
-				return Collections.singletonList(str+"-1");
+			public List<String> process(List<String> input) {
+				List<String> ret = new ArrayList<>();
+				for (String str : input) {
+					ret.add(str+"-1");
+				}
+				return ret;
 			}
 		});
 		

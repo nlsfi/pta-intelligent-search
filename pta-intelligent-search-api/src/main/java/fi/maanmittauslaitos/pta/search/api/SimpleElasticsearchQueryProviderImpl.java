@@ -59,11 +59,8 @@ public class SimpleElasticsearchQueryProviderImpl implements ElasticsearchQueryP
 	private Set<SearchTerm> getSearchTerms(HakuPyynto pyynto) {
 		Set<SearchTerm> termit = new HashSet<>();
 		
-		// TODO: tämähän ei riitä, vaan nyt pitää purkaa ontologiaa auki!
-		for (String hakusana : pyynto.getQuery()) {
-			for (String termi : getTextProcessor().process(hakusana)) {
-				termit.add(new SearchTerm(termi, 1.0));
-			}
+		for (String termi : getTextProcessor().process(pyynto.getQuery())) {
+			termit.add(new SearchTerm(termi, 1.0));
 		}
 		
 		return termit;

@@ -156,11 +156,10 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		Set<String> prosessoimattomatYlakasitteet = new HashSet<>();
 		
 		double weight = 1.0;
-		for (String hakusana : pyynto.getQuery()) {
-			for (String termi : getTextProcessor().process(hakusana)) {
-				termit.add(new SearchTerm(termi, weight));
-				prosessoimattomatYlakasitteet.add(termi);
-			}
+		
+		for (String termi : getTextProcessor().process(pyynto.getQuery())) {
+			termit.add(new SearchTerm(termi, weight));
+			prosessoimattomatYlakasitteet.add(termi);
 		}
 		
 		for (int level = 0; level < ontologyLevels; level++) {

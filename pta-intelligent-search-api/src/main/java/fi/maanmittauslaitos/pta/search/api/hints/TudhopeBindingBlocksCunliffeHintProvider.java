@@ -62,11 +62,8 @@ public class TudhopeBindingBlocksCunliffeHintProvider extends AbstractHintProvid
 			}
 		}*/
 		Set<IRI> iris = new HashSet<>();
-		for (String termi : pyynto.getQuery()) {
-			
-			for (String iri : getTerminologyProcessor().process(termi)) {
-				iris.add(vf.createIRI(iri));
-			}
+		for (String iri : getTerminologyProcessor().process(pyynto.getQuery())) {
+			iris.add(vf.createIRI(iri));
 		}
 		
 		Map<IRI, Double> colorized = colorize(iris);
