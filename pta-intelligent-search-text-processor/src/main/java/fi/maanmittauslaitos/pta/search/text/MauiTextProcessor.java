@@ -1,24 +1,17 @@
 package fi.maanmittauslaitos.pta.search.text;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.zip.GZIPInputStream;
 
 import org.apache.log4j.Logger;
 
 import com.entopix.maui.filters.MauiFilter;
 import com.entopix.maui.filters.MauiFilter.MauiFilterException;
-import com.entopix.maui.main.MauiModelBuilder;
 import com.entopix.maui.stemmers.Stemmer;
 import com.entopix.maui.stopwords.Stopwords;
-import com.entopix.maui.util.MauiDocument;
-import com.entopix.maui.util.MauiTopics;
 import com.entopix.maui.util.Topic;
 import com.entopix.maui.vocab.Vocabulary;
 import com.entopix.maui.vocab.VocabularyStoreFactory;
@@ -197,7 +190,7 @@ public class MauiTextProcessor implements TextProcessor {
 		Topic topic;
 		String title, id;
 
-		logger.info("-- Keyphrases and feature values:");
+		logger.trace("-- Keyphrases and feature values:");
 
 		List<String> ret = new ArrayList<>();
 		
@@ -218,7 +211,9 @@ public class MauiTextProcessor implements TextProcessor {
 						topic.setCorrectness(false);
 					}
 					
-					logger.info("Topic " + title + " " + id + " " + probability + " > " + topic.isCorrect());
+					if (logger.isTraceEnabled()) {
+						logger.trace("Topic " + title + " " + id + " " + probability + " > " + topic.isCorrect());
+					}
 					ret.add(inst.stringValue(0));
 					index++;
 				}
