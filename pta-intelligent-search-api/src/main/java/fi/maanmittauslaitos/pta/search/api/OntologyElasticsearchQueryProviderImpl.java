@@ -154,7 +154,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 			boolQuery.should().add(tmp);
 			
 			tmp = QueryBuilders.matchPhraseQuery("abstract_uri", term.resource);
-			tmp.boost((float)term.weight*0.5f);
+			tmp.boost((float)term.weight*0.75f);
 			boolQuery.should().add(tmp);
 			
 		}
