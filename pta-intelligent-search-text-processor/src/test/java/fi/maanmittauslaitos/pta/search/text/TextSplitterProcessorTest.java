@@ -2,6 +2,7 @@ package fi.maanmittauslaitos.pta.search.text;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Before;
@@ -18,14 +19,14 @@ public class TextSplitterProcessorTest {
 
 	@Test
 	public void test() {
-		List<String> result = processor.process("ABC Kissa kävelee, tikapuita pitkin - taivaaseen!");
+		List<String> result = processor.process(Arrays.asList("ABC Kissa kävelee, tikapuita pitkin - taivaaseen!"));
 		
 		assertArrayEquals(new String[] { "ABC", "Kissa", "kävelee", "tikapuita", "pitkin", "taivaaseen" }, result.toArray());
 	}
 
 	@Test
 	public void testWhitespacePrefix() {
-		List<String> result = processor.process(" ABC Kissa kävelee, tikapuita pitkin - taivaaseen!");
+		List<String> result = processor.process(Arrays.asList(" ABC Kissa kävelee, tikapuita pitkin - taivaaseen!"));
 		
 		assertArrayEquals(new String[] { "ABC", "Kissa", "kävelee", "tikapuita", "pitkin", "taivaaseen" }, result.toArray());
 	}

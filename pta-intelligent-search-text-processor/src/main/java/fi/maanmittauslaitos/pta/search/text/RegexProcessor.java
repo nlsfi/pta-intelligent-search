@@ -1,6 +1,6 @@
 package fi.maanmittauslaitos.pta.search.text;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -27,18 +27,21 @@ public class RegexProcessor implements TextProcessor {
 	
 	
 	@Override
-	public List<String> process(String str) {
-		boolean allow = getPattern().matcher(str).matches();
+	public List<String> process(List<String> input) {
+		List<String> ret = new ArrayList<>();
 		
-		if (!includeMatches) {
-			allow = !allow;
+		for (String str : input) {
+			boolean allow = getPattern().matcher(str).matches();
+			
+			if (!includeMatches) {
+				allow = !allow;
+			}
+			
+			if (allow) {
+				ret.add(str);
+			}
 		}
-		
-		if (allow) {
-			return Collections.singletonList(str);
-		} else {
-			return Collections.emptyList();
-		}
+		return ret;
 	}
 
 }

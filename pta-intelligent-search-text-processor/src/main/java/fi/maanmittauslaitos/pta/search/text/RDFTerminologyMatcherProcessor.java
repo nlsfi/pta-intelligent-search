@@ -1,7 +1,6 @@
 package fi.maanmittauslaitos.pta.search.text;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -171,15 +170,18 @@ public class RDFTerminologyMatcherProcessor implements TextProcessor {
 	}
 	
 	@Override
-	public List<String> process(String str) {
-		String stemmed = stem(str);
-		List<String> ret = getDict().get(stemmed);
+	public List<String> process(List<String> input) {
+		List<String> ret = new ArrayList<>();
 		
-		if (ret == null) {
-			return Collections.emptyList();
-		} else {
-			return new ArrayList<>(ret);
+		for (String str : input) {
+			String stemmed = stem(str);
+			List<String> tmp = getDict().get(stemmed);
+			
+			if (tmp != null) {
+				ret.addAll(tmp);
+			}
 		}
+		return ret;
 	}
 
 }

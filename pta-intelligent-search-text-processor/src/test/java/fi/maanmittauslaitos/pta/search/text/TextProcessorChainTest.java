@@ -2,8 +2,8 @@ package fi.maanmittauslaitos.pta.search.text;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
@@ -17,8 +17,12 @@ public class TextProcessorChainTest {
 		chain.getChain().add(new TextProcessor() {
 			
 			@Override
-			public List<String> process(String str) {
-				return Collections.singletonList(str+"#");
+			public List<String> process(List<String> str) {
+				List<String> ret = new ArrayList<>();
+				for (String tmp : str) {
+					ret.add(tmp+"#");
+				}
+				return ret;
 			}
 		});
 		
@@ -34,8 +38,13 @@ public class TextProcessorChainTest {
 		chain.getChain().add(new TextProcessor() {
 			
 			@Override
-			public List<String> process(String str) {
-				return Arrays.asList(str+"1", str+"2");
+			public List<String> process(List<String> str) {
+				List<String> ret = new ArrayList<>();
+				for (String tmp : str) {
+					ret.add(tmp+"1");
+					ret.add(tmp+"2");
+				}
+				return ret;
 			}
 		});
 		
@@ -52,16 +61,26 @@ public class TextProcessorChainTest {
 		chain.getChain().add(new TextProcessor() {
 			
 			@Override
-			public List<String> process(String str) {
-				return Arrays.asList(str+"-1", str+"-2");
+			public List<String> process(List<String> str) {
+				List<String> ret = new ArrayList<>();
+				for (String tmp : str) {
+					ret.add(tmp+"-1");
+					ret.add(tmp+"-2");
+				}
+				return ret;
 			}
 		});
 		
 		chain.getChain().add(new TextProcessor() {
 			
 			@Override
-			public List<String> process(String str) {
-				return Arrays.asList(str+"-1", str+"-2");
+			public List<String> process(List<String> str) {
+				List<String> ret = new ArrayList<>();
+				for (String tmp : str) {
+					ret.add(tmp+"-1");
+					ret.add(tmp+"-2");
+				}
+				return ret;
 			}
 		});
 		

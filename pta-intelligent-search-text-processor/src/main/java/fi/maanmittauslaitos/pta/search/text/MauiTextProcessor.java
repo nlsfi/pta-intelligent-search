@@ -141,6 +141,16 @@ public class MauiTextProcessor implements TextProcessor {
 	}
 	
 	@Override
+	public List<String> process(List<String> str) {
+		List<String> ret = new ArrayList<>();
+		
+		for (String tmp : str) {
+			ret.addAll(process(tmp));
+		}
+		
+		return ret;
+	}
+	
 	public List<String> process(String str) {
 		if (logger.isTraceEnabled()) {
 			logger.trace("Process input: "+str);

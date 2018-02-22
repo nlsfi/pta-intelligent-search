@@ -6,17 +6,17 @@ import java.util.List;
 public class TextSplitterProcessor implements TextProcessor {
 
 	@Override
-	public List<String> process(String str) {
-		
-		
-		String [] words = str.split("(?U)\\W+");
-		
+	public List<String> process(List<String> input) {
 		List<String> ret = new ArrayList<>();
 		
-		for (String w : words) {
-			if (w == null || w.length() == 0) continue;
+		for (String str : input) {
+			String [] words = str.split("(?U)\\W+");
 			
-			ret.add(w);
+			for (String w : words) {
+				if (w == null || w.length() == 0) continue;
+				
+				ret.add(w);
+			}
 		}
 		
 		return ret;

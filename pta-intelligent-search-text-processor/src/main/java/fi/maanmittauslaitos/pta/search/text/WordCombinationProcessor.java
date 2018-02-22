@@ -65,6 +65,7 @@ public class WordCombinationProcessor implements TextProcessor {
 			return dict;
 		}
 		
+		logger.info("Building dict from RDF model");
 		maxCombinationLengthWords = calculateMaximumNumberOfWordsInModel();
 		dict = createDict();
 		logger.debug("Dict contained "+dict.size()+" word combinations, with a maximum length of "+maxCombinationLengthWords+" words");
@@ -163,12 +164,6 @@ public class WordCombinationProcessor implements TextProcessor {
 	}
 
 	@Override
-	public List<String> process(String str) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	// TODO: this must be moved to be part of the interface
 	public List<String> process(List<String> str) {
 		List<String> ret = new ArrayList<>();
 		

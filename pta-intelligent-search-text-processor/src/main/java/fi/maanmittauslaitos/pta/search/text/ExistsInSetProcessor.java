@@ -1,6 +1,6 @@
 package fi.maanmittauslaitos.pta.search.text;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -17,11 +17,15 @@ public class ExistsInSetProcessor implements TextProcessor {
 	}
 	
 	@Override
-	public List<String> process(String str) {
-		if (getAcceptedStrings().contains(str)) {
-			return Collections.singletonList(str);
+	public List<String> process(List<String> input) {
+		List<String> ret = new ArrayList<>();
+		
+		for (String str : input) {
+			if (getAcceptedStrings().contains(str)) {
+				ret.add(str);
+			}
 		}
-		return Collections.emptyList();
+		return ret;
 	}
 
 }

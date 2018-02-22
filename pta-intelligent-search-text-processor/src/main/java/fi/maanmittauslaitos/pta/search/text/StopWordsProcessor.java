@@ -1,7 +1,7 @@
 package fi.maanmittauslaitos.pta.search.text;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,11 +24,14 @@ public class StopWordsProcessor implements TextProcessor {
 	}
 	
 	@Override
-	public List<String> process(String str) {
-		if (stopwords.contains(str.toLowerCase())) {
-			return Collections.emptyList();
+	public List<String> process(List<String> input) {
+		List<String> ret = new ArrayList<>();
+		for (String str : input) {
+			if (!stopwords.contains(str.toLowerCase())) {
+				ret.add(str);
+			}
 		}
-		return Collections.singletonList(str);
+		return ret;
 	}
 
 }

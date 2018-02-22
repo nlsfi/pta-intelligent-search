@@ -26,7 +26,7 @@ public class RDFTerminologyMatcherProcessorTest {
 		processor.setModel(model);
 		processor.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
 		
-		List<String> result = processor.process("kissa");
+		List<String> result = processor.process(Arrays.asList("kissa"));
 		
 		assertEquals(2, result.size());
 		assertTrue(result.contains("http://www.yso.fi/onto/ysa/Y96241"));
@@ -43,7 +43,7 @@ public class RDFTerminologyMatcherProcessorTest {
 		processor.setModel(model);
 		processor.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
 		
-		List<String> result = processor.process("kissat");
+		List<String> result = processor.process(Arrays.asList("kissat"));
 		
 		assertEquals(1, result.size());
 		assertTrue(result.contains("http://www.yso.fi/onto/ysa/Y96241"));
@@ -60,7 +60,7 @@ public class RDFTerminologyMatcherProcessorTest {
 		processor.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
 		processor.setStemmer(new FinnishShowballStemmerImpl());
 		
-		List<String> result = processor.process("kissat");
+		List<String> result = processor.process(Arrays.asList("kissat"));
 		
 		assertEquals(2, result.size());
 		assertTrue(result.contains("http://www.yso.fi/onto/ysa/Y96241"));
@@ -80,12 +80,12 @@ public class RDFTerminologyMatcherProcessorTest {
 		
 		List<String> result;
 		
-		result = processor.process("villages");
+		result = processor.process(Arrays.asList("villages"));
 		
 		assertEquals(1, result.size());
 		assertTrue(result.contains("http://www.yso.fi/onto/koko/p32440"));
 		
-		result = processor.process("kylät");
+		result = processor.process(Arrays.asList("kylät"));
 		
 		assertEquals(1, result.size());
 		assertTrue(result.contains("http://www.yso.fi/onto/koko/p32440"));
@@ -104,11 +104,11 @@ public class RDFTerminologyMatcherProcessorTest {
 		
 		List<String> result;
 		
-		result = processor.process("villages");
+		result = processor.process(Arrays.asList("villages"));
 		
 		assertEquals(0, result.size());
 		
-		result = processor.process("kylät");
+		result = processor.process(Arrays.asList("kylät"));
 		
 		assertEquals(1, result.size());
 		assertTrue(result.contains("http://www.yso.fi/onto/koko/p32440"));

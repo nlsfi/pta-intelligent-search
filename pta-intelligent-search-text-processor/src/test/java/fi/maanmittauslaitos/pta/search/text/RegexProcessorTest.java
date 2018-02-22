@@ -2,6 +2,7 @@ package fi.maanmittauslaitos.pta.search.text;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -16,7 +17,7 @@ public class RegexProcessorTest {
 		processor.setIncludeMatches(true);
 		processor.setPattern(Pattern.compile("^abc$"));
 		
-		List<String> result = processor.process("abc");
+		List<String> result = processor.process(Arrays.asList("abc"));
 		assertArrayEquals(new String[] { "abc" }, result.toArray());
 	}
 
@@ -27,7 +28,7 @@ public class RegexProcessorTest {
 		processor.setIncludeMatches(false);
 		processor.setPattern(Pattern.compile("^abc$"));
 		
-		List<String> result = processor.process("abc");
+		List<String> result = processor.process(Arrays.asList("abc"));
 		assertEquals(0, result.size());
 	}
 	
@@ -38,7 +39,7 @@ public class RegexProcessorTest {
 		processor.setIncludeMatches(false);
 		processor.setPattern(Pattern.compile("^abc$"));
 		
-		List<String> result = processor.process("def");
+		List<String> result = processor.process(Arrays.asList("def"));
 		assertArrayEquals(new String[] { "def" }, result.toArray());
 	}
 	
@@ -50,7 +51,7 @@ public class RegexProcessorTest {
 		processor.setIncludeMatches(true);
 		processor.setPattern(Pattern.compile("^abc$"));
 		
-		List<String> result = processor.process("def");
+		List<String> result = processor.process(Arrays.asList("def"));
 		assertEquals(0, result.size());
 	}
 	
