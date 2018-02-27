@@ -2,13 +2,23 @@ package fi.maanmittauslaitos.pta.search;
 
 import java.io.InputStream;
 
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink.IndexResult;
 import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
 
-public class Harvester {
+@SpringBootApplication
+public class Harvester implements CommandLineRunner {
 	public static void main(String[] args) throws Exception
-	{		
+	{
+		SpringApplication.run(Harvester.class, args);
+	}
+	
+	@Override
+	public void run(String... args) throws Exception {
 		HarvesterConfig config = new HarvesterConfig();
 		
 		HarvesterSource source = config.getCSWSource();

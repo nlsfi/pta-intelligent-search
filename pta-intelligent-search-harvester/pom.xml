@@ -5,24 +5,32 @@
 	<artifactId>pta-intelligent-search-harvester</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.8.RELEASE</version>
+	</parent>
 
 	<properties>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>nls.fi</groupId>
 			<artifactId>pta-intelligent-search-text-processor</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.9.2</version>
 		</dependency>
+		 
 
 		<dependency>
 			<groupId>log4j</groupId>
@@ -30,19 +38,27 @@
 			<version>1.2.17</version>
 		</dependency>
 
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.25</version>
 		</dependency>
 
 		<!-- Test dependencies -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
+	<build>
+		<plugins>
+			<!-- Package as an executable jar -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>
