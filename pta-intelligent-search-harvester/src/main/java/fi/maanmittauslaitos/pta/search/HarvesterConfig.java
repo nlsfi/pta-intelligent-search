@@ -99,7 +99,7 @@ public class HarvesterConfig {
 			mauiTextProcessor.setMauiStopWords(new StopwordsFinnish());
 			
 			mauiTextProcessor.setModelResource("/paikkatietohakemisto-pto.model");
-			mauiTextProcessor.setVocabularyName("./pto-skos.rdf.gz");
+			mauiTextProcessor.setVocabularyName("pto-skos.rdf.gz");
 			mauiTextProcessor.setVocabularyFormat("skos");
 			mauiTextProcessor.setLanguage("fi");
 			
