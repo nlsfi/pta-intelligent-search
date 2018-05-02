@@ -37,15 +37,32 @@ public class ISOMetadataExtractorConfigurationFactory {
 		
 		List<FieldExtractorConfiguration> extractors = configuration.getFieldExtractors();
 		
-		
+		// Title extractors
 		extractors.add(createXPathExtractor(
 				ISOMetadataFields.TITLE,
 				FieldExtractorType.FIRST_MATCHING_VALUE,
 				"(" +
-				  "//gmd:identificationInfo/*/gmd:citation/*/gmd:title/*[self::gco:CharacterString]" +
-				  "|" +
 				  "//gmd:identificationInfo/*/gmd:citation/*/gmd:title//gmd:LocalisedCharacterString[@locale='#FI']" +
+				  "|" +
+				  "//gmd:identificationInfo/*/gmd:citation/*/gmd:title/*[self::gco:CharacterString]" +
 				")/text()"));
+
+		extractors.add(createXPathExtractor(
+				ISOMetadataFields.TITLE_SV,
+				FieldExtractorType.FIRST_MATCHING_VALUE,
+				"(" +
+				  "//gmd:identificationInfo/*/gmd:citation/*/gmd:title//gmd:LocalisedCharacterString[@locale='#SV']" +
+				")/text()"));
+
+		extractors.add(createXPathExtractor(
+				ISOMetadataFields.TITLE_EN,
+				FieldExtractorType.FIRST_MATCHING_VALUE,
+				"(" +
+				  "//gmd:identificationInfo/*/gmd:citation/*/gmd:title//gmd:LocalisedCharacterString[@locale='#EN']" +
+				")/text()"));
+
+		// Abstract extractors
+		
 		
 		
 		return getDocumentProcessorFactory().createProcessor(configuration);

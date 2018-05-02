@@ -38,24 +38,7 @@ public class ISOMetadataExtractorTest {
 		
 		String titleValue = document.getValue(ISOMetadataFields.TITLE, String.class);
 		assertEquals("Maastotietokanta", titleValue);
-	}
-
-
-	@Test
-	public void testTitleSV() throws Exception {
-		Document document = createMaastotietokantaDocument();
 		
-		String titleValue = document.getValue(ISOMetadataFields.TITLE_SV, String.class);
-		assertEquals("Terrängdatabas", titleValue);
-	}
-
-
-	@Test
-	public void testTitleEN() throws Exception {
-		Document document = createMaastotietokantaDocument();
-		
-		String titleValue = document.getValue(ISOMetadataFields.TITLE_EN, String.class);
-		assertEquals("Topographic Database", titleValue);
 	}
 
 }

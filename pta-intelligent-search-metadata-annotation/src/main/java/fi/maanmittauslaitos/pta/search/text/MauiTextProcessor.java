@@ -14,8 +14,6 @@ import com.entopix.maui.stemmers.Stemmer;
 import com.entopix.maui.stopwords.Stopwords;
 import com.entopix.maui.util.Topic;
 import com.entopix.maui.vocab.Vocabulary;
-import com.entopix.maui.vocab.VocabularyStoreFactory;
-import com.entopix.maui.vocab.VocabularyStore_HT;
 
 import weka.core.Attribute;
 import weka.core.FastVector;
@@ -106,9 +104,7 @@ public class MauiTextProcessor implements TextProcessor {
 	
 	public void init() {
 		logger.info("Initializing");
-		// Ewwww...
-		VocabularyStoreFactory.setPrefferedVocabStoreType(VocabularyStore_HT.class);
-
+		
 		InputStream is = MauiTextProcessor.class.getResourceAsStream(getModelResource());
 		try (ObjectInputStream in = new ObjectInputStream(is)) {
 			this.model = (MauiFilter) in.readObject();

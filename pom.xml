@@ -10,5 +10,6 @@
 		<module>pta-intelligent-search-harvester</module>
 		<module>pta-intelligent-search-document-processor</module>
 		<module>pta-intelligent-search-metadata-extractor</module>
+		<module>pta-intelligent-search-metadata-annotation</module>
 	</modules>
 </project>

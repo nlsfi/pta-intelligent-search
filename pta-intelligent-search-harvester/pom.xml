@@ -22,7 +22,7 @@
 		</dependency>
 		<dependency>
 			<groupId>nls.fi</groupId>
-			<artifactId>pta-intelligent-search-document-processor</artifactId>
+			<artifactId>pta-intelligent-search-metadata-annotation</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		
