@@ -1,4 +1,4 @@
-package fi.maanmittauslaitos.pta.search;
+package fi.maanmittauslaitos.pta.documentprocessor;
 
 import java.util.ArrayList;
 import java.util.Collection;

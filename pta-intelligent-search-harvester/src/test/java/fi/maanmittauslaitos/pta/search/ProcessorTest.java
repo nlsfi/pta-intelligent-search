@@ -12,6 +12,7 @@ import org.eclipse.rdf4j.rio.Rio;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import fi.maanmittauslaitos.pta.documentprocessor.Document;
 import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessingConfiguration;
 import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessorFactory;

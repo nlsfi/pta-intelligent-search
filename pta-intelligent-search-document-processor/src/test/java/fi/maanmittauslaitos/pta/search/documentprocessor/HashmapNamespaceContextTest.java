@@ -1,4 +1,4 @@
-package fi.maanmittauslaitos.pta.search.xpath;
+package fi.maanmittauslaitos.pta.search.documentprocessor;
 
 import static org.junit.Assert.*;
 

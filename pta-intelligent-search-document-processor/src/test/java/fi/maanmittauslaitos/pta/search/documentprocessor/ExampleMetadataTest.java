@@ -1,4 +1,4 @@
-package fi.maanmittauslaitos.pta.search.xpath;
+package fi.maanmittauslaitos.pta.search.documentprocessor;
 
 import static org.junit.Assert.*;
 
@@ -11,12 +11,12 @@ import java.util.regex.Pattern;
 import org.junit.Before;
 import org.junit.Test;
 
+import fi.maanmittauslaitos.pta.documentprocessor.Document;
 import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessingConfiguration;
 import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessorFactory;
 import fi.maanmittauslaitos.pta.documentprocessor.XPathFieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
-import fi.maanmittauslaitos.pta.search.Document;
 import fi.maanmittauslaitos.pta.search.text.ExistsInSetProcessor;
 import fi.maanmittauslaitos.pta.search.text.RegexProcessor;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;

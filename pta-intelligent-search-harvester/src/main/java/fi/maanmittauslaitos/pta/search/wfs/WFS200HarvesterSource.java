@@ -20,13 +20,13 @@ import org.apache.log4j.Logger;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import fi.maanmittauslaitos.pta.documentprocessor.Document;
 import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessingConfiguration;
 import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessingException;
 import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessorFactory;
 import fi.maanmittauslaitos.pta.documentprocessor.XPathFieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
-import fi.maanmittauslaitos.pta.search.Document;
 import fi.maanmittauslaitos.pta.search.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.HarvestingException;
 
