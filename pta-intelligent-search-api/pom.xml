@@ -29,7 +29,7 @@
 		</dependency>
 		<dependency>
 			<groupId>nls.fi</groupId>
-			<artifactId>pta-intelligent-search-text-processor</artifactId>
+			<artifactId>pta-intelligent-search-document-processor</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>

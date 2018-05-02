@@ -8,6 +8,6 @@
 	<modules>
 		<module>pta-intelligent-search-api</module>
 		<module>pta-intelligent-search-harvester</module>
-		<module>pta-intelligent-search-text-processor</module>
+		<module>pta-intelligent-search-document-processor</module>
 	</modules>
 </project>
