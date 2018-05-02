@@ -1,4 +1,4 @@
-package fi.maanmittauslaitos.pta.documentprocessor;
+package fi.maanmittauslaitos.pta.search.documentprocessor;
 
 public abstract class AbstractFieldExtractorConfiguration implements FieldExtractorConfiguration {
 	private String field;

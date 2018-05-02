@@ -9,12 +9,12 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import fi.maanmittauslaitos.pta.documentprocessor.Document;
-import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessingConfiguration;
-import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessor;
-import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessorFactory;
-import fi.maanmittauslaitos.pta.documentprocessor.XPathFieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
+import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessorFactory;
+import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration;
+import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 import fi.maanmittauslaitos.pta.search.text.TextProcessor;
 

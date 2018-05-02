@@ -1,6 +1,6 @@
 package fi.maanmittauslaitos.pta.search.index;
 
-import fi.maanmittauslaitos.pta.documentprocessor.Document;
+import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
 
 public interface DocumentSink {
 	public IndexResult indexDocument(Document doc) throws SinkProcessingException;

@@ -13,12 +13,12 @@ import org.apache.commons.io.IOUtils;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.vocabulary.SKOS;
 
-import fi.maanmittauslaitos.pta.documentprocessor.Document;
-import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessingConfiguration;
-import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessor;
-import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessorFactory;
-import fi.maanmittauslaitos.pta.documentprocessor.XPathFieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
+import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessorFactory;
+import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration;
+import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 

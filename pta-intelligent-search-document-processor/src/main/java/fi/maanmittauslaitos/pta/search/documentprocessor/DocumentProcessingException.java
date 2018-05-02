@@ -1,4 +1,4 @@
-package fi.maanmittauslaitos.pta.documentprocessor;
+package fi.maanmittauslaitos.pta.search.documentprocessor;
 
 public class DocumentProcessingException extends Exception {
 	private static final long serialVersionUID = 1L;

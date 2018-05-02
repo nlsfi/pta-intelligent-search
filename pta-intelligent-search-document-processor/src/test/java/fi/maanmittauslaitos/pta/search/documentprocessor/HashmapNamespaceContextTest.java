@@ -9,7 +9,7 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import fi.maanmittauslaitos.pta.documentprocessor.HashmapNamespaceContextImpl;
+import fi.maanmittauslaitos.pta.search.documentprocessor.HashmapNamespaceContextImpl;
 
 public class HashmapNamespaceContextTest {
 	private HashmapNamespaceContextImpl ctx;

@@ -1,4 +1,4 @@
-package fi.maanmittauslaitos.pta.documentprocessor;
+package fi.maanmittauslaitos.pta.search.documentprocessor;
 
 import javax.xml.xpath.XPath;
 

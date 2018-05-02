@@ -1,4 +1,4 @@
-package fi.maanmittauslaitos.pta.documentprocessor;
+package fi.maanmittauslaitos.pta.search.documentprocessor;
 
 import java.util.Collections;
 import java.util.HashMap;

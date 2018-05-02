@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import fi.maanmittauslaitos.pta.documentprocessor.Document;
+import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
 
 public class ElasticsearchDocumentSink implements DocumentSink {
 	private static Logger logger = Logger.getLogger(ElasticsearchDocumentSink.class);

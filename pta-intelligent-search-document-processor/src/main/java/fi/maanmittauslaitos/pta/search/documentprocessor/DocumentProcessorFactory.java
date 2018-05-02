@@ -1,4 +1,4 @@
-package fi.maanmittauslaitos.pta.documentprocessor;
+package fi.maanmittauslaitos.pta.search.documentprocessor;
 
 import java.io.InputStream;
 import java.util.List;
