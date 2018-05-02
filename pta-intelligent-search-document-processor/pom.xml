@@ -31,6 +31,7 @@
 			<version>${rdf4j.version}</version>
 		</dependency>
 
+		<!-- stemmers need to be moved to another project -->
 		<dependency>
 			<groupId>com.github.rholder</groupId>
 			<artifactId>snowball-stemmer</artifactId>
