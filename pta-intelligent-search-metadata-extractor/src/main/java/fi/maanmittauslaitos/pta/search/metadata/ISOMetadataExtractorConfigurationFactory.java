@@ -37,6 +37,12 @@ public class ISOMetadataExtractorConfigurationFactory {
 		
 		List<FieldExtractorConfiguration> extractors = configuration.getFieldExtractors();
 		
+		// Id extractor
+		extractors.add(createXPathExtractor(
+				ISOMetadataFields.ID,
+				FieldExtractorType.FIRST_MATCHING_VALUE,
+				"//gmd:fileIdentifier/*/text()"));
+		
 		// Title extractors
 		extractors.add(createXPathExtractor(
 				ISOMetadataFields.TITLE,
@@ -62,6 +68,35 @@ public class ISOMetadataExtractorConfigurationFactory {
 				")/text()"));
 
 		// Abstract extractors
+		extractors.add(createXPathExtractor(
+				ISOMetadataFields.ABSTRACT,
+				FieldExtractorType.ALL_MATCHING_VALUES,
+				"(" +
+				  "//gmd:identificationInfo/*/gmd:abstract//gmd:LocalisedCharacterString[@locale='#FI']" +
+				  "|" +
+				  "//gmd:identificationInfo/*/gmd:abstract/*[self::gco:CharacterString]" +
+				")/text()"));
+		
+		extractors.add(createXPathExtractor(
+				ISOMetadataFields.ABSTRACT_SV,
+				FieldExtractorType.ALL_MATCHING_VALUES,
+				"(" +
+				  "//gmd:identificationInfo/*/gmd:abstract//gmd:LocalisedCharacterString[@locale='#SV']" +
+				")/text()"));
+
+		extractors.add(createXPathExtractor(
+				ISOMetadataFields.ABSTRACT_EN,
+				FieldExtractorType.ALL_MATCHING_VALUES,
+				"(" +
+				  "//gmd:identificationInfo/*/gmd:abstract//gmd:LocalisedCharacterString[@locale='#EN']" +
+				")/text()"));
+
+		
+		
+		
+		//		"(" +
+		//		  "//gmd:identificationInfo/*/gmd:abstract/*/gmd:title//gmd:LocalisedCharacterString[@locale='#EN']" +
+		//		")/text()"));
 		
 		
 		
