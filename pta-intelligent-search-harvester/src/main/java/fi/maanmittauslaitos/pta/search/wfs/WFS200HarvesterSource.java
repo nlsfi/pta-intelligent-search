@@ -20,15 +20,15 @@ import org.apache.log4j.Logger;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessingConfiguration;
+import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessingException;
+import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessor;
+import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessorFactory;
+import fi.maanmittauslaitos.pta.documentprocessor.XPathFieldExtractorConfiguration;
+import fi.maanmittauslaitos.pta.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
 import fi.maanmittauslaitos.pta.search.Document;
 import fi.maanmittauslaitos.pta.search.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.HarvestingException;
-import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessingConfiguration;
-import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessingException;
-import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
-import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessorFactory;
-import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration.FieldExtractorType;
 
 public class WFS200HarvesterSource extends HarvesterSource {
 	private static Logger logger = Logger.getLogger(WFS200HarvesterSource.class);

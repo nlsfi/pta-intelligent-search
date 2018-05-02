@@ -22,6 +22,12 @@ import org.eclipse.rdf4j.rio.Rio;
 import com.entopix.maui.stemmers.FinnishStemmer;
 import com.entopix.maui.stopwords.StopwordsFinnish;
 
+import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessingConfiguration;
+import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessor;
+import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessorFactory;
+import fi.maanmittauslaitos.pta.documentprocessor.MockWFSFeatureTypeFieldExtractorConfiguration;
+import fi.maanmittauslaitos.pta.documentprocessor.XPathFieldExtractorConfiguration;
+import fi.maanmittauslaitos.pta.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
 import fi.maanmittauslaitos.pta.search.csw.CSWHarvesterSource;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import fi.maanmittauslaitos.pta.search.index.ElasticsearchDocumentSink;
@@ -34,12 +40,6 @@ import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 import fi.maanmittauslaitos.pta.search.text.TextSplitterProcessor;
 import fi.maanmittauslaitos.pta.search.text.WordCombinationProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
-import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessingConfiguration;
-import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
-import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessorFactory;
-import fi.maanmittauslaitos.pta.search.xpath.MockWFSFeatureTypeFieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration.FieldExtractorType;
 
 public class HarvesterConfig {
 	public HarvesterSource getCSWSource() {

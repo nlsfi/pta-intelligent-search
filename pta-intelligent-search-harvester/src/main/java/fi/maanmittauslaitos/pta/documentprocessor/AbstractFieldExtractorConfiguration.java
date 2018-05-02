@@ -1,4 +1,4 @@
-package fi.maanmittauslaitos.pta.search.xpath;
+package fi.maanmittauslaitos.pta.documentprocessor;
 
 public abstract class AbstractFieldExtractorConfiguration implements FieldExtractorConfiguration {
 	private String field;

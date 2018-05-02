@@ -12,16 +12,16 @@ import org.eclipse.rdf4j.rio.Rio;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessingConfiguration;
+import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessor;
+import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessorFactory;
+import fi.maanmittauslaitos.pta.documentprocessor.XPathFieldExtractorConfiguration;
+import fi.maanmittauslaitos.pta.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 import fi.maanmittauslaitos.pta.search.text.StopWordsProcessor;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 import fi.maanmittauslaitos.pta.search.text.TextSplitterProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.FinnishShowballStemmerImpl;
-import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessingConfiguration;
-import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
-import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessorFactory;
-import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration.FieldExtractorType;
 
 public class ProcessorTest {
 

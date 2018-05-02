@@ -13,13 +13,13 @@ import org.apache.commons.io.IOUtils;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.vocabulary.SKOS;
 
+import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessingConfiguration;
+import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessor;
+import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessorFactory;
+import fi.maanmittauslaitos.pta.documentprocessor.XPathFieldExtractorConfiguration;
+import fi.maanmittauslaitos.pta.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
-import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessingConfiguration;
-import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessor;
-import fi.maanmittauslaitos.pta.search.xpath.DocumentProcessorFactory;
-import fi.maanmittauslaitos.pta.search.xpath.XPathFieldExtractorConfiguration.FieldExtractorType;
 
 /**
  * This class is used to produce training data for maui. It uses an input directory of metadata xml and uses

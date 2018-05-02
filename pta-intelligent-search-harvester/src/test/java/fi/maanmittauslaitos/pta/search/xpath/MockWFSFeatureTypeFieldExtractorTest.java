@@ -9,6 +9,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessingConfiguration;
+import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessor;
+import fi.maanmittauslaitos.pta.documentprocessor.DocumentProcessorFactory;
+import fi.maanmittauslaitos.pta.documentprocessor.MockWFSFeatureTypeFieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.Document;
 
 public class MockWFSFeatureTypeFieldExtractorTest {
