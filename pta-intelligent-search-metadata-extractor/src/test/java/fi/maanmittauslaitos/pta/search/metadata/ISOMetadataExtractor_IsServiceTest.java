@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
 
-public class ISOMetadataExtractor_IsService extends BaseMetadataExtractorTest {
+public class ISOMetadataExtractor_IsServiceTest extends BaseMetadataExtractorTest {
 
 	@Test
 	public void testStatFiWFSIsService() throws Exception {

@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
 
-public class ISOMetadataExtractor_IsDataset extends BaseMetadataExtractorTest {
+public class ISOMetadataExtractor_IsDatasetTest extends BaseMetadataExtractorTest {
 
 	@Test
 	public void testMaastotietokantaIsDataset() throws Exception {
