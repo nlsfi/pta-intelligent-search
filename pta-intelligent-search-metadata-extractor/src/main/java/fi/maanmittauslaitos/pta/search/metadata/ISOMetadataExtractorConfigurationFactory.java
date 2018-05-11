@@ -91,16 +91,26 @@ public class ISOMetadataExtractorConfigurationFactory {
 				  "//gmd:identificationInfo/*/gmd:abstract//gmd:LocalisedCharacterString[@locale='#EN']" +
 				")/text()"));
 
-		// Service or dataset
+		// isService 
 		extractors.add(createXPathExtractor(
 				ISOMetadataFields.IS_SERVICE,
 				FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE,
 				"//gmd:identificationInfo/srv:SV_ServiceIdentification"));
 		
+		// isDataset
 		extractors.add(createXPathExtractor(
 				ISOMetadataFields.IS_DATASET,
 				FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE,
 				"//gmd:identificationInfo/gmd:MD_DataIdentification"));
+		
+		// isAvoindata
+		extractors.add(createXPathExtractor(
+				ISOMetadataFields.IS_AVOINDATA,
+				FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE,
+				"//gmd:identificationInfo/*/gmd:descriptiveKeywords/*/gmd:keyword/*[text()='avoindata.fi']"));
+
+		
+		
 		
 		
 		return getDocumentProcessorFactory().createProcessor(configuration);

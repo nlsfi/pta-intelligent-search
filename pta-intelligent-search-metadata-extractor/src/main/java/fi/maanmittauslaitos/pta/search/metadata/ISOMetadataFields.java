@@ -13,5 +13,6 @@ public class ISOMetadataFields {
 	
 	public static final String IS_SERVICE = "isService";
 	public static final String IS_DATASET = "isDataset";
+	public static final String IS_AVOINDATA = "isAvoindata";
 	
 }
