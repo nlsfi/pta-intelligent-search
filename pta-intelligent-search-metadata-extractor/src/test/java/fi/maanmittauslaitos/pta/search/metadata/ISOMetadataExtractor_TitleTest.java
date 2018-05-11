@@ -34,4 +34,30 @@ public class ISOMetadataExtractor_TitleTest extends BaseMetadataExtractorTest {
 		assertEquals("Topographic Database", titleValue);
 	}
 
+
+	@Test
+	public void testStatFiWFSTitle() throws Exception {
+		Document document = createStatFiWFS();
+		
+		String titleValue = document.getValue(ISOMetadataFields.TITLE, String.class);
+		assertEquals("Tilastokeskuksen palvelurajapinta (WFS)", titleValue);
+	}
+
+
+	@Test
+	public void testStatFiWFSTitleSV() throws Exception {
+		Document document = createStatFiWFS();
+		
+		String titleValue = document.getValue(ISOMetadataFields.TITLE_SV, String.class);
+		assertEquals("Statistikcentralens gränssnittservicen (WFS)", titleValue);
+	}
+
+
+	@Test
+	public void testStatFiWFSTitleEN() throws Exception {
+		Document document = createStatFiWFS();
+		
+		String titleValue = document.getValue(ISOMetadataFields.TITLE_EN, String.class);
+		assertEquals("Statistics Finland's Web Service (WFS)", titleValue);
+	}
 }

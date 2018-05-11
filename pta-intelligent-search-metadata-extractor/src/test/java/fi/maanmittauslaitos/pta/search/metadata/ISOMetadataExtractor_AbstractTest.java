@@ -62,4 +62,76 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 				titleValue);
 	}
 
+	@Test
+	public void testStatFiWFSAbstract() throws Exception {
+		Document document = createStatFiWFS();
+
+		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT, String.class).size());
+
+		String titleValue = document.getValue(ISOMetadataFields.ABSTRACT, String.class);
+		assertEquals(
+				"Tilastokeskuksen palvelurajapinta on WFS-rajapintapalvelu, jonka kautta on saatavilla seuraavat INSPIRE:n ja paikkatietolain velvoittamat aineistot:\n"
+						+ "1) Tilastoyksiköt: Tilastoissa käytetyt aluejaot (kunta, suuralue, maakunta, seutukunta, AVI-alue, ELY-alue)\n"
+						+ "2) Yleishyödylliset ja julkiset palvelut: Oppilaitokset (peruskoulut, lukiot ja yhtenäiskoulut)\n"
+						+ "3) Tuotanto- ja teollisuuslaitokset: Tuotanto- ja teollisuuslaitokset\n"
+						+ "4) Väestöjakauma tilastoissa käytetyillä aluejaoilla. \n" 
+						+ "\n"
+						+ "Muita rajapinnalla julkaistuja aineistoja\n" + "- Väestöjakauma 5 km x 5 km -ruuduittain\n"
+						+ "- Postinumeroalueittainen avoin tieto (Paavo) \n"
+						+ "\n"
+						+ "Aineistoja hallinnoi Tilastokeskus. Palvelun käyttö on maksutonta eikä vaadi autentikointia eli tunnistautumista käyttäjätunnuksen ja salasanan avulla.\n"
+						+ "\n" 
+						+ "Tietoja käytettäessä on noudatettava yleisiä käyttöehtoja\n"
+						+ "(http://tilastokeskus.fi/org/lainsaadanto/copyright.html).",
+				titleValue);
+	}
+
+	@Test
+	public void testStatFiWFSAbstractSV() throws Exception {
+		Document document = createStatFiWFS();
+
+		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT_SV, String.class).size());
+
+		String titleValue = document.getValue(ISOMetadataFields.ABSTRACT_SV, String.class);
+		assertEquals(
+				"Statistikcentralens servicegränssnitt är gränssnittsservicen WFS. Följande material, som motsvarar förpliktelserna i INSPIRE och i lagen om en infrastruktur för geografisk information, är tillgängligt i servicen:\n"
+						+ "\n"
+						+ "1) Statistiska enheter: Områdesindelningar i statistiken (kommun, storområde, landskap, ekonomisk region, regionförvaltningsområde, ELY-centralområde samt rutfält 1 km x 1 km\n"
+						+ "2) Allmännyttiga och offentliga tjänster: Läroanstalter (grundskolor, gymnasier och enhetsskolor)\n"
+						+ "3) Produktions- och industrianläggningar: Produktions- och industrianläggningar\n"
+						+ "4) Befolkningsfördelning enligt områdesindelningen i statistiken och per 1 km x 1 km ruta.\n"
+						+ "\n" 
+						+ "- Befolkningsfördelning per 5 km x 5 km ruta\n"
+						+ "- Öppen data efter postnummerområde (Paavo)\n" + "\n"
+						+ "Materialet förvaltas av Statistikcentralen. Tjänsten är avgiftsfri och kräver inte autentisering, dvs. identifiering med användaridentifikation och lösenord.\n"
+						+ "\n" 
+						+ "Då uppgifterna används, ska de allmänna användarvillkoren iakttas\n"
+						+ "(http://tilastokeskus.fi/org/lainsaadanto/copyright_sv.html).",
+				titleValue);
+	}
+
+	@Test
+	public void testStatFiWFSAbstractEN() throws Exception {
+		Document document = createStatFiWFS();
+
+		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT_EN, String.class).size());
+
+		String titleValue = document.getValue(ISOMetadataFields.ABSTRACT_EN, String.class);
+		assertEquals(
+				"Statistics Finland's Web Service is a WFS interface service through which the following data required by INSPIRE and national legislation on geographic information are available:\n"
+						+ "\n"
+						+ "1) Statistical units: Regional divisions (municipality, major region, region, sub-regional unit, Regional State Administrative Agency (AVI), Centre for Economic Development, Transport and the Environment (ELY) and grid 1 km x 1 km\n"
+						+ "2) Non-profit and public services: Educational institutions (comprehensive schools, upper secondary general schools)\n"
+						+ "3) Production and industrial facilities: Production and industrial facilities\n"
+						+ "4) Population distribution by the regional divisions used in statistics and by 1 km x 1 km grids.\n"
+						+ "\n" 
+						+ "Other data published:\n" + "- Population distribution by 5 km x 5 km grids\n"
+						+ "- Open data by postal code area (Paavo)\n"
+						+ "\n"
+						+ "The data are administered by Statistics Finland. The service is free of charge and does not require authentication or identification with a user ID and password.\n"
+						+ "\n" 
+						+ "The general Terms of Use must be observed when using the data \n"
+						+ "(http://tilastokeskus.fi/org/lainsaadanto/copyright_en.html).",
+				titleValue);
+	}
 }
