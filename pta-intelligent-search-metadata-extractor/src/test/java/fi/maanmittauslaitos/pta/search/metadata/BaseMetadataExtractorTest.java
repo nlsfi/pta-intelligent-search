@@ -27,5 +27,15 @@ public abstract class BaseMetadataExtractorTest {
 		}
 		return document;
 	}
+	
+
+	protected Document createStatFiWFS()
+			throws DocumentProcessingException, IOException, FileNotFoundException {
+		Document document;
+		try (FileInputStream fis = new FileInputStream("src/test/resources/c3c05280-b1cd-4ae6-9c1a-26a8d9f7201d.xml")) {
+			document = processor.processDocument(fis);
+		}
+		return document;
+	}
 
 }

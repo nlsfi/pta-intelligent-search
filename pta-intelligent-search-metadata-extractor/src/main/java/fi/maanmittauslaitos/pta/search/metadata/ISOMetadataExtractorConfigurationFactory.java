@@ -91,13 +91,16 @@ public class ISOMetadataExtractorConfigurationFactory {
 				  "//gmd:identificationInfo/*/gmd:abstract//gmd:LocalisedCharacterString[@locale='#EN']" +
 				")/text()"));
 
+		// Service or dataset
+		extractors.add(createXPathExtractor(
+				ISOMetadataFields.IS_SERVICE,
+				FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE,
+				"//gmd:identificationInfo/srv:SV_ServiceIdentification"));
 		
-		
-		
-		//		"(" +
-		//		  "//gmd:identificationInfo/*/gmd:abstract/*/gmd:title//gmd:LocalisedCharacterString[@locale='#EN']" +
-		//		")/text()"));
-		
+		extractors.add(createXPathExtractor(
+				ISOMetadataFields.IS_DATASET,
+				FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE,
+				"//gmd:identificationInfo/gmd:MD_DataIdentification"));
 		
 		
 		return getDocumentProcessorFactory().createProcessor(configuration);
