@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  "Tilastokeskuksen palvelurajapinta (WFS)", downloaded 2018-05-11
+  http://www.paikkatietohakemisto.fi/geonetwork/srv/api/records/c3c05280-b1cd-4ae6-9c1a-26a8d9f7201d/formatters/xml
+  -->
 <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd"
                  xmlns:gts="http://www.isotc211.org/2005/gts"
                  xmlns:xlink="http://www.w3.org/1999/xlink"
