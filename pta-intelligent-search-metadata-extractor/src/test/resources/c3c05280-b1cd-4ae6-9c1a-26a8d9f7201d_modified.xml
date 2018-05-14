@@ -5,6 +5,7 @@
   
   This has been modified to allow more test cases. Following changes have been made
    - avoindata.fi keyword has been taken out
+   - one topicCategory added (location)
   
   -->
 <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd"
@@ -362,6 +363,9 @@ Då uppgifterna används, ska de allmänna användarvillkoren iakttas
          <srv:serviceType>
             <gco:LocalName>download</gco:LocalName>
          </srv:serviceType>
+         <gmd:topicCategory>
+            <gmd:MD_TopicCategoryCode>location</gmd:MD_TopicCategoryCode>
+         </gmd:topicCategory>
          <srv:extent>
             <gmd:EX_Extent/>
          </srv:extent>

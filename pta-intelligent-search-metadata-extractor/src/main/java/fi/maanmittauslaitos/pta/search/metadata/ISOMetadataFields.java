@@ -11,6 +11,8 @@ public class ISOMetadataFields {
 	public static final String ABSTRACT_SV = "abstract_sv";
 	public static final String ABSTRACT_EN = "abstract_en";
 	
+	public static final String TOPIC_CATEGORIES = "topicCategories";
+	
 	public static final String IS_SERVICE = "isService";
 	public static final String IS_DATASET = "isDataset";
 	public static final String IS_AVOINDATA = "isAvoindata";

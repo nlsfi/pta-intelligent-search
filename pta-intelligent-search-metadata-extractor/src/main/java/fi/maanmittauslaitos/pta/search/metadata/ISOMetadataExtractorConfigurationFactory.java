@@ -109,9 +109,11 @@ public class ISOMetadataExtractorConfigurationFactory {
 				FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE,
 				"//gmd:identificationInfo/*/gmd:descriptiveKeywords/*/gmd:keyword/*[text()='avoindata.fi']"));
 
-		
-		
-		
+		// Topic categories
+		extractors.add(createXPathExtractor(
+				ISOMetadataFields.TOPIC_CATEGORIES,
+				FieldExtractorType.ALL_MATCHING_VALUES,
+				"//gmd:identificationInfo/*/gmd:topicCategory/gmd:MD_TopicCategoryCode/text()"));
 		
 		return getDocumentProcessorFactory().createProcessor(configuration);
 	}
