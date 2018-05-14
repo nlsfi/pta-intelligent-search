@@ -6,7 +6,7 @@
   This has been modified to allow more test cases. Following changes have been made
    - avoindata.fi keyword has been taken out
    - one topicCategory added (location)
-  
+   - added timezone to dateStamp  
   -->
 <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd"
                  xmlns:gts="http://www.isotc211.org/2005/gts"
@@ -59,7 +59,7 @@
       </gmd:CI_ResponsibleParty>
   </gmd:contact>
   <gmd:dateStamp>
-      <gco:DateTime>2018-03-16T10:20:21</gco:DateTime>
+      <gco:DateTime>2018-03-16T10:20:21-03:00</gco:DateTime>
   </gmd:dateStamp>
   <gmd:locale>
       <gmd:PT_Locale id="EN">

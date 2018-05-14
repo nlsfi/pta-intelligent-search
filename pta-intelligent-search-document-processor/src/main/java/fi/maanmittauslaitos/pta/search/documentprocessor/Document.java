@@ -1,5 +1,7 @@
 package fi.maanmittauslaitos.pta.search.documentprocessor;
 
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -77,6 +79,15 @@ public class Document {
 			
 		} else if (type.isAssignableFrom(o.getClass())) {
 			converted = (T)o;
+
+		} else if (type.isAssignableFrom(LocalDateTime.class)) {
+			String asString = o.toString();
+			converted = (T)LocalDateTime.parse(asString);
+
+		} else if (type.isAssignableFrom(OffsetDateTime.class)) {
+			String asString = o.toString();
+			converted = (T)OffsetDateTime.parse(asString);
+			
 		} else if (type == String.class) {
 			converted = (T)o.toString();
 			

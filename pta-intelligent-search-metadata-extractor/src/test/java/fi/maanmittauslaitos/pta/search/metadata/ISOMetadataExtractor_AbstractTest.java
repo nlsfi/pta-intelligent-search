@@ -14,7 +14,7 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 
 		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT, String.class).size());
 
-		String titleValue = document.getValue(ISOMetadataFields.ABSTRACT, String.class);
+		String value = document.getValue(ISOMetadataFields.ABSTRACT, String.class);
 		assertEquals(
 				"Maanmittauslaitoksen Maastotietokanta on koko Suomen kattava maastoa kuvaava aineisto. Sen tärkeimpiä kohderyhmiä ovat liikenneverkko, rakennukset ja rakenteet, hallintorajat, nimistö, maankäyttö, vedet ja korkeussuhteet.\n"
 						+ "\n"
@@ -23,7 +23,7 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 						+ "Maastotietokantaa käytetään muiden karttatuotteiden valmistukseen sekä erilaisissa optimoinneissa.\n"
 						+ "\n"
 						+ "Tuote on avointa aineistoa. Lisätietoa Avoimien aineistojen hankinta -sivustolta http://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/asiantuntevalle-kayttajalle/maastotiedot-ja-niiden-hankinta",
-				titleValue);
+				value);
 	}
 
 	@Test
@@ -32,7 +32,7 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 
 		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT_SV, String.class).size());
 
-		String titleValue = document.getValue(ISOMetadataFields.ABSTRACT_SV, String.class);
+		String value = document.getValue(ISOMetadataFields.ABSTRACT_SV, String.class);
 		assertEquals(
 				"Lantmäteriverkets Terrängdatabas är ett material som täcker och beskriver terrängen i hela Finland. De viktigaste objekten är trafikledsnätet, byggnader och konstruktioner, de administrativa gränserna, namnbeståndet, markanvändning, vattendrag och höjdförhållanden.\n"
 						+ "\n"
@@ -41,7 +41,7 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 						+ "Terrängdatabasen används för produktion av andra kartprodukter samt vid olika typer av optimering.\n"
 						+ "\n"
 						+ "Produkten ingår i Lantmäteriverkets öppna data. Mera information: Terrängdata och anskaffning av demhttp://www.maanmittauslaitos.fi/sv/kartor-och-geodata/expertanvandare/terrangdata-och-anskaffning-av-dem.",
-				titleValue);
+				value);
 	}
 
 	@Test
@@ -50,7 +50,7 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 
 		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT_EN, String.class).size());
 
-		String titleValue = document.getValue(ISOMetadataFields.ABSTRACT_EN, String.class);
+		String value = document.getValue(ISOMetadataFields.ABSTRACT_EN, String.class);
 		assertEquals(
 				"The Topographic database is a dataset depicting the terrain of all of Finland. The key objects in the Topographic database are the road network, buildings and constructions, administrative borders, geographic names, land use, waterways and elevation.\n"
 						+ "\n"
@@ -59,7 +59,7 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 						+ "The topographic database is used in the production of other map products and in various optimisation tasks.\n"
 						+ "\n"
 						+ "The product belongs to the open data of the National Land Survey of Finland. More information: Topographic data and how to acquire it http://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/topographic-data-and-how-acquire-it.",
-				titleValue);
+				value);
 	}
 
 	@Test
@@ -68,7 +68,7 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 
 		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT, String.class).size());
 
-		String titleValue = document.getValue(ISOMetadataFields.ABSTRACT, String.class);
+		String value = document.getValue(ISOMetadataFields.ABSTRACT, String.class);
 		assertEquals(
 				"Tilastokeskuksen palvelurajapinta on WFS-rajapintapalvelu, jonka kautta on saatavilla seuraavat INSPIRE:n ja paikkatietolain velvoittamat aineistot:\n"
 						+ "1) Tilastoyksiköt: Tilastoissa käytetyt aluejaot (kunta, suuralue, maakunta, seutukunta, AVI-alue, ELY-alue)\n"
@@ -83,7 +83,7 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 						+ "\n" 
 						+ "Tietoja käytettäessä on noudatettava yleisiä käyttöehtoja\n"
 						+ "(http://tilastokeskus.fi/org/lainsaadanto/copyright.html).",
-				titleValue);
+				value);
 	}
 
 	@Test
@@ -92,7 +92,7 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 
 		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT_SV, String.class).size());
 
-		String titleValue = document.getValue(ISOMetadataFields.ABSTRACT_SV, String.class);
+		String value = document.getValue(ISOMetadataFields.ABSTRACT_SV, String.class);
 		assertEquals(
 				"Statistikcentralens servicegränssnitt är gränssnittsservicen WFS. Följande material, som motsvarar förpliktelserna i INSPIRE och i lagen om en infrastruktur för geografisk information, är tillgängligt i servicen:\n"
 						+ "\n"
@@ -107,7 +107,7 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 						+ "\n" 
 						+ "Då uppgifterna används, ska de allmänna användarvillkoren iakttas\n"
 						+ "(http://tilastokeskus.fi/org/lainsaadanto/copyright_sv.html).",
-				titleValue);
+				value);
 	}
 
 	@Test
@@ -116,7 +116,7 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 
 		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT_EN, String.class).size());
 
-		String titleValue = document.getValue(ISOMetadataFields.ABSTRACT_EN, String.class);
+		String value = document.getValue(ISOMetadataFields.ABSTRACT_EN, String.class);
 		assertEquals(
 				"Statistics Finland's Web Service is a WFS interface service through which the following data required by INSPIRE and national legislation on geographic information are available:\n"
 						+ "\n"
@@ -132,6 +132,6 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 						+ "\n" 
 						+ "The general Terms of Use must be observed when using the data \n"
 						+ "(http://tilastokeskus.fi/org/lainsaadanto/copyright_en.html).",
-				titleValue);
+				value);
 	}
 }

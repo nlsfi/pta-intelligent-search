@@ -121,6 +121,12 @@ public class ISOMetadataExtractorConfigurationFactory {
 				FieldExtractorType.ALL_MATCHING_VALUES,
 				"//gmd:identificationInfo/*/gmd:descriptiveKeywords/*/gmd:keyword/gco:CharacterString[text()!='avoindata.fi']/text()"));
 		
+		// Datestamp
+		extractors.add(createXPathExtractor(
+				ISOMetadataFields.DATESTAMP,
+				FieldExtractorType.FIRST_MATCHING_VALUE,
+				"/*/gmd:dateStamp/*/text()"));
+		
 		return getDocumentProcessorFactory().createProcessor(configuration);
 	}
 

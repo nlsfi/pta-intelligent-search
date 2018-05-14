@@ -141,7 +141,7 @@ public class HarvesterConfig {
 			configuration.getFieldExtractors().add(titleExtractor);
 		}
 		
-		{
+		{ // TODO
 			XPathFieldExtractorConfiguration keywordExtractor = new XPathFieldExtractorConfiguration();
 			keywordExtractor.setField("avainsanat_uri");
 			keywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
@@ -152,7 +152,7 @@ public class HarvesterConfig {
 			configuration.getFieldExtractors().add(keywordExtractor);
 		}
 		
-		{
+		{ // TODO
 			XPathFieldExtractorConfiguration annotatedKeywordExtractor = new XPathFieldExtractorConfiguration();
 			annotatedKeywordExtractor.setField("annotoidut_avainsanat_uri");
 			annotatedKeywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
@@ -163,6 +163,7 @@ public class HarvesterConfig {
 			configuration.getFieldExtractors().add(annotatedKeywordExtractor);
 		}
 		
+		// TODO (but what was this?)
 		TextProcessingChain isInOntologyFilterProcessor = new TextProcessingChain();
 		
 		ExistsInSetProcessor allowInOntology = new ExistsInSetProcessor();

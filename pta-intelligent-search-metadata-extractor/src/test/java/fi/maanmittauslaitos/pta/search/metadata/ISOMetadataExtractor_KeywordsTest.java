@@ -14,8 +14,9 @@ public class ISOMetadataExtractor_KeywordsTest extends BaseMetadataExtractorTest
 	public void testMaastotietokantaTopicCategories() throws Exception {
 		Document document = createMaastotietokantaDocument();
 		
-		List<String> categories = document.getListValue(ISOMetadataFields.KEYWORDS_ALL,  String.class);
+		List<String> keywords = document.getListValue(ISOMetadataFields.KEYWORDS_ALL,  String.class);
 		assertArrayEquals(new String[] {
+				// Note that avoindata.fi is not here since it's read into it's own field
 				"Rataverkko",
 				"Tieliikenneverkko",
 				"Ympäristö",
@@ -27,7 +28,6 @@ public class ISOMetadataExtractor_KeywordsTest extends BaseMetadataExtractorTest
 				"Maanpeite",
 				"Osoitteet",
 				"Hallinnolliset rajat",
-				//"avoindata.fi",
 				"Korkeus",
 				"Suojelukohteet",
 				"Väylät",
@@ -44,19 +44,19 @@ public class ISOMetadataExtractor_KeywordsTest extends BaseMetadataExtractorTest
 				"Maankäyttö",
 				"Maanpeite",
 				"Ortoilmakuvat"
-			}, categories.toArray());
+			}, keywords.toArray());
 	}
 
 	@Test
 	public void testStatFiWFSTopicCategories() throws Exception {
 		Document document = createStatFiWFS();
 		
-		List<String> categories = document.getListValue(ISOMetadataFields.KEYWORDS_ALL,  String.class);
-		System.out.println("categories: "+categories);
+		List<String> keywords = document.getListValue(ISOMetadataFields.KEYWORDS_ALL,  String.class);
+		System.out.println("categories: "+keywords);
 		assertArrayEquals(new String[] {
 				"Tietokohdepalvelu",
 				"infoFeatureAccessService"
-			}, categories.toArray());
+			}, keywords.toArray());
 	}
 
 }
