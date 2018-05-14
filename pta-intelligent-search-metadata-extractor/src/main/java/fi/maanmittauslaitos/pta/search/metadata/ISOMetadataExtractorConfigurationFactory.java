@@ -127,6 +127,18 @@ public class ISOMetadataExtractorConfigurationFactory {
 				FieldExtractorType.FIRST_MATCHING_VALUE,
 				"/*/gmd:dateStamp/*/text()"));
 		
+		// Organisation names + roles
+		extractors.add(createXPathExtractor(
+				ISOMetadataFields.ORGANISATION_NAMES,
+				FieldExtractorType.ALL_MATCHING_VALUES,
+				"//gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString/text()"));
+
+		extractors.add(createXPathExtractor(
+				ISOMetadataFields.ORGANISATION_ROLES,
+				FieldExtractorType.ALL_MATCHING_VALUES,
+				"//gmd:CI_ResponsibleParty/gmd:role/*/@codeListValue"));
+
+		
 		return getDocumentProcessorFactory().createProcessor(configuration);
 	}
 

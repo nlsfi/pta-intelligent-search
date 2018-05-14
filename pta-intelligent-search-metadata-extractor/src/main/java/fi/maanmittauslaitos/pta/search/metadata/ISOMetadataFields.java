@@ -13,6 +13,9 @@ public class ISOMetadataFields {
 	public static final String ABSTRACT_SV = "abstract_sv";
 	public static final String ABSTRACT_EN = "abstract_en";
 	
+	public static final String ORGANISATION_NAMES = "organisationNames";
+	public static final String ORGANISATION_ROLES = "organisationRoles";
+	
 	public static final String TOPIC_CATEGORIES = "topicCategories";
 	
 	public static final String KEYWORDS_ALL = "keywords";
