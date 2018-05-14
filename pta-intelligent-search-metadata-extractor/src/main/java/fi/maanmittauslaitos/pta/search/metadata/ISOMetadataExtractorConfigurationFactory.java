@@ -115,6 +115,12 @@ public class ISOMetadataExtractorConfigurationFactory {
 				FieldExtractorType.ALL_MATCHING_VALUES,
 				"//gmd:identificationInfo/*/gmd:topicCategory/gmd:MD_TopicCategoryCode/text()"));
 		
+		// Keywords
+		extractors.add(createXPathExtractor(
+				ISOMetadataFields.KEYWORDS_ALL,
+				FieldExtractorType.ALL_MATCHING_VALUES,
+				"//gmd:identificationInfo/*/gmd:descriptiveKeywords/*/gmd:keyword/gco:CharacterString[text()!='avoindata.fi']/text()"));
+		
 		return getDocumentProcessorFactory().createProcessor(configuration);
 	}
 
