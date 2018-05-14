@@ -52,7 +52,7 @@ public class ISOMetadataExtractor_KeywordsTest extends BaseMetadataExtractorTest
 		Document document = createStatFiWFS();
 		
 		List<String> keywords = document.getListValue(ISOMetadataFields.KEYWORDS_ALL,  String.class);
-		System.out.println("categories: "+keywords);
+		
 		assertArrayEquals(new String[] {
 				"Tietokohdepalvelu",
 				"infoFeatureAccessService"
