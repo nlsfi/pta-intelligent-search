@@ -21,6 +21,8 @@ public class ISOMetadataFields {
 	public static final String KEYWORDS_ALL = "keywords";
 	public static final String KEYWORDS_INSPIRE = "keywordsInspire";
 	
+	public static final String DISTRIBUTION_FORMATS = "distributionFormats";
+	
 	public static final String IS_SERVICE = "isService";
 	public static final String IS_DATASET = "isDataset";
 	public static final String IS_AVOINDATA = "isAvoindata";
