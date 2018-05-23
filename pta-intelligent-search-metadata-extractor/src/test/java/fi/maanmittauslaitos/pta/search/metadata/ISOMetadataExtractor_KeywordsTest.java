@@ -11,7 +11,7 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
 public class ISOMetadataExtractor_KeywordsTest extends BaseMetadataExtractorTest {
 
 	@Test
-	public void testMaastotietokantaTopicCategories() throws Exception {
+	public void testMaastotietokantaKeywordsAll() throws Exception {
 		Document document = createMaastotietokantaDocument();
 		
 		List<String> keywords = document.getListValue(ISOMetadataFields.KEYWORDS_ALL,  String.class);
@@ -48,7 +48,7 @@ public class ISOMetadataExtractor_KeywordsTest extends BaseMetadataExtractorTest
 	}
 
 	@Test
-	public void testStatFiWFSTopicCategories() throws Exception {
+	public void testStatFiWFSKeywordsAll() throws Exception {
 		Document document = createStatFiWFS();
 		
 		List<String> keywords = document.getListValue(ISOMetadataFields.KEYWORDS_ALL,  String.class);
