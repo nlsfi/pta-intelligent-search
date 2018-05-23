@@ -121,6 +121,12 @@ public class ISOMetadataExtractorConfigurationFactory {
 				FieldExtractorType.ALL_MATCHING_VALUES,
 				"//gmd:identificationInfo/*/gmd:descriptiveKeywords/*/gmd:keyword/gco:CharacterString[text()!='avoindata.fi']/text()"));
 		
+		// Inspire themes
+		extractors.add(createXPathExtractor(
+				ISOMetadataFields.KEYWORDS_INSPIRE,
+				FieldExtractorType.ALL_MATCHING_VALUES,
+				"//gmd:identificationInfo/*/gmd:descriptiveKeywords/*[gmd:thesaurusName/gmd:CI_Citation/gmd:title/*/text() = 'GEMET - INSPIRE themes, version 1.0']/gmd:keyword/gco:CharacterString/text()"));
+		
 		// Datestamp
 		extractors.add(createXPathExtractor(
 				ISOMetadataFields.DATESTAMP,
