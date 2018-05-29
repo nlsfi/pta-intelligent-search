@@ -8,6 +8,7 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfi
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessorFactory;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
+import fi.maanmittauslaitos.pta.search.documentprocessor.XPathCustomExtractor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
 
@@ -139,18 +140,13 @@ public class ISOMetadataExtractorConfigurationFactory {
 				ISOMetadataFields.DATESTAMP,
 				FieldExtractorType.FIRST_MATCHING_VALUE,
 				"/*/gmd:dateStamp/*/text()"));
+	
 		
 		// Organisation names + roles
 		extractors.add(createXPathExtractor(
-				ISOMetadataFields.ORGANISATION_NAMES,
-				FieldExtractorType.ALL_MATCHING_VALUES,
-				"//gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString/text()"));
-
-		extractors.add(createXPathExtractor(
-				ISOMetadataFields.ORGANISATION_ROLES,
-				FieldExtractorType.ALL_MATCHING_VALUES,
-				"//gmd:CI_ResponsibleParty/gmd:role/*/@codeListValue"));
-
+				ISOMetadataFields.ORGANISATIONS,
+				new ResponsiblePartyXPathCustomExtractor(),
+				"/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty"));
 		
 		return getDocumentProcessorFactory().createProcessor(configuration);
 	}
@@ -161,6 +157,17 @@ public class ISOMetadataExtractorConfigurationFactory {
 		ret.setField(field);
 		ret.setType(type);
 		ret.setXpath(xpath);
+		
+		return ret;
+	}
+	
+	private FieldExtractorConfiguration createXPathExtractor(String field, XPathCustomExtractor extractor, String xpath)
+	{
+		XPathFieldExtractorConfiguration ret = new XPathFieldExtractorConfiguration();
+		ret.setField(field);
+		ret.setType(FieldExtractorType.CUSTOM_CLASS);
+		ret.setXpath(xpath);
+		ret.setCustomExtractor(extractor);
 		
 		return ret;
 	}

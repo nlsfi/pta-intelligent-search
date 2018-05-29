@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
+import fi.maanmittauslaitos.pta.search.metadata.model.ResponsibleParty;
 
 public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractorTest {
 
@@ -14,16 +15,13 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 	public void testMaastotietokantaOrganisations() throws Exception {
 		Document document = createMaastotietokantaDocument();
 		
-		List<String> names = document.getListValue(ISOMetadataFields.ORGANISATION_NAMES, String.class);
-		List<String> roles = document.getListValue(ISOMetadataFields.ORGANISATION_ROLES, String.class);
+		List<ResponsibleParty> organisations = document.getListValue(ISOMetadataFields.ORGANISATIONS, ResponsibleParty.class);
+
+		assertEquals(1, organisations.size());
+		ResponsibleParty party = organisations.get(0);
 		
-		assertEquals(4, names.size());
-		assertEquals(4, roles.size());
-		
-		testNameAndRole("Maanmittauslaitos", "owner", names, roles, 0);
-		testNameAndRole("Maanmittauslaitos", "owner", names, roles, 1);
-		testNameAndRole("Maanmittauslaitos", "owner", names, roles, 2);
-		testNameAndRole("Maanmittauslaitos", "owner", names, roles, 3);
+		assertEquals("Maanmittauslaitos", party.getOrganisationName());
+		assertEquals("owner", party.getIsoRole());
 	}
 
 
@@ -31,23 +29,32 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 	public void testStatFiWFSOrganisations() throws Exception {
 		Document document = createStatFiWFS();
 		
-		List<String> names = document.getListValue(ISOMetadataFields.ORGANISATION_NAMES, String.class);
-		List<String> roles = document.getListValue(ISOMetadataFields.ORGANISATION_ROLES, String.class);
-		
-		assertEquals(3, names.size());
-		assertEquals(3, roles.size());
-		
-		testNameAndRole("Tilastokeskus", "pointOfContact", names, roles, 0);
-		testNameAndRole("Tilastokeskus", "originator",     names, roles, 1);
-		testNameAndRole("Tilastokeskus", "publisher",      names, roles, 2);
-	}
+		List<ResponsibleParty> organisations = document.getListValue(ISOMetadataFields.ORGANISATIONS, ResponsibleParty.class);
 
-	void testNameAndRole(String expectedName, String expectedRole, List<String> names, List<String> roles, int idx) {
-		String name = names.get(idx);
-		String role = roles.get(idx);
+		assertEquals(1, organisations.size());
+		ResponsibleParty party = organisations.get(0);
 		
-		assertEquals(expectedName, name);
-		assertEquals(expectedRole, role);
+		assertEquals("Tilastokeskus", party.getOrganisationName());
+		assertEquals("pointOfContact", party.getIsoRole());
 	}
 	
+
+	@Test
+	public void testStatFiWFSModifiedOrganisations() throws Exception {
+		Document document = createStatFiWFS_modified();
+		
+		List<ResponsibleParty> organisations = document.getListValue(ISOMetadataFields.ORGANISATIONS, ResponsibleParty.class);
+
+		assertEquals(2, organisations.size());
+		ResponsibleParty party1 = organisations.get(0);
+		
+		assertEquals("Tilastokeskus", party1.getOrganisationName());
+		assertEquals("pointOfContact", party1.getIsoRole());
+
+		ResponsibleParty party2 = organisations.get(1);
+		
+		assertEquals("X-Tilastokeskus", party2.getOrganisationName());
+		assertEquals("owner", party2.getIsoRole());
+	}
+
 }
