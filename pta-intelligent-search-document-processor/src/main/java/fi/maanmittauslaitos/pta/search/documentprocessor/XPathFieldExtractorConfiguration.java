@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.w3c.dom.NodeList;
@@ -12,6 +13,7 @@ import org.w3c.dom.NodeList;
 public class XPathFieldExtractorConfiguration extends AbstractFieldExtractorConfiguration {
 	private FieldExtractorType type;
 	private String xpath;
+	private XPathCustomExtractor customExtractor;
 	
 	public void setType(FieldExtractorType type) {
 		this.type = type;
@@ -29,12 +31,21 @@ public class XPathFieldExtractorConfiguration extends AbstractFieldExtractorConf
 		return xpath;
 	}
 	
+	
 	public enum FieldExtractorType {
 		FIRST_MATCHING_VALUE,
 		ALL_MATCHING_VALUES,
-		TRUE_IF_MATCHES_OTHERWISE_FALSE
+		TRUE_IF_MATCHES_OTHERWISE_FALSE,
+		CUSTOM_CLASS
+	}
+
+	public void setCustomExtractor(XPathCustomExtractor customExtractor) {
+		this.customExtractor = customExtractor;
 	}
 	
+	public XPathCustomExtractor getCustomExtractor() {
+		return customExtractor;
+	}
 
 	@Override
 	public Object process(org.w3c.dom.Document doc, XPath xPath) throws DocumentProcessingException 
@@ -77,9 +88,28 @@ public class XPathFieldExtractorConfiguration extends AbstractFieldExtractorConf
 				return Boolean.valueOf(matches);
 			}
 			
+		case CUSTOM_CLASS:
+			{
+				XPathCustomExtractor extractor = getCustomExtractor();
+				if (extractor == null) {
+					throw new IllegalArgumentException("Missing XPathCustomExtractor in CUSTOM_CLASS configuration");
+				}
+				try {
+					List<Object> ret = new ArrayList<>();
+					for (int i = 0; i < nodeList.getLength(); i++) {
+						Object obj = extractor.process(xPath, nodeList.item(i));
+						ret.add(obj);
+					}
+					return ret;
+				} catch(XPathException xpe) {
+					throw new DocumentProcessingException(xpe);
+				}
+			}
+			
 		default:
 			throw new IllegalArgumentException("Unknown type of field extractor: "+getType());
 		}
 		
 	}
+
 }
