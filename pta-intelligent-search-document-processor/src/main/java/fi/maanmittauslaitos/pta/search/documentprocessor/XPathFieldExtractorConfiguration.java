@@ -15,6 +15,15 @@ public class XPathFieldExtractorConfiguration extends AbstractFieldExtractorConf
 	private String xpath;
 	private XPathCustomExtractor customExtractor;
 	
+	@Override
+	public void copyUnderlyingFeatures(AbstractFieldExtractorConfiguration object) {
+		XPathFieldExtractorConfiguration ret = (XPathFieldExtractorConfiguration)object;
+		
+		ret.setType(getType());
+		ret.setXpath(getXpath());
+		ret.setCustomExtractor(getCustomExtractor());
+	}
+	
 	public void setType(FieldExtractorType type) {
 		this.type = type;
 	}

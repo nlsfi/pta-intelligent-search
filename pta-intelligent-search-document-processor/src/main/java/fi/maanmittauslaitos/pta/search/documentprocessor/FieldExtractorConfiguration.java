@@ -12,6 +12,8 @@ public interface FieldExtractorConfiguration {
 	 */
 	public String getField();
 
+	public void setField(String field);
+	
 	/**
 	 * Process the document and returns the raw value. If this configuration has a text processor configured,
 	 * that is not applied within this function.
@@ -22,6 +24,8 @@ public interface FieldExtractorConfiguration {
 	public Object process(Document doc, XPath xpath) throws DocumentProcessingException;
 
 	
-	public Object getTextProcessorName();
+	public String getTextProcessorName();
+	public void setTextProcessorName(String textProcessorName);
 
+	public FieldExtractorConfiguration copy();
 }

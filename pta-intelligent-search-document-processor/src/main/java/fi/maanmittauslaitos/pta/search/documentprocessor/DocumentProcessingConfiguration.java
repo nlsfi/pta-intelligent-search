@@ -19,6 +19,15 @@ public class DocumentProcessingConfiguration {
 	public List<FieldExtractorConfiguration> getFieldExtractors() {
 		return fieldExtractors;
 	}
+
+	public FieldExtractorConfiguration getFieldExtractor(String field) {
+		for (FieldExtractorConfiguration fec : getFieldExtractors()) {
+			if (fec.getField().equals(field)) {
+				return fec;
+			}
+		}
+		return null;
+	}
 	
 	public void setNamespaces(Map<String, String> namespaces) {
 		this.namespaces = namespaces;

@@ -1,10 +1,11 @@
 package fi.maanmittauslaitos.pta.search.documentprocessor;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Map.Entry;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -32,6 +33,16 @@ public class MockWFSFeatureTypeFieldExtractorConfiguration extends AbstractField
 	// Injected via Spring
 	private String idXPathExpression = "//gmd:fileIdentifier/*/text()";
 	private Map<String, List<String>> injectedFieldsById = new HashMap<>();
+	
+	@Override
+	public void copyUnderlyingFeatures(AbstractFieldExtractorConfiguration object) {
+		MockWFSFeatureTypeFieldExtractorConfiguration ret = (MockWFSFeatureTypeFieldExtractorConfiguration)object;
+		
+		ret.setIdXPathExpression(getIdXPathExpression());
+		for (Entry<String, List<String>> e : getInjectedFieldsById().entrySet()) {
+			ret.getInjectedFieldsById().put(e.getKey(), new ArrayList<>(e.getValue()));
+		}
+	}
 	
 	public void setIdXPathExpression(String idXPathExpression) {
 		this.idXPathExpression = idXPathExpression;

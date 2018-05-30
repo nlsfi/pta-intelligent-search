@@ -5,22 +5,43 @@ public abstract class AbstractFieldExtractorConfiguration implements FieldExtrac
 	private String textProcessorName;
 	
 	@Override
+	public FieldExtractorConfiguration copy() {
+		AbstractFieldExtractorConfiguration ret;
+		try {
+			ret = (AbstractFieldExtractorConfiguration)this.getClass().newInstance();
+		
+		} catch(IllegalAccessException | InstantiationException e) {
+			throw new RuntimeException(e);
+		}
+		
+		ret.setField(getField());
+		ret.setTextProcessorName(getTextProcessorName());
+		
+		copyUnderlyingFeatures(ret);
+		
+		return ret;
+	}
+	
+	public abstract void copyUnderlyingFeatures(AbstractFieldExtractorConfiguration object);
+	
+	@Override
+	public void setField(String field) {
+		this.field = field;
+	}
+	
+	@Override
 	public String getField() {
 		return field;
 	}
 
 	@Override
-	public Object getTextProcessorName() {
+	public String getTextProcessorName() {
 		return textProcessorName;
 	}
 	
-	public void setField(String field) {
-		this.field = field;
-	}
-	
+	@Override
 	public void setTextProcessorName(String textProcessorName) {
 		this.textProcessorName = textProcessorName;
 	}
-
 
 }
