@@ -68,4 +68,24 @@ public class ISOMetadataExtractor_DatestampTest extends BaseMetadataExtractorTes
 		OffsetDateTime value = document.getValue(ISOMetadataFields.DATESTAMP, OffsetDateTime.class);
 		assertEquals(expected, value);
 	}
+	
+
+	@Test
+	public void testLukeAineistosarjaDatestamp() throws Exception {
+		Document document = createLukeTietoaineistosarja();
+		
+		LocalDateTime expected = LocalDateTime.of(2018, 1, 23, 14, 52, 17, 0);
+		LocalDateTime value = document.getValue(ISOMetadataFields.DATESTAMP, LocalDateTime.class);
+		assertEquals(expected, value);
+	}
+	
+
+	@Test
+	public void testLukeAineistosarjaDatestamp_fromCSW() throws Exception {
+		Document document = createLukeTietoaineistosarja_fromCSW();
+		
+		LocalDateTime expected = LocalDateTime.of(2018, 1, 23, 14, 52, 17, 0);
+		LocalDateTime value = document.getValue(ISOMetadataFields.DATESTAMP, LocalDateTime.class);
+		assertEquals(expected, value);
+	}
 }

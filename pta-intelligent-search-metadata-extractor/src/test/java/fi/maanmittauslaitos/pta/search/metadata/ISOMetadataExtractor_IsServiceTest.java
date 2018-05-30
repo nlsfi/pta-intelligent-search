@@ -23,5 +23,21 @@ public class ISOMetadataExtractor_IsServiceTest extends BaseMetadataExtractorTes
 		Boolean isService = document.getValue(ISOMetadataFields.IS_SERVICE, Boolean.class);
 		assertEquals(Boolean.FALSE, isService);
 	}
+	
+	@Test
+	public void testLukeAineistosarjaIsNotService() throws Exception {
+		Document document = createLukeTietoaineistosarja();
+		
+		Boolean isService = document.getValue(ISOMetadataFields.IS_SERVICE, Boolean.class);
+		assertEquals(Boolean.FALSE, isService);
+	}
+	
+	@Test
+	public void testLukeAineistosarjaIsNotService_fromCSW() throws Exception {
+		Document document = createLukeTietoaineistosarja_fromCSW();
+		
+		Boolean isService = document.getValue(ISOMetadataFields.IS_SERVICE, Boolean.class);
+		assertEquals(Boolean.FALSE, isService);
+	}
 
 }

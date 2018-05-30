@@ -48,4 +48,24 @@ public abstract class BaseMetadataExtractorTest {
 		return document;
 	}
 
+
+	protected Document createLukeTietoaineistosarja()
+			throws DocumentProcessingException, IOException, FileNotFoundException {
+		Document document;
+		try (FileInputStream fis = new FileInputStream("src/test/resources/2e5565ff-f17f-42a5-9435-d6353f2db46f.xml")) {
+			document = processor.processDocument(fis);
+		}
+		return document;
+	}
+
+
+	protected Document createLukeTietoaineistosarja_fromCSW()
+			throws DocumentProcessingException, IOException, FileNotFoundException {
+		Document document;
+		try (FileInputStream fis = new FileInputStream("src/test/resources/2e5565ff-f17f-42a5-9435-d6353f2db46f_fromcsw.xml")) {
+			document = processor.processDocument(fis);
+		}
+		return document;
+	}
+	
 }

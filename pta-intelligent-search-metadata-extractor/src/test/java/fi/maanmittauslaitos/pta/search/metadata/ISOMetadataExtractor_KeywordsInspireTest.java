@@ -38,4 +38,27 @@ public class ISOMetadataExtractor_KeywordsInspireTest extends BaseMetadataExtrac
 		assertArrayEquals(new String[] { }, keywords.toArray());
 	}
 
+	@Test
+	public void testLukeAineistosarjaKeywordsInspire() throws Exception {
+		Document document = createLukeTietoaineistosarja();
+		
+		List<String> keywords = document.getListValue(ISOMetadataFields.KEYWORDS_INSPIRE,  String.class);
+		assertArrayEquals(new String[] {
+				"Maanpeite",
+				"Maankäyttö",
+				"Energiavarat"
+			}, keywords.toArray());
+	}
+	
+	@Test
+	public void testLukeAineistosarjaKeywordsInspire_fromCSW() throws Exception {
+		Document document = createLukeTietoaineistosarja_fromCSW();
+		
+		List<String> keywords = document.getListValue(ISOMetadataFields.KEYWORDS_INSPIRE,  String.class);
+		assertArrayEquals(new String[] {
+				"Maanpeite",
+				"Maankäyttö",
+				"Energiavarat"
+			}, keywords.toArray());
+	}
 }

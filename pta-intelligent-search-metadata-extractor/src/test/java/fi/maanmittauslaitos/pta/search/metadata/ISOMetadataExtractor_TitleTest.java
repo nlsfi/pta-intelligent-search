@@ -60,4 +60,53 @@ public class ISOMetadataExtractor_TitleTest extends BaseMetadataExtractorTest {
 		String titleValue = document.getValue(ISOMetadataFields.TITLE_EN, String.class);
 		assertEquals("Statistics Finland's Web Service (WFS)", titleValue);
 	}
+	
+	
+	@Test
+	public void testLukeAineistosarjatTitle() throws Exception {
+		Document document = createLukeTietoaineistosarja();
+		
+		String titleValue = document.getValue(ISOMetadataFields.TITLE, String.class);
+		assertEquals("Monilähteisen valtakunnan metsien inventoinnin (MVMI) kartta-aineisto 2009", titleValue);
+	}
+	
+	@Test
+	public void testLukeAineistosarjatTitleSV() throws Exception {
+		Document document = createLukeTietoaineistosarja();
+		
+		String titleValue = document.getValue(ISOMetadataFields.TITLE_SV, String.class);
+		assertNull(titleValue);
+	}
+	
+	@Test
+	public void testLukeAineistosarjatTitleEN() throws Exception {
+		Document document = createLukeTietoaineistosarja();
+		
+		String titleValue = document.getValue(ISOMetadataFields.TITLE_EN, String.class);
+		assertEquals("Multi-source national forest inventory (MS-NFI) raster maps of 2009", titleValue);
+	}
+	
+	@Test
+	public void testLukeAineistosarjatTitle_fromCSW() throws Exception {
+		Document document = createLukeTietoaineistosarja_fromCSW();
+		
+		String titleValue = document.getValue(ISOMetadataFields.TITLE, String.class);
+		assertEquals("Monilähteisen valtakunnan metsien inventoinnin (MVMI) kartta-aineisto 2009", titleValue);
+	}
+	
+	@Test
+	public void testLukeAineistosarjatTitleSV_fromCSW() throws Exception {
+		Document document = createLukeTietoaineistosarja_fromCSW();
+		
+		String titleValue = document.getValue(ISOMetadataFields.TITLE_SV, String.class);
+		assertNull(titleValue);
+	}
+	
+	@Test
+	public void testLukeAineistosarjatTitleEN_fromCSW() throws Exception {
+		Document document = createLukeTietoaineistosarja_fromCSW();
+		
+		String titleValue = document.getValue(ISOMetadataFields.TITLE_EN, String.class);
+		assertEquals("Multi-source national forest inventory (MS-NFI) raster maps of 2009", titleValue);
+	}
 }

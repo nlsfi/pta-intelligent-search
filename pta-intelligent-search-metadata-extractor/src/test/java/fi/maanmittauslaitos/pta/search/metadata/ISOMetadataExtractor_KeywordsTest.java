@@ -58,5 +58,51 @@ public class ISOMetadataExtractor_KeywordsTest extends BaseMetadataExtractorTest
 				"infoFeatureAccessService"
 			}, keywords.toArray());
 	}
+	
+	@Test
+	public void testLukeAineistosarjaKeywordsAll() throws Exception {
+		Document document = createLukeTietoaineistosarja();
+		
+		List<String> keywords = document.getListValue(ISOMetadataFields.KEYWORDS_ALL,  String.class);
+		
+		assertArrayEquals(new String[] {
+				"Maanpeite",
+				"Maankäyttö",
+				"Energiavarat",
+				
+				"luonnonvarat",
+				"metsävarat",
+				"metsävarojen arviointi",
+				"biomassa",
+				"puutavaralaji",
+				
+				"metsätalous",
+				"kasvupaikat",
+				"elinympäristöt"
+			}, keywords.toArray());
+	}
+
+	@Test
+	public void testLukeAineistosarjaKeywordsAll_fromCSW() throws Exception {
+		Document document = createLukeTietoaineistosarja_fromCSW();
+		
+		List<String> keywords = document.getListValue(ISOMetadataFields.KEYWORDS_ALL,  String.class);
+		
+		assertArrayEquals(new String[] {
+				"Maanpeite",
+				"Maankäyttö",
+				"Energiavarat",
+				
+				"luonnonvarat",
+				"metsävarat",
+				"metsävarojen arviointi",
+				"biomassa",
+				"puutavaralaji",
+				
+				"metsätalous",
+				"kasvupaikat",
+				"elinympäristöt"
+			}, keywords.toArray());
+	}
 
 }

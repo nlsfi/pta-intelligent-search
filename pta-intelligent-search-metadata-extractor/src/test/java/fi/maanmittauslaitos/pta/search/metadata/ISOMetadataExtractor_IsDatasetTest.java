@@ -25,4 +25,19 @@ public class ISOMetadataExtractor_IsDatasetTest extends BaseMetadataExtractorTes
 		assertEquals(Boolean.FALSE, isDataset);
 	}
 
+	@Test
+	public void testLukeAineistosarjaIsDataset() throws Exception {
+		Document document = createLukeTietoaineistosarja();
+		
+		Boolean isDataset = document.getValue(ISOMetadataFields.IS_DATASET, Boolean.class);
+		assertEquals(Boolean.TRUE, isDataset);
+	}
+	
+	@Test
+	public void testLukeAineistosarjaIsDataset_fromCSW() throws Exception {
+		Document document = createLukeTietoaineistosarja_fromCSW();
+		
+		Boolean isDataset = document.getValue(ISOMetadataFields.IS_DATASET, Boolean.class);
+		assertEquals(Boolean.TRUE, isDataset);
+	}
 }

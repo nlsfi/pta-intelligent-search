@@ -134,4 +134,73 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 						+ "(http://tilastokeskus.fi/org/lainsaadanto/copyright_en.html).",
 				value);
 	}
+	
+	@Test
+	public void testLukeAineistosarjaAbstract() throws Exception {
+		Document document = createLukeTietoaineistosarja();
+
+		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT, String.class).size());
+
+		String value = document.getValue(ISOMetadataFields.ABSTRACT, String.class);
+		assertEquals(
+				"Metsäntutkimuslaitos (Metla) kehitti niin sanotun valtakunnan metsien monilähteiseninventoinnin (MVMI) ja otti sen käyttöön vuonna 1990. Maastotietojen, satelliittikuvien ja muun numeerisen paikkatiedon avulla tuotetaan kuntakohtaiset metsävara-arviot ja karttamuotoisia metsävaratietoja. Suurimpaan osaan maata on tuotettu 5 kattavaa karttateemajoukkoa ja Lappiin 4.  Uusimmassa, vuoden 2009 inventoinnissa on 43 teemaa, puutavaralajitilavuuksien lisäksi puulajeittaiset ja puusto-ositeittaiset biomassat. Ensimmäinen koko maan tuote valmistettiin vuosina 1990-1994; uusimmat ovat vuosilta 2005, 2007 ja 2009. MVMI 2011 valmistuu alkuvuonna 2013. Ensimmäisessä vaiheessa vapaassa jakelussa ovat vuoden 2009 karttamuotoiset tulokset. Jatkossa uudet teemat tuotetaan yhden tai kahden vuoden välein. Metla on päättänyt laittaa karttamuotoisetteemat avoimesti jaettavaksi. Aineisto on rasterimuodossa, 20mx20m hilassa ETRS-TM35FIN-koordinaattijärjestelmässä ja kattaa metsätalouden maan (VMI-maaluokista metsä-, kitu- ja joutomaan). Tässä aineistossa muu maa ja vesialueet on rajattu pois käyttäen maastotietokannan elementtejä, jotka lähinnä vastaavat VMI:n muita maaluokkia.\n" + 
+				"Aineistojen latauspalvelu on osoitteessa http://kartta.luke.fi/",
+				value);
+	}
+	
+	@Test
+	public void testLukeAineistosarjaAbstractSV() throws Exception {
+		Document document = createLukeTietoaineistosarja();
+
+		assertEquals(0, document.getListValue(ISOMetadataFields.ABSTRACT_SV, String.class).size());
+	}
+
+	@Test
+	public void testLukeAineistosarjaAbstractEN() throws Exception {
+		Document document = createLukeTietoaineistosarja();
+
+		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT_EN, String.class).size());
+
+		String value = document.getValue(ISOMetadataFields.ABSTRACT_EN, String.class);
+		assertEquals(
+				"The Finnish Forest Research Institute (Metla) developed a method called multi-source national forest inventory (MS-NFI). The first operative results were calculated in 1990. Small area forest resource estimates, in here municipality level estimates, and estimates of variables in map form are calculated using field data from the Finnish national forest inventory, satellite images and other digital georeferenced data, such as topographic database of the National Land Survey of Finland. Five sets of estimates have been produced for the most part of the country until now and four sets for Lapland. The number of the map form themes in the most recent version, from year 2009, is 43. In addition to the volumes by tree species and timber assortments, the biomass by tree species groups and tree compartments have been estimated.\n" +
+				"\n" +
+				"The first country level estimates correspond to years 1990-1994. The most recent versions are from years 2005, 2007 and 2009. MS-NFI 2011 will be ready early 2013. The first set of the products freely available are from year 2009. The new set of the products will be produced annually or biannually in the future. The map from products are in a raster format with a pixel size of 20mx20m and in ETRS-TM35FIN coordinate system. The products cover the combined land categories forest land, poorly productive forest land and unproductive land. The other land categories as well as water bodies have been delineated out using the elements of topographic database of the Land Survey of Finland.",
+				value);
+	}
+	
+	@Test
+	public void testLukeAineistosarjaAbstract_fromCSW() throws Exception {
+		Document document = createLukeTietoaineistosarja_fromCSW();
+
+		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT, String.class).size());
+
+		String value = document.getValue(ISOMetadataFields.ABSTRACT, String.class);
+		assertEquals(
+				"Metsäntutkimuslaitos (Metla) kehitti niin sanotun valtakunnan metsien monilähteiseninventoinnin (MVMI) ja otti sen käyttöön vuonna 1990. Maastotietojen, satelliittikuvien ja muun numeerisen paikkatiedon avulla tuotetaan kuntakohtaiset metsävara-arviot ja karttamuotoisia metsävaratietoja. Suurimpaan osaan maata on tuotettu 5 kattavaa karttateemajoukkoa ja Lappiin 4.  Uusimmassa, vuoden 2009 inventoinnissa on 43 teemaa, puutavaralajitilavuuksien lisäksi puulajeittaiset ja puusto-ositeittaiset biomassat. Ensimmäinen koko maan tuote valmistettiin vuosina 1990-1994; uusimmat ovat vuosilta 2005, 2007 ja 2009. MVMI 2011 valmistuu alkuvuonna 2013. Ensimmäisessä vaiheessa vapaassa jakelussa ovat vuoden 2009 karttamuotoiset tulokset. Jatkossa uudet teemat tuotetaan yhden tai kahden vuoden välein. Metla on päättänyt laittaa karttamuotoisetteemat avoimesti jaettavaksi. Aineisto on rasterimuodossa, 20mx20m hilassa ETRS-TM35FIN-koordinaattijärjestelmässä ja kattaa metsätalouden maan (VMI-maaluokista metsä-, kitu- ja joutomaan). Tässä aineistossa muu maa ja vesialueet on rajattu pois käyttäen maastotietokannan elementtejä, jotka lähinnä vastaavat VMI:n muita maaluokkia.\n" + 
+				"Aineistojen latauspalvelu on osoitteessa http://kartta.luke.fi/",
+				value);
+	}
+	
+	@Test
+	public void testLukeAineistosarjaAbstractSV_fromCSW() throws Exception {
+		Document document = createLukeTietoaineistosarja_fromCSW();
+
+		assertEquals(0, document.getListValue(ISOMetadataFields.ABSTRACT_SV, String.class).size());
+	}
+
+	@Test
+	public void testLukeAineistosarjaAbstractEN_fromCSW() throws Exception {
+		Document document = createLukeTietoaineistosarja_fromCSW();
+
+		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT_EN, String.class).size());
+
+		String value = document.getValue(ISOMetadataFields.ABSTRACT_EN, String.class);
+		assertEquals(
+				"The Finnish Forest Research Institute (Metla) developed a method called multi-source national forest inventory (MS-NFI). The first operative results were calculated in 1990. Small area forest resource estimates, in here municipality level estimates, and estimates of variables in map form are calculated using field data from the Finnish national forest inventory, satellite images and other digital georeferenced data, such as topographic database of the National Land Survey of Finland. Five sets of estimates have been produced for the most part of the country until now and four sets for Lapland. The number of the map form themes in the most recent version, from year 2009, is 43. In addition to the volumes by tree species and timber assortments, the biomass by tree species groups and tree compartments have been estimated.\n" +
+				"\n" +
+				"The first country level estimates correspond to years 1990-1994. The most recent versions are from years 2005, 2007 and 2009. MS-NFI 2011 will be ready early 2013. The first set of the products freely available are from year 2009. The new set of the products will be produced annually or biannually in the future. The map from products are in a raster format with a pixel size of 20mx20m and in ETRS-TM35FIN coordinate system. The products cover the combined land categories forest land, poorly productive forest land and unproductive land. The other land categories as well as water bodies have been delineated out using the elements of topographic database of the Land Survey of Finland.",
+				value);
+	}
+	
 }

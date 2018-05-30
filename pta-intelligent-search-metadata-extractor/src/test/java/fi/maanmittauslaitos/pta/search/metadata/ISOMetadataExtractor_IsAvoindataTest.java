@@ -33,5 +33,21 @@ public class ISOMetadataExtractor_IsAvoindataTest extends BaseMetadataExtractorT
 		Boolean isAvoindata = document.getValue(ISOMetadataFields.IS_AVOINDATA, Boolean.class);
 		assertEquals(Boolean.TRUE, isAvoindata);
 	}
+	
+	@Test
+	public void testLukeAIneistosarjaIsAvoindata() throws Exception {
+		Document document = createLukeTietoaineistosarja();
+		
+		Boolean isAvoindata = document.getValue(ISOMetadataFields.IS_AVOINDATA, Boolean.class);
+		assertEquals(Boolean.TRUE, isAvoindata);
+	}
+	
+	@Test
+	public void testLukeAIneistosarjaIsAvoindata_fromCSW() throws Exception {
+		Document document = createLukeTietoaineistosarja_fromCSW();
+		
+		Boolean isAvoindata = document.getValue(ISOMetadataFields.IS_AVOINDATA, Boolean.class);
+		assertEquals(Boolean.TRUE, isAvoindata);
+	}
 
 }

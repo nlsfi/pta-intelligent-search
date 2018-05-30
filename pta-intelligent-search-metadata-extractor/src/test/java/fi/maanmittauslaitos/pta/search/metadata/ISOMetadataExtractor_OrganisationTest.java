@@ -57,4 +57,30 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 		assertEquals("owner", party2.getIsoRole());
 	}
 
+	@Test
+	public void testLukeTietoaineistosarjaOrganisations() throws Exception {
+		Document document = createLukeTietoaineistosarja();
+		
+		List<ResponsibleParty> organisations = document.getListValue(ISOMetadataFields.ORGANISATIONS, ResponsibleParty.class);
+
+		assertEquals(1, organisations.size());
+		ResponsibleParty party = organisations.get(0);
+		
+		assertEquals("Luonnonvarakeskus (Luke)", party.getOrganisationName());
+		assertEquals("pointOfContact", party.getIsoRole());
+	}
+	
+
+	@Test
+	public void testLukeTietoaineistosarjaOrganisations_fromCSW() throws Exception {
+		Document document = createLukeTietoaineistosarja_fromCSW();
+		
+		List<ResponsibleParty> organisations = document.getListValue(ISOMetadataFields.ORGANISATIONS, ResponsibleParty.class);
+
+		assertEquals(1, organisations.size());
+		ResponsibleParty party = organisations.get(0);
+		
+		assertEquals("Luonnonvarakeskus (Luke)", party.getOrganisationName());
+		assertEquals("pointOfContact", party.getIsoRole());
+	}
 }

@@ -25,7 +25,7 @@ public class ISOMetadataExtractorConfigurationFactory {
 	}
 	
 	
-	public DocumentProcessor createMetadataDocumentProcessor() throws ParserConfigurationException
+	public DocumentProcessingConfiguration createMetadataDocumentProcessingConfiguration() throws ParserConfigurationException
 	{
 		DocumentProcessingConfiguration configuration = new DocumentProcessingConfiguration();
 		configuration.getNamespaces().put("gmd", "http://www.isotc211.org/2005/gmd");
@@ -139,15 +139,21 @@ public class ISOMetadataExtractorConfigurationFactory {
 		extractors.add(createXPathExtractor(
 				ISOMetadataFields.DATESTAMP,
 				FieldExtractorType.FIRST_MATCHING_VALUE,
-				"/*/gmd:dateStamp/*/text()"));
+				"//gmd:MD_Metadata/gmd:dateStamp/*/text()"));
 	
 		
 		// Organisation names + roles
 		extractors.add(createXPathExtractor(
 				ISOMetadataFields.ORGANISATIONS,
 				new ResponsiblePartyXPathCustomExtractor(),
-				"/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty"));
+				"//gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty"));
 		
+		return configuration;
+	}
+	
+	public DocumentProcessor createMetadataDocumentProcessor() throws ParserConfigurationException
+	{
+		DocumentProcessingConfiguration configuration = createMetadataDocumentProcessingConfiguration();
 		return getDocumentProcessorFactory().createProcessor(configuration);
 	}
 

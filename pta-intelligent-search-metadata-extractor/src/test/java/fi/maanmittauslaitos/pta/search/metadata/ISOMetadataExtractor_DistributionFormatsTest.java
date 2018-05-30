@@ -30,4 +30,23 @@ public class ISOMetadataExtractor_DistributionFormatsTest extends BaseMetadataEx
 			}, distributionFormats.toArray());
 	}
 
+	@Test
+	public void testLukeAineistosarjaDistributionFormats() throws Exception {
+		Document document = createLukeTietoaineistosarja();
+		
+		List<String> distributionFormats = document.getListValue(ISOMetadataFields.DISTRIBUTION_FORMATS,  String.class);
+		assertArrayEquals(new String[] {
+				"Unknown"
+			}, distributionFormats.toArray());
+	}
+	
+	@Test
+	public void testLukeAineistosarjaDistributionFormats_fromCSW() throws Exception {
+		Document document = createLukeTietoaineistosarja_fromCSW();
+		
+		List<String> distributionFormats = document.getListValue(ISOMetadataFields.DISTRIBUTION_FORMATS,  String.class);
+		assertArrayEquals(new String[] {
+				"Unknown"
+			}, distributionFormats.toArray());
+	}
 }
