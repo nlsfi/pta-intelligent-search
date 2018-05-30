@@ -19,9 +19,9 @@ Henkilökohtainen setup (tehdään vain kerran, jotta saat githubissa olevat Ela
 Elasticsearchin konfiguraatio on hyvin yksinkertaista. ES:ää on käytetty lähessuoraan asennuspaketista. Ainoa "konfiguraatio" on yksinkertainen skripti, joka luo indeksin indeksoitavalle tiedolle. ES:n käsittelemistä varten on kolme skriptiä:
 
 pta-intelligent-search/elasticsearch-scripts/
-	elasticsearch_createIndex.sh   Luo indeksin Elasticsearchiin
-	elasticsearch_clean.sh         Poistaa indeksin (ja dokumentit) Elasticsearchistä
-	elasticsearch_count.sh         Palauttaa indeksoitujen dokumenttien lukumäärän
+	metaindex.sh   Luo indeksin Elasticsearchiin
+	metaclean.sh   Poistaa indeksin (ja dokumentit) Elasticsearchistä
+	metacount.sh   Palauttaa indeksoitujen dokumenttien lukumäärän
 
 
 Uudelleenharvestointi
