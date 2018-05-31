@@ -12,7 +12,13 @@ curl -XPUT 'localhost:9200/pta' -H 'Content-Type: application/json' -d'
         "keywords":               { "type": "keyword" },
         "keywordsInspire":        { "type": "keyword" },
         "topicCategories":        { "type": "keyword" },
-        "distributionFormats":    { "type": "keyword" }
+        "distributionFormats":    { "type": "keyword" },
+        "organisations": {
+          "type": "object",
+          "properties": {
+            "organisationName":   { "type": "keyword" }
+          }
+        }
       }
     }
   }
