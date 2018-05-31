@@ -59,7 +59,7 @@ $(document).ready(function() {
 				    text += ' ';
 				    text += vinkki;
 				    $('#pta-haku-input-container input').val(text);
-				    teeHaku(0);
+				    teeHaku(0, facetQuery);
 				    
 				});
 				vinkkiLista.append(tmp);
@@ -102,13 +102,13 @@ $(document).ready(function() {
 			
 			if (skip > 0) {
 				osumaLista.append($('<span class="pta-tulokset-osumat-previous">Edelliset</span>').click(function() {
-					teeHaku(skip-pageSize);
+					teeHaku(skip-pageSize, facetQuery);
 				}));
 			}
 
 			if ((skip + result.hits.length) < result.totalHits) {
 				osumaLista.append($('<span class="pta-tulokset-osumat-next">Seuraavat</span>').click(function() {
-					teeHaku(skip+pageSize);
+					teeHaku(skip+pageSize, facetQuery);
 				}));
 			}
 			
