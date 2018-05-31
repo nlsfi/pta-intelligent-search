@@ -39,7 +39,7 @@ $(document).ready(function() {
 		virhe.hide();
 
 		$.ajax({
-			url: 'search',
+			url: 'v1/search',
 			method: 'POST',
 			data: JSON.stringify(query),
 			contentType: 'application/json',
@@ -124,7 +124,6 @@ $(document).ready(function() {
 				div.append($('<h4></h4>').text(fasetti));
 				var table = $('<table></table>');
 				
-				console.log(fasetti);
 				result.facets[fasetti].forEach(function(d) {
 					var f = fasetti;
 					var row = $('<tr><td>'+d.id+'</td><td>'+d.count+'</td></tr>');
