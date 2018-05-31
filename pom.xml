@@ -11,5 +11,6 @@
 		<module>pta-intelligent-search-document-processor</module>
 		<module>pta-intelligent-search-metadata-extractor</module>
 		<module>pta-intelligent-search-metadata-annotation</module>
+		<module>pta-intelligent-search-elasticsearch</module>
 	</modules>
 </project>
