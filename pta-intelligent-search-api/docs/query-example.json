@@ -5,7 +5,7 @@
 		"vesi"
 	],
 	"facets": {
-		"type": [ "isDataset" ],
+		"types": [ "isDataset" ],
 		"topicCategories": [ "Korkeus" ],
 		"keywordsInspire": [ "maankäyttö" ],
 		"organisations": [ "Tilastokeskus" ],

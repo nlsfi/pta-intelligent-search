@@ -16,7 +16,7 @@
 		"score": 10.3124,
 		"url": "http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/f5368158-b642-4dec-bfcc-aebe2cdc1acf",
 		"dateStamp": "2018-04-03T13:49:01Z",
-		"type": [ "isService", "isAvoindata", "isPtaAineisto" ],
+		"types": [ "isService", "isAvoindata", "isPtaAineisto" ],
 		"topicCategories": [ "Korkeus", "Foobar" ],
 		"keywordsInspire": [ "..." ],
 		"organisations": [ "Ilmatieteen laitos" ],
@@ -33,14 +33,14 @@
         "Vaikutukset"
     ],
 	"facets":{
-		"type": [{
+		"types": [{
 			"id": "isDataset",
 			"count": 280
 		},{
 			"id": "isService",
 			"count": 89
 		}],
-		"topicCategory": [{
+		"topicCategories": [{
 			"id": "Korkeus",
 			"count": 120
 		}],
