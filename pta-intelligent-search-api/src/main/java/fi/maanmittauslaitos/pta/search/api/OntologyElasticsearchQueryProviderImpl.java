@@ -19,7 +19,6 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
-import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataFields;
 import fi.maanmittauslaitos.pta.search.text.TextProcessor;
 
 
