@@ -31,6 +31,6 @@ public class ISOMetadataFields {
 	
 	// HUOM! On vielä epäselvää kannattaako tämä mallintaa samalla tavalla 
 	// kuin IS_SERVICE, IS_DATASET ja IS_AVOINDATA
-	public static final String IS_PTA = "isPta";
+	public static final String IS_PTA = "isPtaAineisto";
 	
 }

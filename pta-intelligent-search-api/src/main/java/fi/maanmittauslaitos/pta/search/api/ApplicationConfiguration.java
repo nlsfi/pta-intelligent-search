@@ -151,7 +151,7 @@ public class ApplicationConfiguration {
 	
 	@Bean
 	public HakuKone hakuKone(TextProcessor queryTextProcessor, RestHighLevelClient elasticsearchClient, Model model, HintProvider hintProvider) throws IOException {
-		ElasticsearchHakuKoneImpl ret = new ElasticsearchHakuKoneImpl();
+		FacetedElasticsearchHakuKoneImpl ret = new FacetedElasticsearchHakuKoneImpl();
 		ret.setClient(elasticsearchClient);
 		
 		OntologyElasticsearchQueryProviderImpl queryProvider = new OntologyElasticsearchQueryProviderImpl();

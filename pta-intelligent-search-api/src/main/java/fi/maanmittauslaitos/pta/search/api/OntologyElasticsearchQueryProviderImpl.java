@@ -145,7 +145,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		for (SearchTerm term : termit) {
 			MatchPhraseQueryBuilder tmp;
 			
-			tmp = QueryBuilders.matchPhraseQuery("avainsanat_uri", term.resource);
+			tmp = QueryBuilders.matchPhraseQuery("keywords_uri", term.resource);
 			tmp.boost((float)term.weight);
 			boolQuery.should().add(tmp);
 

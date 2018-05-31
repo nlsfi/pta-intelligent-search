@@ -14,6 +14,7 @@ public class ISOMetadataExtractor_KeywordsTest extends BaseMetadataExtractorTest
 	public void testMaastotietokantaKeywordsAll() throws Exception {
 		Document document = createMaastotietokantaDocument();
 		
+		
 		List<String> keywords = document.getListValue(ISOMetadataFields.KEYWORDS_ALL,  String.class);
 		assertArrayEquals(new String[] {
 				// Note that avoindata.fi is not here since it's read into it's own field

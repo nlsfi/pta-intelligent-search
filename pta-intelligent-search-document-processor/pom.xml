@@ -15,6 +15,7 @@
 
 
 	<dependencies>
+		<!-- TODO: siivoa oikeaan paikkaan -->
 		<dependency>
 			<groupId>org.eclipse.rdf4j</groupId>
 			<artifactId>rdf4j-model</artifactId>

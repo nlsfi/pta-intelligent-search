@@ -15,14 +15,16 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.aggregations.Aggregation;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.HitText;
 import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
 
-public class ElasticsearchHakuKoneImpl implements HakuKone {
-	private static Logger logger = Logger.getLogger(ElasticsearchHakuKoneImpl.class);
+public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
+	private static Logger logger = Logger.getLogger(FacetedElasticsearchHakuKoneImpl.class);
 	
 	private RestHighLevelClient client;
 	
@@ -77,19 +79,31 @@ public class ElasticsearchHakuKoneImpl implements HakuKone {
 			sourceBuilder.size(10);
 		}
 		
+		// TODO: sort
+		
 		sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
 		sourceBuilder.fetchSource("*", null);
+		
+		
+		// 'tis the way to do it
+		sourceBuilder.aggregation(AggregationBuilders.terms("keywordsInspire").field("keywordsInspire"));
+		sourceBuilder.aggregation(AggregationBuilders.terms("topicCategories").field("topicCategories"));
 		
 		// Only request explanations if trace level logging is enabled
 		if (logger.isTraceEnabled()) {
 			sourceBuilder.explain(true);
 		}
 		
-		SearchRequest request = new SearchRequest("catalog");
-		request.types("doc");
+		SearchRequest request = new SearchRequest("pta");
+		request.types("metadata");
 		request.source(sourceBuilder);
 		
 		SearchResponse response = client.search(request);
+		
+		Aggregation aggCats = response.getAggregations().get("topicCategories");
+		
+		// TODO: figure out how to use the aggregation response
+		System.out.println(aggCats.getMetaData());
 		
 		SearchHits hits = response.getHits();
 		
@@ -103,7 +117,7 @@ public class ElasticsearchHakuKoneImpl implements HakuKone {
 					logger.trace(t.getExplanation());
 				}
 				Hit osuma = new Hit();
-				
+
 				HitText fi = HitText.create(
 						"FI",
 						extractStringValue(t.getSourceAsMap().get("title")),

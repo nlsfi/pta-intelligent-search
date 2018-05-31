@@ -78,6 +78,8 @@ public class HarvesterConfig {
 		
 		configuration.getFieldExtractors().add(abstractUri);
 		
+		// TODO: tämän pitäisi hakea myös yläkäsitteet indeksiin
+		
 		
 		// Set up maui chain for abstract (abstract => abstract_maui_uri)
 		TextProcessingChain mauiChain = createMauiProcessingChain();
@@ -90,12 +92,12 @@ public class HarvesterConfig {
 		configuration.getFieldExtractors().add(abstractMauiUri);
 		
 		
-		// Keyword to uri detection (keywords => avainsanat_uri) 
+		// Keyword to uri detection (keywords => keywords_uri) 
 		TextProcessingChain keywordChain = createKeywordProcessingChain(terminologyProcessor, wordCombinationProcessor);
 		configuration.getTextProcessingChains().put("keywordProcessor", keywordChain);
 		
 		FieldExtractorConfiguration keywordsUri = configuration.getFieldExtractor(ISOMetadataFields.KEYWORDS_ALL).copy();
-		keywordsUri.setField("avainsanat_uri");
+		keywordsUri.setField("keywords_uri");
 		keywordsUri.setTextProcessorName("keywordProcessor");
 		
 		configuration.getFieldExtractors().add(keywordsUri);
@@ -109,7 +111,7 @@ public class HarvesterConfig {
 		
 		
 		XPathFieldExtractorConfiguration annotatedKeywordExtractor = new XPathFieldExtractorConfiguration();
-		annotatedKeywordExtractor.setField("annotoidut_avainsanat_uri");
+		annotatedKeywordExtractor.setField("annotated_keywords_uri");
 		annotatedKeywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 		annotatedKeywordExtractor.setXpath("//gmd:descriptiveKeywords/*/gmd:keyword/gmx:Anchor/@xlink:href");
 		
@@ -214,8 +216,9 @@ public class HarvesterConfig {
 		ret.setHostname("localhost");
 		ret.setPort(9200);
 		ret.setProtocol("http");
-		ret.setIndex("catalog");
-		ret.setType("doc");
+		
+		ret.setIndex("pta");
+		ret.setType("metadata");
 		
 		ret.setIdField("@id");
 		

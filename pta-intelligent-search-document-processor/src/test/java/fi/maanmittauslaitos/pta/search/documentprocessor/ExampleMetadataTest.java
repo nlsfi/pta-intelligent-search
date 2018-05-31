@@ -73,7 +73,7 @@ public class ExampleMetadataTest {
 		configuration.getFieldExtractors().add(isDatasetExtractor);
 		
 		XPathFieldExtractorConfiguration annotatedKeywordExtractor = new XPathFieldExtractorConfiguration();
-		annotatedKeywordExtractor.setField("annotoidut_avainsanat_uri");
+		annotatedKeywordExtractor.setField("annotated_keywords_uri");
 		annotatedKeywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 		annotatedKeywordExtractor.setXpath("//gmd:descriptiveKeywords/*/gmd:keyword/gmx:Anchor/@xlink:href");
 		
@@ -117,7 +117,7 @@ public class ExampleMetadataTest {
 		
 		assertArrayEquals(new String[] { "Kasvillisuus", "Suo", "Biomaantieteelliset alueet", "Kasvillisuus", "Suot" } , document.getListValue("avainsanat", String.class).toArray());
 		
-		assertArrayEquals(new String[] { "http://paikkatiedot.fi/def/1001002/p877", "http://paikkatiedot.fi/def/1001001/p296" }, document.getListValue("annotoidut_avainsanat_uri", String.class).toArray()); 
+		assertArrayEquals(new String[] { "http://paikkatiedot.fi/def/1001002/p877", "http://paikkatiedot.fi/def/1001001/p296" }, document.getListValue("annotated_keywords_uri", String.class).toArray()); 
 		
 		assertFalse(document.getValue("isService", Boolean.class));
 		assertTrue(document.getValue("isDataset", Boolean.class));

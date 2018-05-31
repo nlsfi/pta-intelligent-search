@@ -58,7 +58,7 @@ public class GenerateMauiData {
 		
 		// Annotated keywords
 		XPathFieldExtractorConfiguration annotatedKeywordExtractor = new XPathFieldExtractorConfiguration();
-		annotatedKeywordExtractor.setField("annotoidut_avainsanat_uri");
+		annotatedKeywordExtractor.setField("annotated_keywords_uri");
 		annotatedKeywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 		annotatedKeywordExtractor.setXpath("//gmd:descriptiveKeywords/*/gmd:keyword/gmx:Anchor/@xlink:href");
 		
@@ -139,7 +139,7 @@ public class GenerateMauiData {
 						FileWriter fwKey  = new FileWriter(outputKey)) {
 					IOUtils.write(text, fwTxt);
 				
-					for (String keyword : doc.getListValue("annotoidut_avainsanat_uri", String.class)) {
+					for (String keyword : doc.getListValue("annotated_keywords_uri", String.class)) {
 						
 						String label = reverseDict.get(keyword);
 						fwSubj.write(keyword+"\t"+label+"\n");
@@ -150,7 +150,7 @@ public class GenerateMauiData {
 				/*
 				System.out.println(text);
 				//System.out.println(doc.getFields().get("abstract"));
-				for (String keyword : doc.getListValue("annotoidut_avainsanat_uri", String.class)) {
+				for (String keyword : doc.getListValue("annotated_keywords_uri", String.class)) {
 					String label = reverseDict.get(keyword);
 					System.out.println(keyword+"\t"+label);
 				}

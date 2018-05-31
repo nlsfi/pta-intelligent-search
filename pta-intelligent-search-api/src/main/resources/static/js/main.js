@@ -68,13 +68,13 @@ $(document).ready(function() {
 				tmp.addClass('pta-tulokset-osumat-osuma');
 				
 				var title = $('<p></p>');
-				title.text(osuma.title + ' ('+Math.round(osuma.score*100)/100+')');
+				title.text(osuma.text[0].title + ' ('+Math.round(osuma.score*100)/100+')');
 				title.addClass('pta-tulokset-osumat-osuma-title');
 				tmp.append(title);
 				
 				var desc = $('<div></div>');
 				desc.addClass('pta-tulokset-osumat-osuma-desc');
-				desc.text(osuma.abstractText);
+				desc.text(osuma.text[0].abstractText);
 				desc.hide();
 				title.click(function() { desc.toggle(); });
 				desc.click(function() { desc.toggle(); });
