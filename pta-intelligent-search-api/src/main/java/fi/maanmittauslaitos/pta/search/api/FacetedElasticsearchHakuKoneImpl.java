@@ -2,7 +2,9 @@ package fi.maanmittauslaitos.pta.search.api;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -15,16 +17,38 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
-import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.Aggregations;
+import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
+import org.elasticsearch.search.aggregations.bucket.terms.Terms.Bucket;
+import org.elasticsearch.search.aggregations.metrics.sum.ParsedSum;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
+import fi.maanmittauslaitos.pta.search.api.HakuTulos.Facet;
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.HitText;
 import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 
 public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
+	private static final String FACETS_INSPIRE_KEYWORDS     = "keywordsInspire";
+	private static final String FACETS_DISTRIBUTION_FORMATS = "distributionFormats";
+	private static final String FACETS_TOPIC_CATEGORIES     = "topicCategories";
+	private static final String FACETS_ORGANISATIONS        = "organisations";
+	
+	private static final String FACETS_TYPES                = "types";
+	
+	// Internal query only
+	private static final String FACETS_TYPE_ISSERVICE       = "isService";
+	private static final String FACETS_TYPE_ISDATASET       = "isDataset";
+	private static final String FACETS_TYPE_ISAVOINDATA     = "isAvoindata";
+	private static final String FACETS_TYPE_ISPTAAINEISTO   = "isPtaAineisto";
+
+	private static final List<String> FACETS_TYPE_ALL = Collections.unmodifiableList(
+			Arrays.asList(FACETS_TYPE_ISSERVICE, FACETS_TYPE_ISDATASET, 
+					FACETS_TYPE_ISAVOINDATA, FACETS_TYPE_ISPTAAINEISTO));
+			
+	
 	private static Logger logger = Logger.getLogger(FacetedElasticsearchHakuKoneImpl.class);
 	
 	private RestHighLevelClient client;
@@ -81,14 +105,23 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 		}
 		
 		// TODO: sort
+		// TODO: facet filters
 		
 		sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
 		sourceBuilder.fetchSource("*", null);
 		
 		
-		// 'tis the way to do it
-		sourceBuilder.aggregation(AggregationBuilders.terms("keywordsInspire").field("keywordsInspire"));
-		sourceBuilder.aggregation(AggregationBuilders.terms("topicCategories").field("topicCategories"));
+		// The aggregation queries
+		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_INSPIRE_KEYWORDS).field("keywordsInspire"));
+		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_TOPIC_CATEGORIES).field("topicCategories"));
+		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_DISTRIBUTION_FORMATS).field("distributionFormats"));
+		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_ORGANISATIONS).field("organisations.organisationName"));
+		
+		// The "type" in the facet response is built out of these four separate queries
+		sourceBuilder.aggregation(AggregationBuilders.sum(FACETS_TYPE_ISSERVICE).field("isService"));
+		sourceBuilder.aggregation(AggregationBuilders.sum(FACETS_TYPE_ISDATASET).field("isDataset"));
+		sourceBuilder.aggregation(AggregationBuilders.sum(FACETS_TYPE_ISAVOINDATA).field("isAvoindata"));
+		sourceBuilder.aggregation(AggregationBuilders.sum(FACETS_TYPE_ISPTAAINEISTO).field("isPtaAineisto"));
 		
 		// Only request explanations if trace level logging is enabled
 		if (logger.isTraceEnabled()) {
@@ -100,11 +133,6 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 		request.source(sourceBuilder);
 		
 		SearchResponse response = client.search(request);
-		
-		Aggregation aggCats = response.getAggregations().get("topicCategories");
-		
-		// TODO: figure out how to use the aggregation response
-		System.out.println(aggCats.getMetaData());
 		
 		SearchHits hits = response.getHits();
 		
@@ -119,18 +147,38 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 				}
 				Hit osuma = new Hit();
 
-				HitText fi = HitText.create(
+				// TODO: organisations are a mess at the moment
+				osuma.getText().add(HitText.create(
 						"FI",
 						extractStringValue(t.getSourceAsMap().get("title")),
 						extractStringValue(t.getSourceAsMap().get("abstract")),
-						"TODO"); // TODO: <- organisation name
+						"TODO")); // TODO: <- organisation name
 				
-				osuma.getText().add(fi);
+				osuma.getText().add(HitText.create(
+						"SV",
+						extractStringValue(t.getSourceAsMap().get("title_sv")),
+						extractStringValue(t.getSourceAsMap().get("abstract_sv")),
+						"TODO")); // TODO: <- organisation name
+
+				osuma.getText().add(HitText.create(
+						"EN",
+						extractStringValue(t.getSourceAsMap().get("title_en")),
+						extractStringValue(t.getSourceAsMap().get("abstract_en")),
+						"TODO")); // TODO: <- organisation name
+
 				
 				osuma.setAbstractUris(extractListValue(t.getSourceAsMap().get(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI)));
 				osuma.setAbstractTopicUris(extractListValue(t.getSourceAsMap().get(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI)));
 				osuma.setUrl("http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/" + t.getId());
 				osuma.setScore((double)t.getScore());
+				osuma.setDateStamp(extractStringValue(t.getSourceAsMap().get("datestamp")));
+				osuma.setDistributionFormats(extractListValue(t.getSourceAsMap().get("distributionFormats")));
+				osuma.setKeywordsInspire(extractListValue(t.getSourceAsMap().get("keywordsInspire")));
+				osuma.setTopicCategories(extractListValue(t.getSourceAsMap().get("topicCategories")));
+				
+				
+				
+				
 				tulos.getHits().add(osuma);
 			}
 
@@ -179,11 +227,43 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 			}
 		});
 		
+		// Do the facets
+		Aggregations aggregations = response.getAggregations();
+		
+		// Basic facets
+		tulos.getFacets().put(FACETS_INSPIRE_KEYWORDS,     readFacetValues(aggregations, FACETS_INSPIRE_KEYWORDS));
+		tulos.getFacets().put(FACETS_ORGANISATIONS,        readFacetValues(aggregations, FACETS_ORGANISATIONS));
+		tulos.getFacets().put(FACETS_TOPIC_CATEGORIES,     readFacetValues(aggregations, FACETS_TOPIC_CATEGORIES));
+		tulos.getFacets().put(FACETS_DISTRIBUTION_FORMATS, readFacetValues(aggregations, FACETS_DISTRIBUTION_FORMATS));
+		
+		// Type facet
+		tulos.getFacets().put(FACETS_TYPES, combineParsedSumFacets(aggregations, FACETS_TYPE_ALL));
+		
+		
+		// Do the hints
 		List<String> terms = getQueryProvider().getPyyntoTerms(pyynto);
 		
 		tulos.setHints(getHintProvider().getHints(terms, tulos.getHits()));
 		
 		return tulos;
+	}
+
+	private List<Facet> combineParsedSumFacets(Aggregations aggregations, List<String> facets) {
+		List<Facet> typeFacetValues = new ArrayList<>();
+		for (String str : facets) {
+			ParsedSum sum = aggregations.get(str);
+			typeFacetValues.add(Facet.create(str, (long)sum.getValue()));
+		}
+		return typeFacetValues;
+	}
+
+	private List<Facet> readFacetValues(Aggregations aggregations, String facetName) {
+		List<Facet> facetValues = new ArrayList<>();
+		ParsedStringTerms terms = aggregations.get(facetName);
+		for (Bucket bucket : terms.getBuckets()) {
+			facetValues.add(Facet.create(bucket.getKey().toString(), bucket.getDocCount()));
+		}
+		return facetValues;
 	}
 
 }

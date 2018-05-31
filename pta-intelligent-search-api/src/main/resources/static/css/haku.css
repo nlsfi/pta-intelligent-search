@@ -102,7 +102,7 @@ body {
 }
 
 /* Tulokset */
-#pta-tulokset #pta-tulokset-vinkit, #pta-tulokset #pta-tulokset-osumat {
+#pta-tulokset #pta-tulokset-vinkit, #pta-tulokset #pta-tulokset-osumat, #pta-tulokset-fasetit {
   display: none;
 }
 
@@ -146,6 +146,11 @@ body {
   color: #fff;
   padding: .25em .5em .25em .5em;
   border-radius: 3px;
+}
+
+/* Fasetit */
+#pta-tulokset #pta-tulokset-fasetit table tr {
+  cursor: pointer;
 }
 
 /* Virheet */

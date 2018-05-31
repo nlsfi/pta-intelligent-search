@@ -10,17 +10,20 @@ $(document).ready(function() {
 
 	$('#pta-haku-input-container button').click(function() { teeHaku(); });
 
+	const lang = 'FI';
 	var pageSize = 10;
 
-	function teeHaku(skip) {
-		skip = skip || 0;
+	function teeHaku(skip, facetQuery) {
+		skip       = skip || 0;
+		facetQuery = facetQuery || {};
 		var hakusanat = $('#pta-haku-input-container input').val();
 
 
 		var query = {
 			query: hakusanat.split(/\s+/).filter(function(v) { return v.length > 0; }),
 			skip: skip,
-			pageSize: pageSize
+			pageSize: pageSize,
+			facets: facetQuery
 		};
 
 		var vinkit = $('#pta-tulokset #pta-tulokset-vinkit');
@@ -28,6 +31,9 @@ $(document).ready(function() {
 
 		var osumat = $('#pta-tulokset #pta-tulokset-osumat');
 		osumat.hide();
+
+		var fasetit = $('#pta-tulokset #pta-tulokset-fasetit');
+		fasetit.hide();
 
 		var virhe = $('#pta-tulokset #pta-tulokset-virhe');
 		virhe.hide();
@@ -68,13 +74,15 @@ $(document).ready(function() {
 				tmp.addClass('pta-tulokset-osumat-osuma');
 				
 				var title = $('<p></p>');
-				title.text(osuma.text[0].title + ' ('+Math.round(osuma.score*100)/100+')');
+				var text = osuma.text.find( d => d.lang === lang && d.title) || osuma.text[0] || {};
+				
+				title.text(text.title + ' ('+Math.round(osuma.score*100)/100+')');
 				title.addClass('pta-tulokset-osumat-osuma-title');
 				tmp.append(title);
 				
 				var desc = $('<div></div>');
 				desc.addClass('pta-tulokset-osumat-osuma-desc');
-				desc.text(osuma.text[0].abstractText);
+				desc.text(text.abstractText);
 				desc.hide();
 				title.click(function() { desc.toggle(); });
 				desc.click(function() { desc.toggle(); });
@@ -105,6 +113,35 @@ $(document).ready(function() {
 			}
 			
 			osumat.show();
+
+
+			// Fasetit
+			var fasettiLista = $('#pta-tulokset-fasetit-lista', fasetit);
+			fasettiLista.empty();
+
+			for (var fasetti in result.facets) {
+				var div = $('<div></div>');
+				div.append($('<h4></h4>').text(fasetti));
+				var table = $('<table></table>');
+				
+				console.log(fasetti);
+				result.facets[fasetti].forEach(function(d) {
+					var f = fasetti;
+					var row = $('<tr><td>'+d.id+'</td><td>'+d.count+'</td></tr>');
+					row.on('click', function() {
+						facetQuery[f] = facetQuery[f] || [];
+						facetQuery[f].push(d.id);
+						teeHaku(skip, facetQuery);
+					});
+				    table.append(row);
+				});
+				div.append(table);
+				
+				fasettiLista.append(div);	
+			}
+						
+			
+			fasetit.show();
 
 		}).fail(function(err) {
 			virhe.empty();
