@@ -11,7 +11,7 @@ public class HakuTulos {
 	private List<Hit> hits = new ArrayList<>();
 	private List<String> hints = new ArrayList<>();
 	
-	private Map<String, Facet> facets = new HashMap<>();
+	private Map<String, List<Facet>> facets = new HashMap<>();
 	
 	public void setStartIndex(Long startIndex) {
 		this.startIndex = startIndex;
@@ -45,11 +45,11 @@ public class HakuTulos {
 		this.hits = hits;
 	}
 	
-	public Map<String, Facet> getFacets() {
+	public Map<String, List<Facet>> getFacets() {
 		return facets;
 	}
 	
-	public void setFacets(Map<String, Facet> facets) {
+	public void setFacets(Map<String, List<Facet>> facets) {
 		this.facets = facets;
 	}
 	
