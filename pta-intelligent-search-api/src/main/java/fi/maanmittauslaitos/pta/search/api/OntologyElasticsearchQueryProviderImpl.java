@@ -10,13 +10,13 @@ import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
+import org.elasticsearch.index.query.AbstractQueryBuilder;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchPhraseQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 import fi.maanmittauslaitos.pta.search.text.TextProcessor;
@@ -104,9 +104,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	}
 	
 	@Override
-	public SearchSourceBuilder buildSearchSource(HakuPyynto pyynto) {
-		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder(); 
-		
+	public BoolQueryBuilder buildSearchSource(HakuPyynto pyynto) {
 		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
 
 		List<String> pyyntoTerms = getPyyntoTerms(pyynto);
@@ -125,9 +123,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 			boolQuery.should().retainAll(qb);
 		}
 		
-		sourceBuilder.query(boolQuery);
-		
-		return sourceBuilder;
+		return boolQuery;
 	}
 
 	private void lisaaVapaaSanahaku(HakuPyynto pyynto, BoolQueryBuilder boolQuery) {
@@ -143,17 +139,17 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 
 	private void lisaaOntologisetTermit(Set<SearchTerm> termit, BoolQueryBuilder boolQuery) {
 		for (SearchTerm term : termit) {
-			MatchPhraseQueryBuilder tmp;
+			QueryBuilder tmp;
 			
-			tmp = QueryBuilders.matchPhraseQuery(PTAElasticSearchMetadataConstants.FIELD_KEYWORDS_URI, term.resource);
+			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_KEYWORDS_URI, term.resource);
 			tmp.boost((float)term.weight);
 			boolQuery.should().add(tmp);
 
-			tmp = QueryBuilders.matchPhraseQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI, term.resource);
+			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI, term.resource);
 			tmp.boost((float)term.weight);
 			boolQuery.should().add(tmp);
 			
-			tmp = QueryBuilders.matchPhraseQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI, term.resource);
+			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI, term.resource);
 			tmp.boost((float)term.weight*0.75f);
 			boolQuery.should().add(tmp);
 			

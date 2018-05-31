@@ -2,11 +2,11 @@ package fi.maanmittauslaitos.pta.search.api;
 
 import java.util.List;
 
-import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 
 public interface ElasticsearchQueryProvider {
 	public List<String> getPyyntoTerms(HakuPyynto pyynto);
-	public SearchSourceBuilder buildSearchSource(HakuPyynto pyynto);
+	public BoolQueryBuilder buildSearchSource(HakuPyynto pyynto);
 	
 	public class SearchTerm {
 		public final String resource;

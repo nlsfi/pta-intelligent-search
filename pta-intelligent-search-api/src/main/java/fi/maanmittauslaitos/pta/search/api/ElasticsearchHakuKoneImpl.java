@@ -62,7 +62,8 @@ public class ElasticsearchHakuKoneImpl implements HakuKone {
 			return new HakuTulos();
 		}
 		
-		SearchSourceBuilder sourceBuilder = getQueryProvider().buildSearchSource(pyynto);
+		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+		sourceBuilder.query(getQueryProvider().buildSearchSource(pyynto));
 		
 		if (pyynto.getSkip() != null) {
 			tulos.setStartIndex(pyynto.getSkip());

@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import org.apache.log4j.Logger;
@@ -15,6 +16,11 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.common.xcontent.ToXContent;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.TermQueryBuilder;
+import org.elasticsearch.index.query.TermsQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
@@ -39,6 +45,7 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 	private static final String FACETS_TYPES                = "types";
 	
 	// Internal query only
+	
 	private static final String FACETS_TYPE_ISSERVICE       = "isService";
 	private static final String FACETS_TYPE_ISDATASET       = "isDataset";
 	private static final String FACETS_TYPE_ISAVOINDATA     = "isAvoindata";
@@ -48,6 +55,11 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 			Arrays.asList(FACETS_TYPE_ISSERVICE, FACETS_TYPE_ISDATASET, 
 					FACETS_TYPE_ISAVOINDATA, FACETS_TYPE_ISPTAAINEISTO));
 			
+	private static final List<String> FACETS_TERMS_ALL = Collections.unmodifiableList(
+			Arrays.asList(FACETS_INSPIRE_KEYWORDS, FACETS_DISTRIBUTION_FORMATS,
+					FACETS_TOPIC_CATEGORIES, FACETS_ORGANISATIONS
+					));
+	
 	
 	private static Logger logger = Logger.getLogger(FacetedElasticsearchHakuKoneImpl.class);
 	
@@ -88,8 +100,15 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 			return new HakuTulos();
 		}
 		
-		SearchSourceBuilder sourceBuilder = getQueryProvider().buildSearchSource(pyynto);
+		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+		sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
+		sourceBuilder.fetchSource("*", null);
 		
+		BoolQueryBuilder query = getQueryProvider().buildSearchSource(pyynto);
+		
+		sourceBuilder.query(query);
+		
+		// Paging
 		if (pyynto.getSkip() != null) {
 			tulos.setStartIndex(pyynto.getSkip());
 			sourceBuilder.from(pyynto.getSkip().intValue());
@@ -105,11 +124,35 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 		}
 		
 		// TODO: sort
-		// TODO: facet filters
+
 		
-		sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
-		sourceBuilder.fetchSource("*", null);
+		// Facet filter
+
+		// This is really important, otherwise having a facet "filter" will change the behavior
+		// of the "should" query
+		query.minimumShouldMatch(1);
 		
+		for (String facetTerm : FACETS_TERMS_ALL) {
+			List<String> values = pyynto.getFacets().get(facetTerm);
+			if (values != null) {
+				
+				for (String value : values) {
+					TermQueryBuilder term = QueryBuilders.termQuery(facetTerm, value);
+					
+					
+					query.filter().add(term);
+				}
+			}
+		}
+		
+		List<String> types = pyynto.getFacets().get(FACETS_TYPES);
+		if (types != null) {
+			for (String type : types) {
+				TermQueryBuilder term = QueryBuilders.termQuery(type, true);
+				query.filter().add(term);
+			}
+		}
+
 		
 		// The aggregation queries
 		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_INSPIRE_KEYWORDS).field("keywordsInspire"));
@@ -131,6 +174,7 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 		SearchRequest request = new SearchRequest(PTAElasticSearchMetadataConstants.INDEX);
 		request.types(PTAElasticSearchMetadataConstants.TYPE);
 		request.source(sourceBuilder);
+		
 		
 		SearchResponse response = client.search(request);
 		
@@ -175,9 +219,6 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 				osuma.setDistributionFormats(extractListValue(t.getSourceAsMap().get("distributionFormats")));
 				osuma.setKeywordsInspire(extractListValue(t.getSourceAsMap().get("keywordsInspire")));
 				osuma.setTopicCategories(extractListValue(t.getSourceAsMap().get("topicCategories")));
-				
-				
-				
 				
 				tulos.getHits().add(osuma);
 			}
