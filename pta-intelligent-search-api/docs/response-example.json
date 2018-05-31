@@ -1,4 +1,37 @@
 {
+	"startIndex": 0,
+    "totalHits": 5000,
+	"hits": [{
+		"text": [{
+			"lang": "FI",
+			"title": "FMI WMS",
+			"abstractText": "Ilmatieteen laitoksen talvikautena tuottama ...",
+			"organisationName": "Ilmatieteen laitos"
+		},{
+			"lang": "SV",
+			"title": "FMI wee-ämm-äs",
+			"abstractText": "Det WMS servis ..",
+			"organisationName": "*SV* Ilmatieteen laitos"
+		}],
+		"score": 10.3124,
+		"url": "http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/f5368158-b642-4dec-bfcc-aebe2cdc1acf",
+		"dateStamp": "2018-04-03T13:49:01Z",
+		"type": [ "isService", "isAvoindata", "isPtaAineisto" ],
+		"topicCategory": [ "Korkeus", "Foobar" ],
+		"keywordInspire": [ "..." ],
+		"organisation": [ "Ilmatieteen laitos" ],
+		"organisationRoles": [ "owner" ],
+		"distributionFormat": [ "OGC:WMS" ]
+	}{
+		...
+	}],
+	 "hints": [
+        "Pohjavesi",
+        "Aineistot",
+        "Alueet",
+        "Esittäminen",
+        "Vaikutukset"
+    ],
 	"facets":{
 		"type": [{
 			"id": "isDataset",
@@ -11,41 +44,8 @@
 			"id": "Korkeus",
 			"count": 120
 		}],
-		"keywordsInspire": [{ ... }],
+		"keywordInspire": [{ ... }],
 		"organisation": [{ ... }],
 		"distributionFormat": [{ ... }],
-	},
-	 "hints": [
-        "Pohjavesi",
-        "Aineistot",
-        "Alueet",
-        "Esittäminen",
-        "Vaikutukset"
-    ],
-	"hits": [{
-		"text": [{
-			"lang": "FI",
-			"title": "FMI WMS",
-			"abstract": "Ilmatieteen laitoksen talvikautena tuottama ...",
-			"organisationName": "Ilmatieteen laitos"
-		},{
-			"lang": "SV",
-			"title": "FMI wee-ämm-äs",
-			"abstract": "Det WMS servis ..",
-			"organisationName": "*SV* Ilmatieteen laitos"
-		}],
-		"score": 10.3124,
-		"dateStamp": "2018-04-03T13:49:01Z",
-		"url": "http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/f5368158-b642-4dec-bfcc-aebe2cdc1acf",
-		"type": [ "isService", "isAvoindata", "isPtaAineisto" ],
-		"topicCategory": [ "Korkeus", "Foobar" ],
-		"keywordsInspire": [ "..." ],
-		"organisation": [ "Ilmatieteen laitos" ],
-		"organisationRoles": [ "owner" ],
-		"distributionFormat": [ "OGC:WMS" ]
-	}{
-		...
-	}],
-	"startIndex": 0,
-    "totalHits": 5000
+	}
 }
