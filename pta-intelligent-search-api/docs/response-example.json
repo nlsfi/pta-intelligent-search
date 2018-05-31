@@ -1,0 +1,51 @@
+{
+	"facets":{
+		"type": [{
+			"id": "isDataset",
+			"count": 280
+		},{
+			"id": "isService",
+			"count": 89
+		}],
+		"topicCategory": [{
+			"id": "Korkeus",
+			"count": 120
+		}],
+		"keywordsInspire": [{ ... }],
+		"organisation": [{ ... }],
+		"distributionFormat": [{ ... }],
+	},
+	 "hints": [
+        "Pohjavesi",
+        "Aineistot",
+        "Alueet",
+        "Esittäminen",
+        "Vaikutukset"
+    ],
+	"hits": [{
+		"text": [{
+			"lang": "FI",
+			"title": "FMI WMS",
+			"abstract": "Ilmatieteen laitoksen talvikautena tuottama ...",
+			"organisationName": "Ilmatieteen laitos"
+		},{
+			"lang": "SV",
+			"title": "FMI wee-ämm-äs",
+			"abstract": "Det WMS servis ..",
+			"organisationName": "*SV* Ilmatieteen laitos"
+		}],
+		"score": 10.3124,
+		"dateStamp": "2018-04-03T13:49:01Z",
+		"url": "http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/f5368158-b642-4dec-bfcc-aebe2cdc1acf",
+		"type": [ "isService", "isAvoindata", "isPtaAineisto" ],
+		"topicCategory": [ "Korkeus", "Foobar" ],
+		"keywordsInspire": [ "..." ],
+		"organisation": [ "Ilmatieteen laitos" ],
+		"organisationRoles": [ "owner" ],
+		"distributionFormat": [ "OGC:WMS" ]
+	}{
+		...
+	}],
+	"startIndex": 0,
+    "totalHits": 5000
+}

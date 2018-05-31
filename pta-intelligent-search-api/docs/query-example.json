@@ -1,0 +1,19 @@
+{
+	"facets":{
+		"type": [ "isDataset" ],
+		"topicCategory": [ "Korkeus" ],
+		"keywordsInspire": [ "maankäyttö" ],
+		"organisation": [ "Tilastokeskus" ],
+		"distributionFormat": [ "WMF" ]
+	},
+	"pageSize": 10,
+	"query": [
+		"vesi"
+	],
+	"skip": 0,
+	"sort": [{
+		"field": "title/dateStamp/organisation",
+		"order": "desc"
+	}],
+	"optionalFields": [ "abstract_maui_uri" ]
+}
