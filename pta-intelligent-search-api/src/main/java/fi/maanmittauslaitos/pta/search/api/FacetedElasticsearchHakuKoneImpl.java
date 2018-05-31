@@ -22,6 +22,7 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.HitText;
 import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
+import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 
 public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 	private static Logger logger = Logger.getLogger(FacetedElasticsearchHakuKoneImpl.class);
@@ -94,8 +95,8 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 			sourceBuilder.explain(true);
 		}
 		
-		SearchRequest request = new SearchRequest("pta");
-		request.types("metadata");
+		SearchRequest request = new SearchRequest(PTAElasticSearchMetadataConstants.INDEX);
+		request.types(PTAElasticSearchMetadataConstants.TYPE);
 		request.source(sourceBuilder);
 		
 		SearchResponse response = client.search(request);
@@ -126,8 +127,8 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 				
 				osuma.getText().add(fi);
 				
-				osuma.setAbstractUris(extractListValue(t.getSourceAsMap().get("abstract_uri")));
-				osuma.setAbstractTopicUris(extractListValue(t.getSourceAsMap().get("abstract_maui_uri")));
+				osuma.setAbstractUris(extractListValue(t.getSourceAsMap().get(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI)));
+				osuma.setAbstractTopicUris(extractListValue(t.getSourceAsMap().get(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI)));
 				osuma.setUrl("http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/" + t.getId());
 				osuma.setScore((double)t.getScore());
 				tulos.getHits().add(osuma);

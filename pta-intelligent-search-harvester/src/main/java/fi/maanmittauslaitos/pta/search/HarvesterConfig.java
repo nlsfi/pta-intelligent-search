@@ -26,6 +26,7 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
+import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import fi.maanmittauslaitos.pta.search.index.ElasticsearchDocumentSink;
 import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataExtractorConfigurationFactory;
@@ -73,7 +74,7 @@ public class HarvesterConfig {
 		configuration.getTextProcessingChains().put("abstractProcessor", abstractChain);
 		
 		FieldExtractorConfiguration abstractUri = configuration.getFieldExtractor(ISOMetadataFields.ABSTRACT).copy();
-		abstractUri.setField("abstract_uri");
+		abstractUri.setField(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI);
 		abstractUri.setTextProcessorName("abstractProcessor");
 		
 		configuration.getFieldExtractors().add(abstractUri);
@@ -86,7 +87,7 @@ public class HarvesterConfig {
 		configuration.getTextProcessingChains().put("mauiProcessor", mauiChain);
 		
 		FieldExtractorConfiguration abstractMauiUri = configuration.getFieldExtractor(ISOMetadataFields.ABSTRACT).copy();
-		abstractMauiUri.setField("abstract_maui_uri");
+		abstractMauiUri.setField(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI);
 		abstractMauiUri.setTextProcessorName("mauiProcessor");
 		
 		configuration.getFieldExtractors().add(abstractMauiUri);
@@ -97,7 +98,7 @@ public class HarvesterConfig {
 		configuration.getTextProcessingChains().put("keywordProcessor", keywordChain);
 		
 		FieldExtractorConfiguration keywordsUri = configuration.getFieldExtractor(ISOMetadataFields.KEYWORDS_ALL).copy();
-		keywordsUri.setField("keywords_uri");
+		keywordsUri.setField(PTAElasticSearchMetadataConstants.FIELD_KEYWORDS_URI);
 		keywordsUri.setTextProcessorName("keywordProcessor");
 		
 		configuration.getFieldExtractors().add(keywordsUri);
@@ -217,8 +218,8 @@ public class HarvesterConfig {
 		ret.setPort(9200);
 		ret.setProtocol("http");
 		
-		ret.setIndex("pta");
-		ret.setType("metadata");
+		ret.setIndex(PTAElasticSearchMetadataConstants.INDEX);
+		ret.setType(PTAElasticSearchMetadataConstants.TYPE);
 		
 		ret.setIdField("@id");
 		

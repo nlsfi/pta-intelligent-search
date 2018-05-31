@@ -18,6 +18,8 @@ import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
+import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
+import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataFields;
 import fi.maanmittauslaitos.pta.search.text.TextProcessor;
 
 
@@ -104,7 +106,6 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	
 	@Override
 	public SearchSourceBuilder buildSearchSource(HakuPyynto pyynto) {
-		
 		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder(); 
 		
 		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
@@ -145,15 +146,15 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		for (SearchTerm term : termit) {
 			MatchPhraseQueryBuilder tmp;
 			
-			tmp = QueryBuilders.matchPhraseQuery("keywords_uri", term.resource);
+			tmp = QueryBuilders.matchPhraseQuery(PTAElasticSearchMetadataConstants.FIELD_KEYWORDS_URI, term.resource);
 			tmp.boost((float)term.weight);
 			boolQuery.should().add(tmp);
 
-			tmp = QueryBuilders.matchPhraseQuery("abstract_maui_uri", term.resource);
+			tmp = QueryBuilders.matchPhraseQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI, term.resource);
 			tmp.boost((float)term.weight);
 			boolQuery.should().add(tmp);
 			
-			tmp = QueryBuilders.matchPhraseQuery("abstract_uri", term.resource);
+			tmp = QueryBuilders.matchPhraseQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI, term.resource);
 			tmp.boost((float)term.weight*0.75f);
 			boolQuery.should().add(tmp);
 			

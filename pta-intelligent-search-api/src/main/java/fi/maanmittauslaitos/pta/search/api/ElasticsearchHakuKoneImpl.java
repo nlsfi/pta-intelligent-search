@@ -20,6 +20,7 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.HitText;
 import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
+import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 
 public class ElasticsearchHakuKoneImpl implements HakuKone {
 	private static Logger logger = Logger.getLogger(ElasticsearchHakuKoneImpl.class);
@@ -112,8 +113,8 @@ public class ElasticsearchHakuKoneImpl implements HakuKone {
 				
 				osuma.getText().add(fi);
 				
-				osuma.setAbstractUris(extractListValue(t.getSourceAsMap().get("abstract_uri")));
-				osuma.setAbstractTopicUris(extractListValue(t.getSourceAsMap().get("abstract_maui_uri")));
+				osuma.setAbstractUris(extractListValue(t.getSourceAsMap().get(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI)));
+				osuma.setAbstractTopicUris(extractListValue(t.getSourceAsMap().get(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI)));
 				osuma.setUrl("http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/" + t.getId());
 				osuma.setScore((double)t.getScore());
 				tulos.getHits().add(osuma);
