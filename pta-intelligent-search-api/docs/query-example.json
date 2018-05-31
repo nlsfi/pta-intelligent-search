@@ -6,10 +6,10 @@
 	],
 	"facets": {
 		"type": [ "isDataset" ],
-		"topicCategory": [ "Korkeus" ],
-		"keywordInspire": [ "maankäyttö" ],
-		"organisation": [ "Tilastokeskus" ],
-		"distributionFormat": [ "WMF" ]
+		"topicCategories": [ "Korkeus" ],
+		"keywordsInspire": [ "maankäyttö" ],
+		"organisations": [ "Tilastokeskus" ],
+		"distributionFormats": [ "WMF" ]
 	},
 	"sort": [{
 		"field": "title/dateStamp/organisation",

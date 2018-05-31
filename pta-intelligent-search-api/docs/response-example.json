@@ -17,11 +17,11 @@
 		"url": "http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/f5368158-b642-4dec-bfcc-aebe2cdc1acf",
 		"dateStamp": "2018-04-03T13:49:01Z",
 		"type": [ "isService", "isAvoindata", "isPtaAineisto" ],
-		"topicCategory": [ "Korkeus", "Foobar" ],
-		"keywordInspire": [ "..." ],
-		"organisation": [ "Ilmatieteen laitos" ],
+		"topicCategories": [ "Korkeus", "Foobar" ],
+		"keywordsInspire": [ "..." ],
+		"organisations": [ "Ilmatieteen laitos" ],
 		"organisationRoles": [ "owner" ],
-		"distributionFormat": [ "OGC:WMS" ]
+		"distributionFormats": [ "OGC:WMS" ]
 	}{
 		...
 	}],
@@ -44,8 +44,8 @@
 			"id": "Korkeus",
 			"count": 120
 		}],
-		"keywordInspire": [{ ... }],
-		"organisation": [{ ... }],
-		"distributionFormat": [{ ... }],
+		"keywordsInspire": [{ ... }],
+		"organisations": [{ ... }],
+		"distributionFormats": [{ ... }],
 	}
 }
