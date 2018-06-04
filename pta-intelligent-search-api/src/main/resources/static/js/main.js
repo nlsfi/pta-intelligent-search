@@ -63,12 +63,9 @@ $(document).ready(function() {
 	function readSortFromUI() {
 		var field = $('#pta-haku-input #pta-haku-sort #pta-haku-sort-field').val();
 		var value = $('#pta-haku-input #pta-haku-sort #pta-haku-sort-order').is(":checked");
-		if (!field || field === 'score') {
-			return [];
-		}
 		return [{
 			field: field,
-			order: value ? 'asc' : 'desc'
+			order: value ? 'desc' : 'asc'
 		}];
 	}
 
