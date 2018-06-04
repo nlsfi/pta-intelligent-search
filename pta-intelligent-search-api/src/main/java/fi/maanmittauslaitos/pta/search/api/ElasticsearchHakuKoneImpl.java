@@ -47,7 +47,7 @@ public class ElasticsearchHakuKoneImpl implements HakuKone {
 	}
 	
 	@Override
-	public HakuTulos haku(HakuPyynto pyynto) throws IOException {
+	public HakuTulos haku(HakuPyynto pyynto, Language lang) throws IOException {
 		HakuTulos tulos = new HakuTulos();
 		
 		if (pyynto.getQuery().size() == 0) {

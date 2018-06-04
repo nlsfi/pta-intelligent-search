@@ -88,15 +88,12 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 	}
 	
 	@Override
-	public HakuTulos haku(HakuPyynto pyynto) throws IOException {
+	public HakuTulos haku(HakuPyynto pyynto, Language lang) throws IOException {
 		HakuTulos tulos = new HakuTulos();
 		
 		if (pyynto.getQuery().size() == 0) {
 			return new HakuTulos();
 		}
-		
-		// TODO
-		String lang = "FI";
 		
 		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 		sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
@@ -121,20 +118,21 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 			sourceBuilder.size(10);
 		}
 		
-		// TODO: sort
-
-		
-		
 		for (Sort sort : pyynto.getSort()) {
 			SortBuilder<?> sortBuilder = null;
 			if (sort.getField().equals("title")) {
-				if ("SV".equals(lang)) {
+				switch(lang) {
+				case SV:
 					sortBuilder = SortBuilders.fieldSort("titleSvSort");
-				} else if ("EN".equals(lang)) {
+					break;
+				case EN:
 					sortBuilder = SortBuilders.fieldSort("titleEnSort");
-				} else {
+					break;
+				default:
 					sortBuilder = SortBuilders.fieldSort("titleFiSort");
+					
 				}
+				
 			} else if (sort.getField().equals("datestamp")) {
 				sortBuilder = SortBuilders.fieldSort("datestamp");
 			} else if (sort.getField().equals("datestamp")) {

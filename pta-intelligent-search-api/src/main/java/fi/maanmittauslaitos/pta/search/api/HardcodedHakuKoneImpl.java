@@ -4,7 +4,7 @@ import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
 
 public class HardcodedHakuKoneImpl implements HakuKone {
 	@Override
-	public HakuTulos haku(HakuPyynto pyynto) {
+	public HakuTulos haku(HakuPyynto pyynto, Language lang) {
 
 		HakuTulos tulos = new HakuTulos();
 		tulos.getHints().add("koti"+pyynto.getQuery().get(0));
