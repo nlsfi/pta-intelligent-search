@@ -22,7 +22,11 @@ import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms.Bucket;
 import org.elasticsearch.search.aggregations.metrics.sum.ParsedSum;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.sort.SortBuilder;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 
+import fi.maanmittauslaitos.pta.search.api.HakuPyynto.Sort;
 import fi.maanmittauslaitos.pta.search.api.HakuTulos.Facet;
 import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
@@ -91,6 +95,9 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 			return new HakuTulos();
 		}
 		
+		// TODO
+		String lang = "FI";
+		
 		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 		sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
 		sourceBuilder.fetchSource("*", null);
@@ -116,6 +123,40 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 		
 		// TODO: sort
 
+		
+		
+		for (Sort sort : pyynto.getSort()) {
+			SortBuilder<?> sortBuilder = null;
+			if (sort.getField().equals("title")) {
+				if ("SV".equals(lang)) {
+					sortBuilder = SortBuilders.fieldSort("titleSvSort");
+				} else if ("EN".equals(lang)) {
+					sortBuilder = SortBuilders.fieldSort("titleEnSort");
+				} else {
+					sortBuilder = SortBuilders.fieldSort("titleFiSort");
+				}
+			} else if (sort.getField().equals("datestamp")) {
+				sortBuilder = SortBuilders.fieldSort("datestamp");
+			} else if (sort.getField().equals("datestamp")) {
+				sortBuilder = SortBuilders.fieldSort("organisations.organisationName");
+			}
+			
+			
+			if (sortBuilder == null) {
+				throw new IllegalArgumentException("Sort field '"+sort.getField()+"' not recognized");
+			}
+			
+			if ("asc".equals(sort.getOrder())) {
+				sortBuilder.order(SortOrder.ASC);
+			} else if ("desc".equals(sort.getOrder())) {
+				sortBuilder.order(SortOrder.DESC);
+			} else {
+				throw new IllegalArgumentException("Sort order '"+sort.getOrder()+"' not recognized");
+			}
+			
+			sourceBuilder.sort(sortBuilder);
+		}
+		
 		
 		// Facet filter
 

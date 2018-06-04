@@ -13,6 +13,9 @@ curl -XPUT 'localhost:9200/pta' -H 'Content-Type: application/json' -d'
         "keywordsInspire":        { "type": "keyword" },
         "topicCategories":        { "type": "keyword" },
         "distributionFormats":    { "type": "keyword" },
+        "titleFiSort":            { "type": "keyword" },
+        "titleSvSort":            { "type": "keyword" },
+        "titleEnSort":            { "type": "keyword" },
         "organisations": {
           "type": "object",
           "properties": {

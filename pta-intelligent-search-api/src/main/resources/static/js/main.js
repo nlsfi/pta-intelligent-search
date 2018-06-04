@@ -4,26 +4,97 @@ $(document).ready(function() {
 
 	$('#pta-haku-input-container input').keypress(function (e) {
 		if (e.which == 13) {
+			updateSortUI(); // reset sort
 			teeHaku();
 		}
 	});
 
-	$('#pta-haku-input-container button').click(function() { teeHaku(); });
+	$('#pta-haku-input-container button').click(function() {
+		updateSortUI(); // reset sort
+		teeHaku();
+	});
+	
+	const sortFields = [{
+		value: 'score', text: 'Vakio'
+	},{
+		value: 'title', text: 'Otsikko'
+	},{
+		value: 'datestamp', text: 'Julkaisupäivä'
+	},{
+		value: 'organisation', text: 'Organisaatio'
+	}];
+	
+	function updateSortUI(currentSort) {
+		currentSort = currentSort || {};
+		
+		var sortti = $('#pta-haku-input #pta-haku-sort');
+	
+		var ret = $('<div><div>').attr('id', 'sort');
+		var fieldSelect = $('<select></select>').attr('id', 'pta-haku-sort-field');
+		
+		for (var i in sortFields) {
+			var opt = $('<option></option>')
+				.attr('value',sortFields[i].value)
+				.text(sortFields[i].text);
+			if (currentSort.field === sortFields[i].value) {
+				opt.attr('selected',true);
+			}
+			fieldSelect.append(opt);
+		}
+		ret.append(fieldSelect);
+		
+		var order = $('<input type="checkbox"></input>')
+			.attr('id', 'pta-haku-sort-order')
+			.text('Nouseva');
+		
+		if (currentSort.sort !== 'desc') {
+			order.attr('checked', true);
+		}
+		ret.append(order);
+		
+		// The value of redoLastSearch is switched, so we can't bind to it directly
+		fieldSelect.on('change', function() { redoLastSearch(); });
+		order.on('change', function() { redoLastSearch(); });
+
+		sortti.empty();
+		sortti.append(ret);
+	}
+	
+	function readSortFromUI() {
+		var field = $('#pta-haku-input #pta-haku-sort #pta-haku-sort-field').val();
+		var value = $('#pta-haku-input #pta-haku-sort #pta-haku-sort-order').is(":checked");
+		if (!field || field === 'score') {
+			return [];
+		}
+		return [{
+			field: field,
+			order: value ? 'asc' : 'desc'
+		}];
+	}
 
 	const lang = 'FI';
 	var pageSize = 10;
+	
+	var redoLastSearch = function() { };
 
 	function teeHaku(skip, facetQuery) {
 		skip       = skip || 0;
 		facetQuery = facetQuery || {};
+		
+		redoLastSearch = function() {
+			teeHaku(skip, facetQuery);
+		}
+		
 		var hakusanat = $('#pta-haku-input-container input').val();
-
+		var sort = readSortFromUI();
+		console.log('sort', sort);
 
 		var query = {
 			query: hakusanat.split(/\s+/).filter(function(v) { return v.length > 0; }),
 			skip: skip,
 			pageSize: pageSize,
-			facets: facetQuery
+			facets: facetQuery,
+			sort: sort
 		};
 
 		var vinkit = $('#pta-tulokset #pta-tulokset-vinkit');
@@ -37,7 +108,8 @@ $(document).ready(function() {
 
 		var virhe = $('#pta-tulokset #pta-tulokset-virhe');
 		virhe.hide();
-
+		
+		
 		$.ajax({
 			url: 'v1/search',
 			method: 'POST',
@@ -45,8 +117,7 @@ $(document).ready(function() {
 			contentType: 'application/json',
 			dataType: 'json'
 		}).done(function(result) {
-
-
+		
 			// Vinkit
 			var vinkkiLista = $('#pta-tulokset-vinkit-lista', vinkit);
 			vinkkiLista.empty();

@@ -120,6 +120,19 @@ public class HarvesterConfig {
 		
 		configuration.getFieldExtractors().add(annotatedKeywordExtractor);
 		
+		// Copy the title to titleSort (which is a keyword field to allow sorting)
+		FieldExtractorConfiguration titleFiSort = configuration.getFieldExtractor(ISOMetadataFields.TITLE).copy();
+		titleFiSort.setField("titleFiSort");
+		configuration.getFieldExtractors().add(titleFiSort);
+		
+		FieldExtractorConfiguration titleSvSort = configuration.getFieldExtractor(ISOMetadataFields.TITLE_SV).copy();
+		titleSvSort.setField("titleSvSort");
+		configuration.getFieldExtractors().add(titleSvSort);
+		
+		FieldExtractorConfiguration titleEnSort = configuration.getFieldExtractor(ISOMetadataFields.TITLE_EN).copy();
+		titleEnSort.setField("titleEnSort");
+		configuration.getFieldExtractors().add(titleEnSort);
+		
 		
 		return factory.getDocumentProcessorFactory().createProcessor(configuration);
 		
