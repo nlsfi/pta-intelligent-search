@@ -20,8 +20,6 @@ $(document).ready(function() {
 		value: 'title', text: 'Otsikko'
 	},{
 		value: 'datestamp', text: 'Julkaisupäivä'
-	},{
-		value: 'organisation', text: 'Organisaatio'
 	}];
 	
 	function updateSortUI(currentSort) {

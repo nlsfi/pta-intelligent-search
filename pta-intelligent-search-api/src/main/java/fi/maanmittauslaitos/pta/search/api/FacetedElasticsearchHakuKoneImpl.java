@@ -135,8 +135,6 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 				
 			} else if (sort.getField().equals("datestamp")) {
 				sortBuilder = SortBuilders.fieldSort("datestamp");
-			} else if (sort.getField().equals("datestamp")) {
-				sortBuilder = SortBuilders.fieldSort("organisations.organisationName");
 			} else if (sort.getField().equals("score")) {
 				sortBuilder = SortBuilders.fieldSort("_score");
 			}
