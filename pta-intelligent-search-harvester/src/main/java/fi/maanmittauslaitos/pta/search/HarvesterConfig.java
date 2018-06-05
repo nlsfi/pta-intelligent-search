@@ -36,6 +36,7 @@ import fi.maanmittauslaitos.pta.search.text.MauiTextProcessor;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 import fi.maanmittauslaitos.pta.search.text.RegexProcessor;
 import fi.maanmittauslaitos.pta.search.text.StopWordsProcessor;
+import fi.maanmittauslaitos.pta.search.text.TerminologyExpansionProcessor;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 import fi.maanmittauslaitos.pta.search.text.TextSplitterProcessor;
 import fi.maanmittauslaitos.pta.search.text.WordCombinationProcessor;
@@ -59,14 +60,10 @@ public class HarvesterConfig {
 		DocumentProcessingConfiguration configuration = factory.createMetadataDocumentProcessingConfiguration();
 		
 		
-		
-		
-		
 		// Ontology models and and text processors
 		Model model = getTerminologyModel();
 		RDFTerminologyMatcherProcessor terminologyProcessor = createTerminologyMatcher(model);
 		WordCombinationProcessor wordCombinationProcessor = createWordCombinationProcessor(model);
-		
 		
 		
 		// Set up abstract processor (abstract => abstract_uri)
@@ -79,11 +76,23 @@ public class HarvesterConfig {
 		
 		configuration.getFieldExtractors().add(abstractUri);
 		
-		// TODO: tämän pitäisi hakea myös yläkäsitteet indeksiin
+		// Abstract processor that determines the parents of
+		TextProcessingChain abstractParentsChain = createAbstractParentProcessingChain(terminologyProcessor, wordCombinationProcessor, model);
+		configuration.getTextProcessingChains().put("abstractParentProcessor", abstractParentsChain);
+		
+		FieldExtractorConfiguration abstract2Uri = configuration.getFieldExtractor(ISOMetadataFields.ABSTRACT).copy();
+		abstract2Uri.setField(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI_PARENTS);
+		abstract2Uri.setTextProcessorName("abstractParentProcessor");
+		
+		configuration.getFieldExtractors().add(abstract2Uri);
+		// tätä ei vielä ajeta, jokin bugaa
 		
 		
 		// Set up maui chain for abstract (abstract => abstract_maui_uri)
-		TextProcessingChain mauiChain = createMauiProcessingChain();
+		MauiTextProcessor mauiTextProcessor = createMauiProcessingChain(); 
+		TextProcessingChain mauiChain = new TextProcessingChain();
+		mauiChain.getChain().add(mauiTextProcessor);
+		
 		configuration.getTextProcessingChains().put("mauiProcessor", mauiChain);
 		
 		FieldExtractorConfiguration abstractMauiUri = configuration.getFieldExtractor(ISOMetadataFields.ABSTRACT).copy();
@@ -91,6 +100,16 @@ public class HarvesterConfig {
 		abstractMauiUri.setTextProcessorName("mauiProcessor");
 		
 		configuration.getFieldExtractors().add(abstractMauiUri);
+		
+		// Set up maui chain for abstract (abstract => abstract_maui_uri_parents)
+		TextProcessingChain mauiParentsChain = createMauiParentProcessingChain(mauiTextProcessor, model);
+		configuration.getTextProcessingChains().put("mauiParentsProcessor", mauiParentsChain);
+		
+		FieldExtractorConfiguration abstractMauiParentsUri = configuration.getFieldExtractor(ISOMetadataFields.ABSTRACT).copy();
+		abstractMauiParentsUri.setField(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI_PARENTS);
+		abstractMauiParentsUri.setTextProcessorName("mauiParentsProcessor");
+		
+		configuration.getFieldExtractors().add(abstractMauiParentsUri);
 		
 		
 		// Keyword to uri detection (keywords => keywords_uri) 
@@ -136,6 +155,21 @@ public class HarvesterConfig {
 		
 		return factory.getDocumentProcessorFactory().createProcessor(configuration);
 		
+	}
+
+
+	private TextProcessingChain createMauiParentProcessingChain(MauiTextProcessor mauiTextProcessor, Model model) {
+		TextProcessingChain ret = new TextProcessingChain();
+		
+		ret.getChain().add(mauiTextProcessor);
+
+		TerminologyExpansionProcessor expansionProcessor = new TerminologyExpansionProcessor();
+		expansionProcessor.setModel(model);
+		expansionProcessor.setPredicates(Arrays.asList(SKOS.BROADER));
+		
+		ret.getChain().add(expansionProcessor);
+		
+		return ret;
 	}
 
 
@@ -188,10 +222,21 @@ public class HarvesterConfig {
 		return ret;
 	}
 	
+	private TextProcessingChain createAbstractParentProcessingChain(RDFTerminologyMatcherProcessor terminologyProcessor,
+			WordCombinationProcessor wordCombinationProcessor, Model model) throws IOException {
+		TextProcessingChain ret = createAbstractProcessingChain(terminologyProcessor, wordCombinationProcessor);
 
-	private TextProcessingChain createMauiProcessingChain() {
-		TextProcessingChain ret = new TextProcessingChain();
+		TerminologyExpansionProcessor expansionProcessor = new TerminologyExpansionProcessor();
+		expansionProcessor.setModel(model);
+		expansionProcessor.setPredicates(Arrays.asList(SKOS.BROADER));
 		
+		ret.getChain().add(expansionProcessor);
+		
+		return ret;
+	}
+	
+
+	private MauiTextProcessor createMauiProcessingChain() {
 		MauiTextProcessor mauiTextProcessor = new MauiTextProcessor();
 		mauiTextProcessor.setMauiStemmer(new FinnishStemmer());
 		mauiTextProcessor.setMauiStopWords(new StopwordsFinnish());
@@ -202,8 +247,7 @@ public class HarvesterConfig {
 		mauiTextProcessor.setLanguage("fi");
 		
 		mauiTextProcessor.init();
-		ret.getChain().add(mauiTextProcessor);
-		return ret;
+		return mauiTextProcessor;
 	}
 
 

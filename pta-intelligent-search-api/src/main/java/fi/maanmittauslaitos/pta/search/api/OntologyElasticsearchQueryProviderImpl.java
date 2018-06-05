@@ -1,5 +1,6 @@
 package fi.maanmittauslaitos.pta.search.api;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -110,10 +111,8 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 			logger.info("Hakusanat: "+pyynto.getQuery()+", tunnistetut termit: "+pyyntoTerms);
 		}
 		
-		Set<SearchTerm> termit = buildSearchTerms(pyyntoTerms);
-		
-		lisaaOntologisetTermit(termit, boolQuery);
-		lisaaVapaaSanahaku(pyynto, boolQuery);
+		lisaaOntologisetTermit(pyyntoTerms, boolQuery);
+		lisaaVapaaSanahaku(pyyntoTerms, boolQuery);
 
 		if (boolQuery.should().size() > getMaxQueryTermsToElasticsearch()) {
 			List<QueryBuilder> qb = boolQuery.should().subList(0, getMaxQueryTermsToElasticsearch());
@@ -124,8 +123,8 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		return boolQuery;
 	}
 
-	private void lisaaVapaaSanahaku(HakuPyynto pyynto, BoolQueryBuilder boolQuery) {
-		for (String sana : pyynto.getQuery()) {
+	private void lisaaVapaaSanahaku(Collection<String> terms, BoolQueryBuilder boolQuery) {
+		for (String sana : terms) {
 			MatchQueryBuilder tmp;
 			
 			tmp = QueryBuilders.matchQuery("abstract", sana);
@@ -135,55 +134,33 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		}
 	}
 
-	private void lisaaOntologisetTermit(Set<SearchTerm> termit, BoolQueryBuilder boolQuery) {
-		for (SearchTerm term : termit) {
+	private void lisaaOntologisetTermit(Collection<String> termit, BoolQueryBuilder boolQuery) {
+		for (String term : termit) {
 			QueryBuilder tmp;
 			
-			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_KEYWORDS_URI, term.resource);
-			tmp.boost((float)term.weight);
+			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_KEYWORDS_URI, term);
+			tmp.boost(1.0f);
 			boolQuery.should().add(tmp);
 
-			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI, term.resource);
-			tmp.boost((float)term.weight);
+			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI, term);
+			tmp.boost(1.0f);
 			boolQuery.should().add(tmp);
-			
-			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI, term.resource);
-			tmp.boost((float)term.weight*0.75f);
-			boolQuery.should().add(tmp);
-			
-		}
-	}
 
-	private Set<SearchTerm> buildSearchTerms(List<String> pyyntoTerms) {
-		Set<SearchTerm> termit = new HashSet<>();
-		
-		Set<String> prosessoidutYlakasitteet = new HashSet<>(); // Vältetään uudelleenkäsittely
-		Set<String> prosessoimattomatYlakasitteet = new HashSet<>();
-		
-		double weight = 1.0;
-		
-		for (String termi : pyyntoTerms) {
-			termit.add(new SearchTerm(termi, weight));
-			prosessoimattomatYlakasitteet.add(termi);
+			
+			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI, term);
+			tmp.boost(0.75f);
+			boolQuery.should().add(tmp);
+
+			
+			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI_PARENTS, term);
+			tmp.boost(1.0f);
+			boolQuery.should().add(tmp);
+
+			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI_PARENTS, term);
+			tmp.boost(0.75f);
+			boolQuery.should().add(tmp);
+			
 		}
-		
-		for (int level = 0; level < ontologyLevels; level++) {
-			prosessoidutYlakasitteet.addAll(prosessoidutYlakasitteet);
-			
-			Set<String> alakasitteet = haeAlakasitteet(prosessoimattomatYlakasitteet);
-			weight *= getWeightFactor();
-			
-			prosessoimattomatYlakasitteet = new HashSet<>();
-			
-			for (String termi : alakasitteet) {
-				termit.add(new SearchTerm(termi, weight));
-				if (!prosessoidutYlakasitteet.contains(termi)) {
-					prosessoimattomatYlakasitteet.add(termi);
-				}
-			}
-		}
-		
-		return termit;
 	}
 
 	@Override

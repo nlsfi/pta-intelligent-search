@@ -18,10 +18,22 @@ public class PTAElasticSearchMetadataConstants {
 	public static final String FIELD_ABSTRACT_MAUI_URI = "abstract_maui_uri";
 	
 	/**
+	 * Name of the source field that contains ontology terms (as uris) that are the parents
+	 * of the terms annotated by maui from the abstract field
+	 */
+	public static final String FIELD_ABSTRACT_MAUI_URI_PARENTS = "abstract_maui_uri_parents";
+	
+	/**
 	 * Name of the source field where ontology terms (as uris) matched from the abstract
 	 * are stored
 	 */
 	public static final String FIELD_ABSTRACT_URI = "abstract_uri";
+	
+	/**
+	 * Name of the source field that contains ontology terms (as uris) that are the parents
+	 * of the terms found in the abstract
+	 */
+	public static final String FIELD_ABSTRACT_URI_PARENTS = "abstract_uri_parents";
 	
 	/**
 	 * Name of the source field where ontology terms (as uris) matched from the keywords

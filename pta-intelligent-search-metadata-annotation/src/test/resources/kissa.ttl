@@ -45,3 +45,11 @@
     skos:prefLabel "kisu"@fi .
 
 
+:Y96840 a skos:Concept ;
+    dct:created "1985-01-01"^^xsd:date ;
+    dct:modified "2016-05-23T16:10:39+03:00"^^xsd:dateTime ;
+    skos:broader :Y109999;
+    skos:altLabel "jokujuttu"@fi ;
+    skos:prefLabel "jokujuttu"@fi .
+
+
