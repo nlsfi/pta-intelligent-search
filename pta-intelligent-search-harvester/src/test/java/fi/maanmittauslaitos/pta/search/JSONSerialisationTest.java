@@ -35,7 +35,7 @@ public class JSONSerialisationTest {
 	@Test
 	public void testOrganisation() throws JsonProcessingException {
 		ResponsibleParty org = new ResponsibleParty();
-		org.setOrganisationName("foo");
+		org.setOrganisationNameDefaultLanguage("foo");
 		org.setIsoRole("bar");
 		
 		Document document = new Document();
@@ -43,7 +43,7 @@ public class JSONSerialisationTest {
 		
 		String jsonString = objectMapper.writeValueAsString(document);
 		
-		assertEquals("{\"fields\":{\"organisations\":[{\"organisationName\":\"foo\",\"isoRole\":\"bar\"}]},\"dom\":null}", jsonString);
+		assertEquals("{\"fields\":{\"organisations\":[{\"organisationNameDefaultLanguage\":\"foo\",\"isoRole\":\"bar\",\"localisedOrganisationName\":{}}]},\"dom\":null}", jsonString);
 	}
 
 }

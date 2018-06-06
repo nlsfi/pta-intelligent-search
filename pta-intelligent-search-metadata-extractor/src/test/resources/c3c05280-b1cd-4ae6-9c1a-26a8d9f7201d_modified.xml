@@ -7,7 +7,7 @@
    - avoindata.fi keyword has been taken out
    - one topicCategory added (location)
    - added timezone to dateStamp  
-   - added second organisation (owner, different name)
+   - added second organisation (owner, different name, localised name switched to swedish)
   -->
 <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd"
                  xmlns:gts="http://www.isotc211.org/2005/gts"
@@ -63,7 +63,7 @@
             <gco:CharacterString>X-Tilastokeskus</gco:CharacterString>
             <gmd:PT_FreeText>
                <gmd:textGroup>
-                  <gmd:LocalisedCharacterString locale="#EN">Statistics Finland</gmd:LocalisedCharacterString>
+                  <gmd:LocalisedCharacterString locale="#SV">Statistikcentralen</gmd:LocalisedCharacterString>
                </gmd:textGroup>
             </gmd:PT_FreeText>
          </gmd:organisationName>
