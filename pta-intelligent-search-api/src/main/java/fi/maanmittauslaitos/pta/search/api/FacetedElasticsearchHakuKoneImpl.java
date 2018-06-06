@@ -167,7 +167,13 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 			if (values != null) {
 				
 				for (String value : values) {
-					TermQueryBuilder term = QueryBuilders.termQuery(facetTerm, value);
+					String field;
+					if (facetTerm.equals(FACETS_ORGANISATIONS)) {
+						field = "organisations.organisationName";
+					} else {
+						field = facetTerm;
+					}
+					TermQueryBuilder term = QueryBuilders.termQuery(field, value);
 					
 					
 					query.filter().add(term);
