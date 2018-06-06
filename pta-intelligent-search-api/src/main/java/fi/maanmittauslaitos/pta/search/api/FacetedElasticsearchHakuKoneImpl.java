@@ -22,7 +22,7 @@ import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms.Bucket;
 import org.elasticsearch.search.aggregations.metrics.sum.ParsedSum;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.elasticsearch.search.sort.SortBuilder;
+import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 
@@ -118,43 +118,11 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 			sourceBuilder.size(10);
 		}
 		
-		for (Sort sort : pyynto.getSort()) {
-			SortBuilder<?> sortBuilder = null;
-			if (sort.getField().equals("title")) {
-				switch(lang) {
-				case SV:
-					sortBuilder = SortBuilders.fieldSort("titleSvSort");
-					break;
-				case EN:
-					sortBuilder = SortBuilders.fieldSort("titleEnSort");
-					break;
-				default:
-					sortBuilder = SortBuilders.fieldSort("titleFiSort");
-					
-				}
-				
-			} else if (sort.getField().equals("datestamp")) {
-				sortBuilder = SortBuilders.fieldSort("datestamp");
-			} else if (sort.getField().equals("score")) {
-				sortBuilder = SortBuilders.fieldSort("_score");
-			}
-			
-			
-			if (sortBuilder == null) {
-				throw new IllegalArgumentException("Sort field '"+sort.getField()+"' not recognized");
-			}
-			
-			if ("asc".equals(sort.getOrder())) {
-				sortBuilder.order(SortOrder.ASC);
-			} else if ("desc".equals(sort.getOrder())) {
-				sortBuilder.order(SortOrder.DESC);
-			} else {
-				throw new IllegalArgumentException("Sort order '"+sort.getOrder()+"' not recognized");
-			}
-			
-			sourceBuilder.sort(sortBuilder);
-		}
+		List<FieldSortBuilder> sorts = createSort(pyynto, lang);
 		
+		for (FieldSortBuilder sort : sorts) {
+			sourceBuilder.sort(sort);
+		}
 		
 		// Facet filter
 
@@ -162,31 +130,10 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 		// of the "should" query
 		query.minimumShouldMatch(1);
 		
-		for (String facetTerm : FACETS_TERMS_ALL) {
-			List<String> values = pyynto.getFacets().get(facetTerm);
-			if (values != null) {
-				
-				for (String value : values) {
-					String field;
-					if (facetTerm.equals(FACETS_ORGANISATIONS)) {
-						field = "organisations.organisationName";
-					} else {
-						field = facetTerm;
-					}
-					TermQueryBuilder term = QueryBuilders.termQuery(field, value);
-					
-					
-					query.filter().add(term);
-				}
-			}
-		}
+		List<TermQueryBuilder> facetFilters = createFacetFilters(pyynto);
 		
-		List<String> types = pyynto.getFacets().get(FACETS_TYPES);
-		if (types != null) {
-			for (String type : types) {
-				TermQueryBuilder term = QueryBuilders.termQuery(type, true);
-				query.filter().add(term);
-			}
+		for (TermQueryBuilder filter : facetFilters) {
+			query.filter(filter);
 		}
 
 		
@@ -238,6 +185,78 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 		tulos.setHints(getHintProvider().getHints(terms, tulos.getHits()));
 		
 		return tulos;
+	}
+
+	private List<TermQueryBuilder> createFacetFilters(HakuPyynto pyynto) {
+		List<TermQueryBuilder> facetFilters = new ArrayList<>();
+		
+		for (String facetTerm : FACETS_TERMS_ALL) {
+			List<String> values = pyynto.getFacets().get(facetTerm);
+			if (values != null) {
+				
+				for (String value : values) {
+					String field;
+					if (facetTerm.equals(FACETS_ORGANISATIONS)) {
+						field = "organisations.organisationName";
+					} else {
+						field = facetTerm;
+					}
+					TermQueryBuilder term = QueryBuilders.termQuery(field, value);
+					
+					facetFilters.add(term);
+				}
+			}
+		}
+		
+		List<String> types = pyynto.getFacets().get(FACETS_TYPES);
+		if (types != null) {
+			for (String type : types) {
+				TermQueryBuilder term = QueryBuilders.termQuery(type, true);
+				facetFilters.add(term);
+			}
+		}
+		return facetFilters;
+	}
+
+	private List<FieldSortBuilder> createSort(HakuPyynto pyynto, Language lang) {
+		List<FieldSortBuilder> sorts = new ArrayList<>();
+		for (Sort sort : pyynto.getSort()) {
+			FieldSortBuilder sortBuilder = null;
+			if (sort.getField().equals("title")) {
+				switch(lang) {
+				case SV:
+					sortBuilder = SortBuilders.fieldSort("titleSvSort");
+					break;
+				case EN:
+					sortBuilder = SortBuilders.fieldSort("titleEnSort");
+					break;
+				default:
+					sortBuilder = SortBuilders.fieldSort("titleFiSort");
+					
+				}
+				
+			} else if (sort.getField().equals("datestamp")) {
+				sortBuilder = SortBuilders.fieldSort("datestamp");
+			} else if (sort.getField().equals("score")) {
+				sortBuilder = SortBuilders.fieldSort("_score");
+			}
+			
+			
+			if (sortBuilder == null) {
+				throw new IllegalArgumentException("Sort field '"+sort.getField()+"' not recognized");
+			}
+			
+			if ("asc".equals(sort.getOrder())) {
+				sortBuilder.order(SortOrder.ASC);
+			} else if ("desc".equals(sort.getOrder())) {
+				sortBuilder.order(SortOrder.DESC);
+			} else {
+				throw new IllegalArgumentException("Sort order '"+sort.getOrder()+"' not recognized");
+			}
+			
+			sorts.add(sortBuilder);
+		}
+		return sorts;
 	}
 
 	private List<Facet> combineParsedSumFacets(Aggregations aggregations, List<String> facets) {
