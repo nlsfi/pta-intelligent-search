@@ -12,7 +12,7 @@ import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.Value;
 
-import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
+import fi.maanmittauslaitos.pta.search.api.model.SearchResult.Hit;
 
 public class NodeColorizationHitScoreHintProviderImpl extends AbstractHintProvider {
 	

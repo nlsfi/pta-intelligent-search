@@ -48,6 +48,9 @@ public class ResponsiblePartyXPathCustomExtractor implements XPathCustomExtracto
 			try {
 				
 				String language = localisedNameNode.getAttributes().getNamedItem("locale").getNodeValue();
+				if (language.startsWith("#")) {
+					language = language.substring(1);
+				}
 				String value = localisedNameNode.getTextContent();
 				
 				ret.getLocalisedOrganisationName().put(language, value);
@@ -61,7 +64,7 @@ public class ResponsiblePartyXPathCustomExtractor implements XPathCustomExtracto
 			}
 		}
 		
-		ret.setOrganisationNameDefaultLanguage(organisationName);
+		ret.setOrganisationName(organisationName);
 		ret.setIsoRole(isoRole);
 		
 		return ret;

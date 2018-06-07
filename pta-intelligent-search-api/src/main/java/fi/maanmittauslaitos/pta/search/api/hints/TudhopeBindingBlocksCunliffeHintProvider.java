@@ -14,7 +14,7 @@ import org.eclipse.rdf4j.model.Value;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 
-import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
+import fi.maanmittauslaitos.pta.search.api.model.SearchResult.Hit;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 
 /**

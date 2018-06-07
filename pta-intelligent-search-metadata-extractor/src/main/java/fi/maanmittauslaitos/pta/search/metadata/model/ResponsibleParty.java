@@ -4,16 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ResponsibleParty {
-	private String organisationNameDefaultLanguage;
+	private String organisationName;
 	private String isoRole;
 	private Map<String, String> localisedOrganisationName = new HashMap<>();
 	
-	public void setOrganisationNameDefaultLanguage(String organisationNameDefaultLanguage) {
-		this.organisationNameDefaultLanguage = organisationNameDefaultLanguage;
+	public void setOrganisationName(String organisationName) {
+		this.organisationName = organisationName;
 	}
 	
-	public String getOrganisationNameDefaultLanguage() {
-		return organisationNameDefaultLanguage;
+	public String getOrganisationName() {
+		return organisationName;
 	}
 	
 	public void setLocalisedOrganisationName(Map<String, String> localisedOrganisationName) {

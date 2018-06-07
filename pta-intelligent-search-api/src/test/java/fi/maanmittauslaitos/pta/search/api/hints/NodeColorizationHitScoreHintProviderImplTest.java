@@ -21,7 +21,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fi.maanmittauslaitos.pta.search.api.ApplicationConfiguration;
-import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
+import fi.maanmittauslaitos.pta.search.api.model.SearchResult.Hit;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
 
 public class NodeColorizationHitScoreHintProviderImplTest {

@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import fi.maanmittauslaitos.pta.search.api.model.SearchQuery;
+import fi.maanmittauslaitos.pta.search.api.model.SearchResult;
+
 @RestController
 public class HakuController {
 	
@@ -17,11 +20,11 @@ public class HakuController {
 	private HakuKone hakukone;
 
 	@RequestMapping(value = "/v1/search", method = RequestMethod.POST)
-	public HakuTulos hae(@RequestBody HakuPyynto pyynto, @RequestParam("X-CLIENT-LANG") Optional<String> lang) throws IOException
+	public SearchResult hae(@RequestBody SearchQuery pyynto, @RequestParam("X-CLIENT-LANG") Optional<String> lang) throws IOException
 	{
 		Language l = sanitizeLanguage(lang.orElse("FI"));
 		
-		HakuTulos tulos = hakukone.haku(pyynto, l);
+		SearchResult tulos = hakukone.haku(pyynto, l);
 		
 		return tulos;
 	}

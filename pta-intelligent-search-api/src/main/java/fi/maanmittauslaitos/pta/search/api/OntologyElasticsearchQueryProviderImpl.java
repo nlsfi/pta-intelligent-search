@@ -17,6 +17,7 @@ import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 
+import fi.maanmittauslaitos.pta.search.api.model.SearchQuery;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 import fi.maanmittauslaitos.pta.search.text.TextProcessor;
 
@@ -103,7 +104,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	}
 	
 	@Override
-	public BoolQueryBuilder buildSearchSource(HakuPyynto pyynto) {
+	public BoolQueryBuilder buildSearchSource(SearchQuery pyynto) {
 		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
 
 		List<String> pyyntoTerms = getPyyntoTerms(pyynto);
@@ -164,7 +165,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	}
 
 	@Override
-	public List<String> getPyyntoTerms(HakuPyynto pyynto) {
+	public List<String> getPyyntoTerms(SearchQuery pyynto) {
 		return getTextProcessor().process(pyynto.getQuery());
 	}
 	

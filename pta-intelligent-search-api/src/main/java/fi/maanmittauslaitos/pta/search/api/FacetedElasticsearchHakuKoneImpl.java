@@ -26,9 +26,11 @@ import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 
-import fi.maanmittauslaitos.pta.search.api.HakuPyynto.Sort;
-import fi.maanmittauslaitos.pta.search.api.HakuTulos.Facet;
 import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
+import fi.maanmittauslaitos.pta.search.api.model.SearchQuery;
+import fi.maanmittauslaitos.pta.search.api.model.SearchResult;
+import fi.maanmittauslaitos.pta.search.api.model.SearchQuery.Sort;
+import fi.maanmittauslaitos.pta.search.api.model.SearchResult.Facet;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 
 public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
@@ -88,11 +90,11 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 	}
 	
 	@Override
-	public HakuTulos haku(HakuPyynto pyynto, Language lang) throws IOException {
-		HakuTulos tulos = new HakuTulos();
+	public SearchResult haku(SearchQuery pyynto, Language lang) throws IOException {
+		SearchResult tulos = new SearchResult();
 		
 		if (pyynto.getQuery().size() == 0) {
-			return new HakuTulos();
+			return new SearchResult();
 		}
 		
 		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
@@ -187,7 +189,7 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 		return tulos;
 	}
 
-	private List<TermQueryBuilder> createFacetFilters(HakuPyynto pyynto) {
+	private List<TermQueryBuilder> createFacetFilters(SearchQuery pyynto) {
 		List<TermQueryBuilder> facetFilters = new ArrayList<>();
 		
 		for (String facetTerm : FACETS_TERMS_ALL) {
@@ -218,7 +220,7 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 		return facetFilters;
 	}
 
-	private List<FieldSortBuilder> createSort(HakuPyynto pyynto, Language lang) {
+	private List<FieldSortBuilder> createSort(SearchQuery pyynto, Language lang) {
 		List<FieldSortBuilder> sorts = new ArrayList<>();
 		for (Sort sort : pyynto.getSort()) {
 			FieldSortBuilder sortBuilder = null;

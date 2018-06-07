@@ -3,23 +3,26 @@ package fi.maanmittauslaitos.pta.search.api;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 import org.apache.log4j.Logger;
 import org.elasticsearch.search.SearchHit;
 
-import fi.maanmittauslaitos.pta.search.api.HakuTulos.Hit;
-import fi.maanmittauslaitos.pta.search.api.HakuTulos.HitText;
+import fi.maanmittauslaitos.pta.search.api.model.SearchResult;
+import fi.maanmittauslaitos.pta.search.api.model.SearchResult.Hit;
+import fi.maanmittauslaitos.pta.search.api.model.SearchResult.HitText;
+import fi.maanmittauslaitos.pta.search.api.model.SearchResult.HitText.HitOrganisation;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 
 public class SearchHitToAPIHit implements Consumer<SearchHit> {
 	static Logger logger = Logger.getLogger(SearchHitToAPIHit.class);
 	
 	private AtomicInteger hitCount = new AtomicInteger(0);
-	private HakuTulos tulos;
+	private SearchResult tulos;
 
-	public SearchHitToAPIHit(HakuTulos tulos) {
+	public SearchHitToAPIHit(SearchResult tulos) {
 		this.tulos = tulos;
 	}
 
@@ -31,29 +34,49 @@ public class SearchHitToAPIHit implements Consumer<SearchHit> {
 		}
 		Hit osuma = new Hit();
 
-		// TODO: organisations are a mess at the moment
-		osuma.getText().add(HitText.create(
-				"FI",
-				extractStringValue(t.getSourceAsMap().get("title")),
-				extractStringValue(t.getSourceAsMap().get("abstract")),
-				"TODO")); // TODO: <- organisation name
+		@SuppressWarnings("unchecked")
+		List<Map<String, Object>> organisations = (List<Map<String, Object>>)t.getSourceAsMap().get("organisations");
 		
-		osuma.getText().add(HitText.create(
-				"SV",
-				extractStringValue(t.getSourceAsMap().get("title_sv")),
-				extractStringValue(t.getSourceAsMap().get("abstract_sv")),
-				"TODO")); // TODO: <- organisation name
-
-		osuma.getText().add(HitText.create(
-				"EN",
-				extractStringValue(t.getSourceAsMap().get("title_en")),
-				extractStringValue(t.getSourceAsMap().get("abstract_en")),
-				"TODO")); // TODO: <- organisation name
-
 		
+		for (Language lang : Language.values()) {
+			String titleField = "title";
+			String abstractField = "abstract";
+			
+			if (lang != Language.FI) {
+				titleField += lang.getFieldPostfix();
+				abstractField += lang.getFieldPostfix();
+			}
+			HitText text = HitText.create(
+					lang.toString(),
+					extractStringValue(t.getSourceAsMap().get(titleField)),
+					extractStringValue(t.getSourceAsMap().get(abstractField)));
+			
+			
+			for (Map<String, Object> o : organisations) {
+				
+				String name;
+				if (lang == Language.FI) {
+					name = o.get("organisationName").toString();
+				} else {
+					@SuppressWarnings("unchecked")
+					Map<String,String> localisedOrganisationName = (Map<String,String>)o.get("localisedOrganisationName");
+					name = localisedOrganisationName.get(lang.toString());
+				}
+				String role = o.get("isoRole").toString();
+				
+				HitOrganisation org = new HitOrganisation();
+				org.setName(name);
+				org.setRole(role);
+				
+				text.getOrganisations().add(org);
+			}
+
+			osuma.getText().add(text);
+		}
+
+		osuma.setId(t.getId());
 		osuma.setAbstractUris(extractListValue(t.getSourceAsMap().get(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI)));
 		osuma.setAbstractTopicUris(extractListValue(t.getSourceAsMap().get(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI)));
-		osuma.setUrl("http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/" + t.getId());
 		osuma.setScore((double)t.getScore());
 		osuma.setDateStamp(extractStringValue(t.getSourceAsMap().get("datestamp")));
 		osuma.setDistributionFormats(extractListValue(t.getSourceAsMap().get("distributionFormats")));

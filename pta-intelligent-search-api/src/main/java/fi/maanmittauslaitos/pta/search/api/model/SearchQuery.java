@@ -1,4 +1,4 @@
-package fi.maanmittauslaitos.pta.search.api;
+package fi.maanmittauslaitos.pta.search.api.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,7 +8,7 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class HakuPyynto {
+public class SearchQuery {
 	private Long skip;
 	private Long pageSize;
 	private List<String> query = new ArrayList<>();

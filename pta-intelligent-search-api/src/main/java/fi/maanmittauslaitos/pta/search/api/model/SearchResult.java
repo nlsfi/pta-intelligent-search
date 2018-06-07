@@ -1,11 +1,11 @@
-package fi.maanmittauslaitos.pta.search.api;
+package fi.maanmittauslaitos.pta.search.api.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HakuTulos {
+public class SearchResult {
 	private Long startIndex;
 	private Long totalHits;
 	private List<Hit> hits = new ArrayList<>();
@@ -56,12 +56,11 @@ public class HakuTulos {
 	public static class Hit {
 		private List<HitText> text = new ArrayList<>();		
 		private Double score;
-		private String url;
+		private String id;
 		private String dateStamp;
 		private List<String> types = new ArrayList<>();
 		private List<String> topicCategories = new ArrayList<>();
 		private List<String> keywordsInspire = new ArrayList<>();
-		private List<String> organisations = new ArrayList<>();
 		private List<String> organisationRoles = new ArrayList<>();
 		private List<String> distributionFormats = new ArrayList<>();
 		
@@ -78,7 +77,13 @@ public class HakuTulos {
 			return text;
 		}
 		
+		public void setId(String id) {
+			this.id = id;
+		}
 		
+		public String getId() {
+			return id;
+		}
 		
 		public void setScore(Double score) {
 			this.score = score;
@@ -88,24 +93,6 @@ public class HakuTulos {
 			return score;
 		}
 		
-		public void setUrl(String url) {
-			this.url = url;
-		}
-		
-		public String getUrl() {
-			return url;
-		}
-		
-		public Hit withRelevanssi(Double relevanssi) {
-			setScore(relevanssi);
-			return this;
-		}
-		
-		public Hit withUrl(String url) {
-			setUrl(url);
-			return this;
-		}
-
 		public void setDateStamp(String dateStamp) {
 			this.dateStamp = dateStamp;
 		}
@@ -136,14 +123,6 @@ public class HakuTulos {
 		
 		public List<String> getOrganisationRoles() {
 			return organisationRoles;
-		}
-		
-		public void setOrganisations(List<String> organisations) {
-			this.organisations = organisations;
-		}
-		
-		public List<String> getOrganisations() {
-			return organisations;
 		}
 		
 		public void setTopicCategories(List<String> topicCategories) {
@@ -183,7 +162,7 @@ public class HakuTulos {
 		private String lang;
 		private String title;
 		private String abstractText;
-		private String organisationName;
+		private List<HitOrganisation> organisations = new ArrayList<>();
 		
 		public void setAbstractText(String abstractText) {
 			this.abstractText = abstractText;
@@ -201,12 +180,12 @@ public class HakuTulos {
 			return lang;
 		}
 		
-		public void setOrganisationName(String organisationName) {
-			this.organisationName = organisationName;
+		public void setOrganisations(List<HitOrganisation> organisations) {
+			this.organisations = organisations;
 		}
 		
-		public String getOrganisationName() {
-			return organisationName;
+		public List<HitOrganisation> getOrganisations() {
+			return organisations;
 		}
 		
 		public void setTitle(String title) {
@@ -217,13 +196,32 @@ public class HakuTulos {
 			return title;
 		}
 		
-		public static HitText create(String lang, String title, String abstractText, String organisationName) {
+		public static HitText create(String lang, String title, String abstractText) {
 			HitText ret = new HitText();
 			ret.setLang(lang);
 			ret.setTitle(title);
 			ret.setAbstractText(abstractText);
-			ret.setOrganisationName(organisationName);
 			return ret;
+		}
+		public static class HitOrganisation {
+			private String name;
+			private String role;
+			
+			public void setName(String name) {
+				this.name = name;
+			}
+			
+			public String getName() {
+				return name;
+			}
+			
+			public void setRole(String role) {
+				this.role = role;
+			}
+			
+			public String getRole() {
+				return role;
+			}
 		}
 	}
 	
