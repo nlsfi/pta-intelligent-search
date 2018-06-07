@@ -1,4 +1,9 @@
 #!/bin/bash
 
-curl -XGET "http://localhost:9200/pta/_search?size=1&pretty" -H 'Content-Type: application/json' -d' { }'
+N=$1
+if [ "$N" = "" ]; then
+  N=1
+fi
+
+curl -XGET "http://localhost:9200/pta/_search?size="$N"&pretty" -H 'Content-Type: application/json' -d' { }'
 
