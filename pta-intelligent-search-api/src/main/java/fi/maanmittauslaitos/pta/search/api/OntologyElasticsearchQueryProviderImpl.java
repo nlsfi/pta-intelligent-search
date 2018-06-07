@@ -13,7 +13,6 @@ import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
-import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 
@@ -113,7 +112,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		}
 		
 		lisaaOntologisetTermit(pyyntoTerms, boolQuery);
-		lisaaVapaaSanahaku(pyyntoTerms, boolQuery);
+		lisaaVapaaSanahaku(pyynto.getQuery(), boolQuery);
 
 		if (boolQuery.should().size() > getMaxQueryTermsToElasticsearch()) {
 			List<QueryBuilder> qb = boolQuery.should().subList(0, getMaxQueryTermsToElasticsearch());
@@ -129,7 +128,14 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 			MatchQueryBuilder tmp;
 			
 			tmp = QueryBuilders.matchQuery("abstract", sana);
-			tmp.operator(Operator.OR);
+			tmp.boost((float)basicWordMatchWeight);
+			boolQuery.should().add(tmp);
+		}
+		
+		for (String sana : terms) {
+			MatchQueryBuilder tmp;
+			
+			tmp = QueryBuilders.matchQuery("title", sana);
 			tmp.boost((float)basicWordMatchWeight);
 			boolQuery.should().add(tmp);
 		}
@@ -138,7 +144,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	private void lisaaOntologisetTermit(Collection<String> termit, BoolQueryBuilder boolQuery) {
 		for (String term : termit) {
 			QueryBuilder tmp;
-			
+			// TODO: these need to be parametrized
 			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_KEYWORDS_URI, term);
 			tmp.boost(1.0f);
 			boolQuery.should().add(tmp);
