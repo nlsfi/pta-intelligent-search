@@ -86,12 +86,12 @@ public abstract class AbstractHintProvider implements HintProvider {
 		});
 		
 		// Pick at most maxHints values, skipping terms used in the query
-		List<String> ret = findLabelsForHints(entries, pyyntoTerms, getMaxHints());
+		List<String> ret = determineLabelsForHintsKeepResultsWithinMaxSize(entries, pyyntoTerms);
 		
 		return ret;
 	}
 
-	private List<String> findLabelsForHints(List<Entry<IRI, Double>> entries, List<String> pyyntoTerms, int maxSize) {
+	protected List<String> determineLabelsForHintsKeepResultsWithinMaxSize(List<Entry<IRI, Double>> entries, List<String> pyyntoTerms) {
 		List<String> ret = new ArrayList<>();
 		for (Entry<IRI, Double> entry : entries) {
 			IRI resource = entry.getKey();
@@ -113,7 +113,7 @@ public abstract class AbstractHintProvider implements HintProvider {
 				}
 			}
 			
-			if (ret.size() >= maxSize) {
+			if (ret.size() >= getMaxHints()) {
 				break;
 			}
 		}
