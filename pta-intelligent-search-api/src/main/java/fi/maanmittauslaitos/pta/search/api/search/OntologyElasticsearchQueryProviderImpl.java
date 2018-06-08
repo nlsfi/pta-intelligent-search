@@ -12,7 +12,6 @@ import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 
@@ -125,17 +124,17 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 
 	private void lisaaVapaaSanahaku(Collection<String> terms, BoolQueryBuilder boolQuery) {
 		for (String sana : terms) {
-			MatchQueryBuilder tmp;
+			QueryBuilder tmp;
 			
-			tmp = QueryBuilders.matchQuery("abstract", sana);
+			tmp = QueryBuilders.fuzzyQuery("abstract", sana);
 			tmp.boost((float)basicWordMatchWeight);
 			boolQuery.should().add(tmp);
 		}
 		
 		for (String sana : terms) {
-			MatchQueryBuilder tmp;
+			QueryBuilder tmp;
 			
-			tmp = QueryBuilders.matchQuery("title", sana);
+			tmp = QueryBuilders.fuzzyQuery("title", sana);
 			tmp.boost((float)basicWordMatchWeight);
 			boolQuery.should().add(tmp);
 		}
