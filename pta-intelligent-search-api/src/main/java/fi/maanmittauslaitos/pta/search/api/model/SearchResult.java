@@ -61,7 +61,6 @@ public class SearchResult {
 		private List<String> types = new ArrayList<>();
 		private List<String> topicCategories = new ArrayList<>();
 		private List<String> keywordsInspire = new ArrayList<>();
-		private List<String> organisationRoles = new ArrayList<>();
 		private List<String> distributionFormats = new ArrayList<>();
 		
 		// Possibly hidden in API response
@@ -115,14 +114,6 @@ public class SearchResult {
 		
 		public List<String> getKeywordsInspire() {
 			return keywordsInspire;
-		}
-		
-		public void setOrganisationRoles(List<String> organisationRoles) {
-			this.organisationRoles = organisationRoles;
-		}
-		
-		public List<String> getOrganisationRoles() {
-			return organisationRoles;
 		}
 		
 		public void setTopicCategories(List<String> topicCategories) {
@@ -203,6 +194,7 @@ public class SearchResult {
 			ret.setAbstractText(abstractText);
 			return ret;
 		}
+		
 		public static class HitOrganisation {
 			private String name;
 			private String role;
