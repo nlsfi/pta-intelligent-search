@@ -110,8 +110,8 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 			logger.info("Hakusanat: "+pyynto.getQuery()+", tunnistetut termit: "+pyyntoTerms);
 		}
 		
-		lisaaOntologisetTermit(pyyntoTerms, boolQuery);
-		lisaaVapaaSanahaku(pyynto.getQuery(), boolQuery);
+		addOntologicalTermQueries(pyyntoTerms, boolQuery);
+		addFreetextQueries(pyynto.getQuery(), boolQuery);
 
 		if (boolQuery.should().size() > getMaxQueryTermsToElasticsearch()) {
 			List<QueryBuilder> qb = boolQuery.should().subList(0, getMaxQueryTermsToElasticsearch());
@@ -122,7 +122,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		return boolQuery;
 	}
 
-	private void lisaaVapaaSanahaku(Collection<String> terms, BoolQueryBuilder boolQuery) {
+	private void addFreetextQueries(Collection<String> terms, BoolQueryBuilder boolQuery) {
 		for (String sana : terms) {
 			QueryBuilder tmp;
 			
@@ -140,7 +140,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		}
 	}
 
-	private void lisaaOntologisetTermit(Collection<String> termit, BoolQueryBuilder boolQuery) {
+	private void addOntologicalTermQueries(Collection<String> termit, BoolQueryBuilder boolQuery) {
 		for (String term : termit) {
 			QueryBuilder tmp;
 			// TODO: these need to be parametrized
