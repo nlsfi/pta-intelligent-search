@@ -4,11 +4,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.UnknownHostException;
-import java.util.AbstractMap;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.zip.GZIPInputStream;
 
 import org.apache.http.HttpHost;
@@ -22,8 +19,8 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import fi.maanmittauslaitos.pta.search.api.hints.FacetHintProviderImpl;
 import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
-import fi.maanmittauslaitos.pta.search.api.hints.NodeColorizationHitScoreHintProviderImpl;
 import fi.maanmittauslaitos.pta.search.api.search.FacetedElasticsearchHakuKoneImpl;
 import fi.maanmittauslaitos.pta.search.api.search.HakuKone;
 import fi.maanmittauslaitos.pta.search.api.search.OntologyElasticsearchQueryProviderImpl;
@@ -117,38 +114,12 @@ public class ApplicationConfiguration {
 	
 	@Bean
 	public HintProvider hintProvider(Model terminologyModel, Stemmer stemmer, RDFTerminologyMatcherProcessor terminologyProcessor) {
-		NodeColorizationHitScoreHintProviderImpl ret = new NodeColorizationHitScoreHintProviderImpl();
-		ret.setMaxColorizationDepth(2);
+		FacetHintProviderImpl ret = new FacetHintProviderImpl();
 		ret.setStemmer(stemmer);
 		ret.setModel(terminologyModel);
 		ret.setLanguage("fi");
 		
-		List<Entry<IRI, Double>> weights = new ArrayList<>();
-		
-		//weights.add(new AbstractMap.SimpleEntry<>(SKOS.BROADER, 0.5));
-		//weights.add(new AbstractMap.SimpleEntry<>(SKOS.NARROWER, 0.4));
-		weights.add(new AbstractMap.SimpleEntry<>(SKOS.RELATED, 0.5));
-		
-		ret.setRelationsAndWeights(weights);
-		
 		return ret;
-
-		/*
-		TudhopeBindingBlocksCunliffeHintProvider ret = new TudhopeBindingBlocksCunliffeHintProvider();
-		ret.setStemmer(stemmer);
-		ret.setModel(terminologyModel);
-		ret.setLanguage("fi");
-		ret.setTerminologyProcessor(terminologyProcessor);
-		
-		List<Entry<IRI, Double>> relationsAndTravelCosts = new ArrayList<>();
-		
-		relationsAndTravelCosts.add(new AbstractMap.SimpleEntry<>(SKOS.BROADER, 0.33));
-		relationsAndTravelCosts.add(new AbstractMap.SimpleEntry<>(SKOS.RELATED, 0.5));
-		
-		ret.setRelationsAndTravelCosts(relationsAndTravelCosts);
-		
-		return ret;
-		*/
 	}
 
 	
