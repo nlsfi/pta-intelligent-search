@@ -1,4 +1,4 @@
-package fi.maanmittauslaitos.pta.search.api;
+package fi.maanmittauslaitos.pta.search.api.search;
 
 import java.util.Collection;
 import java.util.HashSet;

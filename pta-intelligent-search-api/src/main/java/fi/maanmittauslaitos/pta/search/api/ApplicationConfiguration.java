@@ -24,6 +24,9 @@ import org.springframework.context.annotation.Configuration;
 
 import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
 import fi.maanmittauslaitos.pta.search.api.hints.NodeColorizationHitScoreHintProviderImpl;
+import fi.maanmittauslaitos.pta.search.api.search.FacetedElasticsearchHakuKoneImpl;
+import fi.maanmittauslaitos.pta.search.api.search.HakuKone;
+import fi.maanmittauslaitos.pta.search.api.search.OntologyElasticsearchQueryProviderImpl;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 import fi.maanmittauslaitos.pta.search.text.TextProcessor;

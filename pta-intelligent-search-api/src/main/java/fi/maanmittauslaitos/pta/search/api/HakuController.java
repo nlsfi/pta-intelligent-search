@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fi.maanmittauslaitos.pta.search.api.model.SearchQuery;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult;
+import fi.maanmittauslaitos.pta.search.api.search.HakuKone;
 
 @RestController
 public class HakuController {
