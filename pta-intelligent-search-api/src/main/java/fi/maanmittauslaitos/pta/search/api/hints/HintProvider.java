@@ -2,8 +2,17 @@ package fi.maanmittauslaitos.pta.search.api.hints;
 
 import java.util.List;
 
-import fi.maanmittauslaitos.pta.search.api.model.SearchResult.Hit;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 public interface HintProvider {
-	public List<String> getHints(List<String> pyyntoTerms, List<Hit> hits);
+	/**
+	 * Modify searchSourceBuilder in a way to register aggregations or other query parameters required
+	 * to provide hints. Returns a hintExtractor that can be used to get the results once the query
+	 * has been executed.
+	 * 
+	 * @param pyyntoTerms
+	 * @param searchSourceBuilder
+	 * @return
+	 */
+	public HintExtractor registerHintProvider(List<String> pyyntoTerms, SearchSourceBuilder searchSourceBuilder);
 }

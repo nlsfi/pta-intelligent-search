@@ -19,6 +19,8 @@ import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.util.Models;
 import org.eclipse.rdf4j.model.vocabulary.SKOS;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.Hit;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
@@ -73,56 +75,64 @@ public class NodeColorizationHintProviderImpl implements HintProvider {
 	}
 	
 	@Override
-	public List<String> getHints(List<String> pyyntoTerms, List<Hit> hits) {
+	public HintExtractor registerHintProvider(List<String> pyyntoTerms, SearchSourceBuilder builder) {
 		
-		Set<IRI> iris = new HashSet<>();
-		for (Hit hit : hits) {
-			for (String uri : hit.getAbstractUris()) {
-				iris.add(vf.createIRI(uri));
-			}
-		}
-		
-		Map<IRI, Double> colorized = colorize(iris);
-		
-		List<Entry<IRI, Double>> entries = new ArrayList<>(colorized.entrySet());
-		
-		// Sort by score
-		Collections.sort(entries, new Comparator<Entry<IRI, Double>>() {
+		return new HintExtractor() {
+			
 			@Override
-			public int compare(Entry<IRI, Double> o1, Entry<IRI, Double> o2) {
-				if (o1.getValue() < o2.getValue()) {
-					return 1;
-				} else if (o1.getValue() > o2.getValue()) {
-					return -1;
-				} else {
-					return 0;
+			public List<String> getHints(SearchResponse response, List<Hit> hits) {
+						
+				Set<IRI> iris = new HashSet<>();
+				for (Hit hit : hits) {
+					for (String uri : hit.getAbstractUris()) {
+						iris.add(vf.createIRI(uri));
+					}
 				}
-			}
-		});
+				
+				Map<IRI, Double> colorized = colorize(iris);
+				
+				List<Entry<IRI, Double>> entries = new ArrayList<>(colorized.entrySet());
+				
+				// Sort by score
+				Collections.sort(entries, new Comparator<Entry<IRI, Double>>() {
+					@Override
+					public int compare(Entry<IRI, Double> o1, Entry<IRI, Double> o2) {
+						if (o1.getValue() < o2.getValue()) {
+							return 1;
+						} else if (o1.getValue() > o2.getValue()) {
+							return -1;
+						} else {
+							return 0;
+						}
+					}
+				});
+				
+				// Pick at most maxHints values, skipping terms used in the query
+				List<String> ret = new ArrayList<>();
+				for (Entry<IRI, Double> entry : entries) {
+					IRI resource = entry.getKey();
+					Optional<Value> value = Models.getProperty(getModel(), resource, SKOS.PREF_LABEL);
+					if (!value.isPresent()) {
+						continue;
+					}
+					
+					String label = value.get().stringValue();
+					
+					if (!pyyntoTerms.contains(resource.toString())) {
+					
+					//if (!stemmedQueryTerms.contains(getStemmer().stem(label))) {
+						ret.add(label);
 		
-		// Pick at most maxHints values, skipping terms used in the query
-		List<String> ret = new ArrayList<>();
-		for (Entry<IRI, Double> entry : entries) {
-			IRI resource = entry.getKey();
-			Optional<Value> value = Models.getProperty(getModel(), resource, SKOS.PREF_LABEL);
-			if (!value.isPresent()) {
-				continue;
-			}
-			
-			String label = value.get().stringValue();
-			
-			if (!pyyntoTerms.contains(resource.toString())) {
-			
-			//if (!stemmedQueryTerms.contains(getStemmer().stem(label))) {
-				ret.add(label);
+						if (ret.size() >= getMaxHints()) {
+							break;
+						}
+					}
+				}
+				
+				return ret;
 
-				if (ret.size() >= getMaxHints()) {
-					break;
-				}
 			}
-		}
-		
-		return ret;
+		};
 	}
 	
 	// Public for testing

@@ -199,7 +199,7 @@ public class NodeColorizationHintProviderImplTest {
 		fakeHit.setAbstractUris(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711")); // Sakko
 		
 		
-		List<String> hints = hintProvider.getHints(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711"), Arrays.asList(fakeHit));
+		List<String> hints = hintProvider.registerHintProvider(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711"), null).getHints(null, Arrays.asList(fakeHit));
 		
 		assertEquals(2, hints.size());
 		assertEquals("rangaistukset", hints.get(0));
@@ -230,7 +230,7 @@ public class NodeColorizationHintProviderImplTest {
 		Hit fakeHit2 = new Hit();
 		fakeHit2.setAbstractUris(Arrays.asList("http://www.yso.fi/onto/ysa/Y165908")); // Sakon muuntorangaistus
 		
-		List<String> hints = hintProvider.getHints(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711", "http://www.yso.fi/onto/ysa/Y165908"), Arrays.asList(fakeHit1, fakeHit2));
+		List<String> hints = hintProvider.registerHintProvider(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711", "http://www.yso.fi/onto/ysa/Y165908"), null).getHints(null, Arrays.asList(fakeHit1, fakeHit2));
 		System.out.println(hints);
 		assertEquals(2, hints.size());
 		assertEquals("rangaistukset", hints.get(0));

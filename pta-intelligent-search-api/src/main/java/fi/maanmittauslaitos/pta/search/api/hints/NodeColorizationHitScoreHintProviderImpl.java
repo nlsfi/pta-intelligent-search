@@ -11,6 +11,8 @@ import java.util.Map.Entry;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.Value;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.Hit;
 
@@ -61,25 +63,31 @@ public class NodeColorizationHitScoreHintProviderImpl extends AbstractHintProvid
 	 * This process is done recursively until the configured level of recursion has been reached.   
 	 */
 	@Override
-	public List<String> getHints(List<String> pyyntoTerms, List<Hit> hits) {
+	public HintExtractor registerHintProvider(List<String> pyyntoTerms, SearchSourceBuilder builder) {
 		
-		Set<Entry<IRI, Double>> iris = new HashSet<>();
-		for (Hit hit : hits) {
-			// Topics are stronger hints
-			for (String uri : hit.getAbstractTopicUris()) {
-				iris.add(new AbstractMap.SimpleEntry<IRI, Double>(vf.createIRI(uri), hit.getScore()));
+		return new HintExtractor() {
+			
+			@Override
+			public List<String> getHints(SearchResponse response, List<Hit> hits) {
+				Set<Entry<IRI, Double>> iris = new HashSet<>();
+				for (Hit hit : hits) {
+					// Topics are stronger hints
+					for (String uri : hit.getAbstractTopicUris()) {
+						iris.add(new AbstractMap.SimpleEntry<IRI, Double>(vf.createIRI(uri), hit.getScore()));
+					}
+		
+					// Use raw abstract uris just-in-case
+					for (String uri : hit.getAbstractUris()) {
+						iris.add(new AbstractMap.SimpleEntry<IRI, Double>(vf.createIRI(uri), hit.getScore() * 0.1));
+					}
+		
+				}
+				
+				Map<IRI, Double> colorized = colorize(iris);
+				
+				return produceAndOrderHints(pyyntoTerms, colorized);
 			}
-
-			// Use raw abstract uris just-in-case
-			for (String uri : hit.getAbstractUris()) {
-				iris.add(new AbstractMap.SimpleEntry<IRI, Double>(vf.createIRI(uri), hit.getScore() * 0.1));
-			}
-
-		}
-		
-		Map<IRI, Double> colorized = colorize(iris);
-		
-		return produceAndOrderHints(pyyntoTerms, colorized);
+		};
 	}
 
 	

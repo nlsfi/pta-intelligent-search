@@ -27,6 +27,7 @@ import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 
 import fi.maanmittauslaitos.pta.search.api.Language;
+import fi.maanmittauslaitos.pta.search.api.hints.HintExtractor;
 import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
 import fi.maanmittauslaitos.pta.search.api.model.SearchQuery;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult;
@@ -161,6 +162,7 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 		request.types(PTAElasticSearchMetadataConstants.TYPE);
 		request.source(sourceBuilder);
 		
+		HintExtractor hintExtractor = getHintProvider().registerHintProvider(getQueryProvider().getPyyntoTerms(pyynto), sourceBuilder);
 		
 		SearchResponse response = client.search(request);
 		
@@ -181,11 +183,8 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 		// Type facet
 		tulos.getFacets().put(FACETS_TYPES, combineParsedSumFacets(aggregations, FACETS_TYPE_ALL));
 		
-		
-		// Do the hints
-		List<String> terms = getQueryProvider().getPyyntoTerms(pyynto);
-		
-		tulos.setHints(getHintProvider().getHints(terms, tulos.getHits()));
+		// Do the hints	
+		tulos.setHints(hintExtractor.getHints(response, tulos.getHits()));
 		
 		return tulos;
 	}

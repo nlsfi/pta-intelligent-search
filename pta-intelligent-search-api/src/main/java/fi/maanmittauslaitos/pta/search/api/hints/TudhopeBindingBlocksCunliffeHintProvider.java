@@ -13,6 +13,8 @@ import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Value;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.Hit;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
@@ -51,15 +53,21 @@ public class TudhopeBindingBlocksCunliffeHintProvider extends AbstractHintProvid
 	 * 
 	 */
 	@Override
-	public List<String> getHints(List<String> pyyntoTerms, List<Hit> hits) {
-		Set<IRI> iris = new HashSet<>();
-		for (String iri : pyyntoTerms) {
-			iris.add(vf.createIRI(iri));
-		}
-		
-		Map<IRI, Double> colorized = colorize(iris);
-		
-		return produceAndOrderHints(pyyntoTerms, colorized);
+	public HintExtractor registerHintProvider(List<String> pyyntoTerms, SearchSourceBuilder builder) {
+		return new HintExtractor() {
+			
+			@Override
+			public List<String> getHints(SearchResponse response, List<Hit> hits) {
+				Set<IRI> iris = new HashSet<>();
+				for (String iri : pyyntoTerms) {
+					iris.add(vf.createIRI(iri));
+				}
+				
+				Map<IRI, Double> colorized = colorize(iris);
+				
+				return produceAndOrderHints(pyyntoTerms, colorized);
+			}
+		};
 	}
 	
 	
