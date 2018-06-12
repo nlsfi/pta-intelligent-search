@@ -3,6 +3,7 @@ package fi.maanmittauslaitos.pta.search.api.hints;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -92,7 +93,7 @@ public abstract class AbstractHintProvider implements HintProvider {
 	}
 
 	protected List<String> determineLabelsForHintsKeepResultsWithinMaxSize(List<Entry<IRI, Double>> entries, List<String> pyyntoTerms) {
-		List<String> ret = new ArrayList<>();
+		Set<String> labels = new HashSet<>();
 		for (Entry<IRI, Double> entry : entries) {
 			IRI resource = entry.getKey();
 			Set<Literal> values = Models.getPropertyLiterals(getModel(), resource, SKOS.PREF_LABEL);
@@ -107,16 +108,18 @@ public abstract class AbstractHintProvider implements HintProvider {
 				String label = value.stringValue();
 				
 				if (!pyyntoTerms.contains(resource.toString())) {
-					ret.add(label);
+					labels.add(label);
 	
 					break;
 				}
 			}
 			
-			if (ret.size() >= getMaxHints()) {
+			if (labels.size() >= getMaxHints()) {
 				break;
 			}
 		}
+		List<String> ret = new ArrayList<>(labels);
+		Collections.sort(ret);
 		return ret;
 	}
 	
