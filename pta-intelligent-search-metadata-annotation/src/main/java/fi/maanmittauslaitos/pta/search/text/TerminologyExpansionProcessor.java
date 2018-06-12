@@ -80,7 +80,7 @@ public class TerminologyExpansionProcessor implements TextProcessor {
 			}
 		}
 		
-		if (directParents.size() > 0) {
+		if (!directParents.isEmpty()) {
 			addParentsRecursively(directParents, addParentsHere);
 		}
 		

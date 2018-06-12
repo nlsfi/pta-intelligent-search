@@ -65,9 +65,7 @@ public class FacetHintProviderImpl extends AbstractHintProvider {
 				tmp.add(new AbstractMap.SimpleEntry<IRI, Double>(vf.createIRI(uri), score));
 			}
 			
-			List<String> ret = determineLabelsForHintsKeepResultsWithinMaxSize(tmp, pyyntoTerms);
-			
-			return ret;
+			return determineLabelsForHintsKeepResultsWithinMaxSize(tmp, pyyntoTerms);
 		}
 	}
 }

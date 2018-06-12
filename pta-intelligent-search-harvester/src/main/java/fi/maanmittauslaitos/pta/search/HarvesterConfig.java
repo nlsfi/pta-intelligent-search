@@ -85,7 +85,6 @@ public class HarvesterConfig {
 		abstract2Uri.setTextProcessorName("abstractParentProcessor");
 		
 		configuration.getFieldExtractors().add(abstract2Uri);
-		// tätä ei vielä ajeta, jokin bugaa
 		
 		
 		// Set up maui chain for abstract (abstract => abstract_maui_uri)
