@@ -14,6 +14,17 @@ Esivalmistelut
 
 Asennuskohde: Kaikki asennukset suoritetaan hakemistoon /opt/pta-haku
 
+## Projektin tuotosten ja testien ajamien vaatii voikko-kirjaston (versio 4.1.1+)
+## Ubuntu: käytä pakettimanageria
+## Windows:
+##  1. Lataa DLL ja sanastot (kaikki) täältä 
+##           https://www.puimula.org/htp/testing/voikko-sdk/win-crossbuild/
+##  2. Asenna DLL hakemistoon, mikä on PATH:issa (tai muokkaa PATH:ia)
+##  3. Luo hakemisto voikon sanastoille ja pura sanasto-zipit sinne
+##  4. Tee regedit.exe:llä registryavain HKEY_CURRENT_USER\SOFTWARE\Voikko\DictionaryPath
+##     ja aseta sen arvoksi kohdassa 3 luotu hakemisto 
+##
+
 
 ##########################################################################################################
 ##### Asennusohjeet
@@ -132,6 +143,23 @@ java -jar pta-intelligent-search-api.jar >& /opt/pta-haku/logs/api-$(date +%Y-%m
 EOF
 
 sudo chmod +x /opt/pta-haku/start-api.sh
+
+
+cat << 'EOF' | sudo tee /opt/pta-haku/harvest.sh
+#!/bin/bash
+
+. /opt/pta-haku/env.sh
+
+export _JAVA_OPTIONS="-Dhttp.proxyHost=proxy2.nls.fi -Dhttp.proxyPort=800"
+
+cd /opt/pta-haku/
+java -jar pta-intelligent-search-harvester.jar
+
+EOF
+
+sudo chmod +x /opt/pta-haku/harvest.sh
+
+
 
 
 ## Hakupalikka

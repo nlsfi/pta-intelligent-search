@@ -32,16 +32,18 @@ Tämä täytyy tehdä silloin, kun harvestointikoodi on muuttunut ja/tai halutaa
 1. Buildaa uusi versio käynnistämällä Jenkinsistä jobi "pta-haku snapshot release"
 2. Hae Nexuksesta komponentit omalle koneelle
 	- nls.fi/pta-intelligent-search-harvester
-3. Kopioi jar-tiedosto oman tunnuksen alle hakupalvelumelle
-4. Aja harvesteri kirjautumalla ssh:lla palvelimelle:
+3. Kopioi jar-tiedosto oman tunnuksen alle hakupalvelimelle
+4. Kirjaudu palvelimelle ssh:lla
+5. Kopioi harvesterin jar-tiedosto /opt/pta-haku:un 
 
-	. /opt/pta-haku/env.sh
-	java \
-		-Dhttp.proxyHost=proxy2.nls.fi \
-		-Dhttp.proxyPort=800 \
-		-Dhttps.proxyHost=proxy2.nls.fi \
-		-Dhttps.proxyPort=800 \
-		-jar pta-intelligent-search-harvester-[versio jonka äsken kopioit palvelimelle].jar
+    sudo cp pta-intelligent-search-harvester-[versio].jar /opt/pta-haku
+
+6. Varmista, että symbolinen linkki pta-intelligent-search-harvester.jar osoittaa tähän uuteen versioon 
+
+7. Aja harvesteri
+
+    cd /opt/pta-haku/
+	./harvest.sh
 
 
 API:n päivitys
