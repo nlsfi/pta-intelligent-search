@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nls.fi</groupId>
 	<artifactId>pta-intelligent-search-harvester</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.9-SNAPSHOT</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -24,13 +24,13 @@
 		<dependency>
 			<groupId>nls.fi</groupId>
 			<artifactId>pta-intelligent-search-metadata-annotation</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.9-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>nls.fi</groupId>
 			<artifactId>pta-intelligent-search-elasticsearch</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.9-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
