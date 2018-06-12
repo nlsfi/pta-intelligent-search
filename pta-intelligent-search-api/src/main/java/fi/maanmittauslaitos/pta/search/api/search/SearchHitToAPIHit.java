@@ -75,6 +75,12 @@ public class SearchHitToAPIHit implements Consumer<SearchHit> {
 			osuma.getText().add(text);
 		}
 
+		
+		processTypeField(t, "isService", osuma);
+		processTypeField(t, "isDataset", osuma);
+		processTypeField(t, "isAvoindata", osuma);
+		processTypeField(t, "isPtaAineisto", osuma);
+		
 		osuma.setId(t.getId());
 		osuma.setAbstractUris(extractListValue(t.getSourceAsMap().get(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI)));
 		osuma.setAbstractTopicUris(extractListValue(t.getSourceAsMap().get(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI)));
@@ -101,6 +107,26 @@ public class SearchHitToAPIHit implements Consumer<SearchHit> {
 			}
 		}
 		return ret;
+	}
+	
+	private boolean isSet(SearchHit t, String field) {
+		Object o = t.getSourceAsMap().get(field);
+		if (o == null) {
+			return false;
+		}
+		if (o instanceof String) {
+			return Boolean.valueOf((String)o);
+		}
+		if (o instanceof Boolean) {
+			return (Boolean)o;
+		}
+		throw new IllegalArgumentException("Can not determine boolean value of field '"+field+"', is type "+o.getClass()+", value = '"+o+"'");
+	}
+	
+	private void processTypeField(SearchHit t, String field, Hit osuma) {
+		if (isSet(t, field)) {
+			osuma.getTypes().add(field);
+		}
 	}
 
 	private String extractStringValue(Object obj) {
