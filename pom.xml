@@ -12,5 +12,6 @@
 		<module>pta-intelligent-search-metadata-extractor</module>
 		<module>pta-intelligent-search-metadata-annotation</module>
 		<module>pta-intelligent-search-elasticsearch</module>
+		<module>pta-intelligent-search-qa</module>
 	</modules>
 </project>
