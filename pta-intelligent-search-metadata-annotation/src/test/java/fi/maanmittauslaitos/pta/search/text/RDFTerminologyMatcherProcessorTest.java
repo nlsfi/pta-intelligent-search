@@ -12,7 +12,7 @@ import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 import org.junit.Test;
 
-import fi.maanmittauslaitos.pta.search.text.stemmer.FinnishShowballStemmerImpl;
+import fi.maanmittauslaitos.pta.search.text.stemmer.FinnishVoikkoStemmer;
 
 public class RDFTerminologyMatcherProcessorTest {
 
@@ -58,7 +58,7 @@ public class RDFTerminologyMatcherProcessorTest {
 		
 		processor.setModel(model);
 		processor.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
-		processor.setStemmer(new FinnishShowballStemmerImpl());
+		processor.setStemmer(new FinnishVoikkoStemmer());
 		
 		List<String> result = processor.process(Arrays.asList("kissat"));
 		

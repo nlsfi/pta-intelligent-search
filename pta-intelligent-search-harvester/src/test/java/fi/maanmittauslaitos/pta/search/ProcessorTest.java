@@ -22,7 +22,7 @@ import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 import fi.maanmittauslaitos.pta.search.text.StopWordsProcessor;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 import fi.maanmittauslaitos.pta.search.text.TextSplitterProcessor;
-import fi.maanmittauslaitos.pta.search.text.stemmer.FinnishShowballStemmerImpl;
+import fi.maanmittauslaitos.pta.search.text.stemmer.FinnishVoikkoStemmer;
 
 public class ProcessorTest {
 
@@ -59,7 +59,7 @@ public class ProcessorTest {
 		RDFTerminologyMatcherProcessor terminologyProcessor = new RDFTerminologyMatcherProcessor();
 		terminologyProcessor.setModel(loadModels("src/test/resources/ysa-skos.ttl"));
 		terminologyProcessor.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
-		terminologyProcessor.setStemmer(new FinnishShowballStemmerImpl());
+		terminologyProcessor.setStemmer(new FinnishVoikkoStemmer());
 		
 		abstractChain.getChain().add(terminologyProcessor);
 		

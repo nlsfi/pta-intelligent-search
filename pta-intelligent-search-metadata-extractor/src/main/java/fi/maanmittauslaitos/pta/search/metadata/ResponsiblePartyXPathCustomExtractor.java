@@ -5,7 +5,8 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathException;
 import javax.xml.xpath.XPathExpression;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -13,7 +14,7 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.XPathCustomExtractor;
 import fi.maanmittauslaitos.pta.search.metadata.model.ResponsibleParty;
 
 public class ResponsiblePartyXPathCustomExtractor implements XPathCustomExtractor {
-	private static Logger logger = Logger.getLogger(ResponsiblePartyXPathCustomExtractor.class);
+	private static Logger logger = LogManager.getLogger(ResponsiblePartyXPathCustomExtractor.class);
 	
 	@Override
 	public Object process(XPath xPath, Node node) throws XPathException {
