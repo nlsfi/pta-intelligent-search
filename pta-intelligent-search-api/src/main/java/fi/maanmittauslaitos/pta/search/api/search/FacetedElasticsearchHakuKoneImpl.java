@@ -95,10 +95,6 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 	public SearchResult haku(SearchQuery pyynto, Language lang) throws IOException {
 		SearchResult tulos = new SearchResult();
 		
-		if (pyynto.getQuery().size() == 0) {
-			return new SearchResult();
-		}
-		
 		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 		sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
 		sourceBuilder.fetchSource("*", null);
