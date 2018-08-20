@@ -15,6 +15,14 @@ public class ISOMetadataExtractor_IsDatasetTest extends BaseMetadataExtractorTes
 		Boolean isDataset = document.getValue(ISOMetadataFields.IS_DATASET, Boolean.class);
 		assertEquals(Boolean.TRUE, isDataset);
 	}
+	
+	@Test
+	public void testMaastotietokantaIsDataset_modified() throws Exception {
+		Document document = createMaastotietokantaDocument_modified();
+		
+		Boolean isDataset = document.getValue(ISOMetadataFields.IS_DATASET, Boolean.class);
+		assertEquals(Boolean.TRUE, isDataset);
+	}
 
 
 	@Test

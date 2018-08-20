@@ -25,6 +25,14 @@ public class ISOMetadataExtractor_IsServiceTest extends BaseMetadataExtractorTes
 	}
 	
 	@Test
+	public void testMaastotietokantaIsNotService_modified() throws Exception {
+		Document document = createMaastotietokantaDocument_modified();
+		
+		Boolean isService = document.getValue(ISOMetadataFields.IS_SERVICE, Boolean.class);
+		assertEquals(Boolean.FALSE, isService);
+	}
+	
+	@Test
 	public void testLukeAineistosarjaIsNotService() throws Exception {
 		Document document = createLukeTietoaineistosarja();
 		

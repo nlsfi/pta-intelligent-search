@@ -96,13 +96,22 @@ public class ISOMetadataExtractorConfigurationFactory {
 		extractors.add(createXPathExtractor(
 				ISOMetadataFields.IS_SERVICE,
 				FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE,
-				"//gmd:identificationInfo/srv:SV_ServiceIdentification"));
+				"//gmd:hierarchyLevel/gmd:MD_ScopeCode["
+						+ "@codeList='http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode'"
+						+ " and "
+						+ "@codeListValue='service'"
+						+ "]"));
+		
 		
 		// isDataset
 		extractors.add(createXPathExtractor(
 				ISOMetadataFields.IS_DATASET,
 				FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE,
-				"//gmd:identificationInfo/gmd:MD_DataIdentification"));
+				"//gmd:hierarchyLevel/gmd:MD_ScopeCode["
+						+ "@codeList='http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode'"
+						+ " and "
+						+ "(@codeListValue='dataset' or @codeListValue='series')"
+						+ "]"));
 		
 		// isAvoindata
 		extractors.add(createXPathExtractor(
