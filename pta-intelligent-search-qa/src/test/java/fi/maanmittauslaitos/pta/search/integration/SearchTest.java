@@ -30,6 +30,7 @@ import org.elasticsearch.test.ESIntegTestCase;
 import org.elasticsearch.test.ESIntegTestCase.ClusterScope;
 import org.elasticsearch.test.ESIntegTestCase.Scope;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.internal.util.collections.Sets;
 
@@ -38,7 +39,7 @@ import com.carrotsearch.randomizedtesting.annotations.ThreadLeakScope;
 
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 
-
+@Ignore
 @ClusterScope(scope = Scope.SUITE)
 @ThreadLeakScope(ThreadLeakScope.Scope.NONE)
 public class SearchTest extends ESIntegTestCase  {
