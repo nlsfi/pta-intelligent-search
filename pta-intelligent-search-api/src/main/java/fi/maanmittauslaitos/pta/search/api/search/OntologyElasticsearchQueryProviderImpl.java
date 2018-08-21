@@ -159,11 +159,11 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 
 			
 			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI_PARENTS, term);
-			tmp.boost(1.0f);
+			tmp.boost(0.5f);
 			boolQuery.should().add(tmp);
 
 			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI_PARENTS, term);
-			tmp.boost(0.75f);
+			tmp.boost(0.25f);
 			boolQuery.should().add(tmp);
 			
 		}
