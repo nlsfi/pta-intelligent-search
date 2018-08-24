@@ -127,8 +127,11 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 		// Facet filter
 
 		// This is really important, otherwise having a facet "filter" will change the behavior
-		// of the "should" query
-		query.minimumShouldMatch(1);
+		// of the "should" query. However minimumShouldMatch should be 0 if no should() terms are
+		// specified (this happens with a search using no search terms)
+		if (query.should().size() > 0) {
+			query.minimumShouldMatch(1);
+		}
 		
 		List<TermQueryBuilder> facetFilters = createFacetFilters(pyynto);
 		
