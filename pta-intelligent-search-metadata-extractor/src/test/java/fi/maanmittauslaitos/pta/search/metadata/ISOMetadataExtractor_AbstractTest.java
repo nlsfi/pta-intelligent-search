@@ -25,6 +25,24 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 						+ "Tuote on avointa aineistoa. Lisätietoa Avoimien aineistojen hankinta -sivustolta http://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/asiantuntevalle-kayttajalle/maastotiedot-ja-niiden-hankinta",
 				value);
 	}
+	
+	@Test
+	public void testMaastotietokantaAbstract_doubleText() throws Exception {
+		Document document = createMaastotietokantaDocument_doubleText();
+
+		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT, String.class).size());
+
+		String value = document.getValue(ISOMetadataFields.ABSTRACT, String.class);
+		assertEquals(
+				"Maanmittauslaitoksen Maastotietokanta on koko Suomen kattava maastoa kuvaava aineisto. Sen tärkeimpiä kohderyhmiä ovat liikenneverkko, rakennukset ja rakenteet, hallintorajat, nimistö, maankäyttö, vedet ja korkeussuhteet.\n"
+						+ "\n"
+						+ "Maastotietokannan ajantasaistuksessa käytetään hyväksi ilmakuvia, keilausaineistoja ja muiden tiedon-tuottajien tuottamia aineistoja. Ajantasaistuksessa tehdään tiivistä yhteistyötä kuntien kanssa. Jonkin verran joudutaan turvautumaan myös maastotarkistuksiin lähinnä kohteiden luokituksen osalta.\n"
+						+ "\n"
+						+ "Maastotietokantaa käytetään muiden karttatuotteiden valmistukseen sekä erilaisissa optimoinneissa.\n"
+						+ "\n"
+						+ "Tuote on avointa aineistoa. Lisätietoa Avoimien aineistojen hankinta -sivustolta http://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/asiantuntevalle-kayttajalle/maastotiedot-ja-niiden-hankinta",
+				value);
+	}
 
 	@Test
 	public void testMaastotietokantaAbstractSV() throws Exception {

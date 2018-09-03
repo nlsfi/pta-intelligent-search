@@ -16,6 +16,14 @@ public class ISOMetadataExtractor_TitleTest extends BaseMetadataExtractorTest {
 		assertEquals("Maastotietokanta", titleValue);
 	}
 
+	@Test
+	public void testMaastotietokantaTitle_doubleText() throws Exception {
+		Document document = createMaastotietokantaDocument_doubleText();
+		
+		String titleValue = document.getValue(ISOMetadataFields.TITLE, String.class);
+		assertEquals("Maastotietokanta", titleValue);
+	}
+
 
 	@Test
 	public void testMaastotietokantaTitleSV() throws Exception {

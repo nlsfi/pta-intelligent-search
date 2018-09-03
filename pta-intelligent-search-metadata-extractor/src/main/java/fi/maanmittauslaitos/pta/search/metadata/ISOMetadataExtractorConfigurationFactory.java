@@ -71,7 +71,7 @@ public class ISOMetadataExtractorConfigurationFactory {
 		// Abstract extractors
 		extractors.add(createXPathExtractor(
 				ISOMetadataFields.ABSTRACT,
-				FieldExtractorType.ALL_MATCHING_VALUES,
+				FieldExtractorType.FIRST_MATCHING_VALUE,
 				"(" +
 				  "//gmd:identificationInfo/*/gmd:abstract//gmd:LocalisedCharacterString[@locale='#FI']" +
 				  "|" +
@@ -80,14 +80,14 @@ public class ISOMetadataExtractorConfigurationFactory {
 		
 		extractors.add(createXPathExtractor(
 				ISOMetadataFields.ABSTRACT_SV,
-				FieldExtractorType.ALL_MATCHING_VALUES,
+				FieldExtractorType.FIRST_MATCHING_VALUE,
 				"(" +
 				  "//gmd:identificationInfo/*/gmd:abstract//gmd:LocalisedCharacterString[@locale='#SV']" +
 				")/text()"));
 
 		extractors.add(createXPathExtractor(
 				ISOMetadataFields.ABSTRACT_EN,
-				FieldExtractorType.ALL_MATCHING_VALUES,
+				FieldExtractorType.FIRST_MATCHING_VALUE,
 				"(" +
 				  "//gmd:identificationInfo/*/gmd:abstract//gmd:LocalisedCharacterString[@locale='#EN']" +
 				")/text()"));

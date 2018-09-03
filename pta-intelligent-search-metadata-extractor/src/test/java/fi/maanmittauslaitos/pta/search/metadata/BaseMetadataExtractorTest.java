@@ -38,6 +38,16 @@ public abstract class BaseMetadataExtractorTest {
 	}
 	
 
+	protected Document createMaastotietokantaDocument_doubleText()
+			throws DocumentProcessingException, IOException, FileNotFoundException {
+		Document document;
+		try (FileInputStream fis = new FileInputStream("src/test/resources/ddad3347-05ca-401a-b746-d883d4110180_with_double_text.xml")) {
+			document = processor.processDocument(fis);
+		}
+		return document;
+	}
+	
+
 	protected Document createStatFiWFS()
 			throws DocumentProcessingException, IOException, FileNotFoundException {
 		Document document;
