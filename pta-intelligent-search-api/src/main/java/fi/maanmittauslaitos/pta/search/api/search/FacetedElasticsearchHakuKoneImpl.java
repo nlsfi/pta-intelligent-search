@@ -35,7 +35,7 @@ import fi.maanmittauslaitos.pta.search.api.model.SearchQuery.Sort;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.Facet;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 
-public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
+public class FacetedElasticsearchHakuKoneImpl implements HakuKone {	
 	private static final String FACETS_INSPIRE_KEYWORDS     = "keywordsInspire";
 	private static final String FACETS_DISTRIBUTION_FORMATS = "distributionFormats";
 	private static final String FACETS_TOPIC_CATEGORIES     = "topicCategories";
@@ -67,6 +67,8 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 	private ElasticsearchQueryProvider queryProvider;
 	private HintProvider hintProvider;
 	
+	private int facetTermMaxSize = 10;
+	
 	public void setQueryProvider(ElasticsearchQueryProvider queryProvider) {
 		this.queryProvider = queryProvider;
 	}
@@ -89,6 +91,14 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 	
 	public HintProvider getHintProvider() {
 		return hintProvider;
+	}
+	
+	public void setFacetTermMaxSize(int facetTermMaxSize) {
+		this.facetTermMaxSize = facetTermMaxSize;
+	}
+	
+	public int getFacetTermMaxSize() {
+		return facetTermMaxSize;
 	}
 	
 	@Override
@@ -141,10 +151,10 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 
 		
 		// The aggregation queries
-		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_INSPIRE_KEYWORDS).field("keywordsInspire"));
-		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_TOPIC_CATEGORIES).field("topicCategories"));
-		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_DISTRIBUTION_FORMATS).field("distributionFormats"));
-		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_ORGANISATIONS).field("organisations.organisationName"));
+		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_INSPIRE_KEYWORDS).field("keywordsInspire").size(getFacetTermMaxSize()));
+		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_TOPIC_CATEGORIES).field("topicCategories").size(getFacetTermMaxSize()));
+		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_DISTRIBUTION_FORMATS).field("distributionFormats").size(getFacetTermMaxSize()));
+		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_ORGANISATIONS).field("organisations.organisationName").size(getFacetTermMaxSize()));
 		
 		// The "type" in the facet response is built out of these four separate queries
 		sourceBuilder.aggregation(AggregationBuilders.sum(FACETS_TYPE_ISSERVICE).field("isService"));
