@@ -19,6 +19,7 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import fi.maanmittauslaitos.pta.search.api.hints.ElasticSuggestionHintProviderImpl;
 import fi.maanmittauslaitos.pta.search.api.hints.FacetHintProviderImpl;
 import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
 import fi.maanmittauslaitos.pta.search.api.search.FacetedElasticsearchHakuKoneImpl;
@@ -121,12 +122,27 @@ public class ApplicationConfiguration {
 		
 		return ret;
 	}
-
+	
+	
+	/*
+	@Bean
+	public HintProvider hintProvider(Model terminologyModel, Stemmer stemmer, RDFTerminologyMatcherProcessor terminologyProcessor) {
+		ElasticSuggestionHintProviderImpl ret = new ElasticSuggestionHintProviderImpl();
+		ret.setStemmer(stemmer);
+		ret.setModel(terminologyModel);
+		ret.setLanguage("fi");
+		
+		return ret;
+	}
+	*/
 	
 	@Bean
 	public HakuKone hakuKone(TextProcessor queryTextProcessor, RestHighLevelClient elasticsearchClient, Model model, HintProvider hintProvider) throws IOException {
 		FacetedElasticsearchHakuKoneImpl ret = new FacetedElasticsearchHakuKoneImpl();
-		ret.setFacetTermMaxSize(100);
+		ret.setDistributionFormatsFacetTermMaxSize(100);
+		ret.setInspireKeywordsFacetTermMaxSize(100);
+		ret.setOrganisationsFacetTermMaxSize(500);
+		ret.setTopicCategoriesFacetTermMaxSize(100);
 		ret.setClient(elasticsearchClient);
 		
 		OntologyElasticsearchQueryProviderImpl queryProvider = new OntologyElasticsearchQueryProviderImpl();

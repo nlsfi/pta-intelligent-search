@@ -33,6 +33,8 @@ public class FacetHintProviderImpl extends AbstractHintProvider {
 		
 		SignificantTermsAggregationBuilder aggregationBuilder = AggregationBuilders.significantTerms(aggregationFieldName);
 		aggregationBuilder.field(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI);
+		//aggregationBuilder.field(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI);
+		//aggregationBuilder.field(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI_PARENTS);
 		
 		searchSourceBuilder.aggregation(aggregationBuilder);
 		

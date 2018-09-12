@@ -67,7 +67,10 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 	private ElasticsearchQueryProvider queryProvider;
 	private HintProvider hintProvider;
 	
-	private int facetTermMaxSize = 10;
+	private int inspireKeywordsFacetTermMaxSize = 10;
+	private int topicCategoriesFacetTermMaxSize = 10;
+	private int distributionFormatsFacetTermMaxSize = 10;
+	private int organisationsFacetTermMaxSize = 10;
 	
 	public void setQueryProvider(ElasticsearchQueryProvider queryProvider) {
 		this.queryProvider = queryProvider;
@@ -93,12 +96,36 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 		return hintProvider;
 	}
 	
-	public void setFacetTermMaxSize(int facetTermMaxSize) {
-		this.facetTermMaxSize = facetTermMaxSize;
+	public void setDistributionFormatsFacetTermMaxSize(int distributionFormatsFacetTermMaxSize) {
+		this.distributionFormatsFacetTermMaxSize = distributionFormatsFacetTermMaxSize;
 	}
 	
-	public int getFacetTermMaxSize() {
-		return facetTermMaxSize;
+	public int getDistributionFormatsFacetTermMaxSize() {
+		return distributionFormatsFacetTermMaxSize;
+	}
+	
+	public void setInspireKeywordsFacetTermMaxSize(int inspireKeywordsFacetTermMaxSize) {
+		this.inspireKeywordsFacetTermMaxSize = inspireKeywordsFacetTermMaxSize;
+	}
+	
+	public int getInspireKeywordsFacetTermMaxSize() {
+		return inspireKeywordsFacetTermMaxSize;
+	}
+	
+	public void setOrganisationsFacetTermMaxSize(int organisationsFacetTermMaxSize) {
+		this.organisationsFacetTermMaxSize = organisationsFacetTermMaxSize;
+	}
+	
+	public int getOrganisationsFacetTermMaxSize() {
+		return organisationsFacetTermMaxSize;
+	}
+	
+	public void setTopicCategoriesFacetTermMaxSize(int topicCategoriesFacetTermMaxSize) {
+		this.topicCategoriesFacetTermMaxSize = topicCategoriesFacetTermMaxSize;
+	}
+	
+	public int getTopicCategoriesFacetTermMaxSize() {
+		return topicCategoriesFacetTermMaxSize;
 	}
 	
 	@Override
@@ -151,10 +178,10 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 
 		
 		// The aggregation queries
-		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_INSPIRE_KEYWORDS).field("keywordsInspire").size(getFacetTermMaxSize()));
-		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_TOPIC_CATEGORIES).field("topicCategories").size(getFacetTermMaxSize()));
-		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_DISTRIBUTION_FORMATS).field("distributionFormats").size(getFacetTermMaxSize()));
-		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_ORGANISATIONS).field("organisations.organisationName").size(getFacetTermMaxSize()));
+		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_INSPIRE_KEYWORDS).field("keywordsInspire").size(getInspireKeywordsFacetTermMaxSize()));
+		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_TOPIC_CATEGORIES).field("topicCategories").size(getTopicCategoriesFacetTermMaxSize()));
+		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_DISTRIBUTION_FORMATS).field("distributionFormats").size(getDistributionFormatsFacetTermMaxSize()));
+		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_ORGANISATIONS).field("organisations.organisationName").size(getOrganisationsFacetTermMaxSize()));
 		
 		// The "type" in the facet response is built out of these four separate queries
 		sourceBuilder.aggregation(AggregationBuilders.sum(FACETS_TYPE_ISSERVICE).field("isService"));

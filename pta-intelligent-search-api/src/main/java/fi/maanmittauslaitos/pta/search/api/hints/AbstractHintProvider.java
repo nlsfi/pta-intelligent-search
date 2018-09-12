@@ -27,6 +27,8 @@ public abstract class AbstractHintProvider implements HintProvider {
 	private Stemmer stemmer;
 	private String language;
 	
+	// TODO: There shall be a blacklist of terms here
+	
 	public int getMaxHints() {
 		return maxHints;
 	}
