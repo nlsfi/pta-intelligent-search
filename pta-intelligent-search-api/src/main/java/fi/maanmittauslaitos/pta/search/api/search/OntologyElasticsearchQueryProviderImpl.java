@@ -138,6 +138,14 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 			tmp.boost((float)basicWordMatchWeight);
 			boolQuery.should().add(tmp);
 		}
+		
+		for (String sana : terms) {
+			QueryBuilder tmp;
+			
+			tmp = QueryBuilders.fuzzyQuery("organisationName_text", sana);
+			tmp.boost((float)basicWordMatchWeight);
+			boolQuery.should().add(tmp);
+		}
 	}
 
 	private void addOntologicalTermQueries(Collection<String> termit, BoolQueryBuilder boolQuery) {

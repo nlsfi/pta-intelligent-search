@@ -152,6 +152,26 @@ public class HarvesterConfig {
 		configuration.getFieldExtractors().add(titleEnSort);
 		
 		
+		// Extract all organisation names in a text field for full-text search purposes
+		TextProcessingChain removeEmptyEntriesChain = new TextProcessingChain();
+		RegexProcessor whitespaceRemoval = new RegexProcessor();
+		whitespaceRemoval.setPattern(Pattern.compile("^\\s*$"));
+		whitespaceRemoval.setIncludeMatches(false);
+		
+		removeEmptyEntriesChain.getChain().add(whitespaceRemoval);
+		
+		configuration.getTextProcessingChains().put("removeEmptyEntries", removeEmptyEntriesChain);
+		
+		XPathFieldExtractorConfiguration organisationForSearch = new XPathFieldExtractorConfiguration();
+		organisationForSearch.setField("organisationName_text");
+		organisationForSearch.setType(FieldExtractorType.ALL_MATCHING_VALUES);
+		organisationForSearch.setXpath("//gmd:contact//gmd:organisationName//text()");
+		
+		organisationForSearch.setTextProcessorName("removeEmptyEntries");
+		
+		configuration.getFieldExtractors().add(organisationForSearch);
+		
+		
 		return factory.getDocumentProcessorFactory().createProcessor(configuration);
 		
 	}
