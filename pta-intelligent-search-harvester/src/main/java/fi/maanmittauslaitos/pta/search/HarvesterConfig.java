@@ -20,6 +20,7 @@ import org.eclipse.rdf4j.rio.Rio;
 import com.entopix.maui.stemmers.FinnishStemmer;
 import com.entopix.maui.stopwords.StopwordsFinnish;
 
+import fi.maanmittauslaitos.pta.search.codelist.InspireThemesImpl;
 import fi.maanmittauslaitos.pta.search.csw.CSWHarvesterSource;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
@@ -38,6 +39,7 @@ import fi.maanmittauslaitos.pta.search.text.RegexProcessor;
 import fi.maanmittauslaitos.pta.search.text.StopWordsProcessor;
 import fi.maanmittauslaitos.pta.search.text.TerminologyExpansionProcessor;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
+import fi.maanmittauslaitos.pta.search.text.TextProcessor;
 import fi.maanmittauslaitos.pta.search.text.TextSplitterProcessor;
 import fi.maanmittauslaitos.pta.search.text.WordCombinationProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
@@ -170,6 +172,39 @@ public class HarvesterConfig {
 		organisationForSearch.setTextProcessorName("removeEmptyEntries");
 		
 		configuration.getFieldExtractors().add(organisationForSearch);
+		
+		// Configure INSPIRE theme extractor to normalize the theme to 
+		final InspireThemesImpl inspireThemes = new InspireThemesImpl();
+		inspireThemes.setCanonicalLanguage("fi"); // Normalize the records to Finnish
+		inspireThemes.setModel(loadModels(RDFFormat.RDFXML, "/inspire-theme.rdf.gz"));
+		inspireThemes.setHeuristicSearchLanguagePriority("fi", "en", "sv");
+		
+		FieldExtractorConfiguration inspireFieldExtractorConfiguration = 
+				configuration.getFieldExtractor(ISOMetadataFields.KEYWORDS_INSPIRE);
+		
+		TextProcessingChain inspireThemeNormalizer = new TextProcessingChain();
+		inspireThemeNormalizer.getChain().add(new TextProcessor() {
+			
+			@Override
+			public List<String> process(List<String> input) {
+				List<String> ret = new ArrayList<>();
+				
+				for (String str : input) {
+					String value = inspireThemes.getCanonicalName(str);
+					if (value == null) {
+						value = str;
+					}
+					ret.add(value);
+				}
+
+				return ret;
+			}
+		});
+		
+		configuration.getTextProcessingChains().put("inspireThemeNormalizer", inspireThemeNormalizer);
+		
+		inspireFieldExtractorConfiguration.setTextProcessorName("inspireThemeNormalizer");
+		
 		
 		
 		return factory.getDocumentProcessorFactory().createProcessor(configuration);
@@ -304,19 +339,19 @@ public class HarvesterConfig {
 	
 
 	Model getTerminologyModel() throws IOException {
-		return loadModels(getTerminologyModelResourceName());
+		return loadModels(RDFFormat.TURTLE, getTerminologyModelResourceName());
 	}
 
 	private String getTerminologyModelResourceName() {
 		return "/pto-skos.ttl.gz";
 	}
 	
-	private static Model loadModels(String...files) throws IOException {
+	private static Model loadModels(RDFFormat format, String...files) throws IOException {
 		Model ret = null;
 		
 		for (String file : files) {
 			try (Reader reader = new InputStreamReader(new GZIPInputStream(HarvesterConfig.class.getResourceAsStream(file)))) {
-				Model model = Rio.parse(reader, "", RDFFormat.TURTLE);
+				Model model = Rio.parse(reader, "", format);
 				
 				if (ret == null) {
 					ret = model;
