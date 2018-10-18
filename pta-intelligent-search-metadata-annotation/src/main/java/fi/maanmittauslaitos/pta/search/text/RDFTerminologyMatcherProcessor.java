@@ -17,9 +17,6 @@ import org.eclipse.rdf4j.model.Statement;
 
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 
-/**
- * This is not thread safe due to how the snowball stemmer has been done
- */
 public class RDFTerminologyMatcherProcessor implements TextProcessor {
 	private static Logger logger = Logger.getLogger(RDFTerminologyMatcherProcessor.class);
 	
