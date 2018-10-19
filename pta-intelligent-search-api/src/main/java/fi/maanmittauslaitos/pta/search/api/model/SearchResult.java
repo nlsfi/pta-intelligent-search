@@ -8,6 +8,7 @@ import java.util.Map;
 public class SearchResult {
 	private Long startIndex;
 	private Long totalHits;
+	private String languageUsed;
 	private List<Hit> hits = new ArrayList<>();
 	private List<String> hints = new ArrayList<>();
 	
@@ -27,6 +28,14 @@ public class SearchResult {
 	
 	public Long getTotalHits() {
 		return totalHits;
+	}
+	
+	public void setLanguageUsed(String languageUsed) {
+		this.languageUsed = languageUsed;
+	}
+	
+	public String getLanguageUsed() {
+		return languageUsed;
 	}
 	
 	public List<String> getHints() {

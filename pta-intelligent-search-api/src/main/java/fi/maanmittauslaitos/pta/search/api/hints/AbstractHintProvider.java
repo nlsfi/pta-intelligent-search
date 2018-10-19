@@ -17,17 +17,13 @@ import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.util.Models;
 import org.eclipse.rdf4j.model.vocabulary.SKOS;
 
-import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
+import fi.maanmittauslaitos.pta.search.api.Language;
 
 public abstract class AbstractHintProvider implements HintProvider {
 	protected ValueFactory vf = SimpleValueFactory.getInstance();
 	
 	private Model model;
 	private int maxHints = 5;
-	private Stemmer stemmer;
-	private String language;
-	
-	// TODO: There shall be a blacklist of terms here
 	
 	public int getMaxHints() {
 		return maxHints;
@@ -36,23 +32,6 @@ public abstract class AbstractHintProvider implements HintProvider {
 	public void setMaxHints(int maxHints) {
 		this.maxHints = maxHints;
 	}
-	
-	public String getLanguage() {
-		return language;
-	}
-	
-	public void setLanguage(String language) {
-		this.language = language;
-	}
-	
-	public void setStemmer(Stemmer stemmer) {
-		this.stemmer = stemmer;
-	}
-	
-	public Stemmer getStemmer() {
-		return stemmer;
-	}
-	
 
 	public void setModel(Model model) {
 		this.model = model;
@@ -71,7 +50,7 @@ public abstract class AbstractHintProvider implements HintProvider {
 	 * @param colorized
 	 * @return Maximum of maxHits results. Used search terms are never returned as hints.
 	 */
-	protected List<String> produceAndOrderHints(List<String> pyyntoTerms, Map<IRI, Double> colorized) {
+	protected List<String> produceAndOrderHints(List<String> pyyntoTerms, Map<IRI, Double> colorized, Language language) {
 		List<Entry<IRI, Double>> entries = new ArrayList<>(colorized.entrySet());
 		
 		// Sort by score
@@ -89,12 +68,12 @@ public abstract class AbstractHintProvider implements HintProvider {
 		});
 		
 		// Pick at most maxHints values, skipping terms used in the query
-		List<String> ret = determineLabelsForHintsKeepResultsWithinMaxSize(entries, pyyntoTerms);
+		List<String> ret = determineLabelsForHintsKeepResultsWithinMaxSize(entries, pyyntoTerms, language);
 		
 		return ret;
 	}
 
-	protected List<String> determineLabelsForHintsKeepResultsWithinMaxSize(List<Entry<IRI, Double>> entries, List<String> pyyntoTerms) {
+	protected List<String> determineLabelsForHintsKeepResultsWithinMaxSize(List<Entry<IRI, Double>> entries, List<String> pyyntoTerms, Language language) {
 		Set<String> labels = new HashSet<>();
 		for (Entry<IRI, Double> entry : entries) {
 			IRI resource = entry.getKey();
@@ -102,8 +81,8 @@ public abstract class AbstractHintProvider implements HintProvider {
 			
 			for (Literal value : values) {
 				// If language is set, only care about labels for that particular language
-				if (getLanguage() != null && value.getLanguage().isPresent()) {
-					if (!getLanguage().equals(value.getLanguage().get())) {
+				if (language != null && value.getLanguage().isPresent()) {
+					if (!language.getLowercaseLanguageCode().equals(value.getLanguage().get())) {
 						continue;
 					}
 				}

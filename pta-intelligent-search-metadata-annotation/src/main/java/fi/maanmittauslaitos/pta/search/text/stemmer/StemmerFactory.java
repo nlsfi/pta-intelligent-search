@@ -1,7 +1,7 @@
 package fi.maanmittauslaitos.pta.search.text.stemmer;
 
-public class StemmerFactor {
-	public static Stemmer createStemmer() {
+public class StemmerFactory {
+	public static Stemmer createFinnishStemmer() {
 		return new FinnishVoikkoStemmer();
 	}
 }

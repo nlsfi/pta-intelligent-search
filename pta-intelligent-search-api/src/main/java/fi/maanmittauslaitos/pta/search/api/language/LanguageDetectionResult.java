@@ -1,18 +1,21 @@
 package fi.maanmittauslaitos.pta.search.api.language;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import fi.maanmittauslaitos.pta.search.api.Language;
+
 public class LanguageDetectionResult {
-	private List<String> potentialLanguages;
-	private Map<String, Double> scorePerLanguage;
+	private List<Language> potentialLanguages;
+	private Map<Language, Integer> scorePerLanguage;
 	
-	public void setPotentialLanguages(List<String> potentialLanguages) {
+	public void setPotentialLanguages(List<Language> potentialLanguages) {
 		this.potentialLanguages = potentialLanguages;
 	}
 	
-	public void setScorePerLanguage(Map<String, Double> scorePerLanguage) {
+	public void setScorePerLanguage(Map<Language, Integer> scorePerLanguage) {
 		this.scorePerLanguage = scorePerLanguage;
 	}
 	
@@ -21,15 +24,31 @@ public class LanguageDetectionResult {
 	 * 
 	 * @return
 	 */
-	public List<String> getPotentialLanguages() {
+	public List<Language> getPotentialLanguages() {
 		return Collections.unmodifiableList(potentialLanguages);
 	}
 	
-	public double getScoreForLanguage(String language) {
-		Double ret = scorePerLanguage.get(language);
+	public int getScoreForLanguage(Language language) {
+		Integer ret = scorePerLanguage.get(language);
 		if (ret == null) {
-			ret = 0.0;
+			ret = 0;
 		}
+		return ret;
+	}
+	
+	public List<Language> getTopLanguages() {
+		List<Language> ret = new ArrayList<>();
+		if (potentialLanguages.size() > 0) {
+			Integer topScore = getScoreForLanguage(potentialLanguages.get(0));
+			for (int i = 0; i < potentialLanguages.size(); i++) {
+				if (getScoreForLanguage(potentialLanguages.get(i)) == topScore) {
+					ret.add(potentialLanguages.get(i));
+				} else {
+					break;
+				}
+			}
+		}
+		
 		return ret;
 	}
 }

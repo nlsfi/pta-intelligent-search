@@ -42,7 +42,7 @@ import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 import fi.maanmittauslaitos.pta.search.text.TextProcessor;
 import fi.maanmittauslaitos.pta.search.text.TextSplitterProcessor;
 import fi.maanmittauslaitos.pta.search.text.WordCombinationProcessor;
-import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
+import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactory;
 
 public class HarvesterConfig {
 	public HarvesterSource getCSWSource() {
@@ -309,7 +309,7 @@ public class HarvesterConfig {
 		RDFTerminologyMatcherProcessor ret = new RDFTerminologyMatcherProcessor();
 		ret.setModel(model);
 		ret.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
-		ret.setStemmer(StemmerFactor.createStemmer());
+		ret.setStemmer(StemmerFactory.createFinnishStemmer());
 		ret.setLanguage("fi");
 		return ret;
 	}
@@ -318,7 +318,7 @@ public class HarvesterConfig {
 		WordCombinationProcessor ret = new WordCombinationProcessor();
 		ret.setModel(model);
 		ret.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
-		ret.setStemmer(StemmerFactor.createStemmer());
+		ret.setStemmer(StemmerFactory.createFinnishStemmer());
 		ret.setLanguage("fi");
 		return ret;
 	}

@@ -16,6 +16,7 @@ import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
+import fi.maanmittauslaitos.pta.search.api.Language;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.Hit;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 
@@ -27,6 +28,7 @@ import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
  * @author v2
  *
  */
+@Deprecated
 public class TudhopeBindingBlocksCunliffeHintProvider extends AbstractHintProvider {
 	private ValueFactory vf = SimpleValueFactory.getInstance();
 	
@@ -53,7 +55,7 @@ public class TudhopeBindingBlocksCunliffeHintProvider extends AbstractHintProvid
 	 * 
 	 */
 	@Override
-	public HintExtractor registerHintProvider(List<String> pyyntoTerms, SearchSourceBuilder builder) {
+	public HintExtractor registerHintProvider(List<String> pyyntoTerms, SearchSourceBuilder builder, Language language) {
 		return new HintExtractor() {
 			
 			@Override
@@ -65,7 +67,7 @@ public class TudhopeBindingBlocksCunliffeHintProvider extends AbstractHintProvid
 				
 				Map<IRI, Double> colorized = colorize(iris);
 				
-				return produceAndOrderHints(pyyntoTerms, colorized);
+				return produceAndOrderHints(pyyntoTerms, colorized, language);
 			}
 		};
 	}

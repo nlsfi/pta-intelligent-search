@@ -21,9 +21,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fi.maanmittauslaitos.pta.search.api.ApplicationConfiguration;
+import fi.maanmittauslaitos.pta.search.api.Language;
 import fi.maanmittauslaitos.pta.search.api.hints.NodeColorizationHintProviderImpl;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.Hit;
-import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
+import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactory;
 
 public class NodeColorizationHintProviderImplTest {
 	private ValueFactory vf = SimpleValueFactory.getInstance();
@@ -39,7 +40,7 @@ public class NodeColorizationHintProviderImplTest {
 	public void setUp() throws Exception { 
 		hintProvider = new NodeColorizationHintProviderImpl();
 		hintProvider.setMaxColorizationDepth(3);
-		hintProvider.setStemmer(StemmerFactor.createStemmer());
+		hintProvider.setStemmer(StemmerFactory.createFinnishStemmer());
 		hintProvider.setModel(model);
 		
 		List<Entry<IRI, Double>> weights = new ArrayList<>();
@@ -199,7 +200,7 @@ public class NodeColorizationHintProviderImplTest {
 		fakeHit.setAbstractUris(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711")); // Sakko
 		
 		
-		List<String> hints = hintProvider.registerHintProvider(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711"), null).getHints(null, Arrays.asList(fakeHit));
+		List<String> hints = hintProvider.registerHintProvider(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711"), null, Language.FI).getHints(null, Arrays.asList(fakeHit));
 		
 		assertEquals(2, hints.size());
 		assertEquals("rangaistukset", hints.get(0));
@@ -230,7 +231,7 @@ public class NodeColorizationHintProviderImplTest {
 		Hit fakeHit2 = new Hit();
 		fakeHit2.setAbstractUris(Arrays.asList("http://www.yso.fi/onto/ysa/Y165908")); // Sakon muuntorangaistus
 		
-		List<String> hints = hintProvider.registerHintProvider(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711", "http://www.yso.fi/onto/ysa/Y165908"), null).getHints(null, Arrays.asList(fakeHit1, fakeHit2));
+		List<String> hints = hintProvider.registerHintProvider(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711", "http://www.yso.fi/onto/ysa/Y165908"), null, Language.FI).getHints(null, Arrays.asList(fakeHit1, fakeHit2));
 		System.out.println(hints);
 		assertEquals(2, hints.size());
 		assertEquals("rangaistukset", hints.get(0));

@@ -22,9 +22,11 @@ import org.eclipse.rdf4j.model.vocabulary.SKOS;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
+import fi.maanmittauslaitos.pta.search.api.Language;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.Hit;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 
+@Deprecated
 public class NodeColorizationHintProviderImpl implements HintProvider {
 	private ValueFactory vf = SimpleValueFactory.getInstance();
 	
@@ -75,7 +77,7 @@ public class NodeColorizationHintProviderImpl implements HintProvider {
 	}
 	
 	@Override
-	public HintExtractor registerHintProvider(List<String> pyyntoTerms, SearchSourceBuilder builder) {
+	public HintExtractor registerHintProvider(List<String> pyyntoTerms, SearchSourceBuilder builder, Language language) {
 		
 		return new HintExtractor() {
 			

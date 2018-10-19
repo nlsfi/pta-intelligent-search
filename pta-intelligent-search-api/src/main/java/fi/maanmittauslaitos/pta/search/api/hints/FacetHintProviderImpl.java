@@ -15,6 +15,7 @@ import org.elasticsearch.search.aggregations.bucket.significant.SignificantTerms
 import org.elasticsearch.search.aggregations.bucket.significant.SignificantTermsAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
+import fi.maanmittauslaitos.pta.search.api.Language;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.Hit;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 
@@ -29,7 +30,7 @@ public class FacetHintProviderImpl extends AbstractHintProvider {
 	}
 	
 	@Override
-	public HintExtractor registerHintProvider(List<String> pyyntoTerms, SearchSourceBuilder searchSourceBuilder) {
+	public HintExtractor registerHintProvider(List<String> pyyntoTerms, SearchSourceBuilder searchSourceBuilder, Language language) {
 		
 		SignificantTermsAggregationBuilder aggregationBuilder = AggregationBuilders.significantTerms(aggregationFieldName);
 		aggregationBuilder.field(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI);
@@ -39,14 +40,16 @@ public class FacetHintProviderImpl extends AbstractHintProvider {
 		searchSourceBuilder.aggregation(aggregationBuilder);
 		
 		
-		return new FacetHintProviderHintExtractor(pyyntoTerms);
+		return new FacetHintProviderHintExtractor(pyyntoTerms, language);
 	}
 
 	public class FacetHintProviderHintExtractor implements HintExtractor {
 		private List<String> pyyntoTerms;
+		private Language language;
 		
-		public FacetHintProviderHintExtractor(List<String> pyyntoTerms) {
+		public FacetHintProviderHintExtractor(List<String> pyyntoTerms, Language language) {
 			this.pyyntoTerms = pyyntoTerms;
+			this.language = language;
 		}
 		
 		@Override
@@ -67,7 +70,7 @@ public class FacetHintProviderImpl extends AbstractHintProvider {
 				tmp.add(new AbstractMap.SimpleEntry<IRI, Double>(vf.createIRI(uri), score));
 			}
 			
-			return determineLabelsForHintsKeepResultsWithinMaxSize(tmp, pyyntoTerms);
+			return determineLabelsForHintsKeepResultsWithinMaxSize(tmp, pyyntoTerms, language);
 		}
 	}
 }

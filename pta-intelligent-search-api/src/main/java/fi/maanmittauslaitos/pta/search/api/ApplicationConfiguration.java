@@ -5,10 +5,14 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.UnknownHostException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
 import org.apache.http.HttpHost;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
+import org.apache.lucene.analysis.sv.SwedishAnalyzer;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.vocabulary.SKOS;
@@ -16,11 +20,15 @@ import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import fi.maanmittauslaitos.pta.search.api.hints.FacetHintProviderImpl;
 import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
+import fi.maanmittauslaitos.pta.search.api.language.LanguageDetector;
+import fi.maanmittauslaitos.pta.search.api.language.LuceneAnalyzerStemmer;
+import fi.maanmittauslaitos.pta.search.api.language.StemmingOntologyLanguageDetectorImpl;
 import fi.maanmittauslaitos.pta.search.api.search.FacetedElasticsearchHakuKoneImpl;
 import fi.maanmittauslaitos.pta.search.api.search.HakuKone;
 import fi.maanmittauslaitos.pta.search.api.search.OntologyElasticsearchQueryProviderImpl;
@@ -29,13 +37,14 @@ import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 import fi.maanmittauslaitos.pta.search.text.TextProcessor;
 import fi.maanmittauslaitos.pta.search.text.WordCombinationProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
-import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
+import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactory;
 
 @Configuration
 public class ApplicationConfiguration {
 
 	@Bean
-	public RDFTerminologyMatcherProcessor terminologyMatcher(Model terminologyModel, Stemmer stemmer, List<IRI> terminologyLabels) throws IOException {
+	@Qualifier("FI")
+	public RDFTerminologyMatcherProcessor terminologyMatcher_FI(Model terminologyModel, @Qualifier("FI") Stemmer stemmer, List<IRI> terminologyLabels) throws IOException {
 		RDFTerminologyMatcherProcessor ret = new RDFTerminologyMatcherProcessor();
 		ret.setModel(terminologyModel);
 		ret.setTerminologyLabels(terminologyLabels);
@@ -49,7 +58,8 @@ public class ApplicationConfiguration {
 	}
 	
 	@Bean
-	public WordCombinationProcessor wordCombinationProcessor(Model terminologyModel, Stemmer stemmer, List<IRI> terminologyLabels) throws IOException {
+	@Qualifier("FI")
+	public WordCombinationProcessor wordCombinationProcessor_FI(Model terminologyModel, @Qualifier("FI") Stemmer stemmer, List<IRI> terminologyLabels) throws IOException {
 		WordCombinationProcessor ret = new WordCombinationProcessor();
 		ret.setModel(terminologyModel);
 		ret.setTerminologyLabels(terminologyLabels);
@@ -63,11 +73,127 @@ public class ApplicationConfiguration {
 	}
 	
 	@Bean
-	public TextProcessor queryTextProcessor(WordCombinationProcessor combinator, RDFTerminologyMatcherProcessor terminology) {
-		TextProcessingChain chain = new TextProcessingChain();
-		chain.getChain().add(combinator);
-		chain.getChain().add(terminology);
-		return chain;
+	@Qualifier("SV")
+	public RDFTerminologyMatcherProcessor terminologyMatcher_SV(Model terminologyModel, @Qualifier("SV") Stemmer stemmer, List<IRI> terminologyLabels) throws IOException {
+		RDFTerminologyMatcherProcessor ret = new RDFTerminologyMatcherProcessor();
+		ret.setModel(terminologyModel);
+		ret.setTerminologyLabels(terminologyLabels);
+		ret.setStemmer(stemmer);
+		ret.setLanguage("sv");
+		
+		// Initialize
+		ret.getDict();
+		
+		return ret;
+	}
+	
+	@Bean
+	@Qualifier("SV")
+	public WordCombinationProcessor wordCombinationProcessor_SV(Model terminologyModel, @Qualifier("SV") Stemmer stemmer, List<IRI> terminologyLabels) throws IOException {
+		WordCombinationProcessor ret = new WordCombinationProcessor();
+		ret.setModel(terminologyModel);
+		ret.setTerminologyLabels(terminologyLabels);
+		ret.setStemmer(stemmer);
+		ret.setLanguage("sv");
+
+		// Initialize
+		ret.getDict();
+
+		return ret;
+	}
+	
+	@Bean
+	@Qualifier("EN")
+	public RDFTerminologyMatcherProcessor terminologyMatcher_EN(Model terminologyModel, @Qualifier("EN") Stemmer stemmer, List<IRI> terminologyLabels) throws IOException {
+		RDFTerminologyMatcherProcessor ret = new RDFTerminologyMatcherProcessor();
+		ret.setModel(terminologyModel);
+		ret.setTerminologyLabels(terminologyLabels);
+		ret.setStemmer(stemmer);
+		ret.setLanguage("en");
+		
+		// Initialize
+		ret.getDict();
+		
+		return ret;
+	}
+	
+	@Bean
+	@Qualifier("EN")
+	public WordCombinationProcessor wordCombinationProcessor_EN(Model terminologyModel, @Qualifier("EN") Stemmer stemmer, List<IRI> terminologyLabels) throws IOException {
+		WordCombinationProcessor ret = new WordCombinationProcessor();
+		ret.setModel(terminologyModel);
+		ret.setTerminologyLabels(terminologyLabels);
+		ret.setStemmer(stemmer);
+		ret.setLanguage("en");
+
+		// Initialize
+		ret.getDict();
+
+		return ret;
+	}
+	
+	@Bean
+	public Map<Language, TextProcessor> queryTextProcessors(
+			@Qualifier("FI") WordCombinationProcessor combinatorFI, 
+			@Qualifier("FI") RDFTerminologyMatcherProcessor terminologyFI,
+			@Qualifier("SV") WordCombinationProcessor combinatorSV, 
+			@Qualifier("SV") RDFTerminologyMatcherProcessor terminologySV,
+			@Qualifier("EN") WordCombinationProcessor combinatorEN, 
+			@Qualifier("EN") RDFTerminologyMatcherProcessor terminologyEN) {
+		
+		Map<Language, TextProcessor> ret = new HashMap<>();
+		
+		TextProcessingChain chain_FI = new TextProcessingChain();
+		chain_FI.getChain().add(combinatorFI);
+		chain_FI.getChain().add(terminologyFI);
+		ret.put(Language.FI, chain_FI);
+		
+		TextProcessingChain chain_SV = new TextProcessingChain();
+		chain_SV.getChain().add(combinatorSV);
+		chain_SV.getChain().add(terminologySV);
+		ret.put(Language.SV, chain_SV);
+		
+		TextProcessingChain chain_EN = new TextProcessingChain();
+		chain_EN.getChain().add(combinatorEN);
+		chain_EN.getChain().add(terminologyEN);
+		ret.put(Language.EN, chain_EN);
+		
+		return ret;
+	}
+	
+	@Bean
+	@Qualifier("PreferredLanguages")
+	public List<Language> preferredLanguages() {
+		return Arrays.asList(Language.FI, Language.SV, Language.EN);
+	}
+	
+	@Bean
+	public LanguageDetector languageDetector(Model terminologyModel,
+			@Qualifier("FI") Stemmer stemmerFI,
+			@Qualifier("SV") Stemmer stemmerSV,
+			@Qualifier("EN") Stemmer stemmerEN,
+			List<IRI> terminologyLabels,
+			@Qualifier("PreferredLanguages") List<Language> languagesInPreferenceOrder)
+	{
+		StemmingOntologyLanguageDetectorImpl ret = new StemmingOntologyLanguageDetectorImpl();
+		ret.setTerminologyLabels(terminologyLabels);
+		ret.setSupportedLanguages(languagesInPreferenceOrder);
+		
+		ret.setModel(terminologyModel);
+		
+		Map<Language, Stemmer> stemmers = new HashMap<>();
+		stemmers.put(Language.FI, stemmerFI);
+		stemmers.put(Language.SV, stemmerSV);
+		stemmers.put(Language.EN, stemmerEN);
+		ret.setStemmers(stemmers);
+		
+		// Initialize
+		for (RDFTerminologyMatcherProcessor processor : ret.ensureLanguageSupport().values()) {
+			processor.getDict();
+		}
+		
+		
+		return ret;
 	}
 	
 	@Bean
@@ -76,9 +202,26 @@ public class ApplicationConfiguration {
 	}
 	
 	@Bean
-	public Stemmer stemmer() {
-		return StemmerFactor.createStemmer();
+	@Qualifier("FI")
+	public Stemmer stemmer_FI() {
+		return StemmerFactory.createFinnishStemmer();
 	}
+
+
+	@Bean
+	@Qualifier("SV")
+	public Stemmer stemmer_SV() {
+		// TODO: Ensure stopwords!!
+		return new LuceneAnalyzerStemmer(new SwedishAnalyzer());
+	}
+
+	@Bean
+	@Qualifier("EN")
+	public Stemmer stemmer_EN() {
+		// TODO: Ensure stopwords!!
+		return new LuceneAnalyzerStemmer(new EnglishAnalyzer());
+	}
+	
 	
 	@Bean
 	public RestHighLevelClient elasticsearchClient() throws UnknownHostException {
@@ -113,11 +256,9 @@ public class ApplicationConfiguration {
 	}
 	
 	@Bean
-	public HintProvider hintProvider(Model terminologyModel, Stemmer stemmer, RDFTerminologyMatcherProcessor terminologyProcessor) {
+	public HintProvider hintProvider(Model terminologyModel) {
 		FacetHintProviderImpl ret = new FacetHintProviderImpl();
-		ret.setStemmer(stemmer);
 		ret.setModel(terminologyModel);
-		ret.setLanguage("fi");
 		
 		return ret;
 	}
@@ -136,7 +277,7 @@ public class ApplicationConfiguration {
 	*/
 	
 	@Bean
-	public HakuKone hakuKone(TextProcessor queryTextProcessor, RestHighLevelClient elasticsearchClient, Model model, HintProvider hintProvider) throws IOException {
+	public HakuKone hakuKone(Map<Language, TextProcessor> queryTextProcessors, RestHighLevelClient elasticsearchClient, Model model, HintProvider hintProvider) throws IOException {
 		FacetedElasticsearchHakuKoneImpl ret = new FacetedElasticsearchHakuKoneImpl();
 		ret.setDistributionFormatsFacetTermMaxSize(100);
 		ret.setInspireKeywordsFacetTermMaxSize(100);
@@ -146,7 +287,7 @@ public class ApplicationConfiguration {
 		
 		OntologyElasticsearchQueryProviderImpl queryProvider = new OntologyElasticsearchQueryProviderImpl();
 		queryProvider.addRelationPredicate(SKOS.NARROWER);
-		queryProvider.setTextProcessor(queryTextProcessor);
+		queryProvider.setTextProcessors(queryTextProcessors);
 		queryProvider.setModel(model);
 		queryProvider.setOntologyLevels(2);
 		queryProvider.setWeightFactor(0.5);

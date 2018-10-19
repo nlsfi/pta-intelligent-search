@@ -21,7 +21,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fi.maanmittauslaitos.pta.search.api.ApplicationConfiguration;
-import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
+import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactory;
 
 public class TudhopeBindingBlocksCunliffeHintProviderImplTest {
 	private ValueFactory vf = SimpleValueFactory.getInstance();
@@ -36,9 +36,7 @@ public class TudhopeBindingBlocksCunliffeHintProviderImplTest {
 	@Before
 	public void setUp() throws Exception { 
 		hintProvider = new TudhopeBindingBlocksCunliffeHintProvider();
-		hintProvider.setStemmer(StemmerFactor.createStemmer());
 		hintProvider.setModel(model);
-		hintProvider.setLanguage("fi");
 		
 		List<Entry<IRI, Double>> relationsAndTravelCosts = new ArrayList<>();
 		

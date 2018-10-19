@@ -1,15 +1,20 @@
 package fi.maanmittauslaitos.pta.search.api;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import fi.maanmittauslaitos.pta.search.api.language.LanguageDetectionResult;
+import fi.maanmittauslaitos.pta.search.api.language.LanguageDetector;
 import fi.maanmittauslaitos.pta.search.api.model.SearchQuery;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult;
 import fi.maanmittauslaitos.pta.search.api.search.HakuKone;
@@ -17,17 +22,71 @@ import fi.maanmittauslaitos.pta.search.api.search.HakuKone;
 @RestController
 public class HakuController {
 	
+	private static Logger logger = Logger.getLogger(HakuController.class);
+	
 	@Autowired
 	private HakuKone hakukone;
+	
+	@Autowired
+	private LanguageDetector languageDetector;
 
+	@Autowired
+	@Qualifier("PreferredLanguages")
+	private List<Language> languagesInPreferenceOrder;
+	
 	@RequestMapping(value = "/v1/search", method = RequestMethod.POST)
 	public SearchResult hae(@RequestBody SearchQuery pyynto, @RequestParam("X-CLIENT-LANG") Optional<String> lang) throws IOException
 	{
-		Language l = sanitizeLanguage(lang.orElse("FI"));
+		String defaultLanguageStr = languagesInPreferenceOrder.get(0).toString();
+		Language languageHint = sanitizeLanguage(lang.orElse(defaultLanguageStr));
 		
-		SearchResult tulos = hakukone.haku(pyynto, l);
+		Language language = determineLanguage(pyynto, languageHint);
+		
+		logger.debug("Querying in language: "+language);
+		
+		SearchResult tulos = hakukone.haku(pyynto, language);
 		
 		return tulos;
+	}
+
+	private Language determineLanguage(SearchQuery pyynto, Language languageHint) {
+		Language language;
+		
+		LanguageDetectionResult ldr = languageDetector.detectLanguage(pyynto.getQuery());
+		
+		List<Language> autoDetectedLanguages = ldr.getTopLanguages();
+		
+		if (autoDetectedLanguages.size() == 1) {
+			language = autoDetectedLanguages.get(0);
+			
+		} else if (autoDetectedLanguages.size() > 1) {
+			
+			if (autoDetectedLanguages.contains(languageHint)) {
+				// Prefer hinted language
+				language = languageHint;
+			} else {
+				// TODO: warn?
+				logger.debug("Conflict, multiple equally good languages detected. Query terms: "+pyynto.getQuery()+", language hint: "+languageHint+", detected languages: "+autoDetectedLanguages+". Choosing first language in preference order.");
+				language = null;
+				for (Language l : languagesInPreferenceOrder) {
+					if (autoDetectedLanguages.contains(l)) {
+						language = l;
+						break;
+					}
+				}
+				if (language == null) {
+					logger.warn("Detected languages were not in the preference order?! Choosing first language from preference order: "+languagesInPreferenceOrder);
+					language = languagesInPreferenceOrder.get(0);
+				}
+			}
+			
+			languageHint = autoDetectedLanguages.get(0);
+
+		} else {
+			language = languageHint;
+		}
+		
+		return language;
 	}
 
 	private Language sanitizeLanguage(String lang) {

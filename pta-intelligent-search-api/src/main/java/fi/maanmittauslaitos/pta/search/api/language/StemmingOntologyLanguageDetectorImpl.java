@@ -1,34 +1,38 @@
 package fi.maanmittauslaitos.pta.search.api.language;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Model;
 
+import fi.maanmittauslaitos.pta.search.api.Language;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 
 public class StemmingOntologyLanguageDetectorImpl implements LanguageDetector {
+	private static Logger logger = Logger.getLogger(StemmingOntologyLanguageDetectorImpl.class);
 	
-	private Map<String, Stemmer> stemmers;
-	private Collection<String> supportedLanguages;
+	private Map<Language, Stemmer> stemmers;
+	private Collection<Language> supportedLanguages;
 	private List<IRI> terminologyLabels;
 	private Model model;
 
 	// Lazily initialized in ensureLanguages()
-	private Map<String, RDFTerminologyMatcherProcessor> terminologyProcessorsByLanguage;
+	private Map<Language, RDFTerminologyMatcherProcessor> terminologyProcessorsByLanguage;
 
-	public void setSupportedLanguages(Collection<String> supportedLanguages) {
+	public void setSupportedLanguages(Collection<Language> supportedLanguages) {
 		this.supportedLanguages = supportedLanguages;
 		this.terminologyProcessorsByLanguage = null;
 	}
 	
-	public Collection<String> getSupportedLanguages() {
+	public Collection<Language> getSupportedLanguages() {
 		return supportedLanguages;
 	}
 	
@@ -50,23 +54,23 @@ public class StemmingOntologyLanguageDetectorImpl implements LanguageDetector {
 		return model;
 	}
 	
-	public void setStemmers(Map<String, Stemmer> stemmers) {
+	public void setStemmers(Map<Language, Stemmer> stemmers) {
 		this.stemmers = stemmers;
 		this.terminologyProcessorsByLanguage = null;
 	}
 	
-	public Map<String, Stemmer> getStemmers() {
+	public Map<Language, Stemmer> getStemmers() {
 		return stemmers;
 	}
 	
-	private Map<String, RDFTerminologyMatcherProcessor> ensureLanguageSupport() {
-		Map<String, RDFTerminologyMatcherProcessor> ret = this.terminologyProcessorsByLanguage;
+	public Map<Language, RDFTerminologyMatcherProcessor> ensureLanguageSupport() {
+		Map<Language, RDFTerminologyMatcherProcessor> ret = this.terminologyProcessorsByLanguage;
 		if (ret == null) {
 			
 			ret = new HashMap<>();
-			for (String language : getSupportedLanguages()) {
+			for (Language language : getSupportedLanguages()) {
 				RDFTerminologyMatcherProcessor tmp = new RDFTerminologyMatcherProcessor();
-				tmp.setLanguage(language);
+				tmp.setLanguage(language.getLowercaseLanguageCode());
 				tmp.setModel(getModel());
 				tmp.setStemmer(getStemmers().get(language));
 				tmp.setTerminologyLabels(getTerminologyLabels());
@@ -82,29 +86,52 @@ public class StemmingOntologyLanguageDetectorImpl implements LanguageDetector {
 	
 	@Override
 	public LanguageDetectionResult detectLanguage(List<String> queryTerms) {
-		Map<String, RDFTerminologyMatcherProcessor> processors = ensureLanguageSupport();
+		Map<Language, RDFTerminologyMatcherProcessor> processors = ensureLanguageSupport();
 		
 		LanguageDetectionResult ret = new LanguageDetectionResult();
 		
-		final Map<String, Double> scorePerLanguage = new HashMap<>();
-		for (String language: processors.keySet()) {
-			List<String> results = processors.get(language).process(queryTerms);
-			if (results.size() > 0) {
-				scorePerLanguage.put(language, new Double(results.size()));
+		final Map<Language, Integer> scorePerLanguage = new HashMap<>();
+		if (logger.isDebugEnabled()) {
+			logger.debug("Detecting language for query: "+queryTerms);
+		}
+		
+		for (Language language: processors.keySet()) {
+			int score = 0;
+			if (logger.isDebugEnabled()) {
+				logger.debug("\t"+language+" =>");
+			}
+			for (String term : queryTerms) {
+				List<String> results = processors.get(language).process(Arrays.asList(term));
+				if (logger.isDebugEnabled()) {
+					logger.debug("\t\t"+term+" = "+results);
+				}
+				if (results.size() > 0) {
+					score++;
+				}
+			}
+			
+			if (score > 0) {
+				scorePerLanguage.put(language, score);
 			}
 		}
 		
-		List<String> tmp = new ArrayList<>(scorePerLanguage.keySet());
+		List<Language> tmp = new ArrayList<>(scorePerLanguage.keySet());
 
-		tmp.sort(new Comparator<String>() {
+		tmp.sort(new Comparator<Language>() {
 			@Override
-			public int compare(String o1, String o2) {
+			public int compare(Language o1, Language o2) {
 				return scorePerLanguage.get(o2).compareTo(scorePerLanguage.get(o1));
 			}
 		});
 		
 		ret.setScorePerLanguage(scorePerLanguage);
 		ret.setPotentialLanguages(tmp);
+		
+		if (scorePerLanguage.size() == 0) {
+			logger.debug("Could not detect any language");
+		} else {
+			logger.debug("Language priority order: "+tmp);
+		}
 		
 		return ret;
 	}

@@ -3,6 +3,7 @@ package fi.maanmittauslaitos.pta.search.api.search;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -15,6 +16,7 @@ import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 
+import fi.maanmittauslaitos.pta.search.api.Language;
 import fi.maanmittauslaitos.pta.search.api.model.SearchQuery;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 import fi.maanmittauslaitos.pta.search.text.TextProcessor;
@@ -25,7 +27,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	
 	private Set<IRI> relationPredicates = new HashSet<>();
 	
-	private TextProcessor textProcessor;
+	private Map<Language, TextProcessor> textProcessors;
 	private Model model;
 	
 	private int ontologyLevels = 1;
@@ -77,12 +79,12 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		addRelationPredicate(vf.createIRI(relationPredicate));
 	}
 	
-	public void setTextProcessor(TextProcessor textProcessor) {
-		this.textProcessor = textProcessor;
+	public void setTextProcessors(Map<Language, TextProcessor> textProcessors) {
+		this.textProcessors = textProcessors;
 	}
 	
-	public TextProcessor getTextProcessor() {
-		return textProcessor;
+	public Map<Language, TextProcessor> getTextProcessors() {
+		return textProcessors;
 	}
 	
 	public double getBasicWordMatchWeight() {
@@ -102,12 +104,12 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	}
 	
 	@Override
-	public BoolQueryBuilder buildSearchSource(SearchQuery pyynto) {
+	public BoolQueryBuilder buildSearchSource(SearchQuery pyynto, Language lang) {
 		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
 
-		List<String> pyyntoTerms = getPyyntoTerms(pyynto);
+		List<String> pyyntoTerms = getPyyntoTerms(pyynto, lang);
 		if (logger.isInfoEnabled()) {
-			logger.info("Hakusanat: "+pyynto.getQuery()+", tunnistetut termit: "+pyyntoTerms);
+			logger.info("Hakusanat: "+pyynto.getQuery()+", kieli: "+lang+", tunnistetut termit: "+pyyntoTerms);
 		}
 		
 		addOntologicalTermQueries(pyyntoTerms, boolQuery);
@@ -151,7 +153,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	private void addOntologicalTermQueries(Collection<String> termit, BoolQueryBuilder boolQuery) {
 		for (String term : termit) {
 			QueryBuilder tmp;
-			// TODO: these need to be parametrized
+
 			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_KEYWORDS_URI, term);
 			tmp.boost(1.0f);
 			boolQuery.should().add(tmp);
@@ -173,13 +175,12 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI_PARENTS, term);
 			tmp.boost(0.25f);
 			boolQuery.should().add(tmp);
-			
 		}
 	}
 
 	@Override
-	public List<String> getPyyntoTerms(SearchQuery pyynto) {
-		return getTextProcessor().process(pyynto.getQuery());
+	public List<String> getPyyntoTerms(SearchQuery pyynto, Language lang) {
+		return getTextProcessors().get(lang).process(pyynto.getQuery());
 	}
 	
 	public Set<String> haeAlakasitteet(Set<String> ylakasitteet) {

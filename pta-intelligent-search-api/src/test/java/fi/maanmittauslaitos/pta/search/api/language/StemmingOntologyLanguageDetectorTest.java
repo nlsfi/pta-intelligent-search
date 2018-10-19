@@ -13,6 +13,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fi.maanmittauslaitos.pta.search.api.ApplicationConfiguration;
+import fi.maanmittauslaitos.pta.search.api.Language;
 import fi.maanmittauslaitos.pta.search.text.stemmer.EnglishSnowballStemmer;
 import fi.maanmittauslaitos.pta.search.text.stemmer.FinnishVoikkoStemmer;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
@@ -33,14 +34,15 @@ public class StemmingOntologyLanguageDetectorTest {
 	public void setUp() throws Exception {
 		StemmingOntologyLanguageDetectorImpl tmp = new StemmingOntologyLanguageDetectorImpl();
 		tmp.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
-		tmp.setSupportedLanguages(Arrays.asList("fi", "en", "sv"));
+		tmp.setSupportedLanguages(Arrays.asList(Language.FI, Language.EN, Language.SV));
 		
 		tmp.setModel(model);
 		
-		Map<String, Stemmer> stemmers = new HashMap<>();
-		stemmers.put("fi", new FinnishVoikkoStemmer());
-		stemmers.put("en", new EnglishSnowballStemmer());
-		stemmers.put("sv", new SwedishSnowballStemmer());
+		ApplicationConfiguration config = new ApplicationConfiguration();
+		Map<Language, Stemmer> stemmers = new HashMap<>();
+		stemmers.put(Language.FI, config.stemmer_FI());
+		stemmers.put(Language.EN, config.stemmer_EN());
+		stemmers.put(Language.SV, config.stemmer_SV());
 		tmp.setStemmers(stemmers);
 		
 		languageDetector = tmp;
@@ -51,8 +53,8 @@ public class StemmingOntologyLanguageDetectorTest {
 		LanguageDetectionResult result = languageDetector.detectLanguage(Arrays.asList("suomella", "on", "oma", "kieli"));
 		assertNotNull(result);
 		assertTrue(result.getPotentialLanguages().size() > 0);
-		assertEquals("fi", result.getPotentialLanguages().get(0));
-		assertEquals(5.0, result.getScoreForLanguage("fi"), 0.001);
+		assertEquals(Language.FI, result.getPotentialLanguages().get(0));
+		assertEquals(2, result.getScoreForLanguage(Language.FI));
 	}
 
 
@@ -61,8 +63,8 @@ public class StemmingOntologyLanguageDetectorTest {
 		LanguageDetectionResult result = languageDetector.detectLanguage(Arrays.asList("Vi", "skyddar", "din", "data", "och", "använder"));
 		assertNotNull(result);
 		assertTrue(result.getPotentialLanguages().size() > 0);
-		assertEquals("sv", result.getPotentialLanguages().get(0));
-		assertEquals(2.0, result.getScoreForLanguage("sv"), 0.001);
+		assertEquals(Language.SV, result.getPotentialLanguages().get(0));
+		assertEquals(2, result.getScoreForLanguage(Language.SV));
 	}
 
 
@@ -71,21 +73,21 @@ public class StemmingOntologyLanguageDetectorTest {
 		LanguageDetectionResult result = languageDetector.detectLanguage(Arrays.asList("registered", "service", "class"));
 		assertNotNull(result);
 		assertTrue(result.getPotentialLanguages().size() > 0);
-		assertEquals("en", result.getPotentialLanguages().get(0));
-		assertEquals(8.0, result.getScoreForLanguage("en"), 0.001);
+		assertEquals(Language.EN, result.getPotentialLanguages().get(0));
+		assertEquals(2, result.getScoreForLanguage(Language.EN));
 	}
 
 
 	@Test
-	public void testDrawBetweenEnglishAndFinnish() {
-		LanguageDetectionResult result = languageDetector.detectLanguage(Arrays.asList("home"));
+	public void testDrawBetweenEnglishAndSwedish() {
+		LanguageDetectionResult result = languageDetector.detectLanguage(Arrays.asList("salt"));
 		assertNotNull(result);
 		assertEquals(2, result.getPotentialLanguages().size());
-		assertNotEquals("sv", result.getPotentialLanguages().get(0));
-		assertNotEquals("sv", result.getPotentialLanguages().get(1));
+		assertNotEquals(Language.FI, result.getPotentialLanguages().get(0));
+		assertNotEquals(Language.FI, result.getPotentialLanguages().get(1));
 		
-		assertEquals(1.0, result.getScoreForLanguage("fi"), 0.001);
-		assertEquals(1.0, result.getScoreForLanguage("en"), 0.001);
+		assertEquals(1, result.getScoreForLanguage(Language.SV));
+		assertEquals(1, result.getScoreForLanguage(Language.EN));
 		
 	}
 
@@ -96,7 +98,7 @@ public class StemmingOntologyLanguageDetectorTest {
 	public void testNotFinnishAtAll() {
 		LanguageDetectionResult result = languageDetector.detectLanguage(Arrays.asList("change", "your", "perception"));
 		assertNotNull(result);
-		assertEquals(0.0, result.getScoreForLanguage("fi"), 0.001);
+		assertEquals(0, result.getScoreForLanguage(Language.FI));
 	}
 
 }

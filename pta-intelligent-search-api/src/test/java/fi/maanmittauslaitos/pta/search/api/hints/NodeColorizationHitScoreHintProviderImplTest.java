@@ -21,8 +21,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fi.maanmittauslaitos.pta.search.api.ApplicationConfiguration;
+import fi.maanmittauslaitos.pta.search.api.Language;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.Hit;
-import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
+import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactory;
 
 public class NodeColorizationHitScoreHintProviderImplTest {
 	private ValueFactory vf = SimpleValueFactory.getInstance();
@@ -38,9 +39,7 @@ public class NodeColorizationHitScoreHintProviderImplTest {
 	public void setUp() throws Exception { 
 		hintProvider = new NodeColorizationHitScoreHintProviderImpl();
 		hintProvider.setMaxColorizationDepth(3);
-		hintProvider.setStemmer(StemmerFactor.createStemmer());
 		hintProvider.setModel(model);
-		hintProvider.setLanguage("fi");
 		
 		List<Entry<IRI, Double>> weights = new ArrayList<>();
 		
@@ -213,7 +212,7 @@ public class NodeColorizationHitScoreHintProviderImplTest {
 		fakeHit.setAbstractUris(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711")); // Sakko
 		fakeHit.setScore(1.0);
 
-		List<String> hints = hintProvider.registerHintProvider(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711"), null).getHints(null, Arrays.asList(fakeHit));
+		List<String> hints = hintProvider.registerHintProvider(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711"), null, Language.FI).getHints(null, Arrays.asList(fakeHit));
 		
 		assertEquals(2, hints.size());
 		assertEquals("rangaistukset", hints.get(0));
@@ -245,7 +244,7 @@ public class NodeColorizationHitScoreHintProviderImplTest {
 		fakeHit2.setAbstractUris(Arrays.asList("http://www.yso.fi/onto/ysa/Y165908")); // Sakon muuntorangaistus
 		fakeHit2.setScore(1.0);
 		
-		List<String> hints = hintProvider.registerHintProvider(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711", "http://www.yso.fi/onto/ysa/Y165908"), null).getHints(null, Arrays.asList(fakeHit1, fakeHit2));
+		List<String> hints = hintProvider.registerHintProvider(Arrays.asList("http://www.yso.fi/onto/ysa/Y98711", "http://www.yso.fi/onto/ysa/Y165908"), null, Language.FI).getHints(null, Arrays.asList(fakeHit1, fakeHit2));
 		assertEquals(2, hints.size());
 		assertEquals("rangaistukset", hints.get(0));
 		assertEquals("tuomiot", hints.get(1));

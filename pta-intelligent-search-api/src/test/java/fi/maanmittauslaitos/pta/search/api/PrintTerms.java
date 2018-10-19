@@ -25,8 +25,8 @@ public class PrintTerms {
 		ApplicationConfiguration config = new ApplicationConfiguration();
 		
 		Model model = config.terminologyModel();
-		Stemmer stemmer = config.stemmer();
-		RDFTerminologyMatcherProcessor terminologyMatcher = config.terminologyMatcher(model, stemmer, Arrays.asList(SKOS.PREF_LABEL));
+		Stemmer stemmer = config.stemmer_FI();
+		RDFTerminologyMatcherProcessor terminologyMatcher = config.terminologyMatcher_FI(model, stemmer, Arrays.asList(SKOS.PREF_LABEL));
 		
 		Map<String, String> iriToString = terminologyMatcher.getReverseDict();
 

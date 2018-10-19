@@ -13,7 +13,7 @@ import org.eclipse.rdf4j.rio.Rio;
 import org.junit.Before;
 import org.junit.Test;
 
-import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactor;
+import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactory;
 
 public class WordCombinationProcessorTest {
 	private WordCombinationProcessor processor;
@@ -27,7 +27,7 @@ public class WordCombinationProcessorTest {
 		
 		processor.setModel(model);
 		processor.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
-		processor.setStemmer(StemmerFactor.createStemmer());
+		processor.setStemmer(StemmerFactory.createFinnishStemmer());
 	}
 	
 	@Test

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
+import fi.maanmittauslaitos.pta.search.api.Language;
+
 public interface HintProvider {
 	/**
 	 * Modify searchSourceBuilder in a way to register aggregations or other query parameters required
@@ -14,5 +16,5 @@ public interface HintProvider {
 	 * @param searchSourceBuilder
 	 * @return
 	 */
-	public HintExtractor registerHintProvider(List<String> pyyntoTerms, SearchSourceBuilder searchSourceBuilder);
+	public HintExtractor registerHintProvider(List<String> pyyntoTerms, SearchSourceBuilder searchSourceBuilder, Language language);
 }

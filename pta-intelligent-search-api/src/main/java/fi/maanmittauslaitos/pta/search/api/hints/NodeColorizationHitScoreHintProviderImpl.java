@@ -14,8 +14,10 @@ import org.eclipse.rdf4j.model.Value;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
+import fi.maanmittauslaitos.pta.search.api.Language;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.Hit;
 
+@Deprecated
 public class NodeColorizationHitScoreHintProviderImpl extends AbstractHintProvider {
 	
 	
@@ -63,7 +65,7 @@ public class NodeColorizationHitScoreHintProviderImpl extends AbstractHintProvid
 	 * This process is done recursively until the configured level of recursion has been reached.   
 	 */
 	@Override
-	public HintExtractor registerHintProvider(List<String> pyyntoTerms, SearchSourceBuilder builder) {
+	public HintExtractor registerHintProvider(List<String> pyyntoTerms, SearchSourceBuilder builder, Language language) {
 		
 		return new HintExtractor() {
 			
@@ -85,7 +87,7 @@ public class NodeColorizationHitScoreHintProviderImpl extends AbstractHintProvid
 				
 				Map<IRI, Double> colorized = colorize(iris);
 				
-				return produceAndOrderHints(pyyntoTerms, colorized);
+				return produceAndOrderHints(pyyntoTerms, colorized, language);
 			}
 		};
 	}
