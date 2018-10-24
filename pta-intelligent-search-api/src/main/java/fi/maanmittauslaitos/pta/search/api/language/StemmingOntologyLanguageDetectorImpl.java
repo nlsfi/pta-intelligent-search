@@ -3,6 +3,7 @@ package fi.maanmittauslaitos.pta.search.api.language;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -14,19 +15,22 @@ import org.eclipse.rdf4j.model.Model;
 
 import fi.maanmittauslaitos.pta.search.api.Language;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
+import fi.maanmittauslaitos.pta.search.text.StopWordsProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 
 public class StemmingOntologyLanguageDetectorImpl implements LanguageDetector {
 	private static Logger logger = Logger.getLogger(StemmingOntologyLanguageDetectorImpl.class);
 	
-	private Map<Language, Stemmer> stemmers;
-	private Collection<Language> supportedLanguages;
-	private List<IRI> terminologyLabels;
+	private Map<Language, Stemmer> stemmers = new HashMap<>();
+	private Collection<Language> supportedLanguages = Collections.emptyList();
+	private List<IRI> terminologyLabels = Collections.emptyList();
 	private Model model;
 
+	private Map<Language, StopWordsProcessor> stopWordsProcessors = new HashMap<>();
+	
 	// Lazily initialized in ensureLanguages()
 	private Map<Language, RDFTerminologyMatcherProcessor> terminologyProcessorsByLanguage;
-
+	
 	public void setSupportedLanguages(Collection<Language> supportedLanguages) {
 		this.supportedLanguages = supportedLanguages;
 		this.terminologyProcessorsByLanguage = null;
@@ -61,6 +65,14 @@ public class StemmingOntologyLanguageDetectorImpl implements LanguageDetector {
 	
 	public Map<Language, Stemmer> getStemmers() {
 		return stemmers;
+	}
+	
+	public void setStopWordsProcessors(Map<Language, StopWordsProcessor> stopWordsProcessors) {
+		this.stopWordsProcessors = stopWordsProcessors;
+	}
+	
+	public Map<Language, StopWordsProcessor> getStopWordsProcessors() {
+		return stopWordsProcessors;
 	}
 	
 	public Map<Language, RDFTerminologyMatcherProcessor> ensureLanguageSupport() {
@@ -100,7 +112,18 @@ public class StemmingOntologyLanguageDetectorImpl implements LanguageDetector {
 			if (logger.isDebugEnabled()) {
 				logger.debug("\t"+language+" =>");
 			}
-			for (String term : queryTerms) {
+			
+			List<String> queryTermsForThisLanguage = queryTerms;
+			
+			StopWordsProcessor stopWords = getStopWordsProcessors().get(language);
+			if (stopWords != null) {
+				queryTermsForThisLanguage = stopWords.process(queryTermsForThisLanguage);
+				if (logger.isDebugEnabled()) {
+					logger.debug(" terms after stop words: "+queryTermsForThisLanguage+" => ");
+				}
+			}
+			
+			for (String term : queryTermsForThisLanguage) {
 				List<String> results = processors.get(language).process(Arrays.asList(term));
 				if (logger.isDebugEnabled()) {
 					logger.debug("\t\t"+term+" = "+results);

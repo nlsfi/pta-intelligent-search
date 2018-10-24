@@ -33,6 +33,7 @@ import fi.maanmittauslaitos.pta.search.api.search.FacetedElasticsearchHakuKoneIm
 import fi.maanmittauslaitos.pta.search.api.search.HakuKone;
 import fi.maanmittauslaitos.pta.search.api.search.OntologyElasticsearchQueryProviderImpl;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
+import fi.maanmittauslaitos.pta.search.text.StopWordsProcessor;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 import fi.maanmittauslaitos.pta.search.text.TextProcessor;
 import fi.maanmittauslaitos.pta.search.text.WordCombinationProcessor;
@@ -172,6 +173,9 @@ public class ApplicationConfiguration {
 			@Qualifier("FI") Stemmer stemmerFI,
 			@Qualifier("SV") Stemmer stemmerSV,
 			@Qualifier("EN") Stemmer stemmerEN,
+			@Qualifier("FI") StopWordsProcessor stopwordsFI,
+			@Qualifier("SV") StopWordsProcessor stopwordsSV,
+			@Qualifier("EN") StopWordsProcessor stopwordsEN,
 			List<IRI> terminologyLabels,
 			@Qualifier("PreferredLanguages") List<Language> languagesInPreferenceOrder)
 	{
@@ -187,11 +191,16 @@ public class ApplicationConfiguration {
 		stemmers.put(Language.EN, stemmerEN);
 		ret.setStemmers(stemmers);
 		
+		Map<Language, StopWordsProcessor> stopwords = new HashMap<>();
+		stopwords.put(Language.FI, stopwordsFI);
+		stopwords.put(Language.SV, stopwordsSV);
+		stopwords.put(Language.EN, stopwordsEN);
+		ret.setStopWordsProcessors(stopwords);
+		
 		// Initialize
 		for (RDFTerminologyMatcherProcessor processor : ret.ensureLanguageSupport().values()) {
 			processor.getDict();
 		}
-		
 		
 		return ret;
 	}
@@ -207,20 +216,49 @@ public class ApplicationConfiguration {
 		return StemmerFactory.createFinnishStemmer();
 	}
 
-
 	@Bean
 	@Qualifier("SV")
 	public Stemmer stemmer_SV() {
-		// TODO: Ensure stopwords!!
 		return new LuceneAnalyzerStemmer(new SwedishAnalyzer());
 	}
 
 	@Bean
 	@Qualifier("EN")
 	public Stemmer stemmer_EN() {
-		// TODO: Ensure stopwords!!
 		return new LuceneAnalyzerStemmer(new EnglishAnalyzer());
 	}
+	
+	
+	@Bean
+	@Qualifier("FI")
+	public StopWordsProcessor stopwords_FI() throws IOException {
+		StopWordsProcessor stopWords = new StopWordsProcessor();
+		stopWords.loadWords(
+				ApplicationConfiguration.class.getResourceAsStream(
+						"/nls.fi/pta-intelligent-search/stopwords-fi.txt"));
+		return stopWords;
+	}
+
+	@Bean
+	@Qualifier("SV")
+	public StopWordsProcessor stopwords_SV() throws IOException {
+		StopWordsProcessor stopWords = new StopWordsProcessor();
+		stopWords.loadWords(
+				ApplicationConfiguration.class.getResourceAsStream(
+						"/nls.fi/pta-intelligent-search/stopwords-sv.txt"));
+		return stopWords;
+	}
+
+	@Bean
+	@Qualifier("EN")
+	public StopWordsProcessor stopwords_EN() throws IOException {
+		StopWordsProcessor stopWords = new StopWordsProcessor();
+		stopWords.loadWords(
+				ApplicationConfiguration.class.getResourceAsStream(
+						"/nls.fi/pta-intelligent-search/stopwords-en.txt"));
+		return stopWords;
+	}
+	
 	
 	
 	@Bean

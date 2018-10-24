@@ -14,11 +14,12 @@ import org.junit.Test;
 
 import fi.maanmittauslaitos.pta.search.api.ApplicationConfiguration;
 import fi.maanmittauslaitos.pta.search.api.Language;
+import fi.maanmittauslaitos.pta.search.text.StopWordsProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 
 public class StemmingOntologyLanguageDetectorTest {
 
-	private LanguageDetector languageDetector;
+	private StemmingOntologyLanguageDetectorImpl languageDetector;
 	
 	private static Model model;
 	
@@ -54,9 +55,16 @@ public class StemmingOntologyLanguageDetectorTest {
 		assertEquals(2, result.getScoreForLanguage(Language.FI));
 	}
 
-
 	@Test
-	public void testBasicSwedish() {
+	public void testBasicSwedishWithStopwords() throws Exception {
+		StopWordsProcessor stopWords = new StopWordsProcessor();
+		stopWords.loadWords(StemmingOntologyLanguageDetectorTest.class.getResourceAsStream("/nls.fi/pta-intelligent-search/stopwords-sv.txt"));
+		
+		Map<Language, StopWordsProcessor> stopWordProcessors = new HashMap<>();
+		stopWordProcessors.put(Language.SV, stopWords);
+		languageDetector.setStopWordsProcessors(stopWordProcessors);
+		
+		
 		LanguageDetectionResult result = languageDetector.detectLanguage(Arrays.asList("Vi", "skyddar", "din", "data", "och", "använder"));
 		assertNotNull(result);
 		assertTrue(result.getPotentialLanguages().size() > 0);
@@ -94,6 +102,28 @@ public class StemmingOntologyLanguageDetectorTest {
 	@Test
 	public void testNotFinnishAtAll() {
 		LanguageDetectionResult result = languageDetector.detectLanguage(Arrays.asList("change", "your", "perception"));
+		assertNotNull(result);
+		assertEquals(0, result.getScoreForLanguage(Language.FI));
+	}
+
+
+	@Test
+	public void testWithoutStopWords() {
+		LanguageDetectionResult result = languageDetector.detectLanguage(Arrays.asList("hevonen"));
+		assertNotNull(result);
+		assertEquals(1, result.getScoreForLanguage(Language.FI));
+	}
+	
+	@Test
+	public void testStopWords() {
+		StopWordsProcessor stopWords = new StopWordsProcessor();
+		stopWords.setStopwords(Arrays.asList("hevonen"));
+		
+		Map<Language, StopWordsProcessor> stopWordProcessors = new HashMap<>();
+		stopWordProcessors.put(Language.FI, stopWords);
+		languageDetector.setStopWordsProcessors(stopWordProcessors);
+		
+		LanguageDetectionResult result = languageDetector.detectLanguage(Arrays.asList("hevonen"));
 		assertNotNull(result);
 		assertEquals(0, result.getScoreForLanguage(Language.FI));
 	}
