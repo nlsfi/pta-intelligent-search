@@ -14,10 +14,7 @@ import org.junit.Test;
 
 import fi.maanmittauslaitos.pta.search.api.ApplicationConfiguration;
 import fi.maanmittauslaitos.pta.search.api.Language;
-import fi.maanmittauslaitos.pta.search.text.stemmer.EnglishSnowballStemmer;
-import fi.maanmittauslaitos.pta.search.text.stemmer.FinnishVoikkoStemmer;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
-import fi.maanmittauslaitos.pta.search.text.stemmer.SwedishSnowballStemmer;
 
 public class StemmingOntologyLanguageDetectorTest {
 
