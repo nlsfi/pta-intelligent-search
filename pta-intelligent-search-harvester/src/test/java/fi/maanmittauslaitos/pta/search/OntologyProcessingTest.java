@@ -9,7 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessorFactory;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
