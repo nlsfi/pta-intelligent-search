@@ -135,26 +135,32 @@ public class ApplicationConfiguration {
 	
 	@Bean
 	public Map<Language, TextProcessor> queryTextProcessors(
+			@Qualifier("FI") StopWordsProcessor stopwordsFI,
 			@Qualifier("FI") WordCombinationProcessor combinatorFI, 
 			@Qualifier("FI") RDFTerminologyMatcherProcessor terminologyFI,
+			@Qualifier("SV") StopWordsProcessor stopwordsSV,
 			@Qualifier("SV") WordCombinationProcessor combinatorSV, 
 			@Qualifier("SV") RDFTerminologyMatcherProcessor terminologySV,
+			@Qualifier("EN") StopWordsProcessor stopwordsEN,
 			@Qualifier("EN") WordCombinationProcessor combinatorEN, 
 			@Qualifier("EN") RDFTerminologyMatcherProcessor terminologyEN) {
 		
 		Map<Language, TextProcessor> ret = new HashMap<>();
 		
 		TextProcessingChain chain_FI = new TextProcessingChain();
+		chain_FI.getChain().add(stopwordsFI);
 		chain_FI.getChain().add(combinatorFI);
 		chain_FI.getChain().add(terminologyFI);
 		ret.put(Language.FI, chain_FI);
 		
 		TextProcessingChain chain_SV = new TextProcessingChain();
+		chain_SV.getChain().add(stopwordsSV);
 		chain_SV.getChain().add(combinatorSV);
 		chain_SV.getChain().add(terminologySV);
 		ret.put(Language.SV, chain_SV);
 		
 		TextProcessingChain chain_EN = new TextProcessingChain();
+		chain_EN.getChain().add(stopwordsEN);
 		chain_EN.getChain().add(combinatorEN);
 		chain_EN.getChain().add(terminologyEN);
 		ret.put(Language.EN, chain_EN);

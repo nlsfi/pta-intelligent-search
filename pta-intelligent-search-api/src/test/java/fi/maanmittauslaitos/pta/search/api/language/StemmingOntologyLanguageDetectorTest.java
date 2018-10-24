@@ -2,6 +2,7 @@ package fi.maanmittauslaitos.pta.search.api.language;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -128,4 +129,20 @@ public class StemmingOntologyLanguageDetectorTest {
 		assertEquals(0, result.getScoreForLanguage(Language.FI));
 	}
 
+	@Test
+	public void testEnglishWord_World() throws IOException {
+		StopWordsProcessor stopWords = new StopWordsProcessor();
+		stopWords.loadWords(StemmingOntologyLanguageDetectorTest.class.getResourceAsStream("/nls.fi/pta-intelligent-search/stopwords-en.txt"));
+		
+		Map<Language, StopWordsProcessor> stopWordProcessors = new HashMap<>();
+		stopWordProcessors.put(Language.EN, stopWords);
+		languageDetector.setStopWordsProcessors(stopWordProcessors);
+		
+		
+		// the word "world" is in stopwords => no hits
+		LanguageDetectionResult result = languageDetector.detectLanguage(Arrays.asList("world"));
+		assertNotNull(result);
+		assertEquals(0, result.getPotentialLanguages().size());
+
+	}
 }
