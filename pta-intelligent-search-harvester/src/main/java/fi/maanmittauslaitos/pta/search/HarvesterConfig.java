@@ -259,18 +259,7 @@ public class HarvesterConfig {
 		ret.getChain().add(wordCombinationProcessor);
 		
 		StopWordsProcessor stopWordsProcessor = new StopWordsProcessor();
-		try (InputStreamReader isr = new InputStreamReader(HarvesterConfig.class.getResourceAsStream("/stopwords-fi.txt"))) {
-			List<String> stopWords = new ArrayList<>();
-			BufferedReader br = new BufferedReader(isr);
-			String line;
-			while ((line = br.readLine()) != null) {
-				String tmp = line.toLowerCase().trim();
-				if (tmp.length() > 0) {
-					stopWords.add(tmp);
-				}
-			}
-			stopWordsProcessor.setStopwords(stopWords);
-		}
+		stopWordsProcessor.loadWords(HarvesterConfig.class.getResourceAsStream("/nls.fi/pta-intelligent-search/stopwords-fi.txt"));
 		ret.getChain().add(stopWordsProcessor);
 		ret.getChain().add(terminologyProcessor);
 		return ret;

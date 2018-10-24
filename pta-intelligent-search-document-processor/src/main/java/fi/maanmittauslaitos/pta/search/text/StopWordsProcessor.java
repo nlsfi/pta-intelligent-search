@@ -1,5 +1,9 @@
 package fi.maanmittauslaitos.pta.search.text;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -32,6 +36,23 @@ public class StopWordsProcessor implements TextProcessor {
 			}
 		}
 		return ret;
+	}
+
+	public void loadWords(InputStream is) throws IOException
+	{
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+			List<String> stopWords = new ArrayList<>();
+			String line;
+			while ((line = br.readLine()) != null) {
+				String tmp = line.toLowerCase().trim();
+				if (tmp.length() > 0) {
+					stopWords.add(tmp);
+				}
+			}
+			this.setStopwords(stopWords);
+		} finally {
+			is.close();
+		}
 	}
 
 }
