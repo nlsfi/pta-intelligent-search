@@ -132,8 +132,6 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 	public SearchResult haku(SearchQuery pyynto, Language language) throws IOException {
 		SearchResult tulos = new SearchResult();
 		
-		tulos.setLanguageUsed(language.toString());
-		
 		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 		sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
 		sourceBuilder.fetchSource("*", null);

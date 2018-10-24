@@ -12,6 +12,7 @@ public class SearchQuery {
 	private Long skip;
 	private Long pageSize;
 	private List<String> query = new ArrayList<>();
+	private String queryLanguage;
 	
 	private Map<String, List<String>> facets = new HashMap<String, List<String>>();
 	private List<Sort> sort = new ArrayList<>();
@@ -23,6 +24,14 @@ public class SearchQuery {
 	
 	public List<String> getQuery() {
 		return query;
+	}
+	
+	public void setQueryLanguage(String queryLanguage) {
+		this.queryLanguage = queryLanguage;
+	}
+	
+	public String getQueryLanguage() {
+		return queryLanguage;
 	}
 	
 	public Long getSkip() {

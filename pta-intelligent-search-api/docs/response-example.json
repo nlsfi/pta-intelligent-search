@@ -1,6 +1,14 @@
 {
 	"startIndex": 0,
     "totalHits": 5000,
+    "queryLanguage": {
+		"used": "FI",
+		"deduced": "FI",
+		"scores": [{
+			"language": "FI",
+			"score": 1
+		}]
+	},
 	"hits": [{
 		"text": [{
 			"lang": "FI",

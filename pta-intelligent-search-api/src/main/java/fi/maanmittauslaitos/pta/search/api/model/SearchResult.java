@@ -8,7 +8,7 @@ import java.util.Map;
 public class SearchResult {
 	private Long startIndex;
 	private Long totalHits;
-	private String languageUsed;
+	private QueryLanguage queryLanguage;
 	private List<Hit> hits = new ArrayList<>();
 	private List<String> hints = new ArrayList<>();
 	
@@ -30,12 +30,12 @@ public class SearchResult {
 		return totalHits;
 	}
 	
-	public void setLanguageUsed(String languageUsed) {
-		this.languageUsed = languageUsed;
+	public void setQueryLanguage(QueryLanguage queryLanguage) {
+		this.queryLanguage = queryLanguage;
 	}
 	
-	public String getLanguageUsed() {
-		return languageUsed;
+	public QueryLanguage getQueryLanguage() {
+		return queryLanguage;
 	}
 	
 	public List<String> getHints() {
@@ -251,6 +251,57 @@ public class SearchResult {
 			ret.setId(id);
 			ret.setCount(count);
 			return ret;
+		}
+	}
+	
+	public static class QueryLanguage {
+		private String used;
+		private String deduced;
+		private List<QueryLanguageScore> scores;
+		
+		public void setUsed(String used) {
+			this.used = used;
+		}
+		
+		public String getUsed() {
+			return used;
+		}
+		
+		public void setDeduced(String deduced) {
+			this.deduced = deduced;
+		}
+		
+		public String getDeduced() {
+			return deduced;
+		}
+		
+		public void setScores(List<QueryLanguageScore> scores) {
+			this.scores = scores;
+		}
+		
+		public List<QueryLanguageScore> getScores() {
+			return scores;
+		}
+	}
+	
+	public static class QueryLanguageScore {
+		private String language;
+		private Integer score;
+		
+		public void setLanguage(String language) {
+			this.language = language;
+		}
+		
+		public String getLanguage() {
+			return language;
+		}
+		
+		public void setScore(Integer score) {
+			this.score = score;
+		}
+		
+		public Integer getScore() {
+			return score;
 		}
 	}
 }
