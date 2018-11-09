@@ -33,6 +33,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	private int ontologyLevels = 1;
 	private double weightFactor = 0.5; // weightForLevel(1) = 1.0, weightForLevel(x) = weightForLevel(x-1) * weightFactor  
 	private double basicWordMatchWeight = 1.0;
+	private double organisationNameMatchWeight = 1.5;
 	
 	private int maxQueryTermsToElasticsearch = 500;
 	
@@ -95,6 +96,14 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		this.basicWordMatchWeight = basicWordMatchWeight;
 	}
 	
+	public double getOrganisationNameMatchWeight() {
+		return organisationNameMatchWeight;
+	}
+	
+	public void setOrganisationNameMatchWeight(double organisationNameMatchWeight) {
+		this.organisationNameMatchWeight = organisationNameMatchWeight;
+	}
+	
 	public int getMaxQueryTermsToElasticsearch() {
 		return maxQueryTermsToElasticsearch;
 	}
@@ -145,7 +154,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 			QueryBuilder tmp;
 			
 			tmp = QueryBuilders.fuzzyQuery("organisationName_text", sana);
-			tmp.boost((float)basicWordMatchWeight);
+			tmp.boost((float)organisationNameMatchWeight);
 			boolQuery.should().add(tmp);
 		}
 	}
