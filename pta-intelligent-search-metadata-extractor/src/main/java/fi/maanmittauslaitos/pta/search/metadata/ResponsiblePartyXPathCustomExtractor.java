@@ -12,9 +12,32 @@ import org.w3c.dom.NodeList;
 
 import fi.maanmittauslaitos.pta.search.documentprocessor.XPathCustomExtractor;
 import fi.maanmittauslaitos.pta.search.metadata.model.ResponsibleParty;
+import fi.maanmittauslaitos.pta.search.metadata.model.TextRewriter;
 
 public class ResponsiblePartyXPathCustomExtractor implements XPathCustomExtractor {
 	private static Logger logger = LogManager.getLogger(ResponsiblePartyXPathCustomExtractor.class);
+	
+	private TextRewriter organisationNameRewriter = new TextRewriter() {
+		
+		@Override
+		public String rewrite(String name, String language) {
+			return name;
+		}
+		
+		@Override
+		public String rewrite(String name) {
+			return name;
+		}
+	};
+
+	public void setOrganisationNameRewriter(TextRewriter organisationNameRewriter) {
+		this.organisationNameRewriter = organisationNameRewriter;
+	}
+	
+	public TextRewriter getOrganisationNameRewriter() {
+		return organisationNameRewriter;
+	}
+	
 	
 	@Override
 	public Object process(XPath xPath, Node node) throws XPathException {
@@ -30,6 +53,8 @@ public class ResponsiblePartyXPathCustomExtractor implements XPathCustomExtracto
 		XPathExpression nameExpr =
 				xPath.compile("./gmd:organisationName/gco:CharacterString/text()");
 		organisationName = (String)nameExpr.evaluate(node, XPathConstants.STRING);
+		
+		organisationName = getOrganisationNameRewriter().rewrite(organisationName);
 		
 		XPathExpression isoRoleExpr = 
 				xPath.compile("./gmd:role/gmd:CI_RoleCode[@codeList = 'http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode']/@codeListValue");
@@ -53,6 +78,8 @@ public class ResponsiblePartyXPathCustomExtractor implements XPathCustomExtracto
 					language = language.substring(1);
 				}
 				String value = localisedNameNode.getTextContent();
+				
+				value = getOrganisationNameRewriter().rewrite(value, language);
 				
 				ret.getLocalisedOrganisationName().put(language, value);
 				

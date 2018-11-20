@@ -7,7 +7,10 @@ import java.util.List;
 import org.junit.Test;
 
 import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
+import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
+import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.metadata.model.ResponsibleParty;
+import fi.maanmittauslaitos.pta.search.metadata.model.TextRewriter;
 
 public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractorTest {
 
@@ -101,5 +104,39 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 
 		assertEquals(1, party.getLocalisedOrganisationName().size());
 		assertEquals("Natural Resources Institute Finland (Luke)", party.getLocalisedOrganisationName().get("EN"));
+	}
+	
+	@Test
+	public void testOrgNameRewrite() throws Exception {
+		FieldExtractorConfiguration fec = processor.getDocumentProcessingConfiguration().getFieldExtractor(ISOMetadataFields.ORGANISATIONS);
+		XPathFieldExtractorConfiguration xfec = (XPathFieldExtractorConfiguration)fec;
+		ResponsiblePartyXPathCustomExtractor rpxpce = (ResponsiblePartyXPathCustomExtractor)xfec.getCustomExtractor();
+		
+		rpxpce.setOrganisationNameRewriter(new TextRewriter() {
+			
+			@Override
+			public String rewrite(String name, String language) {
+				return "canon-"+language;
+			}
+			
+			@Override
+			public String rewrite(String name) {
+				return "canon";
+			}
+		});
+		
+		Document document = createMaastotietokantaDocument();
+		
+		List<ResponsibleParty> organisations = document.getListValue(ISOMetadataFields.ORGANISATIONS, ResponsibleParty.class);
+
+		assertEquals(1, organisations.size());
+		ResponsibleParty party = organisations.get(0);
+		
+		assertEquals("canon", party.getOrganisationName());
+		assertEquals("owner", party.getIsoRole());
+		
+		assertEquals(2, party.getLocalisedOrganisationName().size());
+		assertEquals("canon-EN", party.getLocalisedOrganisationName().get("EN"));
+		assertEquals("canon-SV", party.getLocalisedOrganisationName().get("SV"));
 	}
 }

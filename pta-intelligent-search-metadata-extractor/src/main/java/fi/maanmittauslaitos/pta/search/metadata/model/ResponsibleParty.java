@@ -8,6 +8,7 @@ public class ResponsibleParty {
 	private String isoRole;
 	private Map<String, String> localisedOrganisationName = new HashMap<>();
 	
+	
 	public void setOrganisationName(String organisationName) {
 		this.organisationName = organisationName;
 	}
