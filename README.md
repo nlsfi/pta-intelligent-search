@@ -19,7 +19,10 @@ Libraries
 
 For the system to work, you need to run elasticsearch in localhost port 9200. The easiest way to do this is to use docker. To create and start the container run:
 
-`docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.4`
+```
+docker pull docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.4
+docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.4
+```
 
 If you stop this container (or reboot your computer), you no longer need to create a new container. Instead you can just start it via `docker start [container id]`
 
