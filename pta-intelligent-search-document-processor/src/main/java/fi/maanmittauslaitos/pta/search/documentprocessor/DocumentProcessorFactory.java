@@ -30,6 +30,12 @@ public class DocumentProcessorFactory {
 		
 		private XPath xPath;
 		
+		@Override
+		public DocumentProcessingConfiguration getDocumentProcessingConfiguration() {
+			return configuration;
+		}
+		
+		
 		private DocumentProcessorImpl(DocumentProcessingConfiguration configuration) throws ParserConfigurationException {
 			this.configuration = configuration;
 			
