@@ -15,7 +15,17 @@ Libraries
 
 ## Installation for development
 
-### 1. Start elasticsearch
+### 1. Install voikko
+
+The harvester uses the voikko library for analysing Finnish language. This is a native library with a Java wrapper, so your system must have voikko installed. Preferably version 4.1.1.
+
+On ubuntu/debian based systems, this should be as easy as:
+
+```
+apt-get install libvoikko1 voikko-fi
+```
+
+### 2. Start elasticsearch
 
 For the system to work, you need to run elasticsearch in localhost port 9200. The easiest way to do this is to use docker. To create and start the container run:
 
@@ -26,7 +36,7 @@ docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elas
 
 If you stop this container (or reboot your computer), you no longer need to create a new container. Instead you can just start it via `docker start [container id]`
 
-### 2. Harvesting data
+### 3. Harvesting data
 
 To populate elasticsearch with data, you must first ensure that the index is set up correctly. 
 
@@ -41,7 +51,7 @@ Once the index is set up, run the harvester class in pta-intelligent-search-harv
 
 This process harvests all records from the Finnish National Catalogue (paikkatietohakemisto.fi) and exits once done.
 
-### 3. Run the search API
+### 4. Run the search API
 
 Run the class `fi.maanmittauslaitos.pta.search.api.Application` from the project pta-intelligent-search-api. Usually the easiest way to do this is to run the class in an IDE where you have the all the projects.
 
