@@ -1,6 +1,5 @@
 package fi.maanmittauslaitos.pta.search;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -21,6 +20,8 @@ import com.entopix.maui.stemmers.FinnishStemmer;
 import com.entopix.maui.stopwords.StopwordsFinnish;
 
 import fi.maanmittauslaitos.pta.search.codelist.InspireThemesImpl;
+import fi.maanmittauslaitos.pta.search.codelist.OrganisationNormaliser;
+import fi.maanmittauslaitos.pta.search.codelist.OrganisationNormaliserTextRewriter;
 import fi.maanmittauslaitos.pta.search.csw.CSWHarvesterSource;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
@@ -32,6 +33,7 @@ import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import fi.maanmittauslaitos.pta.search.index.ElasticsearchDocumentSink;
 import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataExtractorConfigurationFactory;
 import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataFields;
+import fi.maanmittauslaitos.pta.search.metadata.ResponsiblePartyXPathCustomExtractor;
 import fi.maanmittauslaitos.pta.search.text.ExistsInSetProcessor;
 import fi.maanmittauslaitos.pta.search.text.MauiTextProcessor;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
@@ -155,23 +157,36 @@ public class HarvesterConfig {
 		
 		
 		// Extract all organisation names in a text field for full-text search purposes
-		TextProcessingChain removeEmptyEntriesChain = new TextProcessingChain();
+		TextProcessingChain organisationNameTextProcessor = new TextProcessingChain();
 		RegexProcessor whitespaceRemoval = new RegexProcessor();
 		whitespaceRemoval.setPattern(Pattern.compile("^\\s*$"));
 		whitespaceRemoval.setIncludeMatches(false);
 		
-		removeEmptyEntriesChain.getChain().add(whitespaceRemoval);
+		organisationNameTextProcessor.getChain().add(whitespaceRemoval);
 		
-		configuration.getTextProcessingChains().put("removeEmptyEntries", removeEmptyEntriesChain);
+		configuration.getTextProcessingChains().put("organisationNameTextProcessor", organisationNameTextProcessor);
 		
 		XPathFieldExtractorConfiguration organisationForSearch = new XPathFieldExtractorConfiguration();
 		organisationForSearch.setField("organisationName_text");
 		organisationForSearch.setType(FieldExtractorType.ALL_MATCHING_VALUES);
 		organisationForSearch.setXpath("//gmd:contact//gmd:organisationName//text()");
 		
-		organisationForSearch.setTextProcessorName("removeEmptyEntries");
+		organisationForSearch.setTextProcessorName("organisationNameTextProcessor");
 		
 		configuration.getFieldExtractors().add(organisationForSearch);
+		
+		// Modify organisation extractor to canonicalize organisation names
+		OrganisationNormaliser organisationNormaliser = loadOrganisationNormaliser();
+		OrganisationNormaliserTextRewriter orgRewriter = new OrganisationNormaliserTextRewriter();
+		orgRewriter.setOrganisationNormaliser(organisationNormaliser);
+		
+		FieldExtractorConfiguration fec = configuration.getFieldExtractor(ISOMetadataFields.ORGANISATIONS);
+		System.out.println("fec: "+fec);
+		System.out.println("fec: "+fec.getTextProcessorName());
+		XPathFieldExtractorConfiguration x = (XPathFieldExtractorConfiguration)fec;
+		ResponsiblePartyXPathCustomExtractor rpxpce = (ResponsiblePartyXPathCustomExtractor)x.getCustomExtractor();
+		rpxpce.setOrganisationNameRewriter(orgRewriter);
+		
 		
 		// Configure INSPIRE theme extractor to normalize the theme to 
 		final InspireThemesImpl inspireThemes = new InspireThemesImpl();
@@ -209,6 +224,22 @@ public class HarvesterConfig {
 		
 		return factory.getDocumentProcessorFactory().createProcessor(configuration);
 		
+	}
+
+
+	private OrganisationNormaliser loadOrganisationNormaliser() {
+		// TODO: try to load file in CWD
+		// TODO: try to load file via env variable
+		// TODO: load the file from classpath
+
+		return new OrganisationNormaliser() {
+			
+			@Override
+			public String getCanonicalOrganisationName(String orgName, String language) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+		};
 	}
 
 
