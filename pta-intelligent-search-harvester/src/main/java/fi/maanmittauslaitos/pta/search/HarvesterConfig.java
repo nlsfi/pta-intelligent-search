@@ -1,8 +1,12 @@
 package fi.maanmittauslaitos.pta.search;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +15,7 @@ import java.util.zip.GZIPInputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.vocabulary.SKOS;
 import org.eclipse.rdf4j.rio.RDFFormat;
@@ -20,6 +25,7 @@ import com.entopix.maui.stemmers.FinnishStemmer;
 import com.entopix.maui.stopwords.StopwordsFinnish;
 
 import fi.maanmittauslaitos.pta.search.codelist.InspireThemesImpl;
+import fi.maanmittauslaitos.pta.search.codelist.ODFOrganisationNameNormaliserImpl;
 import fi.maanmittauslaitos.pta.search.codelist.OrganisationNormaliser;
 import fi.maanmittauslaitos.pta.search.codelist.OrganisationNormaliserTextRewriter;
 import fi.maanmittauslaitos.pta.search.csw.CSWHarvesterSource;
@@ -47,6 +53,12 @@ import fi.maanmittauslaitos.pta.search.text.WordCombinationProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactory;
 
 public class HarvesterConfig {
+	
+	private static Logger logger = Logger.getLogger(HarvesterConfig.class);
+	
+	private static String ENV_CANONICAL_ORGANISATIONS_FILENAME = "CANONICAL_ORGANISATIONS_FILE";
+	private static String CANONICAL_ORGANISATIONS_DEFAULT_FILENAME = "canonical_organisations.ods";
+	
 	public HarvesterSource getCSWSource() {
 		HarvesterSource source = new CSWHarvesterSource();
 		source.setBatchSize(10);
@@ -181,8 +193,6 @@ public class HarvesterConfig {
 		orgRewriter.setOrganisationNormaliser(organisationNormaliser);
 		
 		FieldExtractorConfiguration fec = configuration.getFieldExtractor(ISOMetadataFields.ORGANISATIONS);
-		System.out.println("fec: "+fec);
-		System.out.println("fec: "+fec.getTextProcessorName());
 		XPathFieldExtractorConfiguration x = (XPathFieldExtractorConfiguration)fec;
 		ResponsiblePartyXPathCustomExtractor rpxpce = (ResponsiblePartyXPathCustomExtractor)x.getCustomExtractor();
 		rpxpce.setOrganisationNameRewriter(orgRewriter);
@@ -227,19 +237,32 @@ public class HarvesterConfig {
 	}
 
 
-	private OrganisationNormaliser loadOrganisationNormaliser() {
-		// TODO: try to load file in CWD
-		// TODO: try to load file via env variable
-		// TODO: load the file from classpath
-
-		return new OrganisationNormaliser() {
+	private OrganisationNormaliser loadOrganisationNormaliser() throws IOException {
+		
+		try {
+			InputStream is;
+			String env = System.getProperty(ENV_CANONICAL_ORGANISATIONS_FILENAME);
+			if (env != null) {
+				logger.info("Loading canonical organisations from file "+env);
+				is = new FileInputStream(env);
+			} else  {
 			
-			@Override
-			public String getCanonicalOrganisationName(String orgName, String language) {
-				// TODO Auto-generated method stub
-				return null;
+				File file = new File(CANONICAL_ORGANISATIONS_DEFAULT_FILENAME);
+				if (file.exists()) {
+					is = new FileInputStream(file); 
+				} else {
+					is = HarvesterConfig.class.getResourceAsStream("/canonical_organisations.ods");
+				}
 			}
-		};
+			
+			ODFOrganisationNameNormaliserImpl ret = new ODFOrganisationNameNormaliserImpl();
+			ret.loadWorkbook(is);
+			
+			return ret;
+		} catch(IOException | ParseException e) {
+			throw new IOException("Could not load canonical organisations", e);
+		}
+
 	}
 
 
