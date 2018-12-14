@@ -29,6 +29,8 @@ import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
 import fi.maanmittauslaitos.pta.search.api.language.LanguageDetector;
 import fi.maanmittauslaitos.pta.search.api.language.LuceneAnalyzerStemmer;
 import fi.maanmittauslaitos.pta.search.api.language.StemmingOntologyLanguageDetectorImpl;
+import fi.maanmittauslaitos.pta.search.api.region.RegionNameDetector;
+import fi.maanmittauslaitos.pta.search.api.region.StemmingTextFileBackedRegionNameDetectorImpl;
 import fi.maanmittauslaitos.pta.search.api.search.FacetedElasticsearchHakuKoneImpl;
 import fi.maanmittauslaitos.pta.search.api.search.HakuKone;
 import fi.maanmittauslaitos.pta.search.api.search.OntologyElasticsearchQueryProviderImpl;
@@ -339,6 +341,57 @@ public class ApplicationConfiguration {
 		
 		ret.setQueryProvider(queryProvider);
 		ret.setHintProvider(hintProvider);
+		
+		return ret;
+	}
+	
+	@Bean
+	@Qualifier("FI")
+	public RegionNameDetector regionNameDetector_FI(@Qualifier("FI") Stemmer stemmer) throws IOException
+	{
+		StemmingTextFileBackedRegionNameDetectorImpl ret = new StemmingTextFileBackedRegionNameDetectorImpl();
+		ret.setStemmer(stemmer);
+		ret.setResourceName("/region_names/fi.txt");
+		
+		ret.init();
+		return ret;
+	}
+	
+	@Bean
+	@Qualifier("SV")
+	public RegionNameDetector regionNameDetector_SV(@Qualifier("SV") Stemmer stemmer) throws IOException
+	{
+		StemmingTextFileBackedRegionNameDetectorImpl ret = new StemmingTextFileBackedRegionNameDetectorImpl();
+		ret.setStemmer(stemmer);
+		ret.setResourceName("/region_names/sv.txt");
+		
+		ret.init();
+		return ret;
+	}
+	
+	@Bean
+	@Qualifier("EN")
+	public RegionNameDetector regionNameDetector_EN(@Qualifier("EN") Stemmer stemmer) throws IOException
+	{
+		StemmingTextFileBackedRegionNameDetectorImpl ret = new StemmingTextFileBackedRegionNameDetectorImpl();
+		ret.setStemmer(stemmer);
+		ret.setResourceName("/region_names/en.txt");
+		
+		ret.init();
+		return ret;
+	}
+	
+	@Bean
+	@Qualifier("RegionNameDetectorsPerLanguage")
+	public Map<Language, RegionNameDetector> regionNameDetectorsPerLanguage(
+			@Qualifier("FI") RegionNameDetector regionNameDetector_FI,
+			@Qualifier("SV") RegionNameDetector regionNameDetector_SV,
+			@Qualifier("EN") RegionNameDetector regionNameDetector_EN)
+	{
+		Map<Language, RegionNameDetector> ret = new HashMap<>();
+		ret.put(Language.FI, regionNameDetector_FI);
+		ret.put(Language.SV, regionNameDetector_SV);
+		ret.put(Language.EN, regionNameDetector_EN);
 		
 		return ret;
 	}

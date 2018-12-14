@@ -157,7 +157,7 @@ $(document).ready(function() {
 				
 				var link = $('<a></a>');
 				link.text('Avaa paikkatietohakemistossa');
-				link.attr('href', osuma.url);
+				link.attr('href', 'http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/'+osuma.id);
 				link.attr('target', '_blank');
 				
 				tmp.append(link);

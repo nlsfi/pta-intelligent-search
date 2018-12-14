@@ -3,6 +3,7 @@ package fi.maanmittauslaitos.pta.search.api;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.apache.log4j.Logger;
@@ -21,6 +22,7 @@ import fi.maanmittauslaitos.pta.search.api.model.SearchQuery;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.QueryLanguage;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.QueryLanguageScore;
+import fi.maanmittauslaitos.pta.search.api.region.RegionNameDetector;
 import fi.maanmittauslaitos.pta.search.api.search.HakuKone;
 
 @RestController
@@ -34,6 +36,10 @@ public class HakuController {
 	@Autowired
 	private LanguageDetector languageDetector;
 
+	@Autowired
+	@Qualifier("RegionNameDetectorsPerLanguage")
+	private Map<Language, RegionNameDetector> regionNameDetectorPerLanguage;
+	
 	@Autowired
 	@Qualifier("PreferredLanguages")
 	private List<Language> languagesInPreferenceOrder;
@@ -61,8 +67,12 @@ public class HakuController {
 		}
 		
 		logger.debug("Querying in language: "+language);
+
+		RegionNameDetector regionNameDetector = regionNameDetectorPerLanguage.get(language);
+		boolean focusOnRegionalHits = regionNameDetector.containsRegionalName(pyynto.getQuery());
+		logger.debug("Query contains name of a region: "+focusOnRegionalHits);
 		
-		SearchResult tulos = hakukone.haku(pyynto, language);
+		SearchResult tulos = hakukone.haku(pyynto, language, focusOnRegionalHits);
 		
 		QueryLanguage queryLanguage = createQueryLanguage(language, detection.v1(), detection.v2());
 		tulos.setQueryLanguage(queryLanguage);

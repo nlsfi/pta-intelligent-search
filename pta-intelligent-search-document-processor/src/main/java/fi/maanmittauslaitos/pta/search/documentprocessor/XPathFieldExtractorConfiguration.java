@@ -107,7 +107,9 @@ public class XPathFieldExtractorConfiguration extends AbstractFieldExtractorConf
 					List<Object> ret = new ArrayList<>();
 					for (int i = 0; i < nodeList.getLength(); i++) {
 						Object obj = extractor.process(xPath, nodeList.item(i));
-						ret.add(obj);
+						if (obj != null) {
+							ret.add(obj);
+						}
 					}
 					return ret;
 				} catch(XPathException xpe) {

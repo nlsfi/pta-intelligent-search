@@ -14,12 +14,15 @@ import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathException;
 
 import org.apache.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.vocabulary.SKOS;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
+import org.w3c.dom.Node;
 
 import com.entopix.maui.stemmers.FinnishStemmer;
 import com.entopix.maui.stopwords.StopwordsFinnish;
@@ -32,11 +35,13 @@ import fi.maanmittauslaitos.pta.search.csw.CSWHarvesterSource;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
+import fi.maanmittauslaitos.pta.search.documentprocessor.XPathCustomExtractor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import fi.maanmittauslaitos.pta.search.index.ElasticsearchDocumentSink;
+import fi.maanmittauslaitos.pta.search.metadata.GeographicBoundingBoxXPathCustomExtractor;
 import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataExtractorConfigurationFactory;
 import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataFields;
 import fi.maanmittauslaitos.pta.search.metadata.ResponsiblePartyXPathCustomExtractor;
@@ -231,6 +236,30 @@ public class HarvesterConfig {
 		inspireFieldExtractorConfiguration.setTextProcessorName("inspireThemeNormalizer");
 		
 		
+		// Extract bounding box area
+		
+		
+		XPathFieldExtractorConfiguration bboxFec = (XPathFieldExtractorConfiguration)
+				configuration.getFieldExtractor(ISOMetadataFields.GEOGRAPHIC_BOUNDING_BOX);
+		
+		XPathFieldExtractorConfiguration bboxAreaFec = (XPathFieldExtractorConfiguration)bboxFec.copy();
+		final GeographicBoundingBoxXPathCustomExtractor originalBboxCustomExtractor = (GeographicBoundingBoxXPathCustomExtractor)bboxAreaFec.getCustomExtractor();
+		bboxAreaFec.setCustomExtractor(new XPathCustomExtractor() {
+			
+			@Override
+			public Object process(XPath xPath, Node node) throws XPathException {
+				Object original = originalBboxCustomExtractor.process(xPath, node);
+				@SuppressWarnings("unchecked")
+				List<Double> coords = (List<Double>)original;
+				if (coords == null) {
+					return null;
+				} else {
+					return (coords.get(2) - coords.get(0)) * (coords.get(3) - coords.get(1));
+				}
+			}
+		});
+		bboxAreaFec.setField("geographicBoundingBoxArea");
+		configuration.getFieldExtractors().add(bboxAreaFec);
 		
 		return factory.getDocumentProcessorFactory().createProcessor(configuration);
 		

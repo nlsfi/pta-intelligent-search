@@ -129,14 +129,14 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 	}
 	
 	@Override
-	public SearchResult haku(SearchQuery pyynto, Language language) throws IOException {
+	public SearchResult haku(SearchQuery pyynto, Language language, boolean focusOnRegionalHits) throws IOException {
 		SearchResult tulos = new SearchResult();
 		
 		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 		sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
 		sourceBuilder.fetchSource("*", null);
 		
-		BoolQueryBuilder query = getQueryProvider().buildSearchSource(pyynto, language);
+		BoolQueryBuilder query = getQueryProvider().buildSearchSource(pyynto, language, focusOnRegionalHits);
 		
 		sourceBuilder.query(query);
 		

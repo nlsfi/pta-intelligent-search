@@ -7,5 +7,5 @@ import fi.maanmittauslaitos.pta.search.api.model.SearchQuery;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult;
 
 public interface HakuKone {
-	public SearchResult haku(SearchQuery pyynto, Language lang) throws IOException;
+	public SearchResult haku(SearchQuery pyynto, Language lang, boolean focusOnRegionalHits) throws IOException;
 }

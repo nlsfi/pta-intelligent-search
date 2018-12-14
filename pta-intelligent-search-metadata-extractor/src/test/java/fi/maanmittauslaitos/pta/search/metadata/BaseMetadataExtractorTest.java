@@ -87,4 +87,22 @@ public abstract class BaseMetadataExtractorTest {
 		return document;
 	}
 	
+	protected Document createYlojarviAineisto()
+			throws DocumentProcessingException, IOException, FileNotFoundException {
+		Document document;
+		try (FileInputStream fis = new FileInputStream("src/test/resources/b845181a-7db0-41d6-bf58-7d1c3c3c5c5a.xml")) {
+			document = processor.processDocument(fis);
+		}
+		return document;
+	}
+	
+	protected Document createLiikennevirastoAvoinWFS()
+			throws DocumentProcessingException, IOException, FileNotFoundException {
+		Document document;
+		try (FileInputStream fis = new FileInputStream("src/test/resources/60d5fd06-44fe-4e41-a39a-60df747ac7ee.xml")) {
+			document = processor.processDocument(fis);
+		}
+		return document;
+	}
+	
 }
