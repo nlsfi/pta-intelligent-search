@@ -13,6 +13,7 @@ import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.BoostingQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
@@ -28,6 +29,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	
 	private Set<IRI> relationPredicates = new HashSet<>();
 	
+	private Set<String> requireExactWordMatch = new HashSet<>();
 	private Map<Language, TextProcessor> textProcessors;
 	private Model model;
 	
@@ -48,6 +50,14 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	
 	public Model getModel() {
 		return model;
+	}
+	
+	public void setRequireExactWordMatch(Set<String> requireExactWordMatch) {
+		this.requireExactWordMatch = requireExactWordMatch;
+	}
+	
+	public Set<String> getRequireExactWordMatch() {
+		return requireExactWordMatch;
 	}
 	
 	public void setOntologyLevels(int ontologyLevels) {
@@ -133,87 +143,98 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		
 		addOntologicalTermQueries(pyyntoTerms, boolQuery);
 		addFreetextQueries(pyynto.getQuery(), boolQuery);
-
 		
-		double finlandAreaWGS84 = 112.15985284328191068268;
+		BoostingQueryBuilder boostingQuery = createRegionalityBoostingQuery(focusOnRegionalHits);
 		
-		float regionalityBoost = 4.0f;
-		RangeQueryBuilder regionalityQuery = QueryBuilders
-				.rangeQuery("geographicBoundingBoxArea")
-				.boost(regionalityBoost);
-		
-		if (focusOnRegionalHits) {
-			regionalityQuery = regionalityQuery.lte(finlandAreaWGS84/2.0);
-		} else {
-			regionalityQuery = regionalityQuery.gt(finlandAreaWGS84/2.0);
-		}
-		
-		boolQuery.should(regionalityQuery);
+		BoolQueryBuilder fullQuery = QueryBuilders.boolQuery();
+		fullQuery.must(boolQuery);
+		fullQuery.should(boostingQuery);
 		
 		// Remove queries if necessary
-		if (boolQuery.should().size() > getMaxQueryTermsToElasticsearch()) {
-			List<QueryBuilder> qb = boolQuery.should().subList(0, getMaxQueryTermsToElasticsearch());
-			logger.warn("Query has more terms ("+boolQuery.should().size()+") than allowed ("+getMaxQueryTermsToElasticsearch()+"), throwing out some terms");
-			boolQuery.should().retainAll(qb);
+		if (fullQuery.should().size() > getMaxQueryTermsToElasticsearch()) {
+			List<QueryBuilder> qb = fullQuery.should().subList(0, getMaxQueryTermsToElasticsearch());
+			logger.warn("Query has more terms ("+fullQuery.should().size()+") than allowed ("+getMaxQueryTermsToElasticsearch()+"), throwing out some terms");
+			fullQuery.should().retainAll(qb);
 		}
 		
-		return boolQuery;
+		return fullQuery;
+	}
+
+	private BoostingQueryBuilder createRegionalityBoostingQuery(boolean focusOnRegionalHits) {
+		double finlandAreaWGS84 = 112.15985284328191068268;
+		
+		float regionalityBoost = 1.0f;
+		RangeQueryBuilder regionalQuery = QueryBuilders
+				.rangeQuery("geographicBoundingBoxArea")
+				.lte(finlandAreaWGS84/2.0);
+		RangeQueryBuilder nationalQuery = QueryBuilders
+				.rangeQuery("geographicBoundingBoxArea")
+				.gt(finlandAreaWGS84/2.0);
+		
+		BoostingQueryBuilder boostingQuery;
+		
+		if (focusOnRegionalHits) {
+			boostingQuery = QueryBuilders.boostingQuery(regionalQuery, nationalQuery);
+		} else {
+			boostingQuery = QueryBuilders.boostingQuery(nationalQuery, regionalQuery);
+		}
+		boostingQuery = boostingQuery.negativeBoost(regionalityBoost);
+		return boostingQuery;
 	}
 
 	private void addFreetextQueries(Collection<String> terms, BoolQueryBuilder boolQuery) {
-		double normalizeWeight = 1.0 / terms.size();
-		
 		for (String sana : terms) {
-			QueryBuilder tmp;
-			
-			tmp = QueryBuilders.fuzzyQuery("abstract", sana);
-			tmp.boost((float)(basicWordMatchWeight * normalizeWeight));
+			QueryBuilder tmp = freetextQuery("abstract", sana, basicWordMatchWeight);
 			boolQuery.should().add(tmp);
 		}
 		
 		for (String sana : terms) {
-			QueryBuilder tmp;
-			
-			tmp = QueryBuilders.fuzzyQuery("title", sana);
-			tmp.boost((float)(titleWordMatchWeight * normalizeWeight));
+			QueryBuilder tmp = freetextQuery("title", sana, titleWordMatchWeight);
 			boolQuery.should().add(tmp);
 		}
 		
 		for (String sana : terms) {
-			QueryBuilder tmp;
-			
-			tmp = QueryBuilders.fuzzyQuery("organisationName_text", sana);
-			tmp.boost((float)(organisationNameMatchWeight* normalizeWeight));
+			QueryBuilder tmp = freetextQuery("organisationName_text", sana, organisationNameMatchWeight);
 			boolQuery.should().add(tmp);
 		}
 	}
 
-	private void addOntologicalTermQueries(Collection<String> termit, BoolQueryBuilder boolQuery) {
-		float normalizeWeight = 1.0f / termit.size();
+	private QueryBuilder freetextQuery(String field, String word, double weight) {
+		QueryBuilder tmp;
 		
+		if (getRequireExactWordMatch().contains(word)) {
+			tmp = QueryBuilders.termQuery(field, word);
+		} else {
+			tmp = QueryBuilders.fuzzyQuery(field, word);
+		}
+		tmp.boost((float)weight);
+		return tmp;
+	}
+
+	private void addOntologicalTermQueries(Collection<String> termit, BoolQueryBuilder boolQuery) {
 		for (String term : termit) {
 			QueryBuilder tmp;
 
 			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_KEYWORDS_URI, term);
-			tmp.boost(1.0f * normalizeWeight);
+			tmp.boost(1.25f);
 			boolQuery.should().add(tmp);
 
 			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI, term);
-			tmp.boost(1.0f * normalizeWeight);
+			tmp.boost(1.25f);
 			boolQuery.should().add(tmp);
 
 			
 			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI, term);
-			tmp.boost(0.75f * normalizeWeight);
+			tmp.boost(1.0f);
 			boolQuery.should().add(tmp);
 
 			
 			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI_PARENTS, term);
-			tmp.boost(0.5f * normalizeWeight);
+			tmp.boost(0.75f);
 			boolQuery.should().add(tmp);
 
 			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI_PARENTS, term);
-			tmp.boost(0.25f * normalizeWeight);
+			tmp.boost(0.5f);
 			boolQuery.should().add(tmp);
 		}
 	}

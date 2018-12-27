@@ -1,16 +1,23 @@
 package fi.maanmittauslaitos.pta.search.api;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.zip.GZIPInputStream;
 
 import org.apache.http.HttpHost;
+import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.analysis.sv.SwedishAnalyzer;
 import org.eclipse.rdf4j.model.IRI;
@@ -44,7 +51,8 @@ import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactory;
 
 @Configuration
 public class ApplicationConfiguration {
-
+	private static Logger logger = Logger.getLogger(ApplicationConfiguration.class);
+	
 	@Bean
 	@Qualifier("FI")
 	public RDFTerminologyMatcherProcessor terminologyMatcher_FI(Model terminologyModel, @Qualifier("FI") Stemmer stemmer, List<IRI> terminologyLabels) throws IOException {
@@ -323,7 +331,58 @@ public class ApplicationConfiguration {
 	*/
 	
 	@Bean
-	public HakuKone hakuKone(Map<Language, TextProcessor> queryTextProcessors, RestHighLevelClient elasticsearchClient, Model model, HintProvider hintProvider) throws IOException {
+	@Qualifier("exactMatchWords")
+	public Set<String> exactMatchWords() throws IOException {
+		InputStream is = null;
+		
+		try {
+			String filename = System.getProperty("EXACT_MATCH_FILE");
+			if (filename != null && filename.length() > 0) {
+				logger.info("Loading exact word match file from '"+filename+"' (configured via system property EXACT_MATCH_FILE)");
+				is = new FileInputStream(filename);
+			}
+			
+			if (is == null) {
+				filename = "./exact_match_words.txt";
+				File f = new File(filename);
+				if (f.exists()) {
+					logger.info("Loading exact word match file 'exact_match_words.txt' from process CWD");
+					is = new FileInputStream(f);
+				}
+			}
+			
+			if (is == null) {
+				logger.info("Loading exact word match file 'exact_match_words.txt' from classpath");
+				is = ApplicationConfiguration.class.getResourceAsStream("/exact_match_words.txt");
+			}
+		
+			Set<String> ret = new HashSet<>();
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+
+			String line;
+			while ((line = br.readLine()) != null) {
+				int idx = line.indexOf('#');
+				if (idx != -1) {
+					line = line.substring(0, idx);
+				}
+				line = line.trim().toLowerCase();
+				if (line.length() > 0) {
+					ret.add(line);
+				}
+			}
+			
+			return ret;
+			
+		} finally {
+			if (is != null) {
+				is.close();
+			}
+		}
+	}
+	
+	@Bean
+	public HakuKone hakuKone(Map<Language, TextProcessor> queryTextProcessors, RestHighLevelClient elasticsearchClient, Model model, HintProvider hintProvider, @Qualifier("exactMatchWords") Set<String> exactMatchWords) throws IOException {
 		FacetedElasticsearchHakuKoneImpl ret = new FacetedElasticsearchHakuKoneImpl();
 		ret.setDistributionFormatsFacetTermMaxSize(100);
 		ret.setInspireKeywordsFacetTermMaxSize(100);
@@ -338,6 +397,8 @@ public class ApplicationConfiguration {
 		queryProvider.setOntologyLevels(2);
 		queryProvider.setWeightFactor(0.5);
 		queryProvider.setBasicWordMatchWeight(0.5);
+		
+		queryProvider.setRequireExactWordMatch(exactMatchWords);
 		
 		ret.setQueryProvider(queryProvider);
 		ret.setHintProvider(hintProvider);
