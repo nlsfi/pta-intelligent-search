@@ -34,6 +34,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	private int ontologyLevels = 1;
 	private double weightFactor = 0.5; // weightForLevel(1) = 1.0, weightForLevel(x) = weightForLevel(x-1) * weightFactor  
 	private double basicWordMatchWeight = 1.0;
+	private double titleWordMatchWeight = 1.5;
 	private double organisationNameMatchWeight = 1.5;
 	
 	private int maxQueryTermsToElasticsearch = 500;
@@ -95,6 +96,14 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	
 	public void setBasicWordMatchWeight(double basicWordMatchWeight) {
 		this.basicWordMatchWeight = basicWordMatchWeight;
+	}
+	
+	public double getTitleWordMatchWeight() {
+		return titleWordMatchWeight;
+	}
+	
+	public void setTitleWordMatchWeight(double titleWordMatchWeight) {
+		this.titleWordMatchWeight = titleWordMatchWeight;
 	}
 	
 	public double getOrganisationNameMatchWeight() {
@@ -166,7 +175,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 			QueryBuilder tmp;
 			
 			tmp = QueryBuilders.fuzzyQuery("title", sana);
-			tmp.boost((float)(basicWordMatchWeight * normalizeWeight));
+			tmp.boost((float)(titleWordMatchWeight * normalizeWeight));
 			boolQuery.should().add(tmp);
 		}
 		
