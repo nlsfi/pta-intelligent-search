@@ -13,6 +13,7 @@ import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.DisMaxQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
@@ -158,20 +159,15 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		}
 	}
 
-	private void addFreetextQueries(Collection<String> terms, BoolQueryBuilder boolQuery) {
-		for (String sana : terms) {
-			QueryBuilder tmp = freetextQuery("abstract", sana, basicWordMatchWeight);
-			boolQuery.should().add(tmp);
-		}
-		
-		for (String sana : terms) {
-			QueryBuilder tmp = freetextQuery("title", sana, titleWordMatchWeight);
-			boolQuery.should().add(tmp);
-		}
-		
-		for (String sana : terms) {
-			QueryBuilder tmp = freetextQuery("organisationName_text", sana, organisationNameMatchWeight);
-			boolQuery.should().add(tmp);
+	private void addFreetextQueries(Collection<String> words, BoolQueryBuilder boolQuery) {
+		for (String sana : words) {
+			DisMaxQueryBuilder disMax = QueryBuilders.disMaxQuery();
+			
+			disMax.add(freetextQuery("abstract", sana, basicWordMatchWeight));
+			disMax.add(freetextQuery("title", sana, titleWordMatchWeight));
+			disMax.add(freetextQuery("organisationName_text", sana, organisationNameMatchWeight));
+
+			boolQuery.should().add(disMax);
 		}
 	}
 
@@ -187,31 +183,31 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		return tmp;
 	}
 
-	private void addOntologicalTermQueries(Collection<String> termit, BoolQueryBuilder boolQuery) {
-		for (String term : termit) {
-			QueryBuilder tmp;
+	private void addOntologicalTermQueries(Collection<String> terms, BoolQueryBuilder boolQuery) {
+		for (String term : terms) {
+			DisMaxQueryBuilder disMax = QueryBuilders.disMaxQuery();
 
-			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_KEYWORDS_URI, term);
-			tmp.boost(1.25f);
-			boolQuery.should().add(tmp);
+			disMax.add(QueryBuilders
+					.termQuery(PTAElasticSearchMetadataConstants.FIELD_KEYWORDS_URI, term)
+					.boost(1.25f));
 
-			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI, term);
-			tmp.boost(1.25f);
-			boolQuery.should().add(tmp);
-
+			disMax.add(QueryBuilders
+					.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI, term)
+					.boost(1.25f));
 			
-			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI, term);
-			tmp.boost(1.0f);
-			boolQuery.should().add(tmp);
-
+			disMax.add(QueryBuilders
+					.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI, term)
+					.boost(1.0f));
 			
-			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI_PARENTS, term);
-			tmp.boost(0.75f);
-			boolQuery.should().add(tmp);
+			disMax.add(QueryBuilders
+					.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI_PARENTS, term)
+					.boost(0.75f));
 
-			tmp = QueryBuilders.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI_PARENTS, term);
-			tmp.boost(0.5f);
-			boolQuery.should().add(tmp);
+			disMax.add(QueryBuilders
+					.termQuery(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI_PARENTS, term)
+					.boost(0.5f));
+			
+			boolQuery.should().add(disMax);
 		}
 	}
 
