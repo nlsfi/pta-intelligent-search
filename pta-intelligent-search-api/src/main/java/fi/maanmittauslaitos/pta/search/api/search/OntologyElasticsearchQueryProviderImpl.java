@@ -13,7 +13,6 @@ import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.BoostingQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
@@ -38,8 +37,6 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	private double basicWordMatchWeight = 1.0;
 	private double titleWordMatchWeight = 1.5;
 	private double organisationNameMatchWeight = 1.5;
-	
-	private int maxQueryTermsToElasticsearch = 500;
 	
 	private final ValueFactory vf = SimpleValueFactory.getInstance();
 	
@@ -124,14 +121,6 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		this.organisationNameMatchWeight = organisationNameMatchWeight;
 	}
 	
-	public int getMaxQueryTermsToElasticsearch() {
-		return maxQueryTermsToElasticsearch;
-	}
-	
-	public void setMaxQueryTermsToElasticsearch(int maxQueryTermsToElasticsearch) {
-		this.maxQueryTermsToElasticsearch = maxQueryTermsToElasticsearch;
-	}
-	
 	@Override
 	public BoolQueryBuilder buildSearchSource(SearchQuery pyynto, Language lang, boolean focusOnRegionalHits) {
 		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
@@ -143,43 +132,30 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		
 		addOntologicalTermQueries(pyyntoTerms, boolQuery);
 		addFreetextQueries(pyynto.getQuery(), boolQuery);
-		
-		BoostingQueryBuilder boostingQuery = createRegionalityBoostingQuery(focusOnRegionalHits);
+
+		QueryBuilder regionalityQuery = createRegionalityQuery(focusOnRegionalHits);
 		
 		BoolQueryBuilder fullQuery = QueryBuilders.boolQuery();
 		fullQuery.must(boolQuery);
-		fullQuery.should(boostingQuery);
-		
-		// Remove queries if necessary
-		if (fullQuery.should().size() > getMaxQueryTermsToElasticsearch()) {
-			List<QueryBuilder> qb = fullQuery.should().subList(0, getMaxQueryTermsToElasticsearch());
-			logger.warn("Query has more terms ("+fullQuery.should().size()+") than allowed ("+getMaxQueryTermsToElasticsearch()+"), throwing out some terms");
-			fullQuery.should().retainAll(qb);
-		}
+		fullQuery.should(regionalityQuery);
 		
 		return fullQuery;
 	}
 
-	private BoostingQueryBuilder createRegionalityBoostingQuery(boolean focusOnRegionalHits) {
+	private QueryBuilder createRegionalityQuery(boolean focusOnRegionalHits) {
 		double finlandAreaWGS84 = 112.15985284328191068268;
 		
-		float regionalityBoost = 1.0f;
-		RangeQueryBuilder regionalQuery = QueryBuilders
+		float regionalityBoost = 10.0f;
+
+		RangeQueryBuilder q =  QueryBuilders
 				.rangeQuery("geographicBoundingBoxArea")
-				.lte(finlandAreaWGS84/2.0);
-		RangeQueryBuilder nationalQuery = QueryBuilders
-				.rangeQuery("geographicBoundingBoxArea")
-				.gt(finlandAreaWGS84/2.0);
-		
-		BoostingQueryBuilder boostingQuery;
+				.boost(regionalityBoost);
 		
 		if (focusOnRegionalHits) {
-			boostingQuery = QueryBuilders.boostingQuery(regionalQuery, nationalQuery);
+			return q.lte(finlandAreaWGS84/2.0);
 		} else {
-			boostingQuery = QueryBuilders.boostingQuery(nationalQuery, regionalQuery);
+			return q.gt(finlandAreaWGS84/2.0);
 		}
-		boostingQuery = boostingQuery.negativeBoost(regionalityBoost);
-		return boostingQuery;
 	}
 
 	private void addFreetextQueries(Collection<String> terms, BoolQueryBuilder boolQuery) {
