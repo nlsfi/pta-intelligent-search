@@ -23,8 +23,8 @@ import org.junit.Test;
 import fi.maanmittauslaitos.pta.search.api.ApplicationConfiguration;
 import fi.maanmittauslaitos.pta.search.api.Language;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.Hit;
-import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactory;
 
+@SuppressWarnings("deprecation")
 public class NodeColorizationHitScoreHintProviderImplTest {
 	private ValueFactory vf = SimpleValueFactory.getInstance();
 	private NodeColorizationHitScoreHintProviderImpl hintProvider;

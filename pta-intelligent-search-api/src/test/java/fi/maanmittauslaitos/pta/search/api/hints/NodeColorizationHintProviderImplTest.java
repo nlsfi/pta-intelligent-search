@@ -26,6 +26,7 @@ import fi.maanmittauslaitos.pta.search.api.hints.NodeColorizationHintProviderImp
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.Hit;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactory;
 
+@SuppressWarnings("deprecation")
 public class NodeColorizationHintProviderImplTest {
 	private ValueFactory vf = SimpleValueFactory.getInstance();
 	private NodeColorizationHintProviderImpl hintProvider;

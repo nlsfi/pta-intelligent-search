@@ -21,8 +21,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fi.maanmittauslaitos.pta.search.api.ApplicationConfiguration;
-import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactory;
 
+@SuppressWarnings("deprecation")
 public class TudhopeBindingBlocksCunliffeHintProviderImplTest {
 	private ValueFactory vf = SimpleValueFactory.getInstance();
 	private TudhopeBindingBlocksCunliffeHintProvider hintProvider;
