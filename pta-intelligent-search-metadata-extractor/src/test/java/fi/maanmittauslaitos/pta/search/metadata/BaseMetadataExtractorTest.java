@@ -105,4 +105,13 @@ public abstract class BaseMetadataExtractorTest {
 		return document;
 	}
 	
+	protected Document createSatakunnanRakennusinvestointienWFS()
+			throws DocumentProcessingException, IOException, FileNotFoundException {
+		Document document;
+		try (FileInputStream fis = new FileInputStream("src/test/resources/2ec56e3a-535b-42f6-97b9-16a73a46520a.xml")) {
+			document = processor.processDocument(fis);
+		}
+		return document;
+	}
+	
 }

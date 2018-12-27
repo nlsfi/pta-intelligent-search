@@ -152,11 +152,10 @@ public class ISOMetadataExtractorConfigurationFactory {
 	
 		
 		// Organisation names + roles
-		// TODO: check, read from a better place
 		extractors.add(createXPathExtractor(
 				ISOMetadataFields.ORGANISATIONS,
 				new ResponsiblePartyXPathCustomExtractor(),
-				"//gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty"));
+				"//gmd:MD_Metadata/gmd:identificationInfo/*/gmd:pointOfContact/gmd:CI_ResponsibleParty"));
 		
 		// Geographic bounding box
 		extractors.add(createXPathExtractor(

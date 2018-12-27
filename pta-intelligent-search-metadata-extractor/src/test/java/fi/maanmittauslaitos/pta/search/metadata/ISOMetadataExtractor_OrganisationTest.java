@@ -38,14 +38,20 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 		
 		List<ResponsibleParty> organisations = document.getListValue(ISOMetadataFields.ORGANISATIONS, ResponsibleParty.class);
 
-		assertEquals(1, organisations.size());
-		ResponsibleParty party = organisations.get(0);
+		assertEquals(2, organisations.size());
+		ResponsibleParty party1 = organisations.get(0);
 		
-		assertEquals("Tilastokeskus", party.getOrganisationName());
-		assertEquals("pointOfContact", party.getIsoRole());
+		assertEquals("Tilastokeskus", party1.getOrganisationName());
+		assertEquals("originator", party1.getIsoRole());
 		
-		assertEquals(1, party.getLocalisedOrganisationName().size());
-		assertEquals("Statistics Finland", party.getLocalisedOrganisationName().get("EN"));
+		assertEquals(0, party1.getLocalisedOrganisationName().size());
+		
+		ResponsibleParty party2 = organisations.get(1);
+		
+		assertEquals("Tilastokeskus", party2.getOrganisationName());
+		assertEquals("publisher", party2.getIsoRole());
+		
+		assertEquals(0, party2.getLocalisedOrganisationName().size());
 	}
 	
 
@@ -59,18 +65,16 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 		ResponsibleParty party1 = organisations.get(0);
 		
 		assertEquals("Tilastokeskus", party1.getOrganisationName());
-		assertEquals("pointOfContact", party1.getIsoRole());
-
-		assertEquals(1, party1.getLocalisedOrganisationName().size());
-		assertEquals("Statistics Finland", party1.getLocalisedOrganisationName().get("EN"));
+		assertEquals("originator", party1.getIsoRole());
+		
+		assertEquals(0, party1.getLocalisedOrganisationName().size());
 		
 		ResponsibleParty party2 = organisations.get(1);
 		
-		assertEquals("X-Tilastokeskus", party2.getOrganisationName());
-		assertEquals("owner", party2.getIsoRole());
-
-		assertEquals(1, party2.getLocalisedOrganisationName().size());
-		assertEquals("Statistikcentralen", party2.getLocalisedOrganisationName().get("SV"));
+		assertEquals("Tilastokeskus", party2.getOrganisationName());
+		assertEquals("publisher", party2.getIsoRole());
+		
+		assertEquals(0, party2.getLocalisedOrganisationName().size());
 	}
 
 	@Test
@@ -83,7 +87,7 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 		ResponsibleParty party = organisations.get(0);
 		
 		assertEquals("Luonnonvarakeskus (Luke)", party.getOrganisationName());
-		assertEquals("pointOfContact", party.getIsoRole());
+		assertEquals("owner", party.getIsoRole());
 		
 		assertEquals(1, party.getLocalisedOrganisationName().size());
 		assertEquals("Natural Resources Institute Finland (Luke)", party.getLocalisedOrganisationName().get("EN"));
@@ -100,7 +104,7 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 		ResponsibleParty party = organisations.get(0);
 		
 		assertEquals("Luonnonvarakeskus (Luke)", party.getOrganisationName());
-		assertEquals("pointOfContact", party.getIsoRole());
+		assertEquals("owner", party.getIsoRole());
 
 		assertEquals(1, party.getLocalisedOrganisationName().size());
 		assertEquals("Natural Resources Institute Finland (Luke)", party.getLocalisedOrganisationName().get("EN"));
@@ -138,5 +142,20 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 		assertEquals(2, party.getLocalisedOrganisationName().size());
 		assertEquals("canon-EN", party.getLocalisedOrganisationName().get("EN"));
 		assertEquals("canon-SV", party.getLocalisedOrganisationName().get("SV"));
+	}
+	
+	@Test
+	public void testChooseCorrectOrganisationForSatakunnanRakennusinvestointienWFS() throws Exception {
+		Document document = createSatakunnanRakennusinvestointienWFS();
+		
+		List<ResponsibleParty> organisations = document.getListValue(ISOMetadataFields.ORGANISATIONS, ResponsibleParty.class);
+
+		assertEquals(1, organisations.size());
+		ResponsibleParty party = organisations.get(0);
+		
+		assertEquals("Satakunnan museo", party.getOrganisationName());
+		assertEquals("pointOfContact", party.getIsoRole());
+		
+		assertEquals(0, party.getLocalisedOrganisationName().size());
 	}
 }
