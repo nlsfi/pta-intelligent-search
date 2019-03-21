@@ -39,6 +39,8 @@ public class Harvester implements CommandLineRunner {
 		int updated = 0;
 		int inserted = 0;
 		
+		sink.startIndexing();
+		
 		for (InputStream is : source) {
 			if (is == null) {
 				System.out.println("Source is null, skipping, or stopping");
@@ -66,8 +68,12 @@ public class Harvester implements CommandLineRunner {
 			}
 		}
 		
+
+		int deleted = sink.stopIndexing();
+		
 		System.out.println("Inserted "+inserted+" documents");
 		System.out.println("Updated "+updated+" documents");
+		System.out.println("Deleted "+deleted+" documents");
 	}
 
 	private void writeDocumentToFile(Document doc) throws IOException, JsonProcessingException
