@@ -25,11 +25,15 @@ import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.vocabulary.SKOS;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import fi.maanmittauslaitos.pta.search.api.hints.FacetHintProviderImpl;
 import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
@@ -38,6 +42,7 @@ import fi.maanmittauslaitos.pta.search.api.language.LuceneAnalyzerStemmer;
 import fi.maanmittauslaitos.pta.search.api.language.StemmingOntologyLanguageDetectorImpl;
 import fi.maanmittauslaitos.pta.search.api.region.RegionNameDetector;
 import fi.maanmittauslaitos.pta.search.api.region.StemmingTextFileBackedRegionNameDetectorImpl;
+import fi.maanmittauslaitos.pta.search.api.search.ElasticsearchQueryAPI;
 import fi.maanmittauslaitos.pta.search.api.search.FacetedElasticsearchHakuKoneImpl;
 import fi.maanmittauslaitos.pta.search.api.search.HakuKone;
 import fi.maanmittauslaitos.pta.search.api.search.OntologyElasticsearchQueryProviderImpl;
@@ -278,12 +283,47 @@ public class ApplicationConfiguration {
 	
 	
 	@Bean
-	public RestHighLevelClient elasticsearchClient() throws UnknownHostException {
-		RestHighLevelClient client = new RestHighLevelClient(
-		        RestClient.builder(
-		                new HttpHost("localhost", 9200, "http")));
+	@Profile("default")
+	public ElasticsearchQueryAPI elasticsearchClient() throws UnknownHostException {
+		return new ElasticsearchQueryAPIImpl();
+	}
+	
+	public static class ElasticsearchQueryAPIImpl implements ElasticsearchQueryAPI, DisposableBean {
+		private RestHighLevelClient client;
+		public ElasticsearchQueryAPIImpl() {
+			client = new RestHighLevelClient(
+			        RestClient.builder(new HttpHost("localhost", 9200, "http")));
+		}
 		
-		return client;
+		@Override
+		public void destroy() throws Exception {
+			client.close();
+		}
+		
+		@Override
+		public SearchResponse search(SearchRequest request) throws IOException {
+			return client.search(request);
+		}
+	}
+	
+	@Bean
+	@Profile("createIntegrationTestQueries")
+	public MockElasticsearchQueryAPI elasticsearchQueryStoreClient() throws IOException {
+		return new MockElasticsearchQueryAPI();
+	}
+	
+	public static class MockElasticsearchQueryAPI implements ElasticsearchQueryAPI {
+		private String lastQueryAsJSON;
+		
+		@Override
+		public SearchResponse search(SearchRequest request) throws IOException {
+			lastQueryAsJSON = request.source().toString();
+			return null;
+		}
+		
+		public String getLastQueryAsJSON() {
+			return lastQueryAsJSON;
+		}
 	}
 	
 	@Bean
@@ -382,13 +422,13 @@ public class ApplicationConfiguration {
 	}
 	
 	@Bean
-	public HakuKone hakuKone(Map<Language, TextProcessor> queryTextProcessors, RestHighLevelClient elasticsearchClient, Model model, HintProvider hintProvider, @Qualifier("exactMatchWords") Set<String> exactMatchWords) throws IOException {
+	public HakuKone hakuKone(Map<Language, TextProcessor> queryTextProcessors, ElasticsearchQueryAPI elasticsearchAPI, Model model, HintProvider hintProvider, @Qualifier("exactMatchWords") Set<String> exactMatchWords) throws IOException {
 		FacetedElasticsearchHakuKoneImpl ret = new FacetedElasticsearchHakuKoneImpl();
 		ret.setDistributionFormatsFacetTermMaxSize(100);
 		ret.setInspireKeywordsFacetTermMaxSize(100);
 		ret.setOrganisationsFacetTermMaxSize(500);
 		ret.setTopicCategoriesFacetTermMaxSize(100);
-		ret.setClient(elasticsearchClient);
+		ret.setClient(elasticsearchAPI);
 		
 		OntologyElasticsearchQueryProviderImpl queryProvider = new OntologyElasticsearchQueryProviderImpl();
 		queryProvider.addRelationPredicate(SKOS.NARROWER);
