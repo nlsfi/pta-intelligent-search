@@ -1,0 +1,16 @@
+{
+  "bool" : {
+    "should" : [
+      {
+        "term" : {
+          "abstract_maui_uri_parents" : {
+            "value" : "http://www.yso.fi/onto/yso/p2536",
+            "boost" : 1.0
+          }
+        }
+      }
+    ],
+    "adjust_pure_negative" : true,
+    "boost" : 1.0
+  }
+}
