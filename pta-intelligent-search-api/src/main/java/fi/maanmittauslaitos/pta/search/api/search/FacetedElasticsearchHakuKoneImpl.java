@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -62,7 +61,7 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 	
 	private static Logger logger = Logger.getLogger(FacetedElasticsearchHakuKoneImpl.class);
 	
-	private RestHighLevelClient client;
+	private ElasticsearchQueryAPI client;
 	
 	private ElasticsearchQueryProvider queryProvider;
 	private HintProvider hintProvider;
@@ -80,11 +79,11 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 		return queryProvider;
 	}
 	
-	public void setClient(RestHighLevelClient client) {
+	public void setClient(ElasticsearchQueryAPI client) {
 		this.client = client;
 	}
 	
-	public RestHighLevelClient getClient() {
+	public ElasticsearchQueryAPI getClient() {
 		return client;
 	}
 	
