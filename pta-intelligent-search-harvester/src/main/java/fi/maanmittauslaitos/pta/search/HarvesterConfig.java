@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.URL;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +18,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathException;
 
+import fi.maanmittauslaitos.pta.search.csw.LocalCSWHarvesterSource;
+import fi.maanmittauslaitos.pta.search.index.LocalArchiveDocumentSink;
 import org.apache.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.vocabulary.SKOS;
@@ -70,6 +73,13 @@ public class HarvesterConfig {
 		source.setOnlineResource("http://paikkatietohakemisto.fi/geonetwork/srv/en/csw");
 		//source.setOnlineResource("http://demo.paikkatietohakemisto.fi/geonetwork/srv/en/csw");
 		
+		return source;
+	}
+
+	public HarvesterSource getLocalCSWSource() {
+		LocalCSWHarvesterSource source = new LocalCSWHarvesterSource();
+		URL cswRoot = this.getClass().getClassLoader().getResource("csws");
+		source.setResourceRootURL(cswRoot);
 		return source;
 	}
 	
@@ -407,6 +417,12 @@ public class HarvesterConfig {
 		ret.setIdField("@id");
 		
 		return ret;
+	}
+
+	public DocumentSink getLocalDocumentSink(String sinkfile) {
+		LocalArchiveDocumentSink localArchiveDocumentSink = new LocalArchiveDocumentSink();
+		localArchiveDocumentSink.setOutputFileName(sinkfile);
+		return localArchiveDocumentSink;
 	}
 	
 
