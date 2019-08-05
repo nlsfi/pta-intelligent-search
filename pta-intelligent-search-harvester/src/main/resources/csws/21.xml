@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csw:GetRecordByIdResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
+  <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gml="http://www.opengis.net/gml" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:geonet="http://www.fao.org/geonetwork" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.isotc211.org/2005/gmd https://www.isotc211.org/2005/gmd/gmd.xsd http://www.isotc211.org/2005/gmx https://www.isotc211.org/2005/gmx/gmx.xsd http://www.isotc211.org/2005/srv http://schemas.opengis.net/iso/19139/20060504/srv/srv.xsd">
+    <gmd:fileIdentifier>
+      <gco:CharacterString>9f660137-4f2a-48f0-8024-f8817ca6e75e</gco:CharacterString>
+    </gmd:fileIdentifier>
+    <gmd:language>
+      <gco:CharacterString>fin</gco:CharacterString>
+    </gmd:language>
+    <gmd:hierarchyLevel>
+      <gmd:MD_ScopeCode codeListValue="dataset" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" />
+    </gmd:hierarchyLevel>
+    <gmd:hierarchyLevelName>
+      <gco:CharacterString>Aineisto</gco:CharacterString>
+    </gmd:hierarchyLevelName>
+    <gmd:contact>
+      <gmd:CI_ResponsibleParty>
+        <gmd:organisationName xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Geologian tutkimuskeskus</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Geologian tutkimuskeskus</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">Geological Survey of Finland</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:organisationName>
+        <gmd:contactInfo>
+          <gmd:CI_Contact>
+            <gmd:address>
+              <gmd:CI_Address>
+                <gmd:electronicMailAddress xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>geodata@gtk.fi</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">geodata@gtk.fi</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">geodata@gtk.fi</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:electronicMailAddress>
+              </gmd:CI_Address>
+            </gmd:address>
+          </gmd:CI_Contact>
+        </gmd:contactInfo>
+        <gmd:role>
+          <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="owner" />
+        </gmd:role>
+      </gmd:CI_ResponsibleParty>
+    </gmd:contact>
+    <gmd:dateStamp>
+      <gco:DateTime>2018-12-13T15:44:14</gco:DateTime>
+    </gmd:dateStamp>
+    <gmd:locale>
+      <gmd:PT_Locale id="EN">
+        <gmd:languageCode>
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+        </gmd:languageCode>
+        <gmd:characterEncoding>
+          <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="8859part15" />
+        </gmd:characterEncoding>
+      </gmd:PT_Locale>
+    </gmd:locale>
+    <gmd:locale>
+      <gmd:PT_Locale id="FI">
+        <gmd:languageCode>
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="fin" />
+        </gmd:languageCode>
+        <gmd:characterEncoding>
+          <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+        </gmd:characterEncoding>
+      </gmd:PT_Locale>
+    </gmd:locale>
+    <gmd:spatialRepresentationInfo>
+      <gmd:MD_VectorSpatialRepresentation>
+        <gmd:topologyLevel>
+          <gmd:MD_TopologyLevelCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_TopologyLevelCode" codeListValue="geometryOnly" />
+        </gmd:topologyLevel>
+      </gmd:MD_VectorSpatialRepresentation>
+    </gmd:spatialRepresentationInfo>
+    <gmd:identificationInfo>
+      <gmd:MD_DataIdentification>
+        <gmd:citation>
+          <gmd:CI_Citation>
+            <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Kallioperän isotooppiaineisto</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Kallioperän isotooppiaineisto</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Isotope data of Finnish bedrock</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:title>
+            <gmd:date>
+              <gmd:CI_Date>
+                <gmd:date>
+                  <gco:Date>2010-11-23</gco:Date>
+                </gmd:date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" />
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+            <gmd:identifier>
+              <gmd:RS_Identifier>
+                <gmd:code>
+                  <gco:CharacterString>1000165</gco:CharacterString>
+                </gmd:code>
+                <gmd:codeSpace>
+                  <gco:CharacterString>FI</gco:CharacterString>
+                </gmd:codeSpace>
+              </gmd:RS_Identifier>
+            </gmd:identifier>
+          </gmd:CI_Citation>
+        </gmd:citation>
+        <gmd:abstract xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Suomen kallioperän isotooppitietokanta perustuu julkaistuun aineistoon, etupäässä Geologian tutkimuskeskuksen tuottamiin zirkonin U-Pb iänmäärityksiin.  Iänmääritysten lisäksi on saatavilla Sm-Nd ja Pb-Pb isotooppiaineistoa. Tietokanta sisältää sijaintitiedon, kivilajityypin, määritysmenetelmän, analysoidun mineraalin, ikätiedon, kommentit ja viitetiedot.</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Suomen kallioperän isotooppitietokanta perustuu julkaistuun aineistoon, etupäässä Geologian tutkimuskeskuksen tuottamiin zirkonin U-Pb iänmäärityksiin.  Iänmääritysten lisäksi on saatavilla Sm-Nd ja Pb-Pb isotooppiaineistoa. Tietokanta sisältää sijaintitiedon, kivilajityypin, määritysmenetelmän, analysoidun mineraalin, ikätiedon, kommentit ja viitetiedot.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">The database consists of three components: "Published age determination”, ”Published Sm-Nd isotope data" and "Pb isotope data on galena". The "Published age determination" database is based on age determinations, which comprise predominantly U-Pb zircon data produced at the Geological Survey of Finland since 1960’s. For igneous rocks the age register contains radiometric ages mostly interpreted as primary ages. The information given consists of location data, rock type, method, mineral analyzed, age results, comments and references. "Published Sm-Nd isotope data" comprise Sm-Nd data procuded at GTK since 1981, which mostly are used to constrain the origin of crust. "Pb isotope data on galena" gives results produced at GTK since 1970's, and include also previously unpublished data.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:abstract>
+        <gmd:purpose xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Tietokanta soveltuu käytettäväksi geologiseen tutkimukseen.</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Tietokanta soveltuu käytettäväksi geologiseen tutkimukseen.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">The database can be used in geological research.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:purpose>
+        <gmd:pointOfContact>
+          <gmd:CI_ResponsibleParty>
+            <gmd:organisationName xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Geologian tutkimuskeskus</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Geologian tutkimuskeskus</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Geological Survey of Finland</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:organisationName>
+            <gmd:contactInfo>
+              <gmd:CI_Contact>
+                <gmd:address>
+                  <gmd:CI_Address>
+                    <gmd:electronicMailAddress xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString>geodata@gtk.fi</gco:CharacterString>
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#FI">geodata@gtk.fi</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#EN">geodata@gtk.fi</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:electronicMailAddress>
+                  </gmd:CI_Address>
+                </gmd:address>
+              </gmd:CI_Contact>
+            </gmd:contactInfo>
+            <gmd:role>
+              <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="owner" />
+            </gmd:role>
+          </gmd:CI_ResponsibleParty>
+        </gmd:pointOfContact>
+        <gmd:graphicOverview xmlns:srv="http://www.isotc211.org/2005/srv">
+          <gmd:MD_BrowseGraphic>
+            <gmd:fileName>
+              <gco:CharacterString>Finnage_s.png</gco:CharacterString>
+            </gmd:fileName>
+            <gmd:fileDescription xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>thumbnail</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">thumbnail</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:fileDescription>
+            <gmd:fileType>
+              <gco:CharacterString>png</gco:CharacterString>
+            </gmd:fileType>
+          </gmd:MD_BrowseGraphic>
+        </gmd:graphicOverview>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Tietokannat</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Tietokannat</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Data bases</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeListValue="discipline" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Georef thesaurus</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Georef thesaurus</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">Georef thesaurus</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2010-11-23</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Suomi</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Suomi</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Finland</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Fennoskandia</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Fennoskandia</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Fennoskandia</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="place" />
+            </gmd:type>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Kallioperä</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Kallioperä</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Bedrock</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+            </gmd:type>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Prekambrinen</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Prekambrinen</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Precambrian</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Paleotsooinen</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Paleotsooinen</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Palaeozoic</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Proterotsooinen</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Proterotsooinen</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Proterozoic</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Arkeeinen</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Arkeeinen</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Archean</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="temporal" />
+            </gmd:type>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Geologia</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Geologia</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN" />
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Paikkatietohakemiston asiasanasto</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Paikkatietohakemiston asiasanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2010-02-03</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+                <gmd:identifier>
+                  <gmd:MD_Identifier>
+                    <gmd:code>
+                      <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.asiasanasto">geonetwork.thesaurus.external.theme.asiasanasto</gmx:Anchor>
+                    </gmd:code>
+                  </gmd:MD_Identifier>
+                </gmd:identifier>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Geologia</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Geologia</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Geology</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>GEMET - INSPIRE themes, version 1.0</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">GEMET - INSPIRE themes, version 1.0</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2008-06-01</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+                <gmd:identifier>
+                  <gmd:MD_Identifier>
+                    <gmd:code>
+                      <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.inspire-theme">geonetwork.thesaurus.external.theme.inspire-theme</gmx:Anchor>
+                    </gmd:code>
+                  </gmd:MD_Identifier>
+                </gmd:identifier>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:resourceConstraints>
+          <gmd:MD_Constraints>
+            <gmd:useLimitation xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Käyttäjän tulee aina tarkistaa alkuperäinen tietolähde ennen merkittäviä johtopäätöksiä.</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Käyttäjän tulee aina tarkistaa alkuperäinen tietolähde ennen merkittäviä johtopäätöksiä.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:useLimitation>
+          </gmd:MD_Constraints>
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints>
+          <gmd:MD_LegalConstraints>
+            <gmd:useLimitation xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>http://tupa.gtk.fi/paikkatieto/lisenssi/gtk_peruslisenssi_1.pdf</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">http://tupa.gtk.fi/paikkatieto/lisenssi/gtk_peruslisenssi_1.pdf</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">http://tupa.gtk.fi/paikkatieto/lisenssi/gtk_basic_licence_1.pdf</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:useLimitation>
+            <gmd:accessConstraints>
+              <gmd:MD_RestrictionCode codeListValue="license" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode" />
+            </gmd:accessConstraints>
+            <gmd:otherConstraints xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Ei muita rajoitteita.</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Ei muita rajoitteita.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:otherConstraints>
+          </gmd:MD_LegalConstraints>
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints>
+          <gmd:MD_SecurityConstraints>
+            <gmd:classification>
+              <gmd:MD_ClassificationCode codeListValue="unclassified" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ClassificationCode" />
+            </gmd:classification>
+          </gmd:MD_SecurityConstraints>
+        </gmd:resourceConstraints>
+        <gmd:language>
+          <gco:CharacterString>fin</gco:CharacterString>
+        </gmd:language>
+        <gmd:topicCategory>
+          <gmd:MD_TopicCategoryCode>geoscientificInformation</gmd:MD_TopicCategoryCode>
+        </gmd:topicCategory>
+        <gmd:environmentDescription xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Isotooppitietokanta on koottu excel-ohjelmalla.</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Isotooppitietokanta on koottu excel-ohjelmalla.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">The database was compiled using excel.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:environmentDescription>
+        <gmd:extent>
+          <gmd:EX_Extent>
+            <gmd:geographicElement>
+              <gmd:EX_GeographicBoundingBox>
+                <gmd:westBoundLongitude>
+                  <gco:Decimal>19.08317359</gco:Decimal>
+                </gmd:westBoundLongitude>
+                <gmd:eastBoundLongitude>
+                  <gco:Decimal>31.58672881</gco:Decimal>
+                </gmd:eastBoundLongitude>
+                <gmd:southBoundLatitude>
+                  <gco:Decimal>59.45414258</gco:Decimal>
+                </gmd:southBoundLatitude>
+                <gmd:northBoundLatitude>
+                  <gco:Decimal>70.09229553</gco:Decimal>
+                </gmd:northBoundLatitude>
+              </gmd:EX_GeographicBoundingBox>
+            </gmd:geographicElement>
+            <gmd:temporalElement>
+              <gmd:EX_TemporalExtent>
+                <gmd:extent>
+                  <gml:TimePeriod gml:id="d35813e597a1051934">
+                    <gml:beginPosition>2010-11-23T00:00:00</gml:beginPosition>
+                    <gml:endPosition>2013-01-29T00:00:00</gml:endPosition>
+                  </gml:TimePeriod>
+                </gmd:extent>
+              </gmd:EX_TemporalExtent>
+            </gmd:temporalElement>
+          </gmd:EX_Extent>
+        </gmd:extent>
+      </gmd:MD_DataIdentification>
+    </gmd:identificationInfo>
+    <gmd:distributionInfo xmlns:date="http://exslt.org/dates-and-times" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:srv="http://www.isotc211.org/2005/srv">
+      <gmd:MD_Distribution>
+        <gmd:distributionFormat>
+          <gmd:MD_Format>
+            <gmd:name xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>ESRI file gdb</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">ESRI file gdb</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">ESRI file gdb</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:name>
+            <gmd:version>
+              <gco:CharacterString>10.4</gco:CharacterString>
+            </gmd:version>
+          </gmd:MD_Format>
+        </gmd:distributionFormat>
+        <gmd:transferOptions>
+          <gmd:MD_DigitalTransferOptions>
+            <gmd:onLine>
+              <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                  <gmd:URL>http://gtkdata.gtk.fi/mdae/index.html</gmd:URL>
+                </gmd:linkage>
+                <gmd:protocol>
+                  <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                </gmd:protocol>
+                <gmd:name xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Mineral Deposits and Exploration</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Mineral Deposits and Exploration</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">Mineral Deposits and Exploration</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:name>
+              </gmd:CI_OnlineResource>
+            </gmd:onLine>
+          </gmd:MD_DigitalTransferOptions>
+        </gmd:transferOptions>
+        <gmd:transferOptions>
+          <gmd:MD_DigitalTransferOptions>
+            <gmd:onLine>
+              <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                  <gmd:URL>?</gmd:URL>
+                </gmd:linkage>
+                <gmd:protocol>
+                  <gco:CharacterString>OGC:WMS-1.1.1-http-get-map</gco:CharacterString>
+                </gmd:protocol>
+                <gmd:name gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString />
+                </gmd:name>
+                <gmd:description gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString />
+                </gmd:description>
+              </gmd:CI_OnlineResource>
+            </gmd:onLine>
+          </gmd:MD_DigitalTransferOptions>
+        </gmd:transferOptions>
+      </gmd:MD_Distribution>
+    </gmd:distributionInfo>
+    <gmd:dataQualityInfo>
+      <gmd:DQ_DataQuality>
+        <gmd:scope>
+          <gmd:DQ_Scope>
+            <gmd:level>
+              <gmd:MD_ScopeCode codeListValue="dataset" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" />
+            </gmd:level>
+          </gmd:DQ_Scope>
+        </gmd:scope>
+        <gmd:report>
+          <gmd:DQ_DomainConsistency>
+            <gmd:result>
+              <gmd:DQ_ConformanceResult>
+                <gmd:specification>
+                  <gmd:CI_Citation>
+                    <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString>KOMISSION ASETUS (EU) N:o 1089/2010, annettu 23 päivänä marraskuuta 2010, Euroopan parlamentin ja neuvoston direktiivin 2007/2/EY täytäntöönpanosta paikkatietoaineistojen ja -palvelujen yhteentoimivuuden osalta</gco:CharacterString>
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#FI">KOMISSION ASETUS (EU) N:o 1089/2010, annettu 23 päivänä marraskuuta 2010, Euroopan parlamentin ja neuvoston direktiivin 2007/2/EY täytäntöönpanosta paikkatietoaineistojen ja -palvelujen yhteentoimivuuden osalta</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:title>
+                    <gmd:date>
+                      <gmd:CI_Date>
+                        <gmd:date>
+                          <gco:Date>2010-12-08</gco:Date>
+                        </gmd:date>
+                        <gmd:dateType>
+                          <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                        </gmd:dateType>
+                      </gmd:CI_Date>
+                    </gmd:date>
+                  </gmd:CI_Citation>
+                </gmd:specification>
+                <gmd:explanation xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Tietotuotemäärittelyä ei ole vielä julkaistu.</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Tietotuotemäärittelyä ei ole vielä julkaistu.</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:explanation>
+                <gmd:pass gco:nilReason="unknown" />
+              </gmd:DQ_ConformanceResult>
+            </gmd:result>
+          </gmd:DQ_DomainConsistency>
+        </gmd:report>
+        <gmd:lineage>
+          <gmd:LI_Lineage>
+            <gmd:statement xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Suomen kallioperän isotooppitietokanta on syntynyt ajan mukana Geologian tutkimuskeskuksen isotooppigeologian laboratoriossa. Pääosa tietokannan iänmäärityksistä perustuu zirkoni-mineraalista tehtyihin U-Pb isotooppianalyyseihin, joita GTK:ssa on tehty vuodesta 1964 alkaen. Sulfidien Pb-Pb isotooppiaineistoa on kertynyt 1970-luvulta lähtien ja Sm-Nd analyysit GTK:ssa aloitettiin 1981.
+Suomen kallioperän isotooppitietokanta koostuu kolmesta osasta: 1) Iänmääritykset, pääasiassa U-Pb zirkonista, 2) Sm-Nd analyysit, ja 3) Pb isotooppianalyysit, pääasiassa lyijyhohteesta.
+Iänmääritysaineisto perustuu aiemmin julkaistuihin määrityksiin ja sisältää sijaintitiedon, kivilajityypin, määritysmenetelmän, analysoidun mineraalin, ikätiedon, kommentit ja viitetiedot. Ikätieto sisältää iän lisäksi virhearvion (2-sigma), analyysien lukumäärän ja luotettavuusindikaattorin: Ikä perustuu konkordanttiin (C) tai lähes konkordanttiin (NC) U-Pb analyysiin, tai ns. konkordian yläleikkaukseen (I), jolloin on usein mainittu myös ns. alaleikkausikä. Kommentit sisältävät lisätietoa, kuten esimerkiksi titaniitista ja monatsiitista määritetyn iän. Tietokanta sisältää seuraavia lyhenteitä: sl (=slightly), disc (=discordant), conc (=concordant), E-Nd (=initial epsilon Nd), heter (=heterogenous), excl (=excluded), frac (=fraction), conv (=conventional), 7/6 (=207Pb/ 206Pb age). Isotooppianalyysien analyyttiset menetelmät on kuvattu kannan sisältämissä viitetiedoissa ja GTK:n analyysit lisäksi ”Mineralogisten ja isotooppigeologisten tutkimuspalvelujen toiminta-käsikirjassa”.</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Suomen kallioperän isotooppitietokanta on syntynyt ajan mukana Geologian tutkimuskeskuksen isotooppigeologian laboratoriossa. Pääosa tietokannan iänmäärityksistä perustuu zirkoni-mineraalista tehtyihin U-Pb isotooppianalyyseihin, joita GTK:ssa on tehty vuodesta 1964 alkaen. Sulfidien Pb-Pb isotooppiaineistoa on kertynyt 1970-luvulta lähtien ja Sm-Nd analyysit GTK:ssa aloitettiin 1981.
+Suomen kallioperän isotooppitietokanta koostuu kolmesta osasta: 1) Iänmääritykset, pääasiassa U-Pb zirkonista, 2) Sm-Nd analyysit, ja 3) Pb isotooppianalyysit, pääasiassa lyijyhohteesta.
+Iänmääritysaineisto perustuu aiemmin julkaistuihin määrityksiin ja sisältää sijaintitiedon, kivilajityypin, määritysmenetelmän, analysoidun mineraalin, ikätiedon, kommentit ja viitetiedot. Ikätieto sisältää iän lisäksi virhearvion (2-sigma), analyysien lukumäärän ja luotettavuusindikaattorin: Ikä perustuu konkordanttiin (C) tai lähes konkordanttiin (NC) U-Pb analyysiin, tai ns. konkordian yläleikkaukseen (I), jolloin on usein mainittu myös ns. alaleikkausikä. Kommentit sisältävät lisätietoa, kuten esimerkiksi titaniitista ja monatsiitista määritetyn iän. Tietokanta sisältää seuraavia lyhenteitä: sl (=slightly), disc (=discordant), conc (=concordant), E-Nd (=initial epsilon Nd), heter (=heterogenous), excl (=excluded), frac (=fraction), conv (=conventional), 7/6 (=207Pb/ 206Pb age). Isotooppianalyysien analyyttiset menetelmät on kuvattu kannan sisältämissä viitetiedoissa ja GTK:n analyysit lisäksi ”Mineralogisten ja isotooppigeologisten tutkimuspalvelujen toiminta-käsikirjassa”.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">The database "Isotope data of Finnish bedrock" is based on results, mostly produced at GTK. The database has been compiled at the laboratory of isotope geology at GTK.
+The register contains published isotope results, which comprise predominantly U-Pb zircon ages, Sm-Nd data on whole rocks and Pb isotope data on galenas produced at the Geological Survey of Finland. The database relies on systematic storage of isotope results, which has been standard procedure at the GTK isotope laboratory operated since 1964. Other data from the laboratory, not included in this database, include Rb-Sr, O, C and O isotopes.
+The information included in the "Published age determination" database consists of location data, rock type, method, mineral analyzed, age and error, comments and references. The age data contains six elements: The age (concordant data or for older U-Pb method upper intercept age, Ma), an error estimate on the 2-sigma level, lower intercept age (for U-Pb), error in lower intercept age, number of analyses and a reliability indicator:  C for concordant analyses, I for concordia upper intercept, NC for nearly concordant analyses, R for reference line (because of e.g. heterogeneity or a high degree of discordancy). The comments contain additional information such as age results from e.g. titanite and monazite, eventual Nd epsilon values etc. It is also indicated, if one or more analysis have been rejected from the age calculation.  The abbreviations include: sl (=slightly), disc (=discordant), conc (=concordant), E-Nd (=initial epsilon Nd), heter (=heterogeneous), excl (=excluded), frac (=fraction), conv (=conventional), 7/6 (= 207Pb/ 206Pb age). Analytical methods for isotope analyses are described in references and for GTK analyses also in the manual "standard operating procedures".
+The information in the ”Published Sm-Nd isotope data" and "Pb isotope data on galena" follows standard practices described in normal references.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:statement>
+            <gmd:processStep>
+              <gmd:LI_ProcessStep>
+                <gmd:description xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Suomen kallioperän isotooppitietokanta koostuu kolmesta osasta: 1) Iänmääritykset, pääasiassa U-Pb zirkonista, 2) Sm-Nd analyysit, ja 3) Pb isotooppianalyysit, pääasiassa lyijyhohteesta.
+Iänmääritysaineisto perustuu aiemmin julkaistuihin määrityksiin ja sisältää sijaintitiedon, kivilajityypin, määritysmenetelmän, analysoidun mineraalin, ikätiedon, kommentit ja viitetiedot. Ikätieto sisältää iän lisäksi virhearvion (2-sigma), analyysien lukumäärän ja luotettavuusindikaattorin: Ikä perustuu konkordanttiin (C) tai lähes konkordanttiin (NC) U-Pb analyysiin, tai ns. konkordian yläleikkaukseen (I), jolloin on usein mainittu myös ns. alaleikkausikä. Kommentit sisältävät lisätietoa, kuten esimerkiksi titaniitista ja monatsiitista määritetyn iän. Tietokanta sisältää seuraavia lyhenteitä: sl (=slightly), disc (=discordant), conc (=concordant), E-Nd (=initial epsilon Nd), heter (=heterogenous), excl (=excluded), frac (=fraction), conv (=conventional), 7/6 (=207Pb/ 206Pb age). Isotooppianalyysien analyyttiset menetelmät on kuvattu kannan sisältämissä viitetiedoissa ja GTK:n analyysit lisäksi ”Mineralogisten ja isotooppigeologisten tutkimuspalvelujen toiminta-käsikirjassa”.
+Isotooppitietokanta on koottu excel-ohjelmalla.</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">The register contains published isotope results, which comprise predominantly U-Pb zircon ages, Sm-Nd data on whole rocks and Pb isotope data on galenas produced at the Geological Survey of Finland. The database relies on systematic storage of isotope results, which has been standard procedure at the GTK isotope laboratory operated since 1964. Other data from the laboratory, not included in this database, include Rb-Sr, O, C and O isotopes.
+The information included in the "Published age determination" database consists of location data, rock type, method, mineral analyzed, age and error, comments and references. The age data contains six elements: The age (concordant data or for older U-Pb method upper intercept age, Ma), an error estimate on the 2-sigma level, lower intercept age (for U-Pb), error in lower intercept age, number of analyses and a reliability indicator:  C for concordant analyses, I for concordia upper intercept, NC for nearly concordant analyses, R for reference line (because of e.g. heterogeneity or a high degree of discordancy). The comments contain additional information such as age results from e.g. titanite and monazite, eventual Nd epsilon values etc. It is also indicated, if one or more analysis have been rejected from the age calculation.  The abbreviations include: sl (=slightly), disc (=discordant), conc (=concordant), E-Nd (=initial epsilon Nd), heter (=heterogeneous), excl (=excluded), frac (=fraction), conv (=conventional), 7/6 (= 207Pb/ 206Pb age). Analytical methods for isotope analyses are described in references and for GTK analyses also in the manual "standard operating procedures".
+The information in the ”Published Sm-Nd isotope data" and "Pb isotope data on galena" follows standard practices described in normal references.
+The database was compiled using excel</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Suomen kallioperän isotooppitietokanta koostuu kolmesta osasta: 1) Iänmääritykset, pääasiassa U-Pb zirkonista, 2) Sm-Nd analyysit, ja 3) Pb isotooppianalyysit, pääasiassa lyijyhohteesta.
+Iänmääritysaineisto perustuu aiemmin julkaistuihin määrityksiin ja sisältää sijaintitiedon, kivilajityypin, määritysmenetelmän, analysoidun mineraalin, ikätiedon, kommentit ja viitetiedot. Ikätieto sisältää iän lisäksi virhearvion (2-sigma), analyysien lukumäärän ja luotettavuusindikaattorin: Ikä perustuu konkordanttiin (C) tai lähes konkordanttiin (NC) U-Pb analyysiin, tai ns. konkordian yläleikkaukseen (I), jolloin on usein mainittu myös ns. alaleikkausikä. Kommentit sisältävät lisätietoa, kuten esimerkiksi titaniitista ja monatsiitista määritetyn iän. Tietokanta sisältää seuraavia lyhenteitä: sl (=slightly), disc (=discordant), conc (=concordant), E-Nd (=initial epsilon Nd), heter (=heterogenous), excl (=excluded), frac (=fraction), conv (=conventional), 7/6 (=207Pb/ 206Pb age). Isotooppianalyysien analyyttiset menetelmät on kuvattu kannan sisältämissä viitetiedoissa ja GTK:n analyysit lisäksi ”Mineralogisten ja isotooppigeologisten tutkimuspalvelujen toiminta-käsikirjassa”.
+Isotooppitietokanta on koottu excel-ohjelmalla.</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:description>
+                <gmd:source uuidref="">
+                  <gmd:LI_Source>
+                    <gmd:description xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString>Suomen kallioperän isotooppitietokanta on syntynyt ajan mukana Geologian tutkimuskeskuksen isotooppigeologian laboratoriossa. Pääosa tietokannan iänmäärityksistä perustuu zirkoni-mineraalista tehtyihin U-Pb isotooppianalyyseihin, joita GTK:ssa on tehty vuodesta 1964 alkaen. Sulfidien Pb-Pb isotooppiaineistoa on kertynyt 1970-luvulta lähtien ja Sm-Nd analyysit GTK:ssa aloitettiin 1981.</gco:CharacterString>
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#EN">The database "Isotope data of Finnish bedrock" is based on results, mostly produced at GTK. The database has been compiled at the laboratory of isotope geology at GTK.</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#FI">Suomen kallioperän isotooppitietokanta on syntynyt ajan mukana Geologian tutkimuskeskuksen isotooppigeologian laboratoriossa. Pääosa tietokannan iänmäärityksistä perustuu zirkoni-mineraalista tehtyihin U-Pb isotooppianalyyseihin, joita GTK:ssa on tehty vuodesta 1964 alkaen. Sulfidien Pb-Pb isotooppiaineistoa on kertynyt 1970-luvulta lähtien ja Sm-Nd analyysit GTK:ssa aloitettiin 1981.</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:description>
+                  </gmd:LI_Source>
+                </gmd:source>
+              </gmd:LI_ProcessStep>
+            </gmd:processStep>
+          </gmd:LI_Lineage>
+        </gmd:lineage>
+      </gmd:DQ_DataQuality>
+    </gmd:dataQualityInfo>
+  </gmd:MD_Metadata>
+</csw:GetRecordByIdResponse>
+
