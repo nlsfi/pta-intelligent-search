@@ -147,9 +147,8 @@ public class SearchTest extends ESIntegTestCase {
         assertAllSuccessful(response);
 
 
-        List<SearchHit> hits = Stream.of(response.getHits().getHits())
-                .collect(Collectors.toList());
-        hits
+        Stream.of(response.getHits().getHits())
+                .collect(Collectors.toList())
                 .forEach(hit -> System.out.println("Id: " + hit.getId() + "- - - score: " + hit.getScore()));
 
         //System.out.println("response:");
@@ -171,8 +170,8 @@ public class SearchTest extends ESIntegTestCase {
         SearchResponse response = getSearchResponse("testcase-2.json");
 
         List<String> ids = Arrays.asList(
-                "89c6a379-776f-4529-b79d-a456177fb64d", //jkl score: 14.366626
-                "52bf65f7-db98-44ac-8da3-0b06fdf71d65" // salo score: 15.153514
+                "89c6a379-776f-4529-b79d-a456177fb64d", //jkl
+                "52bf65f7-db98-44ac-8da3-0b06fdf71d65" // salo
         );
 
         then(response.getHits())
@@ -199,5 +198,23 @@ public class SearchTest extends ESIntegTestCase {
                 .extracting(SearchHit::getId)
                 .containsAll(hslIds)
                 .containsSubsequence(hslIds.get(0), hsyIds.get(0));
+    }
+
+    @Test
+    public void uusimaaContainsMunicipalities() throws Exception {
+        SearchResponse response = getSearchResponse("testcase-5.json");
+
+        List<String> ids = Arrays.asList(
+                "be2440a5-b31c-482b-be2b-e59f98f49272", // Uusimaa
+                "eca4aba3-d145-46f7-9547-a2ccfe4bf1b3", // pk-seutu
+                "03e4a0d0-ee3d-4664-a612-bdf5046679fc", // Helsinki
+                "c163fe28-263a-4372-9078-6941646c6be2", // Kerava
+                "fdca5145-bc5d-4c67-b029-99a2d5801d9e" // Porvoo
+        );
+
+        then(response.getHits())
+                .extracting(SearchHit::getId)
+                .containsAll(ids)
+                .containsSubsequence(ids.get(0), ids.get(1), ids.get(2));
     }
 }

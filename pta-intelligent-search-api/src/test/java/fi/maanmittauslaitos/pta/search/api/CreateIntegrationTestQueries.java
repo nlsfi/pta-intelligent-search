@@ -35,7 +35,7 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
     private MockElasticsearchQueryAPI esQueryAPI;
 
     @Autowired
-    HakuKone hakukone;
+    private HakuKone hakukone;
 
     public static void main(String[] args) {
         System.setProperty("spring.profiles.active", "createIntegrationTestQueries");
@@ -60,7 +60,8 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
         Stream.of(new ConversionHelper("testcase-1", Collections.singletonList("suomi"), false),
                 new ConversionHelper("testcase-2", Arrays.asList("jyväskylä", "tiet"), true),
                 new ConversionHelper("testcase-3", Collections.emptyList(), false),
-                new ConversionHelper("testcase-4", Collections.singletonList("hsl"), false))
+                new ConversionHelper("testcase-4", Collections.singletonList("hsl"), false),
+                new ConversionHelper("testcase-5", Collections.singletonList("uusimaa"), true))
                 .forEach(helper -> generateTestCaseQuery(helper.getQueryList(), Paths.get(outputDir, helper.getTestCaseName() + ".json"), helper.isFocusOnRegional()));
     }
 
@@ -107,7 +108,7 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
             this.focusOnRegional = regionalFlag;
         }
 
-        public String getTestCaseName() {
+        String getTestCaseName() {
             return testCaseName;
         }
 
@@ -115,7 +116,7 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
             this.testCaseName = testCaseName;
         }
 
-        public List<String> getQueryList() {
+        List<String> getQueryList() {
             return queryList;
         }
 
@@ -123,7 +124,7 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
             this.queryList = queryList;
         }
 
-        public boolean isFocusOnRegional() {
+        boolean isFocusOnRegional() {
             return focusOnRegional;
         }
 
