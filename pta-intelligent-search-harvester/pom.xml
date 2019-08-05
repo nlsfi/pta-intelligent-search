@@ -87,7 +87,7 @@
 				</executions>
 				<configuration>
 					<mainClass>fi.maanmittauslaitos.pta.search.utils.LocalResourceMetadataGenerator</mainClass>
-					<arguments>${project.build.directory}/classes/fi/maanmittauslaitos/pta/search/integration/generatedResourceMetatada.zip</arguments>
+					<arguments>${project.build.directory}/classes/fi/maanmittauslaitos/pta/search/integration/generatedResourceMetadata.zip</arguments>
 				</configuration>
 			</plugin>
 			<!-- Package as an executable jar -->
