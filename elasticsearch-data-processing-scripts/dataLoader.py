@@ -38,9 +38,9 @@ def create_df(fname):
     df = df.assign(**df.bounds)
     df['envelope'] = df.apply(
         lambda row: '[ {:.2f}, {:.2f}, {:.2f}, {:.2f} ]'.format(row.minx, row.miny, row.maxx, row.maxy), axis=1)
-    df['synonyms_fi'] = ""
-    df['synonyms_sv'] = ""
-    df['synonyms_en'] = ""
+    df['synonyms_fi'] = '[]'
+    df['synonyms_sv'] = '[]'
+    df['synonyms_en'] = '[]'
     df['bbox'] = df.envelope
     return df
 
@@ -63,9 +63,9 @@ def save_whole_finland(out_dir):
     df = gpd.geodataframe.GeoDataFrame({
         'nimi': "Suomi",
         'namn': "Finland",
-        'synonyms_fi': "[Kansallinen, Valtakunnallinen]",
-        'synonyms_sv': "[National, Landsomfattande]",
-        'synonyms_en': "[National, Nationwide]",
+        'synonyms_fi': '["Kansallinen", "Valtakunnallinen"]',
+        'synonyms_sv': '["National", "Landsomfattande"]',
+        'synonyms_en': '["National", "Nationwide"]',
         'geometry': union
     }, index=[0])
     df = df.assign(**df.bounds)
@@ -77,7 +77,7 @@ def save_whole_finland(out_dir):
 
 def download_datasets():
     out_dir = "../pta-intelligent-search-elasticsearch/src/main/resources/data"
-    download_from_wfs()
+    #download_from_wfs()
     save_to_databases(out_dir, save_complete_geometries=False)
     save_whole_finland(out_dir)
 

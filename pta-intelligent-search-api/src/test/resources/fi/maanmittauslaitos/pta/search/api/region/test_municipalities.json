@@ -12,9 +12,9 @@
       "properties": {
         "nimi": "Espoo",
         "namn": "Esbo",
-        "synonyms_fi": "",
-        "synonyms_sv": "",
-        "synonyms_en": "",
+        "synonyms_fi": [],
+        "synonyms_sv": [],
+        "synonyms_en": [],
         "envelope": [
           24.500000,
           60.130000,
@@ -55,9 +55,9 @@
       "properties": {
         "nimi": "Helsinki",
         "namn": "Helsingfors",
-        "synonyms_fi": "[Stadi]",
-        "synonyms_sv": "[Stad]",
-        "synonyms_en": "[City]",
+        "synonyms_fi": ["Stadi"],
+        "synonyms_sv": ["Stad"],
+        "synonyms_en": ["City"],
         "envelope": [
           24.830000,
           60.130000,
@@ -98,9 +98,9 @@
       "properties": {
         "nimi": "Vantaa",
         "namn": "Vanda",
-        "synonyms_fi": "",
-        "synonyms_sv": "",
-        "synonyms_en": "",
+        "synonyms_fi": [],
+        "synonyms_sv": [],
+        "synonyms_en": [],
         "envelope": [
           24.750000,
           60.240000,

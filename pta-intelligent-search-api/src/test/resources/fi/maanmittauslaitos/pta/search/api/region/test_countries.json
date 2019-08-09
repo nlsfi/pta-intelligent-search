@@ -6,9 +6,9 @@
       "properties": {
         "nimi": "Suomi",
         "namn": "Finland",
-        "synonyms_fi": "[Kansallinen, Valtakunnallinen]",
-        "synonyms_sv": "[National, Landsomfattande]",
-        "synonyms_en": "[National, Nationwide]",
+        "synonyms_fi": ["Kansallinen", "Valtakunnallinen"],
+        "synonyms_sv": ["Landsomfattande"],
+        "synonyms_en": ["National", "Nationwide"],
         "envelope": [
           19.450000,
           59.780000,

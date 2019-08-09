@@ -12,9 +12,9 @@
       "properties": {
         "nimi": "Uusimaa",
         "namn": "Nyland",
-        "synonyms_fi": "",
-        "synonyms_sv": "",
-        "synonyms_en": "",
+        "synonyms_fi": [],
+        "synonyms_sv": [],
+        "synonyms_en": [],
         "envelope": [
           22.850000,
           59.810000,
@@ -55,9 +55,9 @@
       "properties": {
         "nimi": "Ahvenanmaa",
         "namn": "Åland",
-        "synonyms_fi": "",
-        "synonyms_sv": "",
-        "synonyms_en": "",
+        "synonyms_fi": [],
+        "synonyms_sv": [],
+        "synonyms_en": [],
         "envelope": [
           19.470000,
           59.900000,
