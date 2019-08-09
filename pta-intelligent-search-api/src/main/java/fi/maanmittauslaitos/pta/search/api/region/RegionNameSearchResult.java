@@ -5,23 +5,22 @@ import fi.maanmittauslaitos.pta.search.api.Language;
 import java.util.Map;
 
 public class RegionNameSearchResult {
+    public static final RegionNameSearchResult NO_REGION_FOUND = new RegionNameSearchResult(false, "", "");
     private boolean hasRegionName;
     private String regionalQueryPart;
     private String parsedRegion;
+
 
     public static RegionNameSearchResult executeSearch(String queryTerm, String stemmedQueryTerm, RegionNameContainer regionNameContainer, Language lang) {
         Map<String, String> stemmedRegionNames = regionNameContainer.getStemmedRegionNames().get(lang);
         if (stemmedRegionNames.containsKey(stemmedQueryTerm)) {
             return new RegionNameSearchResult(true, queryTerm, stemmedRegionNames.get(stemmedQueryTerm));
         }
-        return noRegionFound();
+        return NO_REGION_FOUND;
     }
 
-    public static RegionNameSearchResult noRegionFound() {
-        return new RegionNameSearchResult(false, "", "");
-    }
 
-    RegionNameSearchResult(boolean hasRegionName, String regionalQueryPart, String parsedRegion) {
+    private RegionNameSearchResult(boolean hasRegionName, String regionalQueryPart, String parsedRegion) {
         this.hasRegionName = hasRegionName;
         this.regionalQueryPart = regionalQueryPart;
         this.parsedRegion = parsedRegion;

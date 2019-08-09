@@ -22,6 +22,8 @@ import org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders;
 
 import java.util.*;
 
+import static fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants.*;
+
 
 public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQueryProvider {
 	private static Logger logger = Logger.getLogger(OntologyElasticsearchQueryProviderImpl.class);
@@ -57,10 +59,6 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 
 	public void setRegionNameContainer(RegionNameContainer regionNameContainer) {
 		this.regionNameContainer = regionNameContainer;
-	}
-
-	public RegionNameContainer getRegionNameContainer() {
-		return regionNameContainer;
 	}
 
 	public void setRequireExactWordMatch(Set<String> requireExactWordMatch) {
@@ -162,8 +160,8 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	}
 
 	private QueryBuilder createSpatialQuery(RegionNameSearchResult regionNameSearchResult, RegionNameContainer regionNameContainer, Language lang) {
-		String fieldName = "bestMatchingRegion.%s.location_name";
-		String scoreName = "bestMatchingRegion.%s.location_score";
+		String fieldName = FIELD_BEST_MACTCHING_REGIONS + ".%s." + FIELD_BEST_MACTCHING_REGIONS_NAME;
+		String scoreName = FIELD_BEST_MACTCHING_REGIONS + ".%s." + FIELD_BEST_MACTCHING_REGIONS_SCORE;
 
 		DisMaxQueryBuilder spatialDisMax = QueryBuilders.disMaxQuery();
 
@@ -191,7 +189,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 				.map(queryTerm -> RegionNameSearchResult.executeSearch(queryTerm, stemmers.get(lang).stem(queryTerm.toLowerCase()), regionNameContainer, lang))
 				.filter(RegionNameSearchResult::hasRegionName)
 				.findFirst()
-				.orElse(RegionNameSearchResult.noRegionFound());
+				.orElse(RegionNameSearchResult.NO_REGION_FOUND);
 	}
 
 	private void addFreetextQueries(Collection<String> words, BoolQueryBuilder boolQuery) {

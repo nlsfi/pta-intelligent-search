@@ -28,6 +28,7 @@ import fi.maanmittauslaitos.pta.search.metadata.ResponsiblePartyXPathCustomExtra
 import fi.maanmittauslaitos.pta.search.text.*;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactory;
 import fi.maanmittauslaitos.pta.search.utils.Region;
+import fi.maanmittauslaitos.pta.search.utils.RegionFactory;
 import org.apache.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.vocabulary.SKOS;
@@ -43,12 +44,17 @@ import java.util.function.BiFunction;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
 
+import static fi.maanmittauslaitos.pta.search.utils.Region.RegionScore.EMPTY_SCORE;
+
 public class HarvesterConfig {
 
 	private static final Logger logger = Logger.getLogger(HarvesterConfig.class);
 
 	private static final String ENV_CANONICAL_ORGANISATIONS_FILENAME = "CANONICAL_ORGANISATIONS_FILE";
 	private static final String CANONICAL_ORGANISATIONS_DEFAULT_FILENAME = "canonical_organisations.ods";
+	private static final double WHOLE_COUNTRY_SCORE_THRESHOLD = 0.6;
+	private static final double WHOLE_REGION_SCORE_THRESHOLD = 0.75;
+	private static final double WHOLE_SUBREGION_SCORE_THRESHOLD = 0.75;
 
 	public HarvesterSource getCSWSource() {
 		HarvesterSource source = new CSWHarvesterSource();
@@ -257,20 +263,20 @@ public class HarvesterConfig {
 		ObjectMapper objectMapper = new ObjectMapper();
 		ObjectReader listReader = objectMapper.readerFor(new TypeReference<List<Double>>() {
 		});
-		Map<String, Region> countries = Region.readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_countries.json");
-		Map<String, Region> regions = Region.readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_regions.json");
-		Map<String, Region> subregions = Region.readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_subregions.json");
-		Map<String, Region> municipalities = Region.readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_municipalities.json");
+		Map<String, Region> countries = RegionFactory.readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_countries.json");
+		Map<String, Region> regions = RegionFactory.readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_regions.json");
+		Map<String, Region> subregions = RegionFactory.readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_subregions.json");
+		Map<String, Region> municipalities = RegionFactory.readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_municipalities.json");
 
 		XPathFieldExtractorConfiguration regionFec = (XPathFieldExtractorConfiguration) bboxFec.copy();
 		final GeographicBoundingBoxXPathCustomExtractor originalBboxCustomExtractor = (GeographicBoundingBoxXPathCustomExtractor) regionFec.getCustomExtractor();
 
 
 		BiFunction<Map<String, Region>, Region, Region.RegionScore> getBestRegionScore = (Map<String, Region> regionType, Region dataRegion) -> regionType.entrySet().stream()//
-				.filter(nameRegionEntry -> nameRegionEntry.getValue().intersects(dataRegion))//
-				.max(Comparator.comparing(entry -> entry.getValue().getIntersection(dataRegion)))//
+				.filter(nameRegionEntry -> nameRegionEntry.getValue().intersects(dataRegion))
+				.max(Comparator.comparing(entry -> entry.getValue().getIntersection(dataRegion)))
 				.map(entry -> Region.RegionScore.create(entry.getKey(), entry.getValue().getIntersectionDividedByArea(dataRegion)))
-				.orElse(Region.RegionScore.createEmpty());
+				.orElse(EMPTY_SCORE);
 
 
 		regionFec.setCustomExtractor((xPath, node) -> {
@@ -280,45 +286,51 @@ public class HarvesterConfig {
 			if (coordinates.isEmpty()) {
 				return objectMapper.createObjectNode();
 			}
-			Region dataRegion = new Region(coordinates);
+			Region dataRegion = RegionFactory.create(coordinates);
 			Region.RegionScore country = getBestRegionScore.apply(countries, dataRegion);
 			Region.RegionScore region = getBestRegionScore.apply(regions, dataRegion);
 			Region.RegionScore subregion = getBestRegionScore.apply(subregions, dataRegion);
 			Region.RegionScore municipality = getBestRegionScore.apply(municipalities, dataRegion);
 
+			String nameField = PTAElasticSearchMetadataConstants.FIELD_BEST_MACTCHING_REGIONS_NAME;
+			String scoreField = PTAElasticSearchMetadataConstants.FIELD_BEST_MACTCHING_REGIONS_SCORE;
+
 			String template = "{\n" +
 					"  \"country\": {\n" +
-					"    \"location_name\": \"%s\",\n" +
-					"    \"location_score\": %.4f\n" +
+					"    \"" + nameField + "\": \"%s\",\n" +
+					"    \"" + scoreField + "\": %.4f\n" +
 					"  },\n" +
 					"  \"region\": {\n" +
-					"    \"location_name\": \"%s\",\n" +
-					"    \"location_score\": %.4f\n" +
+					"    \"" + nameField + "\": \"%s\",\n" +
+					"    \"" + scoreField + "\": %.4f\n" +
 					"  },\n" +
 					"  \"subregion\": {\n" +
-					"    \"location_name\": \"%s\",\n" +
-					"    \"location_score\": %.4f\n" +
+					"    \"" + nameField + "\": \"%s\",\n" +
+					"    \"" + scoreField + "\": %.4f\n" +
 					"  },\n" +
 					"  \"municipality\": {\n" +
-					"    \"location_name\": \"%s\",\n" +
-					"    \"location_score\": %.4f\n" +
+					"    \"" + nameField + "\": \"%s\",\n" +
+					"    \"" + scoreField + "\": %.4f\n" +
 					"  }\n" +
 					"}";
 			String jsonString = "";
 			JsonNode value = null;
 			try {
-				if (country.getScore() >= 0.8) {
+				if (country.getScore() >= WHOLE_COUNTRY_SCORE_THRESHOLD) {
 					jsonString = String.format(template, country.getRegionName(), country.getScore(),
-							"", 0.0, "", 0.0, "", 0.0);
-				} else if (region.getScore() >= 0.95) {
+							EMPTY_SCORE.getRegionName(), EMPTY_SCORE.getScore(),
+							EMPTY_SCORE.getRegionName(), EMPTY_SCORE.getScore(),
+							EMPTY_SCORE.getRegionName(), EMPTY_SCORE.getScore());
+				} else if (region.getScore() >= WHOLE_REGION_SCORE_THRESHOLD) {
 					jsonString = String.format(template, country.getRegionName(), country.getScore(),
 							region.getRegionName(), region.getScore(),
-							"", 0.0, "", 0.0);
-				} else if (subregion.getScore() >= 0.95) {
+							EMPTY_SCORE.getRegionName(), EMPTY_SCORE.getScore(),
+							EMPTY_SCORE.getRegionName(), EMPTY_SCORE.getScore());
+				} else if (subregion.getScore() >= WHOLE_SUBREGION_SCORE_THRESHOLD) {
 					jsonString = String.format(template, country.getRegionName(), country.getScore(),
 							region.getRegionName(), region.getScore(),
 							subregion.getRegionName(), subregion.getScore(),
-							"", 0.0);
+							EMPTY_SCORE.getRegionName(), EMPTY_SCORE.getScore());
 				} else {
 					jsonString = String.format(template, country.getRegionName(), country.getScore(),
 							region.getRegionName(), region.getScore(),
@@ -333,7 +345,7 @@ public class HarvesterConfig {
 		});
 
 
-		regionFec.setField("bestMatchingRegion");
+		regionFec.setField(PTAElasticSearchMetadataConstants.FIELD_BEST_MACTCHING_REGIONS);
 		regionFec.setType(FieldExtractorType.CUSTOM_CLASS_SINGLE_VALUE);
 
 

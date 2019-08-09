@@ -40,5 +40,23 @@ public class PTAElasticSearchMetadataConstants {
 	 * are stored 
 	 */
 	public static final String FIELD_KEYWORDS_URI = "keywords_uri";
+
+	/**
+	 * Name of the source object where names and scores of best matching country, region, sub region and municipality
+	 * are stored
+	 */
+	public static final String FIELD_BEST_MACTCHING_REGIONS = "bestMatchingRegion";
+
+	/**
+	 * Name of the source field where the name of best matching country, region, sub region or municipality
+	 * is stored
+	 */
+	public static final String FIELD_BEST_MACTCHING_REGIONS_NAME = "location_name";
+
+	/**
+	 * Name of the source field where the score of best matching country, region, sub region or municipality
+	 * is stored
+	 */
+	public static final String FIELD_BEST_MACTCHING_REGIONS_SCORE = "location_score";
 	
 }

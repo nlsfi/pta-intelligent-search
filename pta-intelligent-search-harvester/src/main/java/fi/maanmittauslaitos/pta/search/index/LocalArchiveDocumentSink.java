@@ -54,11 +54,14 @@ public class LocalArchiveDocumentSink implements DocumentSink {
     public int stopIndexing() {
         Path zipFile = Paths.get(outputFileName);
         try {
-            File outputRootDir = zipFile.getParent().toFile();
-            if (!outputRootDir.exists()) {
-                logger.warn("Creating new directory " + outputRootDir);
-                outputRootDir.mkdirs();
+            if (zipFile.getParent() != null) {
+                File outputRootDir = zipFile.getParent().toFile();
+                if (!outputRootDir.exists()) {
+                    logger.warn("Creating new directory " + outputRootDir);
+                    outputRootDir.mkdirs();
+                }
             }
+
             Files.deleteIfExists(zipFile);
         } catch (IOException e) {
             logger.error("Failed to delete file " + outputFileName, e);

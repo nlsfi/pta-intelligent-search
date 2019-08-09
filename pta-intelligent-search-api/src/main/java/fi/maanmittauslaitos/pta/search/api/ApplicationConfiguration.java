@@ -7,6 +7,7 @@ import fi.maanmittauslaitos.pta.search.api.language.LanguageDetector;
 import fi.maanmittauslaitos.pta.search.api.language.LuceneAnalyzerStemmer;
 import fi.maanmittauslaitos.pta.search.api.language.StemmingOntologyLanguageDetectorImpl;
 import fi.maanmittauslaitos.pta.search.api.region.RegionNameContainer;
+import fi.maanmittauslaitos.pta.search.api.region.RegionNameContainerImpl;
 import fi.maanmittauslaitos.pta.search.api.search.ElasticsearchQueryAPI;
 import fi.maanmittauslaitos.pta.search.api.search.FacetedElasticsearchHakuKoneImpl;
 import fi.maanmittauslaitos.pta.search.api.search.HakuKone;
@@ -419,7 +420,7 @@ public class ApplicationConfiguration {
 		String regionResource = "data/well_known_location_bboxes_regions.json";
 		String subRegionResource = "data/well_known_location_bboxes_subregions.json";
 		String municipalityResource = "data/well_known_location_bboxes_municipalities.json";
-		RegionNameContainer regionNameContainer = new RegionNameContainer(countryResource, regionResource, subRegionResource, municipalityResource, stemmers);
+		RegionNameContainerImpl regionNameContainer = new RegionNameContainerImpl(countryResource, regionResource, subRegionResource, municipalityResource, stemmers);
 		regionNameContainer.init();
 		return regionNameContainer;
 	}

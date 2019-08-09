@@ -31,14 +31,14 @@ public class RegionNameContainerTest {
     private Stemmer stemmerMock;
 
     private Map<Language, Stemmer> stemmersMock;
-    private RegionNameContainer regionNameContainer;
+    private RegionNameContainerImpl regionNameContainer;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         Mockito.when(stemmerMock.stem(Mockito.anyString())).thenAnswer(region -> region.getArguments()[0].toString().toLowerCase());
         stemmersMock = ImmutableMap.of(Language.FI, stemmerMock, Language.SV, stemmerMock, Language.EN, stemmerMock);
-        regionNameContainer = new RegionNameContainer(RESOURCE_COUNTRY, RESOURCE_REGIONS, RESOURCE_SUBREGIONS, RESOURCE_MUNICIPALITIES, stemmersMock);
+        regionNameContainer = new RegionNameContainerImpl(RESOURCE_COUNTRY, RESOURCE_REGIONS, RESOURCE_SUBREGIONS, RESOURCE_MUNICIPALITIES, stemmersMock);
         regionNameContainer.init();
     }
 

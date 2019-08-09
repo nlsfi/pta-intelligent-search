@@ -133,6 +133,7 @@ public class XPathFieldExtractorConfiguration extends AbstractFieldExtractorConf
 						Object obj = extractor.process(xPath, nodeList.item(i));
 						if (obj != null) {
 							ret.add(obj);
+							break;
 						}
 					}
 					return ret.size() > 0 ? ret.get(0) : ret;
