@@ -6,8 +6,8 @@
 	<version>0.9-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>pta-intelligent-search-api</module>
 		<module>pta-intelligent-search-harvester</module>
+		<module>pta-intelligent-search-api</module>
 		<module>pta-intelligent-search-document-processor</module>
 		<module>pta-intelligent-search-metadata-extractor</module>
 		<module>pta-intelligent-search-metadata-annotation</module>

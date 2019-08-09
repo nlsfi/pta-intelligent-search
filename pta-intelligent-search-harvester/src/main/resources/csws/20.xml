@@ -1,0 +1,870 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csw:GetRecordByIdResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
+  <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gml="http://www.opengis.net/gml" xmlns:geonet="http://www.fao.org/geonetwork" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.isotc211.org/2005/gmd https://www.isotc211.org/2005/gmd/gmd.xsd http://www.isotc211.org/2005/gmx https://www.isotc211.org/2005/gmx/gmx.xsd http://www.isotc211.org/2005/srv http://schemas.opengis.net/iso/19139/20060504/srv/srv.xsd">
+    <gmd:fileIdentifier>
+      <gco:CharacterString>66619eca-42bb-47b2-9d8d-364fc839e0d7</gco:CharacterString>
+    </gmd:fileIdentifier>
+    <gmd:language>
+      <gco:CharacterString>fin</gco:CharacterString>
+    </gmd:language>
+    <gmd:hierarchyLevel>
+      <gmd:MD_ScopeCode codeListValue="dataset" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" />
+    </gmd:hierarchyLevel>
+    <gmd:hierarchyLevelName>
+      <gco:CharacterString>Aineisto</gco:CharacterString>
+    </gmd:hierarchyLevelName>
+    <gmd:contact>
+      <gmd:CI_ResponsibleParty>
+        <gmd:organisationName gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Maanmittauslaitos</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Maanmittauslaitos</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">National Land Survey of Finland</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#SV">Lantmäteriverket</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:organisationName>
+        <gmd:contactInfo>
+          <gmd:CI_Contact>
+            <gmd:address>
+              <gmd:CI_Address>
+                <gmd:electronicMailAddress gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>asiakaspalvelu@maanmittauslaitos.fi</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">asiakaspalvelu@maanmittauslaitos.fi</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">customerservice@nls.fi</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#SV">kundservice@lantmateriverket.fi</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:electronicMailAddress>
+              </gmd:CI_Address>
+            </gmd:address>
+          </gmd:CI_Contact>
+        </gmd:contactInfo>
+        <gmd:role>
+          <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="owner" />
+        </gmd:role>
+      </gmd:CI_ResponsibleParty>
+    </gmd:contact>
+    <gmd:dateStamp>
+      <gco:DateTime>2018-09-03T15:27:59</gco:DateTime>
+    </gmd:dateStamp>
+    <gmd:locale>
+      <gmd:PT_Locale id="SV">
+        <gmd:languageCode xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gmx="http://www.isotc211.org/2005/gmx">
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="swe" />
+        </gmd:languageCode>
+        <gmd:characterEncoding xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gmx="http://www.isotc211.org/2005/gmx">
+          <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="UTF-8" />
+        </gmd:characterEncoding>
+      </gmd:PT_Locale>
+    </gmd:locale>
+    <gmd:locale>
+      <gmd:PT_Locale id="EN">
+        <gmd:languageCode xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gmx="http://www.isotc211.org/2005/gmx">
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+        </gmd:languageCode>
+        <gmd:characterEncoding xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gmx="http://www.isotc211.org/2005/gmx">
+          <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="UTF-8" />
+        </gmd:characterEncoding>
+      </gmd:PT_Locale>
+    </gmd:locale>
+    <gmd:locale>
+      <gmd:PT_Locale id="FI">
+        <gmd:languageCode>
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="fin" />
+        </gmd:languageCode>
+        <gmd:characterEncoding>
+          <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+        </gmd:characterEncoding>
+      </gmd:PT_Locale>
+    </gmd:locale>
+    <gmd:spatialRepresentationInfo>
+      <gmd:MD_GridSpatialRepresentation>
+        <gmd:numberOfDimensions>
+          <gco:Integer />
+        </gmd:numberOfDimensions>
+        <gmd:cellGeometry>
+          <gmd:MD_CellGeometryCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CellGeometryCode" codeListValue="" />
+        </gmd:cellGeometry>
+        <gmd:transformationParameterAvailability>
+          <gco:Boolean />
+        </gmd:transformationParameterAvailability>
+      </gmd:MD_GridSpatialRepresentation>
+    </gmd:spatialRepresentationInfo>
+    <gmd:referenceSystemInfo>
+      <gmd:MD_ReferenceSystem>
+        <gmd:referenceSystemIdentifier>
+          <gmd:RS_Identifier>
+            <gmd:authority />
+            <gmd:code gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>ETRS89 / TM35FIN(E,N) (EPSG:3067)</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">ETRS89 / TM35FIN(E,N) (EPSG:3067)</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:code>
+            <gmd:codeSpace>
+              <gco:CharacterString>EPSG</gco:CharacterString>
+            </gmd:codeSpace>
+            <gmd:version>
+              <gco:CharacterString>8.6</gco:CharacterString>
+            </gmd:version>
+          </gmd:RS_Identifier>
+        </gmd:referenceSystemIdentifier>
+      </gmd:MD_ReferenceSystem>
+    </gmd:referenceSystemInfo>
+    <gmd:referenceSystemInfo>
+      <gmd:MD_ReferenceSystem>
+        <gmd:referenceSystemIdentifier>
+          <gmd:RS_Identifier>
+            <gmd:code gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>N2000 height (EPSG:3900)</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">N2000 height (EPSG:3900)</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:code>
+            <gmd:codeSpace>
+              <gco:CharacterString>EPSG</gco:CharacterString>
+            </gmd:codeSpace>
+            <gmd:version>
+              <gco:CharacterString>8.6</gco:CharacterString>
+            </gmd:version>
+          </gmd:RS_Identifier>
+        </gmd:referenceSystemIdentifier>
+      </gmd:MD_ReferenceSystem>
+    </gmd:referenceSystemInfo>
+    <gmd:identificationInfo>
+      <gmd:MD_DataIdentification>
+        <gmd:citation>
+          <gmd:CI_Citation>
+            <gmd:title gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Korkeusvyöhykkeet</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Korkeusvyöhykkeet</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Elevation zones</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">Höjdzoner</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:title>
+            <gmd:date>
+              <gmd:CI_Date>
+                <gmd:date>
+                  <gco:Date>2011-11-07</gco:Date>
+                </gmd:date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeListValue="creation" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" />
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+            <gmd:identifier>
+              <gmd:RS_Identifier>
+                <gmd:code>
+                  <gco:CharacterString>1000376</gco:CharacterString>
+                </gmd:code>
+                <gmd:codeSpace>
+                  <gco:CharacterString>FI</gco:CharacterString>
+                </gmd:codeSpace>
+              </gmd:RS_Identifier>
+            </gmd:identifier>
+          </gmd:CI_Citation>
+        </gmd:citation>
+        <gmd:abstract gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Korkeusvyöhykkeet on koko Suomen kattava maaston korkeusluokkia visualisoiva rasteriaineisto. Korkeusvyöhykkeet on laskettu neljäksi tuoteversioksi pikselikokoihin 32, 64, 128 ja 512 metriä. Aineisto ei sisällä korkeusarvoja vaan se on värikuva, joka visualisoi maaston korkeutta merenpinnasta vyöhykkeinä. Korkeusvyöhykkeet voi hankkia koko maan kattavana tai rajatulta alueelta.
+
+Tuote on avointa aineistoa. Lisätietoa Avoimien aineistojen hankinta -sivustolta http://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/asiantuntevalle-kayttajalle/maastotiedot-ja-niiden-hankinta.</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Korkeusvyöhykkeet on koko Suomen kattava maaston korkeusluokkia visualisoiva rasteriaineisto. Korkeusvyöhykkeet on laskettu neljäksi tuoteversioksi pikselikokoihin 32, 64, 128 ja 512 metriä. Aineisto ei sisällä korkeusarvoja vaan se on värikuva, joka visualisoi maaston korkeutta merenpinnasta vyöhykkeinä. Korkeusvyöhykkeet voi hankkia koko maan kattavana tai rajatulta alueelta.
+
+Tuote on avointa aineistoa. Lisätietoa Avoimien aineistojen hankinta -sivustolta http://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/asiantuntevalle-kayttajalle/maastotiedot-ja-niiden-hankinta.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">Elevation zones is a raster dataset that visualises elevation of the terrain. The product covers the whole of Finland. There are four product versions available in which the pixel sizes are 32, 64, 128 and 512 metres. The dataset does not contain elevation values; it is a colour image that visualises the height of the terrain above sea level as zones. The product Elevation zones is available as a version that covers the whole country and as versions that cover a certain area.
+
+The product belongs to the open data of the National Land Survey of Finland. More information: Topographic data and how to acquire it http://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/topographic-data-and-how-acquire-it.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#SV">Höjdzoner är ett rastermaterial som visualiserar terrängens höjdklasser och som täcker hela Finland. Höjdzoner har beräknats till fyra produktversioner vars pixelstorlekar är 32, 64, 128 och 512 meter. Materialet innehåller inga höjdvärden utan skapar en färgbild som visualiserar terrängens höjd över havet som zoner. Höjdzoner är tillgänglig i en version som täcker hela landet och i versioner som täcker ett avgränsat område.
+
+Produkten ingår i Lantmäteriverkets öppna data. Mera information: Terrängdata och anskaffning av dem http://www.maanmittauslaitos.fi/sv/kartor-och-geodata/expertanvandare/terrangdata-och-anskaffning-av-dem.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:abstract>
+        <gmd:purpose gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Korkeusvyöhykeaineistoa voidaan käyttää taustakartta-aineistona visualisoimaan maaston topografiaa (korkeus merenpinnasta).</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Korkeusvyöhykeaineistoa voidaan käyttää taustakartta-aineistona visualisoimaan maaston topografiaa (korkeus merenpinnasta).</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">The dataset Elevation zones can be used as a background map material to visualise the topography of the terrain (height above sea level).</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#SV">Materialet Höjdzoner kan användas som ett bakgrundskartmaterial för att visualisera terrängens topografi (höjd över havet).</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:purpose>
+        <gmd:pointOfContact>
+          <gmd:CI_ResponsibleParty>
+            <gmd:organisationName gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Maanmittauslaitos</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Maanmittauslaitos</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">Lantmäteriverket</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">National Land Survey of Finland</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:organisationName>
+            <gmd:contactInfo>
+              <gmd:CI_Contact>
+                <gmd:address>
+                  <gmd:CI_Address>
+                    <gmd:electronicMailAddress gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString>asiakaspalvelu@maanmittauslaitos.fi</gco:CharacterString>
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#FI">asiakaspalvelu@maanmittauslaitos.fi</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#EN">customerservice@nls.fi</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#SV">kundservice@lantmateriverket.fi</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:electronicMailAddress>
+                  </gmd:CI_Address>
+                </gmd:address>
+              </gmd:CI_Contact>
+            </gmd:contactInfo>
+            <gmd:role>
+              <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="owner" />
+            </gmd:role>
+          </gmd:CI_ResponsibleParty>
+        </gmd:pointOfContact>
+        <gmd:resourceMaintenance>
+          <gmd:MD_MaintenanceInformation>
+            <gmd:maintenanceAndUpdateFrequency>
+              <gmd:MD_MaintenanceFrequencyCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_MaintenanceFrequencyCode" codeListValue="asNeeded" />
+            </gmd:maintenanceAndUpdateFrequency>
+            <gmd:maintenanceNote gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Korkeusvyöhykkeet tuotetaan 10 m korkeusmallista.
+Rasterit on kokonaisuudessaan päivitetty lokakuussa 2015
+Aineistoon tehdään alueellisesti rajattuja ja satunnaisia päivityksiä maastotietokannan ajantasaistuksen yhteydessä 10 m korkeusmallin muuttuessa.</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Korkeusvyöhykkeet tuotetaan 10 m korkeusmallista.
+Rasterit on kokonaisuudessaan päivitetty lokakuussa 2015
+Aineistoon tehdään alueellisesti rajattuja ja satunnaisia päivityksiä maastotietokannan ajantasaistuksen yhteydessä 10 m korkeusmallin muuttuessa.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">Höjdzoner produceras utifrån Höjdmodell 10 m.
+Rastren har i sin helhet uppdaterats i oktober 2015.
+I materialet görs områdesavgränsade och sporadiska uppdateringar i samband med terrängdatabasens tidsbundna uppdatering då det sker ändringar i Höjdmodell 10 m.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Elevation zones is produced from Elevation model 10 m
+The rasters have been updated as a whole in October 2015.
+Areally limited and occasional updates are made in the dataset in connection with the regular maintenance procedures of the Topographical database as there are changes in Elevation model 10 m.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:maintenanceNote>
+          </gmd:MD_MaintenanceInformation>
+        </gmd:resourceMaintenance>
+        <gmd:graphicOverview>
+          <gmd:MD_BrowseGraphic>
+            <gmd:fileName>
+              <gco:CharacterString>http://www.paikkatietohakemisto.fi/geonetwork/srv/api/records/5c2ba253-e1b0-42c8-b9bb-3bac947e1cf1/attachments/korkeusvyohykerasteri_2m_s.png</gco:CharacterString>
+            </gmd:fileName>
+            <gmd:fileDescription gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI" />
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:fileDescription>
+          </gmd:MD_BrowseGraphic>
+        </gmd:graphicOverview>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>avoindata.fi</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">avoindata.fi</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">avoindata.fi</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Hilamalli (grid)</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV" />
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN" />
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Ei-Inspire</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">Ej-Inspire</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Not-Inspire</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Korkeus</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV" />
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN" />
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Paikkatietohakemiston asiasanasto</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Paikkatietohakemiston asiasanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2010-02-03</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+                <gmd:identifier>
+                  <gmd:MD_Identifier>
+                    <gmd:code>
+                      <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.asiasanasto">geonetwork.thesaurus.external.theme.asiasanasto</gmx:Anchor>
+                    </gmd:code>
+                  </gmd:MD_Identifier>
+                </gmd:identifier>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:resourceConstraints>
+          <gmd:MD_Constraints>
+            <gmd:useLimitation gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Tuote on avointa aineistoa. Avoimen tietoaineiston lisenssi http://www.maanmittauslaitos.fi/maanmittauslaitoksen-avoimen-tietoaineiston-cc-40-lisenssi. 
+Lisätietoa Avoimien aineistojen hankinta -sivustolta http://www.maanmittauslaitos.fi/avoindata/hankinta. 
+
+Korkeusvyöhykkeet voidaan hankkia koko maan kattavana tai alueeltaan rajattuna seuraavissa pikselikoon mukaan määräytyvissä lehtijaoissa: Korkeusvyöhyke 32 m: 48x96 km (1:100 000 lehtijako), Korkeusvyöhyke 64 m ja 128 m: 96x192 km (1:200 000 lehtijako), Korkeusvyöhyke 512 m: 1178x674 km (koko maa).
+
+Korkeusvyöhykkeet on saatavissa Karttakuvapalvelusta (WMTS) http://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/asiantuntevalle-kayttajalle/kartta-ja-paikkatietojen-rajapintapalvelut-1</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Tuote on avointa aineistoa. Avoimen tietoaineiston lisenssi http://www.maanmittauslaitos.fi/maanmittauslaitoksen-avoimen-tietoaineiston-cc-40-lisenssi. 
+Lisätietoa Avoimien aineistojen hankinta -sivustolta http://www.maanmittauslaitos.fi/avoindata/hankinta. 
+
+Korkeusvyöhykkeet voidaan hankkia koko maan kattavana tai alueeltaan rajattuna seuraavissa pikselikoon mukaan määräytyvissä lehtijaoissa: Korkeusvyöhyke 32 m: 48x96 km (1:100 000 lehtijako), Korkeusvyöhyke 64 m ja 128 m: 96x192 km (1:200 000 lehtijako), Korkeusvyöhyke 512 m: 1178x674 km (koko maa).
+
+Korkeusvyöhykkeet on saatavissa Karttakuvapalvelusta (WMTS) http://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/asiantuntevalle-kayttajalle/kartta-ja-paikkatietojen-rajapintapalvelut-1</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">Produkten ingår i Lantmäteriverkets öppna data. Licens till avgiftsfria datamaterial http://www.maanmittauslaitos.fi/sv/oppnadata-licens-cc40. 
+Mera information: Terrängdata och anskaffning av dem http://www.maanmittauslaitos.fi/sv/kartor-och-geodata/expertanvandare/terrangdata-och-anskaffning-av-dem.
+
+Produkten Höjdzoner är tillgänglig i en version som täcker hela landet eller i versioner som täcker ett avgränsat område i enlighet med följande kartbladsindelningar som bestäms enligt pixelstorlek: Höjdzon 32 m: 48 x 96 km (1:100 000 bladindelning), Höjdzon 64 m och 128 m: 96 x 192 km (1:200 000 bladindelning), Höjdzon 512 m: 1 178 x 674 km (hela landet).
+
+Produkten Höjdzoner är tillgänglig via Kartbildstjänsten (WMTS) http://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/asiantuntevalle-kayttajalle/kartta-ja-paikkatietojen-rajapintapalvelut-1</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">The product belongs to the open data of the National Land Survey of Finland. Open data CC 4.0 license http://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/en-maastotiedot-ja-niiden-hankinta/open-data-cc-40-licence.
+
+More information: Topographic data and how to acquire it http://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/topographic-data-and-how-acquire-it. 
+The product Elevation zones is available as a version that covers the whole country and as versions that cover a particular area. The versions are delivered according to a map sheet division that is determined by pixel size. Elevation zone 32 m: 48 x 96 km (map sheet division 1:100,000), Elevation zones 64 m and 128 m: 96 x 192 km (map sheet division 1:200,000), Elevation zone 512 m: 1,178 x 674 km (the whole country).
+The product Elevation zones is available via the Web Map Service (WMTS) http://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/asiantuntevalle-kayttajalle/kartta-ja-paikkatietojen-rajapintapalvelut-1</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:useLimitation>
+          </gmd:MD_Constraints>
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints>
+          <gmd:MD_LegalConstraints>
+            <gmd:accessConstraints>
+              <gmd:MD_RestrictionCode codeListValue="copyright" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode" />
+            </gmd:accessConstraints>
+            <gmd:otherConstraints gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Maanmittauslaitoksella on tekijänoikeus ja muut immateriaalioikeudet Korkeusvyöhykerastiin. Tietoaineisto ei ole salassa pidettävä. Julkista saatavuutta ei ole rajoitettu INSPIRE-direktiivin nojalla.</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Maanmittauslaitoksella on tekijänoikeus ja muut immateriaalioikeudet Korkeusvyöhykerastiin. Tietoaineisto ei ole salassa pidettävä. Julkista saatavuutta ei ole rajoitettu INSPIRE-direktiivin nojalla.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">Lantmäteriverket äger upphovsrätten och de övriga immateriella rättigheterna till materialet i Höjdzoner. Datamaterialet är inte sekretessbelagt. Den offentliga tillgängligheten till materialet har inte begränsats med stöd av INSPIRE-direktivet.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Copyright and other immaterial rights on the dataset Elevation zones are owned by the National Land Survey of Finland. The data material is not confidential. Public access to the material is not restricted by the INSPIRE Directive.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:otherConstraints>
+          </gmd:MD_LegalConstraints>
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints>
+          <gmd:MD_SecurityConstraints>
+            <gmd:classification>
+              <gmd:MD_ClassificationCode codeListValue="unclassified" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ClassificationCode" />
+            </gmd:classification>
+          </gmd:MD_SecurityConstraints>
+        </gmd:resourceConstraints>
+        <gmd:spatialRepresentationType>
+          <gmd:MD_SpatialRepresentationTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_SpatialRepresentationTypeCode" codeListValue="grid" />
+        </gmd:spatialRepresentationType>
+        <gmd:spatialResolution>
+          <gmd:MD_Resolution>
+            <gmd:distance>
+              <gco:Distance uom="m">32</gco:Distance>
+            </gmd:distance>
+          </gmd:MD_Resolution>
+        </gmd:spatialResolution>
+        <gmd:spatialResolution>
+          <gmd:MD_Resolution>
+            <gmd:distance>
+              <gco:Distance uom="m">64</gco:Distance>
+            </gmd:distance>
+          </gmd:MD_Resolution>
+        </gmd:spatialResolution>
+        <gmd:spatialResolution>
+          <gmd:MD_Resolution>
+            <gmd:distance>
+              <gco:Distance uom="m">128</gco:Distance>
+            </gmd:distance>
+          </gmd:MD_Resolution>
+        </gmd:spatialResolution>
+        <gmd:spatialResolution>
+          <gmd:MD_Resolution>
+            <gmd:distance>
+              <gco:Distance uom="m">512</gco:Distance>
+            </gmd:distance>
+          </gmd:MD_Resolution>
+        </gmd:spatialResolution>
+        <gmd:language>
+          <gco:CharacterString>fin</gco:CharacterString>
+        </gmd:language>
+        <gmd:language>
+          <gco:CharacterString>swe</gco:CharacterString>
+        </gmd:language>
+        <gmd:topicCategory>
+          <gmd:MD_TopicCategoryCode>location</gmd:MD_TopicCategoryCode>
+        </gmd:topicCategory>
+        <gmd:topicCategory>
+          <gmd:MD_TopicCategoryCode>elevation</gmd:MD_TopicCategoryCode>
+        </gmd:topicCategory>
+        <gmd:extent>
+          <gmd:EX_Extent>
+            <gmd:geographicElement>
+              <gmd:EX_GeographicBoundingBox>
+                <gmd:westBoundLongitude>
+                  <gco:Decimal>19.08317359</gco:Decimal>
+                </gmd:westBoundLongitude>
+                <gmd:eastBoundLongitude>
+                  <gco:Decimal>31.58672881</gco:Decimal>
+                </gmd:eastBoundLongitude>
+                <gmd:southBoundLatitude>
+                  <gco:Decimal>59.45414258</gco:Decimal>
+                </gmd:southBoundLatitude>
+                <gmd:northBoundLatitude>
+                  <gco:Decimal>70.09229553</gco:Decimal>
+                </gmd:northBoundLatitude>
+              </gmd:EX_GeographicBoundingBox>
+            </gmd:geographicElement>
+          </gmd:EX_Extent>
+        </gmd:extent>
+      </gmd:MD_DataIdentification>
+    </gmd:identificationInfo>
+    <gmd:contentInfo />
+    <gmd:contentInfo>
+      <gmd:MD_FeatureCatalogueDescription>
+        <gmd:includedWithDataset>
+          <gco:Boolean />
+        </gmd:includedWithDataset>
+        <gmd:featureCatalogueCitation>
+          <gmd:CI_Citation>
+            <gmd:title gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString />
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI" />
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:title>
+            <gmd:date>
+              <gmd:CI_Date>
+                <gmd:date>
+                  <gco:Date />
+                </gmd:date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="" />
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+            <gmd:otherCitationDetails gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Korkeusvyöhykeaineiston versiot:
+
+Korkeusvyöhyke pikselikoko 32 m
+Korkeusvyöhyke pikselikoko 64 m
+Korkeusvyöhyke pikselikoko 128 m
+Korkeusvyöhyke pikselikoko 512 m</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Korkeusvyöhykeaineiston versiot:
+
+Korkeusvyöhyke pikselikoko 32 m
+Korkeusvyöhyke pikselikoko 64 m
+Korkeusvyöhyke pikselikoko 128 m
+Korkeusvyöhyke pikselikoko 512 m</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">Versioner av materialet Höjdzoner:
+
+Höjdzon pixelstorlek 32 m
+Höjdzon pixelstorlek 64 m
+Höjdzon pixelstorlek 128 m
+Höjdzon pixelstorlek 512 m</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Versions of the dataset Elevation zones:
+
+Elevation zone pixel size 32 m
+Elevation zone pixel size 64 m
+Elevation zone pixel size 128 m
+Elevation zone pixel size 512 m</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:otherCitationDetails>
+          </gmd:CI_Citation>
+        </gmd:featureCatalogueCitation>
+      </gmd:MD_FeatureCatalogueDescription>
+    </gmd:contentInfo>
+    <gmd:distributionInfo xmlns:date="http://exslt.org/dates-and-times" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:srv="http://www.isotc211.org/2005/srv">
+      <gmd:MD_Distribution>
+        <gmd:distributionFormat>
+          <gmd:MD_Format>
+            <gmd:name gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>GeoTIFF</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">GeoTIFF</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">GeoTiff</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">GeoTiff</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:name>
+            <gmd:version>
+              <gco:CharacterString>1.0</gco:CharacterString>
+            </gmd:version>
+            <gmd:specification gco:nilReason="missing">
+              <gco:CharacterString />
+            </gmd:specification>
+          </gmd:MD_Format>
+        </gmd:distributionFormat>
+        <gmd:distributor>
+          <gmd:MD_Distributor>
+            <gmd:distributorContact>
+              <gmd:CI_ResponsibleParty>
+                <gmd:individualName gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString />
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI" />
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:individualName>
+                <gmd:organisationName gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Maanmittauslaitos</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Maanmittauslaitos</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#SV">Lantmäteriverket</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">National Land Survey of Finland</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:organisationName>
+                <gmd:positionName gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString />
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI" />
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:positionName>
+                <gmd:contactInfo>
+                  <gmd:CI_Contact>
+                    <gmd:address>
+                      <gmd:CI_Address>
+                        <gmd:deliveryPoint gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                          <gco:CharacterString />
+                          <gmd:PT_FreeText>
+                            <gmd:textGroup>
+                              <gmd:LocalisedCharacterString locale="#FI" />
+                            </gmd:textGroup>
+                          </gmd:PT_FreeText>
+                        </gmd:deliveryPoint>
+                        <gmd:city gco:nilReason="missing">
+                          <gco:CharacterString />
+                        </gmd:city>
+                        <gmd:administrativeArea gco:nilReason="missing">
+                          <gco:CharacterString />
+                        </gmd:administrativeArea>
+                        <gmd:postalCode gco:nilReason="missing">
+                          <gco:CharacterString />
+                        </gmd:postalCode>
+                        <gmd:country gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                          <gco:CharacterString />
+                          <gmd:PT_FreeText>
+                            <gmd:textGroup>
+                              <gmd:LocalisedCharacterString locale="#FI" />
+                            </gmd:textGroup>
+                          </gmd:PT_FreeText>
+                        </gmd:country>
+                        <gmd:electronicMailAddress gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                          <gco:CharacterString>asiakaspalvelu@maanmittauslaitos.fi</gco:CharacterString>
+                          <gmd:PT_FreeText>
+                            <gmd:textGroup>
+                              <gmd:LocalisedCharacterString locale="#FI">asiakaspalvelu@maanmittauslaitos.fi</gmd:LocalisedCharacterString>
+                            </gmd:textGroup>
+                            <gmd:textGroup>
+                              <gmd:LocalisedCharacterString locale="#SV">kundservice@lantmateriverket.fi</gmd:LocalisedCharacterString>
+                            </gmd:textGroup>
+                            <gmd:textGroup>
+                              <gmd:LocalisedCharacterString locale="#EN">customerservice@nls.fi</gmd:LocalisedCharacterString>
+                            </gmd:textGroup>
+                          </gmd:PT_FreeText>
+                        </gmd:electronicMailAddress>
+                      </gmd:CI_Address>
+                    </gmd:address>
+                  </gmd:CI_Contact>
+                </gmd:contactInfo>
+                <gmd:role>
+                  <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="owner" />
+                </gmd:role>
+              </gmd:CI_ResponsibleParty>
+            </gmd:distributorContact>
+          </gmd:MD_Distributor>
+        </gmd:distributor>
+        <gmd:transferOptions>
+          <gmd:MD_DigitalTransferOptions>
+            <gmd:onLine>
+              <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                  <gmd:URL>https://tiedostopalvelu.maanmittauslaitos.fi/tp/kartta</gmd:URL>
+                </gmd:linkage>
+                <gmd:protocol gco:nilReason="missing">
+                  <gco:CharacterString />
+                </gmd:protocol>
+                <gmd:name gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Avoimien aineistojen tiedostopalvelu</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Avoimien aineistojen tiedostopalvelu</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">File service of open data</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#SV">Filservice för avgiftsfri data</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:name>
+              </gmd:CI_OnlineResource>
+            </gmd:onLine>
+          </gmd:MD_DigitalTransferOptions>
+        </gmd:transferOptions>
+      </gmd:MD_Distribution>
+    </gmd:distributionInfo>
+    <gmd:dataQualityInfo>
+      <gmd:DQ_DataQuality>
+        <gmd:scope>
+          <gmd:DQ_Scope>
+            <gmd:level>
+              <gmd:MD_ScopeCode codeListValue="dataset" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" />
+            </gmd:level>
+          </gmd:DQ_Scope>
+        </gmd:scope>
+        <gmd:report>
+          <gmd:DQ_DomainConsistency>
+            <gmd:result>
+              <gmd:DQ_ConformanceResult>
+                <gmd:specification>
+                  <gmd:CI_Citation>
+                    <gmd:title gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString />
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#FI" />
+                        </gmd:textGroup>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#SV" />
+                        </gmd:textGroup>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#EN" />
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:title>
+                    <gmd:date>
+                      <gmd:CI_Date>
+                        <gmd:date>
+                          <gco:Date>2010-01-07</gco:Date>
+                        </gmd:date>
+                        <gmd:dateType>
+                          <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                        </gmd:dateType>
+                      </gmd:CI_Date>
+                    </gmd:date>
+                  </gmd:CI_Citation>
+                </gmd:specification>
+                <gmd:explanation gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString />
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI" />
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#SV">Specifikationen av denna informationsprodukt har ännu inte publicerats.</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">The information product specification has not been published yet.</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:explanation>
+                <gmd:pass>
+                  <gco:Boolean>false</gco:Boolean>
+                </gmd:pass>
+              </gmd:DQ_ConformanceResult>
+            </gmd:result>
+          </gmd:DQ_DomainConsistency>
+        </gmd:report>
+        <gmd:lineage>
+          <gmd:LI_Lineage>
+            <gmd:statement gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Lähdeaineistona käytetty korkeusmalli 10 m on tarkin koko maan kattava korkeusmalli Suomesta. 
+Pikselikokoluokissa 32-128 m maaston korkeus on jaettu 30 korkeusluokkaan ja pikselikokoluokassa 512 m 16 korkeusluokkaan.</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Lähdeaineistona käytetty korkeusmalli 10 m on tarkin koko maan kattava korkeusmalli Suomesta. 
+Pikselikokoluokissa 32-128 m maaston korkeus on jaettu 30 korkeusluokkaan ja pikselikokoluokassa 512 m 16 korkeusluokkaan.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">Utgångsmaterialet Höjdmodell 10 m är den mest exakta riksomfattande höjdmodellen över Finland.
+
+När det gäller pixelstorlekar 32–128 m, har terränghöjden indelats i 30 höjdklasser. Pixelstorlek 512 m har 16 höjdklasser.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">The reference dataset Elevation model 10 m is the most accurate elevation model of Finland that covers the whole of the country. 
+
+In pixel sizes from 32 metres to 128 metres the elevation of the terrain is divided into 30 elevation classes and in pixel size 512 metres into 16 classes.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:statement>
+          </gmd:LI_Lineage>
+        </gmd:lineage>
+      </gmd:DQ_DataQuality>
+    </gmd:dataQualityInfo>
+    <gmd:portrayalCatalogueInfo>
+      <gmd:MD_PortrayalCatalogueReference>
+        <gmd:portrayalCatalogueCitation>
+          <gmd:CI_Citation>
+            <gmd:title gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Korkeusvyöhykeaineiston esitystapaluettelo on osoitteessa:</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Korkeusvyöhykeaineiston esitystapaluettelo on osoitteessa:</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">En förteckning över återgivningssättet av materialet Höjdzoner finns på adressen (på Finska):</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">The portrayal catalogue of Elevation zones is available at (in Finnish):</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:title>
+            <gmd:date>
+              <gmd:CI_Date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="" />
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+            <gmd:otherCitationDetails gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>http://www.maanmittauslaitos.fi/sites/default/files/korkeusvyohykerasteri_legenda.pdf</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">http://www.maanmittauslaitos.fi/sites/default/files/korkeusvyohykerasteri_legenda.pdf</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">http://www.maanmittauslaitos.fi/sites/default/files/korkeusvyohykerasteri_legenda.pdf</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">http://www.maanmittauslaitos.fi/sites/default/files/korkeusvyohykerasteri_legenda.pdf</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:otherCitationDetails>
+          </gmd:CI_Citation>
+        </gmd:portrayalCatalogueCitation>
+      </gmd:MD_PortrayalCatalogueReference>
+    </gmd:portrayalCatalogueInfo>
+    <gmd:metadataMaintenance>
+      <gmd:MD_MaintenanceInformation>
+        <gmd:maintenanceAndUpdateFrequency>
+          <gmd:MD_MaintenanceFrequencyCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_MaintenanceFrequencyCode" codeListValue="" />
+        </gmd:maintenanceAndUpdateFrequency>
+      </gmd:MD_MaintenanceInformation>
+    </gmd:metadataMaintenance>
+  </gmd:MD_Metadata>
+</csw:GetRecordByIdResponse>
+

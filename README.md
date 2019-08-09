@@ -57,6 +57,12 @@ Run the class `fi.maanmittauslaitos.pta.search.api.Application` from the project
 
 Open a browser window with the URL http://localhost:8080
 
+## Updating spatial regions
+
+Databases (geoJSON files) containing the bounding boxes of Finnish municipalities, sub regions and regions 
+are built using Statistical units data from Statistics Finland (https://www.stat.fi/org/avoindata/paikkatietoaineistot/kuntapohjaiset_tilastointialueet.html). 
+
+To update the databases with the newest data sets just run the Python script `dataLoader.py` from the project elasticsearch-data-processing-scripts and build the project.
 
 
 

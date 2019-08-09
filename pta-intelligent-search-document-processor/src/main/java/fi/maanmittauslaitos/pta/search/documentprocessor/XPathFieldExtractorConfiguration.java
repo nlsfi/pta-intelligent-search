@@ -45,7 +45,8 @@ public class XPathFieldExtractorConfiguration extends AbstractFieldExtractorConf
 		FIRST_MATCHING_VALUE,
 		ALL_MATCHING_VALUES,
 		TRUE_IF_MATCHES_OTHERWISE_FALSE,
-		CUSTOM_CLASS
+		CUSTOM_CLASS,
+		CUSTOM_CLASS_SINGLE_VALUE
 	}
 
 	public void setCustomExtractor(XPathCustomExtractor customExtractor) {
@@ -112,6 +113,31 @@ public class XPathFieldExtractorConfiguration extends AbstractFieldExtractorConf
 						}
 					}
 					return ret;
+				} catch(XPathException xpe) {
+					throw new DocumentProcessingException(xpe);
+				}
+			}
+
+			case CUSTOM_CLASS_SINGLE_VALUE:
+			{
+				XPathCustomExtractor extractor = getCustomExtractor();
+				if (extractor == null) {
+					throw new IllegalArgumentException("Missing XPathCustomExtractor in CUSTOM_CLASS_SINGLE_VALUE configuration");
+				}
+				if (nodeList.getLength() > 1) {
+					throw new IllegalArgumentException("More than single value in CUSTOM_CLASS_SINGLE_VALUE configuration");
+				}
+				try {
+					List<Object> ret = new ArrayList<>();
+					for (int i = 0; i < nodeList.getLength(); i++) {
+						Object obj = extractor.process(xPath, nodeList.item(i));
+						if (obj != null) {
+							ret.add(obj);
+							break;
+						}
+					}
+					return ret.size() > 0 ? ret.get(0) : ret;
+
 				} catch(XPathException xpe) {
 					throw new DocumentProcessingException(xpe);
 				}

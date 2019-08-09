@@ -1,29 +1,22 @@
 package fi.maanmittauslaitos.pta.search.api;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import org.apache.log4j.Logger;
-import org.elasticsearch.common.collect.Tuple;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import fi.maanmittauslaitos.pta.search.api.language.LanguageDetectionResult;
 import fi.maanmittauslaitos.pta.search.api.language.LanguageDetector;
 import fi.maanmittauslaitos.pta.search.api.model.SearchQuery;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.QueryLanguage;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.QueryLanguageScore;
-import fi.maanmittauslaitos.pta.search.api.region.RegionNameDetector;
 import fi.maanmittauslaitos.pta.search.api.search.HakuKone;
+import org.apache.log4j.Logger;
+import org.elasticsearch.common.collect.Tuple;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class HakuController {
@@ -35,10 +28,6 @@ public class HakuController {
 	
 	@Autowired
 	private LanguageDetector languageDetector;
-
-	@Autowired
-	@Qualifier("RegionNameDetectorsPerLanguage")
-	private Map<Language, RegionNameDetector> regionNameDetectorPerLanguage;
 	
 	@Autowired
 	@Qualifier("PreferredLanguages")
@@ -67,12 +56,8 @@ public class HakuController {
 		}
 		
 		logger.debug("Querying in language: "+language);
-
-		RegionNameDetector regionNameDetector = regionNameDetectorPerLanguage.get(language);
-		boolean focusOnRegionalHits = regionNameDetector.containsRegionalName(pyynto.getQuery());
-		logger.debug("Query contains name of a region: "+focusOnRegionalHits);
 		
-		SearchResult tulos = hakukone.haku(pyynto, language, focusOnRegionalHits);
+		SearchResult tulos = hakukone.haku(pyynto, language);
 		
 		QueryLanguage queryLanguage = createQueryLanguage(language, detection.v1(), detection.v2());
 		tulos.setQueryLanguage(queryLanguage);

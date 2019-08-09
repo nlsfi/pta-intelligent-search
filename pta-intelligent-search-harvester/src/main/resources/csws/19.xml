@@ -1,0 +1,947 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csw:GetRecordByIdResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
+  <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gml="http://www.opengis.net/gml" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:geonet="http://www.fao.org/geonetwork" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://www.isotc211.org/2005/gmd/gmd.xsd http://www.isotc211.org/2005/gmx http://www.isotc211.org/2005/gmx/gmx.xsd http://www.isotc211.org/2005/srv http://schemas.opengis.net/iso/19139/20060504/srv/srv.xsd">
+    <gmd:fileIdentifier>
+      <gco:CharacterString>db8a66fa-e319-4c50-92e8-924db7693838</gco:CharacterString>
+    </gmd:fileIdentifier>
+    <gmd:language>
+      <gco:CharacterString>fin</gco:CharacterString>
+    </gmd:language>
+    <gmd:characterSet>
+      <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="8859part15" />
+    </gmd:characterSet>
+    <gmd:hierarchyLevel>
+      <gmd:MD_ScopeCode codeListValue="dataset" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" />
+    </gmd:hierarchyLevel>
+    <gmd:hierarchyLevelName>
+      <gco:CharacterString>Kalliogeokemia</gco:CharacterString>
+    </gmd:hierarchyLevelName>
+    <gmd:contact>
+      <gmd:CI_ResponsibleParty>
+        <gmd:organisationName xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Geologian tutkimuskeskus</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Geologian tutkimuskeskus</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">Geological Survey of Finland</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:organisationName>
+        <gmd:contactInfo>
+          <gmd:CI_Contact>
+            <gmd:phone>
+              <gmd:CI_Telephone>
+                <gmd:voice>
+                  <gco:CharacterString>0295030000</gco:CharacterString>
+                </gmd:voice>
+                <gmd:facsimile>
+                  <gco:CharacterString>0295032901</gco:CharacterString>
+                </gmd:facsimile>
+              </gmd:CI_Telephone>
+            </gmd:phone>
+            <gmd:address>
+              <gmd:CI_Address>
+                <gmd:deliveryPoint xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>PL 96 (Vuorimiehentie 5)</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">PL 96 (Vuorimiehentie 5)</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:deliveryPoint>
+                <gmd:city>
+                  <gco:CharacterString>Espoo</gco:CharacterString>
+                </gmd:city>
+                <gmd:postalCode>
+                  <gco:CharacterString>02150</gco:CharacterString>
+                </gmd:postalCode>
+                <gmd:country xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Suomi</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Suomi</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">Finland</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:country>
+                <gmd:electronicMailAddress xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>geodata@gtk.fi</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">geodata@gtk.fi</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">geodata@gtk.fi</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:electronicMailAddress>
+              </gmd:CI_Address>
+            </gmd:address>
+          </gmd:CI_Contact>
+        </gmd:contactInfo>
+        <gmd:role>
+          <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="owner" />
+        </gmd:role>
+      </gmd:CI_ResponsibleParty>
+    </gmd:contact>
+    <gmd:dateStamp>
+      <gco:DateTime>2018-12-04T16:35:06</gco:DateTime>
+    </gmd:dateStamp>
+    <gmd:locale>
+      <gmd:PT_Locale id="EN">
+        <gmd:languageCode>
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+        </gmd:languageCode>
+        <gmd:characterEncoding>
+          <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="8859part15" />
+        </gmd:characterEncoding>
+      </gmd:PT_Locale>
+    </gmd:locale>
+    <gmd:locale>
+      <gmd:PT_Locale id="FI">
+        <gmd:languageCode>
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="fin" />
+        </gmd:languageCode>
+        <gmd:characterEncoding>
+          <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+        </gmd:characterEncoding>
+      </gmd:PT_Locale>
+    </gmd:locale>
+    <gmd:spatialRepresentationInfo>
+      <gmd:MD_VectorSpatialRepresentation>
+        <gmd:topologyLevel>
+          <gmd:MD_TopologyLevelCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_TopologyLevelCode" codeListValue="geometryOnly" />
+        </gmd:topologyLevel>
+      </gmd:MD_VectorSpatialRepresentation>
+    </gmd:spatialRepresentationInfo>
+    <gmd:referenceSystemInfo>
+      <gmd:MD_ReferenceSystem>
+        <gmd:referenceSystemIdentifier>
+          <gmd:RS_Identifier>
+            <gmd:code gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>ETRS89 / ETRS-TM35FIN (EPSG:3067)</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">ETRS89 / ETRS-TM35FIN (EPSG:3067)</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:code>
+            <gmd:codeSpace>
+              <gco:CharacterString>EPSG</gco:CharacterString>
+            </gmd:codeSpace>
+            <gmd:version>
+              <gco:CharacterString>7.4</gco:CharacterString>
+            </gmd:version>
+          </gmd:RS_Identifier>
+        </gmd:referenceSystemIdentifier>
+      </gmd:MD_ReferenceSystem>
+    </gmd:referenceSystemInfo>
+    <gmd:identificationInfo>
+      <gmd:MD_DataIdentification>
+        <gmd:citation>
+          <gmd:CI_Citation>
+            <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Kalliogeokemia</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Kalliogeokemia</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Rock geochemical data of Finland</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:title>
+            <gmd:alternateTitle xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Litogeokemian tietokanta</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Litogeokemian tietokanta</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Litogeokemian tietokanta</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:alternateTitle>
+            <gmd:date>
+              <gmd:CI_Date>
+                <gmd:date>
+                  <gco:Date>2014-01-29</gco:Date>
+                </gmd:date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" />
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+            <gmd:edition>
+              <gco:CharacterString>1.0</gco:CharacterString>
+            </gmd:edition>
+            <gmd:identifier>
+              <gmd:RS_Identifier>
+                <gmd:code>
+                  <gco:CharacterString>1000164</gco:CharacterString>
+                </gmd:code>
+                <gmd:codeSpace>
+                  <gco:CharacterString>FI</gco:CharacterString>
+                </gmd:codeSpace>
+              </gmd:RS_Identifier>
+            </gmd:identifier>
+            <gmd:presentationForm>
+              <gmd:CI_PresentationFormCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_PresentationFormCode" codeListValue="digitalGeographicInfo" />
+            </gmd:presentationForm>
+          </gmd:CI_Citation>
+        </gmd:citation>
+        <gmd:abstract xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Suomen kalliogeokemian tietokannan aineisto kuvaa pää- ja hivenalkuaineiden pitoisuuksia Suomen kallioperässä. Kaikkiaan 6544 näytteestä analysoitiin 57 alkuaineen kokonais- ja osittaispitoisuudet usealla eri menetelmällä (XRF, ICP-MS, ICP-AES, GFAAS). Näytteet otettiin geologikairalla mahdollisimman muuttumattomasta kallioperästä vuosina 1990-1995 ja näytetiheys vaihtelee välillä 1 näyte/30 km2-1 näyte/120 km2. Aineiston kemialliset analyysit suoritettiin vuosina 1992-2001. Analyysitulosten toistettavuus ja analyyttinen tasonvaihtelu arvioitiin 375 toistonäyteparin avulla. Pienin luotettava pitoisuus määritettiin jokaiselle alkuaineelle ja analyysimenetelmälle. Kemiallisten pitoisuuksien lisäksi tietokanta sisältää paikkatiedon ja useita geologisia määreitä jokaiselle näytteelle. Aineisto ja sen käyttöopas on julkaistu vuonna 2007 ja ne ovat saatavilla Geologian tutkimuskeskuksen internetsivujen kautta.</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Suomen kalliogeokemian tietokannan aineisto kuvaa pää- ja hivenalkuaineiden pitoisuuksia Suomen kallioperässä. Kaikkiaan 6544 näytteestä analysoitiin 57 alkuaineen kokonais- ja osittaispitoisuudet usealla eri menetelmällä (XRF, ICP-MS, ICP-AES, GFAAS). Näytteet otettiin geologikairalla mahdollisimman muuttumattomasta kallioperästä vuosina 1990-1995 ja näytetiheys vaihtelee välillä 1 näyte/30 km2-1 näyte/120 km2. Aineiston kemialliset analyysit suoritettiin vuosina 1992-2001. Analyysitulosten toistettavuus ja analyyttinen tasonvaihtelu arvioitiin 375 toistonäyteparin avulla. Pienin luotettava pitoisuus määritettiin jokaiselle alkuaineelle ja analyysimenetelmälle. Kemiallisten pitoisuuksien lisäksi tietokanta sisältää paikkatiedon ja useita geologisia määreitä jokaiselle näytteelle. Aineisto ja sen käyttöopas on julkaistu vuonna 2007 ja ne ovat saatavilla Geologian tutkimuskeskuksen internetsivujen kautta.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">The Rock Geochemical Database of Finland data set describes the concentrations of major and trace elements in the bedrock of Finland. In all, 6544 samples were analysed for the total and partial concentrations of 57 elements using several different methods (XRF, ICP-MS, ICP-AES, GFAAS). The samples were taken during 1990-1995 with a mini-drill from rock that was as unaltered as possible. The sampling density varies between one sample per 30 km2 and one sample per 120 km2. The chemical analyses of the data were performed during 1992-2001. The reproducibility of the analytical results and the analytical drift were estimated using 375 duplicate sample pairs. The lowest reliable concentration was determined for each element and analytical method. In addition to the chemical concentrations, the database contains spatial data and several geological attributes for each sample. The data set and its manual were published in 2007 and they are available via the web site of the Geological Survey of Finland (GTK).</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:abstract>
+        <gmd:purpose xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Aineisto soveltuu käytettäväksi kohteellisissa - alueellisissa geologisissa tutkimuksissa, mm. kivien geneettisessä ja tektonisessa luokittelussa, metallikohtaisten provinssien määrittelyssä, kuoren alkuperän ja kehityksen tutkimuksessa sekä alueellisen moreenigeokemian aineiston tulkinnassa. Aineistoa voidaan käyttää myös tutkimuksissa geologian alan ulkopuolella, mm. lääketieteellisissä ja ympäristöalan tutkimuksissa.
+Näytepisteverkon harvuuden takia aineisto ei sovellu pinta-alaltaan pienten alueiden tutkimukseen.</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Aineisto soveltuu käytettäväksi kohteellisissa - alueellisissa geologisissa tutkimuksissa, mm. kivien geneettisessä ja tektonisessa luokittelussa, metallikohtaisten provinssien määrittelyssä, kuoren alkuperän ja kehityksen tutkimuksessa sekä alueellisen moreenigeokemian aineiston tulkinnassa. Aineistoa voidaan käyttää myös tutkimuksissa geologian alan ulkopuolella, mm. lääketieteellisissä ja ympäristöalan tutkimuksissa.
+Näytepisteverkon harvuuden takia aineisto ei sovellu pinta-alaltaan pienten alueiden tutkimukseen.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">The data is suitable for site specific - regional geological studies: for example in the genetic and tectonic classification of rocks, in determining metallogenic provinces, in studying crustal origin and development and in interpreting regional till geochemical data. The data can also be used outside the field of geological research, for example in the medical sciences and in environmental research.
+Because of the low density of the sample point grid, the material is not suitable for the study of areas with a small surface area.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:purpose>
+        <gmd:status>
+          <gmd:MD_ProgressCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ProgressCode" codeListValue="completed" />
+        </gmd:status>
+        <gmd:pointOfContact>
+          <gmd:CI_ResponsibleParty>
+            <gmd:organisationName xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Geologian tutkimuskeskus</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Geologian tutkimuskeskus</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Geological Survey of Finland</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:organisationName>
+            <gmd:contactInfo>
+              <gmd:CI_Contact>
+                <gmd:phone>
+                  <gmd:CI_Telephone>
+                    <gmd:voice>
+                      <gco:CharacterString>0295030000</gco:CharacterString>
+                    </gmd:voice>
+                    <gmd:facsimile>
+                      <gco:CharacterString>0295032901</gco:CharacterString>
+                    </gmd:facsimile>
+                  </gmd:CI_Telephone>
+                </gmd:phone>
+                <gmd:address>
+                  <gmd:CI_Address>
+                    <gmd:deliveryPoint xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString>PL 96 (Vuorimiehentie 5)</gco:CharacterString>
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#FI">PL 96 (Vuorimiehentie 5)</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#EN">PL 96 (Vuorimiehentie 5)</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:deliveryPoint>
+                    <gmd:city>
+                      <gco:CharacterString>Espoo</gco:CharacterString>
+                    </gmd:city>
+                    <gmd:postalCode>
+                      <gco:CharacterString>02150</gco:CharacterString>
+                    </gmd:postalCode>
+                    <gmd:country xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString>Suomi</gco:CharacterString>
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#FI">Suomi</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#EN">Finland</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:country>
+                    <gmd:electronicMailAddress xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString>geodata@gtk.fi</gco:CharacterString>
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#FI">geodata@gtk.fi</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:electronicMailAddress>
+                  </gmd:CI_Address>
+                </gmd:address>
+              </gmd:CI_Contact>
+            </gmd:contactInfo>
+            <gmd:role>
+              <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="owner" />
+            </gmd:role>
+          </gmd:CI_ResponsibleParty>
+        </gmd:pointOfContact>
+        <gmd:resourceMaintenance>
+          <gmd:MD_MaintenanceInformation>
+            <gmd:maintenanceAndUpdateFrequency>
+              <gmd:MD_MaintenanceFrequencyCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_MaintenanceFrequencyCode" codeListValue="notPlanned" />
+            </gmd:maintenanceAndUpdateFrequency>
+          </gmd:MD_MaintenanceInformation>
+        </gmd:resourceMaintenance>
+        <gmd:graphicOverview>
+          <gmd:MD_BrowseGraphic>
+            <gmd:fileName>
+              <gco:CharacterString>http://www.paikkatietohakemisto.fi/geonetwork/srv/api/records/db8a66fa-e319-4c50-92e8-924db7693838/attachments/litpgeokemia_s.png</gco:CharacterString>
+            </gmd:fileName>
+            <gmd:fileDescription xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>thumbnail</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">thumbnail</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:fileDescription>
+          </gmd:MD_BrowseGraphic>
+        </gmd:graphicOverview>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Geokemia</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Geokemia</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Geochemistry</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Kallioperä</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Kallioperä</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Bedrock</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Tietokannat</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Tietokannat</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Data bases</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="discipline" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Geosanasto</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Geosanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">Geosanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2015-01-09</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="revision" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Suomi</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Suomi</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Finland</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="place" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Geosanasto</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Geosanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">Geosanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2015-01-09</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="revision" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Arkeeinen</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Arkeeinen</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Archaean</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Proterotsooinen</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Proterotsooinen</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Proterozoic</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Paleotsooinen</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Paleotsooinen</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Paleozoic</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="temporal" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Geosanasto</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Geosanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">Geosanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2015-01-09</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="revision" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Geokemia</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Geokemia</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Geochemistry</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeListValue="theme" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Geosanasto</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Geosanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">Geosanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2015-01-09</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeListValue="revision" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Geologia</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Geologia</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Geology</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>GEMET - INSPIRE themes, version 1.0</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">GEMET - INSPIRE themes, version 1.0</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2008-06-01</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+                <gmd:identifier>
+                  <gmd:MD_Identifier>
+                    <gmd:code>
+                      <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.inspire-theme">geonetwork.thesaurus.external.theme.inspire-theme</gmx:Anchor>
+                    </gmd:code>
+                  </gmd:MD_Identifier>
+                </gmd:identifier>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>avoindata.fi</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">avoindata.fi</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">avoindata.fi</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Paikkatietohakemiston asiasanasto</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Paikkatietohakemiston asiasanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2010-02-03</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+                <gmd:identifier>
+                  <gmd:MD_Identifier>
+                    <gmd:code>
+                      <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.asiasanasto">geonetwork.thesaurus.external.theme.asiasanasto</gmx:Anchor>
+                    </gmd:code>
+                  </gmd:MD_Identifier>
+                </gmd:identifier>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:resourceConstraints>
+          <gmd:MD_Constraints>
+            <gmd:useLimitation xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Aineisto ei sovellu yksittäisten näytepisteiden perusteella tehtäviin johtopäätöksiin. Johtuen näytepisteverkoston harvuudesta, pienten alueiden näytepistemäärät saattavat jäädä liian pieniksi luotettavien johtopäätösten tekemistä ajatellen.</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Aineisto ei sovellu yksittäisten näytepisteiden perusteella tehtäviin johtopäätöksiin. Johtuen näytepisteverkoston harvuudesta, pienten alueiden näytepistemäärät saattavat jäädä liian pieniksi luotettavien johtopäätösten tekemistä ajatellen.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">The data is not suitable for making conclusions on the basis of a single sample point. Because of the low density of the sample point grid, the number of sample points in small areas may remain too small to make any reliable conclusions.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:useLimitation>
+          </gmd:MD_Constraints>
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints>
+          <gmd:MD_LegalConstraints>
+            <gmd:useLimitation xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>http://tupa.gtk.fi/paikkatieto/lisenssi/gtk_avoin_lisenssi_2.pdf</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">http://tupa.gtk.fi/paikkatieto/lisenssi/gtk_avoin_lisenssi_2.pdf</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">http://tupa.gtk.fi/paikkatieto/lisenssi/gtk_open_licence_2.pdf</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:useLimitation>
+            <gmd:accessConstraints>
+              <gmd:MD_RestrictionCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode" codeListValue="license" />
+            </gmd:accessConstraints>
+            <gmd:useConstraints>
+              <gmd:MD_RestrictionCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode" codeListValue="copyright" />
+            </gmd:useConstraints>
+          </gmd:MD_LegalConstraints>
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints>
+          <gmd:MD_SecurityConstraints>
+            <gmd:classification>
+              <gmd:MD_ClassificationCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ClassificationCode" codeListValue="unclassified" />
+            </gmd:classification>
+          </gmd:MD_SecurityConstraints>
+        </gmd:resourceConstraints>
+        <gmd:language>
+          <gco:CharacterString>fin</gco:CharacterString>
+        </gmd:language>
+        <gmd:characterSet>
+          <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="8859part15" />
+        </gmd:characterSet>
+        <gmd:topicCategory>
+          <gmd:MD_TopicCategoryCode>geoscientificInformation</gmd:MD_TopicCategoryCode>
+        </gmd:topicCategory>
+        <gmd:environmentDescription xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Kallionäytteet otettiin geologikairalla. Näytteet käsiteltiin ja analysoitiin geologian tutkimuskeskuksen kemian laboratoriossa standardimenetelmillä. Murskaus suoritettiin rauta-mangaani-leukamurskaimella. Ositus tehtiin rännijakolaitteella ja jauhatus rengasmyllyllä volframikarbidi- ja hiiliteräsastiassa. Kemialliset analyysit tehtiin XRF-, ICP-AES-, GFAAS- ja ICP-MS-laitteistoilla sekä hiilianalysaattorilla. Aineiston tilastollinen käsittely toistettavuuden ja pienimmän luotettavan konsentraation määrittämiseksi suoritettiin Systat-tilasto-ohjelmistolla.</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">The rock samples were taken with a mini-drill and were processed and analysed using standard methods in the geochemical laboratory of Geological Survey of Finland (GTK). Crushing was carried out with an iron-manganese jaw crusher. The crushed samples were divided using a riffle splitter and then pulverised in a ring mill in tungsten carbide and carbon steel bowls. Chemical analyses were performed with XRF, ICP-AES, GFAAS and ICP-MS equipment as well as with a carbon analyser. Statistical processing of the data for the determination of reproducibility and the lowest reliable concentration was performed with SYSTAT statistical software.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Kallionäytteet otettiin geologikairalla. Näytteet käsiteltiin ja analysoitiin geologian tutkimuskeskuksen kemian laboratoriossa standardimenetelmillä. Murskaus suoritettiin rauta-mangaani-leukamurskaimella. Ositus tehtiin rännijakolaitteella ja jauhatus rengasmyllyllä volframikarbidi- ja hiiliteräsastiassa. Kemialliset analyysit tehtiin XRF-, ICP-AES-, GFAAS- ja ICP-MS-laitteistoilla sekä hiilianalysaattorilla. Aineiston tilastollinen käsittely toistettavuuden ja pienimmän luotettavan konsentraation määrittämiseksi suoritettiin Systat-tilasto-ohjelmistolla.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:environmentDescription>
+        <gmd:extent>
+          <gmd:EX_Extent>
+            <gmd:geographicElement>
+              <gmd:EX_GeographicBoundingBox>
+                <gmd:westBoundLongitude>
+                  <gco:Decimal>19.08886999</gco:Decimal>
+                </gmd:westBoundLongitude>
+                <gmd:eastBoundLongitude>
+                  <gco:Decimal>31.58671339</gco:Decimal>
+                </gmd:eastBoundLongitude>
+                <gmd:southBoundLatitude>
+                  <gco:Decimal>59.7</gco:Decimal>
+                </gmd:southBoundLatitude>
+                <gmd:northBoundLatitude>
+                  <gco:Decimal>70.09229321</gco:Decimal>
+                </gmd:northBoundLatitude>
+              </gmd:EX_GeographicBoundingBox>
+            </gmd:geographicElement>
+            <gmd:temporalElement xmlns:gn="http://www.fao.org/geonetwork" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <gmd:EX_TemporalExtent>
+                <gmd:extent>
+                  <gml:TimePeriod gml:id="d214360e870a1052958">
+                    <gml:beginPosition>1990-01-01T00:00:00</gml:beginPosition>
+                    <gml:endPosition>1995-01-01T00:00:00</gml:endPosition>
+                  </gml:TimePeriod>
+                </gmd:extent>
+              </gmd:EX_TemporalExtent>
+            </gmd:temporalElement>
+          </gmd:EX_Extent>
+        </gmd:extent>
+      </gmd:MD_DataIdentification>
+    </gmd:identificationInfo>
+    <gmd:distributionInfo xmlns:date="http://exslt.org/dates-and-times" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:srv="http://www.isotc211.org/2005/srv">
+      <gmd:MD_Distribution>
+        <gmd:distributionFormat>
+          <gmd:MD_Format>
+            <gmd:name xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>ESRI file gdb</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">ESRI file gdb</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">ESRI file gdb</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:name>
+            <gmd:version>
+              <gco:CharacterString>10.1</gco:CharacterString>
+            </gmd:version>
+            <gmd:specification gco:nilReason="missing">
+              <gco:CharacterString />
+            </gmd:specification>
+          </gmd:MD_Format>
+        </gmd:distributionFormat>
+        <gmd:distributionFormat>
+          <gmd:MD_Format>
+            <gmd:name xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>MS_excel</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">MS_excel</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">MS_excel</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:name>
+            <gmd:version>
+              <gco:CharacterString>Microsoft Office Excel 97-2003</gco:CharacterString>
+            </gmd:version>
+            <gmd:specification gco:nilReason="missing">
+              <gco:CharacterString />
+            </gmd:specification>
+          </gmd:MD_Format>
+        </gmd:distributionFormat>
+        <gmd:transferOptions>
+          <gmd:MD_DigitalTransferOptions>
+            <gmd:onLine>
+              <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                  <gmd:URL>http://hakku.gtk.fi/fi/locations/search?location_id=4</gmd:URL>
+                </gmd:linkage>
+                <gmd:protocol>
+                  <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                </gmd:protocol>
+                <gmd:name gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString />
+                </gmd:name>
+              </gmd:CI_OnlineResource>
+            </gmd:onLine>
+          </gmd:MD_DigitalTransferOptions>
+        </gmd:transferOptions>
+      </gmd:MD_Distribution>
+    </gmd:distributionInfo>
+    <gmd:dataQualityInfo>
+      <gmd:DQ_DataQuality>
+        <gmd:scope>
+          <gmd:DQ_Scope>
+            <gmd:level>
+              <gmd:MD_ScopeCode codeListValue="dataset" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" />
+            </gmd:level>
+          </gmd:DQ_Scope>
+        </gmd:scope>
+        <gmd:report>
+          <gmd:DQ_DomainConsistency>
+            <gmd:result>
+              <gmd:DQ_ConformanceResult>
+                <gmd:specification>
+                  <gmd:CI_Citation>
+                    <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString>Data Specification on Geology - Technical Guidelines</gco:CharacterString>
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#FI">Data Specification on Geology - Technical Guidelines</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#EN">Data Specification on Geology - Technical Guidelines</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:title>
+                    <gmd:date>
+                      <gmd:CI_Date>
+                        <gmd:date>
+                          <gco:Date>2013-12-10</gco:Date>
+                        </gmd:date>
+                        <gmd:dateType>
+                          <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                        </gmd:dateType>
+                      </gmd:CI_Date>
+                    </gmd:date>
+                  </gmd:CI_Citation>
+                </gmd:specification>
+                <gmd:explanation xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Ei sääntöjen mukainen</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Ei sääntöjen mukainen</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">Ei sääntöjen mukainen</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:explanation>
+                <gmd:pass>
+                  <gco:Boolean>false</gco:Boolean>
+                </gmd:pass>
+              </gmd:DQ_ConformanceResult>
+            </gmd:result>
+          </gmd:DQ_DomainConsistency>
+        </gmd:report>
+        <gmd:lineage>
+          <gmd:LI_Lineage>
+            <gmd:statement xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Suomen kalliogeokemian aineiston näytteenotossa käytettiin paikannuksessa apuna 1:50 000-mittakaavaisia karttoja. Tietoaineistoon tallennetut koordinaatit on mitattu kenttäkartoille merkityistä näytepisteistä. Muut tiedot perustuvat geologisiin kenttähavaintoihin ja näytteistä tehtyihin kemiallisiin analyyseihin. 
+Näytteenotto ja kemiallinen analytiikka on kuvattu yksityiskohtaisesti Geologian tutkimuskeskuksen tutkimusraportissa 164. 
+Näytteenotto suoritettiin vuosina 1990 - 1995. Näytteenoton suunnittelussa huomioitiin geologisilla kartoilla näkyvä litologinen vaihtelu siten, että alueen näytepisteiden määrä riippui alueella olevien kivilajiyksiköiden lukumäärästä. Näytetiheys vaihtelee välillä 1 näyte/30 km2-1 näyte/120 km2. Geologit valitsivat alustavat näytteenottopaikat 1:100 0000 -mittakaavaisten geologisten karttojen perusteella. Jos 1:100 000 mittakaavan karttaa ei ollut saatavilla, käytettiin 1:400 000 -mittakaavaista karttaa. Näytteenoton suoritti 16 kahden hengen ryhmää, joista jokaiseen kuului geologian opiskelija ja kenttäassistentti. Edustavin näytteenottopaikka etsittiin esivalitulta alueelta. Usein jouduttiin kuorimaan sammalta parhaan näytteenotto- ja havainnointipaikan paljastamiseksi. Suositeltu paljastumakoko oli 10 m2, mutta 40 % näytteistä jouduttiin ottamaan pienemmistä paljastumista. Näytteenottopaljastumien mediaanikoko oli 10 m2 ja kvartiiliväli (25 %-75 %) 6 m2 -30 m2. Selkeä ja homogeeninen litologinen yksikkö valittiin näytteenoton kohteeksi. Noin joka 17 kohteelta otettiin normaalin näytteen lisäksi toistonäyte.
+Näytteet otettiin kannettavalla geologikairalla. Kairansydännäytteet olivat 15 cm-25 cm pitkiä ja läpimitaltaan 2,5 cm. Näkyvästi rapautuneet osat poistettiin näytteistä. Kontaminaation välttämiseksi uusilla poranterillä kairattiin ensin puhtaaseen juonikvartsiin.
+Kukin näyte koostuu 4-6 osanäytteestä, riippuen kyseisen yksikön heterogeenisuudesta ja raekoosta. Kerroksellisissa ja raitaisissa kivissä, joissa kerrosten tai raitojen paksuus oli yli 5 cm, näytteet otettiin yhdestä raidasta tai kerroksesta. Muussa tapauksessa näytteet otettiin useasta raidasta tai kerroksesta. Kemiallista analyysiä varten otettujen näytteiden lisäksi jokaisesta näytteenottopisteestä otettiin yksi suunnattu kairansydännäyte referenssimateriaaliksi.
+Näytteenottoryhmän vetäjä täytti kenttähavaintolomakkeen jokaisesta näytteenottokohteesta. Lomakkeeseen merkittiin kivilajit ja niiden ikäsuhteet, petrograafiset, tekstuuri- ja rakennepiirteet, deformaatio, migmatisaatio ja muuttuminen. Paljastuman geologinen kartta luonnosteltiin havaintolomakkeen kääntöpuolelle ja osanäytteiden näytepisteet merkittiin siihen. Osa näytteenottokohteista valokuvattiin. Hankkeen johdossa olevat geologit suorittivat maastokäyntejä synkronoidakseen eri näytteenottoryhmien havaintoja.
+Näytteiden esikäsittely ja kemiallinen analysointi suoritettiin Geologian tutkimuskeskuksen kemian laboratoriossa vuosina 1992-2001. Näytteet murskattiin &lt; 5 mm raekokoon rauta-mangaani-leukamurskaimella. Murske ositettiin kolmeen osaan rännijakolaitteella/kahtiointilaitteella ja yksi osa varastoitiin. Kahdesta jäljelle jääneestä osasta erotettiin kustakin rännijakolaitteella n. 200 g jauhettavaksi rengasmyllyllä &lt; 60 µm raekokoon. Toinen osa jauhettiin hiiliteräsastiassa, toinen volframikarbidiastiassa. Jauheet säilöttiin muovipurkkeihin. Niistä kohteista, joista oli otettu kentällä toistonäyte, tehtiin myös laboratoriossa toistonäyte.
+Näytteet analysoitiin usealla eri menetelmällä: XRF, ICP-AES, GFAAS, ICP-MS. Hiilipitoisuus mitattiin hiilianalysaattorilla ja fluoripitoisuus potentiometrisesti. XRF-, hiili- ja fluorianalyyseissä käytettiin volframikarbidiastiassa jauhettua näytemateriaalia ja muissa analyyseissä hiiliteräsastiassa jauhettua materiaalia.
+Jokaisen alkuaineen analyysituloksille laskettiin toistettavuus ja pienin luotettava konsentraatio käyttämällä 375 laboratoriotoistonäytettä. Toistettavuus määritettiin 95 % luotettavuustasolla käyttäen (normaali näyte, laboratoriotoistonäyte) -näytepareja. Pienin luotettava konsentraatio määritettiin samojen näyteparien avulla.</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Suomen kalliogeokemian aineiston näytteenotossa käytettiin paikannuksessa apuna 1:50 000-mittakaavaisia karttoja. Tietoaineistoon tallennetut koordinaatit on mitattu kenttäkartoille merkityistä näytepisteistä. Muut tiedot perustuvat geologisiin kenttähavaintoihin ja näytteistä tehtyihin kemiallisiin analyyseihin. 
+Näytteenotto ja kemiallinen analytiikka on kuvattu yksityiskohtaisesti Geologian tutkimuskeskuksen tutkimusraportissa 164. 
+Näytteenotto suoritettiin vuosina 1990 - 1995. Näytteenoton suunnittelussa huomioitiin geologisilla kartoilla näkyvä litologinen vaihtelu siten, että alueen näytepisteiden määrä riippui alueella olevien kivilajiyksiköiden lukumäärästä. Näytetiheys vaihtelee välillä 1 näyte/30 km2-1 näyte/120 km2. Geologit valitsivat alustavat näytteenottopaikat 1:100 0000 -mittakaavaisten geologisten karttojen perusteella. Jos 1:100 000 mittakaavan karttaa ei ollut saatavilla, käytettiin 1:400 000 -mittakaavaista karttaa. Näytteenoton suoritti 16 kahden hengen ryhmää, joista jokaiseen kuului geologian opiskelija ja kenttäassistentti. Edustavin näytteenottopaikka etsittiin esivalitulta alueelta. Usein jouduttiin kuorimaan sammalta parhaan näytteenotto- ja havainnointipaikan paljastamiseksi. Suositeltu paljastumakoko oli 10 m2, mutta 40 % näytteistä jouduttiin ottamaan pienemmistä paljastumista. Näytteenottopaljastumien mediaanikoko oli 10 m2 ja kvartiiliväli (25 %-75 %) 6 m2 -30 m2. Selkeä ja homogeeninen litologinen yksikkö valittiin näytteenoton kohteeksi. Noin joka 17 kohteelta otettiin normaalin näytteen lisäksi toistonäyte.
+Näytteet otettiin kannettavalla geologikairalla. Kairansydännäytteet olivat 15 cm-25 cm pitkiä ja läpimitaltaan 2,5 cm. Näkyvästi rapautuneet osat poistettiin näytteistä. Kontaminaation välttämiseksi uusilla poranterillä kairattiin ensin puhtaaseen juonikvartsiin.
+Kukin näyte koostuu 4-6 osanäytteestä, riippuen kyseisen yksikön heterogeenisuudesta ja raekoosta. Kerroksellisissa ja raitaisissa kivissä, joissa kerrosten tai raitojen paksuus oli yli 5 cm, näytteet otettiin yhdestä raidasta tai kerroksesta. Muussa tapauksessa näytteet otettiin useasta raidasta tai kerroksesta. Kemiallista analyysiä varten otettujen näytteiden lisäksi jokaisesta näytteenottopisteestä otettiin yksi suunnattu kairansydännäyte referenssimateriaaliksi.
+Näytteenottoryhmän vetäjä täytti kenttähavaintolomakkeen jokaisesta näytteenottokohteesta. Lomakkeeseen merkittiin kivilajit ja niiden ikäsuhteet, petrograafiset, tekstuuri- ja rakennepiirteet, deformaatio, migmatisaatio ja muuttuminen. Paljastuman geologinen kartta luonnosteltiin havaintolomakkeen kääntöpuolelle ja osanäytteiden näytepisteet merkittiin siihen. Osa näytteenottokohteista valokuvattiin. Hankkeen johdossa olevat geologit suorittivat maastokäyntejä synkronoidakseen eri näytteenottoryhmien havaintoja.
+Näytteiden esikäsittely ja kemiallinen analysointi suoritettiin Geologian tutkimuskeskuksen kemian laboratoriossa vuosina 1992-2001. Näytteet murskattiin &lt; 5 mm raekokoon rauta-mangaani-leukamurskaimella. Murske ositettiin kolmeen osaan rännijakolaitteella/kahtiointilaitteella ja yksi osa varastoitiin. Kahdesta jäljelle jääneestä osasta erotettiin kustakin rännijakolaitteella n. 200 g jauhettavaksi rengasmyllyllä &lt; 60 µm raekokoon. Toinen osa jauhettiin hiiliteräsastiassa, toinen volframikarbidiastiassa. Jauheet säilöttiin muovipurkkeihin. Niistä kohteista, joista oli otettu kentällä toistonäyte, tehtiin myös laboratoriossa toistonäyte.
+Näytteet analysoitiin usealla eri menetelmällä: XRF, ICP-AES, GFAAS, ICP-MS. Hiilipitoisuus mitattiin hiilianalysaattorilla ja fluoripitoisuus potentiometrisesti. XRF-, hiili- ja fluorianalyyseissä käytettiin volframikarbidiastiassa jauhettua näytemateriaalia ja muissa analyyseissä hiiliteräsastiassa jauhettua materiaalia.
+Jokaisen alkuaineen analyysituloksille laskettiin toistettavuus ja pienin luotettava konsentraatio käyttämällä 375 laboratoriotoistonäytettä. Toistettavuus määritettiin 95 % luotettavuustasolla käyttäen (normaali näyte, laboratoriotoistonäyte) -näytepareja. Pienin luotettava konsentraatio määritettiin samojen näyteparien avulla.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">In sampling the Finnish rock geochemical data, maps at a scale of 1:50 000 were used in establishing location. Coordinates stored in the data set have been measured for sample points marked on field maps. Other information is based on geological field observations and on chemical analyses performed on samples.
+Sampling and chemical analysis methods have been described in detail in the Geological Survey of Finland Report of Investigation 164. 
+The sampling was performed during 1990-1995. In planning sampling, the lithological variation displayed on geological maps was taken into account such that the amount of sample points in an area depended on the number of lithological units in an area. The sampling density varies between one sample per 30 km2 and one sample per 120 km2. Geologists chose the preliminary sampling sites on the basis of geological maps at a scale of 1:100 000. If a map at a scale of 1:100 000 was not available, a map at a scale of 1:400 000 was used. Sampling was performed by 16 two-person teams, each consisting of a geological student and a field assistant. The most representative sampling site was sought from a pre-selected area. Often it was necessary to clear moss to expose the best sampling and observation site. The recommended outcrop size was 10 m2 but it was necessary to take 40 % of the samples from smaller outcrops. The median size of the outcrops sampled was 10 m2 and the interquartile range (25%-75%) was 6-30 m2. A distinct and homogeneous lithological unit was chosen as a sampling site. A duplicate sample was taken from approximately every 17th locality in addition to a normal sample.
+The samples were taken with a portable mini-drill. Drill core samples were 15-25 cm long and 2.5 cm in diameter. Visibly weathered parts of the samples were removed. To avoid contamination, new drill bits were first drilled into pure quartz vein.
+Each sample consists of four to six subsamples, depending on the heterogeneity and grain size of the unit in question. In layered or banded rocks in which such features were over 5 cm in thickness, samples were taken from a single band or layer. In other cases, samples were taken from several bands or layers. In addition to the samples taken for chemical analysis, one orientated drill core was collected from each sampling point as reference material.
+The sampling team leader filled in a field observation form for each sampling site. Lithologies and their age relationships, petrographic, textural and structural features, deformation, migmatisation and alteration were recorded on the form. A geological map of the outcrop with the subsample points marked was sketched on the reverse side of the observation form. Some of the sampling sites were photographed. The geologists in charge of the project carried out field visits to synchronise the observations made by different sampling teams.
+Sample pre-processing and chemical analyses were performed at the geochemical laboratory of the Geological Survey of Finland (GTK) between 1992 and 2001. The samples were crushed to a grain size less than five millimetres using an iron-manganese jaw crusher. The crushed sample was split into three portions with a riffle splitter and one of these was stored. About 200 g was separated, again using a riffle splitter, from each of the remaining portions for pulverisation to a grain size of &lt; 60 µm with a ring mill. One 200 g portion was pulverised in a carbon steel bowl and the other in a tungsten carbide bowl. The powders were stored in plastic vials. In the laboratory a duplicate sample was also prepared for those sites from which a field duplicate sample had been taken.
+The samples were analysed with several different methods (XRF, ICP-MS, ICP-AES, GFAAS). Total carbon was measured with a carbon analyser and total fluorine was determined potentiometrically. The sample material that had been pulverised in a tungsten carbide bowl was used in XRF, carbon and fluorine analyses and the material powdered in a carbon steel bowl was used in the other determinations.
+Reproducibility and the lowest reliable concentration were calculated for each of the analytical results using 375 laboratory duplicate samples. Reproducibility at a confidence level of 95 % was determined using paired normal and laboratory duplicate samples. The lowest reliable concentration was determined with the same sample pairs.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:statement>
+            <gmd:processStep>
+              <gmd:LI_ProcessStep>
+                <gmd:description xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Näytteenotto ja kemiallinen analytiikka on kuvattu yksityiskohtaisesti Geologian tutkimuskeskuksen tutkimusraportissa 164. 
+Näytteenotto suoritettiin vuosina 1990 - 1995. Näytteenoton suunnittelussa huomioitiin geologisilla kartoilla näkyvä litologinen vaihtelu siten, että alueen näytepisteiden määrä riippui alueella olevien kivilajiyksiköiden lukumäärästä. Näytetiheys vaihtelee välillä 1 näyte/30 km2-1 näyte/120 km2. Geologit valitsivat alustavat näytteenottopaikat 1:100 0000 -mittakaavaisten geologisten karttojen perusteella. Jos 1:100 000 mittakaavan karttaa ei ollut saatavilla, käytettiin 1:400 000 -mittakaavaista karttaa. Näytteenoton suoritti 16 kahden hengen ryhmää, joista jokaiseen kuului geologian opiskelija ja kenttäassistentti. Edustavin näytteenottopaikka etsittiin esivalitulta alueelta. Usein jouduttiin kuorimaan sammalta parhaan näytteenotto- ja havainnointipaikan paljastamiseksi. Suositeltu paljastumakoko oli 10 m2, mutta 40 % näytteistä jouduttiin ottamaan pienemmistä paljastumista. Näytteenottopaljastumien mediaanikoko oli 10 m2 ja kvartiiliväli (25 %-75 %) 6 m2 -30 m2. Selkeä ja homogeeninen litologinen yksikkö valittiin näytteenoton kohteeksi. Noin joka 17 kohteelta otettiin normaalin näytteen lisäksi toistonäyte.
+Näytteet otettiin kannettavalla geologikairalla. Kairansydännäytteet olivat 15 cm-25 cm pitkiä ja läpimitaltaan 2,5 cm. Näkyvästi rapautuneet osat poistettiin näytteistä. Kontaminaation välttämiseksi uusilla poranterillä kairattiin ensin puhtaaseen juonikvartsiin.
+Kukin näyte koostuu 4-6 osanäytteestä, riippuen kyseisen yksikön heterogeenisuudesta ja raekoosta. Kerroksellisissa ja raitaisissa kivissä, joissa kerrosten tai raitojen paksuus oli yli 5 cm, näytteet otettiin yhdestä raidasta tai kerroksesta. Muussa tapauksessa näytteet otettiin useasta raidasta tai kerroksesta. Kemiallista analyysiä varten otettujen näytteiden lisäksi jokaisesta näytteenottopisteestä otettiin yksi suunnattu kairansydännäyte referenssimateriaaliksi.
+Näytteenottoryhmän vetäjä täytti kenttähavaintolomakkeen jokaisesta näytteenottokohteesta. Lomakkeeseen merkittiin kivilajit ja niiden ikäsuhteet, petrograafiset, tekstuuri- ja rakennepiirteet, deformaatio, migmatisaatio ja muuttuminen. Paljastuman geologinen kartta luonnosteltiin havaintolomakkeen kääntöpuolelle ja osanäytteiden näytepisteet merkittiin siihen. Osa näytteenottokohteista valokuvattiin. Hankkeen johdossa olevat geologit suorittivat maastokäyntejä synkronoidakseen eri näytteenottoryhmien havaintoja.
+Näytteiden esikäsittely ja kemiallinen analysointi suoritettiin Geologian tutkimuskeskuksen kemian laboratoriossa vuosina 1992-2001. Näytteet murskattiin &lt; 5 mm raekokoon rauta-mangaani-leukamurskaimella. Murske ositettiin kolmeen osaan rännijakolaitteella/kahtiointilaitteella ja yksi osa varastoitiin. Kahdesta jäljelle jääneestä osasta erotettiin kustakin rännijakolaitteella n. 200 g jauhettavaksi rengasmyllyllä &lt; 60 µm raekokoon. Toinen osa jauhettiin hiiliteräsastiassa, toinen volframikarbidiastiassa. Jauheet säilöttiin muovipurkkeihin. Niistä kohteista, joista oli otettu kentällä toistonäyte, tehtiin myös laboratoriossa toistonäyte.
+Näytteet analysoitiin usealla eri menetelmällä: XRF, ICP-AES, GFAAS, ICP-MS. Hiilipitoisuus mitattiin hiilianalysaattorilla ja fluoripitoisuus potentiometrisesti. XRF-, hiili- ja fluorianalyyseissä käytettiin volframikarbidiastiassa jauhettua näytemateriaalia ja muissa analyyseissä hiiliteräsastiassa jauhettua materiaalia.
+Jokaisen alkuaineen analyysituloksille laskettiin toistettavuus ja pienin luotettava konsentraatio käyttämällä 375 laboratoriotoistonäytettä. Toistettavuus määritettiin 95 % luotettavuustasolla käyttäen (normaali näyte, laboratoriotoistonäyte) -näytepareja. Pienin luotettava konsentraatio määritettiin samojen näyteparien avulla.
+Kallionäytteet otettiin geologikairalla. Näytteet käsiteltiin ja analysoitiin geologian tutkimuskeskuksen kemian laboratoriossa standardimenetelmillä. Murskaus suoritettiin rauta-mangaani-leukamurskaimella. Ositus tehtiin rännijakolaitteella ja jauhatus rengasmyllyllä volframikarbidi- ja hiiliteräsastiassa. Kemialliset analyysit tehtiin XRF-, ICP-AES-, GFAAS- ja ICP-MS-laitteistoilla sekä hiilianalysaattorilla. Aineiston tilastollinen käsittely toistettavuuden ja pienimmän luotettavan konsentraation määrittämiseksi suoritettiin Systat-tilasto-ohjelmistolla.</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Näytteenotto ja kemiallinen analytiikka on kuvattu yksityiskohtaisesti Geologian tutkimuskeskuksen tutkimusraportissa 164. 
+Näytteenotto suoritettiin vuosina 1990 - 1995. Näytteenoton suunnittelussa huomioitiin geologisilla kartoilla näkyvä litologinen vaihtelu siten, että alueen näytepisteiden määrä riippui alueella olevien kivilajiyksiköiden lukumäärästä. Näytetiheys vaihtelee välillä 1 näyte/30 km2-1 näyte/120 km2. Geologit valitsivat alustavat näytteenottopaikat 1:100 0000 -mittakaavaisten geologisten karttojen perusteella. Jos 1:100 000 mittakaavan karttaa ei ollut saatavilla, käytettiin 1:400 000 -mittakaavaista karttaa. Näytteenoton suoritti 16 kahden hengen ryhmää, joista jokaiseen kuului geologian opiskelija ja kenttäassistentti. Edustavin näytteenottopaikka etsittiin esivalitulta alueelta. Usein jouduttiin kuorimaan sammalta parhaan näytteenotto- ja havainnointipaikan paljastamiseksi. Suositeltu paljastumakoko oli 10 m2, mutta 40 % näytteistä jouduttiin ottamaan pienemmistä paljastumista. Näytteenottopaljastumien mediaanikoko oli 10 m2 ja kvartiiliväli (25 %-75 %) 6 m2 -30 m2. Selkeä ja homogeeninen litologinen yksikkö valittiin näytteenoton kohteeksi. Noin joka 17 kohteelta otettiin normaalin näytteen lisäksi toistonäyte.
+Näytteet otettiin kannettavalla geologikairalla. Kairansydännäytteet olivat 15 cm-25 cm pitkiä ja läpimitaltaan 2,5 cm. Näkyvästi rapautuneet osat poistettiin näytteistä. Kontaminaation välttämiseksi uusilla poranterillä kairattiin ensin puhtaaseen juonikvartsiin.
+Kukin näyte koostuu 4-6 osanäytteestä, riippuen kyseisen yksikön heterogeenisuudesta ja raekoosta. Kerroksellisissa ja raitaisissa kivissä, joissa kerrosten tai raitojen paksuus oli yli 5 cm, näytteet otettiin yhdestä raidasta tai kerroksesta. Muussa tapauksessa näytteet otettiin useasta raidasta tai kerroksesta. Kemiallista analyysiä varten otettujen näytteiden lisäksi jokaisesta näytteenottopisteestä otettiin yksi suunnattu kairansydännäyte referenssimateriaaliksi.
+Näytteenottoryhmän vetäjä täytti kenttähavaintolomakkeen jokaisesta näytteenottokohteesta. Lomakkeeseen merkittiin kivilajit ja niiden ikäsuhteet, petrograafiset, tekstuuri- ja rakennepiirteet, deformaatio, migmatisaatio ja muuttuminen. Paljastuman geologinen kartta luonnosteltiin havaintolomakkeen kääntöpuolelle ja osanäytteiden näytepisteet merkittiin siihen. Osa näytteenottokohteista valokuvattiin. Hankkeen johdossa olevat geologit suorittivat maastokäyntejä synkronoidakseen eri näytteenottoryhmien havaintoja.
+Näytteiden esikäsittely ja kemiallinen analysointi suoritettiin Geologian tutkimuskeskuksen kemian laboratoriossa vuosina 1992-2001. Näytteet murskattiin &lt; 5 mm raekokoon rauta-mangaani-leukamurskaimella. Murske ositettiin kolmeen osaan rännijakolaitteella/kahtiointilaitteella ja yksi osa varastoitiin. Kahdesta jäljelle jääneestä osasta erotettiin kustakin rännijakolaitteella n. 200 g jauhettavaksi rengasmyllyllä &lt; 60 µm raekokoon. Toinen osa jauhettiin hiiliteräsastiassa, toinen volframikarbidiastiassa. Jauheet säilöttiin muovipurkkeihin. Niistä kohteista, joista oli otettu kentällä toistonäyte, tehtiin myös laboratoriossa toistonäyte.
+Näytteet analysoitiin usealla eri menetelmällä: XRF, ICP-AES, GFAAS, ICP-MS. Hiilipitoisuus mitattiin hiilianalysaattorilla ja fluoripitoisuus potentiometrisesti. XRF-, hiili- ja fluorianalyyseissä käytettiin volframikarbidiastiassa jauhettua näytemateriaalia ja muissa analyyseissä hiiliteräsastiassa jauhettua materiaalia.
+Jokaisen alkuaineen analyysituloksille laskettiin toistettavuus ja pienin luotettava konsentraatio käyttämällä 375 laboratoriotoistonäytettä. Toistettavuus määritettiin 95 % luotettavuustasolla käyttäen (normaali näyte, laboratoriotoistonäyte) -näytepareja. Pienin luotettava konsentraatio määritettiin samojen näyteparien avulla.
+Kallionäytteet otettiin geologikairalla. Näytteet käsiteltiin ja analysoitiin geologian tutkimuskeskuksen kemian laboratoriossa standardimenetelmillä. Murskaus suoritettiin rauta-mangaani-leukamurskaimella. Ositus tehtiin rännijakolaitteella ja jauhatus rengasmyllyllä volframikarbidi- ja hiiliteräsastiassa. Kemialliset analyysit tehtiin XRF-, ICP-AES-, GFAAS- ja ICP-MS-laitteistoilla sekä hiilianalysaattorilla. Aineiston tilastollinen käsittely toistettavuuden ja pienimmän luotettavan konsentraation määrittämiseksi suoritettiin Systat-tilasto-ohjelmistolla.</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">Sampling and chemical analysis methods have been described in detail in the Geological Survey of Finland Report of Investigation 164. 
+The sampling was performed during 1990-1995. In planning sampling, the lithological variation displayed on geological maps was taken into account such that the amount of sample points in an area depended on the number of lithological units in an area. The sampling density varies between one sample per 30 km2 and one sample per 120 km2. Geologists chose the preliminary sampling sites on the basis of geological maps at a scale of 1:100 000. If a map at a scale of 1:100 000 was not available, a map at a scale of 1:400 000 was used. Sampling was performed by 16 two-person teams, each consisting of a geological student and a field assistant. The most representative sampling site was sought from a pre-selected area. Often it was necessary to clear moss to expose the best sampling and observation site. The recommended outcrop size was 10 m2 but it was necessary to take 40 % of the samples from smaller outcrops. The median size of the outcrops sampled was 10 m2 and the interquartile range (25%-75%) was 6-30 m2. A distinct and homogeneous lithological unit was chosen as a sampling site. A duplicate sample was taken from approximately every 17th locality in addition to a normal sample.
+The samples were taken with a portable mini-drill. Drill core samples were 15-25 cm long and 2.5 cm in diameter. Visibly weathered parts of the samples were removed. To avoid contamination, new drill bits were first drilled into pure quartz vein.
+Each sample consists of four to six subsamples, depending on the heterogeneity and grain size of the unit in question. In layered or banded rocks in which such features were over 5 cm in thickness, samples were taken from a single band or layer. In other cases, samples were taken from several bands or layers. In addition to the samples taken for chemical analysis, one orientated drill core was collected from each sampling point as reference material.
+The sampling team leader filled in a field observation form for each sampling site. Lithologies and their age relationships, petrographic, textural and structural features, deformation, migmatisation and alteration were recorded on the form. A geological map of the outcrop with the subsample points marked was sketched on the reverse side of the observation form. Some of the sampling sites were photographed. The geologists in charge of the project carried out field visits to synchronise the observations made by different sampling teams.
+Sample pre-processing and chemical analyses were performed at the geochemical laboratory of the Geological Survey of Finland (GTK) between 1992 and 2001. The samples were crushed to a grain size less than five millimetres using an iron-manganese jaw crusher. The crushed sample was split into three portions with a riffle splitter and one of these was stored. About 200 g was separated, again using a riffle splitter, from each of the remaining portions for pulverisation to a grain size of &lt; 60 µm with a ring mill. One 200 g portion was pulverised in a carbon steel bowl and the other in a tungsten carbide bowl. The powders were stored in plastic vials. In the laboratory a duplicate sample was also prepared for those sites from which a field duplicate sample had been taken.
+The samples were analysed with several different methods (XRF, ICP-MS, ICP-AES, GFAAS). Total carbon was measured with a carbon analyser and total fluorine was determined potentiometrically. The sample material that had been pulverised in a tungsten carbide bowl was used in XRF, carbon and fluorine analyses and the material powdered in a carbon steel bowl was used in the other determinations.
+Reproducibility and the lowest reliable concentration were calculated for each of the analytical results using 375 laboratory duplicate samples. Reproducibility at a confidence level of 95 % was determined using paired normal and laboratory duplicate samples. The lowest reliable concentration was determined with the same sample pairs.
+The rock samples were taken with a mini-drill and were processed and analysed using standard methods in the geochemical laboratory of Geological Survey of Finland (GTK). Crushing was carried out with an iron-manganese jaw crusher. The crushed samples were divided using a riffle splitter and then pulverised in a ring mill in tungsten carbide and carbon steel bowls. Chemical analyses were performed with XRF, ICP-AES, GFAAS and ICP-MS equipment as well as with a carbon analyser. Statistical processing of the data for the determination of reproducibility and the lowest reliable concentration was performed with SYSTAT statistical software.</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:description>
+                <gmd:source>
+                  <gmd:LI_Source>
+                    <gmd:description xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString>Suomen kalliogeokemian aineiston näytteenotossa käytettiin paikannuksessa apuna 1:50 000-mittakaavaisia karttoja. Tietoaineistoon tallennetut koordinaatit on mitattu kenttäkartoille merkityistä näytepisteistä. Muut tiedot perustuvat geologisiin kenttähavaintoihin ja näytteistä tehtyihin kemiallisiin analyyseihin.</gco:CharacterString>
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#FI">Suomen kalliogeokemian aineiston näytteenotossa käytettiin paikannuksessa apuna 1:50 000-mittakaavaisia karttoja. Tietoaineistoon tallennetut koordinaatit on mitattu kenttäkartoille merkityistä näytepisteistä. Muut tiedot perustuvat geologisiin kenttähavaintoihin ja näytteistä tehtyihin kemiallisiin analyyseihin.</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#EN">In sampling the Finnish rock geochemical data, maps at a scale of 1:50 000 were used in establishing location. Coordinates stored in the data set have been measured for sample points marked on field maps. Other information is based on geological field observations and on chemical analyses performed on samples.</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:description>
+                  </gmd:LI_Source>
+                </gmd:source>
+              </gmd:LI_ProcessStep>
+            </gmd:processStep>
+          </gmd:LI_Lineage>
+        </gmd:lineage>
+      </gmd:DQ_DataQuality>
+    </gmd:dataQualityInfo>
+    <gmd:metadataMaintenance>
+      <gmd:MD_MaintenanceInformation>
+        <gmd:maintenanceAndUpdateFrequency>
+          <gmd:MD_MaintenanceFrequencyCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_MaintenanceFrequencyCode" codeListValue="asNeeded" />
+        </gmd:maintenanceAndUpdateFrequency>
+      </gmd:MD_MaintenanceInformation>
+    </gmd:metadataMaintenance>
+  </gmd:MD_Metadata>
+</csw:GetRecordByIdResponse>
+
