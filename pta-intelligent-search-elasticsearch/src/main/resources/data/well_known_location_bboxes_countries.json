@@ -1,0 +1,6 @@
+{
+"type": "FeatureCollection",
+"features": [
+{ "type": "Feature", "properties": { "nimi": "Suomi", "namn": "Finland", "synonyms_fi": "[Kansallinen, Valtakunnallinen]", "synonyms_sv": "[National, Landsomfattande]", "synonyms_en": "[National, Nationwide]", "envelope": [ 19.450000, 59.780000, 31.610000, 70.120000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 19.447882561769607, 59.783540358045606 ], [ 31.611577047243781, 59.783540358045606 ], [ 31.611577047243781, 70.116970930607906 ], [ 19.447882561769607, 70.116970930607906 ], [ 19.447882561769607, 59.783540358045606 ] ] ] } }
+]
+}
