@@ -1,7 +1,7 @@
 package fi.maanmittauslaitos.pta.search.utils;
 
 public interface Region {
-	Double getArea();
+	public Double getArea();
 
 	Double getIntersection(Region r2);
 

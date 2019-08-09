@@ -292,23 +292,28 @@ public class HarvesterConfig {
 			Region.RegionScore subregion = getBestRegionScore.apply(subregions, dataRegion);
 			Region.RegionScore municipality = getBestRegionScore.apply(municipalities, dataRegion);
 
-			String nameField = PTAElasticSearchMetadataConstants.FIELD_BEST_MACTCHING_REGIONS_NAME;
-			String scoreField = PTAElasticSearchMetadataConstants.FIELD_BEST_MACTCHING_REGIONS_SCORE;
+			String nameField = PTAElasticSearchMetadataConstants.FIELD_BEST_MATCHING_REGIONS_NAME;
+			String scoreField = PTAElasticSearchMetadataConstants.FIELD_BEST_MATCHING_REGIONS_SCORE;
+			String countryField = PTAElasticSearchMetadataConstants.FIELD_BEST_MATCHING_REGIONS_COUNTRY;
+			String regionField = PTAElasticSearchMetadataConstants.FIELD_BEST_MATCHING_REGIONS_REGION;
+			String subregionfield = PTAElasticSearchMetadataConstants.FIELD_BEST_MATCHING_REGIONS_SUBREGION;
+			String municipalityField = PTAElasticSearchMetadataConstants.FIELD_BEST_MATCHING_REGIONS_MUNICIPALITY;
+
 
 			String template = "{\n" +
-					"  \"country\": {\n" +
+					"  \"" + countryField + "\": {\n" +
 					"    \"" + nameField + "\": \"%s\",\n" +
 					"    \"" + scoreField + "\": %.4f\n" +
 					"  },\n" +
-					"  \"region\": {\n" +
+					"  \"" + regionField + "\": {\n" +
 					"    \"" + nameField + "\": \"%s\",\n" +
 					"    \"" + scoreField + "\": %.4f\n" +
 					"  },\n" +
-					"  \"subregion\": {\n" +
+					"  \"" + subregionfield + "\": {\n" +
 					"    \"" + nameField + "\": \"%s\",\n" +
 					"    \"" + scoreField + "\": %.4f\n" +
 					"  },\n" +
-					"  \"municipality\": {\n" +
+					"  \"" + municipalityField + "\": {\n" +
 					"    \"" + nameField + "\": \"%s\",\n" +
 					"    \"" + scoreField + "\": %.4f\n" +
 					"  }\n" +
@@ -345,7 +350,7 @@ public class HarvesterConfig {
 		});
 
 
-		regionFec.setField(PTAElasticSearchMetadataConstants.FIELD_BEST_MACTCHING_REGIONS);
+		regionFec.setField(PTAElasticSearchMetadataConstants.FIELD_BEST_MATCHING_REGIONS);
 		regionFec.setType(FieldExtractorType.CUSTOM_CLASS_SINGLE_VALUE);
 
 

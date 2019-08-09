@@ -160,8 +160,8 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	}
 
 	private QueryBuilder createSpatialQuery(RegionNameSearchResult regionNameSearchResult, RegionNameContainer regionNameContainer, Language lang) {
-		String fieldName = FIELD_BEST_MACTCHING_REGIONS + ".%s." + FIELD_BEST_MACTCHING_REGIONS_NAME;
-		String scoreName = FIELD_BEST_MACTCHING_REGIONS + ".%s." + FIELD_BEST_MACTCHING_REGIONS_SCORE;
+		String fieldName = FIELD_BEST_MATCHING_REGIONS + ".%s." + FIELD_BEST_MATCHING_REGIONS_NAME;
+		String scoreName = FIELD_BEST_MATCHING_REGIONS + ".%s." + FIELD_BEST_MATCHING_REGIONS_SCORE;
 
 		DisMaxQueryBuilder spatialDisMax = QueryBuilders.disMaxQuery();
 
