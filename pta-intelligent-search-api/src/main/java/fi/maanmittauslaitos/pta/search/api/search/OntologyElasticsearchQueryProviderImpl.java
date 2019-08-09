@@ -185,7 +185,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 
     private RegionNameSearchResult searchQueryForRegionNames(SearchQuery pyynto, RegionNameContainer regionNameContainer, Language lang) {
         return pyynto.getQuery().stream()//
-                .map(queryTerm -> RegionNameSearchResult.create(queryTerm, stemmers.get(lang).stem(queryTerm.toLowerCase()), regionNameContainer, lang))
+                .map(queryTerm -> RegionNameSearchResult.executeSearch(queryTerm, stemmers.get(lang).stem(queryTerm.toLowerCase()), regionNameContainer, lang))
                 .filter(RegionNameSearchResult::hasRegionName)
                 .findFirst()
                 .orElse(RegionNameSearchResult.noRegionFound());

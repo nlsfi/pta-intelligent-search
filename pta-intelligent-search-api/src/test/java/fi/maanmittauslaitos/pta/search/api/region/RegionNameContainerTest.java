@@ -46,7 +46,13 @@ public class RegionNameContainerTest {
     public void region_name_container_has_values() {
         softly.assertThat(regionNameContainer.getStemmedRegionNames()).containsKeys(Language.values());
         softly.assertThat(regionNameContainer.getStemmedRegionNames().get(Language.FI))
-                .contains(entry("suomi", "Suomi"), entry("uusimaa", "Uusimaa"), entry("helsinki", "Helsinki"));
+                .contains(entry("suomi", "Suomi"), entry("uusimaa", "Uusimaa"), entry("helsinki", "Helsinki"), entry("stadi", "Helsinki"), entry("kansallinen", "Suomi"));
+
+        softly.assertThat(regionNameContainer.getStemmedRegionNames().get(Language.EN))
+                .contains(entry("city", "Helsinki"), entry("nationwide", "Suomi"));
+
+        softly.assertThat(regionNameContainer.getStemmedRegionNames().get(Language.SV))
+                .contains(entry("stad", "Helsinki"));
 
         softly.assertThat(regionNameContainer.getRegionNamesByRegionType()).containsKeys(RegionNameContainer.RegionType.values());
 
@@ -56,7 +62,7 @@ public class RegionNameContainerTest {
 
     @Test
     public void search_result_finds_existing_region() {
-        RegionNameSearchResult regionNameSearchResult = RegionNameSearchResult.create("suomi", "suomi", regionNameContainer, Language.FI);
+        RegionNameSearchResult regionNameSearchResult = RegionNameSearchResult.executeSearch("suomi", "suomi", regionNameContainer, Language.FI);
 
         assertThat(regionNameSearchResult.hasRegionName()).isTrue();
         assertThat(regionNameSearchResult.getParsedRegion()).isEqualTo("Suomi");
@@ -64,9 +70,10 @@ public class RegionNameContainerTest {
 
     @Test
     public void search_result_with_invalid_region() {
-        RegionNameSearchResult regionNameSearchResult = RegionNameSearchResult.create("else", "else", regionNameContainer, Language.EN);
+        RegionNameSearchResult regionNameSearchResult = RegionNameSearchResult.executeSearch("else", "else", regionNameContainer, Language.EN);
 
         softly.assertThat(regionNameSearchResult.hasRegionName()).isFalse();
         softly.assertThat(regionNameSearchResult.getParsedRegion()).isEmpty();
     }
+
 }

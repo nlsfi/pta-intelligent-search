@@ -9,7 +9,7 @@ public class RegionNameSearchResult {
     private String regionalQueryPart;
     private String parsedRegion;
 
-    public static RegionNameSearchResult create(String queryTerm, String stemmedQueryTerm, RegionNameContainer regionNameContainer, Language lang) {
+    public static RegionNameSearchResult executeSearch(String queryTerm, String stemmedQueryTerm, RegionNameContainer regionNameContainer, Language lang) {
         Map<String, String> stemmedRegionNames = regionNameContainer.getStemmedRegionNames().get(lang);
         if (stemmedRegionNames.containsKey(stemmedQueryTerm)) {
             return new RegionNameSearchResult(true, queryTerm, stemmedRegionNames.get(stemmedQueryTerm));
