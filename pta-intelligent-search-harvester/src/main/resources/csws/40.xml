@@ -1,0 +1,1503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csw:GetRecordByIdResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
+  <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gml="http://www.opengis.net/gml" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:geonet="http://www.fao.org/geonetwork" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd http://www.isotc211.org/2005/srv http://www.isotc211.org/2005/srv/1.0/srv.xsd http://www.isotc211.org/2005/gmx http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/gmx/gmx.xsd">
+    <gmd:fileIdentifier>
+      <gco:CharacterString>669b7726-8feb-4745-b22c-fe7b42a08668</gco:CharacterString>
+    </gmd:fileIdentifier>
+    <gmd:language>
+      <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="fin" />
+    </gmd:language>
+    <gmd:characterSet>
+      <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+    </gmd:characterSet>
+    <gmd:hierarchyLevel>
+      <gmd:MD_ScopeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" codeListValue="series" />
+    </gmd:hierarchyLevel>
+    <gmd:hierarchyLevelName>
+      <gco:CharacterString>Tietoaineistosarja</gco:CharacterString>
+    </gmd:hierarchyLevelName>
+    <gmd:contact>
+      <gmd:CI_ResponsibleParty>
+        <gmd:organisationName xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Luonnonvarakeskus (Luke)</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Luonnonvarakeskus (Luke)</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">Natural Resources Institute Finland (Luke)</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:organisationName>
+        <gmd:contactInfo>
+          <gmd:CI_Contact>
+            <gmd:address>
+              <gmd:CI_Address>
+                <gmd:electronicMailAddress xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>mvmi@luke.fi</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">mvmi@luke.fi</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:electronicMailAddress>
+              </gmd:CI_Address>
+            </gmd:address>
+          </gmd:CI_Contact>
+        </gmd:contactInfo>
+        <gmd:role>
+          <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact" />
+        </gmd:role>
+      </gmd:CI_ResponsibleParty>
+    </gmd:contact>
+    <gmd:dateStamp>
+      <gco:Date>2019-07-05</gco:Date>
+    </gmd:dateStamp>
+    <gmd:metadataStandardName>
+      <gco:CharacterString>ISO19115</gco:CharacterString>
+    </gmd:metadataStandardName>
+    <gmd:metadataStandardVersion>
+      <gco:CharacterString>2003/Cor.1:2006</gco:CharacterString>
+    </gmd:metadataStandardVersion>
+    <gmd:locale>
+      <gmd:PT_Locale id="EN">
+        <gmd:languageCode xmlns:srv="http://www.isotc211.org/2005/srv">
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+        </gmd:languageCode>
+        <gmd:characterEncoding>
+          <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19139/resources/ gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8">UTF-8</gmd:MD_CharacterSetCode>
+        </gmd:characterEncoding>
+      </gmd:PT_Locale>
+    </gmd:locale>
+    <gmd:locale>
+      <gmd:PT_Locale id="FI">
+        <gmd:languageCode>
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="fin" />
+        </gmd:languageCode>
+        <gmd:characterEncoding>
+          <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/iso/19139/resources/ gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8">UTF-8</gmd:MD_CharacterSetCode>
+        </gmd:characterEncoding>
+      </gmd:PT_Locale>
+    </gmd:locale>
+    <gmd:referenceSystemInfo>
+      <gmd:MD_ReferenceSystem>
+        <gmd:referenceSystemIdentifier>
+          <gmd:RS_Identifier>
+            <gmd:code>
+              <gmx:Anchor xlink:href="http://www.opengis.net/def/crs/EPSG/0/3047">EPSG:3047</gmx:Anchor>
+            </gmd:code>
+          </gmd:RS_Identifier>
+        </gmd:referenceSystemIdentifier>
+      </gmd:MD_ReferenceSystem>
+    </gmd:referenceSystemInfo>
+    <gmd:referenceSystemInfo>
+      <gmd:MD_ReferenceSystem>
+        <gmd:referenceSystemIdentifier>
+          <gmd:RS_Identifier>
+            <gmd:code>
+              <gmx:Anchor xlink:href="http://www.opengis.net/def/crs/EPSG/0/3067">EPSG:3067</gmx:Anchor>
+            </gmd:code>
+          </gmd:RS_Identifier>
+        </gmd:referenceSystemIdentifier>
+      </gmd:MD_ReferenceSystem>
+    </gmd:referenceSystemInfo>
+    <gmd:identificationInfo>
+      <gmd:MD_DataIdentification>
+        <gmd:citation>
+          <gmd:CI_Citation>
+            <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Monilähteisen valtakunnan metsien inventoinnin (MVMI) kartta-aineisto 2013</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Monilähteisen valtakunnan metsien inventoinnin (MVMI) kartta-aineisto 2013</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Multi-source national forest inventory (MS-NFI) raster maps of 2013</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:title>
+            <gmd:date>
+              <gmd:CI_Date>
+                <gmd:date>
+                  <gco:Date>2015-06-12</gco:Date>
+                </gmd:date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+            <gmd:identifier>
+              <gmd:RS_Identifier>
+                <gmd:code>
+                  <gco:CharacterString>1000770</gco:CharacterString>
+                </gmd:code>
+                <gmd:codeSpace>
+                  <gco:CharacterString>FI</gco:CharacterString>
+                </gmd:codeSpace>
+              </gmd:RS_Identifier>
+            </gmd:identifier>
+          </gmd:CI_Citation>
+        </gmd:citation>
+        <gmd:abstract xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Metsäntutkimuslaitos (Metla) kehitti niin sanotun valtakunnan metsien
+monilähteisen inventoinnin (MVMI) ja otti sen käyttöön vuonna
+1990. Maastotietojen, satelliittikuvien ja muun numeerisen paikkatiedon avulla
+tuotetaan kuntakohtaiset metsävara-arviot ja karttamuotoisia
+metsävaratietoja. Suurimpaan osaan maata on tuotettu 7 kattavaa
+karttateemajoukkoa ja Lappiin 5. Uusimmassa, vuoden 2013 inventoinnissa on 45
+teemaa, puutavaralajitilavuuksien lisäksi puulajeittaiset ja
+puusto-ositteittaiset biomassat. Ensimmäinen koko maan tuote valmistettiin
+vuosina 1990-1994; uusimmat ovat vuosilta 2005, 2007, 2009, 2011 ja
+2013. Metla päätti marraskuussa 2012 laittaa vuoden 2009 karttamuotoiset teemat
+avoimesti jaettavaksi ja vuoden 2013 tulokset ovat kolmas vapaaseen
+jakeluun tuleva ja ensimmäinen Luonnovarakeskuksen tuottama karttajoukko.
+Jatkossa uudet teemat tuotetaan yhden tai kahden vuoden välein. Karttamuotoiset
+aineistot ovat rasterimuodossa, aiemmin 20m x 20m hilassa ja nyt 16m x 16m
+hilassa ETRS-TM35FIN-koordinaattijärjestelmässä. Aineistot kattavat metsätalouden
+maan (VMI-maaluokista metsä-, kitu- ja joutomaan). Tässä aineistossa muu maa
+ja vesialueet on rajattu pois käyttäen maastotietokannan elementtejä, jotka lähinnä
+vastaavat VMI:n muita maaluokkia kuin metsä-, kitu- ja joutomaata. Aineistojen
+latauspalvelu on osoitteessa http://kartta.luke.fi/</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Metsäntutkimuslaitos (Metla) kehitti niin sanotun valtakunnan metsien
+monilähteisen inventoinnin (MVMI) ja otti sen käyttöön vuonna
+1990. Maastotietojen, satelliittikuvien ja muun numeerisen paikkatiedon avulla
+tuotetaan kuntakohtaiset metsävara-arviot ja karttamuotoisia
+metsävaratietoja. Suurimpaan osaan maata on tuotettu 7 kattavaa
+karttateemajoukkoa ja Lappiin 5. Uusimmassa, vuoden 2013 inventoinnissa on 45
+teemaa, puutavaralajitilavuuksien lisäksi puulajeittaiset ja
+puusto-ositteittaiset biomassat. Ensimmäinen koko maan tuote valmistettiin
+vuosina 1990-1994; uusimmat ovat vuosilta 2005, 2007, 2009, 2011 ja
+2013. Metla päätti marraskuussa 2012 laittaa vuoden 2009 karttamuotoiset teemat
+avoimesti jaettavaksi ja vuoden 2013 tulokset ovat kolmas vapaaseen
+jakeluun tuleva ja ensimmäinen Luonnovarakeskuksen tuottama karttajoukko.
+Jatkossa uudet teemat tuotetaan yhden tai kahden vuoden välein. Karttamuotoiset
+aineistot ovat rasterimuodossa, aiemmin 20m x 20m hilassa ja nyt 16m x 16m
+hilassa ETRS-TM35FIN-koordinaattijärjestelmässä. Aineistot kattavat metsätalouden
+maan (VMI-maaluokista metsä-, kitu- ja joutomaan). Tässä aineistossa muu maa
+ja vesialueet on rajattu pois käyttäen maastotietokannan elementtejä, jotka lähinnä
+vastaavat VMI:n muita maaluokkia kuin metsä-, kitu- ja joutomaata. Aineistojen
+latauspalvelu on osoitteessa http://kartta.luke.fi/</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">The Finnish Forest Research Institute (Metla) developed a method called
+multi-source national forest inventory (MS-NFI). The first operative results
+were calculated in 1990. Small area forest resource estimates, in here
+municipality level estimates, and estimates of variables in map form are
+calculated using field data from the Finnish national forest inventory,
+satellite images and other digital georeferenced data, such as topographic
+database of the National Land Survey of Finland. Seven sets of estimates have
+been produced for the most part of the country until now and six sets for
+Lapland. The number of the map form themes in the most recent version, from
+year 2015, is 45. In addition to the volumes by tree species and timber
+assortments, the biomass by tree species groups and tree compartments have
+been estimated.
+
+The first country level estimates correspond to years 1990-1994. The most
+recent versions are from years 2005, 2007, 2009, 2011, 2013 and 2015. The maps
+from 2015 is the fourth set of products freely available. It is also the second set
+produced by the Natural Resources Institute Finland. A new set of the products
+will be produced annually or biannually in the future. The maps are in a raster
+format with a pixel size of 16m x 16m (from 2013) and in the ETRS-TM35FIN
+coordinate system. The products cover the combined land categories forest
+land, poorly productive forest land and unproductive land. The other land
+categories as well as water bodies have been delineated out using the elements
+of the topographic database of the Land Survey of Finland.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:abstract>
+        <gmd:pointOfContact>
+          <gmd:CI_ResponsibleParty>
+            <gmd:organisationName xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Luonnonvarakeskus (Luke)</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Luonnonvarakeskus (Luke)</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Natural Resources Institute Finland (Luke)</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:organisationName>
+            <gmd:contactInfo>
+              <gmd:CI_Contact>
+                <gmd:address>
+                  <gmd:CI_Address>
+                    <gmd:electronicMailAddress xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString>mvmi@luke.fi</gco:CharacterString>
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#FI">mvmi@luke.fi</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#EN">mvmi@luke.fi</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:electronicMailAddress>
+                  </gmd:CI_Address>
+                </gmd:address>
+              </gmd:CI_Contact>
+            </gmd:contactInfo>
+            <gmd:role>
+              <gmd:CI_RoleCode codeList="https://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact" />
+            </gmd:role>
+          </gmd:CI_ResponsibleParty>
+        </gmd:pointOfContact>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>luonnonvarat</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">luonnonvarat</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Natural resource</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>metsävarat</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">metsävarat</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Forest resource</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>metsävarojen arviointi</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">metsävarojen arviointi</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Forest resource assessment</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>biomassa</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">biomassa</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Biomass</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>puutavaralaji</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">puutavaralaji</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Wood product</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>GEMET - Supergroups, groups and concepts</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">GEMET - Supergroups, groups and concepts</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2010-01-13</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+                <gmd:identifier gco:nilReason="missing" />
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>metsätalous</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">metsätalous</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>kasvupaikat</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">kasvupaikat</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>elinympäristöt</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">elinympäristöt</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Paikkatietohakemiston hakusanasto</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Paikkatietohakemiston hakusanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2006-11-15</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+                <gmd:identifier gco:nilReason="missing" />
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>avoindata.fi</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">avoindata.fi</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">avoindata.fi</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Paikkatietohakemiston asiasanasto</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Paikkatietohakemiston asiasanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2010-02-03</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+                <gmd:identifier>
+                  <gmd:MD_Identifier>
+                    <gmd:code>
+                      <gmx:Anchor xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.asiasanasto">geonetwork.thesaurus.external.theme.asiasanasto</gmx:Anchor>
+                    </gmd:code>
+                  </gmd:MD_Identifier>
+                </gmd:identifier>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword>
+              <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/theme/lc">Land cover</gmx:Anchor>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/theme/lu">Land use</gmx:Anchor>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gmx:Anchor xlink:href="http://inspire.ec.europa.eu/theme/er">Energy resources</gmx:Anchor>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title>
+                  <gmx:Anchor xlink:href="http://www.eionet.europa.eu/gemet/inspire_themes">GEMET - INSPIRE themes, version 1.0</gmx:Anchor>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2008-06-01</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:resourceConstraints>
+          <gmd:MD_Constraints>
+            <gmd:useLimitation xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>http://creativecommons.org/licenses/by/4.0/</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">http://creativecommons.org/licenses/by/4.0/</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">http://creativecommons.org/licenses/by/4.0/</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:useLimitation>
+          </gmd:MD_Constraints>
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints>
+          <gmd:MD_LegalConstraints>
+            <gmd:accessConstraints>
+              <gmd:MD_RestrictionCode codeList="https://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_RestrictionCode" codeListValue="otherRestrictions" />
+            </gmd:accessConstraints>
+            <gmd:otherConstraints>
+              <gmx:Anchor xlink:href="https://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/noLimitations">No conditions apply to access and use</gmx:Anchor>
+            </gmd:otherConstraints>
+          </gmd:MD_LegalConstraints>
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints>
+          <gmd:MD_LegalConstraints>
+            <gmd:useConstraints>
+              <gmd:MD_RestrictionCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_RestrictionCode" codeListValue="otherRestrictions" />
+            </gmd:useConstraints>
+            <gmd:otherConstraints xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Luonnonvarakeskuksella on tekijänoikeus ja muut immateriaaliset oikeudet tuotteeseen. Tuotteen ylläpidossa on käytetty Maanmittauslaitoksen maastotietokantaa. Tämä tuote on lisensoitu Creative Commons Nimeä 4.0 Kansainvälinen -lisenssillä. Tarkastele lisenssiä osoitteessa http://creativecommons.org/licenses/by/4.0/ tai lähetä kirje osoitteeseen Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. Aineistoa käytettäessä on mainittava tuotteen tekijänoikeuden omistaja, ”© Luonnonvarakeskus, 2015” ja aineiston nimi, ”Monilähteisen valtakunnan metsien inventoinnin (MVMI) kartta-aineisto 2013”. Tutkimuskäytössä aineiston metodinen kuvaus löytyy kohdassa "Historia"mainituista julkaisuista.</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Luonnonvarakeskuksella on tekijänoikeus ja muut immateriaaliset oikeudet tuotteeseen. Tuotteen ylläpidossa on käytetty Maanmittauslaitoksen maastotietokantaa. Tämä tuote on lisensoitu Creative Commons Nimeä 4.0 Kansainvälinen -lisenssillä. Tarkastele lisenssiä osoitteessa http://creativecommons.org/licenses/by/4.0/ tai lähetä kirje osoitteeseen Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. Aineistoa käytettäessä on mainittava tuotteen tekijänoikeuden omistaja, ”© Luonnonvarakeskus, 2015” ja aineiston nimi, ”Monilähteisen valtakunnan metsien inventoinnin (MVMI) kartta-aineisto 2013”. Tutkimuskäytössä aineiston metodinen kuvaus löytyy kohdassa "Historia"mainituista julkaisuista.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Natural Resources Institute Finland (Luke) owns the copyright, data protection, and other immaterial rights to this product. The Topographic Database from the National Land Survey has been utilized when making the product. This work is licensed under the Creative Commons Attribution 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. When using the material, the owner of the rights to the material must be given as "©Natural Resources Institute Finland, 2015" and the name of the material must be given as "The Multi-source National Forest Inventory Raster Maps of 2013". For research use, the description of the method is in the references in the metadata element Lineage. A scientific citation practice shall be used in research use.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:otherConstraints>
+          </gmd:MD_LegalConstraints>
+        </gmd:resourceConstraints>
+        <gmd:spatialRepresentationType>
+          <gmd:MD_SpatialRepresentationTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_SpatialRepresentationTypeCode" codeListValue="grid" />
+        </gmd:spatialRepresentationType>
+        <gmd:spatialResolution>
+          <gmd:MD_Resolution>
+            <gmd:distance>
+              <gco:Distance uom="m">16.00</gco:Distance>
+            </gmd:distance>
+          </gmd:MD_Resolution>
+        </gmd:spatialResolution>
+        <gmd:language>
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="fin" />
+        </gmd:language>
+        <gmd:topicCategory>
+          <gmd:MD_TopicCategoryCode>environment</gmd:MD_TopicCategoryCode>
+        </gmd:topicCategory>
+        <gmd:extent>
+          <gmd:EX_Extent>
+            <gmd:geographicElement>
+              <gmd:EX_GeographicBoundingBox>
+                <gmd:westBoundLongitude>
+                  <gco:Decimal>19.08</gco:Decimal>
+                </gmd:westBoundLongitude>
+                <gmd:eastBoundLongitude>
+                  <gco:Decimal>31.59</gco:Decimal>
+                </gmd:eastBoundLongitude>
+                <gmd:southBoundLatitude>
+                  <gco:Decimal>59.50</gco:Decimal>
+                </gmd:southBoundLatitude>
+                <gmd:northBoundLatitude>
+                  <gco:Decimal>70.10</gco:Decimal>
+                </gmd:northBoundLatitude>
+              </gmd:EX_GeographicBoundingBox>
+            </gmd:geographicElement>
+          </gmd:EX_Extent>
+        </gmd:extent>
+      </gmd:MD_DataIdentification>
+    </gmd:identificationInfo>
+    <gmd:distributionInfo>
+      <gmd:MD_Distribution>
+        <gmd:distributionFormat>
+          <gmd:MD_Format>
+            <gmd:name xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Unknown</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Unknown</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:name>
+            <gmd:version>
+              <gco:CharacterString>Unknown</gco:CharacterString>
+            </gmd:version>
+            <gmd:specification gco:nilReason="missing">
+              <gco:CharacterString />
+            </gmd:specification>
+          </gmd:MD_Format>
+        </gmd:distributionFormat>
+        <gmd:transferOptions>
+          <gmd:MD_DigitalTransferOptions>
+            <gmd:onLine>
+              <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                  <gmd:URL>https://www.luke.fi/tietoa-luonnonvaroista/metsa/metsavarat-ja-metsasuunnittelu/metsavarakartat-ja-kuntatilastot/</gmd:URL>
+                </gmd:linkage>
+                <gmd:protocol gco:nilReason="missing">
+                  <gco:CharacterString />
+                </gmd:protocol>
+              </gmd:CI_OnlineResource>
+            </gmd:onLine>
+            <gmd:onLine xmlns:gn="http://www.fao.org/geonetwork" xmlns:srv="http://www.isotc211.org/2005/srv">
+              <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                  <gmd:URL>http://kartta.luke.fi/</gmd:URL>
+                </gmd:linkage>
+                <gmd:protocol gco:nilReason="missing">
+                  <gco:CharacterString />
+                </gmd:protocol>
+              </gmd:CI_OnlineResource>
+            </gmd:onLine>
+            <gmd:onLine xmlns:gn="http://www.fao.org/geonetwork" xmlns:srv="http://www.isotc211.org/2005/srv">
+              <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                  <gmd:URL>http://kartta.luke.fi/geoserver/wms?service=wms&amp;version=1.3.0&amp;request=GetCapabilities</gmd:URL>
+                </gmd:linkage>
+                <gmd:protocol>
+                  <gco:CharacterString>OGC:WMS-1.3.0-http-get-capabilities</gco:CharacterString>
+                </gmd:protocol>
+              </gmd:CI_OnlineResource>
+            </gmd:onLine>
+          </gmd:MD_DigitalTransferOptions>
+        </gmd:transferOptions>
+      </gmd:MD_Distribution>
+    </gmd:distributionInfo>
+    <gmd:dataQualityInfo>
+      <gmd:DQ_DataQuality>
+        <gmd:scope>
+          <gmd:DQ_Scope>
+            <gmd:level>
+              <gmd:MD_ScopeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_ScopeCode" codeListValue="series" />
+            </gmd:level>
+          </gmd:DQ_Scope>
+        </gmd:scope>
+        <gmd:report>
+          <gmd:DQ_DomainConsistency>
+            <gmd:result>
+              <gmd:DQ_ConformanceResult>
+                <gmd:specification>
+                  <gmd:CI_Citation>
+                    <gmd:title>
+                      <gmx:Anchor xlink:href="https://data.europa.eu/eli/reg/2010/1089">COMMISSION
+			      REGULATION (EU) No 1089/2010 of 23 November 2010
+			      implementing Directive 2007/2/EC of the European
+			      Parliament and of the Council as regards
+			      interoperability of spatial data sets and
+			      services</gmx:Anchor>
+                    </gmd:title>
+                    <gmd:date>
+                      <gmd:CI_Date>
+                        <gmd:date>
+                          <gco:Date>2010-12-08</gco:Date>
+                        </gmd:date>
+                        <gmd:dateType>
+                          <gmd:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                        </gmd:dateType>
+                      </gmd:CI_Date>
+                    </gmd:date>
+                  </gmd:CI_Citation>
+                </gmd:specification>
+                <gmd:explanation xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Sääntöjenmukaisuutta ei ole arvioitu.</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Sääntöjenmukaisuutta ei ole arvioitu.</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">Conformance has not been assessed.</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:explanation>
+                <gmd:pass>
+                  <gco:Boolean>false</gco:Boolean>
+                </gmd:pass>
+              </gmd:DQ_ConformanceResult>
+            </gmd:result>
+          </gmd:DQ_DomainConsistency>
+        </gmd:report>
+        <gmd:lineage>
+          <gmd:LI_Lineage>
+            <gmd:statement xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Monilähteinen inventointi tehtiin Suomeen ensimmäisen kerran
+1990-1994. Ensimmäinen koko maan tuote valmistettiin vuosina 1990-1994;
+seuraavat ovat vuosilta 1996-2003, 2005, 2007, 2009, 2011 ja 2013. Vuoden
+2009 karttamuotoiset tulokset olivat ensimmäiset vapaasti jaetut tuotteet.
+Jatkossa uudet teemat tuotetaan yhden tai kahden vuoden välein.
+
+Vuoden 2013 tuloslaskentaan käytettiin yhteensä 57 563 VMI-maastokoealaa
+metsä-, kitu-, ja joutomaalta. Kuva-aineistona käytettiin 41 kpl Landsat
+8 satelliitin OLI-kuvia ja neljä IRS-P6/Resourcesat 1 LISS-III-kuvia.
+
+Vuoden 2013 tuotteissa maastotiedot päivitettiin ajankohtaan 31.7.2013.
+Päivitysjakson pituus laskettiin maastomittausajankohdan ja 31.7.2013
+välisen ajan kasvujakson päivien määränä olettaen kasvun alkavan 1.5.
+
+Puuston vuotuinen tilavuuskasvuprosentti ennustettiin puujaksoittain käyttäen
+Nyyssösen ja Mielikäisen (1978) metsikkökohtaisia ja puulajiryhmittäisiä
+kasvumalleja männiköille ja kuusikoille. Lehtipuille käytettiin männyn
+malleja. Monijaksoisissa metsissä jaksojen tilavuusosuudet laskettiin
+suhteellisina tunnukseen jakson pohjapinta-ala kertaa jakson pituus ennen
+mallien soveltamisesta.
+
+Maastomittausten ja satelliittikuvan ajankohdan välillä tehdyt uudistushakkuut
+koealoilla tunnistettiin  satelliittikuvien ja osittain ilmakuvien
+avulla. Hakattujen koealojen puustotiedot muutettiin vastaamaan aukeiden
+alojen puustotunnuksia. Lopullinen tilavuuskasvu kalibroitiin maastotiedoista
+estimoidun tilavuuskäyrän avulla seuraavasti. Eri vuosien koealoilla
+laskettiin tilavuusestimaatit ja niihin sovitettiin regressiosuora ajan
+funktiona. Ajankohdan 31.7.2013 tilavuudet saatiin regressiosuoralta.
+Kasvatetut tilavuudet kalibroitiin suhteilla edellä mainittuihin
+estimaatteihin puulajeittain.
+
+Metsikön suhteelliselle pituuskasvulle, suhteelliselle läpimitan kasvulle,
+suhteelliselle pohjapinta-alan kasvulle johdettiin yksikertaiset
+(kiinteäparametriset) regressiomallit VMI10:n pysyvien koealojen avulla.
+Malleja sovellettiin vastaavasti kuten tilavuusmalleja.
+Puuston biomassaestimaatit koealoittain ja biomassaositteittain
+päivitettiin tilavuusmuutosten suhteiden mukaisesti.
+
+Jotta koko maasta voitaisiin esittää mahdollisimman täydellinen kartta, tässä
+tuotteessa on yhdistetty:
+1. vuoden 2013 tulos, jossa on käytetty vuosien 2009-2013 koealatietoja
+päivitettyinä ajankohtaan 31.7.2013 sekä vuosien 2012-2014 satelliittikuvia,
+2. vuoden 2011 tulos, jossa on käytetty vuosien 2007-2011 koealatietoja
+päivitettyinä ajankohtaan 31.7.2011 sekä vuosien 2009-2012 satelliittikuvia,
+3. vuoden 2009 tulos, jossa on käytetty vuosien 2006-2010 VMI-koealatietoja
+sekä vuosien 2009-2010 satelliittikuvia,
+4. likimain Inarin ja Utsjoen alueen tulos, jossa on käytetty vuoden 2003
+koealatietoja ja vuoden 2009 kuvia,
+5. Enontekiön tulos, jossa on käytetty vuoden 2003 koealatietoja ja
+vuoden 2000 kuvia.
+6. Vuoden 2007 tulos, jossa on käytetty vuosien 2005-2008 koealatietoja ja
+vuosien 2005-2007 satelliittikuvia.
+Tähän tuotesarjaan kuuluvasta indeksikartasta "Tietolähdeindeksi, MVMI 2013"
+näkyy, mistä osa-aineistosta kuva-alkiot ovat peräisin.
+
+Karttamuotoiset ennusteet tuotettiin tarkennetulla ei-parametrisellä k:n
+lähimmän naapurin estimointimenetelmällä (k-NN menetelmällä). Useimmiten
+estimoinnissa käytettiin viittä lähintä naapuria. Tarkennetussa k-NN
+estimoinnissa piirteiden painot optimoidaan minimoimalla estimoitavien
+muuttujien ennustevirheet geneettisen algoritmin avulla. Satelliittikuvan
+piirteiden lisäksi käytetään metsämuuttujien suuraluekarttoja piirteinä, tässä
+aineistossa puuston keskitilavuus puulajeittain. Tarkoituksena on ohjata
+lähimpien naapureiden valintaa luokitettavaa kuvanalkiota muistuttaviin
+metsiin (kts. alla viitteet). Estimointi tehtiin erikseen kivennäismaan,
+puustoisten soiden ja avosoiden ositteille kullekin satelliittikuvalle tai
+peräkkäisten satelliittikuvien jonolle. Kuvan ja koealojen ositus perustui
+Maanmittauslaitoksen maastotietokannan karttatietoon.
+
+Aineistosarja sisältää tietolähdeindeksin lisäksi kaikkiaan 44 teemaa, jotka
+voidaan ryhmitellä muutamaan ryhmään:
+
+Puuston tilavuus on esitetty yhteistuloksena sekä jaoteltuna neljään
+puulajiryhmään (mänty, kuusi, koivu, muut lehtipuut) ja puutavaralajeihin
+(tukkipuu, kuitupuu). Mänty sisältää kaikki muut havupuut kuin kuusen ja
+koivu sisältää hies- ja rauduskoivun. Puun tilavuus tarkoittaa runko-osan
+tilavuutta kannon yläpuolelta puun latvaan. Maastokoealan puuston tilavuus
+lasketaan koealaan kuuluvista puista käyttäen puista mitattuja tunnuksia sekä
+runkotilavuusmalleja. Ladattavissa kartoissa runkotilavuus esitetään 1 m3/ha
+luokissa.
+
+Puuston biomassa on jaoteltu seitsemään eri ositteeseen. Puun runkobiomassa
+tarkoittaa kuorellisen runko-osan biomassaa kannon yläpuolelta puun
+latvaan. Puun elävien oksien biomassa sisältää kaikkien elävien oksien massan
+ilman neulasia tai lehtiä. Puun kuolleiden oksien biomassa sisältää elävien
+puiden kuolleiden oksien biomassan ilman mahdollisesti jäljellä olevia
+neulasia tai lehtiä. Puun lehvästön biomassa tarkoittaa elävien neulasten tai
+lehtien biomassaa. Puun kantobiomassa sisältää elävien puiden kantojen
+massan. Sekä maanpäälliset että maanalaiset kannon osat otetaan huomioon, ei
+kuitenkaan juuria. Puun juuribiomassa sisältää elävien puiden yli 1 cm:n
+paksuisten juurien massan. Puun rungon hukkapuuosan biomassa tarkoittaa
+sellaisen kuorellisen runko-osan biomassaa, joka osa ei kelpaa aineispuuksi
+joko kokonsa tai laatunsa vuoksi.
+
+Maastokoealan biomassat lasketaan koealaan kuuluvista elävistä puista käyttäen
+koepuista mitattuja tunnuksia ja tilavuusmalleja sekä puuaineen tiheysmalleja
+(Repola ym. 2007) ja biomassamalleja (Repola 2008, 2009). Niin sanottujen
+lukupuiden tilavuudet ja runkobiomassat estimoidaan koepuiden estimaattien
+sekä lukupuu- ja metsikkötunnusten avulla. Ladattavissa kartoissa biomassat
+esitetään luokissa 10 kg/ha.
+
+Metsikkökuvion puuston ikä määritellään elävien puiden pohjapinta-alalla
+painotettuna keski-ikänä. Keski-ikä mitataan tai arvioidaan maastossa koealaan
+osuneilta metsä- ja kitumaan metsikkökuvioilta yhden vuoden luokissa.
+
+Metsikkökuvion puuston pohjapinta-ala on elävien puiden runkojen
+poikkileikkausala 1.3 metrin korkeudelta hehtaaria kohti laskettuna. Puuston
+pohjapinta-ala mitataan maastossa koealaan osuneilta metsä- ja kitumaan
+metsikkökuvioilta 1 m2/ha luokissa.
+
+Metsikkökuvion puuston keskipituus on elävien puiden pohjapinta-alan mediaania
+vastaavan puun pituus. Se on likimain sama kuin pohjapinta-alalla painotettu
+puiden pituuksien keskiarvo. Puuston keskipituus mitataan maastossa koealaan
+osuneilta metsä- ja kitumaan metsikkökuvioilta 1 dm:n luokissa.
+
+Metsikkökuvion puuston keskiläpimitta 1.3 metrin korkeudelta on elävien puiden
+pohjapinta-alan mediaania vastaavan puun läpimitta. Se on likimain sama kuin
+pohjapinta-alalla painotettu puiden läpimittojen keskiarvo. Puuston
+keskiläpimitta mitataan maastossa koealaan osuneilta metsä- ja kitumaan
+metsikkökuvioilta 1 cm:n luokissa.
+
+Puuston latvuspeittävyys VMI:ssa tarkoittaa koealan puuston vaakatasoon
+projisoidun latvuston peittämää osuutta koealan alasta. Latvuspeittävyys
+arvioitiin VMI10:ssä prosentteina (0-99) kiinteäsäteiseltä koealalta metsä-,
+kitu ja joutomaalla. VMI11-koealoille ennustettiin latvuspeittävyys
+k-NN-menetelmällä VMI10-koealoja käyttäen. VMI9:ssä (Ylä-Lappi)
+latvuspeittävyys arvioitiin koealalta kolmessa luokassa, jos koealan keskipiste
+sijaitsi metsä-, kitu-, tai joutomaalla. VMI9 koealoille laadittiin
+regressiomalli latvuspeittävyyden ennustamiseksi yhden prosentin yksiköissä.
+
+Lehtipuuston latvuspeittävyyden osuus johdettiin koko puuston
+latvuspeittävyydestä käyttäen lehtipuuston tilavuuden arvioitua osuutta
+koealan puuston tilavuudesta. Taimikoissa käytettiin vastaavasti runkolukuja.
+
+Maaluokka jakaa metsätalousmaan alaluokkiin metsämaa (arvo 1), kitumaa (2)
+ja joutomaa (3) sekä metsätalouden tiet ja varastot. Metsätalousmaan ulkopuolella
+maaluokka kuvaa maankäyttöä. Ladattavassa kartassa yhdistetty metsä-, kitu-
+ja joutomaa perustuu Maanmittauslaitoksen maastotietokannan rajaukseen,
+jonka avulla erotetaan muiden maaluokkien peittämä alue. Jokaiselle
+kuva-alkiolle rajauksen sisällä on ennustettu todennäköisin kolmesta
+edellä mainitusta maaluokasta. Kansallisen maaluokkamäärittelyn lisäksi
+vuoden 2011 tuotteisiin otettiin mukaan uusi teema, maaluokat YK:n maatalous-
+ja elintarvikejärjestön (FAO) globaalin metsävara-arvion
+(Forest Resource Assessment, FRA) määritelmien mukaan. Kuva-alkion
+arvo 1 tarkoittaa metsää (forest), 2 muuta puustoista maata (other wooded
+land), 3 muuta maata (other land) ja 4 muuta maata, jossa kasvaa puita
+(other land with tree cover).
+
+Päätyyppi jakaa metsämaan, kitumaan ja joutomaan kivennäismaiksi (1) ja
+soiksi ja suot edelleen korpiin (2), rämeisiin (3) ja avosoihin (4). Sekä
+satelliittikuvat että VMI-koealat ositetaan ennen analyysia
+Maanmittauslaitoksen maastotietokannan mukaisiin kivennäismaihin ja soihin.
+Jokaiselle kuva-alkiolle ennustetaan todennäköisin neljästä edellä mainitusta
+VMI:n päätyypistä. Siten ositteen sisällä voi olla sekä VMI:n mukaisia
+kivennäismaita että soita.
+
+Kasvupaikkatyyppiluokituksella eri metsäkasvillisuusvyöhykkeiden metsä- ja
+suotyypit ryhmitellään ravinteisuudeltaan ja puuntuotoskyvyltään
+yhdenmukaisiin luokkiin. Kansallisessa maankäyttöluokituksessa kaikki
+kivennäismailla olevat luokkien 1-6 kasvupaikkatyypit ovat metsämaata
+(kuva-alkio arvo 1 on lehto, 2 lehtomainen kangas, 3 tuore kangas, 4 kuivahko
+kangas, 5 kuiva kangas ja 6 karukkokangas). Seitsemäs luokka, kalliomaat ja
+hietikot voivat olla myös kitu- tai joutomaata. Pohjois-Suomessa luokat 8
+(lakimetsät), 9 (tunturikoivikot) ja 10 (avotunturit) aina kitumaata tai
+joutomaata. Ojitetut (ojikko- ja muuttumasuot sekä turvekankaat) ja
+ojittamattomat korvet, rämeet että avosuot luokitetaan kuuteen
+kasvupaikkaluokkaan riippumatta maaluokasta. Luokat ovat lehtomaiset ja
+lettosuot (1), ruohoiset suot (2), suursaraiset ja mustikkaiset suot (3),
+piensaraiset ja puolikkaiset suot (4), tupasvillaiset ja isovarpuiset suot (5)
+sekä rahkaiset suot (6). Sekä satelliittikuvat että VMI -koealat ositetaan
+ennen analyysia Maanmittauslaitoksen maastotietokannan mukaisiin
+kivennäismaihin, puustoisiin soihin ja avosoihin. Jokaiselle kuvanalkiolle on
+ennustettu karttaositteen sisällä todennäköisin kasvupaikkatyyppi. Siten
+karttaositteen sisällä voi olla sekä VMI:n mukaisia kivennäismaita että soita.
+
+Kuva-alkion tasolla ennustevirhe on suurehko, mutta pienenee alueen koon
+kasvaessa. Teemojen kuvanalkiokohtainen keskivirhe vaihtelee alueen
+sijainnista, puuston tilavuudesta ja kasvupaikasta riippuen.
+
+Seuraavat virhearviot perustuvat vuoden 2009 MVMI-tuotteeseen.
+
+Tilavuusteemojen keskimääräiset virheet kuutiometreinä/ha on esitetty alla
+kuusikoina (puulajiryhmä puutavaralaji Etelä-Suomi/kivennäismaa
+Etelä-Suomi/suo Pohjois-Suomi/kivennäismaa Pohjois-Suomi/suo):
+kaikki	kaikki	86	66	47	32
+mänty	kaikki	63	53	40	26
+manty	tukki	39	29	19	7
+mänty	kuitu	40	37	30	22
+kuusi	kaikki	63	37	27	12
+kuusi	tukki	43	23	12	3
+kuusi	kuitu	33	21	18	10
+koivu	kaikki	32	30	19	16
+koivu	tukki	10	7	2	1
+koivu	kuitu	25	25	17	13
+lehtipuu	kaikki	22	10	8	4
+lehtipuu	tukki	7	3	2	1
+lehtipuu	kuitu	16	8	7	2
+
+Biomassojen kuvanalkiotason keskivirheiden (yksikkö 10 kg/ha) suuruusluokka on
+seuraavassa kuusikoina (puulajiryhmä biomassaosite Etelä-Suomi/kivennäismaa
+Etelä-Suomi/suo Pohjois-Suomi/kivennäismaa Pohjois-Suomi/suo):
+mänty	runko ja kuori	2400	2100	1500	980
+mänty	elävät oksat	400	350	350	230
+mänty	kuolleet oksat	95	85	71	52
+mänty	neulaset 	150	140	140	100
+mänty	kannot		190	170	140	94
+mänty	juuret		590	500	410	250
+mänty	hukkapuu	200	220	190	220
+kuusi	runko ja kuori	2300	1400	1000	450
+kuusi	elävät oksat	550	340	340	150
+kuusi	kuolleet oksat	100	63	48	23
+kuusi	neulaset 	360	250	230	110
+kuusi	kannot		210	120	110	48
+kuusi	juuret		760	470	430	200
+kuusi	hukkapuu	19	18	16	14
+lehtipuu	runko ja kuori	9	8	8	6
+lehtipuu	elävät oksat	31	35	50	46
+lehtipuu	kuolleet oksat	62	52	40	25
+lehtipuu	lehvästö 	58	47	41	35
+lehtipuu	kannot		9	8	6	6
+lehtipuu	juuret		85	66	47	31
+lehtipuu	hukkapuu	39	29	18	7
+
+Muiden jatkuva-arvoisten teemojen kuvanalkiotason keskivirheiden suuruusluokka
+on seuraavassa kuusikoina (muuttuja Etelä-Suomi/kivennäismaa Etelä-Suomi/suo
+Pohjois-Suomi/kivennäismaa Pohjois-Suomi/suo, yksikkö):
+ikä		32	35	50	47	a
+pohjapinta-ala	9	8	6	6	m3/ha
+keskipituus		59	47	42	35	dm
+keskiläpimitta		9	8	8	6	cm
+latvuspeittävyys		20	18	16	14	%
+lehtip. latvuspeittävyys	15	12	11	10	%
+
+Maaluokkateemassa oikein luokitettujen kuva-alkioiden osuus on keskimäärin 92%
+kun luokitusta verrataan VMI:n maastoluokitukseen. Metsämaaksi luokitetuista
+kuva-alkioista keskimäärin 98% on VMI:n mukaista metsämaata, kun taas VMI:n
+mukaisesta metsämaasta 95% on luokitettu metsämaaksi. Kitumaan osalta
+vastaavat osuudet ovat 38% ja 50% ja joutomaasta 74% ja 87%.
+
+Päätyyppiteemassa (kangas, korpi, räme, avosuo) luokka on oikein 84%:lla
+kuva-alkiosta. 95% kankaiksi luokitetuista on VMI:n maastoluokituksen mukaan
+kankaita, kun taas VMI:n mukaisista kankaista 88% on luokitettu
+kankaiksi. Korpien vastaavat luvut ovat 20% ja 45%, rämeiden 76% ja 76% ja
+avosoiden 71% ja 84%.
+
+Kasvupaikkaluokitus on vaativaa maastossakin ja luokituserot henkilöiden
+välillä yleisiä. Kasvupaikkateeman kuva-alkiosta noin 50%:lla
+kasvupaikkaluokka on sama kuin VMI:n maastoluokituksessa. Ero on useimmiten
+kuitenkin vain yhden luokan suuruinen. Erot ovat yleisimpiä lehdoissa,
+lehtomaisilla soilla ja letoilla ja toisaalta karuilla kasvupaikoilla,
+karukkokankailla ja rahkaisilla soilla. MVMI:n ja VMI:n luokitukset ovat
+useimmiten yhteneviä tuoreilla kankailla ja vastaavilla soilla eli
+suursaraisilla ja mustikkaisilla soilla. Tähän luokkaan luokitetuista
+kuva-alkioista 60-65% kuuluu VMI:n maastoluokituksen mukaiseen luokkaan, kun
+taas maastoluokituksen mukaan ko. luokan kuva-alkioista 60% on luokitettu
+oikein.
+
+Luokkamuuttujien kohdalla on huomattava, että aluetasolla
+pinta-alaestimaattien virheet ovat edellä mainittuja pienempiä.
+
+Lisää tietoja menetelmistä ja luotettavuudesta on esimerkiksi julkaisuissa
+
+Tomppo, E., Haakana, M., Katila, M. &amp; Peräsaari, J. 2008. Multi-source
+national forest inventory - Methods and applications. Managing Forest
+Ecosystems 18. Springer. 374 p. ISBN 978-1-4020-8712-7,
+
+Mäkisara, K., Katila, M., Peräsaari, J. &amp; Tomppo, E. 2016. The Multi-Source
+National Forest Inventory of Finland – methods and results 2013. Natural
+resources and bioeconomy studies 10/2016, Natural Resources Institute
+Finland. 215 s. http://urn.fi/URN:ISBN:978-952-326-186-0
+
+Tomppo, E. &amp; Halme, M. 2004. Using coarse scale forest variables as ancillary
+information and weighting of variables in k-NN estimation: a genetic algorithm
+approach. Remote Sensing of Environment 92: 1-20.
+
+Lisää tietoa Suomen monilähteisestä valtakunnan metsien inventoinnista on
+sivuilla
+https://www.luke.fi/tietoa-luonnonvaroista/metsa/metsavarat-ja-metsasuunnittelu/metsavarakartat-ja-kuntatilastot/</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Monilähteinen inventointi tehtiin Suomeen ensimmäisen kerran
+1990-1994. Ensimmäinen koko maan tuote valmistettiin vuosina 1990-1994;
+seuraavat ovat vuosilta 1996-2003, 2005, 2007, 2009, 2011 ja 2013. Vuoden
+2009 karttamuotoiset tulokset olivat ensimmäiset vapaasti jaetut tuotteet.
+Jatkossa uudet teemat tuotetaan yhden tai kahden vuoden välein.
+
+Vuoden 2013 tuloslaskentaan käytettiin yhteensä 57 563 VMI-maastokoealaa
+metsä-, kitu-, ja joutomaalta. Kuva-aineistona käytettiin 41 kpl Landsat
+8 satelliitin OLI-kuvia ja neljä IRS-P6/Resourcesat 1 LISS-III-kuvia.
+
+Vuoden 2013 tuotteissa maastotiedot päivitettiin ajankohtaan 31.7.2013.
+Päivitysjakson pituus laskettiin maastomittausajankohdan ja 31.7.2013
+välisen ajan kasvujakson päivien määränä olettaen kasvun alkavan 1.5.
+
+Puuston vuotuinen tilavuuskasvuprosentti ennustettiin puujaksoittain käyttäen
+Nyyssösen ja Mielikäisen (1978) metsikkökohtaisia ja puulajiryhmittäisiä
+kasvumalleja männiköille ja kuusikoille. Lehtipuille käytettiin männyn
+malleja. Monijaksoisissa metsissä jaksojen tilavuusosuudet laskettiin
+suhteellisina tunnukseen jakson pohjapinta-ala kertaa jakson pituus ennen
+mallien soveltamisesta.
+
+Maastomittausten ja satelliittikuvan ajankohdan välillä tehdyt uudistushakkuut
+koealoilla tunnistettiin  satelliittikuvien ja osittain ilmakuvien
+avulla. Hakattujen koealojen puustotiedot muutettiin vastaamaan aukeiden
+alojen puustotunnuksia. Lopullinen tilavuuskasvu kalibroitiin maastotiedoista
+estimoidun tilavuuskäyrän avulla seuraavasti. Eri vuosien koealoilla
+laskettiin tilavuusestimaatit ja niihin sovitettiin regressiosuora ajan
+funktiona. Ajankohdan 31.7.2013 tilavuudet saatiin regressiosuoralta.
+Kasvatetut tilavuudet kalibroitiin suhteilla edellä mainittuihin
+estimaatteihin puulajeittain.
+
+Metsikön suhteelliselle pituuskasvulle, suhteelliselle läpimitan kasvulle,
+suhteelliselle pohjapinta-alan kasvulle johdettiin yksikertaiset
+(kiinteäparametriset) regressiomallit VMI10:n pysyvien koealojen avulla.
+Malleja sovellettiin vastaavasti kuten tilavuusmalleja.
+Puuston biomassaestimaatit koealoittain ja biomassaositteittain
+päivitettiin tilavuusmuutosten suhteiden mukaisesti.
+
+Jotta koko maasta voitaisiin esittää mahdollisimman täydellinen kartta, tässä
+tuotteessa on yhdistetty:
+1. vuoden 2013 tulos, jossa on käytetty vuosien 2009-2013 koealatietoja
+päivitettyinä ajankohtaan 31.7.2013 sekä vuosien 2012-2014 satelliittikuvia,
+2. vuoden 2011 tulos, jossa on käytetty vuosien 2007-2011 koealatietoja
+päivitettyinä ajankohtaan 31.7.2011 sekä vuosien 2009-2012 satelliittikuvia,
+3. vuoden 2009 tulos, jossa on käytetty vuosien 2006-2010 VMI-koealatietoja
+sekä vuosien 2009-2010 satelliittikuvia,
+4. likimain Inarin ja Utsjoen alueen tulos, jossa on käytetty vuoden 2003
+koealatietoja ja vuoden 2009 kuvia,
+5. Enontekiön tulos, jossa on käytetty vuoden 2003 koealatietoja ja
+vuoden 2000 kuvia.
+6. Vuoden 2007 tulos, jossa on käytetty vuosien 2005-2008 koealatietoja ja
+vuosien 2005-2007 satelliittikuvia.
+Tähän tuotesarjaan kuuluvasta indeksikartasta "Tietolähdeindeksi, MVMI 2013"
+näkyy, mistä osa-aineistosta kuva-alkiot ovat peräisin.
+
+Karttamuotoiset ennusteet tuotettiin tarkennetulla ei-parametrisellä k:n
+lähimmän naapurin estimointimenetelmällä (k-NN menetelmällä). Useimmiten
+estimoinnissa käytettiin viittä lähintä naapuria. Tarkennetussa k-NN
+estimoinnissa piirteiden painot optimoidaan minimoimalla estimoitavien
+muuttujien ennustevirheet geneettisen algoritmin avulla. Satelliittikuvan
+piirteiden lisäksi käytetään metsämuuttujien suuraluekarttoja piirteinä, tässä
+aineistossa puuston keskitilavuus puulajeittain. Tarkoituksena on ohjata
+lähimpien naapureiden valintaa luokitettavaa kuvanalkiota muistuttaviin
+metsiin (kts. alla viitteet). Estimointi tehtiin erikseen kivennäismaan,
+puustoisten soiden ja avosoiden ositteille kullekin satelliittikuvalle tai
+peräkkäisten satelliittikuvien jonolle. Kuvan ja koealojen ositus perustui
+Maanmittauslaitoksen maastotietokannan karttatietoon.
+
+Aineistosarja sisältää tietolähdeindeksin lisäksi kaikkiaan 44 teemaa, jotka
+voidaan ryhmitellä muutamaan ryhmään:
+
+Puuston tilavuus on esitetty yhteistuloksena sekä jaoteltuna neljään
+puulajiryhmään (mänty, kuusi, koivu, muut lehtipuut) ja puutavaralajeihin
+(tukkipuu, kuitupuu). Mänty sisältää kaikki muut havupuut kuin kuusen ja
+koivu sisältää hies- ja rauduskoivun. Puun tilavuus tarkoittaa runko-osan
+tilavuutta kannon yläpuolelta puun latvaan. Maastokoealan puuston tilavuus
+lasketaan koealaan kuuluvista puista käyttäen puista mitattuja tunnuksia sekä
+runkotilavuusmalleja. Ladattavissa kartoissa runkotilavuus esitetään 1 m3/ha
+luokissa.
+
+Puuston biomassa on jaoteltu seitsemään eri ositteeseen. Puun runkobiomassa
+tarkoittaa kuorellisen runko-osan biomassaa kannon yläpuolelta puun
+latvaan. Puun elävien oksien biomassa sisältää kaikkien elävien oksien massan
+ilman neulasia tai lehtiä. Puun kuolleiden oksien biomassa sisältää elävien
+puiden kuolleiden oksien biomassan ilman mahdollisesti jäljellä olevia
+neulasia tai lehtiä. Puun lehvästön biomassa tarkoittaa elävien neulasten tai
+lehtien biomassaa. Puun kantobiomassa sisältää elävien puiden kantojen
+massan. Sekä maanpäälliset että maanalaiset kannon osat otetaan huomioon, ei
+kuitenkaan juuria. Puun juuribiomassa sisältää elävien puiden yli 1 cm:n
+paksuisten juurien massan. Puun rungon hukkapuuosan biomassa tarkoittaa
+sellaisen kuorellisen runko-osan biomassaa, joka osa ei kelpaa aineispuuksi
+joko kokonsa tai laatunsa vuoksi.
+
+Maastokoealan biomassat lasketaan koealaan kuuluvista elävistä puista käyttäen
+koepuista mitattuja tunnuksia ja tilavuusmalleja sekä puuaineen tiheysmalleja
+(Repola ym. 2007) ja biomassamalleja (Repola 2008, 2009). Niin sanottujen
+lukupuiden tilavuudet ja runkobiomassat estimoidaan koepuiden estimaattien
+sekä lukupuu- ja metsikkötunnusten avulla. Ladattavissa kartoissa biomassat
+esitetään luokissa 10 kg/ha.
+
+Metsikkökuvion puuston ikä määritellään elävien puiden pohjapinta-alalla
+painotettuna keski-ikänä. Keski-ikä mitataan tai arvioidaan maastossa koealaan
+osuneilta metsä- ja kitumaan metsikkökuvioilta yhden vuoden luokissa.
+
+Metsikkökuvion puuston pohjapinta-ala on elävien puiden runkojen
+poikkileikkausala 1.3 metrin korkeudelta hehtaaria kohti laskettuna. Puuston
+pohjapinta-ala mitataan maastossa koealaan osuneilta metsä- ja kitumaan
+metsikkökuvioilta 1 m2/ha luokissa.
+
+Metsikkökuvion puuston keskipituus on elävien puiden pohjapinta-alan mediaania
+vastaavan puun pituus. Se on likimain sama kuin pohjapinta-alalla painotettu
+puiden pituuksien keskiarvo. Puuston keskipituus mitataan maastossa koealaan
+osuneilta metsä- ja kitumaan metsikkökuvioilta 1 dm:n luokissa.
+
+Metsikkökuvion puuston keskiläpimitta 1.3 metrin korkeudelta on elävien puiden
+pohjapinta-alan mediaania vastaavan puun läpimitta. Se on likimain sama kuin
+pohjapinta-alalla painotettu puiden läpimittojen keskiarvo. Puuston
+keskiläpimitta mitataan maastossa koealaan osuneilta metsä- ja kitumaan
+metsikkökuvioilta 1 cm:n luokissa.
+
+Puuston latvuspeittävyys VMI:ssa tarkoittaa koealan puuston vaakatasoon
+projisoidun latvuston peittämää osuutta koealan alasta. Latvuspeittävyys
+arvioitiin VMI10:ssä prosentteina (0-99) kiinteäsäteiseltä koealalta metsä-,
+kitu ja joutomaalla. VMI11-koealoille ennustettiin latvuspeittävyys
+k-NN-menetelmällä VMI10-koealoja käyttäen. VMI9:ssä (Ylä-Lappi)
+latvuspeittävyys arvioitiin koealalta kolmessa luokassa, jos koealan keskipiste
+sijaitsi metsä-, kitu-, tai joutomaalla. VMI9 koealoille laadittiin
+regressiomalli latvuspeittävyyden ennustamiseksi yhden prosentin yksiköissä.
+
+Lehtipuuston latvuspeittävyyden osuus johdettiin koko puuston
+latvuspeittävyydestä käyttäen lehtipuuston tilavuuden arvioitua osuutta
+koealan puuston tilavuudesta. Taimikoissa käytettiin vastaavasti runkolukuja.
+
+Maaluokka jakaa metsätalousmaan alaluokkiin metsämaa (arvo 1), kitumaa (2)
+ja joutomaa (3) sekä metsätalouden tiet ja varastot. Metsätalousmaan ulkopuolella
+maaluokka kuvaa maankäyttöä. Ladattavassa kartassa yhdistetty metsä-, kitu-
+ja joutomaa perustuu Maanmittauslaitoksen maastotietokannan rajaukseen,
+jonka avulla erotetaan muiden maaluokkien peittämä alue. Jokaiselle
+kuva-alkiolle rajauksen sisällä on ennustettu todennäköisin kolmesta
+edellä mainitusta maaluokasta. Kansallisen maaluokkamäärittelyn lisäksi
+vuoden 2011 tuotteisiin otettiin mukaan uusi teema, maaluokat YK:n maatalous-
+ja elintarvikejärjestön (FAO) globaalin metsävara-arvion
+(Forest Resource Assessment, FRA) määritelmien mukaan. Kuva-alkion
+arvo 1 tarkoittaa metsää (forest), 2 muuta puustoista maata (other wooded
+land), 3 muuta maata (other land) ja 4 muuta maata, jossa kasvaa puita
+(other land with tree cover).
+
+Päätyyppi jakaa metsämaan, kitumaan ja joutomaan kivennäismaiksi (1) ja
+soiksi ja suot edelleen korpiin (2), rämeisiin (3) ja avosoihin (4). Sekä
+satelliittikuvat että VMI-koealat ositetaan ennen analyysia
+Maanmittauslaitoksen maastotietokannan mukaisiin kivennäismaihin ja soihin.
+Jokaiselle kuva-alkiolle ennustetaan todennäköisin neljästä edellä mainitusta
+VMI:n päätyypistä. Siten ositteen sisällä voi olla sekä VMI:n mukaisia
+kivennäismaita että soita.
+
+Kasvupaikkatyyppiluokituksella eri metsäkasvillisuusvyöhykkeiden metsä- ja
+suotyypit ryhmitellään ravinteisuudeltaan ja puuntuotoskyvyltään
+yhdenmukaisiin luokkiin. Kansallisessa maankäyttöluokituksessa kaikki
+kivennäismailla olevat luokkien 1-6 kasvupaikkatyypit ovat metsämaata
+(kuva-alkio arvo 1 on lehto, 2 lehtomainen kangas, 3 tuore kangas, 4 kuivahko
+kangas, 5 kuiva kangas ja 6 karukkokangas). Seitsemäs luokka, kalliomaat ja
+hietikot voivat olla myös kitu- tai joutomaata. Pohjois-Suomessa luokat 8
+(lakimetsät), 9 (tunturikoivikot) ja 10 (avotunturit) aina kitumaata tai
+joutomaata. Ojitetut (ojikko- ja muuttumasuot sekä turvekankaat) ja
+ojittamattomat korvet, rämeet että avosuot luokitetaan kuuteen
+kasvupaikkaluokkaan riippumatta maaluokasta. Luokat ovat lehtomaiset ja
+lettosuot (1), ruohoiset suot (2), suursaraiset ja mustikkaiset suot (3),
+piensaraiset ja puolikkaiset suot (4), tupasvillaiset ja isovarpuiset suot (5)
+sekä rahkaiset suot (6). Sekä satelliittikuvat että VMI -koealat ositetaan
+ennen analyysia Maanmittauslaitoksen maastotietokannan mukaisiin
+kivennäismaihin, puustoisiin soihin ja avosoihin. Jokaiselle kuvanalkiolle on
+ennustettu karttaositteen sisällä todennäköisin kasvupaikkatyyppi. Siten
+karttaositteen sisällä voi olla sekä VMI:n mukaisia kivennäismaita että soita.
+
+Kuva-alkion tasolla ennustevirhe on suurehko, mutta pienenee alueen koon
+kasvaessa. Teemojen kuvanalkiokohtainen keskivirhe vaihtelee alueen
+sijainnista, puuston tilavuudesta ja kasvupaikasta riippuen.
+
+Seuraavat virhearviot perustuvat vuoden 2009 MVMI-tuotteeseen.
+
+Tilavuusteemojen keskimääräiset virheet kuutiometreinä/ha on esitetty alla
+kuusikoina (puulajiryhmä puutavaralaji Etelä-Suomi/kivennäismaa
+Etelä-Suomi/suo Pohjois-Suomi/kivennäismaa Pohjois-Suomi/suo):
+kaikki	kaikki	86	66	47	32
+mänty	kaikki	63	53	40	26
+manty	tukki	39	29	19	7
+mänty	kuitu	40	37	30	22
+kuusi	kaikki	63	37	27	12
+kuusi	tukki	43	23	12	3
+kuusi	kuitu	33	21	18	10
+koivu	kaikki	32	30	19	16
+koivu	tukki	10	7	2	1
+koivu	kuitu	25	25	17	13
+lehtipuu	kaikki	22	10	8	4
+lehtipuu	tukki	7	3	2	1
+lehtipuu	kuitu	16	8	7	2
+
+Biomassojen kuvanalkiotason keskivirheiden (yksikkö 10 kg/ha) suuruusluokka on
+seuraavassa kuusikoina (puulajiryhmä biomassaosite Etelä-Suomi/kivennäismaa
+Etelä-Suomi/suo Pohjois-Suomi/kivennäismaa Pohjois-Suomi/suo):
+mänty	runko ja kuori	2400	2100	1500	980
+mänty	elävät oksat	400	350	350	230
+mänty	kuolleet oksat	95	85	71	52
+mänty	neulaset 	150	140	140	100
+mänty	kannot		190	170	140	94
+mänty	juuret		590	500	410	250
+mänty	hukkapuu	200	220	190	220
+kuusi	runko ja kuori	2300	1400	1000	450
+kuusi	elävät oksat	550	340	340	150
+kuusi	kuolleet oksat	100	63	48	23
+kuusi	neulaset 	360	250	230	110
+kuusi	kannot		210	120	110	48
+kuusi	juuret		760	470	430	200
+kuusi	hukkapuu	19	18	16	14
+lehtipuu	runko ja kuori	9	8	8	6
+lehtipuu	elävät oksat	31	35	50	46
+lehtipuu	kuolleet oksat	62	52	40	25
+lehtipuu	lehvästö 	58	47	41	35
+lehtipuu	kannot		9	8	6	6
+lehtipuu	juuret		85	66	47	31
+lehtipuu	hukkapuu	39	29	18	7
+
+Muiden jatkuva-arvoisten teemojen kuvanalkiotason keskivirheiden suuruusluokka
+on seuraavassa kuusikoina (muuttuja Etelä-Suomi/kivennäismaa Etelä-Suomi/suo
+Pohjois-Suomi/kivennäismaa Pohjois-Suomi/suo, yksikkö):
+ikä		32	35	50	47	a
+pohjapinta-ala	9	8	6	6	m3/ha
+keskipituus		59	47	42	35	dm
+keskiläpimitta		9	8	8	6	cm
+latvuspeittävyys		20	18	16	14	%
+lehtip. latvuspeittävyys	15	12	11	10	%
+
+Maaluokkateemassa oikein luokitettujen kuva-alkioiden osuus on keskimäärin 92%
+kun luokitusta verrataan VMI:n maastoluokitukseen. Metsämaaksi luokitetuista
+kuva-alkioista keskimäärin 98% on VMI:n mukaista metsämaata, kun taas VMI:n
+mukaisesta metsämaasta 95% on luokitettu metsämaaksi. Kitumaan osalta
+vastaavat osuudet ovat 38% ja 50% ja joutomaasta 74% ja 87%.
+
+Päätyyppiteemassa (kangas, korpi, räme, avosuo) luokka on oikein 84%:lla
+kuva-alkiosta. 95% kankaiksi luokitetuista on VMI:n maastoluokituksen mukaan
+kankaita, kun taas VMI:n mukaisista kankaista 88% on luokitettu
+kankaiksi. Korpien vastaavat luvut ovat 20% ja 45%, rämeiden 76% ja 76% ja
+avosoiden 71% ja 84%.
+
+Kasvupaikkaluokitus on vaativaa maastossakin ja luokituserot henkilöiden
+välillä yleisiä. Kasvupaikkateeman kuva-alkiosta noin 50%:lla
+kasvupaikkaluokka on sama kuin VMI:n maastoluokituksessa. Ero on useimmiten
+kuitenkin vain yhden luokan suuruinen. Erot ovat yleisimpiä lehdoissa,
+lehtomaisilla soilla ja letoilla ja toisaalta karuilla kasvupaikoilla,
+karukkokankailla ja rahkaisilla soilla. MVMI:n ja VMI:n luokitukset ovat
+useimmiten yhteneviä tuoreilla kankailla ja vastaavilla soilla eli
+suursaraisilla ja mustikkaisilla soilla. Tähän luokkaan luokitetuista
+kuva-alkioista 60-65% kuuluu VMI:n maastoluokituksen mukaiseen luokkaan, kun
+taas maastoluokituksen mukaan ko. luokan kuva-alkioista 60% on luokitettu
+oikein.
+
+Luokkamuuttujien kohdalla on huomattava, että aluetasolla
+pinta-alaestimaattien virheet ovat edellä mainittuja pienempiä.
+
+Lisää tietoja menetelmistä ja luotettavuudesta on esimerkiksi julkaisuissa
+
+Tomppo, E., Haakana, M., Katila, M. &amp; Peräsaari, J. 2008. Multi-source
+national forest inventory - Methods and applications. Managing Forest
+Ecosystems 18. Springer. 374 p. ISBN 978-1-4020-8712-7,
+
+Mäkisara, K., Katila, M., Peräsaari, J. &amp; Tomppo, E. 2016. The Multi-Source
+National Forest Inventory of Finland – methods and results 2013. Natural
+resources and bioeconomy studies 10/2016, Natural Resources Institute
+Finland. 215 s. http://urn.fi/URN:ISBN:978-952-326-186-0
+
+Tomppo, E. &amp; Halme, M. 2004. Using coarse scale forest variables as ancillary
+information and weighting of variables in k-NN estimation: a genetic algorithm
+approach. Remote Sensing of Environment 92: 1-20.
+
+Lisää tietoa Suomen monilähteisestä valtakunnan metsien inventoinnista on
+sivuilla
+https://www.luke.fi/tietoa-luonnonvaroista/metsa/metsavarat-ja-metsasuunnittelu/metsavarakartat-ja-kuntatilastot/</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">The first country level estimates correspond to years 1990-1994. The most
+recent versions are from years 2005, 2007, 2009, 2011 and 2013.
+The first set of the products freely available are from year
+2009. The new set of the products will be produced annually or biannually in
+the future. The map from products are in a raster format with a pixel size of
+16m x 16m and in ETRS-TM35FIN coordinate system. The products cover the combined
+land categories forest land, poorly productive forest land and unproductive
+land. The other land categories as well as water bodies have been delineated
+out using the elements of topographic database of the Land Survey of Finland.
+
+For the 2013 products, in total 57563 NFI field plots were used, locating
+either on forest land, poorly productive forest land or unproductive
+land. The satellite image data consisted of 41 Landsat 8 OLI images and
+four IRS-P6/Resourcesat 1 LISS-III images.
+
+The field data in the 2013 products were up-dated to correspond
+the situation on 31 July, 2013. The length of the up-dating period was
+calculated for each field plot from the date of the field measurement to the
+up-dating date 31 July, 2013. The start of the tree growth was supposed to be
+on May 1.
+
+The relative increment of the volume of the growing stock in a forest stand
+was calculated using the models by Nyyssönen and Mielikäinen (1978) for pine
+(Pinus silvestris) and spruce (Picea abies). The models for pine were used for
+broad-leaved trees. The volume increments were calculated by stand layers in
+case of multi-layer stands. The proportions of volumes by layers were estimated
+proportionally to the quantity the basal area of the layer multiplied by the
+mean height of the layer.
+
+Regeneration cuttings on the field plots were assessed using satellite images
+and, in some cases, with aerial photographs. The stand data of the plots cut
+were changed to stand data for open area plots. The final volume increments
+were calibrated in such a way that the volumes by tree species on July 31,
+2013, was the same as that given by the regression line estimated from field
+data alone.
+
+For the relative height increment, diameter increment and basal area
+increment, simple fixed parameter regression models were estimated using data
+from the permanent sample plots of NFI10.
+The models were used in a similar way as the volume models.
+The biomass estimates by field plots and biomass compartments
+were up-dated proportionally to the volume changes.
+
+For a cover as complete as possible from the entire country, the 2011 product
+has been completed by the data estimates from the recent years. The product
+thus consists of the following sub-products:
+1. The estimates from 2013, the NFI field data from 2003-2013 updated to 31.7.2013 and the satellite images from 2012-2014
+2. The estimates from 2011, the NFI field data from 2007-2011 updated to 31.7.2011 and the satellite images from 2009-2012,
+3. The estimates from 2009, the NFI field data from 2006-2010 and the satellite images from 2009-2010,
+4. The estimates for about the municipalities Inari and Utsjoki in North Lapland, the NFI field data from 2003 and the satellite images from 2009,
+5. The estimates for about municipality Enontekiö in North Lapland, the NFI field data from 2003 and the satellite images from 2000,
+6. The estimates from 2007, the NFI field data from 2005-2008 and the satellite images from 2005-2007.
+
+Data source index, MS-NFI-2013, has been added to the product to indicate the
+source of the estimates.
+
+The map form estimates were made using the improved k-Nearest Neighbour method
+(ik-NN method). The value of five for k was used most frequently. The weights
+of the features in the ik-NN method are sought using an optimization method
+based on genetic algorithm. Coarse scale estimates of forest variables were
+used as the supplementary data. The volumes by tree species groups were
+selected as the variables. The purpose is to direct the selection of the
+neighbours, on the average, to forests similar to the target pixel (see the
+references below). The estimation was made separately for mineral soils, mires
+and open bogs and fens. The stratification of both the satellite image and the
+field plots were made using the topographic map data of Land Survey Finland.
+
+The product consists of 44 theme maps in raster format plus data source
+index. These can be grouped as follows:
+
+The volume of growing stock is available as a total for all tree species and
+broken down into tree species groups (Scots pine, Norway spruce, Birch, Other
+broad leaved trees) and into timber assortments (saw timber, pulpwood). The
+group Scots Pine includes other coniferous species than Norway Spruce, and the
+group Birch includes Betula pubescens and Betula pendula. The volume of a tree
+is defined as the volume of the stem wood above stump until the top of the
+tree. The volume of a tree in the field data is estimated using the parameters
+measured in the field and the volume models. The unit and class interval of
+the volume is 1 m3/ha in the products available for downloading.
+
+The biomass of the growing stock has been estimated and is available by tree
+species groups and by seven tree compartments. The biomass of stem and bark of
+a tree is defined as the biomass of the stem above bark and above stump until
+the top of the tree. The biomass of the living branches includes the biomass
+of the living branches without needles or leaves. The biomass of the dead
+branches includes the biomass of the dead branches possibly left in a living
+tree. The foliage biomass includes the biomass of the living needles or
+leaves. The biomass of stumps includes the biomass of the above and below
+ground stump parts without roots. The root biomass includes the biomass of the
+living roots with a diameter of at least 1 cm. The biomass of stem residual is
+defined as that part of the stem biomass that can not be used as timber or
+pulpwood due it size or quality.
+
+The biomasses of the sample trees on a NFI field plot are calculated from the
+living sample trees belonging to a plot using the wood density models (Repola
+et al. 2007) and biomass models (Repola 2008, 2009). The biomasses of the
+trees called tally trees are estimated using the estimates of the sample trees
+(with more parameters measured) and the parameters of tally trees and
+stands. The unit of the biomass in the maps available for downloading is 10 kg/ha.
+
+The basal area of the growing stock on a forest stand is the cross section
+area of the tree stems of a stand per hectare and measured at a height of 1.3
+m. The basal area is measured in the field for the field plot stands on forest
+land and poorly productive forest land in the classes of 1 m2/ha.
+
+The age of the growing stock on a forest stand is the weighted average of the
+trees, the basal area of the tree as the weight. The age is assessed in the
+field for the field plot stands on forest land and poorly productive forest
+land in the classes of one year.
+
+The mean height of the trees on a forest stand is the height of the basal area
+median tree for the development classes young thinning stand or more mature
+stands. It is about the same as the basal area weighted average height. For
+seedling stands, the mean height is the average height of the dominant and
+co-dominant seedlings. The mean height is assessed in the field in the classes
+of 1 dm.
+
+The mean diameter of trees is assessed at a height of 1.3 metres and is the
+the diameter of the basal area median tree. It is about the same as the
+weighted average diameter, the basal area of a tree as the weight. It is
+assessed for the field plot stands on forest land and poorly productive forest
+land in the classes of 1 cm.
+
+The canopy cover of trees is the vertical projection area on the horizontal
+plane of the canopies of the individual trees on a field plot (without double
+counting the overlapping canopies). In NFI10, it was assessed in the field as
+a shares (0-99%) on a fixed radius plot. For the NFI11 plots, it was estimated
+using k-NN method and the NFI10 plot data. In North Lapland in NFI9, the
+canopy cover was assessed in three categories if the plot was either on forest
+land, poorly productive forest land or unproductive land. A regression model
+was constructed to estimate the cover in the classes of one percent.
+
+The canopy cover proportion of broad leaved trees is derived from the total
+cover using the volume of the growing stock. In the seedling stands the canopy
+cover of broad leaved trees is assessed using the shares of the stem numbers.
+
+The theme "Land class" divides forestry land into sub-categories forest land
+(pixel value 1), poorly productive forest land (2), unproductive land (3) and
+other forestry land: forestry roads, forest depots, etc. Outside forestry land,
+the land class describes land use. In the present themes, the combined
+mask of forest land, poorly productive forest land and unproductive land is
+based on the topographic database from the National Land Survey. One
+of three land categories is estimated for the pixels inside the three mask
+categories. The "Land Class based on FAO FRA" divides forest into four
+categories based on the definition of the United Nations FAO Global
+Forest Resource Assessment (FRA): forest (1), other wooded land (2),
+other land (3) and other land with tree cover (4)
+
+The main site class divides the forest land, poorly productive land and waste
+land into mineral soils (1) and peatlands, and further divides the peatlands
+into spruce mires (2), pine mires (3) and treeless mires (4). Both the satellite
+images and the NFI field plots are stratified to mineral soils and peatlands
+before analysis according to the topograhic database from the National
+Land Survey. The most probable of the four NFI main site classes is
+predicted for each pixel within these strata. This means that each stratum
+may include both mineral soils and peatlands according to the NFI classification.
+
+The site fertility classes are used for grouping the forest by vegetation
+zones into uniform classes according to their site fertility and wood
+production capacity. In national land-use classification, all stands on
+mineral soil with site fertility class in 1 - 6 were classified as forest land
+(1 is herb rich sites, 2 is herb rich heath forests, 3 is mesic forests, 4 is
+sub-xeric forests, 5 is xeric forests, 6 is barren forests). Class 7 (rocky
+and sandy soils and alluvial lands) can be forest land, poorly productive
+forest land, or unproductive land, and class 8 (summit and fjeld land with
+single coniferous trees) either poorly productive forest land or unproductive
+land. Classes 9 (mountain birch dominated fjelds) and 10 (Open fjelds) are
+poorly productive forest land or unproductive land. Both natural and drained
+peatlands are classified into six site fertility classes independently of the
+land class. Class 1 includes euthropic mines and fens, 2 mesothropic mires and
+fens, 3 meso-oligothropic mires, 4 oligothropic mires, 5 oligo-ombothropic
+mires and 6 Sphagnum fuscum dominated mires. Both the field plots and
+satellite images are stratified prior the analyses into three strata, mineral
+soil, pine mires and spruce mires, treeless peatland . The site fertility
+class is estimated for each pixel as the most likely site fertility
+class. Thus in the products, each NFI field data based category can occur
+within each map based stratum.
+
+The estimation errors at pixel level are rather high but decrease when the
+area in question increases, i.e., when the area of interest consists of
+several pixels. The errors vary by the themes and depend also on the actual
+value in the field, for example on the volume of growing stock and the site
+fertility class.
+
+The following error estimates are based on the MS-NFI 2009 product.
+
+The magnitude of the average errors of the volume estimates at pixel level are
+presented below (SF = South Finland, NF = North Finland, min = mineral soil,
+peat = peatland):
+
+species group	assort. SF/min	SF/peat	NF/min	NF/peat
+all 		all	86	66	47	32
+pine		all	63	53	40	26
+pine		saw t. 	39	29	19	7
+pine		pulpw. 	40	37	30	22
+spruce		all	63	37	27	12
+spruce		saw t. 	43	23	12	3
+spruce		pulpw. 	33	21	18	10
+birch		all	32	30	19	16
+birch		saw t. 	10	7	2	1
+birch		pulpw. 	25	25	17	13
+other br. l.   	all	22	10	8	4
+other br. l.    saw t. 	7	3	2	1
+other br. l.    pulpw. 	16	8	7	2
+
+The magnitude of the average error of the biomass estimates at pixel level are
+presented below (SF = South Finland, NF = North Finland, min = mineral soil,
+peat = peatland):
+
+tree species	compartment	SF/min	SF/peat	NF/min	NF/peat
+pine		stem and bark	2400	2100	1500	980
+pine		living branches	400	350	350	230
+pine		dead branches	95	85	71	52
+pine		foliage 	150	140	140	100
+pine		stump		190	170	140	94
+pine		roots		590	500	410	250
+pine		stem residual	200	220	190	220
+spruce		stem and bark	2300	1400	1000	450
+spruce		living branches	550	340	340	150
+spruce		dead branches	100	63	48	23
+spruce		foliage 	360	250	230	110
+spruce		stump		210	120	110	48
+spruce		roots		760	470	430	200
+spruce		stem residual	19	18	16	14
+broad leaved	stem and bark	9	8	8	6
+broad leaved	living branches	31	35	50	46
+broad leaved	dead branches	62	52	40	25
+broad leaved	foliage 	58	47	41	35
+broad leaved	stump		9	8	6	6
+broad leaved	roots		85	66	47	31
+broad leaved	stem residual	39	29	18	7
+
+The magnitude of the average error of the estimates of the other continuous
+variables at pixel level are presented below (SF = South Finland, NF = North
+Finland, min = mineral soil, peat = peatland):
+
+theme			SF/min	SF/peat	NF/min	NF/peat	unit
+age			32	35	50	47	a
+basal area		9	8	6	6	m3/ha
+mean height 		59	47	42	35	dm
+mean diameter		9	8	8	6	cm
+canopy cover		20	18	16	14	%
+canopy cover of br. l.	15 	12 	11	10	%
+
+The overall accuracy (OA) at pixel level of the land class is on the average
+92% when the classification is compared to that based on the NFI field
+data. The user accuracy (UA) of the category forest land is on average 98%
+while the producers accuracy (PA) is on average 95%. The corresponding figures
+on poorly productive forest land are 38% and 50% and on unproductive land 74%
+and 87%.
+
+The pixel level OA of main site class (mineral soil, spruce mire, pine mire,
+treeless mire) is 84%. For the category mineral soil, UA is 95% and PA
+88%. The corresponding figures for spruce mires are 20% and 45%, for pine
+mires 76% and 76% and for treeless mires 71% and 84%.
+
+The assessment of site fertility is very challenging even in the field and the
+results vary by the assessors (field crew leaders). For site fertility class,
+OA is 50% as compared to the NFI field data. In most cases, the difference was
+not more than one class. The differences were most frequent on one hand for
+the categories herb rich sites and herb rich heath forests and for the
+corresponding peatland sites, and on the other for poor mineral soil sites and
+for ombrotrophic peatlands. The accuracies are highest for mesic forest and
+for the corresponding peatland sites (meso-oligotrophic peatlands). In this
+category, UA is 60-65% and PA 60% when compared to the result based on the NFI
+field data.
+
+The errors of estimates at areal level are lower than the errors presented above.
+
+More information about the methods and the accuracies are given in the publications, e.g.:
+
+Tomppo, E., Haakana, M., Katila, M. &amp; Peräsaari, J. 2008. Multi-source
+national forest inventory - Methods and applications. Managing Forest
+Ecosystems 18. Springer. 374 p. ISBN 978-1-4020-8712-7,
+
+Mäkisara, K., Katila, M., Peräsaari, J. &amp; Tomppo, E. 2016. The Multi-Source
+National Forest Inventory of Finland – methods and results 2013. Natural
+resources and bioeconomy studies 10/2016, Natural Resources Institute
+Finland. 215 s. http://urn.fi/URN:ISBN:978-952-326-186-0
+
+Tomppo, E. &amp; Halme, M. 2004. Using coarse scale forest variables as
+ancillary information and weighting of variables in k-NN estimation: a genetic
+algorithm approach. Remote Sensing of Environment 92: 1-20.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:statement>
+          </gmd:LI_Lineage>
+        </gmd:lineage>
+      </gmd:DQ_DataQuality>
+    </gmd:dataQualityInfo>
+  </gmd:MD_Metadata>
+</csw:GetRecordByIdResponse>
+

@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csw:GetRecordByIdResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
+  <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gml="http://www.opengis.net/gml" xmlns:geonet="http://www.fao.org/geonetwork" xsi:schemaLocation="http://www.isotc211.org/2005/gmd ../../../../web/geonetwork/xml/schemas/iso19139/schema.xsd">
+    <gmd:fileIdentifier>
+      <gco:CharacterString>44c4b160-2d5c-4acb-8d6a-38712592db30</gco:CharacterString>
+    </gmd:fileIdentifier>
+    <gmd:language>
+      <gco:CharacterString>fin</gco:CharacterString>
+    </gmd:language>
+    <gmd:hierarchyLevel>
+      <gmd:MD_ScopeCode codeListValue="dataset" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" />
+    </gmd:hierarchyLevel>
+    <gmd:hierarchyLevelName>
+      <gco:CharacterString>Aineisto</gco:CharacterString>
+    </gmd:hierarchyLevelName>
+    <gmd:contact>
+      <gmd:CI_ResponsibleParty>
+        <gmd:organisationName xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Luonnonvarakeskus</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Luonnonvarakeskus</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:organisationName>
+        <gmd:contactInfo>
+          <gmd:CI_Contact>
+            <gmd:address>
+              <gmd:CI_Address>
+                <gmd:electronicMailAddress xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>perttu.anttila@luke.fi</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">perttu.anttila@luke.fi</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:electronicMailAddress>
+              </gmd:CI_Address>
+            </gmd:address>
+          </gmd:CI_Contact>
+        </gmd:contactInfo>
+        <gmd:role>
+          <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact" />
+        </gmd:role>
+      </gmd:CI_ResponsibleParty>
+    </gmd:contact>
+    <gmd:dateStamp>
+      <gco:DateTime>2019-02-20T13:17:59</gco:DateTime>
+    </gmd:dateStamp>
+    <gmd:locale>
+      <gmd:PT_Locale id="EN">
+        <gmd:languageCode>
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+        </gmd:languageCode>
+        <gmd:characterEncoding>
+          <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+        </gmd:characterEncoding>
+      </gmd:PT_Locale>
+    </gmd:locale>
+    <gmd:locale>
+      <gmd:PT_Locale id="FI">
+        <gmd:languageCode>
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="fin" />
+        </gmd:languageCode>
+        <gmd:characterEncoding>
+          <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+        </gmd:characterEncoding>
+      </gmd:PT_Locale>
+    </gmd:locale>
+    <gmd:referenceSystemInfo>
+      <gmd:MD_ReferenceSystem>
+        <gmd:referenceSystemIdentifier>
+          <gmd:RS_Identifier>
+            <gmd:code gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>ETRS89 / TM35FIN(E,N) (EPSG:3067)</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">ETRS89 / TM35FIN(E,N) (EPSG:3067)</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:code>
+            <gmd:codeSpace>
+              <gco:CharacterString>EPSG</gco:CharacterString>
+            </gmd:codeSpace>
+            <gmd:version>
+              <gco:CharacterString>8.6</gco:CharacterString>
+            </gmd:version>
+          </gmd:RS_Identifier>
+        </gmd:referenceSystemIdentifier>
+      </gmd:MD_ReferenceSystem>
+    </gmd:referenceSystemInfo>
+    <gmd:identificationInfo>
+      <gmd:MD_DataIdentification>
+        <gmd:citation>
+          <gmd:CI_Citation>
+            <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Pienpuun korjuupotentiaali</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Pienpuun korjuupotentiaali</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Small-diameter trees</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:title>
+            <gmd:date>
+              <gmd:CI_Date>
+                <gmd:date>
+                  <gco:Date>2017-02-02</gco:Date>
+                </gmd:date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeListValue="creation" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" />
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+            <gmd:identifier>
+              <gmd:RS_Identifier>
+                <gmd:code>
+                  <gco:CharacterString>1001028</gco:CharacterString>
+                </gmd:code>
+                <gmd:codeSpace>
+                  <gco:CharacterString>FI</gco:CharacterString>
+                </gmd:codeSpace>
+              </gmd:RS_Identifier>
+            </gmd:identifier>
+          </gmd:CI_Citation>
+        </gmd:citation>
+        <gmd:abstract xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Metsähakkeen korjuupotentiaali kuvaa metsähakkeen raaka-aineiden teknistä potentiaalia eli hankintamahdollisuutta. Tekninen potentiaali on suurin mahdollinen määrä pienpuuta, joka voitaisiin korjata noudattaen energiapuun korjuuohjeita. Tekninen potentiaali ei kuvaa metsähakkeen saatavuutta, joka riippuu mm. metsänomistajan myyntihalukkuudesta ja kilpailutilanteesta. 
+
+Potentiaalit on laskettu nuorista metsistä saatavalle pienpuulle viidellätoista yhden tai kaksi maakuntaa käsittävällä laskenta-alueella (Koljonen ym. 2017). Pienpuuta korjataan varttuneiden taimikoiden hoidon ja ensiharvennusten yhteydessä. Puuston pienen koon vuoksi taimikonhoidosta saatavan metsähakkeen hankintapotentiaali on kuitenkin mitätön, joten laskelmassa on mukana vain ensiharvennuksista saatava metsähakkeen hankintapotentiaali. Potentiaalit laskettiin Luonnonvarakeskuksen MELA-mallilla (Redsven ym. 2013), jolla simuloitiin metsänhoito- ja energiapuun korjuu ohjeiden (Koistinen ym. 2016, Äijälä ym. 2014) mukaisia metsien käsittely- ja kehitysvaihtoehtoja. Toimenpidevaihtoehtoina nuorissa metsissä oli ainespuun korjuu sekä energiapuun korjuu rankana, kokopuuna tai integroituna ainespuun korjuun kanssa. Laskelmissa hakkuu toteutettiin ensimmäisen kymmenvuotiskauden aikana aina, kun se oli metsänhoitosuositusten mukaan mahdollista. Näin laskettuun pienpuupotentiaaliin sisältyy myös mittojensa puolesta materiaalikäyttöön soveltuvaa puuta. Tämän vuoksi esitetään kaksi potentiaaliarviota: 
+-Läpimitta alle 10 cm
+-Läpimitta alle 14 cm.
+Ensimmäiseen on luettu mukaan ne puut, joiden läpimitta rinnan korkeudella on alle 10,5 cm, ja toiseen ne, joiden läpimitta on alle 14,5 cm.
+
+Seuraavaksi maakunnittaiset potentiaalit levitettiin karttamuotoon puuntuotannon metsämaalle 1 km x 1 km hilaan. Puuntuotannon metsämaa määriteltiin tässä siten, että Monilähteisen Valtakunnan Metsien Inventoinnin (MVMI) vuoden 2013 aineistoon perustuen valittiin metsämaa-alueet, joista poistettiin suojelu- ja suojeluohjelma-alueet sekä Metsähallituksen omalla päätöksellä suojelemat ja erillissopimuksin puuntuotannon ulkopuolelle jätetyt alueet.
+
+Hila-aineistosta valittiin ne pikselit, joiden katsottiin edustavan pienpuun korjuukohteita seuraavien ehtojen mukaisesti:
+•	puuston keskiläpimitta ≥ 8 cm
+•	runkoluku ≥ 1500 / ha
+•	keskipituus &lt; 10,5 m Lapin maakunnassa ja keskipituus &lt; 12,5 m muualla.
+Tämän jälkeen pienpuupotentiaali jaettiin näille pikseleille painottaen MVMI:n runkopuun biomassalla.
+
+
+Viitteet
+
+Avoin tieto. 2016. Internet-portaali. Suomen ympäristökeskus. Saatavissa: http://www.syke.fi/avointieto.
+Avoimien aineistojen tiedostopalvelu. 2015. Internet-portaali. Luonnonvarakeskus. Saatavissa: http://kartta.metla.fi/.
+Koljonen, T., Soimakallio, S., Asikainen, A., Lanki, T., Anttila, P., Hildén, M., Honkatukia, J., Karvosenoja, N., Lehtilä, A., Lehtonen, H., Lindroos, T.J., Regina, K., Salminen, O., Savolahti, M. &amp; Siljander, R. 2017. Energia ja ilmastostrategian vaikutusarviot: Yhteenvetoraportti. Valtioneuvoston selvitys- ja tutkimustoiminnan julkaisusarja 21/2017. 106 s. Saatavissa: http://tietokayttoon.fi/julkaisu?pubid=16902.
+MetINFO. 2014. MetINFO – Metsätietopalvelut. Saatavissa: http://www.metla.fi/metinfo.
+Redsven, V., Hirvelä, H., Härkönen, K., Salminen, O., Siitonen, M. 2013. MELA2012 Reference Manual (2nd edition). Finnish Forest Research Institute. 666 p. (Saatavissa: http://mela2.metla.fi/mela/julkaisut/oppaat/mela2012_2nd_ed.pdf).
+Äijälä, O., Kuusinen, M. &amp; Koistinen, A. 2010. Hyvän metsänhoidon suositukset energiapuun korjuuseen ja kasvatukseen. Metsätalouden kehittämiskeskus Tapio. 31 s. Saatavissa: http://www.tapio.fi/files/tapio/Aineistopankki/Energiapuusuositukset_verkkoon.pdf.</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Metsähakkeen korjuupotentiaali kuvaa metsähakkeen raaka-aineiden teknistä potentiaalia eli hankintamahdollisuutta. Tekninen potentiaali on suurin mahdollinen määrä pienpuuta, joka voitaisiin korjata noudattaen energiapuun korjuuohjeita. Tekninen potentiaali ei kuvaa metsähakkeen saatavuutta, joka riippuu mm. metsänomistajan myyntihalukkuudesta ja kilpailutilanteesta. 
+
+Potentiaalit on laskettu nuorista metsistä saatavalle pienpuulle viidellätoista yhden tai kaksi maakuntaa käsittävällä laskenta-alueella (Koljonen ym. 2017). Pienpuuta korjataan varttuneiden taimikoiden hoidon ja ensiharvennusten yhteydessä. Puuston pienen koon vuoksi taimikonhoidosta saatavan metsähakkeen hankintapotentiaali on kuitenkin mitätön, joten laskelmassa on mukana vain ensiharvennuksista saatava metsähakkeen hankintapotentiaali. Potentiaalit laskettiin Luonnonvarakeskuksen MELA-mallilla (Redsven ym. 2013), jolla simuloitiin metsänhoito- ja energiapuun korjuu ohjeiden (Koistinen ym. 2016, Äijälä ym. 2014) mukaisia metsien käsittely- ja kehitysvaihtoehtoja. Toimenpidevaihtoehtoina nuorissa metsissä oli ainespuun korjuu sekä energiapuun korjuu rankana, kokopuuna tai integroituna ainespuun korjuun kanssa. Laskelmissa hakkuu toteutettiin ensimmäisen kymmenvuotiskauden aikana aina, kun se oli metsänhoitosuositusten mukaan mahdollista. Näin laskettuun pienpuupotentiaaliin sisältyy myös mittojensa puolesta materiaalikäyttöön soveltuvaa puuta. Tämän vuoksi esitetään kaksi potentiaaliarviota: 
+-Läpimitta alle 10 cm
+-Läpimitta alle 14 cm.
+Ensimmäiseen on luettu mukaan ne puut, joiden läpimitta rinnan korkeudella on alle 10,5 cm, ja toiseen ne, joiden läpimitta on alle 14,5 cm.
+
+Seuraavaksi maakunnittaiset potentiaalit levitettiin karttamuotoon puuntuotannon metsämaalle 1 km x 1 km hilaan. Puuntuotannon metsämaa määriteltiin tässä siten, että Monilähteisen Valtakunnan Metsien Inventoinnin (MVMI) vuoden 2013 aineistoon perustuen valittiin metsämaa-alueet, joista poistettiin suojelu- ja suojeluohjelma-alueet sekä Metsähallituksen omalla päätöksellä suojelemat ja erillissopimuksin puuntuotannon ulkopuolelle jätetyt alueet.
+
+Hila-aineistosta valittiin ne pikselit, joiden katsottiin edustavan pienpuun korjuukohteita seuraavien ehtojen mukaisesti:
+•	puuston keskiläpimitta ≥ 8 cm
+•	runkoluku ≥ 1500 / ha
+•	keskipituus &lt; 10,5 m Lapin maakunnassa ja keskipituus &lt; 12,5 m muualla.
+Tämän jälkeen pienpuupotentiaali jaettiin näille pikseleille painottaen MVMI:n runkopuun biomassalla.
+
+
+Viitteet
+
+Avoin tieto. 2016. Internet-portaali. Suomen ympäristökeskus. Saatavissa: http://www.syke.fi/avointieto.
+Avoimien aineistojen tiedostopalvelu. 2015. Internet-portaali. Luonnonvarakeskus. Saatavissa: http://kartta.metla.fi/.
+Koljonen, T., Soimakallio, S., Asikainen, A., Lanki, T., Anttila, P., Hildén, M., Honkatukia, J., Karvosenoja, N., Lehtilä, A., Lehtonen, H., Lindroos, T.J., Regina, K., Salminen, O., Savolahti, M. &amp; Siljander, R. 2017. Energia ja ilmastostrategian vaikutusarviot: Yhteenvetoraportti. Valtioneuvoston selvitys- ja tutkimustoiminnan julkaisusarja 21/2017. 106 s. Saatavissa: http://tietokayttoon.fi/julkaisu?pubid=16902.
+MetINFO. 2014. MetINFO – Metsätietopalvelut. Saatavissa: http://www.metla.fi/metinfo.
+Redsven, V., Hirvelä, H., Härkönen, K., Salminen, O., Siitonen, M. 2013. MELA2012 Reference Manual (2nd edition). Finnish Forest Research Institute. 666 p. (Saatavissa: http://mela2.metla.fi/mela/julkaisut/oppaat/mela2012_2nd_ed.pdf).
+Äijälä, O., Kuusinen, M. &amp; Koistinen, A. 2010. Hyvän metsänhoidon suositukset energiapuun korjuuseen ja kasvatukseen. Metsätalouden kehittämiskeskus Tapio. 31 s. Saatavissa: http://www.tapio.fi/files/tapio/Aineistopankki/Energiapuusuositukset_verkkoon.pdf.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">The technical harvesting potential of small-diameter trees can be defined as the maximum potential procurement volume of small-diameter trees available from the Finnish forests based on the prevailing guidelines for harvesting of energy wood. 
+The potentials of small-diameter trees from early thinnings have been calculated for fifteen NUTS3-based Finnish regions covering the whole country (Koljonen et al. 2017). To begin with the estimation of the region-level potentials, technical harvesting potentials were estimated using the sample plots of the eleventh national forest inventory (NFI11) measured in the years 2009–2013. First, a large number of sound and sustainable management schedules for five consecutive ten-year periods were simulated for each sample plot using a large-scale Finnish forest planning system known as MELA (Siitonen et al. 1996; Redsven et al. 2013). MELA simulations consisted of natural processes and human actions. The ingrowth, growth, and mortality of trees were predicted based on a set of distance-independent tree-level statistical models (e.g. Hynynen et al. 2002) included in MELA and the simulation of the stand (sample plot)-level management actions was based on the current Finnish silvicultural guidelines (Äijälä et al. 2014) and the guidelines for harvesting of energy wood (Koistinen et al. 2016).
+Simulated management actions for the small-tree fraction consisted of thinnings that fulfilled the following stand criteria:
+•	mean diameter at breast height ≥ 8 cm
+•	number of stems ≥ 1500 ha-1
+•	mean height &lt; 10.5 m (in Lapland) or mean height &lt; 12.5 m (elsewhere).
+Energy wood was harvested as delimbed (i.e. including the stem only) in spruce-dominated stands and peatlands and as whole trees (i.e. including stem and branches) elsewhere. When harvested as whole trees, a total of 30% of the original crown biomass was left onsite (Koistinen et al. 2016). Energy wood thinnings could be integrated with roundwood logging or carried out independently.
+Second, the technical energy wood potential of small trees was operationalized in MELA by maximizing the removal of thinnings in the first period. In this way, it was possible to pick out all small tree fellings simulated in the first period despite, for example, the profitability of the operation. However, a single logging event was rejected if the energy wood removal was lower than 25 m³ha-1 or the industrial roundwood removal of pine, spruce, or birch exceeded 45 m³ha-1. The potential calculated in this way contained also timber suitable for industrial roundwood. Therefore, two estimates are given:
+•	potential of trees below 10.5 cm in breast-height diameter
+•	potential of trees below 14.5 cm in breast-height diameter.
+Subsequently, the region-level potentials were spread on a raster grid at 1 km × 1 km resolution. Only grid cells on Forests Available for Wood Supply (FAWS) were considered in this operation. In this study, FAWS was defined as follows: First, forest land was extracted from the Finnish Multi-Source National Forest Inventory (MS-NFI) 2013 data (Mäkisara et al. 2016). Second, restricted areas were excluded from forest land. The restricted areas consisted of nationally protected areas (e.g. nature parks, national parks, protection programme areas) and areas protected by the State Forest Enterprise. In addition, some areas in northernmost Lapland restricted by separate agreements between the State Forest Enterprise and stakeholders were left out from the final data. Furthermore, for small trees, FAWS was further constrained by the stand criteria presented above to represent similar stand conditions for small-tree harvesting as in MELA. Finally, the region-level potentials were distributed to the grid cells by weighting with MS-NFI stem wood biomasses.
+
+References
+Äijälä O, Koistinen A, Sved J, Vanhatalo K, Väisänen P (2014) Metsänhoidon suositukset [Guidelines for sustainable forest management]. Metsätalouden kehittämiskeskus Tapion julkaisuja.
+Hynynen J, Ojansuu R, Hökkä H, Salminen H, Siipilehto J, Haapala P (2002) Models for predicting the stand development – description of biological processes in MELA system. The Finnish Forest Research Institute Research Papers 835.
+Koistinen A, Luiro J, Vanhatalo K (2016) Metsänhoidon suositukset energiapuun korjuuseen, työopas [Guidelines for sustainable harvesting of energy wood]. Metsäkustannus Oy, Helsinki.
+Koljonen T, Soimakallio S, Asikainen A, Lanki T, Anttila P, Hildén M, Honkatukia J, Karvosenoja N, Lehtilä A, Lehtonen H, Lindroos TJ, Regina K, Salminen O, Savolahti M, Siljander R (2017) Energia ja ilmastostrategian vaikutusarviot: Yhteenvetoraportti. [Impact assessments of the Energy and Climate strategy: The summary report.] Publications of the Government´s analysis, assessment and research activities 21/2017.
+Mäkisara K, Katila M, Peräsaari J, Tomppo E (2016) The Multi-Source National Forest Inventory of Finland – methods and results 2013. Natural resources and bioeconomy studies 10/2016.
+Redsven V, Hirvelä H, Härkönen K, Salminen O, Siitonen M (2013) MELA2012 Reference Manual. Finnish Forest Research Institute.
+Siitonen M, Härkönen K, Hirvelä H, Jämsä J, Kilpeläinen H, Salminen O, Teuri M (1996) MELA Handbook. Metsäntutkimuslaitoksen tiedonantoja 622. ISBN 951-40-1543-6.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:abstract>
+        <gmd:pointOfContact>
+          <gmd:CI_ResponsibleParty>
+            <gmd:organisationName xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Luonnonvarakeskus</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Luonnonvarakeskus</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:organisationName>
+            <gmd:contactInfo>
+              <gmd:CI_Contact>
+                <gmd:address>
+                  <gmd:CI_Address>
+                    <gmd:electronicMailAddress xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString>perttu.anttila@luke.fi</gco:CharacterString>
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#FI">perttu.anttila@luke.fi</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:electronicMailAddress>
+                  </gmd:CI_Address>
+                </gmd:address>
+              </gmd:CI_Contact>
+            </gmd:contactInfo>
+            <gmd:role>
+              <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="owner" />
+            </gmd:role>
+          </gmd:CI_ResponsibleParty>
+        </gmd:pointOfContact>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Metsävarat (puusto)</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Metsävarat (puusto)</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN" />
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Ei-Inspire</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Ei-Inspire</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Not-Inspire</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Energiavarat</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Energiavarat</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN" />
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Paikkatietohakemiston asiasanasto</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Paikkatietohakemiston asiasanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2010-02-03</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+                <gmd:identifier>
+                  <gmd:MD_Identifier>
+                    <gmd:code>
+                      <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.asiasanasto">geonetwork.thesaurus.external.theme.asiasanasto</gmx:Anchor>
+                    </gmd:code>
+                  </gmd:MD_Identifier>
+                </gmd:identifier>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:resourceConstraints>
+          <gmd:MD_Constraints>
+            <gmd:useLimitation xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Mainitse lähde (Luonnonvarakeskus</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Mainitse lähde (Luonnonvarakeskus</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:useLimitation>
+          </gmd:MD_Constraints>
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints>
+          <gmd:MD_LegalConstraints>
+            <gmd:accessConstraints>
+              <gmd:MD_RestrictionCode codeListValue="" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode" />
+            </gmd:accessConstraints>
+            <gmd:otherConstraints xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Ei muita rajoitteita.</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Ei muita rajoitteita.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:otherConstraints>
+          </gmd:MD_LegalConstraints>
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints>
+          <gmd:MD_SecurityConstraints>
+            <gmd:classification>
+              <gmd:MD_ClassificationCode codeListValue="unclassified" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ClassificationCode" />
+            </gmd:classification>
+          </gmd:MD_SecurityConstraints>
+        </gmd:resourceConstraints>
+        <gmd:spatialResolution>
+          <gmd:MD_Resolution>
+            <gmd:distance>
+              <gco:Distance uom="">1</gco:Distance>
+            </gmd:distance>
+          </gmd:MD_Resolution>
+        </gmd:spatialResolution>
+        <gmd:language>
+          <gco:CharacterString>fin</gco:CharacterString>
+        </gmd:language>
+        <gmd:topicCategory>
+          <gmd:MD_TopicCategoryCode>economy</gmd:MD_TopicCategoryCode>
+        </gmd:topicCategory>
+        <gmd:extent>
+          <gmd:EX_Extent>
+            <gmd:geographicElement>
+              <gmd:EX_GeographicBoundingBox>
+                <gmd:westBoundLongitude>
+                  <gco:Decimal>19.08886999</gco:Decimal>
+                </gmd:westBoundLongitude>
+                <gmd:eastBoundLongitude>
+                  <gco:Decimal>31.58671339</gco:Decimal>
+                </gmd:eastBoundLongitude>
+                <gmd:southBoundLatitude>
+                  <gco:Decimal>59.45414258</gco:Decimal>
+                </gmd:southBoundLatitude>
+                <gmd:northBoundLatitude>
+                  <gco:Decimal>70.09229321</gco:Decimal>
+                </gmd:northBoundLatitude>
+              </gmd:EX_GeographicBoundingBox>
+            </gmd:geographicElement>
+          </gmd:EX_Extent>
+        </gmd:extent>
+      </gmd:MD_DataIdentification>
+    </gmd:identificationInfo>
+    <gmd:distributionInfo>
+      <gmd:MD_Distribution>
+        <gmd:transferOptions>
+          <gmd:MD_DigitalTransferOptions>
+            <gmd:onLine>
+              <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                  <gmd:URL>https://biomassa-atlas.luke.fi</gmd:URL>
+                </gmd:linkage>
+                <gmd:protocol gco:nilReason="missing">
+                  <gco:CharacterString />
+                </gmd:protocol>
+              </gmd:CI_OnlineResource>
+            </gmd:onLine>
+          </gmd:MD_DigitalTransferOptions>
+        </gmd:transferOptions>
+      </gmd:MD_Distribution>
+    </gmd:distributionInfo>
+    <gmd:dataQualityInfo>
+      <gmd:DQ_DataQuality>
+        <gmd:scope>
+          <gmd:DQ_Scope>
+            <gmd:level>
+              <gmd:MD_ScopeCode codeListValue="series" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" />
+            </gmd:level>
+          </gmd:DQ_Scope>
+        </gmd:scope>
+        <gmd:report>
+          <gmd:DQ_DomainConsistency>
+            <gmd:result>
+              <gmd:DQ_ConformanceResult>
+                <gmd:specification>
+                  <gmd:CI_Citation>
+                    <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString>Tietotuotemäärittely: [MÄÄRITTELYN NIMI]</gco:CharacterString>
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#FI">Tietotuotemäärittely: [MÄÄRITTELYN NIMI]</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:title>
+                    <gmd:date>
+                      <gmd:CI_Date>
+                        <gmd:date>
+                          <gco:Date>2010-01-07</gco:Date>
+                        </gmd:date>
+                        <gmd:dateType>
+                          <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                        </gmd:dateType>
+                      </gmd:CI_Date>
+                    </gmd:date>
+                  </gmd:CI_Citation>
+                </gmd:specification>
+                <gmd:explanation xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>--- Selitys onko aineisto tietotuotemäärittelyn mukainen ---- --- Klikkaa sääntöjenmukaisuusaste, jos on määrittelyn mukainen ---</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">--- Selitys onko aineisto tietotuotemäärittelyn mukainen ---- --- Klikkaa sääntöjenmukaisuusaste, jos on määrittelyn mukainen ---</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:explanation>
+                <gmd:pass>
+                  <gco:Boolean>false</gco:Boolean>
+                </gmd:pass>
+              </gmd:DQ_ConformanceResult>
+            </gmd:result>
+          </gmd:DQ_DomainConsistency>
+        </gmd:report>
+        <gmd:lineage>
+          <gmd:LI_Lineage>
+            <gmd:statement xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>--- Tietoa aineiston prosessointihistoriasta ja laadusta ---</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">--- Tietoa aineiston prosessointihistoriasta ja laadusta ---</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:statement>
+          </gmd:LI_Lineage>
+        </gmd:lineage>
+      </gmd:DQ_DataQuality>
+    </gmd:dataQualityInfo>
+  </gmd:MD_Metadata>
+</csw:GetRecordByIdResponse>
+

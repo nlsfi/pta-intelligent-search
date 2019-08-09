@@ -12,7 +12,10 @@ import fi.maanmittauslaitos.pta.search.codelist.OrganisationNormaliser;
 import fi.maanmittauslaitos.pta.search.codelist.OrganisationNormaliserTextRewriter;
 import fi.maanmittauslaitos.pta.search.csw.CSWHarvesterSource;
 import fi.maanmittauslaitos.pta.search.csw.LocalCSWHarvesterSource;
-import fi.maanmittauslaitos.pta.search.documentprocessor.*;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
+import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
+import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
@@ -30,11 +33,8 @@ import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.vocabulary.SKOS;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
-import org.w3c.dom.Node;
 
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathException;
 import java.io.*;
 import java.net.URL;
 import java.text.ParseException;
@@ -67,7 +67,7 @@ public class HarvesterConfig {
 	}
 
 
-	public DocumentProcessor getCSWRecordProcessor() throws ParserConfigurationException, IOException  {
+	public DocumentProcessor getCSWRecordProcessor() throws ParserConfigurationException, IOException {
 		ISOMetadataExtractorConfigurationFactory factory = new ISOMetadataExtractorConfigurationFactory();
 
 		// Basic configuration
@@ -191,8 +191,8 @@ public class HarvesterConfig {
 		orgRewriter.setOrganisationNormaliser(organisationNormaliser);
 
 		FieldExtractorConfiguration fec = configuration.getFieldExtractor(ISOMetadataFields.ORGANISATIONS);
-		XPathFieldExtractorConfiguration x = (XPathFieldExtractorConfiguration)fec;
-		ResponsiblePartyXPathCustomExtractor rpxpce = (ResponsiblePartyXPathCustomExtractor)x.getCustomExtractor();
+		XPathFieldExtractorConfiguration x = (XPathFieldExtractorConfiguration) fec;
+		ResponsiblePartyXPathCustomExtractor rpxpce = (ResponsiblePartyXPathCustomExtractor) x.getCustomExtractor();
 		rpxpce.setOrganisationNameRewriter(orgRewriter);
 
 
@@ -206,22 +206,18 @@ public class HarvesterConfig {
 				configuration.getFieldExtractor(ISOMetadataFields.KEYWORDS_INSPIRE);
 
 		TextProcessingChain inspireThemeNormalizer = new TextProcessingChain();
-		inspireThemeNormalizer.getChain().add(new TextProcessor() {
+		inspireThemeNormalizer.getChain().add(input -> {
+			List<String> ret = new ArrayList<>();
 
-			@Override
-			public List<String> process(List<String> input) {
-				List<String> ret = new ArrayList<>();
-
-				for (String str : input) {
-					String value = inspireThemes.getCanonicalName(str);
-					if (value == null) {
-						value = str;
-					}
-					ret.add(value);
+			for (String str : input) {
+				String value = inspireThemes.getCanonicalName(str);
+				if (value == null) {
+					value = str;
 				}
-
-				return ret;
+				ret.add(value);
 			}
+
+			return ret;
 		});
 
 		configuration.getTextProcessingChains().put("inspireThemeNormalizer", inspireThemeNormalizer);
@@ -235,142 +231,114 @@ public class HarvesterConfig {
 		XPathFieldExtractorConfiguration bboxFec = (XPathFieldExtractorConfiguration)
 				configuration.getFieldExtractor(ISOMetadataFields.GEOGRAPHIC_BOUNDING_BOX);
 
-		XPathFieldExtractorConfiguration bboxAreaFec = (XPathFieldExtractorConfiguration)bboxFec.copy();
-		final GeographicBoundingBoxXPathCustomExtractor originalBboxCustomExtractor = (GeographicBoundingBoxXPathCustomExtractor)bboxAreaFec.getCustomExtractor();
-		bboxAreaFec.setCustomExtractor(new XPathCustomExtractor() {
-
-			@Override
-			public Object process(XPath xPath, Node node) throws XPathException {
-				Object original = originalBboxCustomExtractor.process(xPath, node);
-				@SuppressWarnings("unchecked")
-				List<Double> coords = (List<Double>)original;
-				if (coords == null) {
-					return null;
-				} else {
-					return (coords.get(2) - coords.get(0)) * (coords.get(3) - coords.get(1));
-				}
+		XPathFieldExtractorConfiguration bboxAreaFec = (XPathFieldExtractorConfiguration) bboxFec.copy();
+		final GeographicBoundingBoxXPathCustomExtractor originalBboxCustomExtractor = (GeographicBoundingBoxXPathCustomExtractor) bboxAreaFec.getCustomExtractor();
+		bboxAreaFec.setCustomExtractor((xPath, node) -> {
+			Object original = originalBboxCustomExtractor.process(xPath, node);
+			@SuppressWarnings("unchecked")
+			List<Double> coords = (List<Double>) original;
+			if (coords == null) {
+				return null;
+			} else {
+				return (coords.get(2) - coords.get(0)) * (coords.get(3) - coords.get(1));
 			}
 		});
 		bboxAreaFec.setField("geographicBoundingBoxArea");
 		configuration.getFieldExtractors().add(bboxAreaFec);
 
-        // Best matching regions
-        configuration.getFieldExtractors().add( getBestMatchingRegions(bboxFec));
+		// Best matching regions
+		configuration.getFieldExtractors().add(getBestMatchingRegions(bboxFec));
 
 
-        return factory.getDocumentProcessorFactory().createProcessor(configuration);
+		return factory.getDocumentProcessorFactory().createProcessor(configuration);
 	}
 
-    private XPathFieldExtractorConfiguration getBestMatchingRegions(XPathFieldExtractorConfiguration bboxFec) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        ObjectReader listReader = objectMapper.readerFor(new TypeReference<List<Double>>() {
-        });
-        Map<String, Region> countries = readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_countries.json");
-        Map<String, Region> regions = readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_regions.json");
-        Map<String, Region> subregions = readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_subregions.json");
-        Map<String, Region> municipalities = readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_municipalities.json");
+	private XPathFieldExtractorConfiguration getBestMatchingRegions(XPathFieldExtractorConfiguration bboxFec) {
+		ObjectMapper objectMapper = new ObjectMapper();
+		ObjectReader listReader = objectMapper.readerFor(new TypeReference<List<Double>>() {
+		});
+		Map<String, Region> countries = Region.readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_countries.json");
+		Map<String, Region> regions = Region.readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_regions.json");
+		Map<String, Region> subregions = Region.readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_subregions.json");
+		Map<String, Region> municipalities = Region.readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_municipalities.json");
 
-        XPathFieldExtractorConfiguration regionFec = (XPathFieldExtractorConfiguration) bboxFec.copy();
-        final GeographicBoundingBoxXPathCustomExtractor originalBboxCustomExtractor = (GeographicBoundingBoxXPathCustomExtractor) regionFec.getCustomExtractor();
-
-
-        BiFunction<Map<String, Region>, Region, Region.RegionScore> getBestRegionScore = (Map<String, Region> regionType, Region dataRegion) -> regionType.entrySet().stream()//
-                .filter(nameRegionEntry -> nameRegionEntry.getValue().intersects(dataRegion))//
-                .max(Comparator.comparing(entry -> entry.getValue().getIntersection(dataRegion)))//
-				.map(entry -> Region.RegionScore.create(entry.getKey(), entry.getValue().getIntersection(dataRegion) / entry.getValue().getArea()))
-                .orElse(Region.RegionScore.createEmpty());
+		XPathFieldExtractorConfiguration regionFec = (XPathFieldExtractorConfiguration) bboxFec.copy();
+		final GeographicBoundingBoxXPathCustomExtractor originalBboxCustomExtractor = (GeographicBoundingBoxXPathCustomExtractor) regionFec.getCustomExtractor();
 
 
-        regionFec.setCustomExtractor((xPath, node) -> {
-            Object original = originalBboxCustomExtractor.process(xPath, node);
-            @SuppressWarnings("unchecked")
-            List<Double> coordinates = (List<Double>) original;
-            if (coordinates.isEmpty()) {
-                return objectMapper.createObjectNode();
-            }
-            Region dataRegion = new Region(coordinates);
-            Region.RegionScore country = getBestRegionScore.apply(countries, dataRegion);
-            Region.RegionScore region = getBestRegionScore.apply(regions, dataRegion);
-            Region.RegionScore subregion = getBestRegionScore.apply(subregions, dataRegion);
-            Region.RegionScore municipality = getBestRegionScore.apply(municipalities, dataRegion);
-
-            String template = "{\n" +
-                    "  \"country\": {\n" +
-                    "    \"location_name\": \"%s\",\n" +
-                    "    \"location_score\": %.4f\n" +
-                    "  },\n" +
-                    "  \"region\": {\n" +
-                    "    \"location_name\": \"%s\",\n" +
-                    "    \"location_score\": %.4f\n" +
-                    "  },\n" +
-                    "  \"subregion\": {\n" +
-                    "    \"location_name\": \"%s\",\n" +
-                    "    \"location_score\": %.4f\n" +
-                    "  },\n" +
-                    "  \"municipality\": {\n" +
-                    "    \"location_name\": \"%s\",\n" +
-                    "    \"location_score\": %.4f\n" +
-                    "  }\n" +
-                    "}";
-            String jsonString = "";
-            JsonNode value = null;
-            try {
-                if (country.getScore() >= 0.8) {
-                    jsonString = String.format(template, country.getRegionName(), country.getScore(),
-                            "", 0.0, "", 0.0, "", 0.0);
-                }
-                else if (region.getScore() >= 0.95) {
-                    jsonString = String.format(template, country.getRegionName(), country.getScore(),
-                            region.getRegionName(), region.getScore(),
-                            "", 0.0, "", 0.0);
-                } else if (subregion.getScore() >= 0.95) {
-                    jsonString = String.format(template, country.getRegionName(), country.getScore(),
-                            region.getRegionName(), region.getScore(),
-                            subregion.getRegionName(), subregion.getScore(),
-                            "", 0.0);
-                } else {
-                    jsonString = String.format(template, country.getRegionName(), country.getScore(),
-                            region.getRegionName(), region.getScore(),
-                            subregion.getRegionName(), subregion.getScore(),
-                            municipality.getRegionName(), municipality.getScore());
-                }
-                value = objectMapper.readTree(jsonString);
-            } catch (IOException e) {
-                logger.error("Could not parse string to json: " + jsonString);
-            }
-            return Optional.ofNullable(value).orElse(objectMapper.createObjectNode());
-        });
+		BiFunction<Map<String, Region>, Region, Region.RegionScore> getBestRegionScore = (Map<String, Region> regionType, Region dataRegion) -> regionType.entrySet().stream()//
+				.filter(nameRegionEntry -> nameRegionEntry.getValue().intersects(dataRegion))//
+				.max(Comparator.comparing(entry -> entry.getValue().getIntersection(dataRegion)))//
+				.map(entry -> Region.RegionScore.create(entry.getKey(), entry.getValue().getIntersectionDividedByArea(dataRegion)))
+				.orElse(Region.RegionScore.createEmpty());
 
 
-        regionFec.setField("bestMatchingRegion");
-        regionFec.setType(FieldExtractorType.CUSTOM_CLASS_SINGLE_VALUE);
+		regionFec.setCustomExtractor((xPath, node) -> {
+			Object original = originalBboxCustomExtractor.process(xPath, node);
+			@SuppressWarnings("unchecked")
+			List<Double> coordinates = (List<Double>) original;
+			if (coordinates.isEmpty()) {
+				return objectMapper.createObjectNode();
+			}
+			Region dataRegion = new Region(coordinates);
+			Region.RegionScore country = getBestRegionScore.apply(countries, dataRegion);
+			Region.RegionScore region = getBestRegionScore.apply(regions, dataRegion);
+			Region.RegionScore subregion = getBestRegionScore.apply(subregions, dataRegion);
+			Region.RegionScore municipality = getBestRegionScore.apply(municipalities, dataRegion);
+
+			String template = "{\n" +
+					"  \"country\": {\n" +
+					"    \"location_name\": \"%s\",\n" +
+					"    \"location_score\": %.4f\n" +
+					"  },\n" +
+					"  \"region\": {\n" +
+					"    \"location_name\": \"%s\",\n" +
+					"    \"location_score\": %.4f\n" +
+					"  },\n" +
+					"  \"subregion\": {\n" +
+					"    \"location_name\": \"%s\",\n" +
+					"    \"location_score\": %.4f\n" +
+					"  },\n" +
+					"  \"municipality\": {\n" +
+					"    \"location_name\": \"%s\",\n" +
+					"    \"location_score\": %.4f\n" +
+					"  }\n" +
+					"}";
+			String jsonString = "";
+			JsonNode value = null;
+			try {
+				if (country.getScore() >= 0.8) {
+					jsonString = String.format(template, country.getRegionName(), country.getScore(),
+							"", 0.0, "", 0.0, "", 0.0);
+				} else if (region.getScore() >= 0.95) {
+					jsonString = String.format(template, country.getRegionName(), country.getScore(),
+							region.getRegionName(), region.getScore(),
+							"", 0.0, "", 0.0);
+				} else if (subregion.getScore() >= 0.95) {
+					jsonString = String.format(template, country.getRegionName(), country.getScore(),
+							region.getRegionName(), region.getScore(),
+							subregion.getRegionName(), subregion.getScore(),
+							"", 0.0);
+				} else {
+					jsonString = String.format(template, country.getRegionName(), country.getScore(),
+							region.getRegionName(), region.getScore(),
+							subregion.getRegionName(), subregion.getScore(),
+							municipality.getRegionName(), municipality.getScore());
+				}
+				value = objectMapper.readTree(jsonString);
+			} catch (IOException e) {
+				logger.error("Could not parse string to json: " + jsonString);
+			}
+			return Optional.ofNullable(value).orElse(objectMapper.createObjectNode());
+		});
 
 
-        return regionFec;
-    }
+		regionFec.setField("bestMatchingRegion");
+		regionFec.setType(FieldExtractorType.CUSTOM_CLASS_SINGLE_VALUE);
 
-    private Map<String, Region> readRegionResource(ObjectMapper objectMapper, ObjectReader listReader, String resource) {
-        Map<String, Region> featureMap = new HashMap<>();
 
-        try {
-            JsonNode jsonFile = objectMapper.readTree(this.getClass().getClassLoader().getResource(resource));
-            JsonNode features = jsonFile.get("features");
-
-            features.forEach(feature -> {
-                List<Double> envelope = Collections.emptyList();
-                try {
-                    envelope = listReader.readValue(feature.get("properties").get("envelope"));
-                } catch (IOException e) {
-                    logger.error("Could not read envelope field as list in resource file " + resource, e);
-                }
-                featureMap.put(feature.get("properties").get("nimi").textValue(), new Region(envelope));
-            });
-        } catch (IOException e) {
-            logger.error("Could not read resource file as json" + resource, e);
-        }
-        assert !featureMap.isEmpty();
-        return featureMap;
-    }
+		return regionFec;
+	}
 
 
 	private OrganisationNormaliser loadOrganisationNormaliser() throws IOException {
@@ -379,9 +347,9 @@ public class HarvesterConfig {
 			InputStream is;
 			String env = System.getProperty(ENV_CANONICAL_ORGANISATIONS_FILENAME);
 			if (env != null) {
-				logger.info("Loading canonical organisations from file "+env);
+				logger.info("Loading canonical organisations from file " + env);
 				is = new FileInputStream(env);
-			} else  {
+			} else {
 
 				File file = new File(CANONICAL_ORGANISATIONS_DEFAULT_FILENAME);
 				if (file.exists()) {
@@ -395,7 +363,7 @@ public class HarvesterConfig {
 			ret.loadWorkbook(is);
 
 			return ret;
-		} catch(IOException | ParseException e) {
+		} catch (IOException | ParseException e) {
 			throw new IOException("Could not load canonical organisations", e);
 		}
 
@@ -428,7 +396,7 @@ public class HarvesterConfig {
 
 
 	private TextProcessingChain createKeywordProcessingChain(RDFTerminologyMatcherProcessor terminologyProcessor,
-			WordCombinationProcessor wordCombinationProcessor) {
+															 WordCombinationProcessor wordCombinationProcessor) {
 		TextProcessingChain keywordChain = new TextProcessingChain();
 		RegexProcessor whitespaceRemoval = new RegexProcessor();
 		whitespaceRemoval.setPattern(Pattern.compile("^\\s*$"));
@@ -443,7 +411,7 @@ public class HarvesterConfig {
 
 
 	private TextProcessingChain createAbstractProcessingChain(RDFTerminologyMatcherProcessor terminologyProcessor,
-			WordCombinationProcessor wordCombinationProcessor) throws IOException {
+															  WordCombinationProcessor wordCombinationProcessor) throws IOException {
 		TextProcessingChain ret = new TextProcessingChain();
 		ret.getChain().add(new TextSplitterProcessor());
 		ret.getChain().add(wordCombinationProcessor);
@@ -456,7 +424,7 @@ public class HarvesterConfig {
 	}
 
 	private TextProcessingChain createAbstractParentProcessingChain(RDFTerminologyMatcherProcessor terminologyProcessor,
-			WordCombinationProcessor wordCombinationProcessor, Model model) throws IOException {
+																	WordCombinationProcessor wordCombinationProcessor, Model model) throws IOException {
 		TextProcessingChain ret = createAbstractProcessingChain(terminologyProcessor, wordCombinationProcessor);
 
 		TerminologyExpansionProcessor expansionProcessor = new TerminologyExpansionProcessor();
@@ -531,7 +499,7 @@ public class HarvesterConfig {
 		return "/pto-skos.ttl.gz";
 	}
 
-	private static Model loadModels(RDFFormat format, String...files) throws IOException {
+	private static Model loadModels(RDFFormat format, String... files) throws IOException {
 		Model ret = null;
 
 		for (String file : files) {
