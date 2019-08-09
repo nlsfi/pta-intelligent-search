@@ -8,14 +8,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.zip.GZIPInputStream;
 
+import com.google.common.collect.ImmutableMap;
+import fi.maanmittauslaitos.pta.search.api.region.RegionNameContainer;
 import org.apache.http.HttpHost;
 import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
@@ -248,7 +245,16 @@ public class ApplicationConfiguration {
 	public Stemmer stemmer_EN() {
 		return new LuceneAnalyzerStemmer(new EnglishAnalyzer());
 	}
-	
+
+	@Bean
+	@Qualifier("StemmersPerLanguage")
+	public Map<Language, Stemmer> stemmersPerLanguage(
+			@Qualifier("FI") Stemmer stemmer_FI,
+			@Qualifier("SV") Stemmer stemmer_SV,
+			@Qualifier("EN") Stemmer stemmer_EN)
+	{
+		return ImmutableMap.of(Language.FI, stemmer_FI, Language.SV, stemmer_SV, Language.EN, stemmer_EN);
+	}
 	
 	@Bean
 	@Qualifier("FI")
@@ -420,9 +426,22 @@ public class ApplicationConfiguration {
 			}
 		}
 	}
-	
+
 	@Bean
-	public HakuKone hakuKone(Map<Language, TextProcessor> queryTextProcessors, ElasticsearchQueryAPI elasticsearchAPI, Model model, HintProvider hintProvider, @Qualifier("exactMatchWords") Set<String> exactMatchWords) throws IOException {
+	public RegionNameContainer regionNameContainer(@Qualifier("StemmersPerLanguage") Map<Language, Stemmer> stemmers) {
+		String countryResource = "data/well_known_location_bboxes_countries.json";
+		String regionResource = "data/well_known_location_bboxes_regions.json";
+		String subRegionResource = "data/well_known_location_bboxes_subregions.json";
+		String municipalityResource = "data/well_known_location_bboxes_municipalities.json";
+		RegionNameContainer regionNameContainer = new RegionNameContainer(countryResource, regionResource, subRegionResource, municipalityResource, stemmers);
+		regionNameContainer.init();
+		return regionNameContainer;
+	}
+
+	@Bean
+	public HakuKone hakuKone(Map<Language, TextProcessor> queryTextProcessors, ElasticsearchQueryAPI elasticsearchAPI,
+							 Model model, HintProvider hintProvider, @Qualifier("exactMatchWords") Set<String> exactMatchWords,
+							 @Qualifier("StemmersPerLanguage") Map<Language, Stemmer> stemmers, RegionNameContainer regionNameContainer) throws IOException {
 		FacetedElasticsearchHakuKoneImpl ret = new FacetedElasticsearchHakuKoneImpl();
 		ret.setDistributionFormatsFacetTermMaxSize(100);
 		ret.setInspireKeywordsFacetTermMaxSize(100);
@@ -437,6 +456,8 @@ public class ApplicationConfiguration {
 		queryProvider.setOntologyLevels(2);
 		queryProvider.setWeightFactor(0.5);
 		queryProvider.setBasicWordMatchWeight(0.5);
+		queryProvider.setStemmers(stemmers);
+		queryProvider.setRegionNameContainer(regionNameContainer);
 		
 		queryProvider.setRequireExactWordMatch(exactMatchWords);
 		

@@ -20,6 +20,39 @@
           "properties": {
             "organisationName":      { "type": "keyword" }
           }
+        },
+        "bestMatchingRegion": {
+          "type": "object",
+          "properties": {
+            "country": {
+              "type": "object",
+              "properties": {
+                "location_name": {"type": "keyword"},
+                "location_score": {"type": "double"}
+              }
+            },
+            "region": {
+              "type": "object",
+              "properties": {
+                "location_name": {"type": "keyword"},
+                "location_score": {"type": "double"}
+              }
+            },
+            "subregion": {
+              "type": "object",
+              "properties": {
+                "location_name": {"type": "keyword"},
+                "location_score": {"type": "double"}
+              }
+            },
+            "municipality": {
+              "type": "object",
+              "properties": {
+                "location_name": {"type": "keyword"},
+                "location_score": {"type": "double"}
+              }
+            }
+          }
         }
       }
     }
