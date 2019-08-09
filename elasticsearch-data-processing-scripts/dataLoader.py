@@ -77,7 +77,7 @@ def save_whole_finland(out_dir):
 
 def download_datasets():
     out_dir = "../pta-intelligent-search-elasticsearch/src/main/resources/data"
-    #download_from_wfs()
+    download_from_wfs()
     save_to_databases(out_dir, save_complete_geometries=False)
     save_whole_finland(out_dir)
 
