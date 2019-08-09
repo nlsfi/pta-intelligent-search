@@ -2,6 +2,8 @@ package fi.maanmittauslaitos.pta.search.integration;
 
 import com.carrotsearch.randomizedtesting.annotations.Seed;
 import com.carrotsearch.randomizedtesting.annotations.ThreadLeakScope;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.ImmutableMap;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 import org.elasticsearch.action.DocWriteResponse.Result;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
@@ -42,6 +44,7 @@ import static org.elasticsearch.test.hamcrest.ElasticsearchAssertions.assertAcke
 import static org.elasticsearch.test.hamcrest.ElasticsearchAssertions.assertAllSuccessful;
 
 
+@Ignore
 @ClusterScope(scope = Scope.SUITE)
 @ThreadLeakScope(ThreadLeakScope.Scope.NONE)
 @Seed("2A")
@@ -157,15 +160,37 @@ public class SearchTest extends ESIntegTestCase {
 
     @Test
     public void emptyQueryReturnsAll() throws Exception {
-        SearchResponse response = getSearchResponse("testcase-3.json", nDocs);
+        SearchResponse response = getSearchResponse("testcase_empty.json", nDocs);
 
         then(response.getHits()).hasSize(nDocs);
     }
 
+    @Test
+    public void suomiReturnsAllNationalData() throws Exception {
+        SearchResponse response = getSearchResponse("testcase_suomi.json", nDocs);
+        then(response.getHits()).hasSize(61);
+    }
+
+    @Test
+    public void nationalReturnsAllNationalData() throws Exception {
+        SearchResponse response = getSearchResponse("testcase_kansallinen.json", nDocs);
+        then(response.getHits()).hasSize(61);
+    }
+
+
+    @Test
+    public void testMiddleFinland() throws IOException, URISyntaxException {
+        SearchResponse response = getSearchResponse("testcase_keski-suomi.json");
+
+        then(response.getHits())
+                .extracting(SearchHit::getId)
+                .containsExactly("89c6a379-776f-4529-b79d-a456177fb64d"); //jkl
+
+    }
 
     @Test
     public void jklBeforeSalo() throws Exception {
-        SearchResponse response = getSearchResponse("testcase-2.json");
+        SearchResponse response = getSearchResponse("testcase_jyväskylä_tiet.json");
 
         List<String> ids = Arrays.asList(
                 "89c6a379-776f-4529-b79d-a456177fb64d", //jkl
@@ -180,7 +205,7 @@ public class SearchTest extends ESIntegTestCase {
     @Test
     @Ignore("Does not work just yet")
     public void HSLBeforeHSY() throws Exception {
-        SearchResponse response = getSearchResponse("testcase-4.json");
+        SearchResponse response = getSearchResponse("testcase_hsl.json");
 
         List<String> hslIds = Arrays.asList(
                 "d52b5fae-6139-4182-858c-8602608dd0a4",
@@ -201,8 +226,7 @@ public class SearchTest extends ESIntegTestCase {
 
     @Test
     public void uusimaaContainsMunicipalities() throws Exception {
-        SearchResponse response = getSearchResponse("testcase-5.json", 200);
-
+        SearchResponse response = getSearchResponse("testcase_uusimaa.json", 200);
         List<String> ids = Arrays.asList(
                 "be2440a5-b31c-482b-be2b-e59f98f49272", // Uusimaa
                 "eca4aba3-d145-46f7-9547-a2ccfe4bf1b3", // pk-seutu

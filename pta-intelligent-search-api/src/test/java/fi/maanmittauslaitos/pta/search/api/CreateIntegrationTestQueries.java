@@ -25,111 +25,109 @@ import java.util.stream.Stream;
 
 @SpringBootApplication
 public class CreateIntegrationTestQueries implements ApplicationRunner {
-    private static Logger logger = Logger.getLogger(CreateIntegrationTestQueries.class);
+	private static Logger logger = Logger.getLogger(CreateIntegrationTestQueries.class);
 
-    @SuppressWarnings("unused")
-    @Autowired
-    private ApplicationConfiguration configuration;
+	@SuppressWarnings("unused")
+	@Autowired
+	private ApplicationConfiguration configuration;
 
-    @Autowired
-    private MockElasticsearchQueryAPI esQueryAPI;
+	@Autowired
+	private MockElasticsearchQueryAPI esQueryAPI;
 
-    @Autowired
-    private HakuKone hakukone;
+	@Autowired
+	private HakuKone hakukone;
 
-    public static void main(String[] args) {
-        System.setProperty("spring.profiles.active", "createIntegrationTestQueries");
-        try {
-            ConfigurableApplicationContext ctx = SpringApplication.run(CreateIntegrationTestQueries.class, args);
-            SpringApplication.exit(ctx);
-        } catch (Exception e) {
-            logger.error("Configuration error", e);
-        }
-    }
+	public static void main(String[] args) {
+		System.setProperty("spring.profiles.active", "createIntegrationTestQueries");
+		try {
+			ConfigurableApplicationContext ctx = SpringApplication.run(CreateIntegrationTestQueries.class, args);
+			SpringApplication.exit(ctx);
+		} catch (Exception e) {
+			logger.error("Configuration error", e);
+		}
+	}
 
-    @Override
-    public void run(ApplicationArguments args) {
-        String outputDir = args.getSourceArgs().length > 0 ? args.getSourceArgs()[0] : "jsontest";
-        File directory = new File(outputDir);
-        if (!directory.exists()) {
-            directory.mkdirs();
-        }
-
-
-
-        Stream.of(new ConversionHelper("testcase-1", Collections.singletonList("suomi"), false),
-                new ConversionHelper("testcase-2", Arrays.asList("jyväskylä", "tiet"), true),
-                new ConversionHelper("testcase-3", Collections.emptyList(), false),
-                new ConversionHelper("testcase-4", Collections.singletonList("hsl"), false),
-                new ConversionHelper("testcase-5", Collections.singletonList("uusimaa"), true))
-                .forEach(helper -> generateTestCaseQuery(helper.getQueryList(), Paths.get(outputDir, helper.getTestCaseName() + ".json"), helper.isFocusOnRegional()));
-    }
-
-    private void generateTestCaseQuery(List<String> queryList, Path outFile, boolean focusOnRegional) {
-        SearchQuery pyynto = new SearchQuery();
-        pyynto.setQuery(queryList);
-
-        String json = null;
-        try {
-            JSONObject jsonObject = new JSONObject(convertQueryIntoJSON(pyynto, Language.FI, focusOnRegional));
-            json = jsonObject.getJSONObject("query").toString(2);
-
-            Files.write(outFile, json.getBytes());
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
-        }
+	@Override
+	public void run(ApplicationArguments args) {
+		String outputDir = args.getSourceArgs().length > 0 ? args.getSourceArgs()[0] : "jsontest";
+		File directory = new File(outputDir);
+		if (!directory.exists()) {
+			directory.mkdirs();
+		}
 
 
-        System.out.println("Query as JSON: " + json);
-    }
+		Arrays.asList(
+				new ConversionHelper("testcase_empty", Collections.emptyList()),
+				new ConversionHelper(Collections.singletonList("suomi")),
+				new ConversionHelper(Collections.singletonList("kansallinen")),
+				new ConversionHelper(Arrays.asList("jyväskylä", "tiet")),
+				new ConversionHelper(Collections.singletonList("hsl")),
+				new ConversionHelper(Collections.singletonList("uusimaa")),
+				new ConversionHelper(Collections.singletonList("keski-suomi"))
+		).forEach(helper -> generateTestCaseQuery(helper.getQueryList(), Paths.get(outputDir, helper.getTestCaseName() + ".json")));
+	}
 
-    private String convertQueryIntoJSON(SearchQuery pyynto, Language lang, boolean focusOnRegionalHits) throws IOException {
-        String json;
+	private void generateTestCaseQuery(List<String> queryList, Path outFile) {
+		SearchQuery pyynto = new SearchQuery();
+		pyynto.setQuery(queryList);
 
-        try {
-            hakukone.haku(pyynto, lang, focusOnRegionalHits);
-        } catch (NullPointerException npe) {
-            /* NOP, we expect this to happen as the ES mock returns null */
-        }
+		String json = null;
+		try {
+			JSONObject jsonObject = new JSONObject(convertQueryIntoJSON(pyynto, Language.FI));
+			json = jsonObject.getJSONObject("query").toString(2);
 
-        json = esQueryAPI.getLastQueryAsJSON();
-        return json;
-    }
-
-    static class ConversionHelper {
-        String testCaseName;
-        List<String> queryList;
-        boolean focusOnRegional;
+			Files.write(outFile, json.getBytes());
+		} catch (IOException | JSONException e) {
+			e.printStackTrace();
+		}
 
 
-        ConversionHelper(String testCaseName, List<String> queryList, boolean regionalFlag) {
-            this.testCaseName = testCaseName;
-            this.queryList = queryList;
-            this.focusOnRegional = regionalFlag;
-        }
+		System.out.println("Query as JSON: " + json);
+	}
 
-        String getTestCaseName() {
-            return testCaseName;
-        }
+	private String convertQueryIntoJSON(SearchQuery pyynto, Language lang) throws IOException {
+		String json;
 
-        public void setTestCaseName(String testCaseName) {
-            this.testCaseName = testCaseName;
-        }
+		try {
+			hakukone.haku(pyynto, lang);
+		} catch (NullPointerException npe) {
+			/* NOP, we expect this to happen as the ES mock returns null */
+		}
 
-        List<String> getQueryList() {
-            return queryList;
-        }
+		json = esQueryAPI.getLastQueryAsJSON();
+		return json;
+	}
 
-        public void setQueryList(List<String> queryList) {
-            this.queryList = queryList;
-        }
+	static class ConversionHelper {
+		private static final String TESTCASE = "testcase_";
+		String testCaseName;
+		List<String> queryList;
 
-        boolean isFocusOnRegional() {
-            return focusOnRegional;
-        }
+		ConversionHelper(List<String> queryList) {
+			this.testCaseName = TESTCASE + String.join("_", queryList);
+			this.queryList = queryList;
+		}
 
-        public void setFocusOnRegional(boolean focusOnRegional) {
-            this.focusOnRegional = focusOnRegional;
-        }
-    }
+		ConversionHelper(String testcase, List<String> queryList) {
+			this.testCaseName = testcase;
+			this.queryList = queryList;
+		}
+
+		String getTestCaseName() {
+			return testCaseName;
+		}
+
+		public void setTestCaseName(String testCaseName) {
+			this.testCaseName = testCaseName;
+		}
+
+		List<String> getQueryList() {
+			return queryList;
+		}
+
+		public void setQueryList(List<String> queryList) {
+			this.queryList = queryList;
+		}
+
+	}
 }

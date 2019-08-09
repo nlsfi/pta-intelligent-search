@@ -1,18 +1,19 @@
 package fi.maanmittauslaitos.pta.search.api;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.UnknownHostException;
-import java.util.*;
-import java.util.zip.GZIPInputStream;
-
 import com.google.common.collect.ImmutableMap;
+import fi.maanmittauslaitos.pta.search.api.hints.FacetHintProviderImpl;
+import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
+import fi.maanmittauslaitos.pta.search.api.language.LanguageDetector;
+import fi.maanmittauslaitos.pta.search.api.language.LuceneAnalyzerStemmer;
+import fi.maanmittauslaitos.pta.search.api.language.StemmingOntologyLanguageDetectorImpl;
 import fi.maanmittauslaitos.pta.search.api.region.RegionNameContainer;
+import fi.maanmittauslaitos.pta.search.api.search.ElasticsearchQueryAPI;
+import fi.maanmittauslaitos.pta.search.api.search.FacetedElasticsearchHakuKoneImpl;
+import fi.maanmittauslaitos.pta.search.api.search.HakuKone;
+import fi.maanmittauslaitos.pta.search.api.search.OntologyElasticsearchQueryProviderImpl;
+import fi.maanmittauslaitos.pta.search.text.*;
+import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
+import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactory;
 import org.apache.http.HttpHost;
 import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
@@ -32,29 +33,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import fi.maanmittauslaitos.pta.search.api.hints.FacetHintProviderImpl;
-import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
-import fi.maanmittauslaitos.pta.search.api.language.LanguageDetector;
-import fi.maanmittauslaitos.pta.search.api.language.LuceneAnalyzerStemmer;
-import fi.maanmittauslaitos.pta.search.api.language.StemmingOntologyLanguageDetectorImpl;
-import fi.maanmittauslaitos.pta.search.api.region.RegionNameDetector;
-import fi.maanmittauslaitos.pta.search.api.region.StemmingTextFileBackedRegionNameDetectorImpl;
-import fi.maanmittauslaitos.pta.search.api.search.ElasticsearchQueryAPI;
-import fi.maanmittauslaitos.pta.search.api.search.FacetedElasticsearchHakuKoneImpl;
-import fi.maanmittauslaitos.pta.search.api.search.HakuKone;
-import fi.maanmittauslaitos.pta.search.api.search.OntologyElasticsearchQueryProviderImpl;
-import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
-import fi.maanmittauslaitos.pta.search.text.StopWordsProcessor;
-import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
-import fi.maanmittauslaitos.pta.search.text.TextProcessor;
-import fi.maanmittauslaitos.pta.search.text.WordCombinationProcessor;
-import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
-import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactory;
+import java.io.*;
+import java.net.UnknownHostException;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+import java.util.zip.GZIPInputStream;
 
 @Configuration
 public class ApplicationConfiguration {
 	private static Logger logger = Logger.getLogger(ApplicationConfiguration.class);
-	
+
 	@Bean
 	@Qualifier("FI")
 	public RDFTerminologyMatcherProcessor terminologyMatcher_FI(Model terminologyModel, @Qualifier("FI") Stemmer stemmer, List<IRI> terminologyLabels) throws IOException {
@@ -63,13 +51,13 @@ public class ApplicationConfiguration {
 		ret.setTerminologyLabels(terminologyLabels);
 		ret.setStemmer(stemmer);
 		ret.setLanguage("fi");
-		
+
 		// Initialize
 		ret.getDict();
-		
+
 		return ret;
 	}
-	
+
 	@Bean
 	@Qualifier("FI")
 	public WordCombinationProcessor wordCombinationProcessor_FI(Model terminologyModel, @Qualifier("FI") Stemmer stemmer, List<IRI> terminologyLabels) throws IOException {
@@ -84,7 +72,7 @@ public class ApplicationConfiguration {
 
 		return ret;
 	}
-	
+
 	@Bean
 	@Qualifier("SV")
 	public RDFTerminologyMatcherProcessor terminologyMatcher_SV(Model terminologyModel, @Qualifier("SV") Stemmer stemmer, List<IRI> terminologyLabels) throws IOException {
@@ -93,13 +81,13 @@ public class ApplicationConfiguration {
 		ret.setTerminologyLabels(terminologyLabels);
 		ret.setStemmer(stemmer);
 		ret.setLanguage("sv");
-		
+
 		// Initialize
 		ret.getDict();
-		
+
 		return ret;
 	}
-	
+
 	@Bean
 	@Qualifier("SV")
 	public WordCombinationProcessor wordCombinationProcessor_SV(Model terminologyModel, @Qualifier("SV") Stemmer stemmer, List<IRI> terminologyLabels) throws IOException {
@@ -114,7 +102,7 @@ public class ApplicationConfiguration {
 
 		return ret;
 	}
-	
+
 	@Bean
 	@Qualifier("EN")
 	public RDFTerminologyMatcherProcessor terminologyMatcher_EN(Model terminologyModel, @Qualifier("EN") Stemmer stemmer, List<IRI> terminologyLabels) throws IOException {
@@ -123,13 +111,13 @@ public class ApplicationConfiguration {
 		ret.setTerminologyLabels(terminologyLabels);
 		ret.setStemmer(stemmer);
 		ret.setLanguage("en");
-		
+
 		// Initialize
 		ret.getDict();
-		
+
 		return ret;
 	}
-	
+
 	@Bean
 	@Qualifier("EN")
 	public WordCombinationProcessor wordCombinationProcessor_EN(Model terminologyModel, @Qualifier("EN") Stemmer stemmer, List<IRI> terminologyLabels) throws IOException {
@@ -144,90 +132,89 @@ public class ApplicationConfiguration {
 
 		return ret;
 	}
-	
+
 	@Bean
 	public Map<Language, TextProcessor> queryTextProcessors(
 			@Qualifier("FI") StopWordsProcessor stopwordsFI,
-			@Qualifier("FI") WordCombinationProcessor combinatorFI, 
+			@Qualifier("FI") WordCombinationProcessor combinatorFI,
 			@Qualifier("FI") RDFTerminologyMatcherProcessor terminologyFI,
 			@Qualifier("SV") StopWordsProcessor stopwordsSV,
-			@Qualifier("SV") WordCombinationProcessor combinatorSV, 
+			@Qualifier("SV") WordCombinationProcessor combinatorSV,
 			@Qualifier("SV") RDFTerminologyMatcherProcessor terminologySV,
 			@Qualifier("EN") StopWordsProcessor stopwordsEN,
-			@Qualifier("EN") WordCombinationProcessor combinatorEN, 
+			@Qualifier("EN") WordCombinationProcessor combinatorEN,
 			@Qualifier("EN") RDFTerminologyMatcherProcessor terminologyEN) {
-		
+
 		Map<Language, TextProcessor> ret = new HashMap<>();
-		
+
 		TextProcessingChain chain_FI = new TextProcessingChain();
 		chain_FI.getChain().add(stopwordsFI);
 		chain_FI.getChain().add(combinatorFI);
 		chain_FI.getChain().add(terminologyFI);
 		ret.put(Language.FI, chain_FI);
-		
+
 		TextProcessingChain chain_SV = new TextProcessingChain();
 		chain_SV.getChain().add(stopwordsSV);
 		chain_SV.getChain().add(combinatorSV);
 		chain_SV.getChain().add(terminologySV);
 		ret.put(Language.SV, chain_SV);
-		
+
 		TextProcessingChain chain_EN = new TextProcessingChain();
 		chain_EN.getChain().add(stopwordsEN);
 		chain_EN.getChain().add(combinatorEN);
 		chain_EN.getChain().add(terminologyEN);
 		ret.put(Language.EN, chain_EN);
-		
+
 		return ret;
 	}
-	
+
 	@Bean
 	@Qualifier("PreferredLanguages")
 	public List<Language> preferredLanguages() {
 		return Arrays.asList(Language.FI, Language.SV, Language.EN);
 	}
-	
+
 	@Bean
 	public LanguageDetector languageDetector(Model terminologyModel,
-			@Qualifier("FI") Stemmer stemmerFI,
-			@Qualifier("SV") Stemmer stemmerSV,
-			@Qualifier("EN") Stemmer stemmerEN,
-			@Qualifier("FI") StopWordsProcessor stopwordsFI,
-			@Qualifier("SV") StopWordsProcessor stopwordsSV,
-			@Qualifier("EN") StopWordsProcessor stopwordsEN,
-			List<IRI> terminologyLabels,
-			@Qualifier("PreferredLanguages") List<Language> languagesInPreferenceOrder)
-	{
+											 @Qualifier("FI") Stemmer stemmerFI,
+											 @Qualifier("SV") Stemmer stemmerSV,
+											 @Qualifier("EN") Stemmer stemmerEN,
+											 @Qualifier("FI") StopWordsProcessor stopwordsFI,
+											 @Qualifier("SV") StopWordsProcessor stopwordsSV,
+											 @Qualifier("EN") StopWordsProcessor stopwordsEN,
+											 List<IRI> terminologyLabels,
+											 @Qualifier("PreferredLanguages") List<Language> languagesInPreferenceOrder) {
 		StemmingOntologyLanguageDetectorImpl ret = new StemmingOntologyLanguageDetectorImpl();
 		ret.setTerminologyLabels(terminologyLabels);
 		ret.setSupportedLanguages(languagesInPreferenceOrder);
-		
+
 		ret.setModel(terminologyModel);
-		
+
 		Map<Language, Stemmer> stemmers = new HashMap<>();
 		stemmers.put(Language.FI, stemmerFI);
 		stemmers.put(Language.SV, stemmerSV);
 		stemmers.put(Language.EN, stemmerEN);
 		ret.setStemmers(stemmers);
-		
+
 		Map<Language, StopWordsProcessor> stopwords = new HashMap<>();
 		stopwords.put(Language.FI, stopwordsFI);
 		stopwords.put(Language.SV, stopwordsSV);
 		stopwords.put(Language.EN, stopwordsEN);
 		ret.setStopWordsProcessors(stopwords);
-		
+
 		// Initialize
 		for (RDFTerminologyMatcherProcessor processor : ret.ensureLanguageSupport().values()) {
 			processor.getDict();
 		}
-		
+
 		return ret;
 	}
-	
+
 	@Bean
 	public List<IRI> terminologyLabels() {
 		return Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL);
 	}
-	
+
 	@Bean
 	@Qualifier("FI")
 	public Stemmer stemmer_FI() {
@@ -251,11 +238,10 @@ public class ApplicationConfiguration {
 	public Map<Language, Stemmer> stemmersPerLanguage(
 			@Qualifier("FI") Stemmer stemmer_FI,
 			@Qualifier("SV") Stemmer stemmer_SV,
-			@Qualifier("EN") Stemmer stemmer_EN)
-	{
+			@Qualifier("EN") Stemmer stemmer_EN) {
 		return ImmutableMap.of(Language.FI, stemmer_FI, Language.SV, stemmer_SV, Language.EN, stemmer_EN);
 	}
-	
+
 	@Bean
 	@Qualifier("FI")
 	public StopWordsProcessor stopwords_FI() throws IOException {
@@ -285,65 +271,65 @@ public class ApplicationConfiguration {
 						"/nls.fi/pta-intelligent-search/stopwords-en.txt"));
 		return stopWords;
 	}
-	
-	
-	
+
+
 	@Bean
 	@Profile("default")
 	public ElasticsearchQueryAPI elasticsearchClient() throws UnknownHostException {
 		return new ElasticsearchQueryAPIImpl();
 	}
-	
+
 	public static class ElasticsearchQueryAPIImpl implements ElasticsearchQueryAPI, DisposableBean {
 		private RestHighLevelClient client;
+
 		public ElasticsearchQueryAPIImpl() {
 			client = new RestHighLevelClient(
-			        RestClient.builder(new HttpHost("localhost", 9200, "http")));
+					RestClient.builder(new HttpHost("localhost", 9200, "http")));
 		}
-		
+
 		@Override
 		public void destroy() throws Exception {
 			client.close();
 		}
-		
+
 		@Override
 		public SearchResponse search(SearchRequest request) throws IOException {
 			return client.search(request);
 		}
 	}
-	
+
 	@Bean
 	@Profile("createIntegrationTestQueries")
 	public MockElasticsearchQueryAPI elasticsearchQueryStoreClient() throws IOException {
 		return new MockElasticsearchQueryAPI();
 	}
-	
+
 	public static class MockElasticsearchQueryAPI implements ElasticsearchQueryAPI {
 		private String lastQueryAsJSON;
-		
+
 		@Override
 		public SearchResponse search(SearchRequest request) throws IOException {
 			lastQueryAsJSON = request.source().toString();
 			return null;
 		}
-		
+
 		public String getLastQueryAsJSON() {
 			return lastQueryAsJSON;
 		}
 	}
-	
+
 	@Bean
 	public Model terminologyModel() throws IOException {
 		return loadModels("/pto-skos.ttl.gz");
 	}
 
-	public static Model loadModels(String...files) throws IOException {
+	public static Model loadModels(String... files) throws IOException {
 		Model ret = null;
-		
+
 		for (String file : files) {
 			try (Reader reader = new InputStreamReader(new GZIPInputStream(ApplicationConfiguration.class.getResourceAsStream(file)))) {
 				Model model = Rio.parse(reader, "", RDFFormat.TURTLE);
-				
+
 				if (ret == null) {
 					ret = model;
 				} else {
@@ -351,15 +337,15 @@ public class ApplicationConfiguration {
 				}
 			}
 		}
-		
+
 		return ret;
 	}
-	
+
 	@Bean
 	public HintProvider hintProvider(Model terminologyModel) {
 		FacetHintProviderImpl ret = new FacetHintProviderImpl();
 		ret.setModel(terminologyModel);
-		
+
 		return ret;
 	}
 	
@@ -375,19 +361,19 @@ public class ApplicationConfiguration {
 		return ret;
 	}
 	*/
-	
+
 	@Bean
 	@Qualifier("exactMatchWords")
 	public Set<String> exactMatchWords() throws IOException {
 		InputStream is = null;
-		
+
 		try {
 			String filename = System.getProperty("EXACT_MATCH_FILE");
 			if (filename != null && filename.length() > 0) {
-				logger.info("Loading exact word match file from '"+filename+"' (configured via system property EXACT_MATCH_FILE)");
+				logger.info("Loading exact word match file from '" + filename + "' (configured via system property EXACT_MATCH_FILE)");
 				is = new FileInputStream(filename);
 			}
-			
+
 			if (is == null) {
 				filename = "./exact_match_words.txt";
 				File f = new File(filename);
@@ -396,15 +382,15 @@ public class ApplicationConfiguration {
 					is = new FileInputStream(f);
 				}
 			}
-			
+
 			if (is == null) {
 				logger.info("Loading exact word match file 'exact_match_words.txt' from classpath");
 				is = ApplicationConfiguration.class.getResourceAsStream("/exact_match_words.txt");
 			}
-		
+
 			Set<String> ret = new HashSet<>();
 
-			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+			BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
 
 			String line;
 			while ((line = br.readLine()) != null) {
@@ -417,9 +403,9 @@ public class ApplicationConfiguration {
 					ret.add(line);
 				}
 			}
-			
+
 			return ret;
-			
+
 		} finally {
 			if (is != null) {
 				is.close();
@@ -448,7 +434,7 @@ public class ApplicationConfiguration {
 		ret.setOrganisationsFacetTermMaxSize(500);
 		ret.setTopicCategoriesFacetTermMaxSize(100);
 		ret.setClient(elasticsearchAPI);
-		
+
 		OntologyElasticsearchQueryProviderImpl queryProvider = new OntologyElasticsearchQueryProviderImpl();
 		queryProvider.addRelationPredicate(SKOS.NARROWER);
 		queryProvider.setTextProcessors(queryTextProcessors);
@@ -458,63 +444,12 @@ public class ApplicationConfiguration {
 		queryProvider.setBasicWordMatchWeight(0.5);
 		queryProvider.setStemmers(stemmers);
 		queryProvider.setRegionNameContainer(regionNameContainer);
-		
+
 		queryProvider.setRequireExactWordMatch(exactMatchWords);
-		
+
 		ret.setQueryProvider(queryProvider);
 		ret.setHintProvider(hintProvider);
-		
-		return ret;
-	}
-	
-	@Bean
-	@Qualifier("FI")
-	public RegionNameDetector regionNameDetector_FI(@Qualifier("FI") Stemmer stemmer) throws IOException
-	{
-		StemmingTextFileBackedRegionNameDetectorImpl ret = new StemmingTextFileBackedRegionNameDetectorImpl();
-		ret.setStemmer(stemmer);
-		ret.setResourceName("/region_names/fi.txt");
-		
-		ret.init();
-		return ret;
-	}
-	
-	@Bean
-	@Qualifier("SV")
-	public RegionNameDetector regionNameDetector_SV(@Qualifier("SV") Stemmer stemmer) throws IOException
-	{
-		StemmingTextFileBackedRegionNameDetectorImpl ret = new StemmingTextFileBackedRegionNameDetectorImpl();
-		ret.setStemmer(stemmer);
-		ret.setResourceName("/region_names/sv.txt");
-		
-		ret.init();
-		return ret;
-	}
-	
-	@Bean
-	@Qualifier("EN")
-	public RegionNameDetector regionNameDetector_EN(@Qualifier("EN") Stemmer stemmer) throws IOException
-	{
-		StemmingTextFileBackedRegionNameDetectorImpl ret = new StemmingTextFileBackedRegionNameDetectorImpl();
-		ret.setStemmer(stemmer);
-		ret.setResourceName("/region_names/en.txt");
-		
-		ret.init();
-		return ret;
-	}
-	
-	@Bean
-	@Qualifier("RegionNameDetectorsPerLanguage")
-	public Map<Language, RegionNameDetector> regionNameDetectorsPerLanguage(
-			@Qualifier("FI") RegionNameDetector regionNameDetector_FI,
-			@Qualifier("SV") RegionNameDetector regionNameDetector_SV,
-			@Qualifier("EN") RegionNameDetector regionNameDetector_EN)
-	{
-		Map<Language, RegionNameDetector> ret = new HashMap<>();
-		ret.put(Language.FI, regionNameDetector_FI);
-		ret.put(Language.SV, regionNameDetector_SV);
-		ret.put(Language.EN, regionNameDetector_EN);
-		
+
 		return ret;
 	}
 }
