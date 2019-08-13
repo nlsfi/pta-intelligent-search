@@ -2,8 +2,7 @@ package fi.maanmittauslaitos.pta.search.integration;
 
 import com.carrotsearch.randomizedtesting.annotations.Seed;
 import com.carrotsearch.randomizedtesting.annotations.ThreadLeakScope;
-import com.google.common.collect.BiMap;
-import com.google.common.collect.ImmutableMap;
+import org.apache.commons.io.IOUtils;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 import org.elasticsearch.action.DocWriteResponse.Result;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
@@ -21,17 +20,17 @@ import org.elasticsearch.test.ESIntegTestCase;
 import org.elasticsearch.test.ESIntegTestCase.ClusterScope;
 import org.elasticsearch.test.ESIntegTestCase.Scope;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -39,21 +38,33 @@ import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import static java.util.Objects.requireNonNull;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.elasticsearch.test.hamcrest.ElasticsearchAssertions.assertAcked;
 import static org.elasticsearch.test.hamcrest.ElasticsearchAssertions.assertAllSuccessful;
 
 
-@Ignore
 @ClusterScope(scope = Scope.SUITE)
 @ThreadLeakScope(ThreadLeakScope.Scope.NONE)
 @Seed("2A")
 @RunWith(com.carrotsearch.randomizedtesting.RandomizedRunner.class)
 public class SearchTest extends ESIntegTestCase {
 
-    private static final String RESOURCE_CLASSPATH = "/fi/maanmittauslaitos/pta/search/integration/testcases/";
+    private static final String INDEX_FILE = "index.json";
+    private static String PREFIX = "BOOT-INF/classes/";
+    private static final String COMMON_CLASSPATH = PREFIX + "fi/maanmittauslaitos/pta/search/integration/";
+    private static final String METADATA_ZIP = COMMON_CLASSPATH + "generatedResourceMetadata.zip";
+    private static final String TESTCASE_DIR = COMMON_CLASSPATH + "testcases/";
     private static final int RESULT_SIZE = 10;
     private int nDocs;
+
+    private static URL getResource(String resource) {
+        return SearchTest.class.getClassLoader().getResource(resource);
+    }
+
+    private static InputStream getResourceAsStream(String resource) {
+        return requireNonNull(SearchTest.class.getClassLoader().getResourceAsStream(resource));
+    }
 
     @Before
     public void createIndexAndPopulate() throws IOException, URISyntaxException {
@@ -61,9 +72,12 @@ public class SearchTest extends ESIntegTestCase {
         File tmpDir = Files.createTempDirectory("pta-SearchTest").toFile();
         tmpDir.deleteOnExit();
 
-        ZipInputStream zipFile = new ZipInputStream(SearchTest.class.getResourceAsStream("/fi/maanmittauslaitos/pta/search/integration/generatedResourceMetadata.zip"));
+        ZipInputStream zipFile = new ZipInputStream(getResourceAsStream(METADATA_ZIP));
 
-        String index = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("index.json").toURI())));
+        URI uri = getResource(INDEX_FILE).toURI();
+        requireNonNull(uri);
+        String index = IOUtils.toString(uri.toURL().openStream(), StandardCharsets.UTF_8);
+
         System.out.println(index);
         CreateIndexResponse response = client().admin().indices().prepareCreate("pta").setSource(index, XContentType.JSON).get();
         assertAcked(response);
@@ -89,7 +103,7 @@ public class SearchTest extends ESIntegTestCase {
             @SuppressWarnings("rawtypes")
             String id = ((Collection) mapValue.get("@id")).iterator().next().toString();
 
-            IndexResponse insertResponse = client().prepareIndex("pta", "metadata", id)
+            IndexResponse insertResponse = client().prepareIndex(PTAElasticSearchMetadataConstants.INDEX, PTAElasticSearchMetadataConstants.TYPE, id)
                     .setSource(content, XContentType.JSON)
                     .get();
 
@@ -119,9 +133,9 @@ public class SearchTest extends ESIntegTestCase {
     }
 
     private SearchResponse getSearchResponse(String testCaseName, int resultMaxSize) throws IOException, URISyntaxException {
-        URL testCase = getClass().getResource(RESOURCE_CLASSPATH + testCaseName);
-        Objects.requireNonNull(testCase, "testCase");
-        String queryStr = new String(Files.readAllBytes(Paths.get(testCase.toURI())));
+        URL testCase = getResource(TESTCASE_DIR + testCaseName);
+        requireNonNull(testCase, "testCase");
+        String queryStr = IOUtils.toString(testCase.openStream(), StandardCharsets.UTF_8);
         return getSearchResponseFromString(queryStr, resultMaxSize);
     }
 
