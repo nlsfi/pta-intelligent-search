@@ -57,6 +57,11 @@ Run the class `fi.maanmittauslaitos.pta.search.api.Application` from the project
 
 Open a browser window with the URL http://localhost:8080
 
+## Testing
+
+In project pta-intelligent-search-qa there are integration tests that depend on data generated in projects pta-intelligent-search-harvester and pta-intelligent-search-api
+by using exec-maven-plugin. In order to run the tests, those projects should be compiled and packaged first. The simplest way verify that all is working is to run `mvn clean install` at the root of the project.
+
 ## Updating spatial regions
 
 Databases (geoJSON files) containing the bounding boxes of Finnish municipalities, sub regions and regions 
