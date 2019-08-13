@@ -84,7 +84,7 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>my-execution</id>
+						<id>generate-qa-test-resource</id>
 						<phase>prepare-package</phase>
 						<goals>
 							<goal>java</goal>
