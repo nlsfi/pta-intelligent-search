@@ -20,60 +20,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>nls.fi</groupId>
-			<artifactId>pta-intelligent-search-harvester</artifactId>
-			<version>0.9-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<groupId>fi.nationallibrary</groupId>
-					<artifactId>maui</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>nls.fi</groupId>
-					<artifactId>pta-intelligent-search-metadata-annotation</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>log4j</groupId>
-					<artifactId>log4j</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>jcl-over-slf4j</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>nls.fi</groupId>
-			<artifactId>pta-intelligent-search-api</artifactId>
-			<version>0.9-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<groupId>fi.nationallibrary</groupId>
-					<artifactId>maui</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>nls.fi</groupId>
-					<artifactId>pta-intelligent-search-metadata-annotation</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>log4j</groupId>
-					<artifactId>log4j</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>jcl-over-slf4j</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>nls.fi</groupId>
 			<artifactId>pta-intelligent-search-elasticsearch</artifactId>
 			<version>0.9-SNAPSHOT</version>
 		</dependency>
@@ -102,4 +48,44 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>process-remote-resources</id>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>nls.fi</groupId>
+									<artifactId>pta-intelligent-search-elasticsearch</artifactId>
+									<version>0.9-SNAPSHOT</version>
+									<includes>**/index.json</includes>
+								</artifactItem>
+								<artifactItem>
+									<groupId>nls.fi</groupId>
+									<artifactId>pta-intelligent-search-harvester</artifactId>
+									<version>0.9-SNAPSHOT</version>
+									<includes>**/generatedResourceMetadata.zip</includes>
+								</artifactItem>
+								<artifactItem>
+									<groupId>nls.fi</groupId>
+									<artifactId>pta-intelligent-search-api</artifactId>
+									<version>0.9-SNAPSHOT</version>
+									<includes>**/testcase*.json</includes>
+								</artifactItem>
+							</artifactItems>
+							<outputDirectory>${project.build.directory}/classes/</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
