@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
+import com.google.common.annotations.VisibleForTesting;
 import fi.maanmittauslaitos.pta.search.codelist.InspireThemesImpl;
 import fi.maanmittauslaitos.pta.search.codelist.ODFOrganisationNameNormaliserImpl;
 import fi.maanmittauslaitos.pta.search.codelist.OrganisationNormaliser;
@@ -449,8 +450,8 @@ public class HarvesterConfig {
 		return isInOntologyFilterProcessor;
 	}
 
-
-	private TextProcessingChain createKeywordProcessingChain(RDFTerminologyMatcherProcessor terminologyProcessor,
+	@VisibleForTesting
+	TextProcessingChain createKeywordProcessingChain(RDFTerminologyMatcherProcessor terminologyProcessor,
 															 WordCombinationProcessor wordCombinationProcessor) {
 		TextProcessingChain keywordChain = new TextProcessingChain();
 		RegexProcessor whitespaceRemoval = new RegexProcessor();
@@ -465,10 +466,11 @@ public class HarvesterConfig {
 	}
 
 
-	private TextProcessingChain createAbstractProcessingChain(RDFTerminologyMatcherProcessor terminologyProcessor,
-															  WordCombinationProcessor wordCombinationProcessor) throws IOException {
+	@VisibleForTesting
+	TextProcessingChain createAbstractProcessingChain(RDFTerminologyMatcherProcessor terminologyProcessor,
+													  WordCombinationProcessor wordCombinationProcessor) throws IOException {
 		TextProcessingChain ret = new TextProcessingChain();
-		ret.getChain().add(new TextSplitterProcessor());
+		ret.getChain().add(new TextSplitterProcessor(true));
 		ret.getChain().add(wordCombinationProcessor);
 
 		StopWordsProcessor stopWordsProcessor = new StopWordsProcessor();
@@ -507,7 +509,8 @@ public class HarvesterConfig {
 	}
 
 
-	private RDFTerminologyMatcherProcessor createTerminologyMatcher(Model model) throws IOException {
+	@VisibleForTesting
+	RDFTerminologyMatcherProcessor createTerminologyMatcher(Model model) throws IOException {
 		RDFTerminologyMatcherProcessor ret = new RDFTerminologyMatcherProcessor();
 		ret.setModel(model);
 		ret.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
@@ -516,7 +519,8 @@ public class HarvesterConfig {
 		return ret;
 	}
 
-	private WordCombinationProcessor createWordCombinationProcessor(Model model) throws IOException {
+	@VisibleForTesting
+	WordCombinationProcessor createWordCombinationProcessor(Model model) throws IOException {
 		WordCombinationProcessor ret = new WordCombinationProcessor();
 		ret.setModel(model);
 		ret.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
