@@ -21,11 +21,10 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
 @SpringBootApplication
 public class CreateIntegrationTestQueries implements ApplicationRunner {
-	private static Logger logger = Logger.getLogger(CreateIntegrationTestQueries.class);
+	private static final Logger logger = Logger.getLogger(CreateIntegrationTestQueries.class);
 
 	@SuppressWarnings("unused")
 	@Autowired
@@ -52,6 +51,7 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
 		String outputDir = args.getSourceArgs().length > 0 ? args.getSourceArgs()[0] : "jsontest";
 		File directory = new File(outputDir);
 		if (!directory.exists()) {
+			//noinspection ResultOfMethodCallIgnored
 			directory.mkdirs();
 		}
 
@@ -63,7 +63,9 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
 				new ConversionHelper(Arrays.asList("jyväskylä", "tiet")),
 				new ConversionHelper(Collections.singletonList("hsl")),
 				new ConversionHelper(Collections.singletonList("uusimaa")),
-				new ConversionHelper(Collections.singletonList("keski-suomi"))
+				new ConversionHelper(Collections.singletonList("keski-suomi")),
+				new ConversionHelper(Collections.singletonList("liito-orava")),
+				new ConversionHelper(Collections.singletonList("orava"))
 		).forEach(helper -> generateTestCaseQuery(helper.getQueryList(), Paths.get(outputDir, helper.getTestCaseName() + ".json")));
 	}
 
