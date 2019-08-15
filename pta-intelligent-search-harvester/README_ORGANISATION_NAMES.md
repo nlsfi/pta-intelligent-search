@@ -3,7 +3,7 @@
 This harvester canonicalizes organisation names based on a ODS sheet. The goal of this canonicalization is to harmonize multiple different variants of a name to a single name to help users and the facet search.
 
 The file is loaded from
-1. The file path pointed to by the system environment property CANONICAL_ORGANISATIONS_FILE
+1. The file path pointed to by the system property -DCANONICAL_ORGANISATIONS_FILE=/path/to/file.ods
 2. The file "canonical_organisations.ods" in the current directory of the JVM process
 3. The resource "/canonical_organisations.ods" from classpath (included in the repository)
 
