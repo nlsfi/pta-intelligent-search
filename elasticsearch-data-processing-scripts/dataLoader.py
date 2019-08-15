@@ -18,6 +18,7 @@ interface service on 9 August 2019 with the licence CC BY 4.0 (https://creativec
 
 # Download new municipality excel from
 # https://www.kuntaliitto.fi/asiantuntijapalvelut/johtaminen-ja-kehittaminen/kuntaliitokset
+# and modify the file name constant accordingly
 MUNICIPALITY_UNIONS_EXCEL = "Kuntajakoselvitykset2005-2019_130519_0.xlsx"
 
 ORIGINAL_RELEVANT_COLUMNS = ['nimi', 'namn', 'geometry']
