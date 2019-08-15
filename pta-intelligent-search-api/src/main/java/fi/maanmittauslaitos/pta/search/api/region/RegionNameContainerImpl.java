@@ -14,6 +14,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.toList;
+
 public class RegionNameContainerImpl implements RegionNameContainer {
 
 	private static Logger logger = Logger.getLogger(RegionNameContainerImpl.class);
@@ -85,7 +87,7 @@ public class RegionNameContainerImpl implements RegionNameContainer {
 		// Build dictionary from all synonyms to finnish base region name
 		regionResources.stream()
 				.map(RegionResource::getSynonymsByRegionName)
-				.collect(Collectors.toList())
+				.collect(toList())
 				.forEach(synonymMap -> synonymMap
 						.forEach((regionName, synonymsByLang) ->
 								synonymsByLang
@@ -108,10 +110,14 @@ public class RegionNameContainerImpl implements RegionNameContainer {
 
 
 				try {
-					JsonNode synonyms_fi = properties.get("synonyms_fi");
-					synonymsByRegionName.put(finnishRegionName, ImmutableMap.of(Language.FI, listReader.readValue(synonyms_fi),
-							Language.EN, listReader.readValue(properties.get("synonyms_en")),
-							Language.SV, listReader.readValue(properties.get("synonyms_sv"))));
+					List<String> syms_fi = listReader.readValue(properties.get("synonyms_fi"));
+					List<String> syms_en = listReader.readValue(properties.get("synonyms_en"));
+					List<String> syms_sv = listReader.readValue(properties.get("synonyms_sv"));
+					synonymsByRegionName.put(finnishRegionName, ImmutableMap.of(
+							Language.FI, syms_fi,
+							Language.EN, Stream.of(syms_fi, syms_en).flatMap(Collection::stream).collect(toList()),
+							Language.SV, Stream.of(syms_fi, syms_sv).flatMap(Collection::stream).collect(toList())
+					));
 				} catch (IOException e) {
 					logger.error("Could not read synonyms", e);
 				}
