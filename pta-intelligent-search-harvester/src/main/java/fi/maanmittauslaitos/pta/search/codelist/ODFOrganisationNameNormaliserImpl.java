@@ -68,13 +68,17 @@ public class ODFOrganisationNameNormaliserImpl implements OrganisationNormaliser
 				HashMap<String, String> nameHashMap = new HashMap<>();
 				String oldCellA = "";
 				
-				for (Integer rowIndex = 1; rowIndex < table.getRowList().size(); rowIndex++) {
+				int numberOfConsecutiveEmptyRows = 0;
+				
+				for (Integer rowIndex = 1; rowIndex < table.getRowCount(); rowIndex++) {
+					boolean empty = true;
 					
 					String cellA = table.getCellByPosition(0, rowIndex).getStringValue();
 					cellA = cellA.trim();
 					Optional.ofNullable(cellA).orElse("");
 					if (!cellA.equals("")) {
 						oldCellA = cellA;
+						empty = false;
 					}
 					
 					String cellB = table.getCellByPosition(1, rowIndex).getStringValue();
@@ -82,6 +86,18 @@ public class ODFOrganisationNameNormaliserImpl implements OrganisationNormaliser
 					Optional.ofNullable(cellB).orElse("");
 					if (cellB.equals("")) {
 						cellB = oldCellA;
+					} else {
+						empty = false;
+					}
+					
+					if (empty) {
+						numberOfConsecutiveEmptyRows++;
+						if (numberOfConsecutiveEmptyRows > 9) {
+							logger.info("10 consecutive empty rows in the canonical names file (sheet '"+tableName+"') at row "+rowIndex+", presuming rest is empty");
+							break;
+						}
+					} else {
+						numberOfConsecutiveEmptyRows = 0;
 					}
 					
 					nameHashMap.put(cellB, oldCellA);
