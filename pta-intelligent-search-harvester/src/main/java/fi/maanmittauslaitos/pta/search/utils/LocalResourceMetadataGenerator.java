@@ -1,73 +1,41 @@
 package fi.maanmittauslaitos.pta.search.utils;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import fi.maanmittauslaitos.pta.search.AbstractHarvester;
 import fi.maanmittauslaitos.pta.search.HarvesterConfig;
 import fi.maanmittauslaitos.pta.search.HarvesterSource;
-import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
-import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataFields;
 import org.apache.commons.io.FileUtils;
-import org.springframework.boot.CommandLineRunner;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class LocalResourceMetadataGenerator implements CommandLineRunner {
-	public static void main(String[] args) throws Exception
-	{
+public class LocalResourceMetadataGenerator extends AbstractHarvester {
+	public static void main(String[] args) throws Exception {
 		LocalResourceMetadataGenerator localResourceMetadataGenerator = new LocalResourceMetadataGenerator();
 		localResourceMetadataGenerator.run(args);
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
-		HarvesterConfig config = new HarvesterConfig();
-		
-		HarvesterSource source = config.getLocalCSWSource();
-		
-		DocumentProcessor processor = config.getCSWRecordProcessor();
 
+	@Override
+	protected DocumentSink getDocumentSink(HarvesterConfig config, String[] args) {
 		String sinkfile = args.length > 0 ? args[0] : "generatedResourceMetatada.zip";
 
 		System.out.println("Sinkfile is " + sinkfile);
 
-		DocumentSink sink = config.getLocalDocumentSink(sinkfile);
-
-
-		int inserted = 0;
-		sink.startIndexing();
-		for (InputStream is : source) {
-			if (is == null) {
-				System.out.println("Source is null, skipping, or stopping");
-				return;
-			}
-			try {
-
-				Document doc = processor.processDocument(is);
-				DocumentSink.IndexResult result = sink.indexDocument(doc);
-
-				inserted++;
-
-			} finally {
-				is.close();
-			}
-		}
-
-		sink.stopIndexing();
-		System.out.println("Inserted "+inserted+" documents");
+		return config.getLocalDocumentSink(sinkfile);
 	}
 
-	private void writeDocumentToFile(Document doc) throws IOException, JsonProcessingException
-	{
-		String id = doc.getValue(ISOMetadataFields.ID, String.class);
-		ObjectMapper objectMapper = new ObjectMapper();
-		try (FileOutputStream out = new FileOutputStream("indexed-documents/"+id+".json")) {
-			objectMapper.writeValue(out, doc.getFields());
-		}
+	@Override
+	protected DocumentProcessor getDocumentProcessor(HarvesterConfig config) throws ParserConfigurationException, IOException {
+		return config.getCSWRecordProcessor();
+	}
+
+	@Override
+	protected HarvesterSource getHarvesterSource(HarvesterConfig config) {
+		return config.getLocalCSWSource();
 	}
 
 	private void downloadXmlFiles() throws IOException {
@@ -83,7 +51,7 @@ public class LocalResourceMetadataGenerator implements CommandLineRunner {
 			}
 			try {
 
-				File targetFile = new File("csws/"+ inserted + ".xml");
+				File targetFile = new File("csws/" + inserted + ".xml");
 				FileUtils.copyInputStreamToFile(is, targetFile);
 				inserted++;
 				if (inserted == 50) {
@@ -95,7 +63,7 @@ public class LocalResourceMetadataGenerator implements CommandLineRunner {
 			}
 		}
 
-		System.out.println("Inserted "+inserted+" documents");
+		System.out.println("Inserted " + inserted + " documents");
 	}
 
 }
