@@ -1,13 +1,14 @@
 package fi.maanmittauslaitos.pta.search.wfs;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.Iterator;
-import java.util.LinkedList;
+import fi.maanmittauslaitos.pta.search.HarvesterSource;
+import fi.maanmittauslaitos.pta.search.HarvestingException;
+import fi.maanmittauslaitos.pta.search.csw.Harvestable;
+import fi.maanmittauslaitos.pta.search.csw.HarvesterInputStream;
+import fi.maanmittauslaitos.pta.search.documentprocessor.*;
+import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
+import org.apache.log4j.Logger;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
@@ -15,81 +16,93 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
-import org.apache.log4j.Logger;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import fi.maanmittauslaitos.pta.search.HarvesterSource;
-import fi.maanmittauslaitos.pta.search.HarvestingException;
-import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessorFactory;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 public class WFS200HarvesterSource extends HarvesterSource {
 	private static Logger logger = Logger.getLogger(WFS200HarvesterSource.class);
-	
+
 	private String featureType;
 	private String sortBy = "gml:id";
-	
+
 	public void setFeatureType(String featureType) {
 		this.featureType = featureType;
 	}
-	
+
 	public String getFeatureType() {
 		return featureType;
 	}
-	
+
 	public void setSortBy(String sortBy) {
 		this.sortBy = sortBy;
 	}
-	
+
 	public String getSortBy() {
 		return sortBy;
 	}
-	
-	
+
+
 	@Override
-	public Iterator<InputStream> iterator() {
+	public Iterator<Harvestable> iterator() {
 		return new FeatureToInputStreamIterator();
 	}
-	
-	private class FeatureToInputStreamIterator implements Iterator<InputStream> {
+
+	@Override
+	public HarvesterInputStream getInputStream(Harvestable harvestable) {
+		return readRecord(harvestable.getNode());
+	}
+
+	private HarvesterInputStream readRecord(Node node) {
+		try {
+			StringWriter writer = new StringWriter();
+			Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			transformer.transform(new DOMSource(node), new StreamResult(writer));
+			String xml = writer.toString();
+			return HarvesterInputStream.wrap(new ByteArrayInputStream(xml.getBytes(StandardCharsets.UTF_8)));
+		} catch (TransformerException e) {
+			throw new HarvestingException(e);
+		}
+	}
+
+	private class FeatureToInputStreamIterator implements Iterator<Harvestable> {
 		private URL nextURL;
 		private LinkedList<Node> currentBatch;
 
-		
+
 		public FeatureToInputStreamIterator() {
 			try {
-			StringBuffer reqUrl = new StringBuffer(getOnlineResource());
-			if (reqUrl.indexOf("?") == -1) {
-				reqUrl.append("?");
-			} else if (reqUrl.charAt(reqUrl.length()-1) != '&') {
-				reqUrl.append("&");
-			}
-			
-			reqUrl.append("SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0");
-			
-			reqUrl.append("&TYPENAMES="+URLEncoder.encode(getFeatureType(), "UTF-8"));
-			reqUrl.append("&COUNT="+getBatchSize());
-			reqUrl.append("&STARTINDEX=1&SORTBY="+URLEncoder.encode(getSortBy(), "UTF-8"));
-			
-			nextURL = new URL(reqUrl.toString());
-			} catch(IOException e) {
+				StringBuffer reqUrl = new StringBuffer(getOnlineResource());
+				if (reqUrl.indexOf("?") == -1) {
+					reqUrl.append("?");
+				} else if (reqUrl.charAt(reqUrl.length() - 1) != '&') {
+					reqUrl.append("&");
+				}
+
+				reqUrl.append("SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0");
+
+				reqUrl.append("&TYPENAMES=" + URLEncoder.encode(getFeatureType(), "UTF-8"));
+				reqUrl.append("&COUNT=" + getBatchSize());
+				reqUrl.append("&STARTINDEX=1&SORTBY=" + URLEncoder.encode(getSortBy(), "UTF-8"));
+
+				nextURL = new URL(reqUrl.toString());
+			} catch (IOException e) {
 				throw new HarvestingException(e);
 			}
-			
+
 			getNextBatch();
 		}
 
 		private void getNextBatch() {
 			try {
-				logger.trace("WFS GetFeature URL: "+nextURL);
-				
+				logger.trace("WFS GetFeature URL: " + nextURL);
+
 				try (InputStream is = nextURL.openStream()) {
 					DocumentProcessingConfiguration configuration = new DocumentProcessingConfiguration();
 					configuration.getNamespaces().put("wfs", "http://www.opengis.net/wfs/2.0");
@@ -104,38 +117,38 @@ public class WFS200HarvesterSource extends HarvesterSource {
 					DocumentProcessor processor = xppf.createProcessor(configuration);
 					Document doc = processor.processDocument(is);
 
-					
+
 					logger.debug("\nnext = " + doc.getFields().get("next"));
 
 					String urlStr = doc.getValue("next", String.class);
-					
+
 					if (urlStr == null) {
 						nextURL = null;
 					} else {
 						nextURL = new URL(urlStr);
 					}
-					
+
 					NodeList list = doc.getDom().getElementsByTagNameNS("http://www.opengis.net/wfs/2.0", "member");
-					
+
 					currentBatch = new LinkedList<>();
 					for (int i = 0; i < list.getLength(); i++) {
 						currentBatch.add(list.item(i));
 					}
 				}
-				
-				
-			} catch(IOException | ParserConfigurationException | DocumentProcessingException e) {
+
+
+			} catch (IOException | ParserConfigurationException | DocumentProcessingException e) {
 				throw new HarvestingException(e);
 			}
 		}
-		
+
 		@Override
 		public boolean hasNext() {
 			return currentBatch.size() > 0 || nextURL != null;
 		}
 
 		@Override
-		public InputStream next() {
+		public Harvestable next() {
 			if (currentBatch.size() == 0) {
 				getNextBatch();
 			}
@@ -145,22 +158,10 @@ public class WFS200HarvesterSource extends HarvesterSource {
 			}
 
 			Node node = currentBatch.removeFirst();
-
-			return readRecord(node);
+			return Harvestable.create(node);
 		}
 
-		private InputStream readRecord(Node node) {
-			try {
-				StringWriter writer = new StringWriter();
-				Transformer transformer = TransformerFactory.newInstance().newTransformer();
-				transformer.transform(new DOMSource(node), new StreamResult(writer));
-				String xml = writer.toString();
-				return new ByteArrayInputStream(xml.getBytes("UTF-8"));
-			} catch(TransformerException | IOException e) {
-				throw new HarvestingException(e);
-			}
-		}
-	
+
 	}
 
 }

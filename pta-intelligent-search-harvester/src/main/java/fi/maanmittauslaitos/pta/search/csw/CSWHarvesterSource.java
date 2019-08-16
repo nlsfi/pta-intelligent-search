@@ -1,36 +1,67 @@
 package fi.maanmittauslaitos.pta.search.csw;
 
+import fi.maanmittauslaitos.pta.search.HarvesterSource;
+import fi.maanmittauslaitos.pta.search.HarvestingException;
+import fi.maanmittauslaitos.pta.search.documentprocessor.*;
+import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
+import org.apache.log4j.Logger;
+
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.apache.log4j.Logger;
-
-import fi.maanmittauslaitos.pta.search.HarvesterSource;
-import fi.maanmittauslaitos.pta.search.HarvestingException;
-import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessorFactory;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
-
 public class CSWHarvesterSource extends HarvesterSource {
 	private static Logger logger = Logger.getLogger(CSWHarvesterSource.class);
 
 	@Override
-	public Iterator<InputStream> iterator() {
+	public Iterator<Harvestable> iterator() {
 		return new CSWIterator();
 	}
 
-	private class CSWIterator implements Iterator<InputStream> {
+	@Override
+	public HarvesterInputStream getInputStream(Harvestable harvestable) {
+		return readRecord(harvestable.getIdentifier());
+	}
+
+
+	private HarvesterInputStream readRecord(String id) {
+		logger.debug("Requesting record with id" + id);
+
+		StringBuffer reqUrl = new StringBuffer(getOnlineResource());
+		if (reqUrl.indexOf("?") == -1) {
+			reqUrl.append("?");
+		} else if (reqUrl.charAt(reqUrl.length() - 1) != '&') {
+			reqUrl.append("&");
+		}
+
+		reqUrl.append("SERVICE=CSW&REQUEST=GetRecordById&VERSION=2.0.2&outputSchema=http://www.isotc211.org/2005/gmd&elementSetName=full");
+
+		try {
+			reqUrl.append("&id=" + URLEncoder.encode(id, "UTF-8"));
+
+			logger.trace("CSW GetRecordById URL: " + reqUrl);
+
+			URL url = new URL(reqUrl.toString());
+
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+				throw new HarvestingException();
+			}
+
+			return HarvesterInputStream.wrap(url.openStream());
+
+		} catch (IOException e) {
+			throw new HarvestingException(e);
+		}
+	}
+
+	private class CSWIterator implements Iterator<Harvestable> {
 		private int numberOfRecordsProcessed = 0;
 		private Integer numberOfRecordsInService;
 		private LinkedList<String> idsInBatch = null;
@@ -47,7 +78,7 @@ public class CSWHarvesterSource extends HarvesterSource {
 		}
 
 		@Override
-		public InputStream next() {
+		public Harvestable next() {
 			if (idsInBatch.size() == 0) {
 				getNextBatch();
 				// BUG: sometimes the next batch of brief records contain no id's and therefore idsInBatch.size() == 0 even after getNextBatch()
@@ -61,35 +92,10 @@ public class CSWHarvesterSource extends HarvesterSource {
 			String id = idsInBatch.removeFirst();
 			numberOfRecordsProcessed++;
 
-			return readRecord(id);
+			return Harvestable.create(id);
 		}
 
-		private InputStream readRecord(String id) {
-			logger.debug("Requesting record with id" + id);
 
-			StringBuffer reqUrl = new StringBuffer(getOnlineResource());
-			if (reqUrl.indexOf("?") == -1) {
-				reqUrl.append("?");
-			} else if (reqUrl.charAt(reqUrl.length()-1) != '&') {
-				reqUrl.append("&");
-			}
-			
-			reqUrl.append("SERVICE=CSW&REQUEST=GetRecordById&VERSION=2.0.2&outputSchema=http://www.isotc211.org/2005/gmd&elementSetName=full");
-			
-			try {
-				reqUrl.append("&id="+URLEncoder.encode(id, "UTF-8"));
-				
-				logger.trace("CSW GetRecordById URL: "+reqUrl);
-				
-				URL url = new URL(reqUrl.toString());
-				return url.openStream();
-				
-			} catch (IOException e) {
-				throw new HarvestingException(e);
-			}
-		}
-
-		
 		private void getNextBatch() {
 			int startPosition = 1 + numberOfRecordsProcessed;
 			int maxRecords = getBatchSize();

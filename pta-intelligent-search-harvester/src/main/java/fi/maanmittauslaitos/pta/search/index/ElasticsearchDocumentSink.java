@@ -1,5 +1,12 @@
 package fi.maanmittauslaitos.pta.search.index;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.ConcurrentHashMultiset;
+import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
+import fi.maanmittauslaitos.pta.search.index.ElasticsearchSearchIdsResponse.Hit;
+import fi.maanmittauslaitos.pta.search.utils.HarvesterTracker;
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -7,17 +14,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-
-import org.apache.log4j.Logger;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
-import fi.maanmittauslaitos.pta.search.index.ElasticsearchSearchIdsResponse.Hit;
 
 /**
  * This sink indexes an entire source and finally reomves all documents from ES that were not part of the inde
@@ -39,9 +37,10 @@ public class ElasticsearchDocumentSink implements DocumentSink {
 	
 	// Set in startIndexing()
 	private Set<String> idsInESBeforeIndexing;
-	private Set<String> idsIndexed;
-	
-	
+	private ConcurrentHashMultiset<String> idsIndexed;
+	private HarvesterTracker tracker;
+
+
 	public void setHostname(String hostname) {
 		this.hostname = hostname;
 	}
@@ -134,8 +133,8 @@ public class ElasticsearchDocumentSink implements DocumentSink {
 		
 		final int pageSize = 100;
 		final ObjectMapper objectMapper = new ObjectMapper();
-		
-		final Set<String> tmp = new HashSet<>();
+
+		final Set<String> existingIds = new HashSet<>();
 		logger.info("Identifying metadata in catalogue");
 		try {
 			Integer from = null;
@@ -156,7 +155,7 @@ public class ElasticsearchDocumentSink implements DocumentSink {
 					ElasticsearchSearchIdsResponse foo = objectMapper.readValue(is, ElasticsearchSearchIdsResponse.class);
 					
 					for (Hit hit : foo.getHits().getHits()) {
-						tmp.add(hit.getId());
+						existingIds.add(hit.getId());
 					}
 					
 					if (foo.getHits().getHits().size() < pageSize) {
@@ -176,18 +175,21 @@ public class ElasticsearchDocumentSink implements DocumentSink {
 			throw new SinkProcessingException(ie);
 		}
 
-		logger.info("Previous catalogue has "+tmp.size()+" records");
+		logger.info("Previous catalogue has " + existingIds.size() + " records");
 
-		idsInESBeforeIndexing = tmp;
-		
-		idsIndexed = new HashSet<>();
+
+		idsInESBeforeIndexing = existingIds;
+
+		idsIndexed = ConcurrentHashMultiset.create();
 	}
 	
 	@Override
 	public int stopIndexing() throws SinkProcessingException {
 		// Remove all IDs that were not indexed during the indexing process
 		Set<String> idsToRemove = new HashSet<>(idsInESBeforeIndexing);
+		Set<String> idsProcessedDuringLastSession = tracker.getIdentifiers();
 		idsToRemove.removeAll(idsIndexed);
+		idsToRemove.removeAll(idsProcessedDuringLastSession);
 		
 		logger.info("Removing "+idsToRemove.size()+" vanished entries from catalgoue");
 		
@@ -261,4 +263,7 @@ public class ElasticsearchDocumentSink implements DocumentSink {
 		}
 	}
 
+	public void setTracker(HarvesterTracker tracker) {
+		this.tracker = tracker;
+	}
 }

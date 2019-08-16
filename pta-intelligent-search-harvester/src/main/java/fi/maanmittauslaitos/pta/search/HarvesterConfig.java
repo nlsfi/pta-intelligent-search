@@ -27,6 +27,8 @@ import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataFields;
 import fi.maanmittauslaitos.pta.search.metadata.ResponsiblePartyXPathCustomExtractor;
 import fi.maanmittauslaitos.pta.search.text.*;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactory;
+import fi.maanmittauslaitos.pta.search.utils.HarvesterTracker;
+import fi.maanmittauslaitos.pta.search.utils.HarvesterTrackerImpl;
 import fi.maanmittauslaitos.pta.search.utils.Region;
 import fi.maanmittauslaitos.pta.search.utils.RegionFactory;
 import org.apache.log4j.Logger;
@@ -36,8 +38,10 @@ import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.*;
 import java.util.function.BiFunction;
@@ -52,9 +56,23 @@ public class HarvesterConfig {
 
 	private static final String ENV_CANONICAL_ORGANISATIONS_FILENAME = "CANONICAL_ORGANISATIONS_FILE";
 	private static final String CANONICAL_ORGANISATIONS_DEFAULT_FILENAME = "canonical_organisations.ods";
+	private static final String TRACKER_FILENAME = "harvester_tracker.json";
 	private static final double WHOLE_COUNTRY_SCORE_THRESHOLD = 0.6;
 	private static final double WHOLE_REGION_SCORE_THRESHOLD = 0.75;
 	private static final double WHOLE_SUBREGION_SCORE_THRESHOLD = 0.75;
+	private static final String LOCAL_CSW_SOURCE_DIR = "csws";
+
+
+	private final ObjectMapper objectMapper;
+
+	public HarvesterConfig() {
+		this.objectMapper = new ObjectMapper();
+	}
+
+	public HarvesterTracker getHarvesterTracker() throws IOException {
+		File trackerFile = Paths.get(TRACKER_FILENAME).toFile();
+		return new HarvesterTrackerImpl(trackerFile, objectMapper);
+	}
 
 	public HarvesterSource getCSWSource() {
 		HarvesterSource source = new CSWHarvesterSource();
@@ -65,11 +83,33 @@ public class HarvesterConfig {
 		return source;
 	}
 
-	public HarvesterSource getLocalCSWSource() {
+	public HarvesterSource getLocalCSWSource() throws XPathExpressionException, ParserConfigurationException {
 		LocalCSWHarvesterSource source = new LocalCSWHarvesterSource();
-		URL cswRoot = this.getClass().getClassLoader().getResource("csws");
+		URL cswRoot = this.getClass().getClassLoader().getResource(LOCAL_CSW_SOURCE_DIR);
 		source.setResourceRootURL(cswRoot);
 		return source;
+	}
+
+	public DocumentSink getDocumentSink(HarvesterTracker harvesterTracker) {
+		ElasticsearchDocumentSink ret = new ElasticsearchDocumentSink();
+		ret.setTracker(harvesterTracker);
+		ret.setHostname("localhost");
+		ret.setPort(9200);
+		ret.setProtocol("http");
+
+		ret.setIndex(PTAElasticSearchMetadataConstants.INDEX);
+		ret.setType(PTAElasticSearchMetadataConstants.TYPE);
+
+		ret.setIdField("@id");
+
+		return ret;
+	}
+
+	public DocumentSink getLocalDocumentSink(String sinkfile, HarvesterTracker harvesterTracker) {
+		LocalArchiveDocumentSink localArchiveDocumentSink = new LocalArchiveDocumentSink();
+		localArchiveDocumentSink.setTracker(harvesterTracker);
+		localArchiveDocumentSink.setOutputFileName(sinkfile);
+		return localArchiveDocumentSink;
 	}
 
 
@@ -260,7 +300,6 @@ public class HarvesterConfig {
 	}
 
 	private XPathFieldExtractorConfiguration getBestMatchingRegions(XPathFieldExtractorConfiguration bboxFec) {
-		ObjectMapper objectMapper = new ObjectMapper();
 		ObjectReader listReader = objectMapper.readerFor(new TypeReference<List<Double>>() {
 		});
 		Map<String, Region> countries = RegionFactory.readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_countries.json");
@@ -485,26 +524,6 @@ public class HarvesterConfig {
 		ret.setStemmer(StemmerFactory.createFinnishStemmer());
 		ret.setLanguage("fi");
 		return ret;
-	}
-
-	public DocumentSink getDocumentSink() {
-		ElasticsearchDocumentSink ret = new ElasticsearchDocumentSink();
-		ret.setHostname("localhost");
-		ret.setPort(9200);
-		ret.setProtocol("http");
-
-		ret.setIndex(PTAElasticSearchMetadataConstants.INDEX);
-		ret.setType(PTAElasticSearchMetadataConstants.TYPE);
-
-		ret.setIdField("@id");
-
-		return ret;
-	}
-
-	public DocumentSink getLocalDocumentSink(String sinkfile) {
-		LocalArchiveDocumentSink localArchiveDocumentSink = new LocalArchiveDocumentSink();
-		localArchiveDocumentSink.setOutputFileName(sinkfile);
-		return localArchiveDocumentSink;
 	}
 
 

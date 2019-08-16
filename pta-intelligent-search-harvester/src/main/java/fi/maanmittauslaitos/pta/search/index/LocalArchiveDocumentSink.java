@@ -3,6 +3,7 @@ package fi.maanmittauslaitos.pta.search.index;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
 import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataFields;
+import fi.maanmittauslaitos.pta.search.utils.HarvesterTracker;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -21,6 +22,7 @@ public class LocalArchiveDocumentSink implements DocumentSink {
     private String outputArchive;
     private Path localArchiveDocumentSink = null;
     private String outputFileName;
+    private HarvesterTracker tracker;
 
 
     @Override
@@ -94,4 +96,9 @@ public class LocalArchiveDocumentSink implements DocumentSink {
     public String getOutputFileName() {
         return outputFileName;
     }
+
+    public void setTracker(HarvesterTracker tracker) {
+        this.tracker = tracker;
+    }
+
 }
