@@ -38,6 +38,9 @@ public class HarvesterTrackerImpl implements HarvesterTracker {
 			objectMapper.writerWithDefaultPrettyPrinter().writeValue(trackerFile, TRACKER_FILE_TEMPLATE);
 		}
 		this.trackerMap = objectMapper.readValue(trackerFile, TRACKER_FILE_TYPE_REFERENCE);
+
+		assert this.trackerMap.keySet().containsAll(Arrays.asList(IdentifierType.values()));
+
 	}
 
 
@@ -68,6 +71,7 @@ public class HarvesterTrackerImpl implements HarvesterTracker {
 			if (!trackerMap.get(IdentifierType.PERMANENTLY_SKIPPED).contains(identifier))
 				trackerMap.get(IdentifierType.PERMANENTLY_SKIPPED).add(identifier);
 		}
+		saveProcess();
 	}
 
 	private boolean isSkippedMoreThanThreshold(String identifier) {
@@ -79,12 +83,14 @@ public class HarvesterTrackerImpl implements HarvesterTracker {
 	public void addIdToInserted(String identifier) {
 		removeFromSkippeds(identifier);
 		trackerMap.get(IdentifierType.INSERTED).add(identifier);
+		saveProcess();
 	}
 
 	@Override
 	public void addIdToUpdated(String identifier) {
 		removeFromSkippeds(identifier);
 		trackerMap.get(IdentifierType.UPDATED).add(identifier);
+		saveProcess();
 	}
 
 	private void removeFromSkippeds(String identifier) {
@@ -113,7 +119,7 @@ public class HarvesterTrackerImpl implements HarvesterTracker {
 			trackerMap.get(IdentifierType.INSERTED).clear();
 			trackerMap.get(IdentifierType.UPDATED).clear();
 		}
-		saveTrackerMap();
+		saveProcess();
 
 		if (getIdentifiers().isEmpty() && !trackerFile.delete()) {
 			logger.error("Failed to delete tracker file: " + trackerFile.toString());
@@ -122,10 +128,10 @@ public class HarvesterTrackerImpl implements HarvesterTracker {
 
 	@Override
 	public void harvestingInterrupted() {
-		saveTrackerMap();
+		saveProcess();
 	}
 
-	private void saveTrackerMap() {
+	private synchronized void saveProcess() {
 		try {
 			objectMapper.writerWithDefaultPrettyPrinter().writeValue(trackerFile, trackerMap);
 		} catch (IOException e) {

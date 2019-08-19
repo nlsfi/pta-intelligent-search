@@ -19,9 +19,11 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.mockito.exceptions.base.MockitoException;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -34,7 +36,8 @@ import static org.mockito.Mockito.when;
 public class AbstractHarvesterTest {
 	private static final String TRACKER_FILENAME = "test_temp_harvester_tracker.json";
 	private static final File TRACKER_FILE = Paths.get(TRACKER_FILENAME).toFile();
-	private static final MockitoException STOPPER_EXCEPTION = new MockitoException("Stopper (lets the test inspect the tracker content)");
+	private static final MockitoException STOPPER_EXCEPTION =
+			new MockitoException("Lets the test inspect the tracker content, when orherwise succesfull harvesting");
 	@Mock
 	private static DocumentSink mockSink;
 	@Mock
@@ -45,6 +48,8 @@ public class AbstractHarvesterTest {
 	private static HarvesterConfig mockConfig;
 	@Mock
 	private static HarvesterInputStream mockIs;
+	@Mock
+	private static HarvesterInputStream mockIsInvalid;
 	@Rule
 	public final JUnitSoftAssertions softly = new JUnitSoftAssertions();
 	@Mock
@@ -54,7 +59,12 @@ public class AbstractHarvesterTest {
 	private Document mockDocument;
 
 	private AbstractHarvester harvester;
-	private HarvesterTracker harvesterTracker;
+
+	@Spy
+	private HarvesterTrackerImpl harvesterTracker = new HarvesterTrackerImpl(TRACKER_FILE, new ObjectMapper());
+
+	public AbstractHarvesterTest() throws IOException {
+	}
 
 
 	@Before
@@ -63,9 +73,7 @@ public class AbstractHarvesterTest {
 		deleteTempTrackerFile();
 
 		harvester = new TestHarvester();
-		harvesterTracker = new HarvesterTrackerImpl(TRACKER_FILE, new ObjectMapper());
 		when(mockSource.iterator()).thenReturn(mockIterator);
-		when(mockIterator.hasNext()).thenReturn(true);
 		when(mockSource.getInputStream(Mockito.any(Harvestable.class))).thenReturn(mockIs);
 		when(mockProcessor.processDocument(Mockito.any(InputStream.class))).thenReturn(mockDocument);
 		when(mockSink.indexDocument(mockDocument)).thenReturn(IndexResult.INSERTED);
@@ -88,12 +96,13 @@ public class AbstractHarvesterTest {
 	public void testSuccessfulHarvesting() throws Exception {
 		List<String> ids = Arrays.asList("successful1", "successful2", "successful3");
 
+		when(mockIterator.hasNext()).thenReturn(true, true, true, false);
 		when(mockIterator.next())
 				.thenReturn(Harvestable.create(ids.get(0)))
 				.thenReturn(Harvestable.create(ids.get(1)))
-				.thenReturn(Harvestable.create(ids.get(2)))
-				.thenThrow(STOPPER_EXCEPTION);
+				.thenReturn(Harvestable.create(ids.get(2)));
 
+		Mockito.doThrow(STOPPER_EXCEPTION).when(harvesterTracker).harvestingFinished();
 		try {
 			harvester.run();
 		} catch (MockitoException ignored) {
@@ -111,10 +120,13 @@ public class AbstractHarvesterTest {
 		when(mockIterator.hasNext()).thenReturn(true, true, true, false);
 		when(mockIterator.next()).thenReturn(valid, invalid, valid2);
 
-		when(mockProcessor.processDocument(Mockito.any(InputStream.class)))
-				.thenReturn(mockDocument)
-				.thenThrow(new DocumentProcessingException("caused by invalid document", new Throwable()))
-				.thenReturn(mockDocument);
+
+		when(mockSource.getInputStream(invalid)).thenReturn(mockIsInvalid);
+
+
+		when(mockProcessor.processDocument(mockIs)).thenReturn(mockDocument);
+		when(mockProcessor.processDocument(mockIsInvalid))
+				.thenThrow(new DocumentProcessingException("caused by invalid document", new Throwable()));
 
 		harvester.run();
 
@@ -132,9 +144,12 @@ public class AbstractHarvesterTest {
 		Harvestable previouslyInvalid = Harvestable.create("caused_processing_exception_in_previous_run");
 		harvesterTracker.addToSkippedDueProcessingException(previouslyInvalid.getIdentifier());
 
+		when(mockIterator.hasNext()).thenReturn(true, true, false);
 		when(mockIterator.next())
-				.thenReturn(valid, previouslyInvalid)
-				.thenThrow(STOPPER_EXCEPTION);
+				.thenReturn(valid, previouslyInvalid);
+
+		Mockito.doThrow(STOPPER_EXCEPTION).when(harvesterTracker).harvestingFinished();
+
 		try {
 			harvester.run();
 		} catch (MockitoException ignored) {
@@ -149,7 +164,7 @@ public class AbstractHarvesterTest {
 	public void testHarvestingException() throws Exception {
 		Harvestable valid = Harvestable.create("successful");
 		Harvestable invalid = Harvestable.create("causing_harvesting_exception");
-		Harvestable valid2 = Harvestable.create("successful_but_doesn't_get_harvested");
+		Harvestable valid2 = Harvestable.create("successful_but_doesn't_get_harvested_if_synchronous_run");
 
 		when(mockIterator.hasNext()).thenReturn(true, true, true, false);
 		when(mockIterator.next()).thenReturn(valid, invalid, valid2);
@@ -159,7 +174,7 @@ public class AbstractHarvesterTest {
 		harvester.run();
 
 		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.INSERTED))
-				.containsOnly(valid.getIdentifier());
+				.contains(valid.getIdentifier());
 		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.SKIPPED_DUE_HARVESTING_EXCEPTION))
 				.contains(invalid.getIdentifier());
 	}
@@ -170,13 +185,15 @@ public class AbstractHarvesterTest {
 		Harvestable invalid = Harvestable.create("causing_harvesting_exception_at_first");
 		Harvestable valid2 = Harvestable.create("successful2");
 
+		when(mockIterator.hasNext()).thenReturn(true, true, true, false);
 		when(mockIterator.next())
-				.thenReturn(valid, invalid, valid2)
-				.thenThrow(STOPPER_EXCEPTION);
+				.thenReturn(valid, invalid, valid2);
 
 		when(mockSource.getInputStream(invalid))
 				.thenThrow(new HarvestingException())
 				.thenReturn(mockIs);
+
+		Mockito.doThrow(STOPPER_EXCEPTION).when(harvesterTracker).harvestingFinished();
 
 		try {
 			harvester.run();
@@ -187,7 +204,6 @@ public class AbstractHarvesterTest {
 					.isEmpty();
 		}
 	}
-
 
 	static class TestHarvester extends AbstractHarvester {
 

@@ -3,15 +3,8 @@ package fi.maanmittauslaitos.pta.search.csw;
 import fi.maanmittauslaitos.pta.search.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.HarvestingException;
 import org.apache.log4j.Logger;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -22,27 +15,15 @@ import java.util.LinkedList;
 
 public class LocalCSWHarvesterSource extends HarvesterSource {
 
-	private static final String FILE_IDENTIFIER_XPATH = "//gmd:fileIdentifier/*/text()";
 	private static Logger logger = Logger.getLogger(LocalCSWHarvesterSource.class);
-	private final DocumentBuilder builder;
-	private final XPathExpression xPathExpression;
 	private URL resourceRootURL;
 
-	public LocalCSWHarvesterSource() throws ParserConfigurationException, XPathExpressionException {
+	public LocalCSWHarvesterSource() {
 		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
 		builderFactory.setNamespaceAware(true);
-		this.builder = builderFactory.newDocumentBuilder();
-		this.xPathExpression = XPathFactory.newInstance().newXPath().compile(FILE_IDENTIFIER_XPATH);
 
 	}
 
-	private String getIdFromFile(File document) throws HarvestingException {
-		try {
-			return (String) xPathExpression.evaluate(builder.parse(document), XPathConstants.STRING);
-		} catch (XPathExpressionException | SAXException | IOException e) {
-			throw new HarvestingException(e);
-		}
-	}
 
 	public URL getResourceRootURL() {
 		return resourceRootURL;
@@ -99,7 +80,7 @@ public class LocalCSWHarvesterSource extends HarvesterSource {
 			File cswFile = localCSWs.removeFirst();
 			numberOfRecordsProcessed++;
 
-			return Harvestable.create(cswFile, getIdFromFile(cswFile));
+			return Harvestable.create(cswFile, cswFile.getName().replace(".xml", ""));
 		}
 
 

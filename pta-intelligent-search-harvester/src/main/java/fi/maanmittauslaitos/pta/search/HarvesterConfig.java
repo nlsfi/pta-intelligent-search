@@ -38,7 +38,6 @@ import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -83,7 +82,7 @@ public class HarvesterConfig {
 		return source;
 	}
 
-	public HarvesterSource getLocalCSWSource() throws XPathExpressionException, ParserConfigurationException {
+	public HarvesterSource getLocalCSWSource() {
 		LocalCSWHarvesterSource source = new LocalCSWHarvesterSource();
 		URL cswRoot = this.getClass().getClassLoader().getResource(LOCAL_CSW_SOURCE_DIR);
 		source.setResourceRootURL(cswRoot);

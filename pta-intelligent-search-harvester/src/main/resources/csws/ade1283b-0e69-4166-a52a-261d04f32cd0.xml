@@ -1,0 +1,1075 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csw:GetRecordByIdResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
+    <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco"
+                     xmlns:gml="http://www.opengis.net/gml"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:schemaLocation="http://www.isotc211.org/2005/gmd https://www.isotc211.org/2005/gmd/gmd.xsd http://www.isotc211.org/2005/gmx https://www.isotc211.org/2005/gmx/gmx.xsd">
+    <gmd:fileIdentifier>
+      <gco:CharacterString>ade1283b-0e69-4166-a52a-261d04f32cd0</gco:CharacterString>
+    </gmd:fileIdentifier>
+    <gmd:language>
+      <gco:CharacterString>fin</gco:CharacterString>
+    </gmd:language>
+    <gmd:characterSet>
+      <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="8859part15" />
+    </gmd:characterSet>
+    <gmd:hierarchyLevel>
+      <gmd:MD_ScopeCode codeListValue="dataset" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" />
+    </gmd:hierarchyLevel>
+    <gmd:hierarchyLevelName>
+      <gco:CharacterString>Maaperä 1:200 000 (maalajit)</gco:CharacterString>
+    </gmd:hierarchyLevelName>
+    <gmd:contact>
+      <gmd:CI_ResponsibleParty>
+        <gmd:organisationName xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Geologian tutkimuskeskus</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Geologian tutkimuskeskus</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">Geological Survey of Finland</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:organisationName>
+        <gmd:contactInfo>
+          <gmd:CI_Contact>
+            <gmd:phone>
+              <gmd:CI_Telephone>
+                <gmd:voice>
+                  <gco:CharacterString>0295030000</gco:CharacterString>
+                </gmd:voice>
+                <gmd:facsimile>
+                  <gco:CharacterString>0295032901</gco:CharacterString>
+                </gmd:facsimile>
+              </gmd:CI_Telephone>
+            </gmd:phone>
+            <gmd:address>
+              <gmd:CI_Address>
+                <gmd:deliveryPoint xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>PL 96 (Vuorimiehentie 5)</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">PL 96 (Vuorimiehentie 5)</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">PL 96 (Vuorimiehentie 5)</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:deliveryPoint>
+                <gmd:city>
+                  <gco:CharacterString>Espoo</gco:CharacterString>
+                </gmd:city>
+                <gmd:postalCode>
+                  <gco:CharacterString>02150</gco:CharacterString>
+                </gmd:postalCode>
+                <gmd:country xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Suomi</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Suomi</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">Finland</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:country>
+                <gmd:electronicMailAddress xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>geodata@gtk.fi</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">geodata@gtk.fi</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">geodata@gtk.fi</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:electronicMailAddress>
+              </gmd:CI_Address>
+            </gmd:address>
+          </gmd:CI_Contact>
+        </gmd:contactInfo>
+        <gmd:role>
+          <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="owner" />
+        </gmd:role>
+      </gmd:CI_ResponsibleParty>
+    </gmd:contact>
+    <gmd:dateStamp>
+      <gco:DateTime>2019-04-04T13:34:02</gco:DateTime>
+    </gmd:dateStamp>
+    <gmd:locale>
+      <gmd:PT_Locale id="EN">
+        <gmd:languageCode>
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+        </gmd:languageCode>
+        <gmd:characterEncoding>
+          <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="8859part15" />
+        </gmd:characterEncoding>
+      </gmd:PT_Locale>
+    </gmd:locale>
+    <gmd:locale>
+      <gmd:PT_Locale id="FI">
+        <gmd:languageCode>
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="fin" />
+        </gmd:languageCode>
+        <gmd:characterEncoding>
+          <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+        </gmd:characterEncoding>
+      </gmd:PT_Locale>
+    </gmd:locale>
+    <gmd:spatialRepresentationInfo>
+      <gmd:MD_VectorSpatialRepresentation>
+        <gmd:topologyLevel>
+          <gmd:MD_TopologyLevelCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_TopologyLevelCode" codeListValue="geometryOnly" />
+        </gmd:topologyLevel>
+      </gmd:MD_VectorSpatialRepresentation>
+    </gmd:spatialRepresentationInfo>
+    <gmd:referenceSystemInfo>
+      <gmd:MD_ReferenceSystem>
+        <gmd:referenceSystemIdentifier>
+          <gmd:RS_Identifier>
+            <gmd:code gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>ETRS89 / ETRS-TM35FIN (EPSG:3067)</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">ETRS89 / ETRS-TM35FIN (EPSG:3067)</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:code>
+            <gmd:codeSpace>
+              <gco:CharacterString>EPSG</gco:CharacterString>
+            </gmd:codeSpace>
+            <gmd:version>
+              <gco:CharacterString>7.4</gco:CharacterString>
+            </gmd:version>
+          </gmd:RS_Identifier>
+        </gmd:referenceSystemIdentifier>
+      </gmd:MD_ReferenceSystem>
+    </gmd:referenceSystemInfo>
+    <gmd:identificationInfo>
+      <gmd:MD_DataIdentification>
+        <gmd:citation>
+          <gmd:CI_Citation>
+            <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Maaperä 1:200 000 (maalajit)</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Maaperä 1:200 000 (maalajit)</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Superficial deposits of Finland 1:200 000 (sediment polygons)</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:title>
+            <gmd:alternateTitle xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Maaperän yleiskartta</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Maaperän yleiskartta</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:alternateTitle>
+            <gmd:date>
+              <gmd:CI_Date>
+                <gmd:date>
+                  <gco:Date>2010-01-01</gco:Date>
+                </gmd:date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" />
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+            <gmd:identifier>
+              <gmd:MD_Identifier>
+                <gmd:code>
+                  <gco:CharacterString>1000171</gco:CharacterString>
+                </gmd:code>
+              </gmd:MD_Identifier>
+            </gmd:identifier>
+            <gmd:presentationForm>
+              <gmd:CI_PresentationFormCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_PresentationFormCode" codeListValue="digitalGeographicInfo" />
+            </gmd:presentationForm>
+          </gmd:CI_Citation>
+        </gmd:citation>
+        <gmd:abstract xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Maaperä 1:200 000 (maalajit) sisältää vuosien 2002-2009 aikana tuotettua aineistoa koko Suomen alueelta. Aineistoa voidaan käyttää seutusuunnittelussa, maanpuolustuksessa, maannoskartoituksessa (EU) ja erilaisissa alueellisissa yhteistyökartoituksissa. Kartoitusmittakaava on ollut 1:50 000-1:200 000. Keskimittakaavaisen aineiston muodostamiseeen on käytetty yleistettyä 1:20 000, 1:50 000 ja 1:100 000 maaperän peruskarttaa, ja 1:200 000 mittakaavaista uustuotantoa, joka perustuu tulkintaan ja maastokartoitukseen. Maalajikuvion minimikoko on yleensä noin 6 ha, poikkeuksena jäätikköjokimuodostumat, reunamoreenimuodostumat ja kumpumoreenit, joita kuvataan aineistossa 2 ha pinta-alaa suuremmat alueet. Peittävä turvekerrostuma on kuvattu uustuotannossa soistumana (0-0,3 m turvetta), ohuena turpeena (0,3-0,6 m turvetta) ja paksuna turpeena (yli 0,6 m turvetta). Soistumat, kivikot ja avokalliot on lisätty uustuotantoon Maanmittauslaitoksen maastotietokannan vastaavista kuvioista yleistämällä. Uustuotannon yhteydessä on kerätty maastohavaintoja maapeitteen paksuudesta ja kerrosjärjestyksestä 1 metrin syvyydessä sekä kalliopaljastumista.
+Maaperä 1:200 000 (maalajit) -aineistolle on tehty koordinaatistomuunnos maaliskuussa 2013. Muunnos kartastokoordinaattijärjestelmän yhtenäiskoordinaatistosta ETRS-TM35FIN -koordinaatistoon on tehty kolmioittaista affiinista muunnosta käyttäen.</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Maaperä 1:200 000 (maalajit) sisältää vuosien 2002-2009 aikana tuotettua aineistoa koko Suomen alueelta. Aineistoa voidaan käyttää seutusuunnittelussa, maanpuolustuksessa, maannoskartoituksessa (EU) ja erilaisissa alueellisissa yhteistyökartoituksissa. Kartoitusmittakaava on ollut 1:50 000-1:200 000. Keskimittakaavaisen aineiston muodostamiseeen on käytetty yleistettyä 1:20 000, 1:50 000 ja 1:100 000 maaperän peruskarttaa, ja 1:200 000 mittakaavaista uustuotantoa, joka perustuu tulkintaan ja maastokartoitukseen. Maalajikuvion minimikoko on yleensä noin 6 ha, poikkeuksena jäätikköjokimuodostumat, reunamoreenimuodostumat ja kumpumoreenit, joita kuvataan aineistossa 2 ha pinta-alaa suuremmat alueet. Peittävä turvekerrostuma on kuvattu uustuotannossa soistumana (0-0,3 m turvetta), ohuena turpeena (0,3-0,6 m turvetta) ja paksuna turpeena (yli 0,6 m turvetta). Soistumat, kivikot ja avokalliot on lisätty uustuotantoon Maanmittauslaitoksen maastotietokannan vastaavista kuvioista yleistämällä. Uustuotannon yhteydessä on kerätty maastohavaintoja maapeitteen paksuudesta ja kerrosjärjestyksestä 1 metrin syvyydessä sekä kalliopaljastumista.
+Maaperä 1:200 000 (maalajit) -aineistolle on tehty koordinaatistomuunnos maaliskuussa 2013. Muunnos kartastokoordinaattijärjestelmän yhtenäiskoordinaatistosta ETRS-TM35FIN -koordinaatistoon on tehty kolmioittaista affiinista muunnosta käyttäen.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">The Superficial deposits of Finland 1:200 000 (sediment polygons) contains data produced from the whole of Finland during the period 2002-2009. The data set can be used in regional planning, in military defence, in soil mapping (EU) and in joint mapping projects in various areas. The mapping scale has been 1:50 000-1:200 000. In compiling the medium-scale data set, generalised 1:20 000, 1:50 000 and 1:100 000 superficial deposits maps have been used and a new map product at a scale of 1:200 000 that is based on interpretation and field mapping. The minimum size of the sediment polygons is about six hectares. Exceptions are glaciofluvial, marginal till and hummocky moraine deposits, which are presented in the data set as areas with a surface area greater than two hectares. The blanketing peat overburden has been described in the new map product as a peat-covered area (0-0.3 m of peat), thin peat (0.3-0.6 m of peat) and thick peat (over 0.6 m of peat). Peat-covered areas, stone fields and uncovered bedrock areas have been added to the new production map by generalising the corresponding polygons in the terrain database of the National Land Survey of Finland (NLS). In connection with the generation of new production map, field observations have been gathered on the overburden thickness and the stratigraphic sequence at a depth of one metre as well as on rock exposures.
+Coordinate reference system of the Superficial deposits of Finland 1:200 000 (sediment polygons) was transformed in March 2013. The transformation from Finnish National Grid Coordinate System (Kartastokoordinaattijärjestelmä, KKJ) Uniform Coordinate Frame to ETRS-TM35FIN projection was done by using the three-dimensional transformation in accordance with the recommendations for the public administration JHS154.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:abstract>
+        <gmd:purpose xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Maaperä 1:200 000 (maalajit) aineisto soveltuu käytettäväksi yleismittakaavaisessa (keskimittakaavainen) maankäytön suunnittelussa, maankamaran raaka-ainevarojen kartoituksessa ja inventoinnissa, ympäristönhoidossa, maa- ja metsätaloudessa sekä opetuksessa ja tieteellisessä ja soveltavassa tutkimuksessa. Kartta-aineiston käyttömittakaava on 1:100 000-1:250 000.</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Maaperä 1:200 000 (maalajit) aineisto soveltuu käytettäväksi yleismittakaavaisessa (keskimittakaavainen) maankäytön suunnittelussa, maankamaran raaka-ainevarojen kartoituksessa ja inventoinnissa, ympäristönhoidossa, maa- ja metsätaloudessa sekä opetuksessa ja tieteellisessä ja soveltavassa tutkimuksessa. Kartta-aineiston käyttömittakaava on 1:100 000-1:250 000.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">The Superficial deposits of Finland 1:200 000 (sediment polygons) is suitable for use at a general scale (medium scale) in land-use planning, in the mapping and inventory of the natural resources of land areas, in environmental management, in agriculture and forestry and in education as well as in scientific and applied research. The scale of use of the map data set is 1:100 000-1:250 000.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:purpose>
+        <gmd:credit xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Maa- ja elintarviketalouden tutkimuskeskus</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Maa- ja elintarviketalouden tutkimuskeskus</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">Maa- ja elintarviketalouden tutkimuskeskus</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:credit>
+        <gmd:credit xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Maanmittauslaitos</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Maanmittauslaitos</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">Maanmittauslaitos</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:credit>
+        <gmd:credit xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Metsäntutkimuslaitos</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Metsäntutkimuslaitos</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">Metsäntutkimuslaitos</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:credit>
+        <gmd:status>
+          <gmd:MD_ProgressCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ProgressCode" codeListValue="completed" />
+        </gmd:status>
+        <gmd:pointOfContact>
+          <gmd:CI_ResponsibleParty>
+            <gmd:organisationName xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Geologian tutkimuskeskus</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Geologian tutkimuskeskus</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Geological Survey of Finland</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:organisationName>
+            <gmd:contactInfo>
+              <gmd:CI_Contact>
+                <gmd:phone>
+                  <gmd:CI_Telephone>
+                    <gmd:voice>
+                      <gco:CharacterString>0295030000</gco:CharacterString>
+                    </gmd:voice>
+                    <gmd:facsimile>
+                      <gco:CharacterString>0295032901</gco:CharacterString>
+                    </gmd:facsimile>
+                  </gmd:CI_Telephone>
+                </gmd:phone>
+                <gmd:address>
+                  <gmd:CI_Address>
+                    <gmd:deliveryPoint xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString>PL 96 (Vuorimiehentie 5)</gco:CharacterString>
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#FI">PL 96 (Vuorimiehentie 5)</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#EN">PL 96 (Vuorimiehentie 5)</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:deliveryPoint>
+                    <gmd:city>
+                      <gco:CharacterString>Espoo</gco:CharacterString>
+                    </gmd:city>
+                    <gmd:postalCode>
+                      <gco:CharacterString>02150</gco:CharacterString>
+                    </gmd:postalCode>
+                    <gmd:country xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString>Suomi</gco:CharacterString>
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#FI">Suomi</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#EN">Finland</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:country>
+                    <gmd:electronicMailAddress xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString>geodata@gtk.fi</gco:CharacterString>
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#FI">geodata@gtk.fi</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#EN">geodata@gtk.fi</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:electronicMailAddress>
+                  </gmd:CI_Address>
+                </gmd:address>
+              </gmd:CI_Contact>
+            </gmd:contactInfo>
+            <gmd:role>
+              <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="owner" />
+            </gmd:role>
+          </gmd:CI_ResponsibleParty>
+        </gmd:pointOfContact>
+        <gmd:graphicOverview>
+          <gmd:MD_BrowseGraphic>
+            <gmd:fileName>
+              <gco:CharacterString>http://www.paikkatietohakemisto.fi/geonetwork/srv/api/records/ade1283b-0e69-4166-a52a-261d04f32cd0/attachments/DigiMP200_s.png</gco:CharacterString>
+            </gmd:fileName>
+            <gmd:fileDescription xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>thumbnail</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">thumbnail</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:fileDescription>
+          </gmd:MD_BrowseGraphic>
+        </gmd:graphicOverview>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Maaperä</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Maaperä</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Soils</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Paljastumat</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Paljastumat</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Outcrops</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Kallioperä</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Kallioperä</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Bedrock</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Sedimentit</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Sedimentit</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Sediments</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Karkearakeinen aines</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Karkearakeinen aines</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Coarse-grained materials</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Hienorakeinen aines</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Hienorakeinen aines</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Fine-grained materials</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Savi</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Savi</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Clay</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Lieju</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Lieju</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Gyttja</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Orgaaniset sedimentit</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Orgaaniset sedimentit</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Organic sediments</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Turve</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Turve</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Peat</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Vesi</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Vesi</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Water</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeListValue="theme" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Geosanasto</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Geosanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">Geosanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2015-01-20</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeListValue="revision" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Suomi</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Suomi</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Finland</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="place" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Geosanasto</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Geosanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">Geosanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2015-01-20</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="revision" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Geologiset kartat</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Geologiset kartat</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Geologic maps</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Maaperäkartat</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Maaperäkartat</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Surficial geology maps</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="discipline" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Geosanasto</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Geosanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">Geosanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2015-01-20</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="revision" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Geologia</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Geologia</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Geology</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>GEMET - INSPIRE themes, version 1.0</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">GEMET - INSPIRE themes, version 1.0</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2008-06-01</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+                <gmd:identifier>
+                  <gmd:MD_Identifier>
+                    <gmd:code>
+                      <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.inspire-theme">geonetwork.thesaurus.external.theme.inspire-theme</gmx:Anchor>
+                    </gmd:code>
+                  </gmd:MD_Identifier>
+                </gmd:identifier>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>avoindata.fi</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">avoindata.fi</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">avoindata.fi</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Ei-Inspire</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Ei-Inspire</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Not-Inspire</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Paikkatietohakemiston asiasanasto</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Paikkatietohakemiston asiasanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2010-02-03</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+                <gmd:identifier>
+                  <gmd:MD_Identifier>
+                    <gmd:code>
+                      <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.asiasanasto">geonetwork.thesaurus.external.theme.asiasanasto</gmx:Anchor>
+                    </gmd:code>
+                  </gmd:MD_Identifier>
+                </gmd:identifier>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Suomi</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Finland</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Suomi</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="place" />
+            </gmd:type>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Kvartääri</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Kvartääri</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Quaternary</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="temporal" />
+            </gmd:type>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Geologiset kartat</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Geologiset kartat</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Geologic maps</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="discipline" />
+            </gmd:type>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Maaperäkartat</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Maaperäkartat</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Surficial geology maps</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="discipline" />
+            </gmd:type>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:resourceConstraints>
+          <gmd:MD_Constraints>
+            <gmd:useLimitation xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Maaperän yleiskartta-aineisto on suunniteltu käytettäväksi mittakaavassa 1:200 000 ja sen käytössä on otettava huomioon, että maalajikuviotaso on yleistys tai tulkinta maastosta. Todellisuudessa yksittäiseen kuvioon voi maastossa sisältyä huomattavaakin maalajien vaihtelua.
+Maaperän yleiskartta-aineistossa maaperän 1:20/50 000-aineiston liejuiset savikot, liejuisen hiesun alueet ja liejuisen hienon hiedan alueet (humusta 2-6 %) on yleistetty liejuiksi, eloperäisten maalajien pääluokkaan. Tämä poikkeama RT- ja GEO-luokituksista on huomioitava riippuen käyttötarkoituksesta.
+Pääasiassa tulkinnalla tuotetussa aineistossa hienorakeisten lajittuneiden maalajien luokitus on epävarmaa. Aineiston mahdollisessa jatkokäsittelyssä voidaan hienorakeiset lajittuneet- (hiesu ja hieno hieta) ja saviluokka yhdistää hienorakeiseksi maalajiksi epävarmuuden vähentämiseksi.</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Maaperän yleiskartta-aineisto on suunniteltu käytettäväksi mittakaavassa 1:200 000 ja sen käytössä on otettava huomioon, että maalajikuviotaso on yleistys tai tulkinta maastosta. Todellisuudessa yksittäiseen kuvioon voi maastossa sisältyä huomattavaakin maalajien vaihtelua.
+Maaperän yleiskartta-aineistossa maaperän 1:20/50 000-aineiston liejuiset savikot, liejuisen hiesun alueet ja liejuisen hienon hiedan alueet (humusta 2-6 %) on yleistetty liejuiksi, eloperäisten maalajien pääluokkaan. Tämä poikkeama RT- ja GEO-luokituksista on huomioitava riippuen käyttötarkoituksesta.
+Pääasiassa tulkinnalla tuotetussa aineistossa hienorakeisten lajittuneiden maalajien luokitus on epävarmaa. Aineiston mahdollisessa jatkokäsittelyssä voidaan hienorakeiset lajittuneet- (hiesu ja hieno hieta) ja saviluokka yhdistää hienorakeiseksi maalajiksi epävarmuuden vähentämiseksi.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">The data set for the general superficial deposits is planned for use at a scale of 1:200 000 and, regarding this, it should be taken into account that the sediment polygon layer is a generalisation or interpretation of the terrain. In reality, the sediments in a single polygon may also vary significantly in the field. The data has mainly been produced by interpretation and therefore the classification of fine-grained sediments is uncertain. In the case of post-processing of the data, the sorted fine-grained materials (medium-fine silt and coarse silt) and the clay class will be combined as a fine-grained sediment to reduce uncertainty.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:useLimitation>
+          </gmd:MD_Constraints>
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints>
+          <gmd:MD_LegalConstraints>
+            <gmd:useLimitation xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>http://tupa.gtk.fi/paikkatieto/lisenssi/gtk_avoin_lisenssi_2.pdf</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">http://tupa.gtk.fi/paikkatieto/lisenssi/gtk_open_licence_2.pdf</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">http://tupa.gtk.fi/paikkatieto/lisenssi/gtk_avoin_lisenssi_2.pdf</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:useLimitation>
+            <gmd:accessConstraints>
+              <gmd:MD_RestrictionCode codeListValue="license" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode" />
+            </gmd:accessConstraints>
+            <gmd:useConstraints>
+              <gmd:MD_RestrictionCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode" codeListValue="copyright" />
+            </gmd:useConstraints>
+          </gmd:MD_LegalConstraints>
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints>
+          <gmd:MD_SecurityConstraints>
+            <gmd:classification>
+              <gmd:MD_ClassificationCode codeListValue="unclassified" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ClassificationCode" />
+            </gmd:classification>
+          </gmd:MD_SecurityConstraints>
+        </gmd:resourceConstraints>
+          <gmd:resourceConstraints xmlns:gmx="http://www.isotc211.org/2005/gmx"
+                                   xmlns:xlink="http://www.w3.org/1999/xlink">
+          <gmd:MD_LegalConstraints>
+            <gmd:useConstraints />
+          </gmd:MD_LegalConstraints>
+        </gmd:resourceConstraints>
+          <gmd:spatialRepresentationType xmlns:gmx="http://www.isotc211.org/2005/gmx"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink">
+          <gmd:MD_SpatialRepresentationTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_SpatialRepresentationTypeCode" codeListValue="vector" />
+        </gmd:spatialRepresentationType>
+        <gmd:spatialResolution>
+          <gmd:MD_Resolution>
+            <gmd:equivalentScale>
+              <gmd:MD_RepresentativeFraction>
+                <gmd:denominator>
+                  <gco:Integer>200000</gco:Integer>
+                </gmd:denominator>
+              </gmd:MD_RepresentativeFraction>
+            </gmd:equivalentScale>
+          </gmd:MD_Resolution>
+        </gmd:spatialResolution>
+        <gmd:language>
+          <gco:CharacterString>fin</gco:CharacterString>
+        </gmd:language>
+        <gmd:topicCategory>
+          <gmd:MD_TopicCategoryCode>geoscientificInformation</gmd:MD_TopicCategoryCode>
+        </gmd:topicCategory>
+        <gmd:extent>
+          <gmd:EX_Extent>
+            <gmd:geographicElement>
+              <gmd:EX_GeographicBoundingBox>
+                <gmd:westBoundLongitude>
+                  <gco:Decimal>19.08886999</gco:Decimal>
+                </gmd:westBoundLongitude>
+                <gmd:eastBoundLongitude>
+                  <gco:Decimal>31.58671339</gco:Decimal>
+                </gmd:eastBoundLongitude>
+                <gmd:southBoundLatitude>
+                  <gco:Decimal>59.45</gco:Decimal>
+                </gmd:southBoundLatitude>
+                <gmd:northBoundLatitude>
+                  <gco:Decimal>70.09229321</gco:Decimal>
+                </gmd:northBoundLatitude>
+              </gmd:EX_GeographicBoundingBox>
+            </gmd:geographicElement>
+            <gmd:temporalElement>
+              <gmd:EX_TemporalExtent>
+                <gmd:extent>
+                  <gml:TimePeriod gml:id="d484527e1062a1051934">
+                    <gml:beginPosition>2002-01-01T00:00:00</gml:beginPosition>
+                    <gml:endPosition>2009-01-01T00:00:00</gml:endPosition>
+                  </gml:TimePeriod>
+                </gmd:extent>
+              </gmd:EX_TemporalExtent>
+            </gmd:temporalElement>
+          </gmd:EX_Extent>
+        </gmd:extent>
+      </gmd:MD_DataIdentification>
+    </gmd:identificationInfo>
+        <gmd:distributionInfo>
+      <gmd:MD_Distribution>
+          <gmd:distributionFormat xmlns:xlink="http://www.w3.org/1999/xlink">
+          <gmd:MD_Format>
+            <gmd:name xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>ESRI file gdb</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">ESRI file gdb</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">ESRI file gdb</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:name>
+            <gmd:version>
+              <gco:CharacterString>10.1</gco:CharacterString>
+            </gmd:version>
+            <gmd:specification gco:nilReason="missing">
+              <gco:CharacterString />
+            </gmd:specification>
+          </gmd:MD_Format>
+        </gmd:distributionFormat>
+        <gmd:transferOptions>
+          <gmd:MD_DigitalTransferOptions>
+              <gmd:onLine xmlns:xlink="http://www.w3.org/1999/xlink">
+              <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                  <gmd:URL>http://hakku.gtk.fi/fi/locations/search?location_id=3</gmd:URL>
+                </gmd:linkage>
+                <gmd:protocol>
+                  <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                </gmd:protocol>
+                <gmd:name gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString />
+                </gmd:name>
+                <gmd:description gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString />
+                </gmd:description>
+              </gmd:CI_OnlineResource>
+            </gmd:onLine>
+            <gmd:onLine>
+              <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                  <gmd:URL>http://gtkdata.gtk.fi/Maankamara/index.html</gmd:URL>
+                </gmd:linkage>
+                <gmd:protocol>
+                  <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                </gmd:protocol>
+                <gmd:name xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Maankamara</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Maankamara</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">Maankamara</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:name>
+                <gmd:description gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString />
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI" />
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:description>
+                <gmd:function>
+                  <gmd:CI_OnLineFunctionCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="information" />
+                </gmd:function>
+              </gmd:CI_OnlineResource>
+            </gmd:onLine>
+          </gmd:MD_DigitalTransferOptions>
+        </gmd:transferOptions>
+          <gmd:transferOptions xmlns:xlink="http://www.w3.org/1999/xlink">
+          <gmd:MD_DigitalTransferOptions />
+        </gmd:transferOptions>
+      </gmd:MD_Distribution>
+    </gmd:distributionInfo>
+    <gmd:dataQualityInfo>
+      <gmd:DQ_DataQuality>
+        <gmd:scope>
+          <gmd:DQ_Scope>
+            <gmd:level>
+              <gmd:MD_ScopeCode codeListValue="dataset" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" />
+            </gmd:level>
+            <gmd:extent />
+          </gmd:DQ_Scope>
+        </gmd:scope>
+        <gmd:lineage>
+          <gmd:LI_Lineage>
+            <gmd:statement xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Maaperän yleiskartoituksen uustuotannossa tausta-aineistona on käytetty pienimittakaavaisia 1:400 000 ja 1:1000 000 maaperäkarttoja, Maanmittauslaitoksen tuottamaa numeerista maastotietokantaa, 1:250 000 vesistöelementtiä, numeerista korkeusmallia, peltolohkojen maalajitietoa, VMI -pisteitä, GTK :n kalliopaljastumahavaintoja, Outokumpu Oy:n kalliopaljastumahavaintoja, geofysiikan matalalentoaineistoja, turvetutkimuspisteitä, maa-ainestietokantaa, erilaisia saatavilla olleita maaperäaineistoja ja geomorfologisia tulkintoja.
+Maaperän yleiskartoitusprosessi koostuu pohjakartan yleistämisestä, referenssiaineistojen keruusta, ennakkotulkinnasta, maastokartoituksesta, kartta-aineiston viimeistelystä ja tarkastuksesta. Pohjakartan valmistuksessa yleistetyt 1:20 000/1:50000 ja 1:100 000 maaperäkartat, maastotietokannan kivikko-, avokallio-, soistuma ja luokitellut suokuviot liitettiin yhdeksi pohjakarttatasoksi. Uustuotannossa kartoitusalue tulkittiin ennen maastotiedonkeruuta. Maastotöissä maalajien määrittämiseen käytettiin apuna pistokairaa ja lapiota. Maastohavainnot tehtiin suurimmalta osaltaan tieverkoston läheisyydestä, Pohjois-Suomessa myös maastoliikennereittejä hyödyntäen. Maastohavainnot tallennettiin maastotietokoneelle. Toimistolla maalajikuviot viimeisteltiin ja tarkastettiin. Lopuksi maaperäaineiston maastohavainnot, maalajitunnukset, maalajikuviorajat ja maalajikuviot tallennettiin GTK:n tietokantaan, jossa maaperäaineistot yhdistettiin yhtenäiseksi saumattomaksi karttatasoksi 1:200 000 lehdittäin. Kartta-aineiston paloittelutasona käytetään ETRS89 -järjestelmän mukaista 1:200 000 karttalehtijakoa (JHS 154).</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Maaperän yleiskartoituksen uustuotannossa tausta-aineistona on käytetty pienimittakaavaisia 1:400 000 ja 1:1000 000 maaperäkarttoja, Maanmittauslaitoksen tuottamaa numeerista maastotietokantaa, 1:250 000 vesistöelementtiä, numeerista korkeusmallia, peltolohkojen maalajitietoa, VMI -pisteitä, GTK :n kalliopaljastumahavaintoja, Outokumpu Oy:n kalliopaljastumahavaintoja, geofysiikan matalalentoaineistoja, turvetutkimuspisteitä, maa-ainestietokantaa, erilaisia saatavilla olleita maaperäaineistoja ja geomorfologisia tulkintoja.
+Maaperän yleiskartoitusprosessi koostuu pohjakartan yleistämisestä, referenssiaineistojen keruusta, ennakkotulkinnasta, maastokartoituksesta, kartta-aineiston viimeistelystä ja tarkastuksesta. Pohjakartan valmistuksessa yleistetyt 1:20 000/1:50000 ja 1:100 000 maaperäkartat, maastotietokannan kivikko-, avokallio-, soistuma ja luokitellut suokuviot liitettiin yhdeksi pohjakarttatasoksi. Uustuotannossa kartoitusalue tulkittiin ennen maastotiedonkeruuta. Maastotöissä maalajien määrittämiseen käytettiin apuna pistokairaa ja lapiota. Maastohavainnot tehtiin suurimmalta osaltaan tieverkoston läheisyydestä, Pohjois-Suomessa myös maastoliikennereittejä hyödyntäen. Maastohavainnot tallennettiin maastotietokoneelle. Toimistolla maalajikuviot viimeisteltiin ja tarkastettiin. Lopuksi maaperäaineiston maastohavainnot, maalajitunnukset, maalajikuviorajat ja maalajikuviot tallennettiin GTK:n tietokantaan, jossa maaperäaineistot yhdistettiin yhtenäiseksi saumattomaksi karttatasoksi 1:200 000 lehdittäin. Kartta-aineiston paloittelutasona käytetään ETRS89 -järjestelmän mukaista 1:200 000 karttalehtijakoa (JHS 154).</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">In producing the new general Superficial deposits of Finland 1:200 000 (sediment polygons), the following have been used as a background data: small scale 1:400 000 and 1:1 000 000 superficial deposits maps, the digital terrain database of the National Land Survey of Finland (NLS), 1:250 000 waterway elements, a digital elevation model, land parcel soil type data, VMI points (VMI = National Forest Inventory), the rock exposure observations of GTK, the rock exposure observations of Outokumpu Oy, low altitude aerogeophysical data sets, peat research points, a rock aggregate database and various available superficial deposits sets and geomorphological interpretations.
+The general superficial deposits mapping process consists of generalisation of the base map, the gathering of reference material, preliminary interpretation, field mapping as well as data set completion and checking. In preparing the base map by generalising 1:20 000/1:50 000 and 1:100 000 superficial deposits maps, stone field polygons, open bedrock polygons, peat area polygons and classified mire polygons in the terrain database were joined to form one base map layer. In the new production process the mapping area was interpreted before field data were collected. In fieldwork, a probing rod and a spade were used for sediment identification. Most field observations were made close to a road network while in Northern Finland off-road routes were also used. The field observations were entered into a field computer. The sediment polygons were finalised and checked in the office. Finally, the field observations, sediment type labels, sediment polygon boundaries and sediment polygons were entered into the GTK database, in which sediment polygons were joined to form one seamless map layer. The clipping layer used for the map data set was a 1:200 000 map sheet division in accordance with the ETRS89 system (JHS 154).</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:statement>
+            <gmd:processStep>
+              <gmd:LI_ProcessStep>
+                <gmd:description xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Maaperän yleiskartoitusprosessi koostuu pohjakartan yleistämisestä, referenssiaineistojen keruusta, ennakkotulkinnasta, maastokartoituksesta, kartta-aineiston viimeistelystä ja tarkastuksesta. Pohjakartan valmistuksessa yleistetyt 1:20 000/1:50000 ja 1:100 000 maaperäkartat, maastotietokannan kivikko-, avokallio-, soistuma ja luokitellut suokuviot liitettiin yhdeksi pohjakarttatasoksi. Uustuotannossa kartoitusalue tulkittiin ennen maastotiedonkeruuta. Maastotöissä maalajien määrittämiseen käytettiin apuna pistokairaa ja lapiota. Maastohavainnot tehtiin suurimmalta osaltaan tieverkoston läheisyydestä, Pohjois-Suomessa myös maastoliikennereittejä hyödyntäen. Maastohavainnot tallennettiin maastotietokoneelle. Toimistolla maalajikuviot viimeisteltiin ja tarkastettiin. Lopuksi maaperäaineiston maastohavainnot, maalajitunnukset, maalajikuviorajat ja maalajikuviot tallennettiin GTK:n tietokantaan, jossa maaperäaineistot yhdistettiin yhtenäiseksi saumattomaksi karttatasoksi 1:200 000 lehdittäin. Kartta-aineiston paloittelutasona käytetään ETRS89 -järjestelmän mukaista 1:200 000 karttalehtijakoa (JHS 154).
+Maaperän yleiskartoituksessa paikkatietoaineistojen käsittelyssä käytettiin aluksi ArcInfo ja ArcView -paikkatieto-ohjelmistoja ja myöhemmin lähes pelkästään ArcGIS 9.1-9.3 -paikkatieto-ohjelmistoa. Lisäksi geofysiikan aineistojen käsittelyssä käytettiin erillisiä ko. aineistoille räätälöityjä ohjelmistoja. Maastohavaintojen tallentamisessa käytettiin GPS-laitetta.</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Maaperän yleiskartoitusprosessi koostuu pohjakartan yleistämisestä, referenssiaineistojen keruusta, ennakkotulkinnasta, maastokartoituksesta, kartta-aineiston viimeistelystä ja tarkastuksesta. Pohjakartan valmistuksessa yleistetyt 1:20 000/1:50000 ja 1:100 000 maaperäkartat, maastotietokannan kivikko-, avokallio-, soistuma ja luokitellut suokuviot liitettiin yhdeksi pohjakarttatasoksi. Uustuotannossa kartoitusalue tulkittiin ennen maastotiedonkeruuta. Maastotöissä maalajien määrittämiseen käytettiin apuna pistokairaa ja lapiota. Maastohavainnot tehtiin suurimmalta osaltaan tieverkoston läheisyydestä, Pohjois-Suomessa myös maastoliikennereittejä hyödyntäen. Maastohavainnot tallennettiin maastotietokoneelle. Toimistolla maalajikuviot viimeisteltiin ja tarkastettiin. Lopuksi maaperäaineiston maastohavainnot, maalajitunnukset, maalajikuviorajat ja maalajikuviot tallennettiin GTK:n tietokantaan, jossa maaperäaineistot yhdistettiin yhtenäiseksi saumattomaksi karttatasoksi 1:200 000 lehdittäin. Kartta-aineiston paloittelutasona käytetään ETRS89 -järjestelmän mukaista 1:200 000 karttalehtijakoa (JHS 154).
+Maaperän yleiskartoituksessa paikkatietoaineistojen käsittelyssä käytettiin aluksi ArcInfo ja ArcView -paikkatieto-ohjelmistoja ja myöhemmin lähes pelkästään ArcGIS 9.1-9.3 -paikkatieto-ohjelmistoa. Lisäksi geofysiikan aineistojen käsittelyssä käytettiin erillisiä ko. aineistoille räätälöityjä ohjelmistoja. Maastohavaintojen tallentamisessa käytettiin GPS-laitetta.</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">The general superficial deposits mapping process consists of generalisation of the base map, the gathering of reference material, preliminary interpretation, field mapping as well as data set completion and checking. In preparing the base map by generalising 1:20 000/1:50 000 and 1:100 000 superficial deposits maps, stone field polygons, open bedrock polygons, peat area polygons and classified mire polygons in the terrain database were joined to form one base map layer. In the new production process the mapping area was interpreted before field data were collected. In fieldwork, a probing rod and a spade were used for sediment identification. Most field observations were made close to a road network while in Northern Finland off-road routes were also used. The field observations were entered into a field computer. The sediment polygons were finalised and checked in the office. Finally, the field observations, sediment type labels, sediment polygon boundaries and sediment polygons were entered into the GTK database, in which sediment polygons were joined to form one seamless map layer. The clipping layer used for the map data set was a 1:200 000 map sheet division in accordance with the ETRS89 system (JHS 154).
+In the general superficial deposits mapping, the geographical information systems (GIS) software packages ArcInfo and ArcView were used initially to process spatial data. Later ArcGIS 9.1-9.3 software was used almost exclusively. Additionally, the processing of the geophysical data sets used various programmes tailored to the material in question. GPS equipment was used in recording field observations.</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:description>
+              </gmd:LI_ProcessStep>
+            </gmd:processStep>
+            <gmd:source>
+              <gmd:LI_Source>
+                <gmd:description xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Maaperän yleiskartoituksen uustuotannossa tausta-aineistona on käytetty pienimittakaavaisia 1:400 000 ja 1:1000 000 maaperäkarttoja, Maanmittauslaitoksen tuottamaa numeerista maastotietokantaa, 1:250 000 vesistöelementtiä, numeerista korkeusmallia, peltolohkojen maalajitietoa, VMI -pisteitä, GTK :n kalliopaljastumahavaintoja, Outokumpu Oy:n kalliopaljastumahavaintoja, geofysiikan matalalentoaineistoja, turvetutkimuspisteitä, maa-ainestietokantaa, erilaisia saatavilla olleita maaperäaineistoja ja geomorfologisia tulkintoja.</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Maaperän yleiskartoituksen uustuotannossa tausta-aineistona on käytetty pienimittakaavaisia 1:400 000 ja 1:1000 000 maaperäkarttoja, Maanmittauslaitoksen tuottamaa numeerista maastotietokantaa, 1:250 000 vesistöelementtiä, numeerista korkeusmallia, peltolohkojen maalajitietoa, VMI -pisteitä, GTK :n kalliopaljastumahavaintoja, Outokumpu Oy:n kalliopaljastumahavaintoja, geofysiikan matalalentoaineistoja, turvetutkimuspisteitä, maa-ainestietokantaa, erilaisia saatavilla olleita maaperäaineistoja ja geomorfologisia tulkintoja.</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">In producing the new general Superficial deposits of Finland 1:200 000 (sediment polygons), the following have been used as a background data: small scale 1:400 000 and 1:1 000 000 superficial deposits maps, the digital terrain database of the National Land Survey of Finland (NLS), 1:250 000 waterway elements, a digital elevation model, land parcel soil type data, VMI points (VMI = National Forest Inventory), the rock exposure observations of GTK, the rock exposure observations of Outokumpu Oy, low altitude aerogeophysical data sets, peat research points, a rock aggregate database and various available superficial deposits sets and geomorphological interpretations.</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:description>
+              </gmd:LI_Source>
+            </gmd:source>
+          </gmd:LI_Lineage>
+        </gmd:lineage>
+      </gmd:DQ_DataQuality>
+    </gmd:dataQualityInfo>
+    <gmd:dataQualityInfo>
+      <gmd:DQ_DataQuality>
+        <gmd:scope>
+          <gmd:DQ_Scope />
+        </gmd:scope>
+          <gmd:report xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <gmd:DQ_DomainConsistency>
+            <gmd:result>
+              <gmd:DQ_ConformanceResult>
+                <gmd:specification>
+                  <gmd:CI_Citation>
+                    <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString>KOMISSION ASETUS (EU) N:o 1089/2010, annettu 23 päivänä marraskuuta 2010, Euroopan parlamentin ja neuvoston direktiivin 2007/2/EY täytäntöönpanosta paikkatietoaineistojen ja -palvelujen yhteentoimivuuden osalta</gco:CharacterString>
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#FI">KOMISSION ASETUS (EU) N:o 1089/2010, annettu 23 päivänä marraskuuta 2010, Euroopan parlamentin ja neuvoston direktiivin 2007/2/EY täytäntöönpanosta paikkatietoaineistojen ja -palvelujen yhteentoimivuuden osalta</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#EN">KOMISSION ASETUS (EU) N:o 1089/2010, annettu 23 päivänä marraskuuta 2010, Euroopan parlamentin ja neuvoston direktiivin 2007/2/EY täytäntöönpanosta paikkatietoaineistojen ja -palvelujen yhteentoimivuuden osalta</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:title>
+                    <gmd:date>
+                      <gmd:CI_Date>
+                        <gmd:date>
+                          <gco:Date>2010-12-08</gco:Date>
+                        </gmd:date>
+                        <gmd:dateType>
+                          <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                        </gmd:dateType>
+                      </gmd:CI_Date>
+                    </gmd:date>
+                  </gmd:CI_Citation>
+                </gmd:specification>
+                <gmd:explanation xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>--- Selitys onko aineisto tietotuotemäärittelyn mukainen ---- --- Klikkaa sääntöjenmukaisuusaste, jos on määrittelyn mukainen ---</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">--- Selitys onko aineisto tietotuotemäärittelyn mukainen ---- --- Klikkaa sääntöjenmukaisuusaste, jos on määrittelyn mukainen ---</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:explanation>
+                <gmd:pass>
+                  <gco:Boolean>false</gco:Boolean>
+                </gmd:pass>
+              </gmd:DQ_ConformanceResult>
+            </gmd:result>
+          </gmd:DQ_DomainConsistency>
+        </gmd:report>
+      </gmd:DQ_DataQuality>
+    </gmd:dataQualityInfo>
+    <gmd:dataQualityInfo />
+  </gmd:MD_Metadata>
+</csw:GetRecordByIdResponse>
+

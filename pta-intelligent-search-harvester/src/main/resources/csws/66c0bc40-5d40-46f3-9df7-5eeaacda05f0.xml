@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csw:GetRecordByIdResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
+    <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xmlns:gco="http://www.isotc211.org/2005/gco"
+                     xsi:schemaLocation="http://www.isotc211.org/2005/gmd ../../../../web/geonetwork/xml/schemas/iso19139/schema.xsd">
+    <gmd:fileIdentifier>
+      <gco:CharacterString>66c0bc40-5d40-46f3-9df7-5eeaacda05f0</gco:CharacterString>
+    </gmd:fileIdentifier>
+    <gmd:language>
+      <gco:CharacterString>eng</gco:CharacterString>
+    </gmd:language>
+    <gmd:characterSet>
+      <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="8859part15" />
+    </gmd:characterSet>
+    <gmd:hierarchyLevel>
+      <gmd:MD_ScopeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset" />
+    </gmd:hierarchyLevel>
+    <gmd:hierarchyLevelName>
+      <gco:CharacterString>Aineisto</gco:CharacterString>
+    </gmd:hierarchyLevelName>
+    <gmd:contact>
+      <gmd:CI_ResponsibleParty>
+        <gmd:organisationName>
+          <gco:CharacterString>Geologian tutkimuskeskus</gco:CharacterString>
+        </gmd:organisationName>
+        <gmd:contactInfo>
+          <gmd:CI_Contact>
+            <gmd:phone>
+              <gmd:CI_Telephone>
+                <gmd:voice>
+                  <gco:CharacterString>0295030000</gco:CharacterString>
+                </gmd:voice>
+                <gmd:facsimile>
+                  <gco:CharacterString>0295032901</gco:CharacterString>
+                </gmd:facsimile>
+              </gmd:CI_Telephone>
+            </gmd:phone>
+            <gmd:address>
+              <gmd:CI_Address>
+                <gmd:deliveryPoint>
+                  <gco:CharacterString>PL 96 (Betonimiehenkuja 4)</gco:CharacterString>
+                </gmd:deliveryPoint>
+                <gmd:city>
+                  <gco:CharacterString>Espoo</gco:CharacterString>
+                </gmd:city>
+                <gmd:postalCode>
+                  <gco:CharacterString>02150</gco:CharacterString>
+                </gmd:postalCode>
+                <gmd:country>
+                  <gco:CharacterString>Suomi</gco:CharacterString>
+                </gmd:country>
+                <gmd:electronicMailAddress>
+                  <gco:CharacterString>geodata@gtk.fi</gco:CharacterString>
+                </gmd:electronicMailAddress>
+              </gmd:CI_Address>
+            </gmd:address>
+          </gmd:CI_Contact>
+        </gmd:contactInfo>
+        <gmd:role>
+          <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="owner" />
+        </gmd:role>
+      </gmd:CI_ResponsibleParty>
+    </gmd:contact>
+    <gmd:dateStamp>
+      <gco:DateTime>2018-06-11T11:53:49</gco:DateTime>
+    </gmd:dateStamp>
+    <gmd:metadataStandardName>
+      <gco:CharacterString>Mineral Deposits</gco:CharacterString>
+    </gmd:metadataStandardName>
+    <gmd:referenceSystemInfo>
+      <gmd:MD_ReferenceSystem>
+        <gmd:referenceSystemIdentifier>
+          <gmd:RS_Identifier>
+            <gmd:code>
+              <gco:CharacterString>ETRS89 / ETRS-TM35FIN (EPSG:3067)</gco:CharacterString>
+            </gmd:code>
+            <gmd:codeSpace>
+              <gco:CharacterString>EPSG</gco:CharacterString>
+            </gmd:codeSpace>
+            <gmd:version>
+              <gco:CharacterString>7.4</gco:CharacterString>
+            </gmd:version>
+          </gmd:RS_Identifier>
+        </gmd:referenceSystemIdentifier>
+      </gmd:MD_ReferenceSystem>
+    </gmd:referenceSystemInfo>
+    <gmd:identificationInfo>
+      <gmd:MD_DataIdentification>
+        <gmd:citation>
+          <gmd:CI_Citation>
+            <gmd:title>
+              <gco:CharacterString>Mineral Deposits</gco:CharacterString>
+            </gmd:title>
+            <gmd:alternateTitle>
+              <gco:CharacterString>Mineral Deposits of Finland</gco:CharacterString>
+            </gmd:alternateTitle>
+            <gmd:date>
+              <gmd:CI_Date>
+                <gmd:date>
+                  <gco:Date>2014-02-26</gco:Date>
+                </gmd:date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" />
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+            <gmd:edition>
+              <gco:CharacterString>1.0</gco:CharacterString>
+            </gmd:edition>
+            <gmd:identifier>
+              <gmd:RS_Identifier>
+                <gmd:code>
+                  <gco:CharacterString>1000179</gco:CharacterString>
+                </gmd:code>
+                <gmd:codeSpace>
+                  <gco:CharacterString>FI</gco:CharacterString>
+                </gmd:codeSpace>
+              </gmd:RS_Identifier>
+            </gmd:identifier>
+            <gmd:presentationForm>
+              <gmd:CI_PresentationFormCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_PresentationFormCode" codeListValue="digitalGeographicInfo" />
+            </gmd:presentationForm>
+          </gmd:CI_Citation>
+        </gmd:citation>
+        <gmd:abstract>
+          <gco:CharacterString>The GTK’s Mineral Deposit database contains all mineral deposits, occurrences and prospects in Finland. Structure of the new database was created in 2012 and it is based on global geostan-dards (GeoSciML and EarthResourceML) and classifications related to them. The database is in Oracle, data products are extracted from the primary database. During 2013 GTK’s separate mineral deposit databases (Au, Zn, Ni, PGE, U, Cu, Industrial minerals, FODD, old ore deposit database) were combined into a single entity. 
+New database contains extensive amount of information about mineral occurrence feature along with its associated commodities, exploration activities, holding history, mineral resource and re-serve estimates, mining activity, production and geology (genetic type, host and wall rocks, min-erals, metamorphism, alteration, age, texture, structure etc.) Database will be updated whenever new data (e.g. resource estimate) is available or new deposit is found. Entries contain references to all published literature and other primary sources of data. Also figures (maps, cross sections, photographs etc.) can be linked to mineral deposit data. Data is based on all public information on the deposits available including published literature, archive reports, press releases, companies’ web pages, and interviews of exploration geologists. Database contains 33 linked tables with 216 data fields. Detailed description of the tables and fields can be found in separate document. (http://tupa/metaviite/MDD_FieldDescription.pdf)
+The data products extracted from the database are available on Mineral Deposits and Exploration map service (http://gtkdata.gtk.fi/MDaE/index.html) and from Hakku -service (http://hakku.gtk.fi).</gco:CharacterString>
+        </gmd:abstract>
+        <gmd:purpose>
+          <gco:CharacterString>The database can be used in regional and local-scale mineral exploration, prospect targeting, re-search and land use planning.</gco:CharacterString>
+        </gmd:purpose>
+        <gmd:credit>
+          <gco:CharacterString>Outokumpu Mining Oy and numerous other exploration companies which are/has been operating in Finland.</gco:CharacterString>
+        </gmd:credit>
+        <gmd:status>
+          <gmd:MD_ProgressCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ProgressCode" codeListValue="onGoing" />
+        </gmd:status>
+        <gmd:pointOfContact>
+          <gmd:CI_ResponsibleParty>
+            <gmd:organisationName>
+              <gco:CharacterString>Geologian tutkimuskeskus</gco:CharacterString>
+            </gmd:organisationName>
+            <gmd:contactInfo>
+              <gmd:CI_Contact>
+                <gmd:phone>
+                  <gmd:CI_Telephone>
+                    <gmd:voice>
+                      <gco:CharacterString>0295030000</gco:CharacterString>
+                    </gmd:voice>
+                    <gmd:facsimile>
+                      <gco:CharacterString>0295032901</gco:CharacterString>
+                    </gmd:facsimile>
+                  </gmd:CI_Telephone>
+                </gmd:phone>
+                <gmd:address>
+                  <gmd:CI_Address>
+                    <gmd:deliveryPoint>
+                      <gco:CharacterString>PL 96 (Betonimiehenkuja 4)</gco:CharacterString>
+                    </gmd:deliveryPoint>
+                    <gmd:city>
+                      <gco:CharacterString>Espoo</gco:CharacterString>
+                    </gmd:city>
+                    <gmd:postalCode>
+                      <gco:CharacterString>02150</gco:CharacterString>
+                    </gmd:postalCode>
+                    <gmd:country>
+                      <gco:CharacterString>Suomi</gco:CharacterString>
+                    </gmd:country>
+                    <gmd:electronicMailAddress>
+                      <gco:CharacterString>geodata@gtk.fi</gco:CharacterString>
+                    </gmd:electronicMailAddress>
+                  </gmd:CI_Address>
+                </gmd:address>
+              </gmd:CI_Contact>
+            </gmd:contactInfo>
+            <gmd:role>
+              <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="owner" />
+            </gmd:role>
+          </gmd:CI_ResponsibleParty>
+        </gmd:pointOfContact>
+        <gmd:resourceMaintenance>
+          <gmd:MD_MaintenanceInformation>
+            <gmd:maintenanceAndUpdateFrequency>
+              <gmd:MD_MaintenanceFrequencyCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_MaintenanceFrequencyCode" codeListValue="asNeeded" />
+            </gmd:maintenanceAndUpdateFrequency>
+          </gmd:MD_MaintenanceInformation>
+        </gmd:resourceMaintenance>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword>
+              <gco:CharacterString>Finland</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="place" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title>
+                  <gco:CharacterString>GeoRef Thesaurus, AGI</gco:CharacterString>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2015-01-07</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="revision" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword>
+              <gco:CharacterString>Precambrian</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Palaeozoic</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Proterozoic</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Archaean</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="temporal" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title>
+                  <gco:CharacterString>GeoRef Thesaurus, AGI</gco:CharacterString>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2015-01-07</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="revision" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword>
+              <gco:CharacterString>Mineral deposit</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Mineral occurrence</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Mine</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Economic geology</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Ore</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Metallogenic</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Industrial mineral</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Mining</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Exploration</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Prospecting</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Host rock</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Mineral-deposit type</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeListValue="theme" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title>
+                  <gco:CharacterString>GeoRef Thesaurus, AGI</gco:CharacterString>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2015-01-07</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeListValue="revision" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword>
+              <gco:CharacterString>Geologia</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title>
+                  <gco:CharacterString>GEMET - INSPIRE themes, version 1.0</gco:CharacterString>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2009-09-22</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword>
+              <gco:CharacterString>Geology</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_KeywordTypeCode" codeListValue="theme" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title>
+                  <gco:CharacterString>GEMET - INSPIRE themes, version 1.0</gco:CharacterString>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2008-06-01</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+                <gmd:identifier>
+                  <gmd:MD_Identifier>
+                    <gmd:code>
+                      <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.inspire-theme">geonetwork.thesaurus.external.theme.inspire-theme</gmx:Anchor>
+                    </gmd:code>
+                  </gmd:MD_Identifier>
+                </gmd:identifier>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:resourceConstraints>
+          <gmd:MD_Constraints>
+            <gmd:useLimitation>
+              <gco:CharacterString>The user should always investigate the primary data sources before making any significant conclusions on the deposits included into the database.</gco:CharacterString>
+            </gmd:useLimitation>
+          </gmd:MD_Constraints>
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints>
+          <gmd:MD_LegalConstraints>
+            <gmd:useLimitation>
+              <gco:CharacterString>http://fi.gtk.fi/export/sites/fi/tietopalvelut/hinnastot/GTK_aineistotuotelisenssi_1_v10.pdf</gco:CharacterString>
+            </gmd:useLimitation>
+            <gmd:accessConstraints>
+              <gmd:MD_RestrictionCode codeListValue="license" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode" />
+            </gmd:accessConstraints>
+            <gmd:useConstraints>
+              <gmd:MD_RestrictionCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode" codeListValue="copyright" />
+            </gmd:useConstraints>
+          </gmd:MD_LegalConstraints>
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints>
+          <gmd:MD_SecurityConstraints>
+            <gmd:classification>
+              <gmd:MD_ClassificationCode codeListValue="unclassified" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ClassificationCode" />
+            </gmd:classification>
+          </gmd:MD_SecurityConstraints>
+        </gmd:resourceConstraints>
+        <gmd:language>
+          <gco:CharacterString>eng</gco:CharacterString>
+        </gmd:language>
+        <gmd:topicCategory>
+          <gmd:MD_TopicCategoryCode>geoscientificInformation</gmd:MD_TopicCategoryCode>
+        </gmd:topicCategory>
+        <gmd:extent>
+          <gmd:EX_Extent>
+            <gmd:geographicElement>
+              <gmd:EX_GeographicBoundingBox>
+                <gmd:westBoundLongitude>
+                  <gco:Decimal>19.08886999</gco:Decimal>
+                </gmd:westBoundLongitude>
+                <gmd:eastBoundLongitude>
+                  <gco:Decimal>31.58671339</gco:Decimal>
+                </gmd:eastBoundLongitude>
+                <gmd:southBoundLatitude>
+                  <gco:Decimal>20.3480106</gco:Decimal>
+                </gmd:southBoundLatitude>
+                <gmd:northBoundLatitude>
+                  <gco:Decimal>70.09229321</gco:Decimal>
+                </gmd:northBoundLatitude>
+              </gmd:EX_GeographicBoundingBox>
+            </gmd:geographicElement>
+          </gmd:EX_Extent>
+        </gmd:extent>
+      </gmd:MD_DataIdentification>
+    </gmd:identificationInfo>
+    <gmd:distributionInfo>
+      <gmd:MD_Distribution>
+        <gmd:distributionFormat>
+          <gmd:MD_Format>
+            <gmd:name>
+              <gco:CharacterString>ESRI file geodatabase</gco:CharacterString>
+            </gmd:name>
+            <gmd:version>
+              <gco:CharacterString>10.1</gco:CharacterString>
+            </gmd:version>
+          </gmd:MD_Format>
+        </gmd:distributionFormat>
+        <gmd:transferOptions>
+          <gmd:MD_DigitalTransferOptions>
+            <gmd:onLine>
+              <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                  <gmd:URL>http://hakku.gtk.fi/fi/locations/search?location_id=62</gmd:URL>
+                </gmd:linkage>
+              </gmd:CI_OnlineResource>
+            </gmd:onLine>
+          </gmd:MD_DigitalTransferOptions>
+        </gmd:transferOptions>
+      </gmd:MD_Distribution>
+    </gmd:distributionInfo>
+    <gmd:dataQualityInfo>
+      <gmd:DQ_DataQuality>
+        <gmd:scope>
+          <gmd:DQ_Scope>
+            <gmd:level>
+              <gmd:MD_ScopeCode codeListValue="dataset" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" />
+            </gmd:level>
+          </gmd:DQ_Scope>
+        </gmd:scope>
+        <gmd:report>
+          <gmd:DQ_DomainConsistency>
+            <gmd:result>
+              <gmd:DQ_ConformanceResult>
+                <gmd:specification>
+                  <gmd:CI_Citation>
+                    <gmd:title>
+                      <gco:CharacterString>Commission Regulation (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services</gco:CharacterString>
+                    </gmd:title>
+                    <gmd:date>
+                      <gmd:CI_Date>
+                        <gmd:date>
+                          <gco:Date>2010-12-08</gco:Date>
+                        </gmd:date>
+                        <gmd:dateType>
+                          <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                        </gmd:dateType>
+                      </gmd:CI_Date>
+                    </gmd:date>
+                  </gmd:CI_Citation>
+                </gmd:specification>
+                <gmd:explanation>
+                  <gco:CharacterString>Ei sääntöjen mukainen.</gco:CharacterString>
+                </gmd:explanation>
+                <gmd:pass>
+                  <gco:Boolean>false</gco:Boolean>
+                </gmd:pass>
+              </gmd:DQ_ConformanceResult>
+            </gmd:result>
+          </gmd:DQ_DomainConsistency>
+        </gmd:report>
+        <gmd:lineage>
+          <gmd:LI_Lineage>
+            <gmd:statement>
+              <gco:CharacterString>Source data was separate mineral deposit databases (Au, Zn, Ni, PGE, U, Cu, Industrial miner-als, FODD, old deposit database) which were combined into Mineral Deposit Database. Data-bases didn’t contain detailed production data, this data was imported from excel-sheets compiled by K. Puustinen (http://weppi.gtk.fi/aineistot/kaivosteollisuus/).
+Original data was based on all public information on the deposits available including published literature, archive reports, press releases, company Internet pages, and interviews of exploration geologists. In future the data sources will be the same and database will be updated whenever new data is available or new deposit is found.
+Deposits in the source databases were included based on certain criteria depending on the data-base. Such criteria are not in use anymore, every promising prospect will be inserted to the data-base. 
+The original criteria were following:
+Au: A prospect must contain at least 1 ppm Au for a 1 m section or at least 0.5 ppm Au for a 5 m section.
+Zn: A prospect must have at least one drill hole with a grade of &gt;1% Zn for &gt;1 m or &gt;0.5 % Zn for &gt;5 m. 
+Ni:  A prospect must have at least one drill hole or continuous outcrop sample with a grade of &gt;0.5 % Ni equivalent &gt;1 m.
+PGE: The threshold for a prospect to be included into the database varies geographically.
+Cu: A prospect must contain at least 1.5% Cu for a 1 m section or 20 m at 0.5% Cu, or at least 0.2 Mt ore at 0.2% Cu.
+FODD: Deposits with the following metals are included in the FODD: Ag, Au, Be, Co, Cr, Cu, Fe, Li, Mn, Mo, Nb, Ni, Pb, Pd, Pt, Rh, REE, Sc, Sn, Ta, Ti, U, V, W, Y, Zn and Zr. Only such deposits where one or several of these metals form the majority of the value of the case are in-cluded, and only when there is a resource estimate of some kind in the primary reports on the deposit. 
+U, Industrial minerals and Ore deposit database: Unknown criteria.</gco:CharacterString>
+            </gmd:statement>
+            <gmd:processStep>
+              <gmd:LI_ProcessStep>
+                <gmd:description>
+                  <gco:CharacterString>The source data for the Mineral Deposit Database were separate commodity-based databases (Au, Zn, Ni, PGE, U, Cu, Industrial minerals, FODD, old Ore deposit database). 
+Separate mineral deposit databases were combined together and data was processed in MS Ac-cess and Excel to fit the new database structure. Old databases contained a lot of descriptive text fields, so the process was done mainly manually. Some of the deposits were found in several dif-ferent databases, mainly Ni+PGE, Au+Cu and Au+U. Information of these deposits was com-bined to form a single deposit.</gco:CharacterString>
+                </gmd:description>
+              </gmd:LI_ProcessStep>
+            </gmd:processStep>
+            <gmd:source>
+              <gmd:LI_Source>
+                <gmd:description>
+                  <gco:CharacterString>Data was processed with MS Access, Excel and ArcMap. Data products from database are ex-tracted using FME.</gco:CharacterString>
+                </gmd:description>
+              </gmd:LI_Source>
+            </gmd:source>
+          </gmd:LI_Lineage>
+        </gmd:lineage>
+      </gmd:DQ_DataQuality>
+    </gmd:dataQualityInfo>
+    <gmd:metadataMaintenance>
+      <gmd:MD_MaintenanceInformation>
+        <gmd:maintenanceAndUpdateFrequency>
+          <gmd:MD_MaintenanceFrequencyCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_MaintenanceFrequencyCode" codeListValue="asNeeded" />
+        </gmd:maintenanceAndUpdateFrequency>
+      </gmd:MD_MaintenanceInformation>
+    </gmd:metadataMaintenance>
+  </gmd:MD_Metadata>
+</csw:GetRecordByIdResponse>
+

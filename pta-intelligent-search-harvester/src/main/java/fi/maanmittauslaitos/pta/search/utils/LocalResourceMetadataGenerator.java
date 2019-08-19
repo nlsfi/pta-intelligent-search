@@ -20,7 +20,6 @@ public class LocalResourceMetadataGenerator extends AbstractHarvester {
 		localResourceMetadataGenerator.run(args);
 	}
 
-
 	@Override
 	protected DocumentSink getDocumentSink(HarvesterConfig config, HarvesterTracker harvesterTracker, String[] args) {
 		String sinkfile = args.length > 0 ? args[0] : "generatedResourceMetatada.zip";

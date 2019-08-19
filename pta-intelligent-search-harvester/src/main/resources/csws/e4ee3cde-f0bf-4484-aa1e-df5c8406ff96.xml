@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csw:GetRecordByIdResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
+    <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:srv="http://www.isotc211.org/2005/srv"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gco="http://www.isotc211.org/2005/gco"
+                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                     xsi:schemaLocation="http://www.isotc211.org/2005/gmd /opt/jetty/webapps/geonetwork/WEB-INF/data/config/schema_plugins/iso19139/schema.xsd">
+    <gmd:fileIdentifier>
+      <gco:CharacterString>e4ee3cde-f0bf-4484-aa1e-df5c8406ff96</gco:CharacterString>
+    </gmd:fileIdentifier>
+    <gmd:language>
+      <gco:CharacterString>eng</gco:CharacterString>
+    </gmd:language>
+    <gmd:hierarchyLevel>
+      <gmd:MD_ScopeCode codeListValue="service" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" />
+    </gmd:hierarchyLevel>
+    <gmd:contact>
+      <gmd:CI_ResponsibleParty>
+        <gmd:organisationName>
+          <gco:CharacterString>Arctic SDI</gco:CharacterString>
+        </gmd:organisationName>
+        <gmd:contactInfo>
+          <gmd:CI_Contact>
+            <gmd:address>
+              <gmd:CI_Address>
+                <gmd:electronicMailAddress>
+                  <gco:CharacterString>info@arctic-sdi.org</gco:CharacterString>
+                </gmd:electronicMailAddress>
+              </gmd:CI_Address>
+            </gmd:address>
+          </gmd:CI_Contact>
+        </gmd:contactInfo>
+        <gmd:role>
+          <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact" />
+        </gmd:role>
+      </gmd:CI_ResponsibleParty>
+    </gmd:contact>
+    <gmd:dateStamp>
+      <gco:DateTime>2018-11-29T08:42:29</gco:DateTime>
+    </gmd:dateStamp>
+    <gmd:referenceSystemInfo xmlns:gmx="http://www.isotc211.org/2005/gmx">
+      <gmd:MD_ReferenceSystem>
+        <gmd:referenceSystemIdentifier>
+          <gmd:RS_Identifier>
+            <gmd:code>
+              <gco:CharacterString>http://www.opengis.net/def/crs/EPSG/0/3571</gco:CharacterString>
+            </gmd:code>
+          </gmd:RS_Identifier>
+        </gmd:referenceSystemIdentifier>
+      </gmd:MD_ReferenceSystem>
+    </gmd:referenceSystemInfo>
+    <gmd:referenceSystemInfo xmlns:gmx="http://www.isotc211.org/2005/gmx">
+      <gmd:MD_ReferenceSystem>
+        <gmd:referenceSystemIdentifier>
+          <gmd:RS_Identifier>
+            <gmd:code>
+              <gco:CharacterString>http://www.opengis.net/def/crs/EPSG/0/3572</gco:CharacterString>
+            </gmd:code>
+          </gmd:RS_Identifier>
+        </gmd:referenceSystemIdentifier>
+      </gmd:MD_ReferenceSystem>
+    </gmd:referenceSystemInfo>
+    <gmd:referenceSystemInfo xmlns:gmx="http://www.isotc211.org/2005/gmx">
+      <gmd:MD_ReferenceSystem>
+        <gmd:referenceSystemIdentifier>
+          <gmd:RS_Identifier>
+            <gmd:code>
+              <gco:CharacterString>http://www.opengis.net/def/crs/EPSG/0/3573</gco:CharacterString>
+            </gmd:code>
+          </gmd:RS_Identifier>
+        </gmd:referenceSystemIdentifier>
+      </gmd:MD_ReferenceSystem>
+    </gmd:referenceSystemInfo>
+    <gmd:referenceSystemInfo xmlns:gmx="http://www.isotc211.org/2005/gmx">
+      <gmd:MD_ReferenceSystem>
+        <gmd:referenceSystemIdentifier>
+          <gmd:RS_Identifier>
+            <gmd:code>
+              <gco:CharacterString>http://www.opengis.net/def/crs/EPSG/0/3574</gco:CharacterString>
+            </gmd:code>
+          </gmd:RS_Identifier>
+        </gmd:referenceSystemIdentifier>
+      </gmd:MD_ReferenceSystem>
+    </gmd:referenceSystemInfo>
+    <gmd:referenceSystemInfo xmlns:gmx="http://www.isotc211.org/2005/gmx">
+      <gmd:MD_ReferenceSystem>
+        <gmd:referenceSystemIdentifier>
+          <gmd:RS_Identifier>
+            <gmd:code>
+              <gco:CharacterString>http://www.opengis.net/def/crs/EPSG/0/3575</gco:CharacterString>
+            </gmd:code>
+          </gmd:RS_Identifier>
+        </gmd:referenceSystemIdentifier>
+      </gmd:MD_ReferenceSystem>
+    </gmd:referenceSystemInfo>
+    <gmd:referenceSystemInfo xmlns:gmx="http://www.isotc211.org/2005/gmx">
+      <gmd:MD_ReferenceSystem>
+        <gmd:referenceSystemIdentifier>
+          <gmd:RS_Identifier>
+            <gmd:code>
+              <gco:CharacterString>http://www.opengis.net/def/crs/EPSG/0/3576</gco:CharacterString>
+            </gmd:code>
+          </gmd:RS_Identifier>
+        </gmd:referenceSystemIdentifier>
+      </gmd:MD_ReferenceSystem>
+    </gmd:referenceSystemInfo>
+    <gmd:identificationInfo>
+      <srv:SV_ServiceIdentification>
+        <gmd:citation>
+          <gmd:CI_Citation>
+            <gmd:title>
+              <gco:CharacterString>Arctic SDI Geoportal</gco:CharacterString>
+            </gmd:title>
+            <gmd:date>
+              <gmd:CI_Date>
+                <gmd:date>
+                  <gco:Date>2015-09-09</gco:Date>
+                </gmd:date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeListValue="creation" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" />
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+          </gmd:CI_Citation>
+        </gmd:citation>
+        <gmd:abstract>
+          <gco:CharacterString>The Arctic SDI Geoportal provides access to geospatial data and services available via the Arctic SDI to support and facilitate monitoring, management and decision making, and support sustainable development in the Arctic. Specifically, the Arctic SDI Geoportal facilitates the discovery, visualization, evaluation, download and integration of geographic data from a variety of sources for the Arctic. The Arctic SDI Geoportal is the result of cooperative efforts between the National Mapping Agencies (NMAs) of the eight Arctic Council Member countries - Canada, Denmark, Finland, Iceland, Norway, Russia, Sweden and the United States.
+
+The Arctic SDI Geoportal includes reference data (such as the Arctic SDI topographic basemap or Pan-Arctic Digital Elevation Model) and thematic data from various sources. Thematic data section includes themes such as oceans, climatology and geoscientific information. Most of the data covers the Arctic or the involved Arctic countries, but new data sources with a smaller or larger geographical extent may be accepted. The Geoportal allows searching placenames via a circumpolar gazetteer, and embedding interactive maps to any website. Some of the features require registration.</gco:CharacterString>
+        </gmd:abstract>
+        <gmd:pointOfContact>
+          <gmd:CI_ResponsibleParty>
+            <gmd:organisationName>
+              <gco:CharacterString>Arctic SDI</gco:CharacterString>
+            </gmd:organisationName>
+            <gmd:contactInfo>
+              <gmd:CI_Contact>
+                <gmd:address>
+                  <gmd:CI_Address>
+                    <gmd:electronicMailAddress>
+                      <gco:CharacterString>info@arctic-sdi.org</gco:CharacterString>
+                    </gmd:electronicMailAddress>
+                  </gmd:CI_Address>
+                </gmd:address>
+              </gmd:CI_Contact>
+            </gmd:contactInfo>
+            <gmd:role>
+              <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="owner" />
+            </gmd:role>
+          </gmd:CI_ResponsibleParty>
+        </gmd:pointOfContact>
+        <gmd:graphicOverview>
+          <gmd:MD_BrowseGraphic>
+            <gmd:fileName>
+              <gco:CharacterString>http://www.paikkatietohakemisto.fi/geonetwork/srv/api/records/e4ee3cde-f0bf-4484-aa1e-df5c8406ff96/attachments/Arctic%20SDI%20Geoportal.jpg</gco:CharacterString>
+            </gmd:fileName>
+          </gmd:MD_BrowseGraphic>
+        </gmd:graphicOverview>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword>
+              <gco:CharacterString>humanGeographicViewer</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>humanInteractionService</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title>
+                  <gco:CharacterString>INSPIRE Service taxonomy</gco:CharacterString>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2010-04-22</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+                <gmd:identifier>
+                  <gmd:MD_Identifier>
+                    <gmd:code>
+                      <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx" xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.inspire-service-taxonomy">geonetwork.thesaurus.external.theme.inspire-service-taxonomy</gmx:Anchor>
+                    </gmd:code>
+                  </gmd:MD_Identifier>
+                </gmd:identifier>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords xmlns:gmx="http://www.isotc211.org/2005/gmx">
+          <gmd:MD_Keywords>
+            <gmd:keyword>
+              <gco:CharacterString>Elevation</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Environmental monitoring facilities</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Administrative units</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Land cover</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Orthoimagery</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Bio-geographical regions</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Species distribution</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Oceanographic geographical features</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Sea regions</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Geology</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Natural risk zones</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Hydrography</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Protected sites</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Atmospheric conditions</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Habitats and biotopes</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Land use</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Geographical names</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:keyword>
+              <gco:CharacterString>Transport networks</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title>
+                  <gco:CharacterString>GEMET - INSPIRE themes, version 1.0</gco:CharacterString>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2008-06-01</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+                <gmd:identifier>
+                  <gmd:MD_Identifier>
+                    <gmd:code>
+                      <gmx:Anchor xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.inspire-theme">geonetwork.thesaurus.external.theme.inspire-theme</gmx:Anchor>
+                    </gmd:code>
+                  </gmd:MD_Identifier>
+                </gmd:identifier>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword gco:nilReason="missing">
+              <gco:CharacterString />
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="" />
+            </gmd:type>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:resourceConstraints>
+          <gmd:MD_Constraints>
+            <gmd:useLimitation>
+              <gco:CharacterString>https://geoportal.arctic-sdi.org/termsofuse.html</gco:CharacterString>
+            </gmd:useLimitation>
+          </gmd:MD_Constraints>
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints>
+          <gmd:MD_SecurityConstraints>
+            <gmd:classification>
+              <gmd:MD_ClassificationCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ClassificationCode" codeListValue="unclassified" />
+            </gmd:classification>
+          </gmd:MD_SecurityConstraints>
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints xmlns:gmx="http://www.isotc211.org/2005/gmx">
+          <gmd:MD_LegalConstraints>
+            <gmd:useConstraints>
+              <gmd:MD_RestrictionCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode" codeListValue="otherRestrictions" />
+            </gmd:useConstraints>
+            <gmd:otherConstraints>
+              <gco:CharacterString>https://geoportal.arctic-sdi.org/termsofuse.html</gco:CharacterString>
+            </gmd:otherConstraints>
+          </gmd:MD_LegalConstraints>
+        </gmd:resourceConstraints>
+        <srv:serviceType>
+          <gco:LocalName>other</gco:LocalName>
+        </srv:serviceType>
+        <srv:extent xmlns:gmx="http://www.isotc211.org/2005/gmx">
+          <gmd:EX_Extent>
+            <gmd:geographicElement>
+              <gmd:EX_GeographicBoundingBox>
+                <gmd:westBoundLongitude>
+                  <gco:Decimal>-180</gco:Decimal>
+                </gmd:westBoundLongitude>
+                <gmd:eastBoundLongitude>
+                  <gco:Decimal>180</gco:Decimal>
+                </gmd:eastBoundLongitude>
+                <gmd:southBoundLatitude>
+                  <gco:Decimal>60</gco:Decimal>
+                </gmd:southBoundLatitude>
+                <gmd:northBoundLatitude>
+                  <gco:Decimal>90</gco:Decimal>
+                </gmd:northBoundLatitude>
+              </gmd:EX_GeographicBoundingBox>
+            </gmd:geographicElement>
+          </gmd:EX_Extent>
+        </srv:extent>
+        <srv:couplingType />
+        <srv:containsOperations />
+      </srv:SV_ServiceIdentification>
+    </gmd:identificationInfo>
+    <gmd:distributionInfo>
+      <gmd:MD_Distribution>
+        <gmd:transferOptions>
+          <gmd:MD_DigitalTransferOptions>
+            <gmd:onLine>
+              <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                  <gmd:URL>https://geoportal.arctic-sdi.org/</gmd:URL>
+                </gmd:linkage>
+                <gmd:protocol gco:nilReason="missing">
+                  <gco:CharacterString />
+                </gmd:protocol>
+              </gmd:CI_OnlineResource>
+            </gmd:onLine>
+          </gmd:MD_DigitalTransferOptions>
+        </gmd:transferOptions>
+      </gmd:MD_Distribution>
+    </gmd:distributionInfo>
+    <gmd:dataQualityInfo>
+      <gmd:DQ_DataQuality>
+        <gmd:scope>
+          <gmd:DQ_Scope>
+            <gmd:level>
+              <gmd:MD_ScopeCode codeListValue="service" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" />
+            </gmd:level>
+          </gmd:DQ_Scope>
+        </gmd:scope>
+        <gmd:report>
+          <gmd:DQ_DomainConsistency>
+            <gmd:result xmlns:gmx="http://www.isotc211.org/2005/gmx">
+              <gmd:DQ_ConformanceResult>
+                <gmd:specification>
+                  <gmd:CI_Citation>
+                    <gmd:title>
+                      <gmx:Anchor xlink:href="">invocable</gmx:Anchor>
+                    </gmd:title>
+                    <gmd:date>
+                      <gmd:CI_Date>
+                        <gmd:date />
+                        <gmd:dateType>
+                          <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                        </gmd:dateType>
+                      </gmd:CI_Date>
+                    </gmd:date>
+                  </gmd:CI_Citation>
+                </gmd:specification>
+                <gmd:explanation gco:nilReason="missing">
+                  <gco:CharacterString />
+                </gmd:explanation>
+                <gmd:pass>
+                  <gco:Boolean>true</gco:Boolean>
+                </gmd:pass>
+              </gmd:DQ_ConformanceResult>
+            </gmd:result>
+          </gmd:DQ_DomainConsistency>
+        </gmd:report>
+        <gmd:report xmlns:gmx="http://www.isotc211.org/2005/gmx">
+          <gmd:DQ_FormatConsistency>
+            <gmd:result>
+              <gmd:DQ_ConformanceResult>
+                <gmd:specification>
+                  <gmd:CI_Citation>
+                    <gmd:title>
+                      <gmx:Anchor xlink:href="http://link,to/the.technical.specification">Description of technical specification</gmx:Anchor>
+                    </gmd:title>
+                    <gmd:date>
+                      <gmd:CI_Date>
+                        <gmd:date>
+                          <gco:Date>
+                            <gco:Date>2014-12-11</gco:Date>
+                          </gco:Date>
+                        </gmd:date>
+                        <gmd:dateType>
+                          <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                        </gmd:dateType>
+                      </gmd:CI_Date>
+                    </gmd:date>
+                  </gmd:CI_Citation>
+                </gmd:specification>
+                <gmd:explanation>
+                  <gco:CharacterString>Conformant to the cited specifications.</gco:CharacterString>
+                </gmd:explanation>
+                <gmd:pass>
+                  <gco:Boolean>true</gco:Boolean>
+                </gmd:pass>
+              </gmd:DQ_ConformanceResult>
+            </gmd:result>
+          </gmd:DQ_FormatConsistency>
+        </gmd:report>
+      </gmd:DQ_DataQuality>
+    </gmd:dataQualityInfo>
+  </gmd:MD_Metadata>
+</csw:GetRecordByIdResponse>
+

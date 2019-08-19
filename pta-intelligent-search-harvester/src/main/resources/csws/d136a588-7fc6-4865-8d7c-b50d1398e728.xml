@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csw:GetRecordByIdResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
+    <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:schemaLocation="http://www.isotc211.org/2005/gmd https://www.isotc211.org/2005/gmd/gmd.xsd http://www.isotc211.org/2005/gmx https://www.isotc211.org/2005/gmx/gmx.xsd">
+    <gmd:fileIdentifier>
+      <gco:CharacterString>d136a588-7fc6-4865-8d7c-b50d1398e728</gco:CharacterString>
+    </gmd:fileIdentifier>
+    <gmd:language>
+      <gco:CharacterString>fin</gco:CharacterString>
+    </gmd:language>
+    <gmd:hierarchyLevel>
+      <gmd:MD_ScopeCode codeListValue="series" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" />
+    </gmd:hierarchyLevel>
+    <gmd:hierarchyLevelName>
+      <gco:CharacterString>Aineisto</gco:CharacterString>
+    </gmd:hierarchyLevelName>
+    <gmd:contact>
+      <gmd:CI_ResponsibleParty>
+        <gmd:organisationName xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Tilastokeskus</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Tilastokeskus</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:organisationName>
+        <gmd:contactInfo>
+          <gmd:CI_Contact>
+            <gmd:address>
+              <gmd:CI_Address>
+                <gmd:deliveryPoint xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Työpajankatu 13</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Työpajankatu 13</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:deliveryPoint>
+                <gmd:city>
+                  <gco:CharacterString>Tilastokeskus</gco:CharacterString>
+                </gmd:city>
+                <gmd:postalCode>
+                  <gco:CharacterString>00022</gco:CharacterString>
+                </gmd:postalCode>
+                <gmd:country xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Suomi</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Suomi</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:country>
+                <gmd:electronicMailAddress xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>sijaintipalvelut@stat.fi</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">sijaintipalvelut@stat.fi</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:electronicMailAddress>
+              </gmd:CI_Address>
+            </gmd:address>
+          </gmd:CI_Contact>
+        </gmd:contactInfo>
+        <gmd:role>
+          <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="originator" />
+        </gmd:role>
+      </gmd:CI_ResponsibleParty>
+    </gmd:contact>
+    <gmd:dateStamp>
+      <gco:DateTime>2019-05-22T15:49:22</gco:DateTime>
+    </gmd:dateStamp>
+    <gmd:locale>
+      <gmd:PT_Locale id="EN">
+          <gmd:languageCode xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gmx="http://www.isotc211.org/2005/gmx">
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+        </gmd:languageCode>
+          <gmd:characterEncoding xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 xmlns:gmx="http://www.isotc211.org/2005/gmx">
+          <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="UTF-8" />
+        </gmd:characterEncoding>
+      </gmd:PT_Locale>
+    </gmd:locale>
+    <gmd:locale>
+      <gmd:PT_Locale id="SV">
+          <gmd:languageCode xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gmx="http://www.isotc211.org/2005/gmx">
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="swe" />
+        </gmd:languageCode>
+          <gmd:characterEncoding xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 xmlns:gmx="http://www.isotc211.org/2005/gmx">
+          <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="UTF-8" />
+        </gmd:characterEncoding>
+      </gmd:PT_Locale>
+    </gmd:locale>
+    <gmd:locale>
+      <gmd:PT_Locale id="FI">
+        <gmd:languageCode>
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="fin" />
+        </gmd:languageCode>
+        <gmd:characterEncoding>
+          <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8" />
+        </gmd:characterEncoding>
+      </gmd:PT_Locale>
+    </gmd:locale>
+        <gmd:referenceSystemInfo xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 xmlns:gmx="http://www.isotc211.org/2005/gmx">
+      <gmd:MD_ReferenceSystem>
+        <gmd:referenceSystemIdentifier>
+          <gmd:RS_Identifier>
+            <gmd:code gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>http://www.opengis.net/def/crs/EPSG/0/3067</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">http://www.opengis.net/def/crs/EPSG/0/3067</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:code>
+          </gmd:RS_Identifier>
+        </gmd:referenceSystemIdentifier>
+      </gmd:MD_ReferenceSystem>
+    </gmd:referenceSystemInfo>
+    <gmd:identificationInfo>
+      <gmd:MD_DataIdentification>
+        <gmd:citation>
+          <gmd:CI_Citation>
+            <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Väestö tilastointialueittain</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Väestö tilastointialueittain</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Population by municipality-based units</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">Befolkning efter statistikområde</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:title>
+            <gmd:date>
+              <gmd:CI_Date>
+                <gmd:date>
+                  <gco:Date>2011-12-31</gco:Date>
+                </gmd:date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+            <gmd:date>
+              <gmd:CI_Date>
+                <gmd:date>
+                  <gco:Date>2012-12-31</gco:Date>
+                </gmd:date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" />
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+            <gmd:date>
+              <gmd:CI_Date>
+                <gmd:date>
+                  <gco:Date>2013-12-31</gco:Date>
+                </gmd:date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+            <gmd:date>
+              <gmd:CI_Date>
+                <gmd:date>
+                  <gco:Date>2014-12-31</gco:Date>
+                </gmd:date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+            <gmd:date>
+              <gmd:CI_Date>
+                <gmd:date>
+                  <gco:Date>2015-12-31</gco:Date>
+                </gmd:date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+              <gmd:date xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gmx="http://www.isotc211.org/2005/gmx">
+              <gmd:CI_Date>
+                <gmd:date>
+                  <gco:Date>2016-12-31</gco:Date>
+                </gmd:date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+              <gmd:date xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gmx="http://www.isotc211.org/2005/gmx">
+              <gmd:CI_Date>
+                <gmd:date>
+                  <gco:Date>2017-12-31</gco:Date>
+                </gmd:date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+              <gmd:date xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <gmd:CI_Date>
+                <gmd:date>
+                  <gco:Date>2018-12-31</gco:Date>
+                </gmd:date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+            <gmd:identifier>
+              <gmd:MD_Identifier>
+                <gmd:code>
+                  <gco:CharacterString>1000521</gco:CharacterString>
+                </gmd:code>
+              </gmd:MD_Identifier>
+            </gmd:identifier>
+          </gmd:CI_Citation>
+        </gmd:citation>
+        <gmd:abstract xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Sisältää väestön lukumäärätiedot tilastointialueittain. Väestön lukumäärä ilmoitetaan viitevuoden viimeisenä päivänä (31.12.). Tilastointialueet ovat kunnat, seutukunnat, maakunnat, suuralueet, aluehallintovirastot (AVI) ja elinkeino-, liikenne- ja ympäristökeskukset (ELY).
+
+Aineiston tilastomuuttujia ovat: alueen väestömäärä yhteensä (vaesto), alueen väestömäärän osuus koko maan väestöstä (vaesto_p), miesten lukumäärä (miehet) ja miesten osuus alueen väestöstä (miehet_p), naisten lukumäärä (naiset) ja naisten osuus alueen väestöstä (naiset_p), alle 15-vuotiaat (ika_0_14) ja alle 15-vuotiaiden osuus (ika_0_14p), 15-64-vuotiaat (ika_15_64) ja 15-64-vuotiaiden osuus (ika_15_64p), 65 vuotta täyttäneet (ika_65_) ja 65 vuotta täyttäneiden osuus (ika_65_p). Lisäksi aineisto sisältää alueluokitusvuoden (vuosi) ja tilastoaineiston ajankohdan (til_vuosi). 
+
+Aineisto soveltuu väestömäärien tarkasteluun ja erilaisten alueellisten analyysien tekemiseen.
+
+Tietoja käytettäessä on noudatettava yleisiä käyttöehtoja:
+http://tilastokeskus.fi/org/lainsaadanto/copyright.html.</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Sisältää väestön lukumäärätiedot tilastointialueittain. Väestön lukumäärä ilmoitetaan viitevuoden viimeisenä päivänä (31.12.). Tilastointialueet ovat kunnat, seutukunnat, maakunnat, suuralueet, aluehallintovirastot (AVI) ja elinkeino-, liikenne- ja ympäristökeskukset (ELY).
+
+Aineiston tilastomuuttujia ovat: alueen väestömäärä yhteensä (vaesto), alueen väestömäärän osuus koko maan väestöstä (vaesto_p), miesten lukumäärä (miehet) ja miesten osuus alueen väestöstä (miehet_p), naisten lukumäärä (naiset) ja naisten osuus alueen väestöstä (naiset_p), alle 15-vuotiaat (ika_0_14) ja alle 15-vuotiaiden osuus (ika_0_14p), 15-64-vuotiaat (ika_15_64) ja 15-64-vuotiaiden osuus (ika_15_64p), 65 vuotta täyttäneet (ika_65_) ja 65 vuotta täyttäneiden osuus (ika_65_p). Lisäksi aineisto sisältää alueluokitusvuoden (vuosi) ja tilastoaineiston ajankohdan (til_vuosi). 
+
+Aineisto soveltuu väestömäärien tarkasteluun ja erilaisten alueellisten analyysien tekemiseen.
+
+Tietoja käytettäessä on noudatettava yleisiä käyttöehtoja:
+http://tilastokeskus.fi/org/lainsaadanto/copyright.html.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">Number of population by statistical units. The number of population on the last day of the reference year (31.12.). Statistical areas are municipalities, sub-regional units, regions, major regions, Regional State Administrative Agencies (AVI) and Centres for Economic Development, Transport and the Environment (ELY).
+
+The statistical variables in the data are: total population (vaesto), share of the total population (vaesto_p), number of men (miehet), men's share of the population in an area (miehet_p) and women (naiset), women's share (naiset_p), those aged under 15: number (ika_0_14), share (ika_0_14p),  those aged 15 to 64: number (ika_15_64), share (ika_15_64p), and aged 65 or over: number (ika_65_), share  (ika_65_p).
+
+The data is suitable for the examination of population distribution and making various regional analyses.
+
+The general Terms of Use must be observed when using the data:
+http://tilastokeskus.fi/org/lainsaadanto/copyright_en.html.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#SV">Uppgifter om folkmängd efter statistikområde. Folkmängd på referensårets sista dag. Statistikområden är kommuner, ekonomiska regioner, landskap, storområde, regionförvaltningsverk (RFV) och närings-, trafik- och miljöcentraler (ELY)
+
+Statistikvariabler i materialet är: folkmängd totalt (vaesto), antal män (miehet) och kvinnor (naiset), yngre än 15 år (ika_0_14), 15–64 år (ika_15_64) och 65 år fyllda (ika_65_).
+
+Materialet lämpar sig för genomgång av folkmängder och för utförande av olika regionala analyser.
+
+Då uppgifterna används, ska de allmänna användarvillkoren iakttas:
+http://tilastokeskus.fi/org/lainsaadanto/copyright_sv.html.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:abstract>
+        <gmd:purpose gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString />
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI" />
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:purpose>
+        <gmd:credit xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Maanmittauslaitos</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Maanmittauslaitos</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">Land Survey of Finland</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#SV">Lantmäterivärket</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:credit>
+        <gmd:credit xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Väestörekisterikeskus</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#FI">Väestörekisterikeskus</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">Population Register Centre</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#SV">Befolkningsregistercentralen</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:credit>
+        <gmd:status>
+          <gmd:MD_ProgressCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ProgressCode" codeListValue="" />
+        </gmd:status>
+        <gmd:pointOfContact>
+          <gmd:CI_ResponsibleParty>
+            <gmd:organisationName xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Tilastokeskus</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Tilastokeskus</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">Statistikcentralen</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Statistics Finland</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:organisationName>
+            <gmd:contactInfo>
+              <gmd:CI_Contact>
+                <gmd:address>
+                  <gmd:CI_Address>
+                    <gmd:electronicMailAddress xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString>sijaintipalvelut@stat.fi</gco:CharacterString>
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#FI">sijaintipalvelut@stat.fi</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:electronicMailAddress>
+                  </gmd:CI_Address>
+                </gmd:address>
+              </gmd:CI_Contact>
+            </gmd:contactInfo>
+            <gmd:role>
+              <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="originator" />
+            </gmd:role>
+          </gmd:CI_ResponsibleParty>
+        </gmd:pointOfContact>
+        <gmd:graphicOverview>
+          <gmd:MD_BrowseGraphic>
+            <gmd:fileName>
+              <gco:CharacterString>http://www.paikkatietohakemisto.fi/geonetwork/srv/api/records/d136a588-7fc6-4865-8d7c-b50d1398e728/attachments/vaesto_tilas_iso_s.png</gco:CharacterString>
+            </gmd:fileName>
+            <gmd:fileDescription gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString />
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI" />
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">thumbnail</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN" />
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV" />
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:fileDescription>
+          </gmd:MD_BrowseGraphic>
+        </gmd:graphicOverview>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Väestöjakauma</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Väestöjakauma</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Väestömäärä</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Väestömäärä</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Väestöjakauma - demografia</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Väestöjakauma - demografia</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Population distribution</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>avoindata.fi</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">avoindata.fi</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeListValue="theme" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Paikkatietohakemiston asiasanasto</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">Paikkatietohakemiston asiasanasto</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2010-02-05</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Väestöjakauma – demografia</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Väestöjakauma – demografia</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Population distribution — demography</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">Befolkningsfördelning – demografi</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>GEMET - INSPIRE themes, version 1.0</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">GEMET - INSPIRE themes, version 1.0</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2008-06-01</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+                <gmd:identifier>
+                  <gmd:MD_Identifier>
+                    <gmd:code>
+                      <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.inspire-theme">geonetwork.thesaurus.external.theme.inspire-theme</gmx:Anchor>
+                    </gmd:code>
+                  </gmd:MD_Identifier>
+                </gmd:identifier>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString />
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI" />
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode" codeListValue="theme" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>INSPIRE themes</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">INSPIRE themes</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2009-09-22</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+                <gmd:identifier>
+                  <gmd:MD_Identifier>
+                    <gmd:code>
+                      <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.paikkatietopalvelut">geonetwork.thesaurus.external.theme.paikkatietopalvelut</gmx:Anchor>
+                    </gmd:code>
+                  </gmd:MD_Identifier>
+                </gmd:identifier>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:resourceConstraints>
+          <gmd:MD_Constraints />
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints>
+          <gmd:MD_LegalConstraints>
+            <gmd:accessConstraints>
+              <gmd:MD_RestrictionCode codeListValue="license" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode" />
+            </gmd:accessConstraints>
+            <gmd:otherConstraints xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Ei muita rajoitteita.</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Ei muita rajoitteita.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Ei muita rajoitteita.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">Ei muita rajoitteita.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:otherConstraints>
+          </gmd:MD_LegalConstraints>
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints>
+          <gmd:MD_SecurityConstraints>
+            <gmd:useLimitation xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>http://tilastokeskus.fi/org/lainsaadanto/yleiset_kayttoehdot.html</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">http://tilastokeskus.fi/org/lainsaadanto/yleiset_kayttoehdot.html</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">http://tilastokeskus.fi/org/lainsaadanto/yleiset_kayttoehdot_en.html</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">http://tilastokeskus.fi/org/lainsaadanto/yleiset_kayttoehdot_sv.html</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:useLimitation>
+            <gmd:classification>
+              <gmd:MD_ClassificationCode codeListValue="unclassified" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ClassificationCode" />
+            </gmd:classification>
+          </gmd:MD_SecurityConstraints>
+        </gmd:resourceConstraints>
+          <gmd:resourceConstraints xmlns:xlink="http://www.w3.org/1999/xlink"
+                                   xmlns:gmx="http://www.isotc211.org/2005/gmx">
+          <gmd:MD_Constraints>
+            <gmd:useLimitation xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>http://tilastokeskus.fi/org/lainsaadanto/copyright.html</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">http://tilastokeskus.fi/org/lainsaadanto/copyright.html</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">http://tilastokeskus.fi/org/lainsaadanto/copyright_sv.html</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">http://tilastokeskus.fi/org/lainsaadanto/copyright_en.html</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:useLimitation>
+          </gmd:MD_Constraints>
+        </gmd:resourceConstraints>
+          <gmd:spatialRepresentationType xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         xmlns:gmx="http://www.isotc211.org/2005/gmx">
+          <gmd:MD_SpatialRepresentationTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_SpatialRepresentationTypeCode" codeListValue="vector" />
+        </gmd:spatialRepresentationType>
+        <gmd:spatialResolution>
+          <gmd:MD_Resolution>
+            <gmd:equivalentScale>
+              <gmd:MD_RepresentativeFraction>
+                <gmd:denominator>
+                  <gco:Integer>4500000</gco:Integer>
+                </gmd:denominator>
+              </gmd:MD_RepresentativeFraction>
+            </gmd:equivalentScale>
+          </gmd:MD_Resolution>
+        </gmd:spatialResolution>
+        <gmd:language>
+          <gco:CharacterString>fin</gco:CharacterString>
+        </gmd:language>
+        <gmd:topicCategory>
+          <gmd:MD_TopicCategoryCode>society</gmd:MD_TopicCategoryCode>
+        </gmd:topicCategory>
+        <gmd:extent>
+          <gmd:EX_Extent>
+            <gmd:geographicElement>
+              <gmd:EX_GeographicBoundingBox>
+                <gmd:westBoundLongitude>
+                  <gco:Decimal>19.0889</gco:Decimal>
+                </gmd:westBoundLongitude>
+                <gmd:eastBoundLongitude>
+                  <gco:Decimal>31.5867</gco:Decimal>
+                </gmd:eastBoundLongitude>
+                <gmd:southBoundLatitude>
+                  <gco:Decimal>59.60</gco:Decimal>
+                </gmd:southBoundLatitude>
+                <gmd:northBoundLatitude>
+                  <gco:Decimal>70.0923</gco:Decimal>
+                </gmd:northBoundLatitude>
+              </gmd:EX_GeographicBoundingBox>
+            </gmd:geographicElement>
+          </gmd:EX_Extent>
+        </gmd:extent>
+      </gmd:MD_DataIdentification>
+    </gmd:identificationInfo>
+        <gmd:distributionInfo xmlns:xlink="http://www.w3.org/1999/xlink">
+      <gmd:MD_Distribution>
+        <gmd:transferOptions>
+          <gmd:MD_DigitalTransferOptions>
+            <gmd:onLine>
+              <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                  <gmd:URL />
+                </gmd:linkage>
+                <gmd:protocol>
+                  <gco:CharacterString>OGC:WFS</gco:CharacterString>
+                </gmd:protocol>
+                <gmd:name xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>http://geo.stat.fi/geoserver/vaestoalue/wfs?service=WFS&amp;request=GetCapabilities&amp;version=1.0.0</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI">http://geo.stat.fi/geoserver/vaestoalue/wfs?service=WFS&amp;request=GetCapabilities&amp;version=1.0.0</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:name>
+                <gmd:description gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString />
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI" />
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:description>
+              </gmd:CI_OnlineResource>
+            </gmd:onLine>
+          </gmd:MD_DigitalTransferOptions>
+        </gmd:transferOptions>
+        <gmd:transferOptions>
+          <gmd:MD_DigitalTransferOptions />
+        </gmd:transferOptions>
+        <gmd:transferOptions>
+          <gmd:MD_DigitalTransferOptions />
+        </gmd:transferOptions>
+      </gmd:MD_Distribution>
+    </gmd:distributionInfo>
+    <gmd:dataQualityInfo>
+      <gmd:DQ_DataQuality>
+        <gmd:scope>
+          <gmd:DQ_Scope>
+            <gmd:level>
+              <gmd:MD_ScopeCode codeListValue="series" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" />
+            </gmd:level>
+          </gmd:DQ_Scope>
+        </gmd:scope>
+        <gmd:report>
+          <gmd:DQ_DomainConsistency>
+            <gmd:result>
+              <gmd:DQ_ConformanceResult>
+                <gmd:specification>
+                  <gmd:CI_Citation>
+                    <gmd:title gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString />
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#FI" />
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:title>
+                    <gmd:date>
+                      <gmd:CI_Date>
+                        <gmd:date>
+                          <gco:Date />
+                        </gmd:date>
+                        <gmd:dateType>
+                          <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                        </gmd:dateType>
+                      </gmd:CI_Date>
+                    </gmd:date>
+                  </gmd:CI_Citation>
+                </gmd:specification>
+                <gmd:explanation gco:nilReason="missing" xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString />
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#FI" />
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:explanation>
+                <gmd:pass>
+                  <gco:Boolean>false</gco:Boolean>
+                </gmd:pass>
+              </gmd:DQ_ConformanceResult>
+            </gmd:result>
+          </gmd:DQ_DomainConsistency>
+        </gmd:report>
+        <gmd:lineage>
+          <gmd:LI_Lineage>
+            <gmd:statement xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Tilastointiyksiköt-kartta-aineistojen tuottamisen lähtöaineistona on ollut Maanmittauslaitoksen rantaviivalla leikattu kuntajako-kartta-aineisto (1:4 500 000). Tilastokeskuksessa on muodostettu kuntapohjaiset tilastointialueet (seutukunnat, maakunnat, suuralueet, AVI- ja ELY-alueet).</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#FI">Tilastointiyksiköt-kartta-aineistojen tuottamisen lähtöaineistona on ollut Maanmittauslaitoksen rantaviivalla leikattu kuntajako-kartta-aineisto (1:4 500 000). Tilastokeskuksessa on muodostettu kuntapohjaiset tilastointialueet (seutukunnat, maakunnat, suuralueet, AVI- ja ELY-alueet).</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:statement>
+          </gmd:LI_Lineage>
+        </gmd:lineage>
+      </gmd:DQ_DataQuality>
+    </gmd:dataQualityInfo>
+  </gmd:MD_Metadata>
+</csw:GetRecordByIdResponse>
+
