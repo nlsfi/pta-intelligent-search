@@ -43,9 +43,9 @@ public class LocalCSWHarvesterSource extends HarvesterSource {
 		logger.debug("Requesting record with id" + harvestable.getIdentifier());
 
 		try {
-			return HarvesterInputStream.wrap(new FileInputStream(harvestable.getFile()));
+			return HarvesterInputStream.wrap(new FileInputStream(((LocalHarvestable) harvestable).getFile()));
 
-		} catch (IOException e) {
+		} catch (IOException | ClassCastException e) {
 			throw new HarvestingException(e);
 		}
 	}
@@ -80,7 +80,7 @@ public class LocalCSWHarvesterSource extends HarvesterSource {
 			File cswFile = localCSWs.removeFirst();
 			numberOfRecordsProcessed++;
 
-			return Harvestable.create(cswFile, cswFile.getName().replace(".xml", ""));
+			return LocalHarvestable.create(cswFile, cswFile.getName().replace(".xml", ""));
 		}
 
 

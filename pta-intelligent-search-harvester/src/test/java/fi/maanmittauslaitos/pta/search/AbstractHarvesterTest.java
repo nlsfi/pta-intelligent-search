@@ -1,8 +1,10 @@
 package fi.maanmittauslaitos.pta.search;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fi.maanmittauslaitos.pta.search.csw.CSWHarvestable;
 import fi.maanmittauslaitos.pta.search.csw.Harvestable;
 import fi.maanmittauslaitos.pta.search.csw.HarvesterInputStream;
+import fi.maanmittauslaitos.pta.search.csw.LocalHarvestable;
 import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
@@ -74,7 +76,7 @@ public class AbstractHarvesterTest {
 
 		harvester = new TestHarvester();
 		when(mockSource.iterator()).thenReturn(mockIterator);
-		when(mockSource.getInputStream(Mockito.any(Harvestable.class))).thenReturn(mockIs);
+		when(mockSource.getInputStream(Mockito.any(LocalHarvestable.class))).thenReturn(mockIs);
 		when(mockProcessor.processDocument(Mockito.any(InputStream.class))).thenReturn(mockDocument);
 		when(mockSink.indexDocument(mockDocument)).thenReturn(IndexResult.INSERTED);
 		when(mockConfig.getHarvesterTracker()).thenReturn(harvesterTracker);
@@ -98,9 +100,9 @@ public class AbstractHarvesterTest {
 
 		when(mockIterator.hasNext()).thenReturn(true, true, true, false);
 		when(mockIterator.next())
-				.thenReturn(Harvestable.create(ids.get(0)))
-				.thenReturn(Harvestable.create(ids.get(1)))
-				.thenReturn(Harvestable.create(ids.get(2)));
+				.thenReturn(CSWHarvestable.create(ids.get(0)))
+				.thenReturn(CSWHarvestable.create(ids.get(1)))
+				.thenReturn(CSWHarvestable.create(ids.get(2)));
 
 		Mockito.doThrow(STOPPER_EXCEPTION).when(harvesterTracker).harvestingFinished();
 		try {
@@ -113,9 +115,9 @@ public class AbstractHarvesterTest {
 
 	@Test
 	public void testContinuingAfterProcessingException() throws Exception {
-		Harvestable valid = Harvestable.create("successful1");
-		Harvestable invalid = Harvestable.create("causing_processing_exception");
-		Harvestable valid2 = Harvestable.create("successful2");
+		Harvestable valid = CSWHarvestable.create("successful1");
+		Harvestable invalid = CSWHarvestable.create("causing_processing_exception");
+		Harvestable valid2 = CSWHarvestable.create("successful2");
 
 		when(mockIterator.hasNext()).thenReturn(true, true, true, false);
 		when(mockIterator.next()).thenReturn(valid, invalid, valid2);
@@ -140,8 +142,8 @@ public class AbstractHarvesterTest {
 
 	@Test
 	public void testRecoveringFromProcessingException() throws Exception {
-		Harvestable valid = Harvestable.create("successful1");
-		Harvestable previouslyInvalid = Harvestable.create("caused_processing_exception_in_previous_run");
+		Harvestable valid = CSWHarvestable.create("successful1");
+		Harvestable previouslyInvalid = CSWHarvestable.create("caused_processing_exception_in_previous_run");
 		harvesterTracker.addToSkippedDueProcessingException(previouslyInvalid.getIdentifier());
 
 		when(mockIterator.hasNext()).thenReturn(true, true, false);
@@ -162,9 +164,9 @@ public class AbstractHarvesterTest {
 
 	@Test
 	public void testHarvestingException() throws Exception {
-		Harvestable valid = Harvestable.create("successful");
-		Harvestable invalid = Harvestable.create("causing_harvesting_exception");
-		Harvestable valid2 = Harvestable.create("successful_but_doesn't_get_harvested_if_synchronous_run");
+		Harvestable valid = CSWHarvestable.create("successful");
+		Harvestable invalid = CSWHarvestable.create("causing_harvesting_exception");
+		Harvestable valid2 = CSWHarvestable.create("successful_but_doesn't_get_harvested_if_synchronous_run");
 
 		when(mockIterator.hasNext()).thenReturn(true, true, true, false);
 		when(mockIterator.next()).thenReturn(valid, invalid, valid2);
@@ -181,9 +183,9 @@ public class AbstractHarvesterTest {
 
 	@Test
 	public void testHarvestingExceptionRecovery() throws Exception {
-		Harvestable valid = Harvestable.create("successful");
-		Harvestable invalid = Harvestable.create("causing_harvesting_exception_at_first");
-		Harvestable valid2 = Harvestable.create("successful2");
+		Harvestable valid = CSWHarvestable.create("successful");
+		Harvestable invalid = CSWHarvestable.create("causing_harvesting_exception_at_first");
+		Harvestable valid2 = CSWHarvestable.create("successful2");
 
 		when(mockIterator.hasNext()).thenReturn(true, true, true, false);
 		when(mockIterator.next())

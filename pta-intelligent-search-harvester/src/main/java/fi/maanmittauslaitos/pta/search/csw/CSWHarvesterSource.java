@@ -33,7 +33,7 @@ public class CSWHarvesterSource extends HarvesterSource {
 	private HarvesterInputStream readRecord(String id) {
 		logger.debug("Requesting record with id" + id);
 
-		StringBuffer reqUrl = new StringBuffer(getOnlineResource());
+		StringBuilder reqUrl = new StringBuilder(getOnlineResource());
 		if (reqUrl.indexOf("?") == -1) {
 			reqUrl.append("?");
 		} else if (reqUrl.charAt(reqUrl.length() - 1) != '&') {
@@ -64,13 +64,13 @@ public class CSWHarvesterSource extends HarvesterSource {
 	private class CSWIterator implements Iterator<Harvestable> {
 		private int numberOfRecordsProcessed = 0;
 		private Integer numberOfRecordsInService;
-		private LinkedList<String> idsInBatch = null;
+		private LinkedList<String> idsInBatch;
 
-		public CSWIterator() {
+		CSWIterator() {
 			idsInBatch = new LinkedList<>();
 			getNextBatch();
 		}
-		
+
 
 		@Override
 		public boolean hasNext() {
@@ -92,7 +92,7 @@ public class CSWHarvesterSource extends HarvesterSource {
 			String id = idsInBatch.removeFirst();
 			numberOfRecordsProcessed++;
 
-			return Harvestable.create(id);
+			return CSWHarvestable.create(id);
 		}
 
 
@@ -100,24 +100,24 @@ public class CSWHarvesterSource extends HarvesterSource {
 			int startPosition = 1 + numberOfRecordsProcessed;
 			int maxRecords = getBatchSize();
 			logger.debug("Requesting records startPosition = " + startPosition + ",maxRecords = " + maxRecords);
-			
+
 			try {
-				
-				StringBuffer reqUrl = new StringBuffer(getOnlineResource());
+
+				StringBuilder reqUrl = new StringBuilder(getOnlineResource());
 				if (reqUrl.indexOf("?") == -1) {
 					reqUrl.append("?");
-				} else if (reqUrl.charAt(reqUrl.length()-1) != '&') {
+				} else if (reqUrl.charAt(reqUrl.length() - 1) != '&') {
 					reqUrl.append("&");
 				}
-				
+
 				reqUrl.append("SERVICE=CSW&REQUEST=GetRecords&VERSION=2.0.2&typeNames=gmd%3AMD_Metadata&resultType=results&elementSetName=brief");
-				
-				reqUrl.append("&startPosition="+startPosition+"&maxRecords="+maxRecords);
-				
-				logger.trace("CSW GetRecords URL: "+reqUrl);
-				
+
+				reqUrl.append("&startPosition=" + startPosition + "&maxRecords=" + maxRecords);
+
+				logger.trace("CSW GetRecords URL: " + reqUrl);
+
 				URL url = new URL(reqUrl.toString());
-				
+
 				try (InputStream is = url.openStream()) {
 					DocumentProcessingConfiguration configuration = new DocumentProcessingConfiguration();
 					configuration.getNamespaces().put("dc", "http://purl.org/dc/elements/1.1/");
@@ -143,19 +143,19 @@ public class CSWHarvesterSource extends HarvesterSource {
 					logger.debug("\tnumberOfRecordsMatched = " + doc.getFields().get("numberOfRecordsMatched"));
 
 					idsInBatch.addAll(doc.getListValue("ids", String.class));
-					
+
 					List<String> nRecords = doc.getListValue("numberOfRecordsMatched", String.class);
 					if (nRecords.size() > 0) {
 						numberOfRecordsInService = Integer.parseInt(doc.getValue("numberOfRecordsMatched", String.class));
 					}
-					
+
 					if (numberOfRecordsInService == null) {
 						throw new IOException("Unable to determine how many records in CSW service");
 					}
 				}
-				
-				
-			} catch(IOException | ParserConfigurationException | DocumentProcessingException e) {
+
+
+			} catch (IOException | ParserConfigurationException | DocumentProcessingException e) {
 				throw new HarvestingException(e);
 			}
 		}

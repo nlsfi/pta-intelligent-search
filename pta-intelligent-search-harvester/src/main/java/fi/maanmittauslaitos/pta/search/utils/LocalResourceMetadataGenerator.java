@@ -9,7 +9,6 @@ import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import org.apache.commons.io.FileUtils;
 
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,14 +32,12 @@ public class LocalResourceMetadataGenerator extends AbstractHarvester {
 	}
 
 	@Override
-	protected HarvesterSource getHarvesterSource(HarvesterConfig config) throws XPathExpressionException, ParserConfigurationException {
+	protected HarvesterSource getHarvesterSource(HarvesterConfig config) {
 		return config.getLocalCSWSource();
 	}
 
-	private void downloadXmlFiles() throws IOException, XPathExpressionException, ParserConfigurationException {
+	private void downloadXmlFiles() throws IOException {
 		HarvesterConfig config = new HarvesterConfig();
-
-		HarvesterTracker harvesterTracker = config.getHarvesterTracker();
 
 		HarvesterSource source = config.getCSWSource();
 
