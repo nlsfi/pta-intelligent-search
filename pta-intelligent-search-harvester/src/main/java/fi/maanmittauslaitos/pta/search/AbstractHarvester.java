@@ -14,7 +14,9 @@ import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataFields;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTracker;
 import org.apache.jena.ext.com.google.common.collect.Streams;
 import org.apache.log4j.Logger;
+import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.DefaultApplicationArguments;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
@@ -28,9 +30,10 @@ import static fi.maanmittauslaitos.pta.search.utils.HarvesterTracker.RETRY_FOR_H
 
 public abstract class AbstractHarvester implements CommandLineRunner {
 
-	private static final Logger logger = Logger.getLogger(AbstractHarvester.class);
+	protected static final Logger logger = Logger.getLogger(AbstractHarvester.class);
+	private static int DEFAULT_NUMBER_OF_THREADS = 4;
 
-	abstract protected DocumentSink getDocumentSink(HarvesterConfig config, HarvesterTracker harvesterTracker, String[] args);
+	abstract protected DocumentSink getDocumentSink(HarvesterConfig config, HarvesterTracker harvesterTracker, ApplicationArguments args);
 
 	abstract protected DocumentProcessor getDocumentProcessor(HarvesterConfig config) throws ParserConfigurationException, IOException;
 
@@ -43,13 +46,17 @@ public abstract class AbstractHarvester implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		ApplicationArguments arguments = new DefaultApplicationArguments(args);
+		logger.info("Arguments are " + arguments.getOptionNames());
+
 		HarvesterConfig config = getConfig();
 		HarvesterTracker tracker = config.getHarvesterTracker();
 		HarvesterSource source = getHarvesterSource(config);
 		DocumentProcessor processor = getDocumentProcessor(config);
-		DocumentSink sink = getDocumentSink(config, tracker, args);
+		DocumentSink sink = getDocumentSink(config, tracker, arguments);
 
-		boolean store = args.length > 0 && args[0].equals("store");
+		boolean store = arguments.containsOption("store");
+		List<String> threadList = arguments.getOptionValues("threads");
 
 		if (!tracker.getIdentifiers().isEmpty()) {
 			logger.warn("Identifiers of the documents, that are permanently skipped from harvesting process:\n" +
@@ -62,7 +69,11 @@ public abstract class AbstractHarvester implements CommandLineRunner {
 
 		sink.startIndexing();
 
-		harvestAsynchronously(tracker, source, processor, sink, store);
+
+		int nThreads = threadList.size() > 0 ? Integer.parseInt(threadList.get(0)) : DEFAULT_NUMBER_OF_THREADS;
+
+		logger.info("Starting harvesting with " + nThreads + " threads");
+		harvestAsynchronously(tracker, source, processor, sink, store, nThreads);
 
 
 		int deleted = sink.stopIndexing();
@@ -76,13 +87,13 @@ public abstract class AbstractHarvester implements CommandLineRunner {
 		tracker.harvestingFinished();
 	}
 
-	private void harvestAsynchronously(HarvesterTracker tracker, HarvesterSource source, DocumentProcessor processor, DocumentSink sink, boolean store) {
+	private void harvestAsynchronously(HarvesterTracker tracker, HarvesterSource source, DocumentProcessor processor, DocumentSink sink, boolean store, int nThreads) {
 		ThreadFactory namedThreadFactory =
 				new ThreadFactoryBuilder()
 						.setNameFormat("harvest-thrd-%d").build();
 
 
-		ExecutorService executor = Executors.newFixedThreadPool(4, namedThreadFactory);
+		ExecutorService executor = Executors.newFixedThreadPool(nThreads, namedThreadFactory);
 
 		Runnable shutdownExecutor = () -> {
 			executor.shutdownNow();
@@ -97,7 +108,6 @@ public abstract class AbstractHarvester implements CommandLineRunner {
 				.collect(ParallelCollectors.parallelToList(harvestable -> {
 					String id = harvestable.getIdentifier();
 					if (tracker.isYetToBeProcessed(id)) {
-						logger.info("Harvesting " + id);
 						boolean continueToNext = false;
 						boolean shouldShutDownExecutor = false;
 						int tries = 0;

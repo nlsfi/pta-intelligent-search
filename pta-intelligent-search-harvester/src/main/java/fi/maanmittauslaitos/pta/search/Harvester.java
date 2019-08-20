@@ -3,6 +3,7 @@ package fi.maanmittauslaitos.pta.search;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTracker;
+import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -17,7 +18,7 @@ public class Harvester extends AbstractHarvester {
 		SpringApplication.run(Harvester.class, args);
 	}
 
-	protected DocumentSink getDocumentSink(HarvesterConfig config, HarvesterTracker harvesterTracker, String[] args) {
+	protected DocumentSink getDocumentSink(HarvesterConfig config, HarvesterTracker harvesterTracker, ApplicationArguments args) {
 		return config.getDocumentSink(harvesterTracker);
 	}
 

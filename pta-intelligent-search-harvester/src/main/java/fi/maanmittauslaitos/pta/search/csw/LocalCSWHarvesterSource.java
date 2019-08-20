@@ -40,7 +40,7 @@ public class LocalCSWHarvesterSource extends HarvesterSource {
 
 	@Override
 	public HarvesterInputStream getInputStream(Harvestable harvestable) {
-		logger.debug("Requesting record with id" + harvestable.getIdentifier());
+		logger.debug("Requesting record with id " + harvestable.getIdentifier());
 
 		try {
 			return HarvesterInputStream.wrap(new FileInputStream(((LocalHarvestable) harvestable).getFile()));

@@ -7,11 +7,13 @@ import fi.maanmittauslaitos.pta.search.csw.Harvestable;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import org.apache.commons.io.FileUtils;
+import org.springframework.boot.ApplicationArguments;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 public class LocalResourceMetadataGenerator extends AbstractHarvester {
 	public static void main(String[] args) throws Exception {
@@ -20,9 +22,10 @@ public class LocalResourceMetadataGenerator extends AbstractHarvester {
 	}
 
 	@Override
-	protected DocumentSink getDocumentSink(HarvesterConfig config, HarvesterTracker harvesterTracker, String[] args) {
-		String sinkfile = args.length > 0 ? args[0] : "generatedResourceMetatada.zip";
-		System.out.println("Sinkfile is " + sinkfile);
+	protected DocumentSink getDocumentSink(HarvesterConfig config, HarvesterTracker harvesterTracker, ApplicationArguments args) {
+		List<String> sinkfileList = args.getOptionValues("sinkfile");
+		String sinkfile = sinkfileList.size() > 0 ? sinkfileList.get(0) : "generatedResourceMetatada.zip";
+		logger.debug("Sinkfile is " + sinkfile);
 		return config.getLocalDocumentSink(sinkfile, harvesterTracker);
 	}
 

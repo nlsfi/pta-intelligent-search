@@ -23,6 +23,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.exceptions.base.MockitoException;
+import org.springframework.boot.ApplicationArguments;
 
 import java.io.File;
 import java.io.IOException;
@@ -284,7 +285,7 @@ public class AbstractHarvesterTest {
 		}
 
 		@Override
-		protected DocumentSink getDocumentSink(HarvesterConfig config, HarvesterTracker harvesterTracker, String[] args) {
+		protected DocumentSink getDocumentSink(HarvesterConfig config, HarvesterTracker harvesterTracker, ApplicationArguments args) {
 			return mockSink;
 		}
 
