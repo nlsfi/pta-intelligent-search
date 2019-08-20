@@ -65,13 +65,23 @@ by using exec-maven-plugin. In order to run the tests, those projects should be 
 ## Updating spatial regions
 
 Databases (geoJSON files) containing the bounding boxes of Finnish municipalities, sub regions and regions 
-are built using Statistical units data. Statistical Units, Statistics Finland The material was downloaded from Statistics Finland's interface service on 9 August 2019 with the licence [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.en).
+are built using Statistical units data and Municipality name data.
+
+Statistical Units, Statistics Finland The material was downloaded from Statistics 
+Finland's interface service on 9 August 2019 with the licence [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.en). 
+Municipalities, Population Register Centre, the material was downloaded from Avoindata.fi on August 20 2019 with
+the licence CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/deed.en)
 
 To update the databases with the newest data sets:
  * Make sure that you have Python3 environment with all packages installed from [requirements.txt](elasticsearch-data-processing-scripts/requirements.txt)
- * Download newest municipality union Excel file from [Kuntaliitto](https://www.kuntaliitto.fi/asiantuntijapalvelut/johtaminen-ja-kehittaminen/kuntaliitokset) and save it 
- to the project folder elasticsearch-data-processing-scripts
- * Modify the MUNICIPALITY_UNIONS_EXCEL constant from file `dataLoader.py` to match the new file name
+ * Download the newest municipality union data:
+    * Download Excel file from [Kuntaliitto](https://www.kuntaliitto.fi/asiantuntijapalvelut/johtaminen-ja-kehittaminen/kuntaliitokset) and save it 
+    to the project folder elasticsearch-data-processing-scripts
+    * Modify the MUNICIPALITY_UNIONS_EXCEL constant from file `dataLoader.py` to match the new file name
+* Download the newest municipality name data:
+    * Download *Voimassa olevat Suomen kunnat* and *Lakanneet Suomen kunnat* csv files from [Avoindata.fi](https://www.avoindata.fi/data/fi/dataset/kunnat)
+    to the project folder elasticsearch-data-processing-scripts
+    * Modify the EXISTING_MUNICIPALITIES_CSV and DISCONTINUED_MUNICIPALITIES_CSV constants from file `dataLoader.py` to match the new file names
  * Run the Python script `dataLoader.py` from the project elasticsearch-data-processing-scripts and build the project.
 
 

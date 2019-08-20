@@ -12,14 +12,22 @@ from osgeo import ogr
 from shapely.ops import unary_union
 
 """
-Statistical Units, Statistics Finland The material was downloaded from Statistics Finland's 
+Statistical Units, Statistics Finland The material was downloaded from Statistics Finland's
 interface service on 9 August 2019 with the licence CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/deed.en).
+
+Municipalities, Population Register Centre, the material was downloaded from Avoindata.fi on August 20 2019 with
+the licence CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/deed.en)
 """
 
 # Download new municipality excel from
 # https://www.kuntaliitto.fi/asiantuntijapalvelut/johtaminen-ja-kehittaminen/kuntaliitokset
 # and modify the file name constant accordingly
 MUNICIPALITY_UNIONS_EXCEL = "Kuntajakoselvitykset2005-2019_130519_0.xlsx"
+
+# Download the newest municipality information csv files from
+# https://www.avoindata.fi/data/fi/dataset/kunnat
+EXISTING_MUNICIPALITIES_CSV = "kuntaluettelo-laajat-tiedot-2018-01-01.csv"
+DISCONTINUED_MUNICIPALITIES_CSV = "lakanneet-kunnat.csv"
 
 ORIGINAL_RELEVANT_COLUMNS = ['nimi', 'namn', 'geometry']
 RELEVANT_COLUMNS = ['nimi', 'namn', 'synonyms_fi', 'synonyms_sv', 'synonyms_en', 'envelope', 'geometry']
@@ -50,12 +58,24 @@ def download_from_wfs():
         download_layers_to_disk(layer, name)
 
 
+def get_municipality_names_dict():
+    cols = ["KUNTANIMIFI", "KUNTANIMISV"]
+    df = pd.concat([(pd.read_csv(EXISTING_MUNICIPALITIES_CSV, delimiter=";", encoding="utf-8")[cols]),
+                    (pd.read_csv(DISCONTINUED_MUNICIPALITIES_CSV, delimiter=";", encoding="ISO-8859-3")[cols])])
+    df.set_index(cols[0], inplace=True)
+    return df.to_dict()[cols[1]]
+
+
 def get_municipality_unions():
     # Please make sure if replacing file that the data scheme is similar
     cols = ['year', 'nmbr',
             'municipalities',
             'status',
             'commit_year', 'nmbr_decreased']
+
+    municipality = "municipality"
+    synonyms = "synonyms"
+    synonyms_sv = "synonyms_sv"
 
     df = pd.read_excel(MUNICIPALITY_UNIONS_EXCEL, sheet_name="Sheet3", header=1, encoding="utf-8")
 
@@ -68,19 +88,19 @@ def get_municipality_unions():
         return parts if parts else None
 
     # Remove all inside parenthesis
-    df['municipalities'] = df.apply(
+    df.municipalities = df.apply(
         lambda row: re.compile(r'\([^)]*\)').sub("", row.municipalities), axis=1)
 
-    df['municipalities'] = df.apply(
+    df.municipalities = df.apply(
         lambda row: [
-            municipality for municipality in municipality_splitter(row.municipalities) if municipality
+            mun for mun in municipality_splitter(row.municipalities) if mun
         ], axis=1)
 
-    df["municiality"] = df.apply(lambda row: row.municipalities[0], axis=1)
-    df["synonyms"] = df.apply(lambda row: set(row.municipalities[1:]), axis=1)
+    df[municipality] = df.apply(lambda row: row.municipalities[0], axis=1)
+    df[synonyms] = df.apply(lambda row: set(row.municipalities[1:]), axis=1)
 
     # Multiple unions could happen into same municipality
-    df = df[["municiality", "synonyms"]].groupby(df.municiality, as_index=True).agg(lambda x: reduce(set.union, x))
+    df = df[[municipality, synonyms]].groupby(df[municipality], as_index=True).agg(lambda x: reduce(set.union, x))
 
     municipalities = set(list(df.index))
     muns_to_remove = set()
@@ -88,16 +108,22 @@ def get_municipality_unions():
     # Municipalities might join to others as well
     def synonyms_from_other_synonyms(row):
         intersection = municipalities & row.synonyms
-        synonyms = row.synonyms
-        for municipality in intersection:
-            muns_to_remove.add(municipality)
-            synonyms.add(municipality)
-            synonyms = synonyms | df.loc[municipality].synonyms
-        return list(synonyms)
+        all_synonyms = row.synonyms
+        for found_municipality in intersection:
+            muns_to_remove.add(found_municipality)
+            all_synonyms.add(found_municipality)
+            all_synonyms = all_synonyms | df.loc[found_municipality].synonyms
+        return list(all_synonyms)
 
-    df['synonyms'] = df.apply(synonyms_from_other_synonyms, axis=1)
+    df[synonyms] = df.apply(synonyms_from_other_synonyms, axis=1)
 
-    return df.drop(muns_to_remove)
+    df = df.drop(muns_to_remove)
+
+    mun_sv_dict = get_municipality_names_dict()
+
+    df[synonyms_sv] = df.apply(lambda row: [mun_sv_dict.get(val, val) for val in row[synonyms]], axis=1)
+
+    return df
 
 
 def create_df(fname, municipality_unions):
@@ -108,13 +134,13 @@ def create_df(fname, municipality_unions):
 
     df['synonyms_fi'] = '[]'
 
-    def get_synonyms(row):
+    def get_synonyms(row, col):
         if row.nimi in municipality_unions.index:
-            return str(municipality_unions.loc[row.nimi].synonyms)
+            return str(municipality_unions.loc[row.nimi][col])
         return '[]'
 
-    df['synonyms_fi'] = df.apply(get_synonyms, axis=1)
-    df['synonyms_sv'] = '[]'
+    df['synonyms_fi'] = df.apply(lambda row: get_synonyms(row, "synonyms"), axis=1)
+    df['synonyms_sv'] = df.apply(lambda row: get_synonyms(row, "synonyms_sv"), axis=1)
     df['synonyms_en'] = '[]'
     df['bbox'] = df.envelope
     return df
