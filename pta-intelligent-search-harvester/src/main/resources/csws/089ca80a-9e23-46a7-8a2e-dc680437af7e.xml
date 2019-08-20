@@ -1,0 +1,960 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csw:GetRecordByIdResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
+    <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xmlns:gco="http://www.isotc211.org/2005/gco"
+                     xsi:schemaLocation="http://www.isotc211.org/2005/gmd ../../../../web/geonetwork/xml/schemas/iso19139/schema.xsd">
+    <gmd:fileIdentifier>
+      <gco:CharacterString>089ca80a-9e23-46a7-8a2e-dc680437af7e</gco:CharacterString>
+    </gmd:fileIdentifier>
+    <gmd:language>
+      <gco:CharacterString>fin</gco:CharacterString>
+    </gmd:language>
+    <gmd:hierarchyLevel>
+      <gmd:MD_ScopeCode codeListValue="dataset" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" />
+    </gmd:hierarchyLevel>
+    <gmd:hierarchyLevelName>
+      <gco:CharacterString>Aineisto</gco:CharacterString>
+    </gmd:hierarchyLevelName>
+    <gmd:contact>
+      <gmd:CI_ResponsibleParty>
+        <gmd:organisationName xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Maanmittauslaitos</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">National Land Survey of Finland</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#SV">Lantmäteriverket</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:organisationName>
+        <gmd:contactInfo>
+          <gmd:CI_Contact>
+            <gmd:address>
+              <gmd:CI_Address>
+                <gmd:electronicMailAddress xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>asiakaspalvelu@maanmittauslaitos.fi</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">customerservice@nls.fi</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#SV">kundservice@lantmateriverket.fi</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:electronicMailAddress>
+              </gmd:CI_Address>
+            </gmd:address>
+          </gmd:CI_Contact>
+        </gmd:contactInfo>
+        <gmd:role>
+          <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="custodian" />
+        </gmd:role>
+      </gmd:CI_ResponsibleParty>
+    </gmd:contact>
+    <gmd:dateStamp>
+      <gco:DateTime>2018-01-24T07:19:06</gco:DateTime>
+    </gmd:dateStamp>
+    <gmd:locale>
+      <gmd:PT_Locale id="SV">
+          <gmd:languageCode xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="swe" />
+        </gmd:languageCode>
+          <gmd:characterEncoding xmlns:gmx="http://www.isotc211.org/2005/gmx"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink">
+          <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="UTF-8" />
+        </gmd:characterEncoding>
+      </gmd:PT_Locale>
+    </gmd:locale>
+    <gmd:locale>
+      <gmd:PT_Locale id="EN">
+          <gmd:languageCode xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
+        </gmd:languageCode>
+          <gmd:characterEncoding xmlns:gmx="http://www.isotc211.org/2005/gmx"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink">
+          <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CharacterSetCode" codeListValue="UTF-8" />
+        </gmd:characterEncoding>
+      </gmd:PT_Locale>
+    </gmd:locale>
+    <gmd:spatialRepresentationInfo>
+      <gmd:MD_VectorSpatialRepresentation>
+        <gmd:topologyLevel>
+          <gmd:MD_TopologyLevelCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_TopologyLevelCode" codeListValue="fullPlanarGraph" />
+        </gmd:topologyLevel>
+      </gmd:MD_VectorSpatialRepresentation>
+    </gmd:spatialRepresentationInfo>
+    <gmd:referenceSystemInfo>
+      <gmd:MD_ReferenceSystem>
+        <gmd:referenceSystemIdentifier>
+          <gmd:RS_Identifier>
+            <gmd:code>
+              <gco:CharacterString>ETRS89 / TM35FIN(E,N) (EPSG:3067)</gco:CharacterString>
+            </gmd:code>
+            <gmd:codeSpace>
+              <gco:CharacterString>EPSG</gco:CharacterString>
+            </gmd:codeSpace>
+            <gmd:version>
+              <gco:CharacterString>8.6</gco:CharacterString>
+            </gmd:version>
+          </gmd:RS_Identifier>
+        </gmd:referenceSystemIdentifier>
+      </gmd:MD_ReferenceSystem>
+    </gmd:referenceSystemInfo>
+    <gmd:identificationInfo>
+      <gmd:MD_DataIdentification>
+        <gmd:citation>
+          <gmd:CI_Citation>
+            <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Kiinteistörekisterikartta</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Cadastral index map</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">Fastighetsregisterkarta</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:title>
+            <gmd:date>
+              <gmd:CI_Date>
+                <gmd:date>
+                  <gco:Date>2014-12-29</gco:Date>
+                </gmd:date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeListValue="publication" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" />
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+            <gmd:identifier>
+              <gmd:RS_Identifier>
+                <gmd:code>
+                  <gco:CharacterString>1000840</gco:CharacterString>
+                </gmd:code>
+                <gmd:codeSpace>
+                  <gco:CharacterString>FI</gco:CharacterString>
+                </gmd:codeSpace>
+              </gmd:RS_Identifier>
+            </gmd:identifier>
+          </gmd:CI_Citation>
+        </gmd:citation>
+        <gmd:abstract xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Kiinteistön sijainti esitetään kiinteistörekisterikartalla. Siinä on kiinteistöjen ja muiden rekisteriyksiköiden rajat, rajamerkit ja kiinteistötunnukset.
+
+Kiinteistöihin liittyviä ominaisuustietoja on kiinteistötietojärjestelmässä. Lisätietoja: http://www.maanmittauslaitos.fi/kiinteistot/asiantuntevalle-kayttajalle/kiinteistotiedot-ja-niiden-hankinta
+
+Tuote on avointa aineistoa. Lisätietoa Avoimien aineistojen hankinta -sivustolta http://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/asiantuntevalle-kayttajalle/maastotiedot-ja-niiden-hankinta.</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">The location of the real property unit is shown on the cadastral index map. On the map, there are property and other register unit boundaries, boundary markers and property identifiers.
+
+The Land Information System of Finland contains attribute data related to property. Further information (in Finnish): http://www.maanmittauslaitos.fi/kiinteistot/asiantuntevalle-kayttajalle/kiinteistotiedot-ja-niiden-hankinta
+
+The product belongs to the open data of the National Land Survey of Finland. More information: Topographic data and how to acquire it: http://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/topographic-data-and-how-acquire-it</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#SV">Fastighetens läge visas på fastighetsregisterkartan. På den finns fastigheters och andra registerenheters gränser, råmärken och fastighetsbeteckningar.
+
+Egenskapsuppgifter om fastigheter finns i fastighetsdatasystemet. Mera information: http://www.maanmittauslaitos.fi/sv/fastigheter/expertanvandare/fastighetsuppgifter-sa-har-kan-du-fa-tillgang-till-dem. 
+
+Produkten ingår i Lantmäteriverkets öppna data. Mera information: Terrängdata och anskaffning av dem http://www.maanmittauslaitos.fi/sv/kartor-och-geodata/expertanvandare/terrangdata-och-anskaffning-av-dem</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:abstract>
+        <gmd:purpose xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Kiinteistörekisterikartan tietoja tarvitaan esimerkiksi kiinteistön kaupan yhteydessä ja rakennuslupaa haettaessa sekä silloin, kun selvitetään omia tai toisten kulkuoikeuksia tai kiinteistöjen rajoja, rajamerkkejä ja kiinteistötunnuksia.</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">Data in the Cadastral index map is needed for instance in connection with property transactions and acquisition of building permits, and when clarifying own or others' rights of passage or property boundaries, boundary markers and property identifiers.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#SV">Fastighetsregisterkartans uppgifter behövs exempelvis i samband med fastighetsköp, vid ansökning om bygglov och vid utredning av egna eller andras rätter till genomfart eller av fastighetsgränser, råmärken eller fastighetsbeteckningar.</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:purpose>
+        <gmd:credit xsi:type="gmd:PT_FreeText_PropertyType">
+          <gco:CharacterString>Kunnat</gco:CharacterString>
+          <gmd:PT_FreeText>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#EN">Municipalities</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+            <gmd:textGroup>
+              <gmd:LocalisedCharacterString locale="#SV">Kommuner</gmd:LocalisedCharacterString>
+            </gmd:textGroup>
+          </gmd:PT_FreeText>
+        </gmd:credit>
+        <gmd:pointOfContact>
+          <gmd:CI_ResponsibleParty>
+            <gmd:organisationName xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Maanmittauslaitos</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">National Land Survey of Finland</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">Lantmäteriverket</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:organisationName>
+            <gmd:contactInfo>
+              <gmd:CI_Contact>
+                <gmd:address>
+                  <gmd:CI_Address>
+                    <gmd:electronicMailAddress xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString>asiakaspalvelu@maanmittauslaitos.fi</gco:CharacterString>
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#SV">kundservice@lantmateriverket.fi</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#EN">customerservice@nls.fi</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:electronicMailAddress>
+                  </gmd:CI_Address>
+                </gmd:address>
+              </gmd:CI_Contact>
+            </gmd:contactInfo>
+            <gmd:role>
+              <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="custodian" />
+            </gmd:role>
+          </gmd:CI_ResponsibleParty>
+        </gmd:pointOfContact>
+        <gmd:resourceMaintenance>
+          <gmd:MD_MaintenanceInformation>
+            <gmd:maintenanceAndUpdateFrequency>
+              <gmd:MD_MaintenanceFrequencyCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_MaintenanceFrequencyCode" codeListValue="continual" />
+            </gmd:maintenanceAndUpdateFrequency>
+            <gmd:maintenanceNote xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Ylläpidon tiheys. Vektori : jatkuva, Rasteri: viikoittain</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">Uppdateringsfrekvens: kontinuerlig</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Updating frequency. Vector: continuous, Raster: weekly</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:maintenanceNote>
+            <gmd:contact>
+              <gmd:CI_ResponsibleParty>
+                <gmd:individualName xsi:type="gmd:PT_FreeText_PropertyType" gco:nilReason="missing">
+                  <gco:CharacterString />
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#SV">Lantmäteriverket</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">National Land Survey of Finland</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:individualName>
+                <gmd:organisationName>
+                  <gco:CharacterString>Maanmittauslaitos</gco:CharacterString>
+                </gmd:organisationName>
+                <gmd:contactInfo>
+                  <gmd:CI_Contact>
+                    <gmd:address>
+                      <gmd:CI_Address>
+                        <gmd:electronicMailAddress xsi:type="gmd:PT_FreeText_PropertyType">
+                          <gco:CharacterString>asiakaspalvelu@maanmittauslaito</gco:CharacterString>
+                          <gmd:PT_FreeText>
+                            <gmd:textGroup>
+                              <gmd:LocalisedCharacterString locale="#EN">customerservice@nls.fi</gmd:LocalisedCharacterString>
+                            </gmd:textGroup>
+                            <gmd:textGroup>
+                              <gmd:LocalisedCharacterString locale="#SV">kundservice@lantmateriverket.fi</gmd:LocalisedCharacterString>
+                            </gmd:textGroup>
+                          </gmd:PT_FreeText>
+                        </gmd:electronicMailAddress>
+                      </gmd:CI_Address>
+                    </gmd:address>
+                  </gmd:CI_Contact>
+                </gmd:contactInfo>
+                <gmd:role>
+                  <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="custodian" />
+                </gmd:role>
+              </gmd:CI_ResponsibleParty>
+            </gmd:contact>
+          </gmd:MD_MaintenanceInformation>
+        </gmd:resourceMaintenance>
+        <gmd:graphicOverview>
+          <gmd:MD_BrowseGraphic>
+            <gmd:fileName>
+              <gco:CharacterString>http://www.paikkatietohakemisto.fi/geonetwork/srv/api/records/089ca80a-9e23-46a7-8a2e-dc680437af7e/attachments/Naytekuva_KRK.png</gco:CharacterString>
+            </gmd:fileName>
+            <gmd:fileDescription />
+          </gmd:MD_BrowseGraphic>
+        </gmd:graphicOverview>
+        <gmd:graphicOverview>
+          <gmd:MD_BrowseGraphic>
+            <gmd:fileName>
+              <gco:CharacterString>http://www.paikkatietohakemisto.fi/geonetwork/srv/api/records/089ca80a-9e23-46a7-8a2e-dc680437af7e/attachments/Naytekuva_KRK.png</gco:CharacterString>
+            </gmd:fileName>
+          </gmd:MD_BrowseGraphic>
+        </gmd:graphicOverview>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>avoindata.fi</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">avoindata.fi</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">avoindata.fi</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Kiinteistöt</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV" />
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN" />
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Kiinteistörajat</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV" />
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN" />
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Hallinnolliset rajat</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV" />
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN" />
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_KeywordTypeCode" codeListValue="theme" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title>
+                  <gco:CharacterString>Paikkatietohakemiston asiasanasto</gco:CharacterString>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2010-02-03</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+                <gmd:identifier>
+                  <gmd:MD_Identifier>
+                    <gmd:code>
+                      <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.asiasanasto">geonetwork.thesaurus.external.theme.asiasanasto</gmx:Anchor>
+                    </gmd:code>
+                  </gmd:MD_Identifier>
+                </gmd:identifier>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Kiinteistöt</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">Fastighetsområden</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Cadastral parcels</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:keyword>
+            <gmd:type>
+              <gmd:MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_KeywordTypeCode" codeListValue="theme" />
+            </gmd:type>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title>
+                  <gco:CharacterString>GEMET - INSPIRE themes, version 1.0</gco:CharacterString>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2008-06-01</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+                <gmd:identifier>
+                  <gmd:MD_Identifier>
+                    <gmd:code>
+                      <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.inspire-theme">geonetwork.thesaurus.external.theme.inspire-theme</gmx:Anchor>
+                    </gmd:code>
+                  </gmd:MD_Identifier>
+                </gmd:identifier>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:resourceConstraints>
+          <gmd:MD_Constraints>
+            <gmd:useLimitation xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Tuote on avointa aineistoa. Avoimen tietoaineiston lisenssi http://www.maanmittauslaitos.fi/maanmittauslaitoksen-avoimen-tietoaineiston-cc-40-lisenssi. 
+Lisätietoa Avoimien aineistojen hankinta -sivustolta http://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/asiantuntevalle-kayttajalle/maastotiedot-ja-niiden-hankinta. 
+
+Kiinteistörekisterikartan voi hankkia koko maan kattavana tai alueeltaan tai tietosisällöltään rajatuissa osissa. Alueellinen rajaus tapahtuu kuntajaon perusteella tai vapaalla rajauksella. Tiedostoina toimitettava aineisto on karttalehdittäin, joissa kohteet ovat kokonaisina. Nämä tiedostot päivittyvät viikoittain muutoksilla ja niille on saatavissa myös muutostietopalvelua. 
+
+Kiinteistörekisterikartta on saatavissa myös Kiinteistötietojen kyselypalvelusta (WFS) http://www.maanmittauslaitos.fi/kiinteistot/asiantuntevalle-kayttajalle/kiinteistotietojen-rajapintapalvelut/kiinteistotietojen. Palvelu tarjoaa ajantasaiset tiedot ja myös tietoja sijainnillisista käyttöoikeusyksiköistä.
+
+Kiinteistörekisterikarttarasteri on saatavissa myös Karttakuvapalvelusta (WMS), lisätietoa http://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/asiantuntevalle-kayttajalle/kartta-ja-paikkatietojen-rajapintapalvelut-1 ja Karttakuvapalvelusta (WMTS), lisätietoa http://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/asiantuntevalle-kayttajalle/kartta-ja-paikkatietojen-rajapintapalvelut-1</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">Produkten ingår i Lantmäteriverkets öppna data. Licens till avgiftsfria datamaterial http://www.maanmittauslaitos.fi/sv/oppnadata-licens-cc40. Terrängdata och anskaffning av dem http://www.maanmittauslaitos.fi/sv/kartor-och-geodata/expertanvandare/terrangdata-och-anskaffning-av-dem. 
+
+Fastighetsregisterkartan är tillgänglig i en version som täcker hela landet och i versioner som täcker ett avgränsat område eller har ett visst informationsinnehåll. Avgränsning enligt område sker på basis av kommunindelningen eller med en fri avgränsning. Materialet som levereras som filer är indelat i kartblad där objekten finns i helhet. Ändringar uppdateras i dessa filer varje vecka och för filerna erbjuds också en uppdateringstjänst.
+
+Fastighetsregisterkartan finns tillgänglig även i Söktjänsten för fastighetsuppgifter (WFS), mera information (på finska) http://www.maanmittauslaitos.fi/kiinteistot/asiantuntevalle-kayttajalle/kiinteistotietojen-rajapintapalvelut/kiinteistotietojen. I tjänsten finns tidsenliga uppgifter och också uppgifter om nyttjanderättsenheter med lägen.
+
+Fastighetsregisterkarta raster finns tillgänglig även i Kartbildtjänsten (WMS), mera information (på finska) http://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/asiantuntevalle-kayttajalle/kartta-ja-paikkatietojen-rajapintapalvelut-0 och Kartbildtjänsten (WMTS), mera information (på finska) http://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/asiantuntevalle-kayttajalle/kartta-ja-paikkatietojen-rajapintapalvelut-1.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">The product belongs to the open data of the National Land Survey of Finland. Open data license http://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/en-maastotiedot-ja-niiden-hankinta/open-data-cc-40-licence. More information: Topographic data and how to acquire it http://www.maanmittauslaitos.fi/en/maps-and-spatial-data/expert-users/topographic-data-and-how-acquire-it. 
+
+The Cadastral index map is available as nationwide or in selected parts with limited areas or data contents. The area selection is done according to the municipal division or according to a freely definable selection. The material that is delivered as files comes in map sheets where the objects are in their entirety. The files are updated with changes weekly and there is also an update service available for them. 
+
+The Cadastral index map is available also in the land information inquiry service (WFS), more information (in Finnish) http://www.maanmittauslaitos.fi/kiinteistot/asiantuntevalle-kayttajalle/kiinteistotietojen-rajapintapalvelut/kiinteistotietojen. The service offers real-time information and also information about right-of-use units with locations.
+
+The Cadastral index map raster is available also in the map image service (WMS), more information (in Finnish) http://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/asiantuntevalle-kayttajalle/kartta-ja-paikkatietojen-rajapintapalvelut-1 and the map image service (WMTS), more information (in Finnish) http://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/asiantuntevalle-kayttajalle/kartta-ja-paikkatietojen-rajapintapalvelut-1</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:useLimitation>
+          </gmd:MD_Constraints>
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints>
+          <gmd:MD_LegalConstraints>
+            <gmd:accessConstraints>
+              <gmd:MD_RestrictionCode codeListValue="copyright" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode" />
+            </gmd:accessConstraints>
+            <gmd:otherConstraints xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Maanmittauslaitoksella ja kunnilla on tekijänoikeus ja muut immateriaalioikeudet Kiinteistörekisterikarttaan.  Tietoaineisto ei ole salassa pidettävä. Julkista saatavuutta ei ole rajoitettu INSPIRE-direktiivin nojalla.</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">Lantmäteriverket och kommunerna har upphovsrätt och övriga immaterialrättigheter till Fastighetsregisterkartan. Datamaterialet är inte sekretessbelagt. Den offentliga tillgängligheten till materialet har inte begränsats med stöd av INSPIRE-direktivet.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Copyright and other immaterial rights to the Cadastral index map are owned by the National Land Survey and the municipalities. The data material is not confidential. Public access to the material is not restricted by the INSPIRE Directive.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:otherConstraints>
+          </gmd:MD_LegalConstraints>
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints>
+          <gmd:MD_SecurityConstraints>
+            <gmd:classification>
+              <gmd:MD_ClassificationCode codeListValue="unclassified" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ClassificationCode" />
+            </gmd:classification>
+          </gmd:MD_SecurityConstraints>
+        </gmd:resourceConstraints>
+        <gmd:spatialRepresentationType>
+          <gmd:MD_SpatialRepresentationTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_SpatialRepresentationTypeCode" codeListValue="vector" />
+        </gmd:spatialRepresentationType>
+        <gmd:spatialResolution>
+          <gmd:MD_Resolution>
+            <gmd:equivalentScale>
+              <gmd:MD_RepresentativeFraction>
+                <gmd:denominator>
+                  <gco:Integer>5000</gco:Integer>
+                </gmd:denominator>
+              </gmd:MD_RepresentativeFraction>
+            </gmd:equivalentScale>
+          </gmd:MD_Resolution>
+        </gmd:spatialResolution>
+        <gmd:spatialResolution />
+        <gmd:language>
+          <gco:CharacterString>fin</gco:CharacterString>
+        </gmd:language>
+        <gmd:language>
+          <gco:CharacterString>swe</gco:CharacterString>
+        </gmd:language>
+        <gmd:topicCategory>
+          <gmd:MD_TopicCategoryCode>location</gmd:MD_TopicCategoryCode>
+        </gmd:topicCategory>
+        <gmd:topicCategory>
+          <gmd:MD_TopicCategoryCode>boundaries</gmd:MD_TopicCategoryCode>
+        </gmd:topicCategory>
+        <gmd:topicCategory>
+          <gmd:MD_TopicCategoryCode>planningCadastre</gmd:MD_TopicCategoryCode>
+        </gmd:topicCategory>
+        <gmd:extent>
+          <gmd:EX_Extent>
+            <gmd:geographicElement>
+              <gmd:EX_GeographicBoundingBox>
+                <gmd:westBoundLongitude>
+                  <gco:Decimal>19.08317359</gco:Decimal>
+                </gmd:westBoundLongitude>
+                <gmd:eastBoundLongitude>
+                  <gco:Decimal>31.58672881</gco:Decimal>
+                </gmd:eastBoundLongitude>
+                <gmd:southBoundLatitude>
+                  <gco:Decimal>59.45414258</gco:Decimal>
+                </gmd:southBoundLatitude>
+                <gmd:northBoundLatitude>
+                  <gco:Decimal>70.09229553</gco:Decimal>
+                </gmd:northBoundLatitude>
+              </gmd:EX_GeographicBoundingBox>
+            </gmd:geographicElement>
+          </gmd:EX_Extent>
+        </gmd:extent>
+      </gmd:MD_DataIdentification>
+    </gmd:identificationInfo>
+    <gmd:contentInfo>
+      <gmd:MD_ImageDescription>
+        <gmd:attributeDescription>
+          <gco:RecordType />
+        </gmd:attributeDescription>
+        <gmd:contentType>
+          <gmd:MD_CoverageContentTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_CoverageContentTypeCode" codeListValue="" />
+        </gmd:contentType>
+      </gmd:MD_ImageDescription>
+    </gmd:contentInfo>
+    <gmd:contentInfo>
+      <gmd:MD_FeatureCatalogueDescription>
+        <gmd:language>
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="" />
+        </gmd:language>
+        <gmd:includedWithDataset>
+          <gco:Boolean>false</gco:Boolean>
+        </gmd:includedWithDataset>
+        <gmd:featureCatalogueCitation>
+          <gmd:CI_Citation>
+            <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>.</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">.</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:title>
+            <gmd:date>
+              <gmd:CI_Date>
+                <gmd:date>
+                  <gco:Date>2018-01-09</gco:Date>
+                </gmd:date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+            <gmd:otherCitationDetails xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Vektorimuotoisen Kiinteistörekisterikartan GML-skeema http://xml.nls.fi/KTJ/Kiinteistorekisterikartta/2014-08/Kiinteistorekisterikartta.xsd 
+
+GML-skeeman kuvaus http://xml.nls.fi/KTJ/Kiinteistorekisterikartta/Asiakasdokumentaatio/gml/index.html
+
+Kiinteistörekisterikartan ESRI shape formaattikuvaus http://www.maanmittauslaitos.fi/sites/maanmittauslaitos.fi/files/attachments/2017/05/Kiinteist%C3%B6rekisterikartta_shape.pdf
+
+Kiinteistörekisterikartan MapInfo mif formaattikuvaus http://www.maanmittauslaitos.fi/sites/maanmittauslaitos.fi/files/attachments/2017/05/Kiinteist%C3%B6rekisterikartta_mif_mid.pdf</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">GML schema of Cadastral index map in vector format http://xml.nls.fi/KTJ/Kiinteistorekisterikartta/2014-08/Kiinteistorekisterikartta.xsd.
+
+GML schema description http://xml.nls.fi/KTJ/Kiinteistorekisterikartta/Asiakasdokumentaatio/gml/index.html.
+
+ESRI shape format description of Cadastral index map (in Finnish) http://www.maanmittauslaitos.fi/sites/maanmittauslaitos.fi/files/attachments/2017/05/Kiinteist%C3%B6rekisterikartta_shape.pdf
+
+MapInfo mif format description of Cadastral index map (in Finnish) http://www.maanmittauslaitos.fi/sites/maanmittauslaitos.fi/files/attachments/2017/05/Kiinteist%C3%B6rekisterikartta_mif_mid.pdf</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">GML-schema för Fastighetsregisterkartan i vektorformat http://xml.nls.fi/KTJ/Kiinteistorekisterikartta/2014-08/Kiinteistorekisterikartta.xsd
+
+Beskrivning av GML-schema http://xml.nls.fi/KTJ/Kiinteistorekisterikartta/Asiakasdokumentaatio/gml/index.html
+
+Fastighetsregisterkartans ESRI shape formatbeskrivning (på finska) http://www.maanmittauslaitos.fi/sites/maanmittauslaitos.fi/files/attachments/2017/05/Kiinteist%C3%B6rekisterikartta_shape.pdf
+
+Fastighetsregisterkartans MapInfo mif formatbeskrivning (på finska) http://www.maanmittauslaitos.fi/sites/maanmittauslaitos.fi/files/attachments/2017/05/Kiinteist%C3%B6rekisterikartta_mif_mid.pdf</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:otherCitationDetails>
+          </gmd:CI_Citation>
+        </gmd:featureCatalogueCitation>
+      </gmd:MD_FeatureCatalogueDescription>
+    </gmd:contentInfo>
+    <gmd:distributionInfo>
+      <gmd:MD_Distribution>
+          <gmd:distributionFormat xmlns:xlink="http://www.w3.org/1999/xlink">
+          <gmd:MD_Format>
+            <gmd:name xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>XML/GML</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">XML/GML</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">XML/GML</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:name>
+            <gmd:version>
+              <gco:CharacterString>3.2.1</gco:CharacterString>
+            </gmd:version>
+            <gmd:fileDecompressionTechnique>
+              <gco:CharacterString>zip</gco:CharacterString>
+            </gmd:fileDecompressionTechnique>
+          </gmd:MD_Format>
+        </gmd:distributionFormat>
+          <gmd:distributionFormat xmlns:xlink="http://www.w3.org/1999/xlink">
+          <gmd:MD_Format>
+            <gmd:name xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Mapinfo MIF/MID</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">Mapinfo MIF/MID</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Mapinfo MIF/MID</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:name>
+            <gmd:version>
+              <gco:CharacterString>4.5</gco:CharacterString>
+            </gmd:version>
+            <gmd:fileDecompressionTechnique>
+              <gco:CharacterString>zip</gco:CharacterString>
+            </gmd:fileDecompressionTechnique>
+          </gmd:MD_Format>
+        </gmd:distributionFormat>
+          <gmd:distributionFormat xmlns:xlink="http://www.w3.org/1999/xlink">
+          <gmd:MD_Format>
+            <gmd:name xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>ESRI Shapefile</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">ESRI Shapefile</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">ESRI Shapefile</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:name>
+            <gmd:version>
+              <gco:CharacterString>1.0</gco:CharacterString>
+            </gmd:version>
+            <gmd:fileDecompressionTechnique>
+              <gco:CharacterString>zip</gco:CharacterString>
+            </gmd:fileDecompressionTechnique>
+          </gmd:MD_Format>
+        </gmd:distributionFormat>
+          <gmd:distributionFormat xmlns:gmx="http://www.isotc211.org/2005/gmx"
+                                  xmlns:xlink="http://www.w3.org/1999/xlink">
+          <gmd:MD_Format>
+            <gmd:name xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>PNG</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">PNG</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">PNG</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:name>
+            <gmd:version gco:nilReason="missing">
+              <gco:CharacterString />
+            </gmd:version>
+          </gmd:MD_Format>
+        </gmd:distributionFormat>
+          <gmd:distributor xmlns:xlink="http://www.w3.org/1999/xlink">
+          <gmd:MD_Distributor>
+            <gmd:distributorContact>
+              <gmd:CI_ResponsibleParty>
+                <gmd:individualName gco:nilReason="missing">
+                  <gco:CharacterString />
+                </gmd:individualName>
+                <gmd:organisationName xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Maanmittauslaitos</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#SV">Lantmäteriverket</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">National Land Survey of Finland</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:organisationName>
+                <gmd:positionName gco:nilReason="missing">
+                  <gco:CharacterString />
+                </gmd:positionName>
+                <gmd:contactInfo>
+                  <gmd:CI_Contact>
+                    <gmd:address>
+                      <gmd:CI_Address>
+                        <gmd:deliveryPoint gco:nilReason="missing">
+                          <gco:CharacterString />
+                        </gmd:deliveryPoint>
+                        <gmd:city gco:nilReason="missing">
+                          <gco:CharacterString />
+                        </gmd:city>
+                        <gmd:administrativeArea gco:nilReason="missing">
+                          <gco:CharacterString />
+                        </gmd:administrativeArea>
+                        <gmd:postalCode gco:nilReason="missing">
+                          <gco:CharacterString />
+                        </gmd:postalCode>
+                        <gmd:country gco:nilReason="missing">
+                          <gco:CharacterString />
+                        </gmd:country>
+                        <gmd:electronicMailAddress xsi:type="gmd:PT_FreeText_PropertyType">
+                          <gco:CharacterString>asiakaspalvelu@maanmittauslaitos.fi</gco:CharacterString>
+                          <gmd:PT_FreeText>
+                            <gmd:textGroup>
+                              <gmd:LocalisedCharacterString locale="#SV">kundservice@lantmateriverket.fi</gmd:LocalisedCharacterString>
+                            </gmd:textGroup>
+                            <gmd:textGroup>
+                              <gmd:LocalisedCharacterString locale="#EN">customerservice@nls.fi</gmd:LocalisedCharacterString>
+                            </gmd:textGroup>
+                          </gmd:PT_FreeText>
+                        </gmd:electronicMailAddress>
+                      </gmd:CI_Address>
+                    </gmd:address>
+                  </gmd:CI_Contact>
+                </gmd:contactInfo>
+                <gmd:role>
+                  <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="custodian" />
+                </gmd:role>
+              </gmd:CI_ResponsibleParty>
+            </gmd:distributorContact>
+          </gmd:MD_Distributor>
+        </gmd:distributor>
+        <gmd:transferOptions>
+          <gmd:MD_DigitalTransferOptions>
+              <gmd:onLine xmlns:xlink="http://www.w3.org/1999/xlink">
+              <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                  <gmd:URL>https://tiedostopalvelu.maanmittauslaitos.fi/tp/kartta</gmd:URL>
+                </gmd:linkage>
+                <gmd:protocol>
+                  <gco:CharacterString>OGC:WFS-1.0.0-http-get-capabilities</gco:CharacterString>
+                </gmd:protocol>
+                <gmd:name xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Avoimien aineistojen tiedostopalvelu</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">File service of open data</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#SV">Filservice för avgiftsfri data</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:name>
+                <gmd:description gco:nilReason="missing">
+                  <gco:CharacterString />
+                </gmd:description>
+              </gmd:CI_OnlineResource>
+            </gmd:onLine>
+              <gmd:onLine xmlns:xlink="http://www.w3.org/1999/xlink">
+              <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                  <gmd:URL>http://www.maanmittauslaitos.fi/kiinteistot/asiantuntevalle-kayttajalle/kiinteistotietojen-rajapintapalvelut/kiinteistotietojen</gmd:URL>
+                </gmd:linkage>
+                <gmd:protocol gco:nilReason="missing">
+                  <gco:CharacterString />
+                </gmd:protocol>
+                <gmd:name xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Kiinteistötietojen kyselypalvelu (WFS)</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">land information inquiry service (WFS)</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#SV">Söktjänsten för fastighetsuppgifter (WFS)</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:name>
+                <gmd:description gco:nilReason="missing">
+                  <gco:CharacterString />
+                </gmd:description>
+              </gmd:CI_OnlineResource>
+            </gmd:onLine>
+            <gmd:onLine>
+              <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                  <gmd:URL>http://www.paikkatietohakemisto.fi/geonetwork/srv/api/records/089ca80a-9e23-46a7-8a2e-dc680437af7e/attachments/Naytekuva_KRK.png</gmd:URL>
+                </gmd:linkage>
+                <gmd:protocol>
+                  <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                </gmd:protocol>
+              </gmd:CI_OnlineResource>
+            </gmd:onLine>
+          </gmd:MD_DigitalTransferOptions>
+        </gmd:transferOptions>
+          <gmd:transferOptions xmlns:xlink="http://www.w3.org/1999/xlink">
+          <gmd:MD_DigitalTransferOptions>
+            <gmd:onLine>
+              <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                  <gmd:URL>http://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/asiantuntevalle-kayttajalle/kartta-ja-paikkatietojen-rajapintapalvelut-1</gmd:URL>
+                </gmd:linkage>
+                <gmd:protocol gco:nilReason="missing">
+                  <gco:CharacterString />
+                </gmd:protocol>
+                <gmd:name xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Karttakuvapalvelusta (WMS)</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#SV">Kartbildtjänsten (WMS)</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">Map image service (WMS)</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:name>
+                <gmd:description gco:nilReason="missing">
+                  <gco:CharacterString />
+                </gmd:description>
+              </gmd:CI_OnlineResource>
+            </gmd:onLine>
+            <gmd:onLine>
+              <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                  <gmd:URL>http://www.maanmittauslaitos.fi/kartat-ja-paikkatieto/asiantuntevalle-kayttajalle/kartta-ja-paikkatietojen-rajapintapalvelut-1</gmd:URL>
+                </gmd:linkage>
+                <gmd:protocol gco:nilReason="missing">
+                  <gco:CharacterString />
+                </gmd:protocol>
+                <gmd:name xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>Karttakuvapalvelusta (WMTS)</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN">Map image service (WMTS)</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#SV">Kartbildtjänsten (WMTS)</gmd:LocalisedCharacterString>
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:name>
+                <gmd:description gco:nilReason="missing">
+                  <gco:CharacterString />
+                </gmd:description>
+              </gmd:CI_OnlineResource>
+            </gmd:onLine>
+          </gmd:MD_DigitalTransferOptions>
+        </gmd:transferOptions>
+      </gmd:MD_Distribution>
+    </gmd:distributionInfo>
+    <gmd:dataQualityInfo>
+      <gmd:DQ_DataQuality>
+        <gmd:scope>
+          <gmd:DQ_Scope>
+            <gmd:level>
+              <gmd:MD_ScopeCode codeListValue="dataset" codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode" />
+            </gmd:level>
+          </gmd:DQ_Scope>
+        </gmd:scope>
+        <gmd:report>
+          <gmd:DQ_DomainConsistency>
+            <gmd:result>
+              <gmd:DQ_ConformanceResult>
+                <gmd:specification>
+                  <gmd:CI_Citation>
+                    <gmd:title xsi:type="gmd:PT_FreeText_PropertyType">
+                      <gco:CharacterString>Komission asetus (EU) N:o 1089/2010, annettu 23 päivänä marraskuuta 2010 , Euroopan parlamentin ja neuvoston direktiivin 2007/2/EY täytäntöönpanosta paikkatietoaineistojen ja -palvelujen yhteentoimivuuden osalta</gco:CharacterString>
+                      <gmd:PT_FreeText>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#SV">KOMMISSIONENS FÖRORDNING (EU) nr 1089/2010, av den 23 november 2010, om genomförande av Europaparlamentets och rådets direktiv 2007/2/EG vad gäller interoperabilitet för rumsliga datamängder och datatjänster.</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                        <gmd:textGroup>
+                          <gmd:LocalisedCharacterString locale="#EN">COMMISSION REGULATION (EU) No 1089/2010 of 23 November 2010 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards interoperability of spatial data sets and services.</gmd:LocalisedCharacterString>
+                        </gmd:textGroup>
+                      </gmd:PT_FreeText>
+                    </gmd:title>
+                    <gmd:date>
+                      <gmd:CI_Date>
+                        <gmd:date>
+                          <gco:Date>2010-12-08</gco:Date>
+                        </gmd:date>
+                        <gmd:dateType>
+                          <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
+                        </gmd:dateType>
+                      </gmd:CI_Date>
+                    </gmd:date>
+                  </gmd:CI_Citation>
+                </gmd:specification>
+                <gmd:explanation xsi:type="gmd:PT_FreeText_PropertyType">
+                  <gco:CharacterString>.</gco:CharacterString>
+                  <gmd:PT_FreeText>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#SV" />
+                    </gmd:textGroup>
+                    <gmd:textGroup>
+                      <gmd:LocalisedCharacterString locale="#EN" />
+                    </gmd:textGroup>
+                  </gmd:PT_FreeText>
+                </gmd:explanation>
+                <gmd:pass>
+                  <gco:Boolean>false</gco:Boolean>
+                </gmd:pass>
+              </gmd:DQ_ConformanceResult>
+            </gmd:result>
+          </gmd:DQ_DomainConsistency>
+        </gmd:report>
+        <gmd:lineage>
+          <gmd:LI_Lineage>
+            <gmd:statement xsi:type="gmd:PT_FreeText_PropertyType">
+              <gco:CharacterString>Kiinteistöjen rajat merkitään maastoon rajamerkeillä kiinteistöä muodostettaessa. Rajamerkit osoittavat kiinteistön rajalinjat. Raja voi olla myös luonnollinen selvä maastonkohta, kuten ranta, valtaoja tai tie. Haja-asutusalueilla vuodesta 2005 rajamerkit on kiinteistötoimituksissa määritetty GPS-mittauksilla n. 20 cm tarkkuudella. Sitä aiempien rajamerkkien koordinaatit on määritetty joko kuvamittauksilla ilmakuvilta tai digitoimalla kartoilta. Näiden rajamerkkien tarkkuus vaihtelee yleensä 50 cm ja 4 m välillä, joissain tapauksissa yli 4 m. Rajamerkin tarkkuus ilmenee sen RSK-luvusta.
+
+Taajamissa kiinteistörekisterikartta perustuu pääosin kunnan suurikaavaisiin kaavojen pohjakarttojen aineistoihin, joiden sisältämät kiinteistötiedot on ajantasaistettu. 
+
+Kiinteistörekisterikartan sijaintitiedoissa voi olla epätarkkuutta, koska kaikista rajapyykeistä ei ole tarkkoja koordinaatteja. Kiinteistörekisterikarttaa tarkemmin rekisteriyksikön alue selviää toimitusasiakirjoista (saatavilla kiinteistörekisterin ylläpitäjän arkistoista) ja maastosta. 
+
+Lisätietoa, selvitys Kiinteistörekisterikartan rajamerkkien sijaintitarkkuudesta http://www.maanmittauslaitos.fi/sites/maanmittauslaitos.fi/files/old/Nro_112_Kiinteistorekisterikartan_rajamerkkien_sijaintitarkkuus.pdf</gco:CharacterString>
+              <gmd:PT_FreeText>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#SV">Fastighetsgränserna märks ut i terrängen med råmärken när en fastighet bildas. Råmärkena utvisar fastighetens rålinjer. Gränsen kan även följa terrängformationer, exempelvis en strand, ett utfallsdike eller en väg. På glesbygdsområden har råmärkenas positioner vid fastighetsförrättningar fr.o.m. år 2005 bestämts med GPS-mätningar med cirka 20 cm noggrannhet. Koordinaterna för tidigare råmärken har bestämts antingen genom bildmätningar på flygbilder eller digitalisering av kartor. Dessa råmärkens noggrannhet varierar i allmänhet mellan 50 cm och 4 m, i vissa fall över 4 m. Ett råmärkes noggrannhet framgår av dess RSK-tal.
+
+I tätorter grundar sig fastighetsregisterkartan i huvudsak på kommunens storskaliga baskartmaterial i detaljplanerna, i vilket fastighetsuppgifterna har uppdaterats.
+
+Det kan förekomma inexaktheter i kartans lägesuppgifter, eftersom det inte finns exakta koordinater för alla råmärken. Mer exakt än av fastighetsregisterkartan framgår en registerenhets område av förrättningshandlingarna (tillgängliga i fastighetsregisterförarens arkiv) och terrängen.
+
+Mera information, utredning om lägesnoggrannheten av råmärken på Fastighetsregisterkartan  (på finska) http://www.maanmittauslaitos.fi/sites/maanmittauslaitos.fi/files/old/Nro_112_Kiinteistorekisterikartan_rajamerkkien_sijaintitarkkuus.pdf</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+                <gmd:textGroup>
+                  <gmd:LocalisedCharacterString locale="#EN">Property boundaries are marked with boundary markers in the terrain when forming a property. Boundary markers indicate the boundary lines of a property. A boundary can also be a natural terrain formation, such as a shore, drainage ditch or road.  In sparsely populated areas, boundary markers have been defined with an accuracy of approx. 20 cm by GPS measurement since 2005. Coordinates of earlier boundary markers have been defined either by image measurement from aerial photographs or by digitalisation from maps. The accuracy of these boundary markers varies in general between 50 cm and 4 m, over 4 m in some cases. The accuracy of a boundary marker is indicated by its RSK value.
+
+In population centres, the Cadastral index map is mainly based on the municipality's large scale base map material in the plans, the property data of which has been updated.
+
+There can be inaccuracies in the location data of the Cadastral index map, because there are no exact coordinates for all boundary markers. The area of a register unit is shown in more detail in the cadastral survey documents (available in the archives of the keeper of the cadastral registry) and the terrain than on the Cadastral index map. 
+
+More information, report on positional accuracy of boundary markers in the Cadastral index map (in Finnish) http://www.maanmittauslaitos.fi/sites/maanmittauslaitos.fi/files/old/Nro_112_Kiinteistorekisterikartan_rajamerkkien_sijaintitarkkuus.pdf</gmd:LocalisedCharacterString>
+                </gmd:textGroup>
+              </gmd:PT_FreeText>
+            </gmd:statement>
+          </gmd:LI_Lineage>
+        </gmd:lineage>
+      </gmd:DQ_DataQuality>
+    </gmd:dataQualityInfo>
+    <gmd:metadataMaintenance>
+      <gmd:MD_MaintenanceInformation>
+        <gmd:maintenanceAndUpdateFrequency>
+          <gmd:MD_MaintenanceFrequencyCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_MaintenanceFrequencyCode" codeListValue="asNeeded" />
+        </gmd:maintenanceAndUpdateFrequency>
+      </gmd:MD_MaintenanceInformation>
+    </gmd:metadataMaintenance>
+  </gmd:MD_Metadata>
+</csw:GetRecordByIdResponse>
+

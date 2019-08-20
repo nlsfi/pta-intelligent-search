@@ -63,6 +63,12 @@
 			<version>0.8.7</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.pivovarit</groupId>
+			<artifactId>parallel-collectors</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+
 		<!-- Test dependencies -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -75,6 +81,12 @@
             <version>3.11.1</version>
             <scope>test</scope>
         </dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>1.10.19</version>
+			<scope>test</scope>
+		</dependency>
     </dependencies>
 
 	<build>
@@ -93,7 +105,9 @@
 				</executions>
 				<configuration>
 					<mainClass>fi.maanmittauslaitos.pta.search.utils.LocalResourceMetadataGenerator</mainClass>
-					<arguments>${project.build.directory}/classes/fi/maanmittauslaitos/pta/search/integration/generatedResourceMetadata.zip</arguments>
+					<arguments>
+						--sinkfile=${project.build.directory}/classes/fi/maanmittauslaitos/pta/search/integration/generatedResourceMetadata.zip
+					</arguments>
 				</configuration>
 			</plugin>
 			<!-- Package as an executable jar -->

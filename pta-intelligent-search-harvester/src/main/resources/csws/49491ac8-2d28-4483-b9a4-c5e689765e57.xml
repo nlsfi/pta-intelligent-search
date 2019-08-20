@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csw:GetRecordByIdResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
+    <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd">
+    <gmd:fileIdentifier>
+      <gco:CharacterString>49491ac8-2d28-4483-b9a4-c5e689765e57</gco:CharacterString>
+    </gmd:fileIdentifier>
+    <gmd:language>
+      <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/ " codeListValue="eng">English</gmd:LanguageCode>
+    </gmd:language>
+    <gmd:characterSet>
+      <gmd:MD_CharacterSetCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode" codeListValue="MD_CharacterSetCode_utf8" codeSpace="ISOTC211/19115">MD_CharacterSetCode_utf8</gmd:MD_CharacterSetCode>
+    </gmd:characterSet>
+    <gmd:hierarchyLevel>
+      <gmd:MD_ScopeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset">dataset</gmd:MD_ScopeCode>
+    </gmd:hierarchyLevel>
+    <gmd:contact>
+      <gmd:CI_ResponsibleParty>
+        <gmd:organisationName>
+          <gco:CharacterString>Finnish Environment Institute</gco:CharacterString>
+        </gmd:organisationName>
+        <gmd:contactInfo>
+          <gmd:CI_Contact>
+            <gmd:address>
+              <gmd:CI_Address>
+                <gmd:electronicMailAddress>
+                  <gco:CharacterString>gistuki.syke@ymparisto.fi</gco:CharacterString>
+                </gmd:electronicMailAddress>
+              </gmd:CI_Address>
+            </gmd:address>
+          </gmd:CI_Contact>
+        </gmd:contactInfo>
+        <gmd:role>
+          <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact">pointOfContact</gmd:CI_RoleCode>
+        </gmd:role>
+      </gmd:CI_ResponsibleParty>
+    </gmd:contact>
+    <gmd:dateStamp>
+      <gco:Date>2019-02-27</gco:Date>
+    </gmd:dateStamp>
+    <gmd:metadataStandardName>
+      <gco:CharacterString>ISO 19115</gco:CharacterString>
+    </gmd:metadataStandardName>
+    <gmd:referenceSystemInfo>
+      <gmd:MD_ReferenceSystem>
+        <gmd:referenceSystemIdentifier>
+          <gmd:RS_Identifier>
+            <gmd:code>
+              <gco:CharacterString>3067</gco:CharacterString>
+            </gmd:code>
+            <gmd:codeSpace>
+              <gco:CharacterString>EPSG</gco:CharacterString>
+            </gmd:codeSpace>
+          </gmd:RS_Identifier>
+        </gmd:referenceSystemIdentifier>
+      </gmd:MD_ReferenceSystem>
+    </gmd:referenceSystemInfo>
+    <gmd:identificationInfo>
+      <gmd:MD_DataIdentification>
+        <gmd:citation>
+          <gmd:CI_Citation>
+            <gmd:title>
+              <gco:CharacterString>High biodiversity value Forests 2018 (Zonation)</gco:CharacterString>
+            </gmd:title>
+            <gmd:date>
+              <gmd:CI_Date>
+                <gmd:date>
+                  <gco:Date>2018-05-11</gco:Date>
+                </gmd:date>
+                <gmd:dateType>
+                  <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="revision">revision</gmd:CI_DateTypeCode>
+                </gmd:dateType>
+              </gmd:CI_Date>
+            </gmd:date>
+            <gmd:identifier>
+              <gmd:MD_Identifier>
+                <gmd:code>
+                  <gco:CharacterString>NaN</gco:CharacterString>
+                </gmd:code>
+              </gmd:MD_Identifier>
+            </gmd:identifier>
+          </gmd:CI_Citation>
+        </gmd:citation>
+        <gmd:abstract>
+          <gco:CharacterString>Forests of high biodiversity value 2018 (Zonation) datapackage consists of 12 nationwide raster maps from Finland. These 12 maps are all different versions of biodiversity values of Finnish forests. Resolution of these raster maps is 96 meters x 96 meters.&#xD;
+&#xD;
+Simple instructions for reading the raster maps: The bigger the numeric value the higher the biodiversity value.&#xD;
+&#xD;
+NAT = National scale analyses of biodiversity values of Finnish forests (6 analysis)&#xD;
+REG = Regional scale analyses of biodiversity values of Finnish forests (map looks like one but is in reality a collection of 13 separately done analysis, region = Centre for Economic Development, Transport and the Environment in Finland) (6 analysis)&#xD;
+&#xD;
+Six different spatial conservation prioritizations were made with Zonation Software (a) so that each new version included everything that had been included in previous, simpler, analysis versions.&#xD;
+&#xD;
+NAT / REG 1 Decaying wood potential:&#xD;
+Version 1 (V1) included the local decaying wood potentials*. Areas with lot of large trees, many tree species and rare forest environments get high local value.&#xD;
+&#xD;
+NAT / REG 2 Decaying wood potential – penalties:&#xD;
+Version 2 = V1 + penalties for forestry operations with negative impact on biodiversity. More realistic local values when taking into account real life changes in forests.&#xD;
+&#xD;
+NAT / REG 3 Decaying wood potential – penalties + forest connectivity:&#xD;
+Version 3 = V2 + connectivity based on ecological similarity, distance and quality between forest patches (attenuation avg. 400m). Unfragmented high value forests areas emerge.&#xD;
+&#xD;
+NAT / REG 4 Decaying wood potential – penalties + forest connectivity + RL species:&#xD;
+Version 4 = V3 + observations of Red List forest species. Red List forest species habitats emerge.&#xD;
+&#xD;
+NAT / REG 5 Decaying wood potential – penalties + forest connectivity + RL species + FFA 10§:&#xD;
+Version 5 = V4 + connectivity to woodland key habitats protected by Finnish Forest Act 10 § (attenuation avg. 200m). Valuable forest areas and landscapes close to protected high biodiversity forest patches emerge.&#xD;
+&#xD;
+NAT / REG 6 Decaying wood potential – penalties + forest connectivity + RL species + FFA 10§ + PA connectivity:&#xD;
+Version 6 = V5 + connectivity to permanent conservation areas (attenuation avg. 2km).&#xD;
+Valuable forest areas and landscapes close to protected high biodiversity areas emerge.&#xD;
+&#xD;
+&#xD;
+*Calculation of Decaying wood potential (DWP)&#xD;
+DWP was calculated for every strata of tree species in every crown storey class in 2 stages:&#xD;
+1) Decaying wood potential indexes (DWPi) were modelled with MOTTI-program (b, c, d).&#xD;
+•	168 tree species, fertility class and latitude combinations&#xD;
+2) DWPis were used for converting diameter and volume into decaying wood potential&#xD;
+•	Generated for the whole Finland at tree stand level at the resolution of 16 m x 16 m&#xD;
+•	Eventually combined into 20 tree species &amp; fertility classes and aggregated to 96 m x 96 m resolution.&#xD;
+&#xD;
+&#xD;
+Input data&#xD;
+&#xD;
+Decaying wood potential was calculated from forest stand level datasets (tree species, diameter, volume, fertility) covering whole Finland. Best possible data was used for every area. &#xD;
+-	24 % of Finland covered by state-owned forestry and conservation areas and private conservation areas&#xD;
+o	Metsähallitus Parks &amp; Wildlife: field and forest stand data (5/2015)&#xD;
+o	Metsähallitus Forestry Inc.: field and forest stand data (5/2015)&#xD;
+o	Private owned conservation areas: field and forest stand data (5/2015)&#xD;
+-	37 % of Finland covered by privately owned other than protected forest areas: Finnish Forest Centre, forest information (6.5.2005 – 6.5.2015)&#xD;
+-	39 % of Finland covered by &#xD;
+o	Natural Resources Institute Finland: Multi-source national forest inventory data of Finland 2013(volume, tree species, fertility class, diameter)&#xD;
+&#xD;
+Spatial data on forestry operations with negative impact on biodiversity (e. g. fellings, thinning and ditching) (updated 10/2017)&#xD;
+-	National Land Survey of Finland &amp; Finnish Environment Institute SYKE: Ditching state of Finnish peatlands (SOJT_09b1)&#xD;
+-	Metsähallitus Forestry Inc.: Executed forest operations of forest operations from field and forest stand data and ditching status&#xD;
+-	Finnish Forest Centre: Forest declariations and ditching status&#xD;
+-	University of Maryland / Dept. of Geographica Sciences: Global Forest Change / Forest Cover Loss 2000-2014&#xD;
+&#xD;
+Observations of IUCN Red List forest species (since 1990): Finnish Environmental database HERTTA &#xD;
+&#xD;
+Spatial data on woodland key habitats protected by The Finnish Forest Act 10§ (updated 10/2017)&#xD;
+-	Finnish Forest Centre: woodland key habitats protected by Finnish Forest act 10§&#xD;
+&#xD;
+Spatial data on permanent conservation areas (updated 2/2018)&#xD;
+-	Metsähallitus Parks &amp; Wildlife: Conservation area database SATJ&#xD;
+&#xD;
+&#xD;
+Background&#xD;
+&#xD;
+Areas important to forest biodiversity were identified throughout Finland to support sustainable land using planning and nature conservation at local, regional and national level by informing land owners, ministries and forestry stakeholders. Importance of analyzes like this rise from increased usage of natural resources and consequent harmful impacts on biodiversity together with limited resources for conservation. These highlight the importance of developing cost-effective, ecologically sustainable land use planning approaches such as these spatial conservation prioritizations of forests made for a first time for the whole Finland.&#xD;
+&#xD;
+Prioritization approach, Zonation, was used to find new forest areas of potential high conservation value. The overall aim was to implement nationwide prioritization analyses based on biodiversity-related forest data and land use data recorded at the level of forest stand. Primarily employed data on forest structure and quality (vegetation class, tree species, volume and diameter) provided ecologically useful surrogates for conservation value in boreal forest. &#xD;
+&#xD;
+Results show that a significant portion of high biodiversity value forests lay outside the current Finnish protected area (PA) network. As most of the Finnish forest area is under commercial management, PA network cannot halt the on-going decline of forest biodiversity. &#xD;
+&#xD;
+&#xD;
+Keywords:&#xD;
+biodiversity value, decaying wood, forest biodiversity, Forest Biodiversity Programme for Southern Finland (METSO), forest conservation, forestry, geographical information system (GIS), land use, spatial conservation prioritization, Zonation software&#xD;
+&#xD;
+&#xD;
+Datapackage includes all 12 raster maps and a .lyr -file. .lyr -file contains coloured symbology and descriptions of different analysis versions. .lyr -file is probably operable only with GIS-software prvided by ESRI Inc. &#xD;
+Datapackage can be loaded from: http://www.syke.fi/en-US/Open_information/Spatial_datasets&#xD;
+High Biodiversity Value Forests 2018 (Zonation) nationwide&#xD;
+High Biodiversity Value Forests 2018 (Zonation) regional&#xD;
+&#xD;
+Detailed poster available:&#xD;
+http://www.syke.fi/en-US/Research__Development/Ecosystem_services/Specialist_work/Zonation_in_Finland/Zonation_materials/Posters &#xD;
+OR&#xD;
+http://www.syke.fi/download/noname/%7B771FF5A4-DAB6-45EE-8246-F38FC0090CAD%7D/138289&#xD;
+&#xD;
+&#xD;
+Detailed report (only in Finnish): http://hdl.handle.net/10138/234359&#xD;
+Mikkonen et al. 2018. Suomen ympäristökeskuksen raportteja 9/2018. Monimuotoisuudelle tärkeät metsäalueet Suomessa - Puustoisten elinympäristöjen monimuotoisuusarvojen Zonation-analyysien loppuraportti.&#xD;
+&#xD;
+Other references:&#xD;
+a) Moilanen et al. 2014. Zonation–Spatial Conservation Planning Methods and Software. Version 4. User Manual. See also www.syke.fi/Zonation/en&#xD;
+b) Hynynen et al. 2015. Eur. J. For. Res. 134/3. Long-term impacts of forest management on biomass supply and forest resource development: a scenario analysis for Finland. &#xD;
+c) Hynynen et al. 2014. Metlan työraportteja 302. Scenario analysis for the biomass supply potential and the future development of Finnish forest resources.&#xD;
+d) Salminen et al. 2005. Comput. electron. agr. 49/1. Reusing legacy FORTRAN in the MOTTI growth and yield simulator. &#xD;
+&#xD;
+Availability:&#xD;
+Aineisto kuuluu SYKEn avoimiin aineistoihin (CC BY 4.0)&#xD;
+Creative Commons 4.0.&#xD;
+&#xD;
+© SYKE Datasources: Finnish Forest Centre, Metsähallitus, Natural Resources Institute Finland 2015, National Land Survey of Finland, Hansen/UMD/Google/USGS/NASA</gco:CharacterString>
+        </gmd:abstract>
+        <gmd:pointOfContact>
+          <gmd:CI_ResponsibleParty>
+            <gmd:organisationName>
+              <gco:CharacterString>Finnish Environment Institute</gco:CharacterString>
+            </gmd:organisationName>
+            <gmd:contactInfo>
+              <gmd:CI_Contact>
+                <gmd:address>
+                  <gmd:CI_Address>
+                    <gmd:electronicMailAddress>
+                      <gco:CharacterString>gistuki.syke@ymparisto.fi</gco:CharacterString>
+                    </gmd:electronicMailAddress>
+                  </gmd:CI_Address>
+                </gmd:address>
+              </gmd:CI_Contact>
+            </gmd:contactInfo>
+            <gmd:role>
+              <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="owner">owner</gmd:CI_RoleCode>
+            </gmd:role>
+          </gmd:CI_ResponsibleParty>
+        </gmd:pointOfContact>
+        <gmd:descriptiveKeywords>
+          <gmd:MD_Keywords>
+            <gmd:keyword>
+              <gco:CharacterString>Habitats and biotopes</gco:CharacterString>
+            </gmd:keyword>
+            <gmd:thesaurusName>
+              <gmd:CI_Citation>
+                <gmd:title>
+                  <gco:CharacterString>GEMET - INSPIRE themes, version 1.0</gco:CharacterString>
+                </gmd:title>
+                <gmd:date>
+                  <gmd:CI_Date>
+                    <gmd:date>
+                      <gco:Date>2008-06-01</gco:Date>
+                    </gmd:date>
+                    <gmd:dateType>
+                      <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
+                    </gmd:dateType>
+                  </gmd:CI_Date>
+                </gmd:date>
+              </gmd:CI_Citation>
+            </gmd:thesaurusName>
+          </gmd:MD_Keywords>
+        </gmd:descriptiveKeywords>
+        <gmd:resourceConstraints>
+          <gmd:MD_Constraints>
+            <gmd:useLimitation>
+              <gco:CharacterString>Creative Commons 4.0</gco:CharacterString>
+            </gmd:useLimitation>
+          </gmd:MD_Constraints>
+        </gmd:resourceConstraints>
+        <gmd:resourceConstraints>
+          <gmd:MD_LegalConstraints>
+            <gmd:accessConstraints>
+              <gmd:MD_RestrictionCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#MD_RestrictionCode" codeListValue="license">license</gmd:MD_RestrictionCode>
+            </gmd:accessConstraints>
+          </gmd:MD_LegalConstraints>
+        </gmd:resourceConstraints>
+        <gmd:language>
+          <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/ " codeListValue="zxx">No linguistic content; Not applicable</gmd:LanguageCode>
+        </gmd:language>
+        <gmd:topicCategory>
+          <gmd:MD_TopicCategoryCode>environment</gmd:MD_TopicCategoryCode>
+        </gmd:topicCategory>
+        <gmd:extent>
+          <gmd:EX_Extent>
+            <gmd:geographicElement>
+              <gmd:EX_GeographicBoundingBox>
+                <gmd:westBoundLongitude>
+                  <gco:Decimal>17.625322</gco:Decimal>
+                </gmd:westBoundLongitude>
+                <gmd:eastBoundLongitude>
+                  <gco:Decimal>33.14091</gco:Decimal>
+                </gmd:eastBoundLongitude>
+                <gmd:southBoundLatitude>
+                  <gco:Decimal>59.248304</gco:Decimal>
+                </gmd:southBoundLatitude>
+                <gmd:northBoundLatitude>
+                  <gco:Decimal>70.099992</gco:Decimal>
+                </gmd:northBoundLatitude>
+              </gmd:EX_GeographicBoundingBox>
+            </gmd:geographicElement>
+          </gmd:EX_Extent>
+        </gmd:extent>
+      </gmd:MD_DataIdentification>
+    </gmd:identificationInfo>
+    <gmd:distributionInfo>
+      <gmd:MD_Distribution>
+        <gmd:transferOptions>
+          <gmd:MD_DigitalTransferOptions>
+            <gmd:onLine>
+              <gmd:CI_OnlineResource>
+                <gmd:linkage>
+                  <gmd:URL />
+                </gmd:linkage>
+                <gmd:function>
+                  <gmd:CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</gmd:CI_OnLineFunctionCode>
+                </gmd:function>
+              </gmd:CI_OnlineResource>
+            </gmd:onLine>
+          </gmd:MD_DigitalTransferOptions>
+        </gmd:transferOptions>
+      </gmd:MD_Distribution>
+    </gmd:distributionInfo>
+    <gmd:dataQualityInfo>
+      <gmd:DQ_DataQuality>
+        <gmd:scope>
+          <gmd:DQ_Scope>
+            <gmd:level>
+              <gmd:MD_ScopeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset">dataset</gmd:MD_ScopeCode>
+            </gmd:level>
+          </gmd:DQ_Scope>
+        </gmd:scope>
+        <gmd:lineage>
+          <gmd:LI_Lineage>
+            <gmd:statement>
+              <gco:CharacterString>Zonation analyses were done during years 2015 - 2016 and they were updated 2018. Analyses were done in Finnish Environment Institute in co-operation with Metsähallitus Parks &amp; Wildlife Finland.  Environmental  administration, especially in the Centres for Economic Development, Transport and the Environment, have had the use of the 2016 results concerning private forests and conservation areas since 4/2016. Since 3/2018 those results became also open for public (CC 4.0). Since 5/2018 results concerning whole Finland beacame open for public (CC 4.0).</gco:CharacterString>
+            </gmd:statement>
+          </gmd:LI_Lineage>
+        </gmd:lineage>
+      </gmd:DQ_DataQuality>
+    </gmd:dataQualityInfo>
+  </gmd:MD_Metadata>
+</csw:GetRecordByIdResponse>
+

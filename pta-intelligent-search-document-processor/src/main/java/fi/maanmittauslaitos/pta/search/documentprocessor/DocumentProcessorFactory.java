@@ -1,17 +1,16 @@
 package fi.maanmittauslaitos.pta.search.documentprocessor;
 
-import java.io.InputStream;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
-
-import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
+import java.io.InputStream;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class DocumentProcessorFactory {
 
@@ -25,8 +24,8 @@ public class DocumentProcessorFactory {
 
 	public static class DocumentProcessorImpl implements DocumentProcessor {
 		private DocumentProcessingConfiguration configuration;
-		
-		private DocumentBuilder builder;
+
+		private final DocumentBuilder builder;
 		
 		private XPath xPath;
 		
@@ -66,7 +65,9 @@ public class DocumentProcessorFactory {
 			org.w3c.dom.Document doc;
 			
 			try {
-				doc = builder.parse(is);
+				synchronized (builder) {
+					doc = builder.parse(is);
+				}
 			} catch(Exception e) {
 				throw new DocumentProcessingException(e);
 			}
