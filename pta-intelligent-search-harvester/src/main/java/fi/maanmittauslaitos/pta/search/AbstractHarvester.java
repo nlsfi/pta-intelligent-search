@@ -23,6 +23,7 @@ import javax.xml.xpath.XPathExpressionException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.*;
 
 import static fi.maanmittauslaitos.pta.search.utils.HarvesterTracker.IdentifierType;
@@ -31,6 +32,7 @@ import static fi.maanmittauslaitos.pta.search.utils.HarvesterTracker.RETRY_FOR_H
 public abstract class AbstractHarvester implements CommandLineRunner {
 
 	protected static final Logger logger = Logger.getLogger(AbstractHarvester.class);
+	private static final String NUMBER_OF_THREADS_ARGUMENT = "threads";
 	private static int DEFAULT_NUMBER_OF_THREADS = 4;
 
 	abstract protected DocumentSink getDocumentSink(HarvesterConfig config, HarvesterTracker harvesterTracker, ApplicationArguments args);
@@ -38,6 +40,13 @@ public abstract class AbstractHarvester implements CommandLineRunner {
 	abstract protected DocumentProcessor getDocumentProcessor(HarvesterConfig config) throws ParserConfigurationException, IOException;
 
 	abstract protected HarvesterSource getHarvesterSource(HarvesterConfig config) throws XPathExpressionException, ParserConfigurationException;
+
+	protected Optional<String> parseArgument(String optionName, ApplicationArguments args) {
+		return Optional.ofNullable(args.getOptionValues(optionName))
+				.filter(values -> !values.isEmpty())
+				.map(values -> values.get(0));
+	}
+
 
 	HarvesterConfig getConfig() {
 		return new HarvesterConfig();
@@ -56,7 +65,6 @@ public abstract class AbstractHarvester implements CommandLineRunner {
 		DocumentSink sink = getDocumentSink(config, tracker, arguments);
 
 		boolean store = arguments.containsOption("store");
-		List<String> threadList = arguments.getOptionValues("threads");
 
 		if (!tracker.getIdentifiers().isEmpty()) {
 			logger.warn("Identifiers of the documents, that are permanently skipped from harvesting process:\n" +
@@ -70,11 +78,13 @@ public abstract class AbstractHarvester implements CommandLineRunner {
 		sink.startIndexing();
 
 
-		int nThreads = threadList.size() > 0 ? Integer.parseInt(threadList.get(0)) : DEFAULT_NUMBER_OF_THREADS;
+		int nThreads = parseArgument(NUMBER_OF_THREADS_ARGUMENT, arguments)
+				.map(Integer::parseInt)
+				.orElse(DEFAULT_NUMBER_OF_THREADS);
 
 		logger.info("Starting harvesting with " + nThreads + " threads");
-		harvestAsynchronously(tracker, source, processor, sink, store, nThreads);
 
+		harvestAsynchronously(tracker, source, processor, sink, store, nThreads);
 
 		int deleted = sink.stopIndexing();
 

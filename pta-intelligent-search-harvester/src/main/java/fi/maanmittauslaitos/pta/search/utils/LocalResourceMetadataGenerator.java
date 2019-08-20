@@ -13,9 +13,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 public class LocalResourceMetadataGenerator extends AbstractHarvester {
+
+	private static final String DEFAULT_SINKFILE_NAME = "generatedResourceMetatada.zip";
+	private static final String SINKFILE_ARGUMENT = "sinkfile";
+
 	public static void main(String[] args) throws Exception {
 		LocalResourceMetadataGenerator localResourceMetadataGenerator = new LocalResourceMetadataGenerator();
 		localResourceMetadataGenerator.run(args);
@@ -23,8 +26,7 @@ public class LocalResourceMetadataGenerator extends AbstractHarvester {
 
 	@Override
 	protected DocumentSink getDocumentSink(HarvesterConfig config, HarvesterTracker harvesterTracker, ApplicationArguments args) {
-		List<String> sinkfileList = args.getOptionValues("sinkfile");
-		String sinkfile = sinkfileList.size() > 0 ? sinkfileList.get(0) : "generatedResourceMetatada.zip";
+		String sinkfile = parseArgument(SINKFILE_ARGUMENT, args).orElse(DEFAULT_SINKFILE_NAME);
 		logger.debug("Sinkfile is " + sinkfile);
 		return config.getLocalDocumentSink(sinkfile, harvesterTracker);
 	}
