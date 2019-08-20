@@ -13,6 +13,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static fi.maanmittauslaitos.pta.search.utils.HarvesterTracker.IdentifierType.*;
+
 public class HarvesterTrackerImpl implements HarvesterTracker {
 
 	static final TypeReference<ConcurrentMap<IdentifierType, CopyOnWriteArrayList<String>>> TRACKER_FILE_TYPE_REFERENCE =
@@ -20,7 +22,7 @@ public class HarvesterTrackerImpl implements HarvesterTracker {
 			};
 
 	private static final Map<IdentifierType, List<String>> TRACKER_FILE_TEMPLATE =
-			Stream.of(IdentifierType.values()).collect(Collectors.toMap(type -> type, type -> Collections.emptyList()));
+			Stream.of(values()).collect(Collectors.toMap(type -> type, type -> Collections.emptyList()));
 
 	private static final Logger logger = Logger.getLogger(HarvesterTrackerImpl.class);
 
@@ -30,8 +32,7 @@ public class HarvesterTrackerImpl implements HarvesterTracker {
 	private File trackerFile;
 	private ConcurrentMap<IdentifierType, CopyOnWriteArrayList<String>> trackerMap;
 
-
-	public HarvesterTrackerImpl(File trackerFile, ObjectMapper objectMapper) throws IOException {
+	private HarvesterTrackerImpl(File trackerFile, ObjectMapper objectMapper) throws IOException {
 		this.trackerFile = trackerFile;
 		this.objectMapper = objectMapper;
 		if (trackerFile.createNewFile()) {
@@ -39,70 +40,47 @@ public class HarvesterTrackerImpl implements HarvesterTracker {
 		}
 		this.trackerMap = objectMapper.readValue(trackerFile, TRACKER_FILE_TYPE_REFERENCE);
 
-		assert this.trackerMap.keySet().containsAll(Arrays.asList(IdentifierType.values()));
-
+		assert this.trackerMap.keySet().containsAll(Arrays.asList(values()));
 	}
 
-
-	@VisibleForTesting
-	ConcurrentMap<IdentifierType, CopyOnWriteArrayList<String>> getTrackerMap() {
-		return trackerMap;
-	}
-
-	@Override
-	public boolean isYetToBeProcessed(String identifier) {
-		return !trackerMap.get(IdentifierType.PERMANENTLY_SKIPPED).contains(identifier) &&
-				!getIdentifiersByType(IdentifierType.INSERTED).contains(identifier);
-	}
-
-	@Override
-	public void addToSkippedDueHarvestingException(String identifier) {
-		if (!trackerMap.get(IdentifierType.SKIPPED_DUE_HARVESTING_EXCEPTION).contains(identifier)) {
-			trackerMap.get(IdentifierType.SKIPPED_DUE_HARVESTING_EXCEPTION).add(identifier);
-		}
-	}
-
-	@Override
-	public void addToSkippedDueProcessingException(String identifier) {
-		if (!isSkippedMoreThanThreshold(identifier)) {
-			trackerMap.get(IdentifierType.SKIPPED_DUE_PROCESSING_EXCEPTION).add(identifier);
-		} else {
-			trackerMap.get(IdentifierType.SKIPPED_DUE_PROCESSING_EXCEPTION).removeIf(s -> s.equals(identifier));
-			if (!trackerMap.get(IdentifierType.PERMANENTLY_SKIPPED).contains(identifier))
-				trackerMap.get(IdentifierType.PERMANENTLY_SKIPPED).add(identifier);
-		}
-		saveProcess();
-	}
-
-	private boolean isSkippedMoreThanThreshold(String identifier) {
-		return Collections.frequency(trackerMap.get(IdentifierType.SKIPPED_DUE_PROCESSING_EXCEPTION), identifier)
-				>= RETRY_FOR_PROCESSING_EXCEPTION;
+	public static HarvesterTrackerImpl create(File trackerFile, ObjectMapper objectMapper) throws IOException {
+		return new HarvesterTrackerImpl(trackerFile, objectMapper);
 	}
 
 	@Override
 	public void addIdToInserted(String identifier) {
 		removeFromSkippeds(identifier);
-		trackerMap.get(IdentifierType.INSERTED).add(identifier);
+		getByType(INSERTED).add(identifier);
 		saveProcess();
+	}
+
+	@Override
+	public boolean isYetToBeProcessed(String identifier) {
+		return !getByType(PERMANENTLY_SKIPPED).contains(identifier) &&
+				!getIdentifiersByType(INSERTED).contains(identifier) &&
+				!getIdentifiersByType(UPDATED).contains(identifier);
 	}
 
 	@Override
 	public void addIdToUpdated(String identifier) {
 		removeFromSkippeds(identifier);
-		trackerMap.get(IdentifierType.UPDATED).add(identifier);
+		getByType(UPDATED).add(identifier);
 		saveProcess();
 	}
 
-	private void removeFromSkippeds(String identifier) {
-		trackerMap.get(IdentifierType.SKIPPED_DUE_PROCESSING_EXCEPTION).removeIf(s -> s.equals(identifier));
-		trackerMap.get(IdentifierType.SKIPPED_DUE_HARVESTING_EXCEPTION).removeIf(s -> s.equals(identifier));
-		trackerMap.get(IdentifierType.PERMANENTLY_SKIPPED).removeIf(s -> s.equals(identifier));
+	@Override
+	public void addToSkippedDueHarvestingException(String identifier) {
+		addToSkipped(identifier, SKIPPED_DUE_HARVESTING_EXCEPTION);
 	}
 
+	@Override
+	public void addToSkippedDueProcessingException(String identifier) {
+		addToSkipped(identifier, SKIPPED_DUE_PROCESSING_EXCEPTION);
+	}
 
 	@Override
 	public Set<String> getIdentifiersByType(IdentifierType identifierType) {
-		return new HashSet<>(trackerMap.get(identifierType));
+		return new HashSet<>(getByType(identifierType));
 	}
 
 	@Override
@@ -114,10 +92,10 @@ public class HarvesterTrackerImpl implements HarvesterTracker {
 
 	@Override
 	public void harvestingFinished() {
-		if (trackerMap.get(IdentifierType.SKIPPED_DUE_PROCESSING_EXCEPTION).isEmpty() &&
-				trackerMap.get(IdentifierType.SKIPPED_DUE_HARVESTING_EXCEPTION).isEmpty()) {
-			trackerMap.get(IdentifierType.INSERTED).clear();
-			trackerMap.get(IdentifierType.UPDATED).clear();
+		if (getByType(SKIPPED_DUE_PROCESSING_EXCEPTION).isEmpty() &&
+				getByType(SKIPPED_DUE_HARVESTING_EXCEPTION).isEmpty()) {
+			getByType(INSERTED).clear();
+			getByType(UPDATED).clear();
 		}
 		saveProcess();
 
@@ -130,6 +108,37 @@ public class HarvesterTrackerImpl implements HarvesterTracker {
 	public void harvestingInterrupted() {
 		saveProcess();
 	}
+
+	@VisibleForTesting
+	ConcurrentMap<IdentifierType, CopyOnWriteArrayList<String>> getTrackerMap() {
+		return trackerMap;
+	}
+
+	private void addToSkipped(String identifier, IdentifierType skippedReason) {
+		if (!isSkippedMoreThanThreshold(identifier, skippedReason)) {
+			getByType(skippedReason).add(identifier);
+		} else {
+			getByType(skippedReason).removeIf(s -> s.equals(identifier));
+			if (!getByType(PERMANENTLY_SKIPPED).contains(identifier))
+				getByType(PERMANENTLY_SKIPPED).add(identifier);
+		}
+		saveProcess();
+	}
+
+	private CopyOnWriteArrayList<String> getByType(IdentifierType skippedDueProcessingException) {
+		return trackerMap.get(skippedDueProcessingException);
+	}
+
+	private boolean isSkippedMoreThanThreshold(String identifier, IdentifierType type) {
+		return Collections.frequency(getByType(type), identifier) >= RETRY_BEFORE_PERMANENTLY_SKIPPING;
+	}
+
+	private void removeFromSkippeds(String identifier) {
+		getByType(SKIPPED_DUE_PROCESSING_EXCEPTION).removeIf(s -> s.equals(identifier));
+		getByType(SKIPPED_DUE_HARVESTING_EXCEPTION).removeIf(s -> s.equals(identifier));
+		getByType(PERMANENTLY_SKIPPED).removeIf(s -> s.equals(identifier));
+	}
+
 
 	private synchronized void saveProcess() {
 		try {

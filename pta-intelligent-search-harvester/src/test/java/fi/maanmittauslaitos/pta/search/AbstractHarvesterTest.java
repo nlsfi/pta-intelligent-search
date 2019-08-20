@@ -31,7 +31,9 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.IntStream;
 
+import static fi.maanmittauslaitos.pta.search.utils.HarvesterTracker.RETRY_BEFORE_PERMANENTLY_SKIPPING;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -63,7 +65,7 @@ public class AbstractHarvesterTest {
 	private AbstractHarvester harvester;
 
 	@Spy
-	private HarvesterTrackerImpl harvesterTracker = new HarvesterTrackerImpl(TRACKER_FILE, new ObjectMapper());
+	private HarvesterTrackerImpl harvesterTracker = HarvesterTrackerImpl.create(TRACKER_FILE, new ObjectMapper());
 
 	public AbstractHarvesterTest() throws IOException {
 	}
@@ -136,7 +138,35 @@ public class AbstractHarvesterTest {
 				.contains(valid.getIdentifier(), valid2.getIdentifier());
 		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.SKIPPED_DUE_PROCESSING_EXCEPTION))
 				.contains(invalid.getIdentifier());
+	}
 
+	@Test
+	public void testProcessingExceptionMoreThanThreshold() throws Exception {
+		Harvestable valid = CSWHarvestable.create("successful1");
+		Harvestable invalid = CSWHarvestable.create("causing_processing_exception");
+		Harvestable valid2 = CSWHarvestable.create("successful2");
+		IntStream.range(0, RETRY_BEFORE_PERMANENTLY_SKIPPING)
+				.forEach(i -> harvesterTracker.addToSkippedDueProcessingException(invalid.getIdentifier()));
+
+		when(mockIterator.hasNext()).thenReturn(true, true, true, false);
+		when(mockIterator.next()).thenReturn(valid, invalid, valid2);
+
+		when(mockSource.getInputStream(invalid)).thenReturn(mockIsInvalid);
+
+
+		when(mockProcessor.processDocument(mockIs)).thenReturn(mockDocument);
+		when(mockProcessor.processDocument(mockIsInvalid))
+				.thenThrow(new DocumentProcessingException("caused by invalid document", new Throwable()));
+
+		harvester.run();
+
+
+		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.INSERTED))
+				.isEmpty();
+		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.SKIPPED_DUE_PROCESSING_EXCEPTION))
+				.isEmpty();
+		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.PERMANENTLY_SKIPPED))
+				.contains(invalid.getIdentifier());
 	}
 
 
@@ -205,6 +235,45 @@ public class AbstractHarvesterTest {
 			softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.SKIPPED_DUE_HARVESTING_EXCEPTION))
 					.isEmpty();
 		}
+	}
+
+	@Test
+	public void testHarvestingExceptionMoreThanThreshold() throws Exception {
+		Harvestable valid = CSWHarvestable.create("successful");
+		Harvestable invalid = CSWHarvestable.create("causing_harvesting_exception");
+		Harvestable valid2 = CSWHarvestable.create("successful2");
+
+		when(mockSource.getInputStream(invalid)).thenThrow(new HarvestingException());
+
+		IntStream.range(0, RETRY_BEFORE_PERMANENTLY_SKIPPING)
+				.forEach(i -> {
+					try {
+						when(mockIterator.hasNext()).thenReturn(true, true, true, false);
+						when(mockIterator.next()).thenReturn(valid, invalid, valid2);
+						harvester.run();
+					} catch (Exception e) {
+						e.printStackTrace();
+						assertThat(1).overridingErrorMessage("Error occurred while harvesting")
+								.isEqualTo(2);
+					}
+				});
+
+
+		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.INSERTED))
+				.contains(valid.getIdentifier());
+		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.SKIPPED_DUE_HARVESTING_EXCEPTION))
+				.contains(invalid.getIdentifier());
+
+		when(mockIterator.hasNext()).thenReturn(true, true, true, false);
+		when(mockIterator.next()).thenReturn(valid, invalid, valid2);
+		harvester.run();
+
+		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.INSERTED))
+				.isEmpty();
+		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.SKIPPED_DUE_HARVESTING_EXCEPTION))
+				.isEmpty();
+		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.PERMANENTLY_SKIPPED))
+				.contains(invalid.getIdentifier());
 	}
 
 	static class TestHarvester extends AbstractHarvester {

@@ -70,7 +70,7 @@ public class HarvesterConfig {
 
 	public HarvesterTracker getHarvesterTracker() throws IOException {
 		File trackerFile = Paths.get(TRACKER_FILENAME).toFile();
-		return new HarvesterTrackerImpl(trackerFile, objectMapper);
+		return HarvesterTrackerImpl.create(trackerFile, objectMapper);
 	}
 
 	public HarvesterSource getCSWSource() {

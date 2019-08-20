@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static fi.maanmittauslaitos.pta.search.utils.HarvesterTracker.RETRY_FOR_PROCESSING_EXCEPTION;
+import static fi.maanmittauslaitos.pta.search.utils.HarvesterTracker.RETRY_BEFORE_PERMANENTLY_SKIPPING;
 import static fi.maanmittauslaitos.pta.search.utils.HarvesterTrackerImpl.TRACKER_FILE_TYPE_REFERENCE;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -41,7 +41,7 @@ public class HarvesterTrackerImplTest {
 	public void setUp() throws Exception {
 		deleteTempTrackerFile();
 		assertThat(TRACKER_FILE).doesNotExist();
-		harvesterTracker = new HarvesterTrackerImpl(TRACKER_FILE, OBJECT_MAPPER);
+		harvesterTracker = HarvesterTrackerImpl.create(TRACKER_FILE, OBJECT_MAPPER);
 		assertThat(TRACKER_FILE).exists();
 	}
 
@@ -61,7 +61,7 @@ public class HarvesterTrackerImplTest {
 		URL resource = getClass().getClassLoader().getResource(EXISTING_HARVESTER_TRACKER_FILENAME);
 		assertThat(resource).isNotNull();
 
-		harvesterTracker = new HarvesterTrackerImpl(Paths.get(resource.toURI()).toFile(), OBJECT_MAPPER);
+		harvesterTracker = HarvesterTrackerImpl.create(Paths.get(resource.toURI()).toFile(), OBJECT_MAPPER);
 
 		softly.assertThat(harvesterTracker.getTrackerMap())
 				.containsKeys(IdentifierType.values());
@@ -125,7 +125,7 @@ public class HarvesterTrackerImplTest {
 
 		harvesterTracker.addIdToInserted("test-id");
 
-		IntStream.range(0, RETRY_FOR_PROCESSING_EXCEPTION)
+		IntStream.range(0, RETRY_BEFORE_PERMANENTLY_SKIPPING)
 				.forEach(i -> harvesterTracker.addToSkippedDueProcessingException(invalid));
 
 		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.PERMANENTLY_SKIPPED))
@@ -145,7 +145,7 @@ public class HarvesterTrackerImplTest {
 		// First harvesting
 		harvesterTracker.addIdToInserted(valid);
 
-		IntStream.range(0, RETRY_FOR_PROCESSING_EXCEPTION)
+		IntStream.range(0, RETRY_BEFORE_PERMANENTLY_SKIPPING)
 				.forEach(i -> harvesterTracker.addToSkippedDueProcessingException(invalid));
 
 		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.PERMANENTLY_SKIPPED))
@@ -164,6 +164,42 @@ public class HarvesterTrackerImplTest {
 
 		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.PERMANENTLY_SKIPPED))
 				.contains(invalid);
+		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.SKIPPED_DUE_PROCESSING_EXCEPTION))
+				.isEmpty();
+		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.INSERTED))
+				.isEmpty();
+		softly.assertThat(TRACKER_FILE).exists();
+	}
+
+	@Test
+	public void testPermanentlySkipping2() throws IOException, XPathExpressionException, ParserConfigurationException {
+		String valid = "test-id";
+		String invalid = "invalid";
+
+		// First harvesting
+		harvesterTracker.addIdToInserted(valid);
+
+		IntStream.range(0, RETRY_BEFORE_PERMANENTLY_SKIPPING)
+				.forEach(i -> harvesterTracker.addToSkippedDueHarvestingException(invalid));
+
+		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.PERMANENTLY_SKIPPED))
+				.isEmpty();
+
+		harvesterTracker.harvestingFinished();
+
+		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.SKIPPED_DUE_HARVESTING_EXCEPTION))
+				.contains(invalid);
+		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.INSERTED))
+				.contains(valid);
+
+		// Second harvesting
+		harvesterTracker.addToSkippedDueHarvestingException(invalid);
+		harvesterTracker.harvestingFinished();
+
+		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.PERMANENTLY_SKIPPED))
+				.contains(invalid);
+		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.SKIPPED_DUE_HARVESTING_EXCEPTION))
+				.isEmpty();
 		softly.assertThat(harvesterTracker.getIdentifiersByType(IdentifierType.INSERTED))
 				.isEmpty();
 		softly.assertThat(TRACKER_FILE).exists();
@@ -172,7 +208,7 @@ public class HarvesterTrackerImplTest {
 
 	@Test
 	public void testThreadSafety() throws IOException, XPathExpressionException, ParserConfigurationException, ExecutionException, InterruptedException {
-		harvesterTracker = new HarvesterTrackerImpl(TRACKER_FILE, OBJECT_MAPPER);
+		harvesterTracker = HarvesterTrackerImpl.create(TRACKER_FILE, OBJECT_MAPPER);
 
 		int threads = 1000;
 		List<String> ids = IntStream.range(0, threads).mapToObj(i -> "test_id_" + i).collect(Collectors.toList());
