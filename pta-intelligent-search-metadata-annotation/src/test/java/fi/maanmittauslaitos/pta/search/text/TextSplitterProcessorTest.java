@@ -35,11 +35,12 @@ public class TextSplitterProcessorTest {
 
 	@Test
 	public void testWordsWithHyphen() {
-		List<String> result = processor.process(Collections.singletonList("liito-orava eläin- ja kasvikunta ELY-keskus kaava-aineisto"));
+		List<String> result = processor.process(Collections.singletonList("liito-orava eläin- ja kasvikunta ELY-keskus kaava-aineisto, TOIMINTA-ALUE"));
 		assertThat(result)
 				.containsExactlyInAnyOrder("liito-orava", "liitoorava",
 						"eläin", "ja", "kasvikunta",
 						"ELY-keskus", "ELYkeskus",
-						"kaava-aineisto", "kaavaaineisto", "kaava", "aineisto");
+						"kaava-aineisto", "kaavaaineisto", "kaava", "aineisto",
+						"TOIMINTA-ALUE", "TOIMINTAALUE", "TOIMINTA", "ALUE");
 	}
 }
