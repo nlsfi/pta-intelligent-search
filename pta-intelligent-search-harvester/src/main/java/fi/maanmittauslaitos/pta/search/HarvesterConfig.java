@@ -33,6 +33,7 @@ import fi.maanmittauslaitos.pta.search.utils.HarvesterTracker;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTrackerImpl;
 import fi.maanmittauslaitos.pta.search.utils.Region;
 import fi.maanmittauslaitos.pta.search.utils.RegionFactory;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.vocabulary.SKOS;
@@ -42,13 +43,12 @@ import org.eclipse.rdf4j.rio.Rio;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.net.URL;
-import java.nio.file.Files;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import java.util.zip.GZIPInputStream;
 
 import static fi.maanmittauslaitos.pta.search.utils.Region.RegionScore.EMPTY_SCORE;
@@ -72,9 +72,11 @@ public class HarvesterConfig {
 		this.objectMapper = new ObjectMapper();
 	}
 
-	public HarvesterTracker getHarvesterTracker() throws IOException {
-		File trackerFile = Paths.get(TRACKER_FILENAME).toFile();
-		return HarvesterTrackerImpl.create(trackerFile, objectMapper);
+	private static Collection<String> getWellKnownPostfixes() throws IOException {
+		URL resource = HarvesterConfig.class.getClassLoader().getResource("nls.fi/pta-intelligent-search/well-known-postfixes-fi.txt");
+		String content = IOUtils.toString(resource.openStream(), StandardCharsets.UTF_8);
+		String[] split = content.split("\n");
+		return Arrays.asList(split);
 	}
 
 	public HarvesterSource getCSWSource() {
@@ -453,9 +455,9 @@ public class HarvesterConfig {
 		return isInOntologyFilterProcessor;
 	}
 
-	public static Set<String> getWellKnownPostfixes() throws IOException {
-		URL resource = HarvesterConfig.class.getResource("/nls.fi/pta-intelligent-search/well-known-postfixes-fi.txt");
-		return Files.lines(Paths.get(resource.getPath())).collect(Collectors.toSet());
+	HarvesterTracker getHarvesterTracker() throws IOException {
+		File trackerFile = Paths.get(TRACKER_FILENAME).toFile();
+		return HarvesterTrackerImpl.create(trackerFile, objectMapper);
 	}
 
 	private static Stemmer getFinnishStemmer() {
@@ -525,9 +527,8 @@ public class HarvesterConfig {
 		return mauiTextProcessor;
 	}
 
-
 	@VisibleForTesting
-	RDFTerminologyMatcherProcessor createTerminologyMatcher(Model model) throws IOException {
+	RDFTerminologyMatcherProcessor createTerminologyMatcher(Model model) {
 		RDFTerminologyMatcherProcessor ret = new RDFTerminologyMatcherProcessor();
 		ret.setModel(model);
 		ret.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
@@ -537,7 +538,7 @@ public class HarvesterConfig {
 	}
 
 	@VisibleForTesting
-	WordCombinationProcessor createWordCombinationProcessor(Model model) throws IOException {
+	WordCombinationProcessor createWordCombinationProcessor(Model model) {
 		WordCombinationProcessor ret = new WordCombinationProcessor();
 		ret.setModel(model);
 		ret.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));

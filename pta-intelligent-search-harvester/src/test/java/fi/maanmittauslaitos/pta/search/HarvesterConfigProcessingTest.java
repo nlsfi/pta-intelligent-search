@@ -33,7 +33,7 @@ public class HarvesterConfigProcessingTest {
 	}
 
 	private Document getProcessedDocument(String modelName, String metadataFile) throws IOException, ParserConfigurationException, DocumentProcessingException {
-		InputStream resource = getClass().getClassLoader().getResourceAsStream(modelName);
+		InputStream resource = getClass().getResourceAsStream(modelName);
 		Model model = Rio.parse(resource, "", RDFFormat.TURTLE);
 
 		ISOMetadataExtractorConfigurationFactory factory = new ISOMetadataExtractorConfigurationFactory();
@@ -64,7 +64,7 @@ public class HarvesterConfigProcessingTest {
 		DocumentProcessor processor = factory.getDocumentProcessorFactory().createProcessor(configuration);
 
 		Document document;
-		try (InputStream fis = getClass().getClassLoader().getResourceAsStream(metadataFile)) {
+		try (InputStream fis = getClass().getResourceAsStream(metadataFile)) {
 			document = processor.processDocument(fis);
 		}
 		return document;
@@ -72,7 +72,7 @@ public class HarvesterConfigProcessingTest {
 
 	@Test
 	public void testAgainstSimpleCsw() throws IOException, ParserConfigurationException, DocumentProcessingException {
-		Document document = getProcessedDocument("kissa.ttl", "kissa.xml");
+		Document document = getProcessedDocument("/kissa.ttl", "/kissa.xml");
 
 		softly.assertThat(document.getFields())
 				.containsKey(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI)
