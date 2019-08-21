@@ -12,7 +12,11 @@ import fi.maanmittauslaitos.pta.search.api.search.ElasticsearchQueryAPI;
 import fi.maanmittauslaitos.pta.search.api.search.FacetedElasticsearchHakuKoneImpl;
 import fi.maanmittauslaitos.pta.search.api.search.HakuKone;
 import fi.maanmittauslaitos.pta.search.api.search.OntologyElasticsearchQueryProviderImpl;
-import fi.maanmittauslaitos.pta.search.text.*;
+import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
+import fi.maanmittauslaitos.pta.search.text.StopWordsProcessor;
+import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
+import fi.maanmittauslaitos.pta.search.text.TextProcessor;
+import fi.maanmittauslaitos.pta.search.text.WordCombinationProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactory;
 import org.apache.http.HttpHost;
@@ -34,10 +38,21 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.zip.GZIPInputStream;
 
 @Configuration

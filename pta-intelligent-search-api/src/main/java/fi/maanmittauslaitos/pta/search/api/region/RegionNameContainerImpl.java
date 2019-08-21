@@ -10,11 +10,21 @@ import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
-import static fi.maanmittauslaitos.pta.search.api.Language.*;
-import static java.util.stream.Collectors.*;
+import static fi.maanmittauslaitos.pta.search.api.Language.EN;
+import static fi.maanmittauslaitos.pta.search.api.Language.FI;
+import static fi.maanmittauslaitos.pta.search.api.Language.SV;
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
 public class RegionNameContainerImpl implements RegionNameContainer {
 
@@ -106,11 +116,6 @@ public class RegionNameContainerImpl implements RegionNameContainer {
 				JsonNode properties = feature.get("properties");
 				String finnishRegionName = properties.get("nimi").textValue();
 				String swedishRegionName = properties.get("namn").textValue();
-				if (finnishRegionName.toLowerCase().equals("lahti")) {
-					int i = 2;
-				}
-
-
 				try {
 					List<String> symsFi = listReader.readValue(properties.get("synonyms_fi"));
 					List<String> symsEn = listReader.readValue(properties.get("synonyms_en"));

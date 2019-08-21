@@ -20,9 +20,15 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder;
 import org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import static fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants.*;
+import static fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants.FIELD_BEST_MATCHING_REGIONS;
+import static fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants.FIELD_BEST_MATCHING_REGIONS_NAME;
+import static fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants.FIELD_BEST_MATCHING_REGIONS_SCORE;
 
 
 public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQueryProvider {

@@ -1,6 +1,10 @@
 package fi.maanmittauslaitos.pta.search;
 
-import fi.maanmittauslaitos.pta.search.documentprocessor.*;
+import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
+import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataExtractorConfigurationFactory;
 import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataFields;
@@ -28,7 +32,7 @@ public class HarvesterConfigProcessingTest {
 	public final JUnitSoftAssertions softly = new JUnitSoftAssertions();
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		conf = new HarvesterConfig();
 	}
 

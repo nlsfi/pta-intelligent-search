@@ -7,13 +7,24 @@ import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static fi.maanmittauslaitos.pta.search.utils.HarvesterTracker.IdentifierType.*;
+import static fi.maanmittauslaitos.pta.search.utils.HarvesterTracker.IdentifierType.INSERTED;
+import static fi.maanmittauslaitos.pta.search.utils.HarvesterTracker.IdentifierType.PERMANENTLY_SKIPPED;
+import static fi.maanmittauslaitos.pta.search.utils.HarvesterTracker.IdentifierType.SKIPPED_DUE_HARVESTING_EXCEPTION;
+import static fi.maanmittauslaitos.pta.search.utils.HarvesterTracker.IdentifierType.SKIPPED_DUE_PROCESSING_EXCEPTION;
+import static fi.maanmittauslaitos.pta.search.utils.HarvesterTracker.IdentifierType.UPDATED;
+import static fi.maanmittauslaitos.pta.search.utils.HarvesterTracker.IdentifierType.values;
 
 public class HarvesterTrackerImpl implements HarvesterTracker {
 
