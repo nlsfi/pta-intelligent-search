@@ -1,2 +1,4 @@
 GDAL==2.4.0
 geopandas==0.5.1
+pandas==0.25.0
+xlrd==1.2.0

@@ -11,8 +11,10 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static fi.maanmittauslaitos.pta.search.api.Language.*;
+import static java.util.stream.Collectors.*;
 
 public class RegionNameContainerImpl implements RegionNameContainer {
 
@@ -55,19 +57,17 @@ public class RegionNameContainerImpl implements RegionNameContainer {
 
 
 		this.regionNamesByRegionType = regionNamesByRegionTypeAndLanguage.entrySet().stream()//
-				.collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().getRegionNamesByLang().get(Language.FI)));
+				.collect(toMap(Map.Entry::getKey, entry -> entry.getValue().getRegionNamesByLang().get(FI)));
 
 
 		this.stemmedRegionNames = regionNamesByRegionTypeAndLanguage.values().stream()
 				.flatMap(regionResource -> Stream.concat(regionResource.getRegionNamesByLang().entrySet().stream(),
 						regionResource.getSynonymsByRegionName().values().stream().flatMap(languageListMap -> languageListMap.entrySet().stream())))
-				.collect(Collectors.groupingBy(Map.Entry::getKey))//
+				.collect(groupingBy(Map.Entry::getKey))//
 				.entrySet().stream()//
-				.collect(Collectors.toMap(Map.Entry::getKey, languageRegionsEntry -> languageRegionsEntry.getValue().stream().map(Map.Entry::getValue).flatMap(Collection::stream)
+				.collect(toMap(Map.Entry::getKey, languageRegionsEntry -> languageRegionsEntry.getValue().stream().map(Map.Entry::getValue).flatMap(Collection::stream)
 						.distinct()//
-						.collect(Collectors.toMap(region -> stemmers.get(languageRegionsEntry.getKey()).stem(region), region -> regionNameTranslator.get(languageRegionsEntry.getKey()).get(region)))));
-
-
+						.collect(toMap(region -> stemmers.get(languageRegionsEntry.getKey()).stem(region), region -> regionNameTranslator.get(languageRegionsEntry.getKey()).get(region), (p, q) -> p))));
 	}
 
 	private Map<Language, Map<String, String>> getRegionNameTranslator(List<RegionResource> regionResources) {
@@ -78,14 +78,14 @@ public class RegionNameContainerImpl implements RegionNameContainer {
 				.map(RegionResource::getRegionNamesByLang)//
 				.forEach(languageListMap -> languageListMap.forEach((lang, regionNames) -> {
 					for (int i = 0; i < regionNames.size(); i++) {
-						toFinnishRegionNameMap.computeIfAbsent(lang, ignored -> new HashMap<>()).putIfAbsent(regionNames.get(i), languageListMap.get(Language.FI).get(i));
+						toFinnishRegionNameMap.computeIfAbsent(lang, ignored -> new HashMap<>()).putIfAbsent(regionNames.get(i), languageListMap.get(FI).get(i));
 					}
 				}));
 
 		// Build dictionary from all synonyms to finnish base region name
 		regionResources.stream()
 				.map(RegionResource::getSynonymsByRegionName)
-				.collect(Collectors.toList())
+				.collect(toList())
 				.forEach(synonymMap -> synonymMap
 						.forEach((regionName, synonymsByLang) ->
 								synonymsByLang
@@ -105,20 +105,29 @@ public class RegionNameContainerImpl implements RegionNameContainer {
 			features.forEach(feature -> {
 				JsonNode properties = feature.get("properties");
 				String finnishRegionName = properties.get("nimi").textValue();
+				String swedishRegionName = properties.get("namn").textValue();
+				if (finnishRegionName.toLowerCase().equals("lahti")) {
+					int i = 2;
+				}
 
 
 				try {
-					JsonNode synonyms_fi = properties.get("synonyms_fi");
-					synonymsByRegionName.put(finnishRegionName, ImmutableMap.of(Language.FI, listReader.readValue(synonyms_fi),
-							Language.EN, listReader.readValue(properties.get("synonyms_en")),
-							Language.SV, listReader.readValue(properties.get("synonyms_sv"))));
+					List<String> symsFi = listReader.readValue(properties.get("synonyms_fi"));
+					List<String> symsEn = listReader.readValue(properties.get("synonyms_en"));
+					List<String> symsSv = listReader.readValue(properties.get("synonyms_sv"));
+					synonymsByRegionName.put(finnishRegionName, ImmutableMap.of(
+							FI, symsFi,
+							EN, Stream.of(symsFi, symsSv, symsEn, Collections.singletonList(swedishRegionName))
+									.flatMap(Collection::stream).distinct().collect(toList()),
+							SV, symsSv
+					));
 				} catch (IOException e) {
 					logger.error("Could not read synonyms", e);
 				}
 
-				regionNamesByLang.computeIfAbsent(Language.FI, lang -> new ArrayList<>()).add(finnishRegionName);
-				regionNamesByLang.computeIfAbsent(Language.EN, lang -> new ArrayList<>()).add(finnishRegionName);
-				regionNamesByLang.computeIfAbsent(Language.SV, lang -> new ArrayList<>()).add(properties.get("namn").textValue());
+				regionNamesByLang.computeIfAbsent(FI, lang -> new ArrayList<>()).add(finnishRegionName);
+				regionNamesByLang.computeIfAbsent(EN, lang -> new ArrayList<>()).add(finnishRegionName);
+				regionNamesByLang.computeIfAbsent(SV, lang -> new ArrayList<>()).add(swedishRegionName);
 			});
 		} catch (IOException e) {
 			logger.error("Could not read resource file as json " + resource, e);
@@ -152,11 +161,11 @@ public class RegionNameContainerImpl implements RegionNameContainer {
 			this.synonymsByRegionName = synonymsByRegionName;
 		}
 
-		public Map<Language, List<String>> getRegionNamesByLang() {
+		Map<Language, List<String>> getRegionNamesByLang() {
 			return regionNamesByLang;
 		}
 
-		public Map<String, Map<Language, List<String>>> getSynonymsByRegionName() {
+		Map<String, Map<Language, List<String>>> getSynonymsByRegionName() {
 			return synonymsByRegionName;
 		}
 	}
