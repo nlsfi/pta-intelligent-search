@@ -65,7 +65,9 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
 				new ConversionHelper(Collections.singletonList("uusimaa")),
 				new ConversionHelper(Collections.singletonList("keski-suomi")),
 				new ConversionHelper(Collections.singletonList("liito-orava")),
-				new ConversionHelper(Collections.singletonList("orava"))
+				new ConversionHelper(Collections.singletonList("orava")),
+				new ConversionHelper(Collections.singletonList("ranta")),
+				new ConversionHelper(Collections.singletonList("rauta"))
 		).forEach(helper -> generateTestCaseQuery(helper.getQueryList(), Paths.get(outputDir, helper.getTestCaseName() + ".json")));
 	}
 
