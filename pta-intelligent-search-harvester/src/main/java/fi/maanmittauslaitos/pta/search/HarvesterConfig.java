@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
+import com.google.common.annotations.VisibleForTesting;
 import fi.maanmittauslaitos.pta.search.codelist.InspireThemesImpl;
 import fi.maanmittauslaitos.pta.search.codelist.ODFOrganisationNameNormaliserImpl;
 import fi.maanmittauslaitos.pta.search.codelist.OrganisationNormaliser;
@@ -25,12 +26,23 @@ import fi.maanmittauslaitos.pta.search.metadata.GeographicBoundingBoxXPathCustom
 import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataExtractorConfigurationFactory;
 import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataFields;
 import fi.maanmittauslaitos.pta.search.metadata.ResponsiblePartyXPathCustomExtractor;
-import fi.maanmittauslaitos.pta.search.text.*;
+import fi.maanmittauslaitos.pta.search.text.ExistsInSetProcessor;
+import fi.maanmittauslaitos.pta.search.text.MauiTextProcessor;
+import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
+import fi.maanmittauslaitos.pta.search.text.RegexProcessor;
+import fi.maanmittauslaitos.pta.search.text.StopWordsProcessor;
+import fi.maanmittauslaitos.pta.search.text.TerminologyExpansionProcessor;
+import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
+import fi.maanmittauslaitos.pta.search.text.TextProcessor;
+import fi.maanmittauslaitos.pta.search.text.TextSplitterProcessor;
+import fi.maanmittauslaitos.pta.search.text.WordCombinationProcessor;
+import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactory;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTracker;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTrackerImpl;
 import fi.maanmittauslaitos.pta.search.utils.Region;
 import fi.maanmittauslaitos.pta.search.utils.RegionFactory;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.vocabulary.SKOS;
@@ -38,11 +50,24 @@ import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
 
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.text.ParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
@@ -68,9 +93,11 @@ public class HarvesterConfig {
 		this.objectMapper = new ObjectMapper();
 	}
 
-	public HarvesterTracker getHarvesterTracker() throws IOException {
-		File trackerFile = Paths.get(TRACKER_FILENAME).toFile();
-		return HarvesterTrackerImpl.create(trackerFile, objectMapper);
+	private static Collection<String> getWellKnownPostfixes() throws IOException {
+		URL resource = HarvesterConfig.class.getClassLoader().getResource("nls.fi/pta-intelligent-search/well-known-postfixes-fi.txt");
+		String content = IOUtils.toString(resource.openStream(), StandardCharsets.UTF_8);
+		String[] split = content.split("\n");
+		return Arrays.asList(split);
 	}
 
 	public HarvesterSource getCSWSource() {
@@ -449,15 +476,29 @@ public class HarvesterConfig {
 		return isInOntologyFilterProcessor;
 	}
 
+	HarvesterTracker getHarvesterTracker() throws IOException {
+		File trackerFile = Paths.get(TRACKER_FILENAME).toFile();
+		return HarvesterTrackerImpl.create(trackerFile, objectMapper);
+	}
 
-	private TextProcessingChain createKeywordProcessingChain(RDFTerminologyMatcherProcessor terminologyProcessor,
-															 WordCombinationProcessor wordCombinationProcessor) {
+	private static Stemmer getFinnishStemmer() {
+		return StemmerFactory.createFinnishStemmer();
+	}
+
+	private TextProcessor createTextSplitterProcessor(boolean joinHyphened) throws IOException {
+		return TextSplitterProcessor.create(getFinnishStemmer(), getWellKnownPostfixes(), joinHyphened);
+
+	}
+
+	@VisibleForTesting
+	TextProcessingChain createKeywordProcessingChain(RDFTerminologyMatcherProcessor terminologyProcessor,
+													 WordCombinationProcessor wordCombinationProcessor) throws IOException {
 		TextProcessingChain keywordChain = new TextProcessingChain();
 		RegexProcessor whitespaceRemoval = new RegexProcessor();
 		whitespaceRemoval.setPattern(Pattern.compile("^\\s*$"));
 		whitespaceRemoval.setIncludeMatches(false);
 
-		keywordChain.getChain().add(new TextSplitterProcessor());
+		keywordChain.getChain().add(createTextSplitterProcessor(false));
 		keywordChain.getChain().add(wordCombinationProcessor);
 		keywordChain.getChain().add(whitespaceRemoval);
 		keywordChain.getChain().add(terminologyProcessor);
@@ -465,10 +506,11 @@ public class HarvesterConfig {
 	}
 
 
-	private TextProcessingChain createAbstractProcessingChain(RDFTerminologyMatcherProcessor terminologyProcessor,
-															  WordCombinationProcessor wordCombinationProcessor) throws IOException {
+	@VisibleForTesting
+	TextProcessingChain createAbstractProcessingChain(RDFTerminologyMatcherProcessor terminologyProcessor,
+													  WordCombinationProcessor wordCombinationProcessor) throws IOException {
 		TextProcessingChain ret = new TextProcessingChain();
-		ret.getChain().add(new TextSplitterProcessor());
+		ret.getChain().add(createTextSplitterProcessor(true));
 		ret.getChain().add(wordCombinationProcessor);
 
 		StopWordsProcessor stopWordsProcessor = new StopWordsProcessor();
@@ -506,21 +548,22 @@ public class HarvesterConfig {
 		return mauiTextProcessor;
 	}
 
-
-	private RDFTerminologyMatcherProcessor createTerminologyMatcher(Model model) throws IOException {
+	@VisibleForTesting
+	RDFTerminologyMatcherProcessor createTerminologyMatcher(Model model) {
 		RDFTerminologyMatcherProcessor ret = new RDFTerminologyMatcherProcessor();
 		ret.setModel(model);
 		ret.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
-		ret.setStemmer(StemmerFactory.createFinnishStemmer());
+		ret.setStemmer(getFinnishStemmer());
 		ret.setLanguage("fi");
 		return ret;
 	}
 
-	private WordCombinationProcessor createWordCombinationProcessor(Model model) throws IOException {
+	@VisibleForTesting
+	WordCombinationProcessor createWordCombinationProcessor(Model model) {
 		WordCombinationProcessor ret = new WordCombinationProcessor();
 		ret.setModel(model);
 		ret.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
-		ret.setStemmer(StemmerFactory.createFinnishStemmer());
+		ret.setStemmer(getFinnishStemmer());
 		ret.setLanguage("fi");
 		return ret;
 	}

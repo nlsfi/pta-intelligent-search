@@ -17,7 +17,7 @@ import java.util.zip.ZipOutputStream;
 
 public class LocalArchiveDocumentSink implements DocumentSink {
 
-    private static Logger logger = Logger.getLogger(LocalArchiveDocumentSink.class);
+    private static final Logger logger = Logger.getLogger(LocalArchiveDocumentSink.class);
 
     private String outputArchive;
     private Path localArchiveDocumentSink = null;
@@ -48,6 +48,8 @@ public class LocalArchiveDocumentSink implements DocumentSink {
         String id = doc.getValue(ISOMetadataFields.ID, String.class);
         ObjectMapper objectMapper = new ObjectMapper();
         try (FileOutputStream out = new FileOutputStream(new File(localArchiveDocumentSink.toFile(), id + ".json"))) {
+            //String content = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(doc);
+            //logger.error("Content of document with id " + id + "\n\n" +content);
             objectMapper.writeValue(out, doc.getFields());
         }
     }
@@ -60,6 +62,7 @@ public class LocalArchiveDocumentSink implements DocumentSink {
                 File outputRootDir = zipFile.getParent().toFile();
                 if (!outputRootDir.exists()) {
                     logger.warn("Creating new directory " + outputRootDir);
+                    //noinspection ResultOfMethodCallIgnored
                     outputRootDir.mkdirs();
                 }
             }

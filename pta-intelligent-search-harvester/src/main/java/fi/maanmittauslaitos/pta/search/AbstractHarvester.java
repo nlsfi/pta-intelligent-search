@@ -24,7 +24,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
 
 import static fi.maanmittauslaitos.pta.search.utils.HarvesterTracker.IdentifierType;
 import static fi.maanmittauslaitos.pta.search.utils.HarvesterTracker.RETRY_FOR_HARVESTING_EXCEPTION;

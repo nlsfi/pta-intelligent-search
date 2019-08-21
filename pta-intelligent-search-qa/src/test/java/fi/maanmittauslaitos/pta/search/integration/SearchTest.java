@@ -2,8 +2,8 @@ package fi.maanmittauslaitos.pta.search.integration;
 
 import com.carrotsearch.randomizedtesting.annotations.Seed;
 import com.carrotsearch.randomizedtesting.annotations.ThreadLeakScope;
-import org.apache.commons.io.IOUtils;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
+import org.apache.commons.io.IOUtils;
 import org.elasticsearch.action.DocWriteResponse.Result;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.index.IndexResponse;
@@ -20,18 +20,23 @@ import org.elasticsearch.test.ESIntegTestCase;
 import org.elasticsearch.test.ESIntegTestCase.ClusterScope;
 import org.elasticsearch.test.ESIntegTestCase.Scope;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -51,7 +56,7 @@ import static org.elasticsearch.test.hamcrest.ElasticsearchAssertions.assertAllS
 public class SearchTest extends ESIntegTestCase {
 
     private static final String INDEX_FILE = "index.json";
-    private static String PREFIX = "BOOT-INF/classes/";
+    private static final String PREFIX = "BOOT-INF/classes/";
     private static final String COMMON_CLASSPATH = PREFIX + "fi/maanmittauslaitos/pta/search/integration/";
     private static final String METADATA_ZIP = COMMON_CLASSPATH + "generatedResourceMetadata.zip";
     private static final String TESTCASE_DIR = COMMON_CLASSPATH + "testcases/";
@@ -182,18 +187,18 @@ public class SearchTest extends ESIntegTestCase {
     @Test
     public void suomiReturnsAllNationalData() throws Exception {
         SearchResponse response = getSearchResponse("testcase_suomi.json", nDocs);
-        then(response.getHits()).hasSize(61);
+        then(response.getHits()).hasSize(nDocs - 3);
     }
 
     @Test
     public void nationalReturnsAllNationalData() throws Exception {
         SearchResponse response = getSearchResponse("testcase_kansallinen.json", nDocs);
-        then(response.getHits()).hasSize(61);
+        then(response.getHits()).hasSize(nDocs - 3);
     }
 
 
     @Test
-    public void testMiddleFinland() throws IOException, URISyntaxException {
+    public void middleFinlandSearch() throws IOException, URISyntaxException {
         SearchResponse response = getSearchResponse("testcase_keski-suomi.json");
 
         then(response.getHits())
@@ -203,7 +208,29 @@ public class SearchTest extends ESIntegTestCase {
     }
 
     @Test
-    public void jklBeforeSalo() throws Exception {
+    public void hyphenedKeyWordSearch() throws IOException, URISyntaxException {
+        SearchResponse response = getSearchResponse("testcase_liito-orava.json");
+
+        then(response.getHits())
+                .extracting(SearchHit::getId)
+                .containsExactlyInAnyOrder(
+                        "2d8394c5-8cd3-434e-993d-1160851ff665",
+                        "67f47ee3-cd16-44d3-b6fd-8eb9faa374a5");
+    }
+
+    @Test
+    public void hyphenedKeyWordParentSearch() throws IOException, URISyntaxException {
+        SearchResponse response = getSearchResponse("testcase_orava.json");
+
+        then(response.getHits())
+                .extracting(SearchHit::getId)
+                .containsExactlyInAnyOrder(
+                        "2d8394c5-8cd3-434e-993d-1160851ff665",
+                        "67f47ee3-cd16-44d3-b6fd-8eb9faa374a5");
+    }
+
+    @Test
+    public void jklBeforeSaloSearch() throws Exception {
         SearchResponse response = getSearchResponse("testcase_jyväskylä_tiet.json");
 
         List<String> ids = Arrays.asList(
