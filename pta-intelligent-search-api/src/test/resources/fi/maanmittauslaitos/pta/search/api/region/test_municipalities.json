@@ -55,9 +55,15 @@
       "properties": {
         "nimi": "Helsinki",
         "namn": "Helsingfors",
-        "synonyms_fi": ["Stadi"],
-        "synonyms_sv": ["Stad"],
-        "synonyms_en": ["City"],
+        "synonyms_fi": [
+          "Stadi"
+        ],
+        "synonyms_sv": [
+          "Stad"
+        ],
+        "synonyms_en": [
+          "City"
+        ],
         "envelope": [
           24.830000,
           60.130000,
@@ -131,6 +137,53 @@
             [
               24.749283192652005,
               60.237228221729936
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nimi": "Lahti",
+        "namn": "Lahtis",
+        "synonyms_fi": [
+          "Nastola"
+        ],
+        "synonyms_sv": [
+          "Nastola"
+        ],
+        "synonyms_en": [],
+        "envelope": [
+          25.540000,
+          60.890000,
+          26.140000,
+          61.100000
+        ]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              25.540308005239467,
+              60.88664902174046
+            ],
+            [
+              26.139943775101546,
+              60.88664902174046
+            ],
+            [
+              26.139943775101546,
+              61.102666387363762
+            ],
+            [
+              25.540308005239467,
+              61.102666387363762
+            ],
+            [
+              25.540308005239467,
+              60.88664902174046
             ]
           ]
         ]
