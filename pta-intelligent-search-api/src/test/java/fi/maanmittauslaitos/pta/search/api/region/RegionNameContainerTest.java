@@ -19,63 +19,63 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 
 public class RegionNameContainerTest {
-    private static String RESOURCE_ROOT = "fi/maanmittauslaitos/pta/search/api/region/";
-    private static String RESOURCE_COUNTRY = RESOURCE_ROOT + "test_countries.json";
-    private static String RESOURCE_REGIONS = RESOURCE_ROOT + "test_regions.json";
-    private static String RESOURCE_SUBREGIONS = RESOURCE_ROOT + "test_subregions.json";
-    private static String RESOURCE_MUNICIPALITIES = RESOURCE_ROOT + "test_municipalities.json";
+	private static String RESOURCE_ROOT = "fi/maanmittauslaitos/pta/search/api/region/";
+	private static String RESOURCE_COUNTRY = RESOURCE_ROOT + "test_countries.json";
+	private static String RESOURCE_REGIONS = RESOURCE_ROOT + "test_regions.json";
+	private static String RESOURCE_SUBREGIONS = RESOURCE_ROOT + "test_subregions.json";
+	private static String RESOURCE_MUNICIPALITIES = RESOURCE_ROOT + "test_municipalities.json";
 
-    @Rule
-    public final JUnitSoftAssertions softly = new JUnitSoftAssertions();
-
-
-    private RegionNameContainerImpl regionNameContainer;
-
-    private Map<Language, Stemmer> stemmers = ImmutableMap.of(Language.FI, StemmerFactory.createFinnishStemmer(),
-            Language.SV, new LuceneAnalyzerStemmer(new SwedishAnalyzer()),
-            Language.EN, new LuceneAnalyzerStemmer(new EnglishAnalyzer()));
+	@Rule
+	public final JUnitSoftAssertions softly = new JUnitSoftAssertions();
 
 
-    @Before
-    public void setUp() {
-        regionNameContainer = new RegionNameContainerImpl(RESOURCE_COUNTRY, RESOURCE_REGIONS, RESOURCE_SUBREGIONS, RESOURCE_MUNICIPALITIES, stemmers);
-        regionNameContainer.init();
-    }
+	private RegionNameContainerImpl regionNameContainer;
 
-    @SuppressWarnings("unchecked")
-    @Test
-    public void region_name_container_has_values() {
-        softly.assertThat(regionNameContainer.getStemmedRegionNames()).containsKeys(Language.values());
-        softly.assertThat(regionNameContainer.getStemmedRegionNames().get(Language.FI))
-                .contains(entry("suomia", "Suomi"), entry("Uusimaa", "Uusimaa"), entry("Helsinki", "Helsinki"), entry("stadi", "Helsinki"), entry("kansallinen", "Suomi"));
+	private Map<Language, Stemmer> stemmers = ImmutableMap.of(Language.FI, StemmerFactory.createFinnishStemmer(),
+			Language.SV, new LuceneAnalyzerStemmer(new SwedishAnalyzer()),
+			Language.EN, new LuceneAnalyzerStemmer(new EnglishAnalyzer()));
 
-        softly.assertThat(regionNameContainer.getStemmedRegionNames().get(Language.EN))
-                .contains(entry("citi", "Helsinki"), entry("nationwid", "Suomi"),
-                        entry("stadi", "Helsinki"), entry("helsingfor", "Helsinki"));
 
-        softly.assertThat(regionNameContainer.getStemmedRegionNames().get(Language.SV))
-                .contains(entry("stad", "Helsinki"), entry("helsingfor", "Helsinki"));
+	@Before
+	public void setUp() {
+		regionNameContainer = new RegionNameContainerImpl(RESOURCE_COUNTRY, RESOURCE_REGIONS, RESOURCE_SUBREGIONS, RESOURCE_MUNICIPALITIES, stemmers);
+		regionNameContainer.init();
+	}
 
-        softly.assertThat(regionNameContainer.getRegionNamesByRegionType()).containsKeys(RegionNameContainer.RegionType.values());
+	@SuppressWarnings("unchecked")
+	@Test
+	public void region_name_container_has_values() {
+		softly.assertThat(regionNameContainer.getStemmedRegionNames()).containsKeys(Language.values());
+		softly.assertThat(regionNameContainer.getStemmedRegionNames().get(Language.FI))
+				.contains(entry("suomia", "Suomi"), entry("Uusimaa", "Uusimaa"), entry("Helsinki", "Helsinki"),
+						entry("kansallinen", "Suomi"), entry("Nastola", "Lahti"));
 
-        softly.assertThat(regionNameContainer.getRegionNamesByRegionType().get(RegionNameContainer.RegionType.MUNICIPALITY))
-                .containsExactlyInAnyOrder("Espoo", "Helsinki", "Vantaa", "Lahti");
-    }
+		softly.assertThat(regionNameContainer.getStemmedRegionNames().get(Language.EN))
+				.contains(entry("nationwid", "Suomi"), entry("helsingfor", "Helsinki"), entry("nastola", "Lahti"));
 
-    @Test
-    public void search_result_finds_existing_region() {
-        RegionNameSearchResult regionNameSearchResult = RegionNameSearchResult.executeSearch("Kansallinen", "kansallinen", regionNameContainer, Language.FI);
+		softly.assertThat(regionNameContainer.getStemmedRegionNames().get(Language.SV))
+				.contains(entry("hangö", "Hanko"), entry("helsingfor", "Helsinki"));
 
-        assertThat(regionNameSearchResult.hasRegionName()).isTrue();
-        assertThat(regionNameSearchResult.getParsedRegion()).isEqualTo("Suomi");
-    }
+		softly.assertThat(regionNameContainer.getRegionNamesByRegionType()).containsKeys(RegionNameContainer.RegionType.values());
 
-    @Test
-    public void search_result_with_invalid_region() {
-        RegionNameSearchResult regionNameSearchResult = RegionNameSearchResult.executeSearch("else", "else", regionNameContainer, Language.EN);
+		softly.assertThat(regionNameContainer.getRegionNamesByRegionType().get(RegionNameContainer.RegionType.MUNICIPALITY))
+				.containsExactlyInAnyOrder("Espoo", "Helsinki", "Vantaa", "Lahti", "Hanko");
+	}
 
-        softly.assertThat(regionNameSearchResult.hasRegionName()).isFalse();
-        softly.assertThat(regionNameSearchResult.getParsedRegion()).isEmpty();
-    }
+	@Test
+	public void search_result_finds_existing_region() {
+		RegionNameSearchResult regionNameSearchResult = RegionNameSearchResult.executeSearch("Kansallinen", "kansallinen", regionNameContainer, Language.FI);
+
+		assertThat(regionNameSearchResult.hasRegionName()).isTrue();
+		assertThat(regionNameSearchResult.getParsedRegion()).isEqualTo("Suomi");
+	}
+
+	@Test
+	public void search_result_with_invalid_region() {
+		RegionNameSearchResult regionNameSearchResult = RegionNameSearchResult.executeSearch("else", "else", regionNameContainer, Language.EN);
+
+		softly.assertThat(regionNameSearchResult.hasRegionName()).isFalse();
+		softly.assertThat(regionNameSearchResult.getParsedRegion()).isEmpty();
+	}
 
 }
