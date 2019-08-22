@@ -44,20 +44,18 @@ public class SearchTest extends SearchTestBase {
 	}
 
 	@Test
-	public void nationalReturnsAllNationalData() throws Exception {
+	public void nationwideReturnsAllNationalData() throws Exception {
+		// In the testcase the serach them was "nationwide" and language set to English
 		SearchResponse response = getSearchResponse("testcase_kansallinen.json", nDocs);
 		then(response.getHits()).hasSize(nDocs - 3);
 	}
 
-
 	@Test
 	public void middleFinlandSearch() throws IOException, URISyntaxException {
 		SearchResponse response = getSearchResponse("testcase_keski-suomi.json");
-
 		then(response.getHits())
 				.extracting(SearchHit::getId)
 				.containsExactly("89c6a379-776f-4529-b79d-a456177fb64d"); //jkl
-
 	}
 
 	@Test
@@ -72,20 +70,41 @@ public class SearchTest extends SearchTestBase {
 	}
 
 	@Test
+	public void testSwedishMunicipalityName() throws IOException, URISyntaxException {
+		SearchResponse response = getSearchResponse("testcase_tammerfors.json");
+		then(response.getHits())
+				.extracting(SearchHit::getId)
+				.containsExactlyInAnyOrder(
+						"2d8394c5-8cd3-434e-993d-1160851ff665", //Tampereen Lajihavainnot
+						"67f47ee3-cd16-44d3-b6fd-8eb9faa374a5" //Tampereen Liito-oravalle soveltuva elinympäristö
+				);
+	}
+
+	@Test
+	public void testOldMunicipalityName() throws IOException, URISyntaxException {
+		SearchResponse response = getSearchResponse("testcase_korpilahti.json");
+		then(response.getHits())
+				.extracting(SearchHit::getId)
+				.containsOnly(
+						"89c6a379-776f-4529-b79d-a456177fb64d" //Jyväskylä
+				);
+	}
+
+	@Test
 	public void hyphenedKeyWordParentSearch() throws IOException, URISyntaxException {
 		SearchResponse response = getSearchResponse("testcase_orava.json");
 
 		then(response.getHits())
 				.extracting(SearchHit::getId)
 				.containsExactlyInAnyOrder(
-						"2d8394c5-8cd3-434e-993d-1160851ff665",
-						"67f47ee3-cd16-44d3-b6fd-8eb9faa374a5");
+						"2d8394c5-8cd3-434e-993d-1160851ff665", //Tampereen Lajihavainnot
+						"67f47ee3-cd16-44d3-b6fd-8eb9faa374a5" //Tampereen Liito-oravalle soveltuva elinympäristö
+				);
 	}
 
 	@Test
 	public void jklBeforeSaloSearch() throws Exception {
 		SearchResponse response = getSearchResponse("testcase_jyväskylä_tiet.json");
-
 		List<String> ids = Arrays.asList(
 				"89c6a379-776f-4529-b79d-a456177fb64d", //jkl
 				"52bf65f7-db98-44ac-8da3-0b06fdf71d65" // salo
@@ -177,5 +196,4 @@ public class SearchTest extends SearchTestBase {
 				.containsExactlyInAnyOrderElementsOf(rautaIds)
 				.doesNotContainAnyElementsOf(rantaIds);
 	}
-
 }

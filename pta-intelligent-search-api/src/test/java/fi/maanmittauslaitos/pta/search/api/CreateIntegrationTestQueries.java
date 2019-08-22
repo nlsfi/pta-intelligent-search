@@ -55,29 +55,30 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
 			directory.mkdirs();
 		}
 
-
 		Arrays.asList(
-				new ConversionHelper("testcase_empty", Collections.emptyList()),
-				new ConversionHelper(Collections.singletonList("suomi")),
-				new ConversionHelper(Collections.singletonList("kansallinen")),
-				new ConversionHelper(Arrays.asList("jyväskylä", "tiet")),
-				new ConversionHelper(Collections.singletonList("hsl")),
-				new ConversionHelper(Collections.singletonList("uusimaa")),
-				new ConversionHelper(Collections.singletonList("keski-suomi")),
-				new ConversionHelper(Collections.singletonList("liito-orava")),
-				new ConversionHelper(Collections.singletonList("orava")),
-				new ConversionHelper(Collections.singletonList("ranta")),
-				new ConversionHelper(Collections.singletonList("rauta"))
-		).forEach(helper -> generateTestCaseQuery(helper.getQueryList(), Paths.get(outputDir, helper.getTestCaseName() + ".json")));
+				ConversionHelper.create("testcase_empty", Collections.emptyList()),
+				ConversionHelper.create(Collections.singletonList("suomi")),
+				ConversionHelper.create(Arrays.asList("jyväskylä", "tiet")),
+				ConversionHelper.create(Collections.singletonList("hsl")),
+				ConversionHelper.create(Collections.singletonList("uusimaa")),
+				ConversionHelper.create(Collections.singletonList("keski-suomi")),
+				ConversionHelper.create(Collections.singletonList("liito-orava")),
+				ConversionHelper.create(Collections.singletonList("orava")),
+				ConversionHelper.create(Collections.singletonList("ranta")),
+				ConversionHelper.create(Collections.singletonList("rauta")),
+				ConversionHelper.create(Collections.singletonList("korpilahti")),
+				ConversionHelper.create("testcase_kansallinen", Collections.singletonList("nationwide"), Language.EN),
+				ConversionHelper.create(Collections.singletonList("tammerfors"), Language.SV)
+		).forEach(helper -> generateTestCaseQuery(helper.getQueryList(), Paths.get(outputDir, helper.getTestCaseName()), helper.getLanguage()));
 	}
 
-	private void generateTestCaseQuery(List<String> queryList, Path outFile) {
+	private void generateTestCaseQuery(List<String> queryList, Path outFile, Language lang) {
 		SearchQuery pyynto = new SearchQuery();
 		pyynto.setQuery(queryList);
 
 		String json = null;
 		try {
-			JSONObject jsonObject = new JSONObject(convertQueryIntoJSON(pyynto, Language.FI));
+			JSONObject jsonObject = new JSONObject(convertQueryIntoJSON(pyynto, lang));
 			json = jsonObject.getJSONObject("query").toString(2);
 
 			Files.write(outFile, json.getBytes());
@@ -104,34 +105,45 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
 
 	static class ConversionHelper {
 		private static final String TESTCASE = "testcase_";
-		String testCaseName;
-		List<String> queryList;
+		private static final String POSTFIX = ".json";
+		private String testCaseName;
+		private List<String> queryList;
+		private Language lang;
 
-		ConversionHelper(List<String> queryList) {
-			this.testCaseName = TESTCASE + String.join("_", queryList);
-			this.queryList = queryList;
-		}
-
-		ConversionHelper(String testcase, List<String> queryList) {
+		private ConversionHelper(String testcase, List<String> queryList, Language lang) {
 			this.testCaseName = testcase;
 			this.queryList = queryList;
+			this.lang = lang;
+		}
+
+		static ConversionHelper create(List<String> queryList) {
+			String testcase = TESTCASE + String.join("_", queryList) + POSTFIX;
+			return new ConversionHelper(testcase, queryList, Language.FI);
+		}
+
+		static ConversionHelper create(List<String> queryList, Language lang) {
+			String testcase = TESTCASE + String.join("_", queryList) + POSTFIX;
+			return new ConversionHelper(testcase, queryList, lang);
+		}
+
+		static ConversionHelper create(String testcase, List<String> queryList) {
+			return new ConversionHelper(testcase, queryList, Language.FI);
+		}
+
+		static ConversionHelper create(String testcase, List<String> queryList, Language lang) {
+			return new ConversionHelper(testcase, queryList, lang);
 		}
 
 		String getTestCaseName() {
 			return testCaseName;
 		}
 
-		public void setTestCaseName(String testCaseName) {
-			this.testCaseName = testCaseName;
-		}
-
 		List<String> getQueryList() {
 			return queryList;
 		}
 
-		public void setQueryList(List<String> queryList) {
-			this.queryList = queryList;
+		public Language getLanguage() {
+			return lang;
 		}
-
 	}
 }
