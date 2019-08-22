@@ -458,6 +458,7 @@ public class ApplicationConfiguration {
 		queryProvider.setOntologyLevels(2);
 		queryProvider.setWeightFactor(0.5);
 		queryProvider.setBasicWordMatchWeight(0.5);
+		queryProvider.setBasicWordMatchFuzzyWeight(0.4);
 		queryProvider.setStemmers(stemmers);
 		queryProvider.setRegionNameContainer(regionNameContainer);
 

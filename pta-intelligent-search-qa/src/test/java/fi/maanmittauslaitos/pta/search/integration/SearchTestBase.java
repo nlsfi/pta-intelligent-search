@@ -2,8 +2,10 @@ package fi.maanmittauslaitos.pta.search.integration;
 
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 import org.apache.commons.io.IOUtils;
+import org.apache.lucene.search.Explanation;
 import org.elasticsearch.action.DocWriteResponse.Result;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
+import org.elasticsearch.action.explain.ExplainRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
@@ -28,6 +30,7 @@ import java.nio.file.Files;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -39,6 +42,7 @@ import static org.elasticsearch.test.hamcrest.ElasticsearchAssertions.assertAcke
 import static org.elasticsearch.test.hamcrest.ElasticsearchAssertions.assertAllSuccessful;
 
 
+@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public abstract class SearchTestBase extends ESIntegTestCase {
 	private static final String INDEX_FILE = "index.json";
 	private static final String PREFIX = "BOOT-INF/classes/";
@@ -117,18 +121,31 @@ public abstract class SearchTestBase extends ESIntegTestCase {
 		refresh();
 	}
 
-	protected SearchResponse getSearchResponse(String testCaseName) throws IOException, URISyntaxException {
-		return getSearchResponse(testCaseName, RESULT_SIZE);
+
+	SearchResponse getSearchResponse(String testCaseName) throws IOException, URISyntaxException {
+		return getSearchResponse(testCaseName, RESULT_SIZE, Optional.empty());
 	}
 
-	protected SearchResponse getSearchResponse(String testCaseName, int resultMaxSize) throws IOException, URISyntaxException {
+	SearchResponse getSearchResponse(String testCaseName, int resultMaxSize) throws IOException, URISyntaxException {
+		return getSearchResponse(testCaseName, resultMaxSize, Optional.empty());
+	}
+
+	SearchResponse getSearchResponse(String testCaseName, String explainId) throws IOException, URISyntaxException {
+		return getSearchResponse(testCaseName, RESULT_SIZE, Optional.of(explainId));
+	}
+
+	SearchResponse getSearchResponse(String testCaseName, int resultMaxSize, String explainId) throws IOException, URISyntaxException {
+		return getSearchResponse(testCaseName, resultMaxSize, Optional.of(explainId));
+	}
+
+	SearchResponse getSearchResponse(String testCaseName, int resultMaxSize, Optional<String> explainId) throws IOException, URISyntaxException {
 		URL testCase = getResource(TESTCASE_DIR + testCaseName);
 		requireNonNull(testCase, "testCase");
 		String queryStr = IOUtils.toString(testCase.openStream(), StandardCharsets.UTF_8);
-		return getSearchResponseFromString(queryStr, resultMaxSize);
+		return getSearchResponseFromString(queryStr, resultMaxSize, explainId);
 	}
 
-	protected SearchResponse getSearchResponseFromString(String queryStr, int resultMaxSize) throws IOException, URISyntaxException {
+	SearchResponse getSearchResponseFromString(String queryStr, int resultMaxSize, Optional<String> explainId) throws IOException, URISyntaxException {
 
 		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 		sourceBuilder.size(resultMaxSize);
@@ -137,10 +154,14 @@ public abstract class SearchTestBase extends ESIntegTestCase {
 
 		sourceBuilder.query(QueryBuilders.wrapperQuery(queryStr));
 
-        /*ExplainRequest explainRequest = new ExplainRequest(PTAElasticSearchMetadataConstants.INDEX, "metadata", "03e4a0d0-ee3d-4664-a612-bdf5046679fc");
-        explainRequest.query(sourceBuilder.query());
-        ExplainResponse explainResponse = client().explain(explainRequest).actionGet();
-        Explanation explanation = explainResponse.getExplanation();*/
+		explainId.ifPresent(id -> {
+			ExplainRequest explainRequest = new ExplainRequest(PTAElasticSearchMetadataConstants.INDEX, "metadata", id);
+			explainRequest.query(sourceBuilder.query());
+			Explanation explanation = client().explain(explainRequest).actionGet().getExplanation();
+			System.out.println("-------------------------\n" +
+					"EXPLANATION:\n\n" + explanation + "" +
+					"-------------------------");
+		});
 
 		SearchRequest request = new SearchRequest(PTAElasticSearchMetadataConstants.INDEX);
 		request.types(PTAElasticSearchMetadataConstants.TYPE);

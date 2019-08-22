@@ -7,7 +7,6 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.test.ESIntegTestCase.ClusterScope;
 import org.elasticsearch.test.ESIntegTestCase.Scope;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -98,9 +97,8 @@ public class SearchTest extends SearchTestBase {
 	}
 
 	@Test
-	@Ignore("Does not work just yet")
 	public void HSLBeforeHSY() throws Exception {
-		SearchResponse response = getSearchResponse("testcase_hsl.json");
+		SearchResponse response = getSearchResponse("testcase_hsl.json", "a93a10c6-a3dc-46f3-8ab9-260f423a4b9e");
 
 		List<String> hslIds = Arrays.asList(
 				"d52b5fae-6139-4182-858c-8602608dd0a4",
@@ -116,7 +114,13 @@ public class SearchTest extends SearchTestBase {
 		then(response.getHits())
 				.extracting(SearchHit::getId)
 				.containsAll(hslIds)
-				.containsSubsequence(hslIds.get(0), hsyIds.get(0));
+				.containsSubsequence(hslIds.get(0), hsyIds.get(0))
+				.containsSubsequence(hslIds.get(1), hsyIds.get(0))
+				.containsSubsequence(hslIds.get(1), hsyIds.get(0))
+				.containsSubsequence(hslIds.get(2), hsyIds.get(0))
+				.containsSubsequence(hslIds.get(3), hsyIds.get(0))
+				.containsSubsequence(hslIds.get(4), hsyIds.get(0))
+		;
 	}
 
 	@Test
