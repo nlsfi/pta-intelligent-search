@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csw:GetRecordByIdResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
+    <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gml="http://www.opengis.net/gml"
+                     xsi:schemaLocation="http://www.isotc211.org/2005/gmd ../../../../web/geonetwork/xml/schemas/iso19139/schema.xsd">
+        <gmd:fileIdentifier>
+            <gco:CharacterString>8dd86d67-5afc-4b51-86c1-15a4889f208b</gco:CharacterString>
+        </gmd:fileIdentifier>
+        <gmd:language>
+            <gco:CharacterString>fin</gco:CharacterString>
+        </gmd:language>
+        <gmd:parentIdentifier>
+            <gco:CharacterString>91bdc4b3-72db-46d6-b542-a1e6d3f68095</gco:CharacterString>
+        </gmd:parentIdentifier>
+        <gmd:hierarchyLevel>
+            <gmd:MD_ScopeCode codeListValue="dataset"
+                              codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"/>
+        </gmd:hierarchyLevel>
+        <gmd:hierarchyLevelName>
+            <gco:CharacterString>Aineisto</gco:CharacterString>
+        </gmd:hierarchyLevelName>
+        <gmd:contact>
+            <gmd:CI_ResponsibleParty>
+                <gmd:organisationName>
+                    <gco:CharacterString>Väylävirasto</gco:CharacterString>
+                </gmd:organisationName>
+                <gmd:contactInfo>
+                    <gmd:CI_Contact>
+                        <gmd:address>
+                            <gmd:CI_Address>
+                                <gmd:electronicMailAddress>
+                                    <gco:CharacterString>paikkatieto@vayla.fi</gco:CharacterString>
+                                </gmd:electronicMailAddress>
+                            </gmd:CI_Address>
+                        </gmd:address>
+                    </gmd:CI_Contact>
+                </gmd:contactInfo>
+                <gmd:role>
+                    <gmd:CI_RoleCode
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"
+                            codeListValue="pointOfContact"/>
+                </gmd:role>
+            </gmd:CI_ResponsibleParty>
+        </gmd:contact>
+        <gmd:dateStamp>
+            <gco:DateTime>2019-06-19T17:04:14</gco:DateTime>
+        </gmd:dateStamp>
+        <gmd:referenceSystemInfo>
+            <gmd:MD_ReferenceSystem/>
+        </gmd:referenceSystemInfo>
+        <gmd:referenceSystemInfo>
+            <gmd:MD_ReferenceSystem>
+                <gmd:referenceSystemIdentifier>
+                    <gmd:RS_Identifier>
+                        <gmd:code>
+                            <gco:CharacterString>- (urn:x-ogc:def:EPSG:3067)</gco:CharacterString>
+                        </gmd:code>
+                        <gmd:codeSpace>
+                            <gco:CharacterString>urn:x-ogc:def</gco:CharacterString>
+                        </gmd:codeSpace>
+                        <gmd:version gco:nilReason="missing">
+                            <gco:CharacterString/>
+                        </gmd:version>
+                    </gmd:RS_Identifier>
+                </gmd:referenceSystemIdentifier>
+            </gmd:MD_ReferenceSystem>
+        </gmd:referenceSystemInfo>
+        <gmd:identificationInfo>
+            <gmd:MD_DataIdentification>
+                <gmd:citation>
+                    <gmd:CI_Citation>
+                        <gmd:title>
+                            <gco:CharacterString>Alikulkupaikka (Tierekisterin tietolaji 262)</gco:CharacterString>
+                        </gmd:title>
+                        <gmd:date>
+                            <gmd:CI_Date>
+                                <gmd:date>
+                                    <gco:Date>2017-02-02</gco:Date>
+                                </gmd:date>
+                                <gmd:dateType>
+                                    <gmd:CI_DateTypeCode codeListValue="creation"
+                                                         codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"/>
+                                </gmd:dateType>
+                            </gmd:CI_Date>
+                        </gmd:date>
+                        <gmd:identifier xmlns:gmx="http://www.isotc211.org/2005/gmx"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <gmd:MD_Identifier>
+                                <gmd:code>
+                                    <gco:CharacterString>1000040</gco:CharacterString>
+                                </gmd:code>
+                            </gmd:MD_Identifier>
+                        </gmd:identifier>
+                    </gmd:CI_Citation>
+                </gmd:citation>
+                <gmd:abstract>
+                    <gco:CharacterString>Aineisto kattaa Väylän ylläpitämän maantieverkon.
+
+                        Tierekisteriin viedään kaikki yleisillä teillä olevat alikulkukorkeutta rajoittavat esteet.
+                        Sähkö-, yms. kaapeleista otetaan mukaan vain rauta- ja raitioteiden ajojohdot. Alikulkupaikan
+                        tieosoite määräytyy ko. esteen puolivälin mukaan (esim. risteävien teiden keskilinjat). Tapaus,
+                        jossa kaksi ajorataisella tiellä molemmilla ajoradoilla on oma siltansa, katsotaan alimenevän
+                        tien kannalta yhdeksi alikulkupaikaksi. Varsinainen alikulkukorkeus ilmoitetaan tietolajilla
+                        263, koska korkeus voi olla erilainen eri ajosuunnissa.
+                    </gco:CharacterString>
+                </gmd:abstract>
+                <gmd:pointOfContact>
+                    <gmd:CI_ResponsibleParty>
+                        <gmd:organisationName>
+                            <gco:CharacterString>Väylävirasto</gco:CharacterString>
+                        </gmd:organisationName>
+                        <gmd:contactInfo>
+                            <gmd:CI_Contact>
+                                <gmd:address>
+                                    <gmd:CI_Address>
+                                        <gmd:electronicMailAddress>
+                                            <gco:CharacterString>paikkatieto@vayla.fi</gco:CharacterString>
+                                        </gmd:electronicMailAddress>
+                                    </gmd:CI_Address>
+                                </gmd:address>
+                            </gmd:CI_Contact>
+                        </gmd:contactInfo>
+                        <gmd:role>
+                            <gmd:CI_RoleCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"
+                                    codeListValue="owner"/>
+                        </gmd:role>
+                    </gmd:CI_ResponsibleParty>
+                </gmd:pointOfContact>
+                <gmd:descriptiveKeywords>
+                    <gmd:MD_Keywords>
+                        <gmd:keyword>
+                            <gco:CharacterString>Liikenne</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:type>
+                            <gmd:MD_KeywordTypeCode codeListValue="theme"
+                                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"/>
+                        </gmd:type>
+                        <gmd:thesaurusName>
+                            <gmd:CI_Citation>
+                                <gmd:title>
+                                    <gco:CharacterString>GEMET Themes, version 2.3,</gco:CharacterString>
+                                </gmd:title>
+                                <gmd:date>
+                                    <gmd:CI_Date>
+                                        <gmd:date>
+                                            <gco:Date>2009-07-13</gco:Date>
+                                        </gmd:date>
+                                        <gmd:dateType>
+                                            <gmd:CI_DateTypeCode codeListValue="publication"
+                                                                 codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"/>
+                                        </gmd:dateType>
+                                    </gmd:CI_Date>
+                                </gmd:date>
+                            </gmd:CI_Citation>
+                        </gmd:thesaurusName>
+                    </gmd:MD_Keywords>
+                </gmd:descriptiveKeywords>
+                <gmd:descriptiveKeywords>
+                    <gmd:MD_Keywords>
+                        <gmd:keyword>
+                            <gco:CharacterString>Liikenneverkot</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:type>
+                            <gmd:MD_KeywordTypeCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"
+                                    codeListValue="theme"/>
+                        </gmd:type>
+                        <gmd:thesaurusName>
+                            <gmd:CI_Citation>
+                                <gmd:title>
+                                    <gco:CharacterString>GEMET - INSPIRE themes, version 1.0</gco:CharacterString>
+                                </gmd:title>
+                                <gmd:date>
+                                    <gmd:CI_Date>
+                                        <gmd:date>
+                                            <gco:Date>2008-06-01</gco:Date>
+                                        </gmd:date>
+                                        <gmd:dateType>
+                                            <gmd:CI_DateTypeCode
+                                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                                    codeListValue="publication"/>
+                                        </gmd:dateType>
+                                    </gmd:CI_Date>
+                                </gmd:date>
+                                <gmd:identifier>
+                                    <gmd:MD_Identifier>
+                                        <gmd:code>
+                                            <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                        xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.inspire-theme">
+                                                geonetwork.thesaurus.external.theme.inspire-theme
+                                            </gmx:Anchor>
+                                        </gmd:code>
+                                    </gmd:MD_Identifier>
+                                </gmd:identifier>
+                            </gmd:CI_Citation>
+                        </gmd:thesaurusName>
+                    </gmd:MD_Keywords>
+                </gmd:descriptiveKeywords>
+                <gmd:descriptiveKeywords>
+                    <gmd:MD_Keywords>
+                        <gmd:keyword>
+                            <gco:CharacterString>Tierekisteri</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:keyword>
+                            <gco:CharacterString>Alikulkupaikka</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:keyword>
+                            <gco:CharacterString>avoindata.fi</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:type>
+                            <gmd:MD_KeywordTypeCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"
+                                    codeListValue=""/>
+                        </gmd:type>
+                    </gmd:MD_Keywords>
+                </gmd:descriptiveKeywords>
+                <gmd:resourceConstraints>
+                    <gmd:MD_Constraints>
+                        <gmd:useLimitation>
+                            <gco:CharacterString>Creative Commons 4.0 BY</gco:CharacterString>
+                        </gmd:useLimitation>
+                    </gmd:MD_Constraints>
+                </gmd:resourceConstraints>
+                <gmd:resourceConstraints>
+                    <gmd:MD_LegalConstraints>
+                        <gmd:accessConstraints>
+                            <gmd:MD_RestrictionCode codeListValue="otherRestrictions"
+                                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode"/>
+                        </gmd:accessConstraints>
+                        <gmd:otherConstraints>
+                            <gco:CharacterString>Ei muita rajoitteita.</gco:CharacterString>
+                        </gmd:otherConstraints>
+                    </gmd:MD_LegalConstraints>
+                </gmd:resourceConstraints>
+                <gmd:resourceConstraints>
+                    <gmd:MD_SecurityConstraints>
+                        <gmd:classification>
+                            <gmd:MD_ClassificationCode codeListValue="unclassified"
+                                                       codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ClassificationCode"/>
+                        </gmd:classification>
+                    </gmd:MD_SecurityConstraints>
+                </gmd:resourceConstraints>
+                <gmd:resourceConstraints xmlns:gmx="http://www.isotc211.org/2005/gmx"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <gmd:MD_LegalConstraints>
+                        <gmd:accessConstraints>
+                            <gmd:MD_RestrictionCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode"
+                                    codeListValue="otherRestrictions"/>
+                        </gmd:accessConstraints>
+                        <gmd:useConstraints/>
+                    </gmd:MD_LegalConstraints>
+                </gmd:resourceConstraints>
+                <gmd:language>
+                    <gco:CharacterString>fin</gco:CharacterString>
+                </gmd:language>
+                <gmd:topicCategory>
+                    <gmd:MD_TopicCategoryCode>transportation</gmd:MD_TopicCategoryCode>
+                </gmd:topicCategory>
+                <gmd:extent>
+                    <gmd:EX_Extent>
+                        <gmd:geographicElement>
+                            <gmd:EX_GeographicBoundingBox>
+                                <gmd:westBoundLongitude>
+                                    <gco:Decimal>19.08317359</gco:Decimal>
+                                </gmd:westBoundLongitude>
+                                <gmd:eastBoundLongitude>
+                                    <gco:Decimal>31.58672881</gco:Decimal>
+                                </gmd:eastBoundLongitude>
+                                <gmd:southBoundLatitude>
+                                    <gco:Decimal>59.45414258</gco:Decimal>
+                                </gmd:southBoundLatitude>
+                                <gmd:northBoundLatitude>
+                                    <gco:Decimal>70.09229553</gco:Decimal>
+                                </gmd:northBoundLatitude>
+                            </gmd:EX_GeographicBoundingBox>
+                        </gmd:geographicElement>
+                        <gmd:temporalElement xmlns:gmx="http://www.isotc211.org/2005/gmx"
+                                             xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <gmd:EX_TemporalExtent>
+                                <gmd:extent>
+                                    <gml:TimePeriod gml:id="d148808e286a1051934">
+                                        <gml:beginPosition>2017-02-03T00:00:00</gml:beginPosition>
+                                        <gml:endPosition>2017-02-03T00:00:00</gml:endPosition>
+                                    </gml:TimePeriod>
+                                </gmd:extent>
+                            </gmd:EX_TemporalExtent>
+                        </gmd:temporalElement>
+                    </gmd:EX_Extent>
+                </gmd:extent>
+                <gmd:extent xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <gmd:EX_Extent>
+                        <gmd:geographicElement/>
+                    </gmd:EX_Extent>
+                </gmd:extent>
+            </gmd:MD_DataIdentification>
+        </gmd:identificationInfo>
+        <gmd:distributionInfo>
+            <gmd:MD_Distribution>
+                <gmd:transferOptions>
+                    <gmd:MD_DigitalTransferOptions>
+                        <gmd:onLine>
+                            <gmd:CI_OnlineResource>
+                                <gmd:linkage>
+                                    <gmd:URL>http://www.vayla.fi/palveluntuottajat/aineistot/tierekisteri</gmd:URL>
+                                </gmd:linkage>
+                                <gmd:protocol>
+                                    <gco:CharacterString>WWW:LINK-1.0-http--link</gco:CharacterString>
+                                </gmd:protocol>
+                            </gmd:CI_OnlineResource>
+                        </gmd:onLine>
+                    </gmd:MD_DigitalTransferOptions>
+                </gmd:transferOptions>
+                <gmd:transferOptions xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <gmd:MD_DigitalTransferOptions/>
+                </gmd:transferOptions>
+            </gmd:MD_Distribution>
+        </gmd:distributionInfo>
+        <gmd:dataQualityInfo>
+            <gmd:DQ_DataQuality>
+                <gmd:scope>
+                    <gmd:DQ_Scope>
+                        <gmd:level>
+                            <gmd:MD_ScopeCode codeListValue="dataset"
+                                              codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"/>
+                        </gmd:level>
+                    </gmd:DQ_Scope>
+                </gmd:scope>
+                <gmd:report xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <gmd:DQ_DomainConsistency>
+                        <gmd:result>
+                            <gmd:DQ_ConformanceResult>
+                                <gmd:specification>
+                                    <gmd:CI_Citation>
+                                        <gmd:title>
+                                            <gco:CharacterString>KOMISSION ASETUS (EU) N:o 1089/2010, annettu 23 päivänä
+                                                marraskuuta 2010, Euroopan parlamentin ja neuvoston direktiivin
+                                                2007/2/EY täytäntöönpanosta paikkatietoaineistojen ja -palvelujen
+                                                yhteentoimivuuden osalta
+                                            </gco:CharacterString>
+                                        </gmd:title>
+                                        <gmd:date>
+                                            <gmd:CI_Date>
+                                                <gmd:date>
+                                                    <gco:Date>2010-12-08</gco:Date>
+                                                </gmd:date>
+                                                <gmd:dateType>
+                                                    <gmd:CI_DateTypeCode
+                                                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                                            codeListValue="publication"/>
+                                                </gmd:dateType>
+                                            </gmd:CI_Date>
+                                        </gmd:date>
+                                    </gmd:CI_Citation>
+                                </gmd:specification>
+                                <gmd:explanation>
+                                    <gco:CharacterString>--- Selitys onko aineisto tietotuotemäärittelyn mukainen ----
+                                        --- Klikkaa sääntöjenmukaisuusaste, jos on määrittelyn mukainen ---
+                                    </gco:CharacterString>
+                                </gmd:explanation>
+                                <gmd:pass>
+                                    <gco:Boolean>false</gco:Boolean>
+                                </gmd:pass>
+                            </gmd:DQ_ConformanceResult>
+                        </gmd:result>
+                    </gmd:DQ_DomainConsistency>
+                </gmd:report>
+                <gmd:lineage>
+                    <gmd:LI_Lineage>
+                        <gmd:statement>
+                            <gco:CharacterString>--- Tietoa aineiston prosessointihistoriasta ja laadusta ---
+                            </gco:CharacterString>
+                        </gmd:statement>
+                    </gmd:LI_Lineage>
+                </gmd:lineage>
+            </gmd:DQ_DataQuality>
+        </gmd:dataQualityInfo>
+    </gmd:MD_Metadata>
+</csw:GetRecordByIdResponse>
+
