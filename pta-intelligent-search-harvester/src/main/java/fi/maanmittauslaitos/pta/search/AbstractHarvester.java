@@ -37,7 +37,7 @@ public abstract class AbstractHarvester implements CommandLineRunner {
 
 	protected static final Logger logger = Logger.getLogger(AbstractHarvester.class);
 	private static final String NUMBER_OF_THREADS_ARGUMENT = "threads";
-	private static int DEFAULT_NUMBER_OF_THREADS = 4;
+	private static final int DEFAULT_NUMBER_OF_THREADS = 4;
 
 	abstract protected DocumentSink getDocumentSink(HarvesterConfig config, HarvesterTracker harvesterTracker, ApplicationArguments args);
 
@@ -61,6 +61,9 @@ public abstract class AbstractHarvester implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		ApplicationArguments arguments = new DefaultApplicationArguments(args);
 		logger.info("Arguments are " + arguments.getOptionNames());
+		int nThreads = parseArgument(NUMBER_OF_THREADS_ARGUMENT, arguments)
+				.map(Integer::parseInt)
+				.orElse(DEFAULT_NUMBER_OF_THREADS);
 
 		HarvesterConfig config = getConfig();
 		HarvesterTracker tracker = config.getHarvesterTracker();
@@ -82,9 +85,6 @@ public abstract class AbstractHarvester implements CommandLineRunner {
 		sink.startIndexing();
 
 
-		int nThreads = parseArgument(NUMBER_OF_THREADS_ARGUMENT, arguments)
-				.map(Integer::parseInt)
-				.orElse(DEFAULT_NUMBER_OF_THREADS);
 
 		logger.info("Starting harvesting with " + nThreads + " threads");
 
@@ -122,6 +122,7 @@ public abstract class AbstractHarvester implements CommandLineRunner {
 				.collect(ParallelCollectors.parallelToList(harvestable -> {
 					String id = harvestable.getIdentifier();
 					if (tracker.isYetToBeProcessed(id)) {
+						logger.info("Processing: " + id);
 						boolean continueToNext = false;
 						boolean shouldShutDownExecutor = false;
 						int tries = 0;
@@ -200,7 +201,7 @@ public abstract class AbstractHarvester implements CommandLineRunner {
 			continueToNext = true;
 
 
-		} catch (DocumentProcessingException | SinkProcessingException e) {
+		} catch (DocumentProcessingException | SinkProcessingException | IllegalArgumentException e) {
 			logger.error("Processing error for the id " + id, e);
 			tracker.addToSkippedDueProcessingException(id);
 			continueToNext = true;

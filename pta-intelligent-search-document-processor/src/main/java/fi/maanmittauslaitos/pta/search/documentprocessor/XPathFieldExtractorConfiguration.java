@@ -1,19 +1,20 @@
 package fi.maanmittauslaitos.pta.search.documentprocessor;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.w3c.dom.NodeList;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathException;
 import javax.xml.xpath.XPathExpressionException;
-
-import org.w3c.dom.NodeList;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class XPathFieldExtractorConfiguration extends AbstractFieldExtractorConfiguration {
 	private FieldExtractorType type;
 	private String xpath;
 	private XPathCustomExtractor customExtractor;
+	private XPathNodeListCustomExtractor customNodeListExtractor;
 	
 	@Override
 	public void copyUnderlyingFeatures(AbstractFieldExtractorConfiguration object) {
@@ -57,6 +58,14 @@ public class XPathFieldExtractorConfiguration extends AbstractFieldExtractorConf
 		return customExtractor;
 	}
 
+	public XPathNodeListCustomExtractor getCustomNodeListExtractor() {
+		return customNodeListExtractor;
+	}
+
+	public void setCustomNodeListExtractor(XPathNodeListCustomExtractor customNodeListExtractor) {
+		this.customNodeListExtractor = customNodeListExtractor;
+	}
+
 	@Override
 	public Object process(org.w3c.dom.Document doc, XPath xPath) throws DocumentProcessingException 
 	{
@@ -95,7 +104,7 @@ public class XPathFieldExtractorConfiguration extends AbstractFieldExtractorConf
 		case TRUE_IF_MATCHES_OTHERWISE_FALSE:
 			{
 				boolean matches = nodeList.getLength() > 0;
-				return Boolean.valueOf(matches);
+				return matches;
 			}
 			
 		case CUSTOM_CLASS:
@@ -120,24 +129,13 @@ public class XPathFieldExtractorConfiguration extends AbstractFieldExtractorConf
 
 			case CUSTOM_CLASS_SINGLE_VALUE:
 			{
-				XPathCustomExtractor extractor = getCustomExtractor();
+				XPathNodeListCustomExtractor extractor = getCustomNodeListExtractor();
 				if (extractor == null) {
-					throw new IllegalArgumentException("Missing XPathCustomExtractor in CUSTOM_CLASS_SINGLE_VALUE configuration");
-				}
-				if (nodeList.getLength() > 1) {
-					throw new IllegalArgumentException("More than single value in CUSTOM_CLASS_SINGLE_VALUE configuration");
+					throw new IllegalArgumentException("Missing XPathNodeListCustomExtractor in CUSTOM_CLASS_SINGLE_VALUE configuration");
 				}
 				try {
-					List<Object> ret = new ArrayList<>();
-					for (int i = 0; i < nodeList.getLength(); i++) {
-						Object obj = extractor.process(xPath, nodeList.item(i));
-						if (obj != null) {
-							ret.add(obj);
-							break;
-						}
-					}
-					return ret.size() > 0 ? ret.get(0) : ret;
-
+					Object obj = extractor.process(xPath, nodeList);
+					return obj != null ? obj : Collections.emptyList();
 				} catch(XPathException xpe) {
 					throw new DocumentProcessingException(xpe);
 				}

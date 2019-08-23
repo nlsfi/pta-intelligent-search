@@ -1,13 +1,13 @@
 package fi.maanmittauslaitos.pta.search.documentprocessor;
 
-import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathException;
 
 @FunctionalInterface
-public interface XPathCustomExtractor {
+public interface XPathNodeListCustomExtractor {
 
-	Object process(XPath xPath, Node node) throws XPathException;
+	Object process(XPath xPath, NodeList nodeList) throws XPathException;
 
 }

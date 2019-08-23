@@ -11,11 +11,11 @@ public class RegionTest {
 
     @Test
     public void testRegionIntersections() {
-        RegionImpl finland = new RegionImpl(Arrays.asList(19.450000, 59.780000, 31.610000, 70.120000));
-        RegionImpl keskiSuomi = new RegionImpl(Arrays.asList(24.010000, 61.450000, 26.780000, 63.610000));
-        RegionImpl jklMunicipality = new RegionImpl(Arrays.asList(25.260000, 61.840000, 26.050000, 62.430000));
-        RegionImpl jkl = new RegionImpl(Arrays.asList(25.26078, 61.83952, 26.25, 62.5));
-        RegionImpl inari = new RegionImpl(Arrays.asList(24.900000, 68.280000, 29.340000, 69.850000));
+        Region finland = RegionFactory.create(Arrays.asList(19.450000, 59.780000, 31.610000, 70.120000));
+        Region keskiSuomi = RegionFactory.create(Arrays.asList(24.010000, 61.450000, 26.780000, 63.610000));
+        Region jklMunicipality = RegionFactory.create(Arrays.asList(25.260000, 61.840000, 26.050000, 62.430000));
+        Region jkl = RegionFactory.create(Arrays.asList(25.26078, 61.83952, 26.25, 62.5));
+        Region inari = RegionFactory.create(Arrays.asList(24.900000, 68.280000, 29.340000, 69.850000));
 
         assertThat(finland.intersects(keskiSuomi)).isTrue();
         assertThat(finland.intersects(jklMunicipality)).isTrue();
@@ -33,8 +33,8 @@ public class RegionTest {
 
     @Test
     public void testCommonRegion() {
-        RegionImpl jkl = new RegionImpl(Arrays.asList(25.26078, 61.83952, 26.25, 62.5));
-        RegionImpl inari = new RegionImpl(Arrays.asList(24.900000, 68.280000, 29.340000, 69.850000));
+        Region jkl = RegionFactory.create(Arrays.asList(25.26078, 61.83952, 26.25, 62.5));
+        Region inari = RegionFactory.create(Arrays.asList(24.900000, 68.280000, 29.340000, 69.850000));
 
         assertThat(jkl.getCommonRegion(inari).getCoordinates()).isEqualTo(Arrays.asList(24.900000, 61.83952, 29.340000, 69.850000));
     }
