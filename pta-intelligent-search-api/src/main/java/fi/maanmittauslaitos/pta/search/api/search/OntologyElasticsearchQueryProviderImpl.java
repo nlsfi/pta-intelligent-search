@@ -43,8 +43,11 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	private int ontologyLevels = 1;
 	private double weightFactor = 0.5; // weightForLevel(1) = 1.0, weightForLevel(x) = weightForLevel(x-1) * weightFactor
 	private double basicWordMatchWeight = 1.0;
+	private double basicWordMatchFuzzyWeight = 0.4;
 	private double titleWordMatchWeight = 1.5;
+	private double titleWordMatchFuzzyWeight = 1.1;
 	private double organisationNameMatchWeight = 1.5;
+	private double organisationNameMatchFuzzyWeight = 1.1;
 
 	private final ValueFactory vf = SimpleValueFactory.getInstance();
 	private Map<Language, Stemmer> stemmers;
@@ -139,6 +142,18 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		this.organisationNameMatchWeight = organisationNameMatchWeight;
 	}
 
+	public void setBasicWordMatchFuzzyWeight(double basicWordMatchFuzzyWeight) {
+		this.basicWordMatchFuzzyWeight = basicWordMatchFuzzyWeight;
+	}
+
+	public void setTitleWordMatchFuzzyWeight(double titleWordMatchFuzzyWeight) {
+		this.titleWordMatchFuzzyWeight = titleWordMatchFuzzyWeight;
+	}
+
+	public void setOrganisationNameMatchFuzzyWeight(double organisationNameMatchFuzzyWeight) {
+		this.organisationNameMatchFuzzyWeight = organisationNameMatchFuzzyWeight;
+	}
+
 	@Override
 	public BoolQueryBuilder buildSearchSource(SearchQuery pyynto, Language lang) {
 		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
@@ -202,24 +217,26 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		for (String sana : words) {
 			DisMaxQueryBuilder disMax = QueryBuilders.disMaxQuery();
 
-			disMax.add(freetextQuery("abstract", sana, basicWordMatchWeight));
-			disMax.add(freetextQuery("title", sana, titleWordMatchWeight));
-			disMax.add(freetextQuery("organisationName_text", sana, organisationNameMatchWeight));
+			disMax.add(freetextQuery("abstract", sana, basicWordMatchWeight, basicWordMatchFuzzyWeight));
+			disMax.add(freetextQuery("title", sana, titleWordMatchWeight, titleWordMatchFuzzyWeight));
+			disMax.add(freetextQuery("organisationName_text", sana, organisationNameMatchWeight, organisationNameMatchFuzzyWeight));
 
 			boolQuery.should().add(disMax);
 		}
 	}
 
-	private QueryBuilder freetextQuery(String field, String word, double weight) {
-		QueryBuilder tmp;
+	private QueryBuilder freetextQuery(String field, String word, double weight, double fuzzyWeight) {
+		DisMaxQueryBuilder query = QueryBuilders.disMaxQuery();
+		query.add(QueryBuilders.termQuery(field, word)
+				.boost((float) weight));
 
-		if (getRequireExactWordMatch().contains(word)) {
-			tmp = QueryBuilders.termQuery(field, word);
-		} else {
-			tmp = QueryBuilders.fuzzyQuery(field, word);
+		if (!getRequireExactWordMatch().contains(word)) {
+			query.add(
+					QueryBuilders.fuzzyQuery(field, word)
+							.boost((float) fuzzyWeight)
+			);
 		}
-		tmp.boost((float) weight);
-		return tmp;
+		return query;
 	}
 
 	private void addOntologicalTermQueries(Collection<String> terms, BoolQueryBuilder boolQuery) {
