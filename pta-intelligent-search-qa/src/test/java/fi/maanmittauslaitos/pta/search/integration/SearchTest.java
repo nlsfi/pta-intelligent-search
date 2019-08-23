@@ -55,7 +55,10 @@ public class SearchTest extends SearchTestBase {
 		SearchResponse response = getSearchResponse("testcase_keski-suomi.json");
 		then(response.getHits())
 				.extracting(SearchHit::getId)
-				.containsExactly("89c6a379-776f-4529-b79d-a456177fb64d"); //jkl
+				.containsExactly(
+						"89c6a379-776f-4529-b79d-a456177fb64d", //jkl
+						"d527c231-0c7f-4ef0-89df-e5a34888caa4" //jämsä
+				);
 	}
 
 	@Test
