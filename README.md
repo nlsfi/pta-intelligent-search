@@ -70,7 +70,7 @@ are built using Statistical units data and Municipality name data.
 Statistical Units, Statistics Finland The material was downloaded from Statistics 
 Finland's interface service on 9 August 2019 with the licence [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.en). 
 Municipalities, Population Register Centre, the material was downloaded from Avoindata.fi on August 20 2019 with
-the licence CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/deed.en)
+the licence [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.en)
 
 To update the databases with the newest data sets:
  * Make sure that you have Python3 environment with all packages installed from [requirements.txt](elasticsearch-data-processing-scripts/requirements.txt)

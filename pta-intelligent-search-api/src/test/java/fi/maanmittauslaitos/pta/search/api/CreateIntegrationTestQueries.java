@@ -111,13 +111,13 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
 		private Language lang;
 
 		private ConversionHelper(String testcase, List<String> queryList, Language lang) {
-			this.testCaseName = testcase;
+			this.testCaseName = testcase + POSTFIX;
 			this.queryList = queryList;
 			this.lang = lang;
 		}
 
 		static ConversionHelper create(List<String> queryList) {
-			String testcase = TESTCASE + String.join("_", queryList) + POSTFIX;
+			String testcase = TESTCASE + String.join("_", queryList);
 			return new ConversionHelper(testcase, queryList, Language.FI);
 		}
 
