@@ -1,6 +1,12 @@
 package fi.maanmittauslaitos.pta.search.utils;
 
+import java.util.List;
+
 public interface Region {
+	Region getCommonRegion(Region r2);
+
+	List<Double> getCoordinates();
+
 	Double getArea();
 
 	Double getIntersection(Region r2);

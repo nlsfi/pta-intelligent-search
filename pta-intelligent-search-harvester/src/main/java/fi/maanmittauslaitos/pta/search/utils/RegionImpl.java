@@ -1,5 +1,6 @@
 package fi.maanmittauslaitos.pta.search.utils;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class RegionImpl implements Region {
@@ -8,10 +9,6 @@ public class RegionImpl implements Region {
 
 	RegionImpl(List<Double> coordinates) {
 		this.coordinates = coordinates;
-	}
-
-	public List<Double> getCoordinates() {
-		return coordinates;
 	}
 
 	private Double left() {
@@ -30,10 +27,27 @@ public class RegionImpl implements Region {
 		return coordinates.get(1);
 	}
 
+	@Override
+	public List<Double> getCoordinates() {
+		return coordinates;
+	}
+
 
 	@Override
 	public Double getArea() {
 		return (right() - left()) * (top() - bottom());
+	}
+
+	@Override
+	public Region getCommonRegion(Region other) {
+		RegionImpl r2 = (RegionImpl) other;
+		List<Double> coordinates = Arrays.asList(
+				Math.min(left(), r2.left()),
+				Math.min(bottom(), r2.bottom()),
+				Math.max(right(), r2.right()),
+				Math.max(top(), r2.top())
+		);
+		return new RegionImpl(coordinates);
 	}
 
 	@Override
