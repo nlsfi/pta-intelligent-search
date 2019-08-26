@@ -26,7 +26,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.elasticsearch.action.DocWriteResponse;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
-import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
@@ -44,6 +43,7 @@ import org.elasticsearch.common.xcontent.json.JsonXContent;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.testcontainers.elasticsearch.ElasticsearchContainer;
@@ -59,10 +59,10 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -73,9 +73,10 @@ import static java.util.Objects.requireNonNull;
 import static org.assertj.core.api.BDDAssertions.then;
 
 /**
- * This class
+ * This class is adapted from https://github.com/dadoonet/elasticsearch-integration-tests
  */
 
+@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public abstract class SearchTestBase {
 
 	private static final Logger logger = LogManager.getLogger(SearchTestBase.class);
@@ -90,6 +91,7 @@ public abstract class SearchTestBase {
 	private static final String TESTCASE_DIR = COMMON_CLASSPATH + "testcases/";
 	private static final int RESULT_SIZE = 10;
 	protected static int nDocs;
+	protected List<FieldSortBuilder> sortBuilders = Collections.emptyList();
 
 	@BeforeClass
 	public static void startElasticsearchRestClient() throws IOException, URISyntaxException {
@@ -108,8 +110,6 @@ public abstract class SearchTestBase {
 			logger.info("A node is already running. No need to start a Docker instance.");
 		} catch (ConnectException e) {
 			logger.info("No node running. We need to start a Docker instance.");
-			Properties properties = new Properties();
-			properties.load(SearchTestBase.class.getClassLoader().getResourceAsStream("elasticsearch.version.properties"));
 			container = new ElasticsearchContainer("docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.4");
 			container.start();
 			logger.info("Docker instance started.");
@@ -185,7 +185,7 @@ public abstract class SearchTestBase {
 		CreateIndexRequest createIndexRequest = new CreateIndexRequest(INDEX);
 		createIndexRequest.source(index, XContentType.JSON);
 
-		CreateIndexResponse response = client.indices().create(createIndexRequest);
+		client.indices().create(createIndexRequest);
 
 		ZipEntry entry;
 
@@ -254,7 +254,7 @@ public abstract class SearchTestBase {
 		return getSearchResponseFromString(queryStr, resultMaxSize, explainId);
 	}
 
-	SearchResponse getSearchResponseFromString(String queryStr, int resultMaxSize, Optional<String> explainId) throws IOException, URISyntaxException {
+	SearchResponse getSearchResponseFromString(String queryStr, int resultMaxSize, Optional<String> explainId) throws IOException {
 
 		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 		sourceBuilder.size(resultMaxSize);
@@ -262,6 +262,8 @@ public abstract class SearchTestBase {
 		sourceBuilder.fetchSource("*", null);
 
 		sourceBuilder.query(QueryBuilders.wrapperQuery(queryStr));
+
+		sortBuilders.forEach(sourceBuilder::sort);
 
 		//TODO: Fix explain
         /*explainId.ifPresent(id -> {

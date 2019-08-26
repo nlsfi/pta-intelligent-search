@@ -3,7 +3,6 @@ package fi.maanmittauslaitos.pta.search.api;
 import fi.maanmittauslaitos.pta.search.api.ApplicationConfiguration.MockElasticsearchQueryAPI;
 import fi.maanmittauslaitos.pta.search.api.model.SearchQuery;
 import fi.maanmittauslaitos.pta.search.api.search.HakuKone;
-import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.boot.ApplicationArguments;
@@ -15,7 +14,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,24 +21,22 @@ import java.util.List;
 import java.util.Objects;
 
 public class CreateIntegrationTestQueries implements ApplicationRunner {
-	private static final Logger logger = Logger.getLogger(CreateIntegrationTestQueries.class);
 
-	private MockElasticsearchQueryAPI esQueryAPI;
+	private final MockElasticsearchQueryAPI esQueryAPI;
 
-	private HakuKone hakukone;
+	private final HakuKone hakukone;
 
 	public CreateIntegrationTestQueries(MockElasticsearchQueryAPI esQueryAPI, HakuKone hakukone) {
 		this.esQueryAPI = esQueryAPI;
 		this.hakukone = hakukone;
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		System.setProperty("spring.profiles.active", "createIntegrationTestQueries");
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
 		Objects.requireNonNull(ctx);
 
 		CreateIntegrationTestQueries runner = new CreateIntegrationTestQueries(ctx.getBean(MockElasticsearchQueryAPI.class), ctx.getBean(HakuKone.class));
-
 		runner.run(new DefaultApplicationArguments(args));
 	}
 
@@ -52,6 +48,7 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
 			//noinspection ResultOfMethodCallIgnored
 			directory.mkdirs();
 		}
+
 
 		Arrays.asList(
 				ConversionHelper.create("testcase_empty", Collections.emptyList()),
@@ -66,20 +63,21 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
 				ConversionHelper.create(Collections.singletonList("rauta")),
 				ConversionHelper.create(Collections.singletonList("korpilahti")),
 				ConversionHelper.create("testcase_kansallinen", Collections.singletonList("nationwide"), Language.EN),
-				ConversionHelper.create(Collections.singletonList("tammerfors"), Language.SV)
-		).forEach(helper -> generateTestCaseQuery(helper.getQueryList(), Paths.get(outputDir, helper.getTestCaseName()), helper.getLanguage()));
+				ConversionHelper.create(Collections.singletonList("tammerfors"), Language.SV),
+				ConversionHelper.create(Collections.singletonList("oulu"))
+		).forEach(helper -> generateTestCaseQuery(helper, outputDir));
 	}
 
-	private void generateTestCaseQuery(List<String> queryList, Path outFile, Language lang) {
+	private void generateTestCaseQuery(ConversionHelper helper, String outputDir) {
 		SearchQuery pyynto = new SearchQuery();
-		pyynto.setQuery(queryList);
+		pyynto.setQuery(helper.getQueryList());
 
 		String json = null;
 		try {
-			JSONObject jsonObject = new JSONObject(convertQueryIntoJSON(pyynto, lang));
+			JSONObject jsonObject = new JSONObject(convertQueryIntoJSON(pyynto, helper.getLanguage()));
 			json = jsonObject.getJSONObject("query").toString(2);
 
-			Files.write(outFile, json.getBytes());
+			Files.write(Paths.get(outputDir, helper.getTestCaseName()), json.getBytes());
 		} catch (IOException | JSONException e) {
 			e.printStackTrace();
 		}
@@ -104,9 +102,9 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
 	static class ConversionHelper {
 		private static final String TESTCASE = "testcase_";
 		private static final String POSTFIX = ".json";
-		private String testCaseName;
-		private List<String> queryList;
-		private Language lang;
+		private final String testCaseName;
+		private final List<String> queryList;
+		private final Language lang;
 
 		private ConversionHelper(String testcase, List<String> queryList, Language lang) {
 			this.testCaseName = testcase + POSTFIX;
@@ -120,7 +118,7 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
 		}
 
 		static ConversionHelper create(List<String> queryList, Language lang) {
-			String testcase = TESTCASE + String.join("_", queryList) + POSTFIX;
+			String testcase = TESTCASE + String.join("_", queryList);
 			return new ConversionHelper(testcase, queryList, lang);
 		}
 
