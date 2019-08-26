@@ -1,4 +1,18 @@
 {
+  "settings": {
+    "analysis": {
+      "normalizer": {
+        "lowercase_normalizer": {
+          "type": "custom",
+          "char_filter": [],
+          "filter": [
+            "lowercase",
+            "asciifolding"
+          ]
+        }
+      }
+    }
+  },
   "mappings": {
     "metadata": {
       "properties": {
@@ -12,9 +26,18 @@
         "keywordsInspire":           { "type": "keyword" },
         "topicCategories":           { "type": "keyword" },
         "distributionFormats":       { "type": "keyword" },
-        "titleFiSort":               { "type": "keyword" },
-        "titleSvSort":               { "type": "keyword" },
-        "titleEnSort":               { "type": "keyword" },
+        "titleFiSort": {
+          "type": "keyword",
+          "normalizer": "lowercase_normalizer"
+        },
+        "titleSvSort": {
+          "type": "keyword",
+          "normalizer": "lowercase_normalizer"
+        },
+        "titleEnSort": {
+          "type": "keyword",
+          "normalizer": "lowercase_normalizer"
+        },
         "organisations": {
           "type": "object",
           "properties": {
