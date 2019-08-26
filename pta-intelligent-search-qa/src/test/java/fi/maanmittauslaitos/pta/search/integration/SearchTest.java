@@ -1,14 +1,8 @@
 package fi.maanmittauslaitos.pta.search.integration;
 
-import com.carrotsearch.randomizedtesting.annotations.Seed;
-import com.carrotsearch.randomizedtesting.annotations.ThreadLeakScope;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.test.ESIntegTestCase.ClusterScope;
-import org.elasticsearch.test.ESIntegTestCase.Scope;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -18,17 +12,7 @@ import java.util.List;
 import static org.assertj.core.api.BDDAssertions.then;
 
 
-@ClusterScope(scope = Scope.SUITE)
-@ThreadLeakScope(ThreadLeakScope.Scope.NONE)
-@Seed("2A")
-@RunWith(com.carrotsearch.randomizedtesting.RandomizedRunner.class)
 public class SearchTest extends SearchTestBase {
-
-
-	@Before
-	public void beforeTests() throws Exception {
-		createIndexAndPopulate();
-	}
 
 	@Test
 	public void emptyQueryReturnsAll() throws Exception {
