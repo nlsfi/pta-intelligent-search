@@ -6,12 +6,11 @@ import fi.maanmittauslaitos.pta.search.api.search.HakuKone;
 import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.boot.DefaultApplicationArguments;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,29 +20,28 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
-@SpringBootApplication
 public class CreateIntegrationTestQueries implements ApplicationRunner {
 	private static final Logger logger = Logger.getLogger(CreateIntegrationTestQueries.class);
 
-	@SuppressWarnings("unused")
-	@Autowired
-	private ApplicationConfiguration configuration;
-
-	@Autowired
 	private MockElasticsearchQueryAPI esQueryAPI;
 
-	@Autowired
 	private HakuKone hakukone;
 
-	public static void main(String[] args) {
+	public CreateIntegrationTestQueries(MockElasticsearchQueryAPI esQueryAPI, HakuKone hakukone) {
+		this.esQueryAPI = esQueryAPI;
+		this.hakukone = hakukone;
+	}
+
+	public static void main(String[] args) throws IOException {
 		System.setProperty("spring.profiles.active", "createIntegrationTestQueries");
-		try {
-			ConfigurableApplicationContext ctx = SpringApplication.run(CreateIntegrationTestQueries.class, args);
-			SpringApplication.exit(ctx);
-		} catch (Exception e) {
-			logger.error("Configuration error", e);
-		}
+		ApplicationContext ctx = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
+		Objects.requireNonNull(ctx);
+
+		CreateIntegrationTestQueries runner = new CreateIntegrationTestQueries(ctx.getBean(MockElasticsearchQueryAPI.class), ctx.getBean(HakuKone.class));
+
+		runner.run(new DefaultApplicationArguments(args));
 	}
 
 	@Override
@@ -146,4 +144,5 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
 			return lang;
 		}
 	}
+
 }
