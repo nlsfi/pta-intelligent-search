@@ -80,7 +80,7 @@ import static org.assertj.core.api.BDDAssertions.then;
 public abstract class SearchTestBase {
 
 	private static final Logger logger = LogManager.getLogger(SearchTestBase.class);
-	private static final String INDEX = "pta";
+	private static final String INDEX = "ptatestidx";
 	private static RestHighLevelClient client;
 	private static ElasticsearchContainer container;
 
@@ -276,7 +276,7 @@ public abstract class SearchTestBase {
                     "-------------------------");
         });*/
 
-		SearchRequest request = new SearchRequest(PTAElasticSearchMetadataConstants.INDEX);
+		SearchRequest request = new SearchRequest(INDEX);
 		request.types(PTAElasticSearchMetadataConstants.TYPE);
 		request.source(sourceBuilder);
 
