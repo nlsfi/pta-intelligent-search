@@ -1,13 +1,6 @@
 package fi.maanmittauslaitos.pta.search.text;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
+import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 import org.apache.log4j.Logger;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Literal;
@@ -15,7 +8,13 @@ import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Resource;
 import org.eclipse.rdf4j.model.Statement;
 
-import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 public class RDFTerminologyMatcherProcessor implements TextProcessor {
 	private static Logger logger = Logger.getLogger(RDFTerminologyMatcherProcessor.class);
@@ -68,8 +67,8 @@ public class RDFTerminologyMatcherProcessor implements TextProcessor {
 	public Stemmer getStemmer() {
 		return stemmer;
 	}
-	
-	public Map<String, List<String>> getDict() {
+
+	public synchronized Map<String, List<String>> getDict() {
 		if (dict != null) {
 			return dict;
 		}
@@ -169,10 +168,11 @@ public class RDFTerminologyMatcherProcessor implements TextProcessor {
 	@Override
 	public List<String> process(List<String> input) {
 		List<String> ret = new ArrayList<>();
-		
+		Map<String, List<String>> dict = getDict();
+
 		for (String str : input) {
 			String stemmed = stem(str);
-			List<String> tmp = getDict().get(stemmed);
+			List<String> tmp = dict.get(stemmed);
 			
 			if (tmp != null) {
 				ret.addAll(tmp);

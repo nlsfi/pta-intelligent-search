@@ -1,5 +1,11 @@
 package fi.maanmittauslaitos.pta.search.text;
 
+import org.eclipse.rdf4j.model.IRI;
+import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.Value;
+import org.eclipse.rdf4j.model.ValueFactory;
+import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -8,12 +14,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.eclipse.rdf4j.model.IRI;
-import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.Value;
-import org.eclipse.rdf4j.model.ValueFactory;
-import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 
 /**
  * 
@@ -42,8 +42,8 @@ public class TerminologyExpansionProcessor implements TextProcessor {
 	 * predicate to follow is the SKOS.BROADER, the expander will then expand
 	 * a word into the broader definitions of the original term. Expansion is
 	 * done recursively until no more new relatives are found.
-	 * 
-	 * @param predicate
+	 *
+	 * @param predicates
 	 */
 	public void setPredicates(Collection<IRI> predicates) {
 		this.predicates = predicates;

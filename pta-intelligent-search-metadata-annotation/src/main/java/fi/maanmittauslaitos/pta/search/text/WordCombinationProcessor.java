@@ -1,10 +1,6 @@
 package fi.maanmittauslaitos.pta.search.text;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 import org.apache.log4j.Logger;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Literal;
@@ -12,7 +8,10 @@ import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Resource;
 import org.eclipse.rdf4j.model.Statement;
 
-import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class WordCombinationProcessor implements TextProcessor {
 	private static Logger logger = Logger.getLogger(WordCombinationProcessor.class);
@@ -60,11 +59,11 @@ public class WordCombinationProcessor implements TextProcessor {
 		return language;
 	}
 
-	public Map<String, String> getDict() {
+	public synchronized Map<String, String> getDict() {
 		if (dict != null) {
 			return dict;
 		}
-		
+
 		logger.info("Building dict from RDF model");
 		maxCombinationLengthWords = calculateMaximumNumberOfWordsInModel();
 		dict = createDict();
