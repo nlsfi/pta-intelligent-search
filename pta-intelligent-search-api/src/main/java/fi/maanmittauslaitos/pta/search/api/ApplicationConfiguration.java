@@ -1,5 +1,7 @@
 package fi.maanmittauslaitos.pta.search.api;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
 import fi.maanmittauslaitos.pta.search.api.hints.FacetHintProviderImpl;
 import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
@@ -45,6 +47,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.URL;
 import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -54,6 +57,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.zip.GZIPInputStream;
+
+import static java.util.Objects.requireNonNull;
 
 @Configuration
 public class ApplicationConfiguration {
@@ -233,8 +238,17 @@ public class ApplicationConfiguration {
 
 	@Bean
 	@Qualifier("FI")
-	public Stemmer stemmer_FI() {
-		return StemmerFactory.createFinnishStemmer();
+	public Stemmer stemmer_FI() throws IOException {
+		URL preStemRes = requireNonNull(getClass().getClassLoader()
+				.getResource("nls.fi/pta-intelligent-search/pre-stem-fi.json"));
+		URL postStemRes = requireNonNull(getClass().getClassLoader()
+				.getResource("nls.fi/pta-intelligent-search/post-stem-fi.json"));
+		TypeReference<Map<String, String>> valueTypeRef = new TypeReference<Map<String, String>>() {
+		};
+		ObjectMapper objectMapper = new ObjectMapper();
+		Map<String, String> preStem = objectMapper.readValue(preStemRes, valueTypeRef);
+		Map<String, String> postStem = objectMapper.readValue(postStemRes, valueTypeRef);
+		return StemmerFactory.createFinnishStemmer(preStem, postStem);
 	}
 
 	@Bean

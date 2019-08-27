@@ -66,9 +66,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
+
+import static java.util.Objects.requireNonNull;
 
 public class HarvesterConfig {
 
@@ -81,16 +82,33 @@ public class HarvesterConfig {
 
 
 	private final ObjectMapper objectMapper;
+	private final Stemmer finnishStemmer;
+	private final Collection<String> wellKnownPostfixes;
 
-	public HarvesterConfig() {
+	public HarvesterConfig() throws IOException {
 		this.objectMapper = new ObjectMapper();
+		this.finnishStemmer = getFinnishStemmer();
+		this.wellKnownPostfixes = getWellKnownPostfixes();
 	}
 
-	private static Collection<String> getWellKnownPostfixes() throws IOException {
+	private Collection<String> getWellKnownPostfixes() throws IOException {
 		URL resource = HarvesterConfig.class.getClassLoader().getResource("nls.fi/pta-intelligent-search/well-known-postfixes-fi.txt");
-		String content = IOUtils.toString(Objects.requireNonNull(resource).openStream(), StandardCharsets.UTF_8);
+		String content = IOUtils.toString(requireNonNull(resource).openStream(), StandardCharsets.UTF_8);
 		String[] split = content.split("\n");
 		return Arrays.asList(split);
+	}
+
+	private Stemmer getFinnishStemmer() throws IOException {
+		URL preStemRes = requireNonNull(getClass().getClassLoader()
+				.getResource("nls.fi/pta-intelligent-search/pre-stem-fi.json"));
+		URL postStemRes = requireNonNull(getClass().getClassLoader()
+				.getResource("nls.fi/pta-intelligent-search/post-stem-fi.json"));
+		TypeReference<Map<String, String>> valueTypeRef = new TypeReference<Map<String, String>>() {
+		};
+		Map<String, String> preStem = objectMapper.readValue(preStemRes, valueTypeRef);
+		Map<String, String> postStem = objectMapper.readValue(postStemRes, valueTypeRef);
+
+		return StemmerFactory.createFinnishStemmer(preStem, postStem);
 	}
 
 	public HarvesterSource getCSWSource() {
@@ -109,7 +127,7 @@ public class HarvesterConfig {
 		return source;
 	}
 
-	public DocumentSink getDocumentSink(HarvesterTracker harvesterTracker) {
+	DocumentSink getDocumentSink(HarvesterTracker harvesterTracker) {
 		ElasticsearchDocumentSink ret = new ElasticsearchDocumentSink();
 		ret.setTracker(harvesterTracker);
 		ret.setHostname("localhost");
@@ -397,12 +415,8 @@ public class HarvesterConfig {
 		return HarvesterTrackerImpl.create(trackerFile, objectMapper);
 	}
 
-	private static Stemmer getFinnishStemmer() {
-		return StemmerFactory.createFinnishStemmer();
-	}
-
 	private TextProcessor createTextSplitterProcessor(boolean joinHyphened) throws IOException {
-		return TextSplitterProcessor.create(getFinnishStemmer(), getWellKnownPostfixes(), joinHyphened);
+		return TextSplitterProcessor.create(finnishStemmer, wellKnownPostfixes, joinHyphened);
 
 	}
 
@@ -469,7 +483,7 @@ public class HarvesterConfig {
 		RDFTerminologyMatcherProcessor ret = new RDFTerminologyMatcherProcessor();
 		ret.setModel(model);
 		ret.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
-		ret.setStemmer(getFinnishStemmer());
+		ret.setStemmer(finnishStemmer);
 		ret.setLanguage("fi");
 		return ret;
 	}
@@ -479,7 +493,7 @@ public class HarvesterConfig {
 		WordCombinationProcessor ret = new WordCombinationProcessor();
 		ret.setModel(model);
 		ret.setTerminologyLabels(Arrays.asList(SKOS.PREF_LABEL, SKOS.ALT_LABEL));
-		ret.setStemmer(getFinnishStemmer());
+		ret.setStemmer(finnishStemmer);
 		ret.setLanguage("fi");
 		return ret;
 	}

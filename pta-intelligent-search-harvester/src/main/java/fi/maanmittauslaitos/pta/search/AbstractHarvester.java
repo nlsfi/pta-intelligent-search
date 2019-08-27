@@ -52,7 +52,7 @@ public abstract class AbstractHarvester implements CommandLineRunner {
 	}
 
 
-	HarvesterConfig getConfig() {
+	HarvesterConfig getConfig() throws IOException {
 		return new HarvesterConfig();
 	}
 

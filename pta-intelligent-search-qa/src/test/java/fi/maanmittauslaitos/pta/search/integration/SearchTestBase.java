@@ -24,8 +24,10 @@ import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpHost;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.elasticsearch.ElasticsearchStatusException;
 import org.elasticsearch.action.DocWriteResponse;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
+import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
@@ -170,6 +172,14 @@ public abstract class SearchTestBase {
 	}
 
 	protected static void createIndexAndPopulate() throws IOException, URISyntaxException {
+		// We remove any existing index
+		try {
+			logger.info("-> Removing index {}.", INDEX);
+			client.indices().delete(new DeleteIndexRequest(INDEX));
+		} catch (ElasticsearchStatusException e) {
+			then(e.status().getStatus()).isEqualTo(404);
+		}
+
 		nDocs = 0;
 		File tmpDir = Files.createTempDirectory("pta-SearchTest").toFile();
 		tmpDir.deleteOnExit();

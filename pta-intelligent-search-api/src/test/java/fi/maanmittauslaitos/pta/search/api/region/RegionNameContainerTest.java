@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.util.Collections;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,7 +32,8 @@ public class RegionNameContainerTest {
 
 	private RegionNameContainerImpl regionNameContainer;
 
-	private Map<Language, Stemmer> stemmers = ImmutableMap.of(Language.FI, StemmerFactory.createFinnishStemmer(),
+	private Map<Language, Stemmer> stemmers = ImmutableMap.of(
+			Language.FI, StemmerFactory.createFinnishStemmer(Collections.emptyMap(), ImmutableMap.of("suomia", "Suomi")),
 			Language.SV, new LuceneAnalyzerStemmer(new SwedishAnalyzer()),
 			Language.EN, new LuceneAnalyzerStemmer(new EnglishAnalyzer()));
 
@@ -47,7 +49,7 @@ public class RegionNameContainerTest {
 	public void region_name_container_has_values() {
 		softly.assertThat(regionNameContainer.getStemmedRegionNames()).containsKeys(Language.values());
 		softly.assertThat(regionNameContainer.getStemmedRegionNames().get(Language.FI))
-				.contains(entry("suomia", "Suomi"), entry("Uusimaa", "Uusimaa"), entry("Helsinki", "Helsinki"),
+				.contains(entry("Suomi", "Suomi"), entry("Uusimaa", "Uusimaa"), entry("Helsinki", "Helsinki"),
 						entry("kansallinen", "Suomi"), entry("Nastola", "Lahti"));
 
 		softly.assertThat(regionNameContainer.getStemmedRegionNames().get(Language.EN))

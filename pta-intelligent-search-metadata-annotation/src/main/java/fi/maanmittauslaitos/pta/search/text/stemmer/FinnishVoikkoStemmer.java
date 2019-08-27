@@ -1,35 +1,40 @@
 package fi.maanmittauslaitos.pta.search.text.stemmer;
 
-import java.util.List;
-
-import org.puimula.libvoikko.Analysis;
 import org.puimula.libvoikko.Voikko;
+
+import java.util.Collections;
+import java.util.Map;
+import java.util.Objects;
 
 public class FinnishVoikkoStemmer implements Stemmer {
 	private Voikko voikko;
-	
+	private Map<String, String> preStem;
+	private Map<String, String> postStem;
+
+	public FinnishVoikkoStemmer(Map<String, String> preStem, Map<String, String> postStem) {
+		voikko = new Voikko("fi");
+		this.preStem = preStem;
+		this.postStem = postStem;
+	}
+
 	public FinnishVoikkoStemmer() {
 		voikko = new Voikko("fi");
+		preStem = Collections.emptyMap();
+		postStem = Collections.emptyMap();
 	}
 	
 	@Override
 	public String stem(String str) {
-		List<Analysis> analysis = voikko.analyze(str);
-		
-		String stemmed = null;
-		for (Analysis a : analysis) {
-			String baseform = a.get("BASEFORM");
-			if (baseform != null) {
-				stemmed = baseform;
-				break;
-			}
-		}
-		
-		if (stemmed == null) {
-			stemmed = str;
-		}
-		
-		return stemmed;
+
+		String word = preStem.getOrDefault(str.toLowerCase(), str);
+
+		String stemmed = voikko.analyze(word).stream()
+				.map(a -> a.get("BASEFORM"))
+				.filter(Objects::nonNull)
+				.findFirst()
+				.orElse(word);
+
+		return postStem.getOrDefault(stemmed.toLowerCase(), stemmed);
 	}
 
 }

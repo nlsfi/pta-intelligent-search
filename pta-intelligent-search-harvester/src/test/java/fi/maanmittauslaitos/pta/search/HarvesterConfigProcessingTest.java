@@ -32,7 +32,7 @@ public class HarvesterConfigProcessingTest {
 	public final JUnitSoftAssertions softly = new JUnitSoftAssertions();
 
 	@Before
-	public void setUp() {
+	public void setUp() throws IOException {
 		conf = new HarvesterConfig();
 	}
 

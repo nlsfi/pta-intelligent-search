@@ -28,7 +28,20 @@ public class SearchTest extends SearchTestBase {
 	@Test
 	public void suomiReturnsAllNationalData() throws Exception {
 		SearchResponse response = getSearchResponse("testcase_suomi.json", nDocs);
-		then(response.getHits()).hasSize(nDocs - 3);
+
+		List<String> ids = Arrays.asList(
+				"495e0dca-c439-4447-948b-171b976a2863",
+				"49491ac8-2d28-4483-b9a4-c5e689765e57",
+				"199db687-fca8-4860-bde5-7e6d1b1af15d",
+				"00168bde-de18-4760-b452-967fbb1c9845",
+				"44204afc-9951-4c25-ab18-646afd78a89a"
+		);
+
+		then(response.getHits())
+				.hasSize(nDocs - 3)
+				.extracting(SearchHit::getId)
+				.containsAll(ids)
+				.containsSequence(ids);
 	}
 
 	@Test
