@@ -1,34 +1,22 @@
 package fi.maanmittauslaitos.pta.search.integration;
 
-import com.carrotsearch.randomizedtesting.annotations.Seed;
-import com.carrotsearch.randomizedtesting.annotations.ThreadLeakScope;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.test.ESIntegTestCase.ClusterScope;
-import org.elasticsearch.test.ESIntegTestCase.Scope;
-import org.junit.Before;
+import org.elasticsearch.search.sort.FieldSortBuilder;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
 
-@ClusterScope(scope = Scope.SUITE)
-@ThreadLeakScope(ThreadLeakScope.Scope.NONE)
-@Seed("2A")
-@RunWith(com.carrotsearch.randomizedtesting.RandomizedRunner.class)
 public class SearchTest extends SearchTestBase {
-
-
-	@Before
-	public void beforeTests() throws Exception {
-		createIndexAndPopulate();
-	}
 
 	@Test
 	public void emptyQueryReturnsAll() throws Exception {
@@ -129,7 +117,7 @@ public class SearchTest extends SearchTestBase {
 				"c176b773-9672-4f39-8ae8-3647d2f54ab4",
 				"fd06055c-31e1-476f-b91c-8f8f50548660");
 
-		List<String> hsyIds = Arrays.asList(
+		List<String> hsyIds = Collections.singletonList(
 				"a93a10c6-a3dc-46f3-8ab9-260f423a4b9e"
 		);
 
@@ -199,4 +187,37 @@ public class SearchTest extends SearchTestBase {
 				.containsExactlyInAnyOrderElementsOf(rautaIds)
 				.doesNotContainAnyElementsOf(rantaIds);
 	}
+
+	@Test
+	public void sortedByTitleAsc() throws IOException, URISyntaxException {
+		FieldSortBuilder sortBuilder = SortBuilders.fieldSort("titleFiSort");
+		sortBuilder.order(SortOrder.ASC);
+		sortBuilders = Collections.singletonList(sortBuilder);
+
+		SearchResponse response = getSearchResponse("testcase_oulu.json");
+
+		then(response.getHits())
+				.extracting(SearchHit::getId)
+				.containsSubsequence(
+						"2c7ca8c6-a47d-4209-8696-6545f2fae8b7", //Oulun kaupungin ajantasa-asemakaava
+						"58440189-8048-45aa-81d2-4604a471d179" //Oulun kaupungin WMS-palvelu
+				);
+	}
+
+	@Test
+	public void sortedByTitleDesc() throws IOException, URISyntaxException {
+		FieldSortBuilder sortBuilder = SortBuilders.fieldSort("titleFiSort");
+		sortBuilder.order(SortOrder.DESC);
+		sortBuilders = Collections.singletonList(sortBuilder);
+
+		SearchResponse response = getSearchResponse("testcase_oulu.json");
+
+		then(response.getHits())
+				.extracting(SearchHit::getId)
+				.containsSubsequence(
+						"58440189-8048-45aa-81d2-4604a471d179",//Oulun kaupungin WMS-palvelu
+						"2c7ca8c6-a47d-4209-8696-6545f2fae8b7" //Oulun kaupungin ajantasa-asemakaava
+				);
+	}
+
 }

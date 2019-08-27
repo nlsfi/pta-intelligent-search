@@ -1,14 +1,41 @@
+/*
+ * Licensed to Elasticsearch under one or more contributor
+ * license agreements. See the NOTICE file distributed with
+ * this work for additional information regarding copyright
+ * ownership. Elasticsearch licenses this file to you under
+ * the Apache License, Version 2.0 (the "License"); you may
+ * not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
 package fi.maanmittauslaitos.pta.search.integration;
 
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 import org.apache.commons.io.IOUtils;
-import org.apache.lucene.search.Explanation;
-import org.elasticsearch.action.DocWriteResponse.Result;
-import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
-import org.elasticsearch.action.explain.ExplainRequest;
-import org.elasticsearch.action.index.IndexResponse;
+import org.apache.http.HttpHost;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.elasticsearch.action.DocWriteResponse;
+import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
+import org.elasticsearch.action.bulk.BulkRequest;
+import org.elasticsearch.action.bulk.BulkResponse;
+import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.main.MainResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.support.WriteRequest;
+import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestClientBuilder;
+import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentHelper;
 import org.elasticsearch.common.xcontent.XContentType;
@@ -16,18 +43,23 @@ import org.elasticsearch.common.xcontent.json.JsonXContent;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.elasticsearch.test.ESIntegTestCase;
+import org.elasticsearch.search.sort.FieldSortBuilder;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.testcontainers.elasticsearch.ElasticsearchContainer;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.ConnectException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -38,12 +70,20 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import static java.util.Objects.requireNonNull;
-import static org.elasticsearch.test.hamcrest.ElasticsearchAssertions.assertAcked;
-import static org.elasticsearch.test.hamcrest.ElasticsearchAssertions.assertAllSuccessful;
+import static org.assertj.core.api.BDDAssertions.then;
 
+/**
+ * This class is adapted from https://github.com/dadoonet/elasticsearch-integration-tests
+ */
 
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-public abstract class SearchTestBase extends ESIntegTestCase {
+public abstract class SearchTestBase {
+
+	private static final Logger logger = LogManager.getLogger(SearchTestBase.class);
+	private static final String INDEX = "ptatestidx";
+	private static RestHighLevelClient client;
+	private static ElasticsearchContainer container;
+
 	private static final String INDEX_FILE = "index.json";
 	private static final String PREFIX = "BOOT-INF/classes/";
 	private static final String COMMON_CLASSPATH = PREFIX + "fi/maanmittauslaitos/pta/search/integration/";
@@ -51,6 +91,62 @@ public abstract class SearchTestBase extends ESIntegTestCase {
 	private static final String TESTCASE_DIR = COMMON_CLASSPATH + "testcases/";
 	private static final int RESULT_SIZE = 10;
 	protected static int nDocs;
+	protected List<FieldSortBuilder> sortBuilders = Collections.emptyList();
+
+	@BeforeClass
+	public static void startElasticsearchRestClient() throws IOException, URISyntaxException {
+		int testClusterPort = Integer.parseInt(System.getProperty("tests.cluster.port", "9201"));
+		String testClusterHost = System.getProperty("tests.cluster.host", "localhost");
+		String testClusterScheme = System.getProperty("tests.cluster.scheme", "http");
+
+		logger.info("Starting a client on {}://{}:{}", testClusterScheme, testClusterHost, testClusterPort);
+
+		// We start a client
+		RestClientBuilder builder = getClientBuilder(new HttpHost(testClusterHost, testClusterPort, testClusterScheme));
+
+		// We check that the client is running
+		try (RestHighLevelClient elasticsearchClientTemporary = new RestHighLevelClient(builder)) {
+			elasticsearchClientTemporary.info();
+			logger.info("A node is already running. No need to start a Docker instance.");
+		} catch (ConnectException e) {
+			logger.info("No node running. We need to start a Docker instance.");
+			container = new ElasticsearchContainer("docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.4");
+			container.start();
+			logger.info("Docker instance started.");
+			testClusterHost = container.getContainerIpAddress();
+			testClusterPort = container.getFirstMappedPort();
+			testClusterScheme = "http";
+		}
+
+		logger.info("Starting a client on {}://{}:{}", testClusterScheme, testClusterHost, testClusterPort);
+
+		// We build the elasticsearch High Level Client based on the parameters
+		builder = getClientBuilder(new HttpHost(testClusterHost, testClusterPort, testClusterScheme));
+		client = new RestHighLevelClient(builder);
+
+		// We make sure the cluster is running
+		MainResponse info = client.info();
+		logger.info("Client is running against an elasticsearch cluster {}.", info.getVersion().toString());
+
+		createIndexAndPopulate();
+	}
+
+	@AfterClass
+	public static void stopElasticsearchRestClient() throws IOException {
+		if (client != null) {
+			logger.info("Closing elasticsearch client.");
+			client.close();
+		}
+		if (container != null) {
+			logger.info("Stopping Docker instance.");
+			container.close();
+		}
+	}
+
+	private static RestClientBuilder getClientBuilder(HttpHost host) {
+		return RestClient.builder(host);
+	}
+
 
 	protected static URL getResource(String resource) {
 		return SearchTestBase.class.getClassLoader().getResource(resource);
@@ -73,7 +169,7 @@ public abstract class SearchTestBase extends ESIntegTestCase {
 		return destFile;
 	}
 
-	protected void createIndexAndPopulate() throws IOException, URISyntaxException {
+	protected static void createIndexAndPopulate() throws IOException, URISyntaxException {
 		nDocs = 0;
 		File tmpDir = Files.createTempDirectory("pta-SearchTest").toFile();
 		tmpDir.deleteOnExit();
@@ -84,11 +180,17 @@ public abstract class SearchTestBase extends ESIntegTestCase {
 		requireNonNull(uri);
 		String index = IOUtils.toString(uri.toURL().openStream(), StandardCharsets.UTF_8);
 
-		System.out.println(index);
-		CreateIndexResponse response = client().admin().indices().prepareCreate("pta").setSource(index, XContentType.JSON).get();
-		assertAcked(response);
+		logger.debug(index);
+
+		CreateIndexRequest createIndexRequest = new CreateIndexRequest(INDEX);
+		createIndexRequest.source(index, XContentType.JSON);
+
+		client.indices().create(createIndexRequest);
 
 		ZipEntry entry;
+
+		BulkRequest bulkRequest = new BulkRequest()
+				.setRefreshPolicy(WriteRequest.RefreshPolicy.IMMEDIATE);
 
 		while ((entry = zipFile.getNextEntry()) != null) {
 			File newFile = newTempOutputFile(tmpDir, entry);
@@ -109,16 +211,23 @@ public abstract class SearchTestBase extends ESIntegTestCase {
 			@SuppressWarnings("rawtypes")
 			String id = ((Collection) mapValue.get("@id")).iterator().next().toString();
 
-			IndexResponse insertResponse = client().prepareIndex(PTAElasticSearchMetadataConstants.INDEX, PTAElasticSearchMetadataConstants.TYPE, id)
-					.setSource(content, XContentType.JSON)
-					.get();
+			bulkRequest.add(new IndexRequest(INDEX, PTAElasticSearchMetadataConstants.TYPE, id)
+					.source(content, XContentType.JSON)
 
-			assertEquals(Result.CREATED, insertResponse.getResult());
+			);
 			nDocs++;
 		}
-		System.out.println("Inserted " + nDocs + ", waiting until all are searchable");
 
-		refresh();
+		BulkResponse r = client.bulk(bulkRequest);
+
+		then(r.hasFailures()).isFalse();
+
+		then(r.getItems())
+				.hasSize(nDocs)
+				.allMatch(bulkItemResponse ->
+						bulkItemResponse.getResponse().getResult() == DocWriteResponse.Result.CREATED);
+
+		logger.info("Inserted " + nDocs + ", waiting until all are searchable");
 	}
 
 
@@ -145,7 +254,7 @@ public abstract class SearchTestBase extends ESIntegTestCase {
 		return getSearchResponseFromString(queryStr, resultMaxSize, explainId);
 	}
 
-	SearchResponse getSearchResponseFromString(String queryStr, int resultMaxSize, Optional<String> explainId) throws IOException, URISyntaxException {
+	SearchResponse getSearchResponseFromString(String queryStr, int resultMaxSize, Optional<String> explainId) throws IOException {
 
 		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 		sourceBuilder.size(resultMaxSize);
@@ -154,30 +263,31 @@ public abstract class SearchTestBase extends ESIntegTestCase {
 
 		sourceBuilder.query(QueryBuilders.wrapperQuery(queryStr));
 
-		explainId.ifPresent(id -> {
-			ExplainRequest explainRequest = new ExplainRequest(PTAElasticSearchMetadataConstants.INDEX, "metadata", id);
-			explainRequest.query(sourceBuilder.query());
-			Explanation explanation = client().explain(explainRequest).actionGet().getExplanation();
-			System.out.println("-------------------------\n" +
-					"EXPLANATION:\n\n" + explanation + "" +
-					"-------------------------");
-		});
+		sortBuilders.forEach(sourceBuilder::sort);
 
-		SearchRequest request = new SearchRequest(PTAElasticSearchMetadataConstants.INDEX);
+		//TODO: Fix explain
+        /*explainId.ifPresent(id -> {
+            ExplainRequest explainRequest = new ExplainRequest(PTAElasticSearchMetadataConstants.INDEX, "metadata", id);
+            explainRequest.query(sourceBuilder.query());
+            client.search(explainRequest)
+            Explanation explanation = client.explain(explainRequest).actionGet().getExplanation();
+            logger.debug("-------------------------\n" +
+                    "EXPLANATION:\n\n" + explanation + "" +
+                    "-------------------------");
+        });*/
+
+		SearchRequest request = new SearchRequest(INDEX);
 		request.types(PTAElasticSearchMetadataConstants.TYPE);
 		request.source(sourceBuilder);
 
-		System.out.println("Query:\n" + queryStr);
+		logger.debug("Query:\n" + queryStr);
 
-		SearchResponse response = client().search(request).actionGet();
-
-		assertAllSuccessful(response);
-
+		SearchResponse response = client.search(request);
 
 		List<SearchHit> collect = Stream.of(response.getHits().getHits())
 				.collect(Collectors.toList());
 		collect
-				.forEach(hit -> System.out.println("Id: " + hit.getId() + "- - - score: " + hit.getScore()));
+				.forEach(hit -> logger.debug("Id: " + hit.getId() + "- - - score: " + hit.getScore()));
 
 		return response;
 	}
