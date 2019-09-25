@@ -1,18 +1,19 @@
 package fi.maanmittauslaitos.pta.search.metadata;
 
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathException;
-import javax.xml.xpath.XPathExpression;
-
+import fi.maanmittauslaitos.pta.search.documentprocessor.XPathCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.model.ResponsibleParty;
+import fi.maanmittauslaitos.pta.search.metadata.model.TextRewriter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathCustomExtractor;
-import fi.maanmittauslaitos.pta.search.metadata.model.ResponsibleParty;
-import fi.maanmittauslaitos.pta.search.metadata.model.TextRewriter;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathException;
+import javax.xml.xpath.XPathExpression;
+
+import static fi.maanmittauslaitos.pta.search.metadata.utils.XPathHelper.matches;
 
 public class ResponsiblePartyXPathCustomExtractor implements XPathCustomExtractor {
 	private static Logger logger = LogManager.getLogger(ResponsiblePartyXPathCustomExtractor.class);
@@ -55,9 +56,11 @@ public class ResponsiblePartyXPathCustomExtractor implements XPathCustomExtracto
 		organisationName = (String)nameExpr.evaluate(node, XPathConstants.STRING);
 		
 		organisationName = getOrganisationNameRewriter().rewrite(organisationName);
-		
-		XPathExpression isoRoleExpr = 
-				xPath.compile("./gmd:role/gmd:CI_RoleCode[@codeList = 'http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode']/@codeListValue");
+
+		XPathExpression isoRoleExpr =
+				xPath.compile("./gmd:role/gmd:CI_RoleCode[" +
+						matches("@codeList", "'http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode'") +
+						"]/@codeListValue");
 		isoRole = (String)isoRoleExpr.evaluate(node, XPathConstants.STRING);
 		
 		if (logger.isTraceEnabled()) {

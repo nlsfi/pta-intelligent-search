@@ -1,10 +1,9 @@
 package fi.maanmittauslaitos.pta.search.metadata;
 
-import static org.junit.Assert.*;
-
+import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
 import org.junit.Test;
 
-import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
+import static org.junit.Assert.assertEquals;
 
 public class ISOMetadataExtractor_IsServiceTest extends BaseMetadataExtractorTest {
 
@@ -15,7 +14,16 @@ public class ISOMetadataExtractor_IsServiceTest extends BaseMetadataExtractorTes
 		Boolean isService = document.getValue(ISOMetadataFields.IS_SERVICE, Boolean.class);
 		assertEquals(Boolean.TRUE, isService);
 	}
-	
+
+	@Test
+	public void testStatFiWFSModifiedIsService() throws Exception {
+		Document document = createStatFiWFS_modified();
+
+		Boolean isService = document.getValue(ISOMetadataFields.IS_SERVICE, Boolean.class);
+		assertEquals(Boolean.TRUE, isService);
+	}
+
+
 	@Test
 	public void testMaastotietokantaIsNotService() throws Exception {
 		Document document = createMaastotietokantaDocument();

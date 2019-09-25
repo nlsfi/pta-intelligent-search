@@ -10,10 +10,8 @@
    - added second organisation (owner, different name, localised name switched to swedish)
   -->
 <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd"
-                 xmlns:gts="http://www.isotc211.org/2005/gts"
                  xmlns:xlink="http://www.w3.org/1999/xlink"
                  xmlns:gco="http://www.isotc211.org/2005/gco"
-                 xmlns:gml="http://www.opengis.net/gml"
                  xmlns:srv="http://www.isotc211.org/2005/srv"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://www.isotc211.org/2005/gmd/gmd.xsd&#xA;                  http://www.isotc211.org/2005/gmx http://www.isotc211.org/2005/gmx/gmx.xsd&#xA;                  http://www.isotc211.org/2005/srv http://schemas.opengis.net/iso/19139/20060504/srv/srv.xsd&#xA;  ">
@@ -25,7 +23,7 @@
   </gmd:language>
   <gmd:hierarchyLevel>
       <gmd:MD_ScopeCode codeListValue="service"
-                        codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"/>
+                        codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#MD_ScopeCode"/>
   </gmd:hierarchyLevel>
   <gmd:contact>
       <gmd:CI_ResponsibleParty>
@@ -114,7 +112,7 @@
          </gmd:characterEncoding>
       </gmd:PT_Locale>
   </gmd:locale>
-  <gmd:identificationInfo xmlns:date="http://exslt.org/dates-and-times">
+   <gmd:identificationInfo>
       <srv:SV_ServiceIdentification>
          <gmd:citation>
             <gmd:CI_Citation>
@@ -525,7 +523,7 @@ Då uppgifterna används, ska de allmänna användarvillkoren iakttas
             <gmd:DQ_Scope>
                <gmd:level>
                   <gmd:MD_ScopeCode codeListValue="service"
-                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"/>
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#MD_ScopeCode"/>
                </gmd:level>
             </gmd:DQ_Scope>
          </gmd:scope>
