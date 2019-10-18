@@ -60,7 +60,16 @@ Open a browser window with the URL http://localhost:8080
 ## Testing
 
 In project pta-intelligent-search-qa there are integration tests that depend on data generated in projects pta-intelligent-search-harvester and pta-intelligent-search-api
-by using exec-maven-plugin. In order to run the tests, those projects should be compiled and packaged first. The simplest way verify that all is working is to run `mvn clean install` at the root of the project.
+by using exec-maven-plugin. In order to run the tests, those projects should be compiled and packaged first. 
+
+There are two test profiles: `esrunning` (activated by default) and `esdocker`. Profile `esrunning` expects that the Elastisearch
+is running in http://localhost:9200. Scheme, host and port can be configured using properties: 
+`integ.elasticsearch.scheme`, `integ.elasticsearch.host`,  and `integ.elasticsearch.port`. 
+Profile `esdocker` starts the dockerized Elasticsearch on http://localhost:9201.
+
+If dockerized Elasticsearch is wanted, run `mvn clean install -Pesdocker` at the root of the project. 
+Otherwise just run `mvn clean install`.
+
 
 ## Updating spatial regions
 
@@ -76,7 +85,8 @@ To update the databases with the newest data sets:
  * Make sure that you have Python3 environment with all packages installed from [requirements.txt](elasticsearch-data-processing-scripts/requirements.txt)
  * Download the newest municipality union data:
     * Download Excel file from [Kuntaliitto](https://www.kuntaliitto.fi/asiantuntijapalvelut/johtaminen-ja-kehittaminen/kuntaliitokset) and save it 
-    to the project folder elasticsearch-data-processing-scripts
+    to the project folder elasticsearch-dat
+    a-processing-scripts
     * Modify the MUNICIPALITY_UNIONS_EXCEL constant from file `dataLoader.py` to match the new file name
 * Download the newest municipality name data:
     * Download *Voimassa olevat Suomen kunnat* and *Lakanneet Suomen kunnat* csv files from [Avoindata.fi](https://www.avoindata.fi/data/fi/dataset/kunnat)

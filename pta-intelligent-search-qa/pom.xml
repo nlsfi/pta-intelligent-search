@@ -14,6 +14,27 @@
 		https://github.com/dadoonet/elasticsearch-integration-tests.
 	</description>
 
+	<profiles>
+		<profile>
+			<id>esrunning</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<skipDockerEs>true</skipDockerEs>
+				<integ.elasticsearch.port>9200</integ.elasticsearch.port>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>esdocker</id>
+			<properties>
+				<skipDockerEs>false</skipDockerEs>
+				<integ.elasticsearch.port>9201</integ.elasticsearch.port>
+			</properties>
+		</profile>
+	</profiles>
+
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -28,7 +49,8 @@
 		<!-- For integration tests using Docker or external cluster -->
 		<integ.elasticsearch.image>docker.elastic.co/elasticsearch/elasticsearch-oss</integ.elasticsearch.image>
 		<integ.elasticsearch.version>6.2.4</integ.elasticsearch.version>
-		<integ.elasticsearch.port>9201</integ.elasticsearch.port>
+		<integ.elasticsearch.host>localhost</integ.elasticsearch.host>
+		<integ.elasticsearch.scheme>http</integ.elasticsearch.scheme>
 	</properties>
 
 	<dependencies>
@@ -76,6 +98,16 @@
 	</dependencies>
 
 	<build>
+
+		<!-- map ${} variable -->
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -192,7 +224,9 @@
 								</ports>
 								<wait>
 									<http>
-										<url>http://localhost:${integ.elasticsearch.port}/</url>
+										<url>
+											${integ.elasticsearch.scheme}://${integ.elasticsearch.host}:${integ.elasticsearch.port}/
+										</url>
 										<status>200..499</status>
 									</http>
 									<time>30000</time>
@@ -201,6 +235,7 @@
 						</image>
 					</images>
 					<skip>${skipIntegTests}</skip>
+					<skip>${skipDockerEs}</skip>
 				</configuration>
 				<executions>
 					<execution>
@@ -222,6 +257,21 @@
 				</executions>
 			</plugin>
 
+			<!-- display active profile in compile phase -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-help-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>show-profiles</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>active-profiles</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>

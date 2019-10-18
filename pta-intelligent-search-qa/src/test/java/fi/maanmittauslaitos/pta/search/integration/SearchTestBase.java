@@ -65,6 +65,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -97,11 +98,29 @@ public abstract class SearchTestBase {
 
 	@BeforeClass
 	public static void startElasticsearchRestClient() throws IOException, URISyntaxException {
-		int testClusterPort = Integer.parseInt(System.getProperty("tests.cluster.port", "9201"));
-		String testClusterHost = System.getProperty("tests.cluster.host", "localhost");
-		String testClusterScheme = System.getProperty("tests.cluster.scheme", "http");
+		int testClusterPort = 9201;
+		String testClusterHost = "localhost";
+		String testClusterScheme = "http";
 
-		logger.info("Starting a client on {}://{}:{}", testClusterScheme, testClusterHost, testClusterPort);
+		try {
+			Properties properties = new Properties();
+			try (InputStream is = SearchTestBase.getResourceAsStream("elasticsearch.properties")) {
+				properties.load(is);
+			}
+			testClusterHost = Optional.of(properties.getProperty("integ.elasticsearch.host"))
+					.filter(s -> !s.contains("$"))
+					.orElse(testClusterHost);
+			testClusterScheme = Optional.of(properties.getProperty("integ.elasticsearch.scheme"))
+					.filter(s -> !s.contains("$"))
+					.orElse(testClusterScheme);
+			testClusterPort = Optional.of(properties.getProperty("integ.elasticsearch.port"))
+					.filter(s -> !s.contains("$"))
+					.map(Integer::parseInt)
+					.orElse(testClusterPort);
+
+		} catch (IOException e) {
+			logger.error("Error occurred when loading properties file", e);
+		}
 
 		// We start a client
 		RestClientBuilder builder = getClientBuilder(new HttpHost(testClusterHost, testClusterPort, testClusterScheme));
