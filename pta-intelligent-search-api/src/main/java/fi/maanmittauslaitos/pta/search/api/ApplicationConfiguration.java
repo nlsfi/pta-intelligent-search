@@ -473,6 +473,7 @@ public class ApplicationConfiguration {
 		queryProvider.setWeightFactor(0.5);
 		queryProvider.setBasicWordMatchWeight(0.5);
 		queryProvider.setBasicWordMatchFuzzyWeight(0.4);
+		queryProvider.setSpatialWeight(15.0);
 		queryProvider.setStemmers(stemmers);
 		queryProvider.setRegionNameContainer(regionNameContainer);
 

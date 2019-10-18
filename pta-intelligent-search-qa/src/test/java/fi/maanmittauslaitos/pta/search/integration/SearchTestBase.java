@@ -98,7 +98,7 @@ public abstract class SearchTestBase {
 
 	@BeforeClass
 	public static void startElasticsearchRestClient() throws IOException, URISyntaxException {
-		int testClusterPort = 9201;
+		int testClusterPort = 9200;
 		String testClusterHost = "localhost";
 		String testClusterScheme = "http";
 
@@ -316,7 +316,7 @@ public abstract class SearchTestBase {
 		List<SearchHit> collect = Stream.of(response.getHits().getHits())
 				.collect(Collectors.toList());
 		collect
-				.forEach(hit -> logger.debug("Id: " + hit.getId() + "- - - score: " + hit.getScore()));
+				.forEach(hit -> logger.info("Id: " + hit.getId() + "- - - score: " + hit.getScore()));
 
 		return response;
 	}

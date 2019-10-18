@@ -164,6 +164,36 @@ public class SearchTest extends SearchTestBase {
 	}
 
 	@Test
+	public void suomenTietPrioritiesDigiroad() throws Exception {
+		SearchResponse response = getSearchResponse("testcase_suomen_tiet.json", 200);
+		List<String> ids = Arrays.asList(
+				"34155a94-b58b-4ad0-87e6-f96d2db0f3ba", // Digiroad
+				"3827015f-546c-4aee-b5c4-2de0509e47ed",
+				"52bf65f7-db98-44ac-8da3-0b06fdf71d65"// salo
+		);
+
+		then(response.getHits())
+				.extracting(SearchHit::getId)
+				.containsAll(ids)
+				.containsSubsequence(ids.get(0), ids.get(1), ids.get(2));
+	}
+
+	@Test
+	public void suomenLiikenneverkotPrioritiesDigiroad() throws Exception {
+		SearchResponse response = getSearchResponse("testcase_suomen_liikenneverkot.json", 200);
+		List<String> ids = Arrays.asList(
+				"34155a94-b58b-4ad0-87e6-f96d2db0f3ba", // Digiroad
+				"3827015f-546c-4aee-b5c4-2de0509e47ed",
+				"52bf65f7-db98-44ac-8da3-0b06fdf71d65"// salo
+		);
+
+		then(response.getHits())
+				.extracting(SearchHit::getId)
+				.containsAll(ids)
+				.containsSubsequence(ids.get(0), ids.get(1), ids.get(2));
+	}
+
+	@Test
 	public void testExactStopWords() throws Exception {
 		// Ranta in fuzzy search matches with rauta as well
 		SearchResponse response = getSearchResponse("testcase_ranta.json");

@@ -53,6 +53,8 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
 		Arrays.asList(
 				ConversionHelper.create("testcase_empty", Collections.emptyList()),
 				ConversionHelper.create(Collections.singletonList("suomi")),
+				ConversionHelper.create(Arrays.asList("suomen", "tiet")),
+				ConversionHelper.create(Arrays.asList("suomen", "liikenneverkot")),
 				ConversionHelper.create(Arrays.asList("jyväskylä", "tiet")),
 				ConversionHelper.create(Collections.singletonList("hsl")),
 				ConversionHelper.create(Collections.singletonList("uusimaa")),

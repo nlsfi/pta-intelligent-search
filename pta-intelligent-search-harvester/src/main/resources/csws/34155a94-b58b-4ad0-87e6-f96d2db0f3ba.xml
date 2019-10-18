@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csw:GetRecordByIdResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
+    <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xmlns:gco="http://www.isotc211.org/2005/gco"
+                     xsi:schemaLocation="http://www.isotc211.org/2005/gmd ../../../../web/geonetwork/xml/schemas/iso19139/schema.xsd">
+        <gmd:fileIdentifier>
+            <gco:CharacterString>34155a94-b58b-4ad0-87e6-f96d2db0f3ba</gco:CharacterString>
+        </gmd:fileIdentifier>
+        <gmd:language>
+            <gco:CharacterString>fin</gco:CharacterString>
+        </gmd:language>
+        <gmd:hierarchyLevel>
+            <gmd:MD_ScopeCode codeListValue="dataset"
+                              codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"/>
+        </gmd:hierarchyLevel>
+        <gmd:hierarchyLevelName>
+            <gco:CharacterString>Aineisto</gco:CharacterString>
+        </gmd:hierarchyLevelName>
+        <gmd:contact>
+            <gmd:CI_ResponsibleParty>
+                <gmd:organisationName>
+                    <gco:CharacterString>Väylävirasto</gco:CharacterString>
+                </gmd:organisationName>
+                <gmd:contactInfo>
+                    <gmd:CI_Contact>
+                        <gmd:address>
+                            <gmd:CI_Address>
+                                <gmd:electronicMailAddress>
+                                    <gco:CharacterString>info@digiroad.fi</gco:CharacterString>
+                                </gmd:electronicMailAddress>
+                            </gmd:CI_Address>
+                        </gmd:address>
+                        <gmd:onlineResource>
+                            <gmd:CI_OnlineResource>
+                                <gmd:linkage>
+                                    <gmd:URL>http://www.digiroad.fi/</gmd:URL>
+                                </gmd:linkage>
+                                <gmd:protocol gco:nilReason="missing">
+                                    <gco:CharacterString/>
+                                </gmd:protocol>
+                                <gmd:name gco:nilReason="missing">
+                                    <gco:CharacterString/>
+                                </gmd:name>
+                                <gmd:description gco:nilReason="missing">
+                                    <gco:CharacterString/>
+                                </gmd:description>
+                            </gmd:CI_OnlineResource>
+                        </gmd:onlineResource>
+                    </gmd:CI_Contact>
+                </gmd:contactInfo>
+                <gmd:role>
+                    <gmd:CI_RoleCode
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"
+                            codeListValue="owner"/>
+                </gmd:role>
+            </gmd:CI_ResponsibleParty>
+        </gmd:contact>
+        <gmd:dateStamp>
+            <gco:DateTime>2019-07-08T13:24:11</gco:DateTime>
+        </gmd:dateStamp>
+        <gmd:identificationInfo>
+            <gmd:MD_DataIdentification>
+                <gmd:citation>
+                    <gmd:CI_Citation>
+                        <gmd:title>
+                            <gco:CharacterString>Digiroad</gco:CharacterString>
+                        </gmd:title>
+                        <gmd:date>
+                            <gmd:CI_Date>
+                                <gmd:date>
+                                    <gco:Date>2017-05-24</gco:Date>
+                                </gmd:date>
+                                <gmd:dateType>
+                                    <gmd:CI_DateTypeCode codeListValue="revision"
+                                                         codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"/>
+                                </gmd:dateType>
+                            </gmd:CI_Date>
+                        </gmd:date>
+                        <gmd:identifier>
+                            <gmd:RS_Identifier>
+                                <gmd:code>
+                                    <gco:CharacterString>1000018</gco:CharacterString>
+                                </gmd:code>
+                                <gmd:codeSpace>
+                                    <gco:CharacterString>FI</gco:CharacterString>
+                                </gmd:codeSpace>
+                            </gmd:RS_Identifier>
+                        </gmd:identifier>
+                    </gmd:CI_Citation>
+                </gmd:citation>
+                <gmd:abstract>
+                    <gco:CharacterString>Digiroad on Väylän vastuulla oleva valtakunnallinen aineistokokonaisuus, joka
+                        sisältää tieverkon keskilinjageometriat sekä liikenteeseen liittyviä ominaisuustietoja. Digiroad
+                        on kokoava tietojärjestelmä, johon kerätään aineistoa Väylän Tierekisteristä,
+                        Maanmittauslaitoksen Maastotietokannasta, kuntien katutietojärjestelmistä sekä muutamien muiden
+                        viranomaisten tietojärjestelmistä (mm. Helsingin seudun liikenne HSL).
+
+                        Digiroadin tieverkon keskilinjageometria saadaan Maanmittauslaitoksen Maastotietokannasta. Se
+                        kattaa kaikki Suomen maantiet, kadut ja yksityistiet sekä Maastotietokannassa olevat kevyen
+                        liikenteen väylät ja ajopolut. Lisäksi tieverkossa on kuvattuna jonkin verran kuntien ja Väylän
+                        toimittamaa tielinjageometriaa täydentävänä aineistona, joka ei ole Maanmittauslaitoksen
+                        ylläpitämää. Nämä linkit ovat eroteltavissa muusta geometriasta ylläpitäjätiedon avulla.
+
+                        Digiroadin liikkumisen suunnittelua palvelevia ominaisuustietoja ovat mm. tien toiminnallinen
+                        luokka, tieto liikennevirran suunnasta, teiden nimi- ja osoitetiedot, tie- ja katuverkon
+                        käyttörajoitukset (mm. suljettu yhteys, kääntymisrajoitus, paino-, korkeus-, pituus- ja
+                        leveysrajoitus) sekä tieverkon muut ominaisuustiedot (mm. nopeusrajoitus, leveys,
+                        päällystetieto, tasoristeykset).
+
+                        Digiroad-aineisto on ladattavissa Väylän lataus- ja katselupalvelusta yhtenä pakettina.
+                        Poikkeuksen tästä muodostaa joukkoliikenteen pysäkki -tietolaji, joka on ladattavissa myös
+                        Digiroadin verkkosivuilta. Tarkemmat tiedot joukkoliikenteen pysäkki -aineiston osalta löytyvät
+                        alta ”Liittyvät resurssit” -kohdasta.
+                    </gco:CharacterString>
+                </gmd:abstract>
+                <gmd:pointOfContact>
+                    <gmd:CI_ResponsibleParty>
+                        <gmd:organisationName>
+                            <gco:CharacterString>Väylävirasto</gco:CharacterString>
+                        </gmd:organisationName>
+                        <gmd:contactInfo>
+                            <gmd:CI_Contact>
+                                <gmd:address>
+                                    <gmd:CI_Address>
+                                        <gmd:electronicMailAddress>
+                                            <gco:CharacterString>info@digiroad.fi</gco:CharacterString>
+                                        </gmd:electronicMailAddress>
+                                    </gmd:CI_Address>
+                                </gmd:address>
+                                <gmd:onlineResource>
+                                    <gmd:CI_OnlineResource>
+                                        <gmd:linkage>
+                                            <gmd:URL>http://www.digiroad.fi/</gmd:URL>
+                                        </gmd:linkage>
+                                        <gmd:protocol gco:nilReason="missing">
+                                            <gco:CharacterString/>
+                                        </gmd:protocol>
+                                        <gmd:name gco:nilReason="missing">
+                                            <gco:CharacterString/>
+                                        </gmd:name>
+                                        <gmd:description gco:nilReason="missing">
+                                            <gco:CharacterString/>
+                                        </gmd:description>
+                                    </gmd:CI_OnlineResource>
+                                </gmd:onlineResource>
+                            </gmd:CI_Contact>
+                        </gmd:contactInfo>
+                        <gmd:role>
+                            <gmd:CI_RoleCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"
+                                    codeListValue="owner"/>
+                        </gmd:role>
+                    </gmd:CI_ResponsibleParty>
+                </gmd:pointOfContact>
+                <gmd:descriptiveKeywords>
+                    <gmd:MD_Keywords>
+                        <gmd:keyword>
+                            <gco:CharacterString>Logistiikka</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:keyword>
+                            <gco:CharacterString>Tieliikenneverkko</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:keyword>
+                            <gco:CharacterString>Liikenne</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:keyword>
+                            <gco:CharacterString>avoindata.fi</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:keyword>
+                            <gco:CharacterString>Osoitteet</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:keyword>
+                            <gco:CharacterString>Navigointi</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:keyword>
+                            <gco:CharacterString>Kevyen liikenteen verkko</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:keyword>
+                            <gco:CharacterString>Tieliikenne</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:keyword>
+                            <gco:CharacterString>Kuljetus</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:type>
+                            <gmd:MD_KeywordTypeCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"
+                                    codeListValue="theme"/>
+                        </gmd:type>
+                        <gmd:thesaurusName>
+                            <gmd:CI_Citation>
+                                <gmd:title>
+                                    <gco:CharacterString>Paikkatietohakemiston asiasanasto</gco:CharacterString>
+                                </gmd:title>
+                                <gmd:date>
+                                    <gmd:CI_Date>
+                                        <gmd:date>
+                                            <gco:Date>2010-02-03</gco:Date>
+                                        </gmd:date>
+                                        <gmd:dateType>
+                                            <gmd:CI_DateTypeCode
+                                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                                    codeListValue="publication"/>
+                                        </gmd:dateType>
+                                    </gmd:CI_Date>
+                                </gmd:date>
+                                <gmd:identifier>
+                                    <gmd:MD_Identifier>
+                                        <gmd:code>
+                                            <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                        xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.asiasanasto">
+                                                geonetwork.thesaurus.external.theme.asiasanasto
+                                            </gmx:Anchor>
+                                        </gmd:code>
+                                    </gmd:MD_Identifier>
+                                </gmd:identifier>
+                            </gmd:CI_Citation>
+                        </gmd:thesaurusName>
+                    </gmd:MD_Keywords>
+                </gmd:descriptiveKeywords>
+                <gmd:descriptiveKeywords>
+                    <gmd:MD_Keywords>
+                        <gmd:keyword>
+                            <gco:CharacterString>Liikenneverkot</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:type>
+                            <gmd:MD_KeywordTypeCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"
+                                    codeListValue="theme"/>
+                        </gmd:type>
+                        <gmd:thesaurusName>
+                            <gmd:CI_Citation>
+                                <gmd:title>
+                                    <gco:CharacterString>GEMET - INSPIRE themes, version 1.0</gco:CharacterString>
+                                </gmd:title>
+                                <gmd:date>
+                                    <gmd:CI_Date>
+                                        <gmd:date>
+                                            <gco:Date>2008-06-01</gco:Date>
+                                        </gmd:date>
+                                        <gmd:dateType>
+                                            <gmd:CI_DateTypeCode
+                                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                                    codeListValue="publication"/>
+                                        </gmd:dateType>
+                                    </gmd:CI_Date>
+                                </gmd:date>
+                                <gmd:identifier>
+                                    <gmd:MD_Identifier>
+                                        <gmd:code>
+                                            <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                        xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.inspire-theme">
+                                                geonetwork.thesaurus.external.theme.inspire-theme
+                                            </gmx:Anchor>
+                                        </gmd:code>
+                                    </gmd:MD_Identifier>
+                                </gmd:identifier>
+                            </gmd:CI_Citation>
+                        </gmd:thesaurusName>
+                    </gmd:MD_Keywords>
+                </gmd:descriptiveKeywords>
+                <gmd:descriptiveKeywords>
+                    <gmd:MD_Keywords>
+                        <gmd:keyword>
+                            <gco:CharacterString>avoindata.fi</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:type>
+                            <gmd:MD_KeywordTypeCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"
+                                    codeListValue=""/>
+                        </gmd:type>
+                    </gmd:MD_Keywords>
+                </gmd:descriptiveKeywords>
+                <gmd:descriptiveKeywords>
+                    <gmd:MD_Keywords>
+                        <gmd:keyword>
+                            <gco:CharacterString>avoin data</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:type>
+                            <gmd:MD_KeywordTypeCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"
+                                    codeListValue=""/>
+                        </gmd:type>
+                    </gmd:MD_Keywords>
+                </gmd:descriptiveKeywords>
+                <gmd:resourceConstraints>
+                    <gmd:MD_Constraints>
+                        <gmd:useLimitation>
+                            <gco:CharacterString>Aineisto sopii mm. kuljetuksien ja logistiikan suunnitteluun,
+                                erilaisiin reititys- ja navigointitehtäviin, erilaisiin liikenne- ja
+                                yhdyskuntasuunnittelun toimialaan liittyviin tehtäviin ja paikkatietoanalyysien
+                                lähdeaineistoksi sekä lähdeaineistoksi erilaisiin liikenteen tietopalvelujen
+                                tuotteisiin.
+                            </gco:CharacterString>
+                        </gmd:useLimitation>
+                    </gmd:MD_Constraints>
+                </gmd:resourceConstraints>
+                <gmd:resourceConstraints>
+                    <gmd:MD_LegalConstraints>
+                        <gmd:accessConstraints>
+                            <gmd:MD_RestrictionCode codeListValue="license"
+                                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode"/>
+                        </gmd:accessConstraints>
+                        <gmd:accessConstraints>
+                            <gmd:MD_RestrictionCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode"
+                                    codeListValue=""/>
+                        </gmd:accessConstraints>
+                        <gmd:otherConstraints>
+                            <gco:CharacterString>Ei muita rajoitteita.</gco:CharacterString>
+                        </gmd:otherConstraints>
+                    </gmd:MD_LegalConstraints>
+                </gmd:resourceConstraints>
+                <gmd:resourceConstraints>
+                    <gmd:MD_SecurityConstraints>
+                        <gmd:classification>
+                            <gmd:MD_ClassificationCode codeListValue="unclassified"
+                                                       codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ClassificationCode"/>
+                        </gmd:classification>
+                    </gmd:MD_SecurityConstraints>
+                </gmd:resourceConstraints>
+                <gmd:spatialResolution>
+                    <gmd:MD_Resolution>
+                        <gmd:equivalentScale>
+                            <gmd:MD_RepresentativeFraction>
+                                <gmd:denominator>
+                                    <gco:Integer>10000</gco:Integer>
+                                </gmd:denominator>
+                            </gmd:MD_RepresentativeFraction>
+                        </gmd:equivalentScale>
+                    </gmd:MD_Resolution>
+                </gmd:spatialResolution>
+                <gmd:language>
+                    <gco:CharacterString>fin</gco:CharacterString>
+                </gmd:language>
+                <gmd:language>
+                    <gco:CharacterString>eng</gco:CharacterString>
+                </gmd:language>
+                <gmd:topicCategory>
+                    <gmd:MD_TopicCategoryCode>transportation</gmd:MD_TopicCategoryCode>
+                </gmd:topicCategory>
+                <gmd:topicCategory>
+                    <gmd:MD_TopicCategoryCode>location</gmd:MD_TopicCategoryCode>
+                </gmd:topicCategory>
+                <gmd:extent>
+                    <gmd:EX_Extent>
+                        <gmd:geographicElement>
+                            <gmd:EX_GeographicBoundingBox>
+                                <gmd:westBoundLongitude>
+                                    <gco:Decimal>19.08317359</gco:Decimal>
+                                </gmd:westBoundLongitude>
+                                <gmd:eastBoundLongitude>
+                                    <gco:Decimal>31.58672881</gco:Decimal>
+                                </gmd:eastBoundLongitude>
+                                <gmd:southBoundLatitude>
+                                    <gco:Decimal>59.45414258</gco:Decimal>
+                                </gmd:southBoundLatitude>
+                                <gmd:northBoundLatitude>
+                                    <gco:Decimal>70.09229553</gco:Decimal>
+                                </gmd:northBoundLatitude>
+                            </gmd:EX_GeographicBoundingBox>
+                        </gmd:geographicElement>
+                    </gmd:EX_Extent>
+                </gmd:extent>
+            </gmd:MD_DataIdentification>
+        </gmd:identificationInfo>
+        <gmd:distributionInfo>
+            <gmd:MD_Distribution>
+                <gmd:transferOptions>
+                    <gmd:MD_DigitalTransferOptions>
+                        <gmd:onLine xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <gmd:CI_OnlineResource>
+                                <gmd:linkage>
+                                    <gmd:URL>https://aineistot.vayla.fi/digiroad/</gmd:URL>
+                                </gmd:linkage>
+                                <gmd:protocol gco:nilReason="missing">
+                                    <gco:CharacterString/>
+                                </gmd:protocol>
+                                <gmd:applicationProfile gco:nilReason="missing">
+                                    <gco:CharacterString/>
+                                </gmd:applicationProfile>
+                                <gmd:name gco:nilReason="missing">
+                                    <gco:CharacterString/>
+                                </gmd:name>
+                                <gmd:description gco:nilReason="missing">
+                                    <gco:CharacterString/>
+                                </gmd:description>
+                                <gmd:function>
+                                    <gmd:CI_OnLineFunctionCode
+                                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_OnLineFunctionCode"
+                                            codeListValue=""/>
+                                </gmd:function>
+                            </gmd:CI_OnlineResource>
+                        </gmd:onLine>
+                    </gmd:MD_DigitalTransferOptions>
+                </gmd:transferOptions>
+                <gmd:transferOptions xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <gmd:MD_DigitalTransferOptions/>
+                </gmd:transferOptions>
+            </gmd:MD_Distribution>
+        </gmd:distributionInfo>
+        <gmd:dataQualityInfo>
+            <gmd:DQ_DataQuality>
+                <gmd:scope>
+                    <gmd:DQ_Scope>
+                        <gmd:level>
+                            <gmd:MD_ScopeCode codeListValue="dataset"
+                                              codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"/>
+                        </gmd:level>
+                    </gmd:DQ_Scope>
+                </gmd:scope>
+                <gmd:report>
+                    <gmd:DQ_DomainConsistency>
+                        <gmd:result>
+                            <gmd:DQ_ConformanceResult>
+                                <gmd:specification>
+                                    <gmd:CI_Citation>
+                                        <gmd:title>
+                                            <gco:CharacterString>KOMISSION ASETUS (EU) N:o 1089/2010, annettu 23 päivänä
+                                                marraskuuta 2010, Euroopan parlamentin ja neuvoston direktiivin
+                                                2007/2/EY täytäntöönpanosta paikkatietoaineistojen ja -palvelujen
+                                                yhteentoimivuuden osalta
+                                            </gco:CharacterString>
+                                        </gmd:title>
+                                        <gmd:date>
+                                            <gmd:CI_Date>
+                                                <gmd:date>
+                                                    <gco:Date>2010-12-08</gco:Date>
+                                                </gmd:date>
+                                                <gmd:dateType>
+                                                    <gmd:CI_DateTypeCode
+                                                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                                            codeListValue="publication"/>
+                                                </gmd:dateType>
+                                            </gmd:CI_Date>
+                                        </gmd:date>
+                                    </gmd:CI_Citation>
+                                </gmd:specification>
+                                <gmd:explanation>
+                                    <gco:CharacterString>Sääntöjenmukaisuutta ei ole vielä arvioitu.
+                                    </gco:CharacterString>
+                                </gmd:explanation>
+                                <gmd:pass>
+                                    <gco:Boolean>false</gco:Boolean>
+                                </gmd:pass>
+                            </gmd:DQ_ConformanceResult>
+                        </gmd:result>
+                    </gmd:DQ_DomainConsistency>
+                </gmd:report>
+                <gmd:lineage>
+                    <gmd:LI_Lineage>
+                        <gmd:statement>
+                            <gco:CharacterString>Digiroad-tietolajien ylläpitovastuu jakaantuu eri julkishallinnon
+                                organisaatioille. Kukin organisaatio ylläpitää tietoja omissa tietojärjestelmissään,
+                                josta ne koostetaan Digiroadiin. Maanmittauslaitos vastaa tieverkon keskilinjan
+                                sijaintitiedon ylläpidosta, Väylä vastaa maanteiden ominaisuustietojen ylläpidosta
+                                Tierekisterissä ja kunnat vastaavat katuverkon ominaisuustietojen ylläpidosta.
+                                Yksityisteiden ominaisuustietojen ylläpitovastuu jakaantuu Maanmittauslaitoksen, Väylän
+                                ja kuntien kesken. Lisäksi tietojen ylläpitäjänä on muutama muu julkishallinnon
+                                organisaatio yksittäisten tietolajien osalta.
+
+                                Koska kaikki kunnat eivät toimita omistamansa katuverkon tietoja Digiroadiin, ovat
+                                katuverkon ominaisuustiedot puutteellisia joidenkin kuntien osalta. Myös yksityisteiden
+                                osalta tiedot voivat olla puutteellisia.
+                            </gco:CharacterString>
+                        </gmd:statement>
+                        <gmd:processStep>
+                            <gmd:LI_ProcessStep>
+                                <gmd:description>
+                                    <gco:CharacterString>Ylläpito-organisaatiot toimittavat Digiroadiin ylläpitotietoja
+                                        sovittuja menettelytapoja noudattaen. Ylläpitotiedot yhdistellään
+                                        Digiroad-tietojärjestelmässä. Lisäksi Digiroad ottaa vastaan vihjetietoa ja
+                                        välittää tiedon oikealle ylläpitäjälle.
+                                    </gco:CharacterString>
+                                </gmd:description>
+                                <gmd:rationale gco:nilReason="missing">
+                                    <gco:CharacterString/>
+                                </gmd:rationale>
+                                <gmd:dateTime>
+                                    <gco:DateTime/>
+                                </gmd:dateTime>
+                                <gmd:processor>
+                                    <gmd:CI_ResponsibleParty>
+                                        <gmd:individualName gco:nilReason="missing">
+                                            <gco:CharacterString/>
+                                        </gmd:individualName>
+                                        <gmd:organisationName gco:nilReason="missing">
+                                            <gco:CharacterString/>
+                                        </gmd:organisationName>
+                                        <gmd:positionName gco:nilReason="missing">
+                                            <gco:CharacterString/>
+                                        </gmd:positionName>
+                                        <gmd:contactInfo>
+                                            <gmd:CI_Contact>
+                                                <gmd:phone>
+                                                    <gmd:CI_Telephone>
+                                                        <gmd:voice gco:nilReason="missing">
+                                                            <gco:CharacterString/>
+                                                        </gmd:voice>
+                                                        <gmd:facsimile gco:nilReason="missing">
+                                                            <gco:CharacterString/>
+                                                        </gmd:facsimile>
+                                                    </gmd:CI_Telephone>
+                                                </gmd:phone>
+                                                <gmd:address>
+                                                    <gmd:CI_Address>
+                                                        <gmd:deliveryPoint gco:nilReason="missing">
+                                                            <gco:CharacterString/>
+                                                        </gmd:deliveryPoint>
+                                                        <gmd:city gco:nilReason="missing">
+                                                            <gco:CharacterString/>
+                                                        </gmd:city>
+                                                        <gmd:administrativeArea gco:nilReason="missing">
+                                                            <gco:CharacterString/>
+                                                        </gmd:administrativeArea>
+                                                        <gmd:postalCode gco:nilReason="missing">
+                                                            <gco:CharacterString/>
+                                                        </gmd:postalCode>
+                                                        <gmd:country gco:nilReason="missing">
+                                                            <gco:CharacterString/>
+                                                        </gmd:country>
+                                                        <gmd:electronicMailAddress>
+                                                            <gco:CharacterString>info@digiroad.fi</gco:CharacterString>
+                                                        </gmd:electronicMailAddress>
+                                                        <gmd:electronicMailAddress gco:nilReason="missing">
+                                                            <gco:CharacterString/>
+                                                        </gmd:electronicMailAddress>
+                                                    </gmd:CI_Address>
+                                                </gmd:address>
+                                                <gmd:onlineResource>
+                                                    <gmd:CI_OnlineResource>
+                                                        <gmd:linkage>
+                                                            <gmd:URL>
+                                                                https://extranet.liikennevirasto.fi/extranet/web/public/latauspalvelu
+                                                            </gmd:URL>
+                                                        </gmd:linkage>
+                                                        <gmd:protocol gco:nilReason="missing">
+                                                            <gco:CharacterString/>
+                                                        </gmd:protocol>
+                                                        <gmd:name gco:nilReason="missing">
+                                                            <gco:CharacterString/>
+                                                        </gmd:name>
+                                                        <gmd:description gco:nilReason="missing">
+                                                            <gco:CharacterString/>
+                                                        </gmd:description>
+                                                        <gmd:function>
+                                                            <gmd:CI_OnLineFunctionCode
+                                                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_OnLineFunctionCode"
+                                                                    codeListValue=""/>
+                                                        </gmd:function>
+                                                    </gmd:CI_OnlineResource>
+                                                </gmd:onlineResource>
+                                                <gmd:contactInstructions gco:nilReason="missing">
+                                                    <gco:CharacterString/>
+                                                </gmd:contactInstructions>
+                                            </gmd:CI_Contact>
+                                        </gmd:contactInfo>
+                                        <gmd:role>
+                                            <gmd:CI_RoleCode
+                                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"
+                                                    codeListValue="owner"/>
+                                        </gmd:role>
+                                    </gmd:CI_ResponsibleParty>
+                                </gmd:processor>
+                            </gmd:LI_ProcessStep>
+                        </gmd:processStep>
+                    </gmd:LI_Lineage>
+                </gmd:lineage>
+            </gmd:DQ_DataQuality>
+        </gmd:dataQualityInfo>
+    </gmd:MD_Metadata>
+</csw:GetRecordByIdResponse>
+

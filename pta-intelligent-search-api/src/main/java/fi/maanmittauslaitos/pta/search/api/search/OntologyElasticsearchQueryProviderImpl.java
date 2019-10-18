@@ -48,10 +48,12 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	private double titleWordMatchFuzzyWeight = 1.1;
 	private double organisationNameMatchWeight = 1.5;
 	private double organisationNameMatchFuzzyWeight = 1.1;
+	private double spatialWeight = 1.0;
 
 	private final ValueFactory vf = SimpleValueFactory.getInstance();
 	private Map<Language, Stemmer> stemmers;
 	private RegionNameContainer regionNameContainer;
+
 
 
 	public void setModel(Model model) {
@@ -154,6 +156,10 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		this.organisationNameMatchFuzzyWeight = organisationNameMatchFuzzyWeight;
 	}
 
+	public void setSpatialWeight(double spatialWeight) {
+		this.spatialWeight = spatialWeight;
+	}
+
 	@Override
 	public BoolQueryBuilder buildSearchSource(SearchQuery pyynto, Language lang) {
 		BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
@@ -190,10 +196,10 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 			if (regionNames.contains(regionNameSearchResult.getParsedRegion())) {
 				BoolQueryBuilder query = QueryBuilders.boolQuery();
 
-				// TODO: set factor to something else maybe?
 				FunctionScoreQueryBuilder.FilterFunctionBuilder[] functions = {
 						new FunctionScoreQueryBuilder.FilterFunctionBuilder(
-								ScoreFunctionBuilders.fieldValueFactorFunction(String.format(scoreName, regionType.getType())).factor(1.0f))
+								ScoreFunctionBuilders.fieldValueFactorFunction(String.format(scoreName, regionType.getType()))
+										.factor((float) spatialWeight))
 				};
 				query.filter().add(QueryBuilders.termQuery(String.format(fieldName, regionType.getType()), regionNameSearchResult.getParsedRegion()));
 				query.should().add(QueryBuilders.functionScoreQuery(functions));
@@ -286,4 +292,6 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 
 		return ret;
 	}
+
+
 }
