@@ -17,12 +17,18 @@ interface service on 9 August 2019 with the licence CC BY 4.0 (https://creativec
 
 Municipalities, Population Register Centre, the material was downloaded from Avoindata.fi on August 20 2019 with
 the licence CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/deed.en)
+
+Official Statistics of Finland (OSF): Municipal elections [e-publication].
+ISSN=2323-1114. Helsinki: Statistics Finland [referred: 21.10.2019].
+Access method: http://www.tilastokeskus.fi/til/kvaa/kvaa_2017-03-31_luo_001_fi.html
 """
 
 # Download new municipality excel from
 # https://www.kuntaliitto.fi/asiantuntijapalvelut/johtaminen-ja-kehittaminen/kuntaliitokset
 # and modify the file name constant accordingly
 MUNICIPALITY_UNIONS_EXCEL = "Kuntajakoselvitykset2005-2019_130519_0.xlsx"
+
+MUNICIPALITY_UNION_STATS_URL = "http://www.tilastokeskus.fi/til/kvaa/kvaa_2017-03-31_luo_001_fi.html"
 
 # Download the newest municipality information csv files from
 # https://www.avoindata.fi/data/fi/dataset/kunnat
@@ -61,9 +67,27 @@ def download_from_wfs():
 def get_municipality_names_dict():
     cols = ["KUNTANIMIFI", "KUNTANIMISV"]
     df = pd.concat([(pd.read_csv(EXISTING_MUNICIPALITIES_CSV, delimiter=";", encoding="utf-8")[cols]),
-                    (pd.read_csv(DISCONTINUED_MUNICIPALITIES_CSV, delimiter=";", encoding="ISO-8859-3")[cols])])
+                    (pd.read_csv(DISCONTINUED_MUNICIPALITIES_CSV, delimiter=";", encoding="Windows-1252")[cols])])
     df.set_index(cols[0], inplace=True)
     return df.to_dict()[cols[1]]
+
+
+def get_municipality_unions2():
+    cols = ["synonym", "new", "date"]
+    municipality = "municipality"
+    synonyms = "synonyms"
+    df = pd.read_html(MUNICIPALITY_UNION_STATS_URL, header=0, parse_dates=True)[0].dropna()[
+        ["Lakkautettu kunta", "Uuden tai laajentuvan kunnan nimi", "Ajankohta"]]
+    df.columns = cols
+
+    def clean_cell(line):
+        parts = line.split(" ")
+        return " ".join(parts[1:]).replace(", osa", "").replace(" (osa)", "").replace(". osa", "")
+
+    df[municipality] = df.apply(lambda row: clean_cell(row[1]) if len(row[1]) < 100 else None, axis=1)
+    df[synonyms] = df.apply(lambda row: {clean_cell(row[0])}, axis=1)
+    df[synonyms] = df.apply(lambda row: row[synonyms] if list(row[synonyms])[0] != row[municipality] else None, axis=1)
+    return df[[municipality, synonyms]].dropna()
 
 
 def get_municipality_unions():
@@ -99,6 +123,9 @@ def get_municipality_unions():
     df[municipality] = df.apply(lambda row: row.municipalities[0], axis=1)
     df[synonyms] = df.apply(lambda row: set(row.municipalities[1:]), axis=1)
 
+    # Fetch and concat the similar data from another source
+    df = df[[municipality, synonyms]].append(get_municipality_unions2(), ignore_index=True)
+
     # Multiple unions could happen into same municipality
     df = df[[municipality, synonyms]].groupby(df[municipality], as_index=True).agg(lambda x: reduce(set.union, x))
 
@@ -116,13 +143,10 @@ def get_municipality_unions():
         return list(all_synonyms)
 
     df[synonyms] = df.apply(synonyms_from_other_synonyms, axis=1)
-
     df = df.drop(muns_to_remove)
-
     mun_sv_dict = get_municipality_names_dict()
 
     df[synonyms_sv] = df.apply(lambda row: [mun_sv_dict.get(val, val) for val in row[synonyms]], axis=1)
-
     return df
 
 
@@ -184,5 +208,9 @@ def download_datasets():
     save_whole_finland(out_dir)
 
 
-if __name__ == '__main__':
+def main():
     download_datasets()
+
+
+if __name__ == '__main__':
+    main()

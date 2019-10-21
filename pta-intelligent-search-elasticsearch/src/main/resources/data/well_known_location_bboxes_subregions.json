@@ -3,18 +3,388 @@
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
 { "type": "Feature", "properties": { "nimi": "Helsinki", "namn": "Helsingfors", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 23.590000, 59.970000, 25.520000, 60.840000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 23.586321572039132, 59.970956515937146 ], [ 25.519284246778188, 59.970956515937146 ], [ 25.519284246778188, 60.8408511319087 ], [ 23.586321572039132, 60.8408511319087 ], [ 23.586321572039132, 59.970956515937146 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Raasepori", "namn": "Raseborg", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 22.850000, 59.810000, 24.280000, 60.210000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 22.854994612260025, 59.808411558045606 ], [ 24.276087553388169, 59.808411558045606 ], [ 24.276087553388169, 60.206001262290485 ], [ 22.854994612260025, 60.206001262290485 ], [ 22.854994612260025, 59.808411558045606 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Porvoo", "namn": "Borgå", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 25.360000, 60.190000, 26.000000, 60.740000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 25.363440798151625, 60.185449663169727 ], [ 26.000593596409086, 60.185449663169727 ], [ 26.000593596409086, 60.735870733814338 ], [ 25.363440798151625, 60.735870733814338 ], [ 25.363440798151625, 60.185449663169727 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Loviisa", "namn": "Lovisa", "synonyms_fi": [ "Ruotsinpyhtää", "Liljendal", "Pernaja" ], "synonyms_sv": [ "Strömfors", "Liljendal", "Pernċ" ], "synonyms_en": [ ], "envelope": [ 25.800000, 60.270000, 26.540000, 60.760000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 25.801002362550282, 60.266396375937418 ], [ 26.544292157862039, 60.266396375937418 ], [ 26.544292157862039, 60.757994370458498 ], [ 25.801002362550282, 60.757994370458498 ], [ 25.801002362550282, 60.266396375937418 ] ] ] } },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Raasepori",
+      "namn": "Raseborg",
+      "synonyms_fi": [
+        "Pohja",
+        "Karjaa",
+        "Tammisaaren mlk.",
+        "Bromarv",
+        "Tammisaari",
+        "Snappertuna",
+        "Tenhola"
+      ],
+      "synonyms_sv": [
+        "Pojo",
+        "Karis",
+        "Tammisaaren mlk.",
+        "Bromarv",
+        "Ekenäs",
+        "Snappertuna",
+        "Tenala"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        22.850000,
+        59.810000,
+        24.280000,
+        60.210000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            22.854994612260025,
+            59.808411558045606
+          ],
+          [
+            24.276087553388169,
+            59.808411558045606
+          ],
+          [
+            24.276087553388169,
+            60.206001262290485
+          ],
+          [
+            22.854994612260025,
+            60.206001262290485
+          ],
+          [
+            22.854994612260025,
+            59.808411558045606
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Porvoo",
+      "namn": "Borgå",
+      "synonyms_fi": [
+        "Porvoon mlk"
+      ],
+      "synonyms_sv": [
+        "Borgå lk"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        25.360000,
+        60.190000,
+        26.000000,
+        60.740000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            25.363440798151625,
+            60.185449663169727
+          ],
+          [
+            26.000593596409086,
+            60.185449663169727
+          ],
+          [
+            26.000593596409086,
+            60.735870733814338
+          ],
+          [
+            25.363440798151625,
+            60.735870733814338
+          ],
+          [
+            25.363440798151625,
+            60.185449663169727
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Loviisa",
+      "namn": "Lovisa",
+      "synonyms_fi": [
+        "Ruotsinpyhtää",
+        "Liljendal",
+        "Pernaja"
+      ],
+      "synonyms_sv": [
+        "Strömfors",
+        "Liljendal",
+        "Pernå"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        25.800000,
+        60.270000,
+        26.540000,
+        60.760000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            25.801002362550282,
+            60.266396375937418
+          ],
+          [
+            26.544292157862039,
+            60.266396375937418
+          ],
+          [
+            26.544292157862039,
+            60.757994370458498
+          ],
+          [
+            25.801002362550282,
+            60.757994370458498
+          ],
+          [
+            25.801002362550282,
+            60.266396375937418
+          ]
+        ]
+      ]
+    }
+  },
 { "type": "Feature", "properties": { "nimi": "Åboland-Turunmaa", "namn": "Åboland-Turunmaa", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 21.180000, 59.810000, 22.880000, 60.450000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 21.178434385112226, 59.808583414717695 ], [ 22.876629212600715, 59.808583414717695 ], [ 22.876629212600715, 60.447204871517556 ], [ 21.178434385112226, 60.447204871517556 ], [ 21.178434385112226, 59.808583414717695 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Salo", "namn": "Salo", "synonyms_fi": [ "Suomusjärvi", "Pertteli", "Kiikala", "Kisko", "Halikko", "Särkisalo", "Kuusjoki", "Muurla", "Perniö" ], "synonyms_sv": [ "Suomusjärvi", "Pertteli", "Kiikala", "Kisko", "Halikko", "Finby", "Kuusjoki", "Muurla", "Bjärnċ" ], "synonyms_en": [ ], "envelope": [ 22.820000, 60.010000, 23.920000, 60.770000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 22.818931753904558, 60.012837491158571 ], [ 23.920549093256536, 60.012837491158571 ], [ 23.920549093256536, 60.77416824002681 ], [ 22.818931753904558, 60.77416824002681 ], [ 22.818931753904558, 60.012837491158571 ] ] ] } },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Salo",
+      "namn": "Salo",
+      "synonyms_fi": [
+        "Muurla",
+        "Halikko",
+        "Kiikala",
+        "Suomusjärvi",
+        "Perniö",
+        "Pertteli",
+        "Särkisalo",
+        "Kuusjoki",
+        "Kisko"
+      ],
+      "synonyms_sv": [
+        "Muurla",
+        "Halikko",
+        "Kiikala",
+        "Suomusjärvi",
+        "Bjärnå",
+        "Pertteli",
+        "Finby",
+        "Kuusjoki",
+        "Kisko"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        22.820000,
+        60.010000,
+        23.920000,
+        60.770000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            22.818931753904558,
+            60.012837491158571
+          ],
+          [
+            23.920549093256536,
+            60.012837491158571
+          ],
+          [
+            23.920549093256536,
+            60.77416824002681
+          ],
+          [
+            22.818931753904558,
+            60.77416824002681
+          ],
+          [
+            22.818931753904558,
+            60.012837491158571
+          ]
+        ]
+      ]
+    }
+  },
 { "type": "Feature", "properties": { "nimi": "Turku", "namn": "Åbo", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 21.560000, 60.250000, 22.880000, 60.900000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 21.555157858104678, 60.247860465178896 ], [ 22.880317926048377, 60.247860465178896 ], [ 22.880317926048377, 60.904205378693142 ], [ 21.555157858104678, 60.904205378693142 ], [ 21.555157858104678, 60.247860465178896 ] ] ] } },
 { "type": "Feature", "properties": { "nimi": "Vakka-Suomi", "namn": "Nystadsregionen", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 21.200000, 60.480000, 22.130000, 61.090000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 21.203077609475343, 60.480357190555353 ], [ 22.128467336340098, 60.480357190555353 ], [ 22.128467336340098, 61.088943661581148 ], [ 21.203077609475343, 61.088943661581148 ], [ 21.203077609475343, 60.480357190555353 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Loimaa", "namn": "Loimaa", "synonyms_fi": [ "Alastaro", "Mellilä" ], "synonyms_sv": [ "Alastaro", "Mellilä" ], "synonyms_en": [ ], "envelope": [ 22.160000, 60.510000, 23.290000, 61.100000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 22.160313633317582, 60.51088294612309 ], [ 23.293928972580186, 60.51088294612309 ], [ 23.293928972580186, 61.101435320153456 ], [ 22.160313633317582, 61.101435320153456 ], [ 22.160313633317582, 60.51088294612309 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Rauma", "namn": "Raumo", "synonyms_fi": [ "Lappi", "Kodisjoki" ], "synonyms_sv": [ "Lappi", "Kodisjoki" ], "synonyms_en": [ ], "envelope": [ 21.330000, 60.870000, 22.700000, 61.440000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 21.33440020905816, 60.872005738961469 ], [ 22.70154449164605, 60.872005738961469 ], [ 22.70154449164605, 61.442675532512787 ], [ 21.33440020905816, 61.442675532512787 ], [ 21.33440020905816, 60.872005738961469 ] ] ] } },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Loimaa",
+      "namn": "Loimaa",
+      "synonyms_fi": [
+        "Mellilä",
+        "Alastaro",
+        "Loimaan kunta"
+      ],
+      "synonyms_sv": [
+        "Mellilä",
+        "Alastaro",
+        "Loimaa kommun"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        22.160000,
+        60.510000,
+        23.290000,
+        61.100000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            22.160313633317582,
+            60.51088294612309
+          ],
+          [
+            23.293928972580186,
+            60.51088294612309
+          ],
+          [
+            23.293928972580186,
+            61.101435320153456
+          ],
+          [
+            22.160313633317582,
+            61.101435320153456
+          ],
+          [
+            22.160313633317582,
+            60.51088294612309
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Rauma",
+      "namn": "Raumo",
+      "synonyms_fi": [
+        "Kodisjoki",
+        "Rauman mlk",
+        "Lappi"
+      ],
+      "synonyms_sv": [
+        "Kodisjoki",
+        "Raumo lk",
+        "Lappi"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        21.330000,
+        60.870000,
+        22.700000,
+        61.440000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            21.33440020905816,
+            60.872005738961469
+          ],
+          [
+            22.70154449164605,
+            60.872005738961469
+          ],
+          [
+            22.70154449164605,
+            61.442675532512787
+          ],
+          [
+            21.33440020905816,
+            61.442675532512787
+          ],
+          [
+            21.33440020905816,
+            60.872005738961469
+          ]
+        ]
+      ]
+    }
+  },
 { "type": "Feature", "properties": { "nimi": "Pori", "namn": "Björneborg", "synonyms_fi": [ "Lavia", "Noormarkku" ], "synonyms_sv": [ "Lavia", "Norrmark" ], "synonyms_en": [ ], "envelope": [ 21.330000, 60.990000, 22.990000, 62.020000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 21.332016549513618, 60.986935526700428 ], [ 22.993958184226496, 60.986935526700428 ], [ 22.993958184226496, 62.019585020526662 ], [ 21.332016549513618, 62.019585020526662 ], [ 21.332016549513618, 60.986935526700428 ] ] ] } },
 { "type": "Feature", "properties": { "nimi": "Pohjois-Satakunta", "namn": "Norra Satakunta", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 21.680000, 61.690000, 22.860000, 62.310000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 21.678973354406299, 61.686066745564744 ], [ 22.861626436873077, 61.686066745564744 ], [ 22.861626436873077, 62.311125803353661 ], [ 21.678973354406299, 62.311125803353661 ], [ 21.678973354406299, 61.686066745564744 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Hämeenlinna", "namn": "Tavastehus", "synonyms_fi": [ "Hauho", "Renko", "Lammi", "Kalvola", "Tuulos" ], "synonyms_sv": [ "Hauho", "Renko", "Lammi", "Kalvola", "Tuulos" ], "synonyms_en": [ ], "envelope": [ 23.760000, 60.740000, 25.260000, 61.320000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 23.756756704880438, 60.744569283446062 ], [ 25.259867424271146, 60.744569283446062 ], [ 25.259867424271146, 61.324881263440922 ], [ 23.756756704880438, 61.324881263440922 ], [ 23.756756704880438, 60.744569283446062 ] ] ] } },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Hämeenlinna",
+      "namn": "Tavastehus",
+      "synonyms_fi": [
+        "Lammi",
+        "Kalvola",
+        "Hauho",
+        "Renko",
+        "Tuulos"
+      ],
+      "synonyms_sv": [
+        "Lammi",
+        "Kalvola",
+        "Hauho",
+        "Renko",
+        "Tuulos"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        23.760000,
+        60.740000,
+        25.260000,
+        61.320000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            23.756756704880438,
+            60.744569283446062
+          ],
+          [
+            25.259867424271146,
+            60.744569283446062
+          ],
+          [
+            25.259867424271146,
+            61.324881263440922
+          ],
+          [
+            23.756756704880438,
+            61.324881263440922
+          ],
+          [
+            23.756756704880438,
+            60.744569283446062
+          ]
+        ]
+      ]
+    }
+  },
 { "type": "Feature", "properties": { "nimi": "Riihimäki", "namn": "Riihimäki", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 24.050000, 60.550000, 25.150000, 60.930000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 24.046748248084818, 60.552491482442349 ], [ 25.154875870166148, 60.552491482442349 ], [ 25.154875870166148, 60.927816351958135 ], [ 24.046748248084818, 60.927816351958135 ], [ 24.046748248084818, 60.552491482442349 ] ] ] } },
 { "type": "Feature", "properties": { "nimi": "Forssa", "namn": "Forssa", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 23.140000, 60.640000, 24.060000, 61.020000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 23.135638121690143, 60.63820101410036 ], [ 24.06324337885788, 60.63820101410036 ], [ 24.06324337885788, 61.018553972856552 ], [ 23.135638121690143, 61.018553972856552 ], [ 23.135638121690143, 60.63820101410036 ] ] ] } },
 { "type": "Feature", "properties": { "nimi": "Luoteis-Pirkanmaa", "namn": "Nordvästra Birkaland", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 22.520000, 61.680000, 23.590000, 62.330000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 22.522595371754171, 61.675139305255804 ], [ 23.593875293551669, 61.675139305255804 ], [ 23.593875293551669, 62.334166697857 ], [ 22.522595371754171, 62.334166697857 ], [ 22.522595371754171, 61.675139305255804 ] ] ] } },
@@ -23,29 +393,593 @@
 { "type": "Feature", "properties": { "nimi": "Lounais-Pirkanmaa", "namn": "Sydvästra Birkaland", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 22.430000, 61.000000, 23.380000, 61.700000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 22.434161869524701, 61.001219807519597 ], [ 23.383360154994776, 61.001219807519597 ], [ 23.383360154994776, 61.702547174629942 ], [ 22.434161869524701, 61.702547174629942 ], [ 22.434161869524701, 61.001219807519597 ] ] ] } },
 { "type": "Feature", "properties": { "nimi": "Ylä-Pirkanmaa", "namn": "Övre Birkaland", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 23.220000, 61.720000, 24.730000, 62.490000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 23.217823356517762, 61.71553824578659 ], [ 24.730913470259239, 61.71553824578659 ], [ 24.730913470259239, 62.494336308734944 ], [ 23.217823356517762, 62.494336308734944 ], [ 23.217823356517762, 61.71553824578659 ] ] ] } },
 { "type": "Feature", "properties": { "nimi": "Lahti", "namn": "Lahtis", "synonyms_fi": [ "Nastola" ], "synonyms_sv": [ "Nastola" ], "synonyms_en": [ ], "envelope": [ 24.860000, 60.670000, 26.510000, 61.800000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 24.85995269742083, 60.671476259160862 ], [ 26.513662873553251, 60.671476259160862 ], [ 26.513662873553251, 61.801407879883925 ], [ 24.85995269742083, 61.801407879883925 ], [ 24.85995269742083, 60.671476259160862 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Kouvola", "namn": "Kouvola", "synonyms_fi": [ "Kuusankoski", "Anjalankoski", "Elimäki", "Valkeala", "Jaala" ], "synonyms_sv": [ "Kuusankoski", "Anjalankoski", "Elimäki", "Valkeala", "Jaala" ], "synonyms_en": [ ], "envelope": [ 26.040000, 60.580000, 27.430000, 61.290000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 26.042201439135184, 60.575006452801013 ], [ 27.428359693405305, 60.575006452801013 ], [ 27.428359693405305, 61.28714635767853 ], [ 26.042201439135184, 61.28714635767853 ], [ 26.042201439135184, 60.575006452801013 ] ] ] } },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Kouvola",
+      "namn": "Kouvola",
+      "synonyms_fi": [
+        "Anjalankoski",
+        "Jaala",
+        "Kuusankoski",
+        "Elimäki",
+        "Valkeala"
+      ],
+      "synonyms_sv": [
+        "Anjalankoski",
+        "Jaala",
+        "Kuusankoski",
+        "Elimäki",
+        "Valkeala"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        26.040000,
+        60.580000,
+        27.430000,
+        61.290000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            26.042201439135184,
+            60.575006452801013
+          ],
+          [
+            27.428359693405305,
+            60.575006452801013
+          ],
+          [
+            27.428359693405305,
+            61.28714635767853
+          ],
+          [
+            26.042201439135184,
+            61.28714635767853
+          ],
+          [
+            26.042201439135184,
+            60.575006452801013
+          ]
+        ]
+      ]
+    }
+  },
 { "type": "Feature", "properties": { "nimi": "Kotka-Hamina", "namn": "Kotka-Fredrikshamn", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 26.450000, 60.270000, 27.990000, 60.840000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 26.447839512684808, 60.272060851615493 ], [ 27.991282517935058, 60.272060851615493 ], [ 27.991282517935058, 60.842640038358127 ], [ 26.447839512684808, 60.842640038358127 ], [ 26.447839512684808, 60.272060851615493 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Lappeenranta", "namn": "Villmanstrand", "synonyms_fi": [ "Joutseno", "Ylämaa" ], "synonyms_sv": [ "Joutseno", "Ylämaa" ], "synonyms_en": [ ], "envelope": [ 27.140000, 60.670000, 28.780000, 61.380000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 27.136110481752134, 60.668984887708874 ], [ 28.776648531491837, 60.668984887708874 ], [ 28.776648531491837, 61.379686542496934 ], [ 27.136110481752134, 61.379686542496934 ], [ 27.136110481752134, 60.668984887708874 ] ] ] } },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Lappeenranta",
+      "namn": "Villmanstrand",
+      "synonyms_fi": [
+        "Ylämaa",
+        "Joutseno",
+        "Nuijamaa"
+      ],
+      "synonyms_sv": [
+        "Ylämaa",
+        "Joutseno",
+        "Nuijamaa"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        27.140000,
+        60.670000,
+        28.780000,
+        61.380000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            27.136110481752134,
+            60.668984887708874
+          ],
+          [
+            28.776648531491837,
+            60.668984887708874
+          ],
+          [
+            28.776648531491837,
+            61.379686542496934
+          ],
+          [
+            27.136110481752134,
+            61.379686542496934
+          ],
+          [
+            27.136110481752134,
+            60.668984887708874
+          ]
+        ]
+      ]
+    }
+  },
 { "type": "Feature", "properties": { "nimi": "Imatra", "namn": "Imatra", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 28.250000, 61.080000, 30.140000, 61.850000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 28.252197927799042, 61.079254962437318 ], [ 30.143957438072871, 61.079254962437318 ], [ 30.143957438072871, 61.853209046160408 ], [ 28.252197927799042, 61.853209046160408 ], [ 28.252197927799042, 61.079254962437318 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Mikkeli", "namn": "S:t Michel", "synonyms_fi": [ "Ristiina", "Suomenniemi", "Haukivuori" ], "synonyms_sv": [ "Ristiina", "Suomenniemi", "Haukivuori" ], "synonyms_en": [ ], "envelope": [ 26.220000, 61.150000, 28.810000, 62.310000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 26.220722550149564, 61.152061290171524 ], [ 28.811777678606269, 61.152061290171524 ], [ 28.811777678606269, 62.307726349927712 ], [ 26.220722550149564, 62.307726349927712 ], [ 26.220722550149564, 61.152061290171524 ] ] ] } },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Mikkeli",
+      "namn": "S:t Michel",
+      "synonyms_fi": [
+        "Anttola",
+        "Mikkelin mlk",
+        "Haukivuori",
+        "Ristiina",
+        "Suomenniemi"
+      ],
+      "synonyms_sv": [
+        "Anttola",
+        "S:t Michels lk",
+        "Haukivuori",
+        "Ristiina",
+        "Suomenniemi"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        26.220000,
+        61.150000,
+        28.810000,
+        62.310000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            26.220722550149564,
+            61.152061290171524
+          ],
+          [
+            28.811777678606269,
+            61.152061290171524
+          ],
+          [
+            28.811777678606269,
+            62.307726349927712
+          ],
+          [
+            26.220722550149564,
+            62.307726349927712
+          ],
+          [
+            26.220722550149564,
+            61.152061290171524
+          ]
+        ]
+      ]
+    }
+  },
 { "type": "Feature", "properties": { "nimi": "Savonlinna", "namn": "Nyslott", "synonyms_fi": [ "Savonranta", "Punkaharju", "Kerimäki" ], "synonyms_sv": [ "Savonranta", "Punkaharju", "Kerimäki" ], "synonyms_en": [ ], "envelope": [ 27.870000, 61.540000, 29.700000, 62.660000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 27.866773614239065, 61.535776933764716 ], [ 29.696825625233611, 61.535776933764716 ], [ 29.696825625233611, 62.657021683783391 ], [ 27.866773614239065, 62.657021683783391 ], [ 27.866773614239065, 61.535776933764716 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Pieksämäki", "namn": "Pieksämäki", "synonyms_fi": [ "Pieksänmaa" ], "synonyms_sv": [ "Pieksänmaa" ], "synonyms_en": [ ], "envelope": [ 26.670000, 61.550000, 28.230000, 62.500000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 26.669044203050337, 61.545595532344628 ], [ 28.227784859992049, 61.545595532344628 ], [ 28.227784859992049, 62.503886123097992 ], [ 26.669044203050337, 62.503886123097992 ], [ 26.669044203050337, 61.545595532344628 ] ] ] } },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Pieksämäki",
+      "namn": "Pieksämäki",
+      "synonyms_fi": [
+        "Jäppilä",
+        "Pieksänmaa",
+        "Virtasalmi",
+        "Pieksämäen mlk"
+      ],
+      "synonyms_sv": [
+        "Jäppilä",
+        "Pieksänmaa",
+        "Virtasalmi",
+        "Pieksämäki lk"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        26.670000,
+        61.550000,
+        28.230000,
+        62.500000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            26.669044203050337,
+            61.545595532344628
+          ],
+          [
+            28.227784859992049,
+            61.545595532344628
+          ],
+          [
+            28.227784859992049,
+            62.503886123097992
+          ],
+          [
+            26.669044203050337,
+            62.503886123097992
+          ],
+          [
+            26.669044203050337,
+            61.545595532344628
+          ]
+        ]
+      ]
+    }
+  },
 { "type": "Feature", "properties": { "nimi": "Ylä-Savo", "namn": "Norra Savolax", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 26.070000, 63.000000, 28.170000, 64.040000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 26.070540596614844, 62.998813547130887 ], [ 28.168816137904422, 62.998813547130887 ], [ 28.168816137904422, 64.036973831042161 ], [ 26.070540596614844, 64.036973831042161 ], [ 26.070540596614844, 62.998813547130887 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Kuopio", "namn": "Kuopio", "synonyms_fi": [ "Karttula", "Nilsiä", "Juankoski", "Maaninka" ], "synonyms_sv": [ "Karttula", "Nilsiä", "Juankoski", "Maaninka" ], "synonyms_en": [ ], "envelope": [ 26.900000, 62.610000, 28.760000, 63.400000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 26.895500491503512, 62.612419835978059 ], [ 28.762386826475662, 62.612419835978059 ], [ 28.762386826475662, 63.403310727787726 ], [ 26.895500491503512, 63.403310727787726 ], [ 26.895500491503512, 62.612419835978059 ] ] ] } },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Kuopio",
+      "namn": "Kuopio",
+      "synonyms_fi": [
+        "Juankoski",
+        "Karttula",
+        "Nilsiä",
+        "Maaninka",
+        "Vehmersalmi"
+      ],
+      "synonyms_sv": [
+        "Juankoski",
+        "Karttula",
+        "Nilsiä",
+        "Maaninka",
+        "Vehmersalmi"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        26.900000,
+        62.610000,
+        28.760000,
+        63.400000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            26.895500491503512,
+            62.612419835978059
+          ],
+          [
+            28.762386826475662,
+            62.612419835978059
+          ],
+          [
+            28.762386826475662,
+            63.403310727787726
+          ],
+          [
+            26.895500491503512,
+            63.403310727787726
+          ],
+          [
+            26.895500491503512,
+            62.612419835978059
+          ]
+        ]
+      ]
+    }
+  },
 { "type": "Feature", "properties": { "nimi": "Koillis-Savo", "namn": "Nordöstra Savolax", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 28.040000, 62.580000, 29.100000, 63.750000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 28.041811397630159, 62.583162658638855 ], [ 29.097602163194985, 62.583162658638855 ], [ 29.097602163194985, 63.754752623128397 ], [ 28.041811397630159, 63.754752623128397 ], [ 28.041811397630159, 62.583162658638855 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Varkaus", "namn": "Varkaus", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 27.410000, 62.150000, 28.650000, 62.710000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 27.408508822228697, 62.14962008209227 ], [ 28.652808243600358, 62.14962008209227 ], [ 28.652808243600358, 62.705791326703093 ], [ 27.408508822228697, 62.705791326703093 ], [ 27.408508822228697, 62.14962008209227 ] ] ] } },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Varkaus",
+      "namn": "Varkaus",
+      "synonyms_fi": [
+        "Kangaslampi"
+      ],
+      "synonyms_sv": [
+        "Kangaslampi"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        27.410000,
+        62.150000,
+        28.650000,
+        62.710000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            27.408508822228697,
+            62.14962008209227
+          ],
+          [
+            28.652808243600358,
+            62.14962008209227
+          ],
+          [
+            28.652808243600358,
+            62.705791326703093
+          ],
+          [
+            27.408508822228697,
+            62.705791326703093
+          ],
+          [
+            27.408508822228697,
+            62.14962008209227
+          ]
+        ]
+      ]
+    }
+  },
 { "type": "Feature", "properties": { "nimi": "Sisä-Savo", "namn": "Inre Savolax", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 26.040000, 62.450000, 27.530000, 63.120000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 26.039837786893372, 62.448809166595005 ], [ 27.529794623177711, 62.448809166595005 ], [ 27.529794623177711, 63.117692540693177 ], [ 26.039837786893372, 63.117692540693177 ], [ 26.039837786893372, 62.448809166595005 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Joensuu", "namn": "Joensuu", "synonyms_fi": [ "Pyhäselkä", "Eno" ], "synonyms_sv": [ "Pyhäselkä", "Eno" ], "synonyms_en": [ ], "envelope": [ 28.610000, 62.250000, 31.590000, 63.450000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 28.610804132619116, 62.250802840354517 ], [ 31.586705847243781, 62.250802840354517 ], [ 31.586705847243781, 63.449715591164676 ], [ 28.610804132619116, 63.449715591164676 ], [ 28.610804132619116, 62.250802840354517 ] ] ] } },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Joensuu",
+      "namn": "Joensuu",
+      "synonyms_fi": [
+        "Kiihtelysvaara",
+        "Pyhäselkä",
+        "Eno",
+        "Tuupovaara"
+      ],
+      "synonyms_sv": [
+        "Kiihtelysvaara",
+        "Pyhäselkä",
+        "Eno",
+        "Tuupovaara"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        28.610000,
+        62.250000,
+        31.590000,
+        63.450000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            28.610804132619116,
+            62.250802840354517
+          ],
+          [
+            31.586705847243781,
+            62.250802840354517
+          ],
+          [
+            31.586705847243781,
+            63.449715591164676
+          ],
+          [
+            28.610804132619116,
+            63.449715591164676
+          ],
+          [
+            28.610804132619116,
+            62.250802840354517
+          ]
+        ]
+      ]
+    }
+  },
 { "type": "Feature", "properties": { "nimi": "Keski-Karjala", "namn": "Mellersta Karelen", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 29.300000, 61.720000, 30.790000, 62.420000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 29.295965344218789, 61.722072807270926 ], [ 30.789181998487273, 61.722072807270926 ], [ 30.789181998487273, 62.416349276077042 ], [ 29.295965344218789, 62.416349276077042 ], [ 29.295965344218789, 61.722072807270926 ] ] ] } },
 { "type": "Feature", "properties": { "nimi": "Pielisen Karjala", "namn": "Pielisen Karjala", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 28.360000, 63.000000, 31.240000, 63.880000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 28.359590193318859, 62.998402437182655 ], [ 31.239857160525297, 62.998402437182655 ], [ 31.239857160525297, 63.882414665412014 ], [ 28.359590193318859, 63.882414665412014 ], [ 28.359590193318859, 62.998402437182655 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Jyväskylä", "namn": "Jyväskylä", "synonyms_fi": [ "Jyväskylänmlk", "Korpilahti" ], "synonyms_sv": [ "Jyväskylänmlk", "Korpilahti" ], "synonyms_en": [ ], "envelope": [ 24.970000, 61.840000, 26.780000, 62.580000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 24.968808147282644, 61.839518894000015 ], [ 26.776124785472199, 61.839518894000015 ], [ 26.776124785472199, 62.583585823518547 ], [ 24.968808147282644, 62.583585823518547 ], [ 24.968808147282644, 61.839518894000015 ] ] ] } },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Jyväskylä",
+      "namn": "Jyväskylä",
+      "synonyms_fi": [
+        "Jyväskylänmlk",
+        "Korpilahti",
+        "Säynätsalo",
+        "Jyväskylän mlk"
+      ],
+      "synonyms_sv": [
+        "Jyväskylänmlk",
+        "Korpilahti",
+        "Säynätsalo",
+        "Jyväskylä lk"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        24.970000,
+        61.840000,
+        26.780000,
+        62.580000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            24.968808147282644,
+            61.839518894000015
+          ],
+          [
+            26.776124785472199,
+            61.839518894000015
+          ],
+          [
+            26.776124785472199,
+            62.583585823518547
+          ],
+          [
+            24.968808147282644,
+            62.583585823518547
+          ],
+          [
+            24.968808147282644,
+            61.839518894000015
+          ]
+        ]
+      ]
+    }
+  },
 { "type": "Feature", "properties": { "nimi": "Joutsa", "namn": "Joutsa", "synonyms_fi": [ "Leivonmäki" ], "synonyms_sv": [ "Leivonmäki" ], "synonyms_en": [ ], "envelope": [ 25.500000, 61.610000, 26.530000, 62.040000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 25.501333303437583, 61.608449416014537 ], [ 26.527086841908076, 61.608449416014537 ], [ 26.527086841908076, 62.038480335553778 ], [ 25.501333303437583, 62.038480335553778 ], [ 25.501333303437583, 61.608449416014537 ] ] ] } },
 { "type": "Feature", "properties": { "nimi": "Keuruu", "namn": "Keuruu", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 24.010000, 62.020000, 25.250000, 62.660000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 24.013003199323808, 62.023191751346062 ], [ 25.251913084078417, 62.023191751346062 ], [ 25.251913084078417, 62.664786460691708 ], [ 24.013003199323808, 62.664786460691708 ], [ 24.013003199323808, 62.023191751346062 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Jämsä", "namn": "Jämsä", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 24.520000, 61.450000, 25.600000, 62.210000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 24.52464400939769, 61.450703817350607 ], [ 25.596409729872146, 61.450703817350607 ], [ 25.596409729872146, 62.21080123373261 ], [ 24.52464400939769, 62.21080123373261 ], [ 24.52464400939769, 61.450703817350607 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Äänekoski", "namn": "Äänekoski", "synonyms_fi": [ "Sumiainen", "Suolahti" ], "synonyms_sv": [ "Sumiainen", "Suolahti" ], "synonyms_en": [ ], "envelope": [ 25.480000, 62.490000, 26.600000, 62.920000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 25.483862798653824, 62.489475774303216 ], [ 26.598386275363705, 62.489475774303216 ], [ 26.598386275363705, 62.920742875243143 ], [ 25.483862798653824, 62.920742875243143 ], [ 25.483862798653824, 62.489475774303216 ] ] ] } },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Jämsä",
+      "namn": "Jämsä",
+      "synonyms_fi": [
+        "Kuorevesi",
+        "Längelmäki",
+        "Jämsänkoski"
+      ],
+      "synonyms_sv": [
+        "Kuorevesi",
+        "Längelmäki",
+        "Jämsänkoski"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        24.520000,
+        61.450000,
+        25.600000,
+        62.210000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            24.52464400939769,
+            61.450703817350607
+          ],
+          [
+            25.596409729872146,
+            61.450703817350607
+          ],
+          [
+            25.596409729872146,
+            62.21080123373261
+          ],
+          [
+            24.52464400939769,
+            62.21080123373261
+          ],
+          [
+            24.52464400939769,
+            61.450703817350607
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Äänekoski",
+      "namn": "Äänekoski",
+      "synonyms_fi": [
+        "Konginkangas",
+        "Suolahti",
+        "Sumiainen"
+      ],
+      "synonyms_sv": [
+        "Konginkangas",
+        "Suolahti",
+        "Sumiainen"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        25.480000,
+        62.490000,
+        26.600000,
+        62.920000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            25.483862798653824,
+            62.489475774303216
+          ],
+          [
+            26.598386275363705,
+            62.489475774303216
+          ],
+          [
+            26.598386275363705,
+            62.920742875243143
+          ],
+          [
+            25.483862798653824,
+            62.920742875243143
+          ],
+          [
+            25.483862798653824,
+            62.489475774303216
+          ]
+        ]
+      ]
+    }
+  },
 { "type": "Feature", "properties": { "nimi": "Saarijärvi-Viitasaari", "namn": "Saarijärvi-Viitasaari", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 24.280000, 62.520000, 26.330000, 63.610000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 24.278016679306976, 62.520826208900814 ], [ 26.334274123861412, 62.520826208900814 ], [ 26.334274123861412, 63.61027606350121 ], [ 24.278016679306976, 63.61027606350121 ], [ 24.278016679306976, 62.520826208900814 ] ] ] } },
 { "type": "Feature", "properties": { "nimi": "Suupohja", "namn": "Suupohja", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 21.550000, 61.980000, 22.640000, 62.640000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 21.554130115012388, 61.979759588074522 ], [ 22.641897506855248, 61.979759588074522 ], [ 22.641897506855248, 62.640045044341342 ], [ 21.554130115012388, 62.640045044341342 ], [ 21.554130115012388, 61.979759588074522 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Seinäjoki", "namn": "Seinäjoki", "synonyms_fi": [ "Ylistaro", "Nurmo" ], "synonyms_sv": [ "Ylistaro", "Nurmo" ], "synonyms_en": [ ], "envelope": [ 21.660000, 62.270000, 23.520000, 63.400000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 21.662244557639834, 62.270883652000556 ], [ 23.51947115582648, 62.270883652000556 ], [ 23.51947115582648, 63.398961424408192 ], [ 21.662244557639834, 63.398961424408192 ], [ 21.662244557639834, 62.270883652000556 ] ] ] } },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Seinäjoki",
+      "namn": "Seinäjoki",
+      "synonyms_fi": [
+        "Ylistaro",
+        "Nurmo",
+        "Peräseinäjoki"
+      ],
+      "synonyms_sv": [
+        "Ylistaro",
+        "Nurmo",
+        "Peräseinäjoki"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        21.660000,
+        62.270000,
+        23.520000,
+        63.400000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            21.662244557639834,
+            62.270883652000556
+          ],
+          [
+            23.51947115582648,
+            62.270883652000556
+          ],
+          [
+            23.51947115582648,
+            63.398961424408192
+          ],
+          [
+            21.662244557639834,
+            63.398961424408192
+          ],
+          [
+            21.662244557639834,
+            62.270883652000556
+          ]
+        ]
+      ]
+    }
+  },
 { "type": "Feature", "properties": { "nimi": "Kuusiokunnat", "namn": "Kuusiokunnat", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 23.160000, 62.360000, 24.580000, 62.920000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 23.161226225470561, 62.363326371043968 ], [ 24.582168733904478, 62.363326371043968 ], [ 24.582168733904478, 62.919628298592798 ], [ 23.161226225470561, 62.919628298592798 ], [ 23.161226225470561, 62.363326371043968 ] ] ] } },
 { "type": "Feature", "properties": { "nimi": "Järviseutu", "namn": "Järviseutu", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 23.210000, 62.690000, 24.520000, 63.500000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 23.207039642118055, 62.685776175889806 ], [ 24.519591938696557, 62.685776175889806 ], [ 24.519591938696557, 63.498046659827395 ], [ 23.207039642118055, 63.498046659827395 ], [ 23.207039642118055, 62.685776175889806 ] ] ] } },
 { "type": "Feature", "properties": { "nimi": "Kyrönmaa", "namn": "Kyrönmaa", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 21.770000, 62.750000, 22.680000, 63.100000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 21.772061010433553, 62.75157420685445 ], [ 22.6762298865338, 62.75157420685445 ], [ 22.6762298865338, 63.101917509370196 ], [ 21.772061010433553, 63.101917509370196 ], [ 21.772061010433553, 62.75157420685445 ] ] ] } },
@@ -53,17 +987,265 @@
 { "type": "Feature", "properties": { "nimi": "Sydösterbotten", "namn": "Sydösterbotten", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 21.040000, 61.970000, 21.790000, 62.770000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 21.040698084365658, 61.966964836969815 ], [ 21.790967682193891, 61.966964836969815 ], [ 21.790967682193891, 62.767665483714246 ], [ 21.040698084365658, 62.767665483714246 ], [ 21.040698084365658, 61.966964836969815 ] ] ] } },
 { "type": "Feature", "properties": { "nimi": "Jakobstadsregionen", "namn": "Jakobstadsregionen", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 22.210000, 63.280000, 23.740000, 63.890000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 22.208355636828038, 63.282048041678344 ], [ 23.744081223369431, 63.282048041678344 ], [ 23.744081223369431, 63.890012377579275 ], [ 22.208355636828038, 63.890012377579275 ], [ 22.208355636828038, 63.282048041678344 ] ] ] } },
 { "type": "Feature", "properties": { "nimi": "Kaustinen", "namn": "Kaustby", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 23.420000, 63.120000, 25.040000, 63.880000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 23.422407205216071, 63.116429508564174 ], [ 25.036315554951337, 63.116429508564174 ], [ 25.036315554951337, 63.876949484833496 ], [ 23.422407205216071, 63.876949484833496 ], [ 23.422407205216071, 63.116429508564174 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Kokkola", "namn": "Karleby", "synonyms_fi": [ "Kälviä", "Lohtaja", "Ullava" ], "synonyms_sv": [ "Kelviċ", "Lochteċ", "Ullava" ], "synonyms_en": [ ], "envelope": [ 22.810000, 63.500000, 24.470000, 64.100000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 22.808019035393599, 63.499110380338323 ], [ 24.466864056660278, 63.499110380338323 ], [ 24.466864056660278, 64.095265579882934 ], [ 22.808019035393599, 64.095265579882934 ], [ 22.808019035393599, 63.499110380338323 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Oulu", "namn": "Uleåborg", "synonyms_fi": [ "Yli-Ii", "Haukipudas", "Kiiminki", "Oulunsalo", "Ylikiiminki" ], "synonyms_sv": [ "Yli-Ii", "Haukipudas", "Kiiminki", "Oulunsalo", "Ylikiiminki" ], "synonyms_en": [ ], "envelope": [ 24.570000, 64.460000, 26.770000, 65.560000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 24.569732748985412, 64.46268228440627 ], [ 26.768424187225669, 64.46268228440627 ], [ 26.768424187225669, 65.555211463323786 ], [ 24.569732748985412, 65.555211463323786 ], [ 24.569732748985412, 64.46268228440627 ] ] ] } },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Kokkola",
+      "namn": "Karleby",
+      "synonyms_fi": [
+        "Ullava",
+        "Kaarlela",
+        "Lohtaja",
+        "Kälviä"
+      ],
+      "synonyms_sv": [
+        "Ullava",
+        "Karleby",
+        "Lochteå",
+        "Kelviå"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        22.810000,
+        63.500000,
+        24.470000,
+        64.100000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            22.808019035393599,
+            63.499110380338323
+          ],
+          [
+            24.466864056660278,
+            63.499110380338323
+          ],
+          [
+            24.466864056660278,
+            64.095265579882934
+          ],
+          [
+            22.808019035393599,
+            64.095265579882934
+          ],
+          [
+            22.808019035393599,
+            63.499110380338323
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Oulu",
+      "namn": "Uleåborg",
+      "synonyms_fi": [
+        "Yli-Ii",
+        "Kiiminki",
+        "Ylikiiminki",
+        "Oulunsalo",
+        "Haukipudas"
+      ],
+      "synonyms_sv": [
+        "Yli-Ii",
+        "Kiiminki",
+        "Ylikiiminki",
+        "Oulunsalo",
+        "Haukipudas"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        24.570000,
+        64.460000,
+        26.770000,
+        65.560000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            24.569732748985412,
+            64.46268228440627
+          ],
+          [
+            26.768424187225669,
+            64.46268228440627
+          ],
+          [
+            26.768424187225669,
+            65.555211463323786
+          ],
+          [
+            24.569732748985412,
+            65.555211463323786
+          ],
+          [
+            24.569732748985412,
+            64.46268228440627
+          ]
+        ]
+      ]
+    }
+  },
 { "type": "Feature", "properties": { "nimi": "Oulunkaari", "namn": "Oulunkaari", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 25.090000, 64.270000, 28.160000, 65.960000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 25.092609625299552, 64.265165544478108 ], [ 28.162380231626695, 64.265165544478108 ], [ 28.162380231626695, 65.960359611856234 ], [ 25.092609625299552, 65.960359611856234 ], [ 25.092609625299552, 64.265165544478108 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Raahe", "namn": "Brahestad", "synonyms_fi": [ "Vihanti" ], "synonyms_sv": [ "Vihanti" ], "synonyms_en": [ ], "envelope": [ 23.980000, 64.310000, 25.520000, 64.910000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 23.984469062225056, 64.312106134079059 ], [ 25.520269456117223, 64.312106134079059 ], [ 25.520269456117223, 64.907746874512654 ], [ 23.984469062225056, 64.907746874512654 ], [ 23.984469062225056, 64.312106134079059 ] ] ] } },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Raahe",
+      "namn": "Brahestad",
+      "synonyms_fi": [
+        "Pattijoki",
+        "Vihanti"
+      ],
+      "synonyms_sv": [
+        "Pattijoki",
+        "Vihanti"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        23.980000,
+        64.310000,
+        25.520000,
+        64.910000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            23.984469062225056,
+            64.312106134079059
+          ],
+          [
+            25.520269456117223,
+            64.312106134079059
+          ],
+          [
+            25.520269456117223,
+            64.907746874512654
+          ],
+          [
+            23.984469062225056,
+            64.907746874512654
+          ],
+          [
+            23.984469062225056,
+            64.312106134079059
+          ]
+        ]
+      ]
+    }
+  },
 { "type": "Feature", "properties": { "nimi": "Haapavesi-Siikalatva", "namn": "Haapavesi-Siikalatva", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 24.910000, 63.840000, 26.870000, 64.630000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 24.906373763289476, 63.841035478316186 ], [ 26.870402198627438, 63.841035478316186 ], [ 26.870402198627438, 64.628942518049499 ], [ 24.906373763289476, 64.628942518049499 ], [ 24.906373763289476, 63.841035478316186 ] ] ] } },
 { "type": "Feature", "properties": { "nimi": "Nivala-Haapajärvi", "namn": "Nivala-Haapajärvi", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 24.620000, 63.430000, 26.290000, 64.110000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 24.61871397518107, 63.429120373691404 ], [ 26.291803752867093, 63.429120373691404 ], [ 26.291803752867093, 64.110644001720843 ], [ 24.61871397518107, 64.110644001720843 ], [ 24.61871397518107, 63.429120373691404 ] ] ] } },
 { "type": "Feature", "properties": { "nimi": "Ylivieska", "namn": "Ylivieska", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 23.570000, 63.650000, 25.200000, 64.390000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 23.565496896425607, 63.650888011787742 ], [ 25.200173123069206, 63.650888011787742 ], [ 25.200173123069206, 64.391785208347912 ], [ 23.565496896425607, 64.391785208347912 ], [ 23.565496896425607, 63.650888011787742 ] ] ] } },
 { "type": "Feature", "properties": { "nimi": "Koillismaa", "namn": "Koillismaa", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 27.710000, 65.250000, 30.140000, 66.490000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 27.712540011923718, 65.25034867864278 ], [ 30.138467226797413, 65.25034867864278 ], [ 30.138467226797413, 66.48585323740393 ], [ 27.712540011923718, 66.48585323740393 ], [ 27.712540011923718, 65.25034867864278 ] ] ] } },
 { "type": "Feature", "properties": { "nimi": "Kehys-Kainuu", "namn": "Kehys-Kainuu", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 27.150000, 63.700000, 30.550000, 65.520000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 27.148091534326284, 63.703356370228811 ], [ 30.553557627281602, 63.703356370228811 ], [ 30.553557627281602, 65.518477409266652 ], [ 27.148091534326284, 65.518477409266652 ], [ 27.148091534326284, 63.703356370228811 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Kajaani", "namn": "Kajana", "synonyms_fi": [ "Vuolijoki" ], "synonyms_sv": [ "Vuolijoki" ], "synonyms_en": [ ], "envelope": [ 26.770000, 63.670000, 29.210000, 64.640000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 26.767499650906636, 63.668811475314335 ], [ 29.211042321714832, 63.668811475314335 ], [ 29.211042321714832, 64.636780231369045 ], [ 26.767499650906636, 64.636780231369045 ], [ 26.767499650906636, 63.668811475314335 ] ] ] } },
-{ "type": "Feature", "properties": { "nimi": "Rovaniemi", "namn": "Rovaniemi", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 24.740000, 65.700000, 27.470000, 67.180000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 24.736798650585847, 65.701145060429425 ], [ 27.469198275648242, 65.701145060429425 ], [ 27.469198275648242, 67.177119056777855 ], [ 24.736798650585847, 67.177119056777855 ], [ 24.736798650585847, 65.701145060429425 ] ] ] } },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Kajaani",
+      "namn": "Kajana",
+      "synonyms_fi": [
+        "Kajaanin mlk.",
+        "Vuolijoki"
+      ],
+      "synonyms_sv": [
+        "Kajaanin mlk.",
+        "Vuolijoki"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        26.770000,
+        63.670000,
+        29.210000,
+        64.640000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            26.767499650906636,
+            63.668811475314335
+          ],
+          [
+            29.211042321714832,
+            63.668811475314335
+          ],
+          [
+            29.211042321714832,
+            64.636780231369045
+          ],
+          [
+            26.767499650906636,
+            64.636780231369045
+          ],
+          [
+            26.767499650906636,
+            63.668811475314335
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "nimi": "Rovaniemi",
+      "namn": "Rovaniemi",
+      "synonyms_fi": [
+        "Rovaniemen mlk"
+      ],
+      "synonyms_sv": [
+        "Rovaniemi lk"
+      ],
+      "synonyms_en": [],
+      "envelope": [
+        24.740000,
+        65.700000,
+        27.470000,
+        67.180000
+      ]
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            24.736798650585847,
+            65.701145060429425
+          ],
+          [
+            27.469198275648242,
+            65.701145060429425
+          ],
+          [
+            27.469198275648242,
+            67.177119056777855
+          ],
+          [
+            24.736798650585847,
+            67.177119056777855
+          ],
+          [
+            24.736798650585847,
+            65.701145060429425
+          ]
+        ]
+      ]
+    }
+  },
 { "type": "Feature", "properties": { "nimi": "Kemi-Tornio", "namn": "Kemi-Torneå", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 23.890000, 65.590000, 26.070000, 66.330000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 23.891862024788416, 65.594183049392981 ], [ 26.067324366243682, 65.594183049392981 ], [ 26.067324366243682, 66.332235705788435 ], [ 23.891862024788416, 66.332235705788435 ], [ 23.891862024788416, 65.594183049392981 ] ] ] } },
 { "type": "Feature", "properties": { "nimi": "Torniolaakso", "namn": "Tornedalen", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 23.640000, 66.170000, 25.050000, 67.010000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 23.641840796722139, 66.167670189857901 ], [ 25.050410745223935, 66.167670189857901 ], [ 25.050410745223935, 67.009522611908821 ], [ 23.641840796722139, 67.009522611908821 ], [ 23.641840796722139, 66.167670189857901 ] ] ] } },
 { "type": "Feature", "properties": { "nimi": "Itä-Lappi", "namn": "Östra Lappland", "synonyms_fi": [ ], "synonyms_sv": [ ], "synonyms_en": [ ], "envelope": [ 26.520000, 65.800000, 30.020000, 68.200000 ] }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 26.517973576881964, 65.800594899969951 ], [ 30.017043628441751, 65.800594899969951 ], [ 30.017043628441751, 68.196303550697223 ], [ 26.517973576881964, 68.196303550697223 ], [ 26.517973576881964, 65.800594899969951 ] ] ] } },
