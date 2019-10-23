@@ -1,7 +1,9 @@
-package fi.maanmittauslaitos.pta.search.csw;
+package fi.maanmittauslaitos.pta.search.source.csw;
 
-import fi.maanmittauslaitos.pta.search.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.HarvestingException;
+import fi.maanmittauslaitos.pta.search.source.Harvestable;
+import fi.maanmittauslaitos.pta.search.source.HarvesterInputStream;
+import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
 import org.apache.log4j.Logger;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -24,18 +26,13 @@ public class LocalCSWHarvesterSource extends HarvesterSource {
 
 	}
 
-
-	public URL getResourceRootURL() {
-		return resourceRootURL;
-	}
-
 	public void setResourceRootURL(URL resourceRootURL) {
 		this.resourceRootURL = resourceRootURL;
 	}
 
 	@Override
 	public Iterator<Harvestable> iterator() {
-		return new CSWIterator();
+		return new LocalItemIterator(".xml", resourceRootURL);
 	}
 
 	@Override
@@ -50,15 +47,18 @@ public class LocalCSWHarvesterSource extends HarvesterSource {
 		}
 	}
 
-
-	private class CSWIterator implements Iterator<Harvestable> {
+	public static class LocalItemIterator implements Iterator<Harvestable> {
+		private final URL resourceRootURL;
 		private int numberOfRecordsProcessed = 0;
 		private Integer numberOfRecordsInService;
-		private LinkedList<File> localCSWs = null;
+		private String prefix;
+		private LinkedList<File> localItems = null;
 
-		CSWIterator() {
-			localCSWs = new LinkedList<>();
-			getLocalCSWs();
+		public LocalItemIterator(String prefix, URL resourceRootURL) {
+			localItems = new LinkedList<>();
+			this.prefix = prefix;
+			this.resourceRootURL = resourceRootURL;
+			getLocalItems();
 		}
 
 
@@ -69,34 +69,34 @@ public class LocalCSWHarvesterSource extends HarvesterSource {
 
 		@Override
 		public Harvestable next() {
-			if (localCSWs.size() == 0) {
-				getLocalCSWs();
+			if (localItems.size() == 0) {
+				getLocalItems();
 			}
 
-			if (localCSWs.size() == 0) {
+			if (localItems.size() == 0) {
 				return null;
 			}
 
-			File cswFile = localCSWs.removeFirst();
+			File metadataItem = localItems.removeFirst();
 			numberOfRecordsProcessed++;
 
-			return LocalHarvestable.create(cswFile, cswFile.getName().replace(".xml", ""));
+			return LocalHarvestable.create(metadataItem, metadataItem.getName().replace(prefix, ""));
 		}
 
 
-		private void getLocalCSWs() {
+		private void getLocalItems() {
 			try {
 				if (resourceRootURL != null) {
 					File[] resources = new File(resourceRootURL.getPath()).listFiles();
 					if (resources != null) {
 						numberOfRecordsInService = resources.length;
-						localCSWs.addAll(Arrays.asList(resources));
+						localItems.addAll(Arrays.asList(resources));
 					}
 
 				}
 
 				if (numberOfRecordsInService == null) {
-					throw new IOException("Unable to determine how many records in CSW service");
+					throw new IOException("Unable to determine how many records in the service");
 				}
 
 			} catch (IOException e) {

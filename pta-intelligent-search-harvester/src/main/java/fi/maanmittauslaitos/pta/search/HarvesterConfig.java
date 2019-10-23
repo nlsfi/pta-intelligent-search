@@ -10,8 +10,6 @@ import fi.maanmittauslaitos.pta.search.codelist.InspireThemesImpl;
 import fi.maanmittauslaitos.pta.search.codelist.ODFOrganisationNameNormaliserImpl;
 import fi.maanmittauslaitos.pta.search.codelist.OrganisationNormaliser;
 import fi.maanmittauslaitos.pta.search.codelist.OrganisationNormaliserTextRewriter;
-import fi.maanmittauslaitos.pta.search.csw.CSWHarvesterSource;
-import fi.maanmittauslaitos.pta.search.csw.LocalCSWHarvesterSource;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
@@ -26,6 +24,9 @@ import fi.maanmittauslaitos.pta.search.metadata.GeographicBoundingBoxXPathCustom
 import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataExtractorConfigurationFactory;
 import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataFields;
 import fi.maanmittauslaitos.pta.search.metadata.ResponsiblePartyXPathCustomExtractor;
+import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
+import fi.maanmittauslaitos.pta.search.source.csw.CSWHarvesterSource;
+import fi.maanmittauslaitos.pta.search.source.csw.LocalCSWHarvesterSource;
 import fi.maanmittauslaitos.pta.search.text.ExistsInSetProcessor;
 import fi.maanmittauslaitos.pta.search.text.MauiTextProcessor;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;

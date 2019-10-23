@@ -2,6 +2,7 @@ package fi.maanmittauslaitos.pta.search;
 
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
+import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTracker;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.SpringApplication;

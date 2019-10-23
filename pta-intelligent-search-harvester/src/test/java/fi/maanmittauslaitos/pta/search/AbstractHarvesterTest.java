@@ -1,15 +1,16 @@
 package fi.maanmittauslaitos.pta.search;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fi.maanmittauslaitos.pta.search.csw.CSWHarvestable;
-import fi.maanmittauslaitos.pta.search.csw.Harvestable;
-import fi.maanmittauslaitos.pta.search.csw.HarvesterInputStream;
-import fi.maanmittauslaitos.pta.search.csw.LocalHarvestable;
 import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink.IndexResult;
+import fi.maanmittauslaitos.pta.search.source.Harvestable;
+import fi.maanmittauslaitos.pta.search.source.HarvesterInputStream;
+import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
+import fi.maanmittauslaitos.pta.search.source.csw.CSWHarvestable;
+import fi.maanmittauslaitos.pta.search.source.csw.LocalHarvestable;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTracker;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTracker.IdentifierType;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTrackerImpl;

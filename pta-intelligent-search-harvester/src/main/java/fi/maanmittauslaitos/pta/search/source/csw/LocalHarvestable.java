@@ -1,4 +1,6 @@
-package fi.maanmittauslaitos.pta.search.csw;
+package fi.maanmittauslaitos.pta.search.source.csw;
+
+import fi.maanmittauslaitos.pta.search.source.Harvestable;
 
 import java.io.File;
 
@@ -22,7 +24,7 @@ public class LocalHarvestable implements Harvestable {
 	}
 
 
-	File getFile() {
+	public File getFile() {
 		return file;
 	}
 }

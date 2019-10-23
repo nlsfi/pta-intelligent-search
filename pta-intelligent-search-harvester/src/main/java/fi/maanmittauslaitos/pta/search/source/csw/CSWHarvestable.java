@@ -1,4 +1,6 @@
-package fi.maanmittauslaitos.pta.search.csw;
+package fi.maanmittauslaitos.pta.search.source.csw;
+
+import fi.maanmittauslaitos.pta.search.source.Harvestable;
 
 public class CSWHarvestable implements Harvestable {
 

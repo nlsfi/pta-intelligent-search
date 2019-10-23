@@ -2,10 +2,10 @@ package fi.maanmittauslaitos.pta.search.utils;
 
 import fi.maanmittauslaitos.pta.search.AbstractHarvester;
 import fi.maanmittauslaitos.pta.search.HarvesterConfig;
-import fi.maanmittauslaitos.pta.search.HarvesterSource;
-import fi.maanmittauslaitos.pta.search.csw.Harvestable;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
+import fi.maanmittauslaitos.pta.search.source.Harvestable;
+import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
 import org.apache.commons.io.FileUtils;
 import org.springframework.boot.ApplicationArguments;
 

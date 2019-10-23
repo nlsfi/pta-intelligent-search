@@ -1,8 +1,8 @@
-package fi.maanmittauslaitos.pta.search;
+package fi.maanmittauslaitos.pta.search.source.csw;
 
-import fi.maanmittauslaitos.pta.search.csw.CSWHarvesterSource;
-import fi.maanmittauslaitos.pta.search.csw.Harvestable;
-import fi.maanmittauslaitos.pta.search.csw.HarvesterInputStream;
+import fi.maanmittauslaitos.pta.search.source.Harvestable;
+import fi.maanmittauslaitos.pta.search.source.HarvesterInputStream;
+import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
 import org.apache.commons.io.IOUtils;
 
 public class CSWSourceTest {

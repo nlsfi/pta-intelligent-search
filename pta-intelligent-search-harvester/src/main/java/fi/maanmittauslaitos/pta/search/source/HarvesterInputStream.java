@@ -1,4 +1,4 @@
-package fi.maanmittauslaitos.pta.search.csw;
+package fi.maanmittauslaitos.pta.search.source;
 
 import fi.maanmittauslaitos.pta.search.HarvestingException;
 

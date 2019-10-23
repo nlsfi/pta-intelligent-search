@@ -76,7 +76,7 @@ public class HarvesterConfigProcessingTest {
 
 	@Test
 	public void testAgainstSimpleCsw() throws IOException, ParserConfigurationException, DocumentProcessingException {
-		Document document = getProcessedDocument("/kissa.ttl", "/kissa.xml");
+		Document document = getProcessedDocument("/kissa.ttl", "/testcsws/kissa.xml");
 
 		softly.assertThat(document.getFields())
 				.containsKey(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI)

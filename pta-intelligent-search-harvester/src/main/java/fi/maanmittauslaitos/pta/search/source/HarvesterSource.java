@@ -1,7 +1,4 @@
-package fi.maanmittauslaitos.pta.search;
-
-import fi.maanmittauslaitos.pta.search.csw.Harvestable;
-import fi.maanmittauslaitos.pta.search.csw.HarvesterInputStream;
+package fi.maanmittauslaitos.pta.search.source;
 
 public abstract class HarvesterSource implements Iterable<Harvestable> {
 	private String onlineResource;
@@ -15,7 +12,7 @@ public abstract class HarvesterSource implements Iterable<Harvestable> {
 		this.onlineResource = onlineResource;
 	}
 
-	void setBatchSize(int batchSize) {
+	public void setBatchSize(int batchSize) {
 		this.batchSize = batchSize;
 	}
 

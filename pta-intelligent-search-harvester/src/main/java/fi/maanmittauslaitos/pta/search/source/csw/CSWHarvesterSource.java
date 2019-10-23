@@ -1,6 +1,5 @@
-package fi.maanmittauslaitos.pta.search.csw;
+package fi.maanmittauslaitos.pta.search.source.csw;
 
-import fi.maanmittauslaitos.pta.search.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.HarvestingException;
 import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
@@ -9,6 +8,9 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessorFactory;
 import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
+import fi.maanmittauslaitos.pta.search.source.Harvestable;
+import fi.maanmittauslaitos.pta.search.source.HarvesterInputStream;
+import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
 import org.apache.log4j.Logger;
 
 import javax.xml.parsers.ParserConfigurationException;
