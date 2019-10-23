@@ -62,6 +62,7 @@ public class SearchTest extends SearchTestBase {
 				);
 	}
 
+
 	@Test
 	public void hyphenedKeyWordSearch() throws IOException, URISyntaxException {
 		SearchResponse response = getSearchResponse("testcase_liito-orava.json");
@@ -260,6 +261,28 @@ public class SearchTest extends SearchTestBase {
 				.containsSubsequence(
 						"58440189-8048-45aa-81d2-4604a471d179",//Oulun kaupungin WMS-palvelu
 						"2c7ca8c6-a47d-4209-8696-6545f2fae8b7" //Oulun kaupungin ajantasa-asemakaava
+				);
+	}
+
+	@Test
+	public void rakennuksetSearch() throws IOException, URISyntaxException {
+		SearchResponse response = getSearchResponse("testcase_rakennukset.json", 200);
+		then(response.getHits())
+				.extracting(SearchHit::getId)
+				.hasSize(13)
+				.contains(
+						"61aab717-9e54-4973-b195-4b7d9b0754f9",
+						"2d8394c5-8cd3-434e-993d-1160851ff665" //Tampereen Lajihavainnot
+				);
+	}
+
+	@Test
+	public void rakennuksetFacetedSearch() throws IOException, URISyntaxException {
+		SearchResponse response = getSearchResponse("testcase_rakennukset_biota.json");
+		then(response.getHits())
+				.extracting(SearchHit::getId)
+				.containsExactly(
+						"2d8394c5-8cd3-434e-993d-1160851ff665" //Tampereen Lajihavainnot
 				);
 	}
 

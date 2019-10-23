@@ -174,15 +174,18 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		addFreetextQueries(pyynto.getQuery(), boolQuery);
 
 
-		BoolQueryBuilder fullQuery = QueryBuilders.boolQuery();
-		fullQuery.should(boolQuery);
+		BoolQueryBuilder mustQuery = QueryBuilders.boolQuery();
+		mustQuery.should(boolQuery);
+
 
 		RegionNameSearchResult regionNameSearchResult = searchQueryForRegionNames(pyynto, regionNameContainer, lang);
 		if (regionNameSearchResult.hasRegionName()) {
 			QueryBuilder spatialQuery = createSpatialQuery(regionNameSearchResult, regionNameContainer, lang);
-			fullQuery.should().add(spatialQuery);
+			mustQuery.should().add(spatialQuery);
 		}
 
+		BoolQueryBuilder fullQuery = QueryBuilders.boolQuery();
+		fullQuery.must(mustQuery);
 		return fullQuery;
 	}
 

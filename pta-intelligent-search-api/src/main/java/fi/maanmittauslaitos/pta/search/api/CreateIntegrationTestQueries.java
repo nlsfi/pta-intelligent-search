@@ -1,5 +1,6 @@
 package fi.maanmittauslaitos.pta.search.api;
 
+import com.google.common.collect.ImmutableMap;
 import fi.maanmittauslaitos.pta.search.api.ApplicationConfiguration.MockElasticsearchQueryAPI;
 import fi.maanmittauslaitos.pta.search.api.model.SearchQuery;
 import fi.maanmittauslaitos.pta.search.api.search.HakuKone;
@@ -18,6 +19,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class CreateIntegrationTestQueries implements ApplicationRunner {
@@ -66,13 +68,17 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
 				ConversionHelper.create(Collections.singletonList("korpilahti")),
 				ConversionHelper.create("testcase_kansallinen", Collections.singletonList("nationwide"), Language.EN),
 				ConversionHelper.create(Collections.singletonList("tammerfors"), Language.SV),
-				ConversionHelper.create(Collections.singletonList("oulu"))
+				ConversionHelper.create(Collections.singletonList("oulu")),
+				ConversionHelper.create(Collections.singletonList("rakennukset")),
+				ConversionHelper.create("testcase_rakennukset_biota", Collections.singletonList("rakennukset"),
+						ImmutableMap.of("topicCategories", Collections.singletonList("biota")))
 		).forEach(helper -> generateTestCaseQuery(helper, outputDir));
 	}
 
 	private void generateTestCaseQuery(ConversionHelper helper, String outputDir) {
 		SearchQuery pyynto = new SearchQuery();
 		pyynto.setQuery(helper.getQueryList());
+		pyynto.setFacets(helper.getFacets());
 
 		String json = null;
 		try {
@@ -107,16 +113,29 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
 		private final String testCaseName;
 		private final List<String> queryList;
 		private final Language lang;
+		private final Map<String, List<String>> facets;
 
 		private ConversionHelper(String testcase, List<String> queryList, Language lang) {
 			this.testCaseName = testcase + POSTFIX;
 			this.queryList = queryList;
 			this.lang = lang;
+			this.facets = Collections.emptyMap();
+		}
+
+		public ConversionHelper(String testcase, List<String> queryList, Language lang, Map<String, List<String>> facets) {
+			this.testCaseName = testcase + POSTFIX;
+			this.queryList = queryList;
+			this.lang = lang;
+			this.facets = facets;
 		}
 
 		static ConversionHelper create(List<String> queryList) {
 			String testcase = TESTCASE + String.join("_", queryList);
 			return new ConversionHelper(testcase, queryList, Language.FI);
+		}
+
+		static ConversionHelper create(String testcase, List<String> queryList, Map<String, List<String>> facets) {
+			return new ConversionHelper(testcase, queryList, Language.FI, facets);
 		}
 
 		static ConversionHelper create(List<String> queryList, Language lang) {
@@ -140,8 +159,12 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
 			return queryList;
 		}
 
-		public Language getLanguage() {
+		Language getLanguage() {
 			return lang;
+		}
+
+		Map<String, List<String>> getFacets() {
+			return facets;
 		}
 	}
 
