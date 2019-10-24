@@ -114,7 +114,7 @@ public class HarvesterConfig {
 	public HarvesterSource getCSWSource() {
 		HarvesterSource source = new CSWHarvesterSource();
 		source.setBatchSize(10);
-		source.setOnlineResource("http://paikkatietohakemisto.fi/geonetwork/srv/en/csw");
+		source.setOnlineResource("https://paikkatietohakemisto.fi/geonetwork/srv/en/csw");
 		//source.setOnlineResource("http://demo.paikkatietohakemisto.fi/geonetwork/srv/en/csw");
 
 		return source;
