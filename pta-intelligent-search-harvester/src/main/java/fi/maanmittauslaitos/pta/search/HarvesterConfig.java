@@ -27,6 +27,8 @@ import fi.maanmittauslaitos.pta.search.metadata.ResponsiblePartyXPathCustomExtra
 import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.source.csw.CSWHarvesterSource;
 import fi.maanmittauslaitos.pta.search.source.csw.LocalCSWHarvesterSource;
+import fi.maanmittauslaitos.pta.search.source.json.CKANHarvesterSource;
+import fi.maanmittauslaitos.pta.search.source.json.LocalCKANHarvesterSource;
 import fi.maanmittauslaitos.pta.search.text.ExistsInSetProcessor;
 import fi.maanmittauslaitos.pta.search.text.MauiTextProcessor;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
@@ -80,6 +82,7 @@ public class HarvesterConfig {
 	private static final String CANONICAL_ORGANISATIONS_DEFAULT_FILENAME = "canonical_organisations.ods";
 	private static final String TRACKER_FILENAME = "harvester_tracker.json";
 	private static final String LOCAL_CSW_SOURCE_DIR = "csws";
+	private static final String LOCAL_CKAN_SOURCE_DIR = "ckans";
 
 
 	private final ObjectMapper objectMapper;
@@ -117,7 +120,6 @@ public class HarvesterConfig {
 		source.setBatchSize(10);
 		source.setOnlineResource("https://paikkatietohakemisto.fi/geonetwork/srv/en/csw");
 		//source.setOnlineResource("http://demo.paikkatietohakemisto.fi/geonetwork/srv/en/csw");
-
 		return source;
 	}
 
@@ -125,6 +127,20 @@ public class HarvesterConfig {
 		LocalCSWHarvesterSource source = new LocalCSWHarvesterSource();
 		URL cswRoot = this.getClass().getClassLoader().getResource(LOCAL_CSW_SOURCE_DIR);
 		source.setResourceRootURL(cswRoot);
+		return source;
+	}
+
+	public HarvesterSource getCKANSource() {
+		CKANHarvesterSource source = new CKANHarvesterSource(objectMapper);
+		source.setBatchSize(10);
+		source.setOnlineResource("https://ckan.ymparisto.fi/api/3/action/package_search");
+		source.setQuery("type:envi-reports");
+		return source;
+	}
+
+	public HarvesterSource getLocalCKANSource() {
+		LocalCKANHarvesterSource source = new LocalCKANHarvesterSource(objectMapper);
+		source.setResourceRootURL(this.getClass().getClassLoader().getResource(LOCAL_CKAN_SOURCE_DIR));
 		return source;
 	}
 
