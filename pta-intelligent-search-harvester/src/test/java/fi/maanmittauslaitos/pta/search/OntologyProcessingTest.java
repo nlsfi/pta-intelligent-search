@@ -24,7 +24,7 @@ public class OntologyProcessingTest {
 
 	@Test
 	public void testParentsResolvedUntilTopmostTerm() {
-		DocumentProcessingConfiguration config = processor.getConfiguration();
+		DocumentProcessingConfiguration config = processor.getDocumentProcessingConfiguration();
 		FieldExtractorConfiguration fec = config.getFieldExtractor("abstract_uri_parents");
 		TextProcessingChain chain = config.getTextProcessingChains().get(fec.getTextProcessorName());
 		

@@ -1,5 +1,6 @@
 package fi.maanmittauslaitos.pta.search.documentprocessor;
 
+import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuerier;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.XmlDocumentQuerierImpl;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 
@@ -9,13 +10,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Map;
 
-public class XmlDocumentProcessorImpl implements DocumentProcessor {
+public class XmlDocumentProcessorImpl extends DocumentProcessor {
 	private final DocumentBuilder builder;
 	private final DocumentProcessingConfiguration configuration;
-	private XmlDocumentQuerierImpl documentQuery;
+	private XmlDocumentQuerierImpl documentQuerier;
 
 	XmlDocumentProcessorImpl(DocumentProcessingConfiguration configuration) throws ParserConfigurationException {
 		this.configuration = configuration;
@@ -33,7 +33,7 @@ public class XmlDocumentProcessorImpl implements DocumentProcessor {
 
 		XPath xPath = XPathFactory.newInstance().newXPath();
 		xPath.setNamespaceContext(nsContext);
-		this.documentQuery = XmlDocumentQuerierImpl.create(xPath);
+		this.documentQuerier = XmlDocumentQuerierImpl.create(xPath);
 
 	}
 
@@ -42,8 +42,10 @@ public class XmlDocumentProcessorImpl implements DocumentProcessor {
 		return configuration;
 	}
 
-	public DocumentProcessingConfiguration getConfiguration() {
-		return configuration;
+
+	@Override
+	public DocumentQuerier getDocumentQuerier() {
+		return documentQuerier;
 	}
 
 	@Override
@@ -62,26 +64,7 @@ public class XmlDocumentProcessorImpl implements DocumentProcessor {
 		XmlDocument ret = new XmlDocument();
 		ret.setDom(doc);
 
-		for (FieldExtractorConfiguration fec : configuration.getFieldExtractors()) {
-			Object value = fec.process(ret, documentQuery);
-
-			if (fec.getTextProcessorName() != null) {
-				TextProcessingChain chain = textProcessingChains.get(fec.getTextProcessorName());
-
-				if (chain == null) {
-					throw new IllegalArgumentException("Text processor chain '" + fec.getTextProcessorName() + "' not declared");
-				}
-
-				@SuppressWarnings("unchecked")
-				List<String> asList = (List<String>) value;
-
-				value = chain.process(asList);
-			}
-
-			ret.getFields().put(fec.getField(), value);
-		}
-
-		return ret;
+		return processDocument(textProcessingChains, ret);
 	}
 
 }
