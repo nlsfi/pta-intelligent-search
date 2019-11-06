@@ -1,6 +1,16 @@
 package fi.maanmittauslaitos.pta.search.metadata;
 
-import static org.junit.Assert.*;
+import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessorFactory;
+import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl;
+import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl.FieldExtractorType;
+import fi.maanmittauslaitos.pta.search.text.RegexProcessor;
+import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,18 +18,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessorFactory;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
-import fi.maanmittauslaitos.pta.search.text.RegexProcessor;
-import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
+import static org.junit.Assert.assertEquals;
 
 public class OrganisationNamesForFullTextTest {
 
@@ -40,17 +39,17 @@ public class OrganisationNamesForFullTextTest {
 		removeEmptyEntriesChain.getChain().add(whitespaceRemoval);
 		
 		configuration.getTextProcessingChains().put("removeEmptyEntries", removeEmptyEntriesChain);
-		
-		XPathFieldExtractorConfiguration organisationForSearch = new XPathFieldExtractorConfiguration();
+
+		FieldExtractorConfigurationImpl organisationForSearch = new FieldExtractorConfigurationImpl();
 		organisationForSearch.setField("organisationName_text");
 		organisationForSearch.setType(FieldExtractorType.ALL_MATCHING_VALUES);
-		organisationForSearch.setXpath("//gmd:contact//gmd:organisationName//text()");
+		organisationForSearch.setQuery("//gmd:contact//gmd:organisationName//text()");
 		
 		organisationForSearch.setTextProcessorName("removeEmptyEntries");
 		
 		configuration.getFieldExtractors().add(organisationForSearch);
-		
-		processor = new DocumentProcessorFactory().createProcessor(configuration);
+
+		processor = DocumentProcessorFactory.getInstance().createXmlProcessor(configuration);
 	}
 	
 	protected Document createStatFiWFS()

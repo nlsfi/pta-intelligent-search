@@ -1,12 +1,11 @@
 package fi.maanmittauslaitos.pta.search.metadata;
 
+import fi.maanmittauslaitos.pta.search.documentprocessor.CustomExtractor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessorFactory;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathCustomExtractor;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
+import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl;
+import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl.FieldExtractorType;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.util.List;
@@ -15,18 +14,10 @@ import static fi.maanmittauslaitos.pta.search.metadata.utils.XPathHelper.doesntM
 import static fi.maanmittauslaitos.pta.search.metadata.utils.XPathHelper.matches;
 
 
-public class ISOMetadataExtractorConfigurationFactory {
-	private DocumentProcessorFactory documentProcessorFactory = new DocumentProcessorFactory();
-
-	public void setDocumentProcessorFactory(DocumentProcessorFactory documentProcessorFactory) {
-		this.documentProcessorFactory = documentProcessorFactory;
-	}
-
-	public DocumentProcessorFactory getDocumentProcessorFactory() {
-		return documentProcessorFactory;
-	}
+public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorConfigurationFactory {
 
 
+	@Override
 	public DocumentProcessingConfiguration createMetadataDocumentProcessingConfiguration() throws ParserConfigurationException {
 		DocumentProcessingConfiguration configuration = new DocumentProcessingConfiguration();
 		configuration.getNamespaces().put("gmd", "http://www.isotc211.org/2005/gmd");
@@ -163,37 +154,39 @@ public class ISOMetadataExtractorConfigurationFactory {
 		// Organisation names + roles
 		extractors.add(createXPathExtractor(
 				ISOMetadataFields.ORGANISATIONS,
-				new ResponsiblePartyXPathCustomExtractor(),
+				new ResponsiblePartyCustomExtractor(),
 				"//gmd:MD_Metadata/gmd:identificationInfo/*/gmd:pointOfContact/gmd:CI_ResponsibleParty"));
 
 		// Geographic bounding box
 		extractors.add(createXPathExtractor(
 				ISOMetadataFields.GEOGRAPHIC_BOUNDING_BOX,
-				new GeographicBoundingBoxXPathCustomExtractor(),
+				new GeographicBoundingBoxCustomExtractor(),
 				"//gmd:MD_Metadata/gmd:identificationInfo/*/*[self::gmd:extent or self::srv:extent]/*/gmd:geographicElement/gmd:EX_GeographicBoundingBox"));
 
 		return configuration;
 	}
 
+
+	@Override
 	public DocumentProcessor createMetadataDocumentProcessor() throws ParserConfigurationException {
 		DocumentProcessingConfiguration configuration = createMetadataDocumentProcessingConfiguration();
-		return getDocumentProcessorFactory().createProcessor(configuration);
+		return getDocumentProcessorFactory().createXmlProcessor(configuration);
 	}
 
 	private FieldExtractorConfiguration createXPathExtractor(String field, FieldExtractorType type, String xpath) {
-		XPathFieldExtractorConfiguration ret = new XPathFieldExtractorConfiguration();
+		FieldExtractorConfigurationImpl ret = new FieldExtractorConfigurationImpl();
 		ret.setField(field);
 		ret.setType(type);
-		ret.setXpath(xpath);
+		ret.setQuery(xpath);
 
 		return ret;
 	}
 
-	private FieldExtractorConfiguration createXPathExtractor(String field, XPathCustomExtractor extractor, String xpath) {
-		XPathFieldExtractorConfiguration ret = new XPathFieldExtractorConfiguration();
+	private FieldExtractorConfiguration createXPathExtractor(String field, CustomExtractor extractor, String xpath) {
+		FieldExtractorConfigurationImpl ret = new FieldExtractorConfigurationImpl();
 		ret.setField(field);
 		ret.setType(FieldExtractorType.CUSTOM_CLASS);
-		ret.setXpath(xpath);
+		ret.setQuery(xpath);
 		ret.setCustomExtractor(extractor);
 
 		return ret;

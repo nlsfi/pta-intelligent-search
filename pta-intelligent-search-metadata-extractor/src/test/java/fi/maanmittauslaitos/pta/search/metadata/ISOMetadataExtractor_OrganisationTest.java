@@ -1,16 +1,15 @@
 package fi.maanmittauslaitos.pta.search.metadata;
 
-import static org.junit.Assert.*;
+import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
+import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
+import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl;
+import fi.maanmittauslaitos.pta.search.metadata.model.ResponsibleParty;
+import fi.maanmittauslaitos.pta.search.metadata.model.TextRewriter;
+import org.junit.Test;
 
 import java.util.List;
 
-import org.junit.Test;
-
-import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
-import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.metadata.model.ResponsibleParty;
-import fi.maanmittauslaitos.pta.search.metadata.model.TextRewriter;
+import static org.junit.Assert.assertEquals;
 
 public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractorTest {
 
@@ -113,8 +112,8 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 	@Test
 	public void testOrgNameRewrite() throws Exception {
 		FieldExtractorConfiguration fec = processor.getDocumentProcessingConfiguration().getFieldExtractor(ISOMetadataFields.ORGANISATIONS);
-		XPathFieldExtractorConfiguration xfec = (XPathFieldExtractorConfiguration)fec;
-		ResponsiblePartyXPathCustomExtractor rpxpce = (ResponsiblePartyXPathCustomExtractor)xfec.getCustomExtractor();
+		FieldExtractorConfigurationImpl xfec = (FieldExtractorConfigurationImpl) fec;
+		ResponsiblePartyCustomExtractor rpxpce = (ResponsiblePartyCustomExtractor) xfec.getCustomExtractor();
 		
 		rpxpce.setOrganisationNameRewriter(new TextRewriter() {
 			

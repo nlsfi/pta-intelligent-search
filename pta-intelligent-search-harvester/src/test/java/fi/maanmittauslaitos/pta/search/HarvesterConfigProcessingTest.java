@@ -8,6 +8,7 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigura
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataExtractorConfigurationFactory;
 import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataFields;
+import fi.maanmittauslaitos.pta.search.metadata.MetadataExtractorConfigurationFactory;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 import fi.maanmittauslaitos.pta.search.text.WordCombinationProcessor;
 import org.assertj.core.api.JUnitSoftAssertions;
@@ -40,7 +41,7 @@ public class HarvesterConfigProcessingTest {
 		InputStream resource = getClass().getResourceAsStream(modelName);
 		Model model = Rio.parse(resource, "", RDFFormat.TURTLE);
 
-		ISOMetadataExtractorConfigurationFactory factory = new ISOMetadataExtractorConfigurationFactory();
+		MetadataExtractorConfigurationFactory factory = new ISOMetadataExtractorConfigurationFactory();
 		DocumentProcessingConfiguration configuration = factory
 				.createMetadataDocumentProcessingConfiguration();
 
@@ -65,7 +66,7 @@ public class HarvesterConfigProcessingTest {
 		configuration.getFieldExtractors().add(keywordsUri);
 
 
-		DocumentProcessor processor = factory.getDocumentProcessorFactory().createProcessor(configuration);
+		DocumentProcessor processor = factory.getDocumentProcessorFactory().createXmlProcessor(configuration);
 
 		Document document;
 		try (InputStream fis = getClass().getResourceAsStream(metadataFile)) {

@@ -1,24 +1,24 @@
 package fi.maanmittauslaitos.pta.search;
 
-import static org.junit.Assert.*;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
+import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
+import fi.maanmittauslaitos.pta.search.documentprocessor.XmlDocumentProcessorImpl;
+import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessorFactory;
-import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class OntologyProcessingTest {
-	private static DocumentProcessorFactory.DocumentProcessorImpl processor;
+	private static XmlDocumentProcessorImpl processor;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		processor = (DocumentProcessorFactory.DocumentProcessorImpl)
+		processor = (XmlDocumentProcessorImpl)
 				new HarvesterConfig().getCSWRecordProcessor();
 	}
 

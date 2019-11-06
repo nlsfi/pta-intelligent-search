@@ -6,8 +6,8 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfi
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessorFactory;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
+import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl;
+import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl.FieldExtractorType;
 import fi.maanmittauslaitos.pta.search.source.Harvestable;
 import fi.maanmittauslaitos.pta.search.source.HarvesterInputStream;
 import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
@@ -24,7 +24,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class CSWHarvesterSource extends HarvesterSource {
-	private static Logger logger = Logger.getLogger(CSWHarvesterSource.class);
+	private static final Logger logger = Logger.getLogger(CSWHarvesterSource.class);
 
 	@Override
 	public Iterator<Harvestable> iterator() {
@@ -71,7 +71,7 @@ public class CSWHarvesterSource extends HarvesterSource {
 	private class CSWIterator implements Iterator<Harvestable> {
 		private int numberOfRecordsProcessed = 0;
 		private Integer numberOfRecordsInService;
-		private LinkedList<String> idsInBatch;
+		private final LinkedList<String> idsInBatch;
 
 		CSWIterator() {
 			idsInBatch = new LinkedList<>();
@@ -130,20 +130,20 @@ public class CSWHarvesterSource extends HarvesterSource {
 					configuration.getNamespaces().put("dc", "http://purl.org/dc/elements/1.1/");
 					configuration.getNamespaces().put("csw", "http://www.opengis.net/cat/csw/2.0.2");
 
-					XPathFieldExtractorConfiguration numberOfRecordsMatched = new XPathFieldExtractorConfiguration();
+					FieldExtractorConfigurationImpl numberOfRecordsMatched = new FieldExtractorConfigurationImpl();
 					numberOfRecordsMatched.setField("numberOfRecordsMatched");
 					numberOfRecordsMatched.setType(FieldExtractorType.FIRST_MATCHING_VALUE);
-					numberOfRecordsMatched.setXpath("//csw:SearchResults/@numberOfRecordsMatched");
+					numberOfRecordsMatched.setQuery("//csw:SearchResults/@numberOfRecordsMatched");
 					configuration.getFieldExtractors().add(numberOfRecordsMatched);
 
-					XPathFieldExtractorConfiguration ids = new XPathFieldExtractorConfiguration();
+					FieldExtractorConfigurationImpl ids = new FieldExtractorConfigurationImpl();
 					ids.setField("ids");
 					ids.setType(FieldExtractorType.ALL_MATCHING_VALUES);
-					ids.setXpath("//dc:identifier/text()");
+					ids.setQuery("//dc:identifier/text()");
 					configuration.getFieldExtractors().add(ids);
 
-					DocumentProcessorFactory xppf = new DocumentProcessorFactory();
-					DocumentProcessor processor = xppf.createProcessor(configuration);
+					DocumentProcessorFactory xppf = DocumentProcessorFactory.getInstance();
+					DocumentProcessor processor = xppf.createXmlProcessor(configuration);
 					Document doc = processor.processDocument(is);
 
 					logger.debug("\tReceived ids: " + doc.getFields().get("ids"));

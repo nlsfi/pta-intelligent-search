@@ -1,6 +1,11 @@
 package fi.maanmittauslaitos.pta.search.metadata;
 
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathCustomExtractor;
+import fi.maanmittauslaitos.pta.search.documentprocessor.CustomExtractor;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
+import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuerier;
+import fi.maanmittauslaitos.pta.search.documentprocessor.query.QueryResult;
+import fi.maanmittauslaitos.pta.search.documentprocessor.query.XmlDocumentQuerierImpl;
+import fi.maanmittauslaitos.pta.search.documentprocessor.query.XmlQueryResultImpl;
 import fi.maanmittauslaitos.pta.search.metadata.model.ResponsibleParty;
 import fi.maanmittauslaitos.pta.search.metadata.model.TextRewriter;
 import org.apache.logging.log4j.LogManager;
@@ -15,8 +20,8 @@ import javax.xml.xpath.XPathExpression;
 
 import static fi.maanmittauslaitos.pta.search.metadata.utils.XPathHelper.matches;
 
-public class ResponsiblePartyXPathCustomExtractor implements XPathCustomExtractor {
-	private static Logger logger = LogManager.getLogger(ResponsiblePartyXPathCustomExtractor.class);
+public class ResponsiblePartyCustomExtractor implements CustomExtractor {
+	private static final Logger logger = LogManager.getLogger(ResponsiblePartyCustomExtractor.class);
 	
 	private TextRewriter organisationNameRewriter = new TextRewriter() {
 		
@@ -38,10 +43,17 @@ public class ResponsiblePartyXPathCustomExtractor implements XPathCustomExtracto
 	public TextRewriter getOrganisationNameRewriter() {
 		return organisationNameRewriter;
 	}
-	
-	
+
 	@Override
-	public Object process(XPath xPath, Node node) throws XPathException {
+	public Object process(DocumentQuerier documentQuerier, QueryResult queryResult) throws XPathException, DocumentProcessingException {
+		if (!(documentQuerier instanceof XmlDocumentQuerierImpl)) {
+			throw new DocumentProcessingException("documentQuerier was not instance of XmlDocumentQuerierImpl");
+		}
+
+		return process(((XmlDocumentQuerierImpl) documentQuerier).getxPath(), ((XmlQueryResultImpl) queryResult).getNode());
+	}
+
+	private Object process(XPath xPath, Node node) throws XPathException {
 		ResponsibleParty ret = new ResponsibleParty();
 		
 		String organisationName;

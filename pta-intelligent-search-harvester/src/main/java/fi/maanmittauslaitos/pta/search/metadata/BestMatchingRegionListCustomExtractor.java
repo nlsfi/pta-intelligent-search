@@ -2,14 +2,14 @@ package fi.maanmittauslaitos.pta.search.metadata;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathNodeListCustomExtractor;
+import fi.maanmittauslaitos.pta.search.documentprocessor.ListCustomExtractor;
+import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuerier;
+import fi.maanmittauslaitos.pta.search.documentprocessor.query.QueryResult;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 import fi.maanmittauslaitos.pta.search.utils.Region;
 import fi.maanmittauslaitos.pta.search.utils.RegionFactory;
 import org.apache.log4j.Logger;
-import org.w3c.dom.NodeList;
 
-import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,24 +21,24 @@ import java.util.Optional;
 
 import static fi.maanmittauslaitos.pta.search.utils.Region.RegionScore.EMPTY_SCORE;
 
-public class BestMatchingRegionXPathNodeListCustomExtractor implements XPathNodeListCustomExtractor {
+public class BestMatchingRegionListCustomExtractor implements ListCustomExtractor {
 
 	private static final double WHOLE_COUNTRY_SCORE_THRESHOLD = 0.6;
 	private static final double WHOLE_REGION_SCORE_THRESHOLD = 0.75;
 	private static final double WHOLE_SUBREGION_SCORE_THRESHOLD = 0.75;
 
-	private static final Logger logger = Logger.getLogger(BestMatchingRegionXPathNodeListCustomExtractor.class);
+	private static final Logger logger = Logger.getLogger(BestMatchingRegionListCustomExtractor.class);
 
 	private final ObjectMapper objectMapper;
 	private final Map<String, Region> countries;
 	private final Map<String, Region> regions;
 	private final Map<String, Region> subregions;
 	private final Map<String, Region> municipalities;
-	private final GeographicBoundingBoxXPathCustomExtractor originalBBoxExtractor;
+	private final GeographicBoundingBoxCustomExtractor originalBBoxExtractor;
 
-	private BestMatchingRegionXPathNodeListCustomExtractor(ObjectMapper objectMapper, Map<String, Region> countries, Map<String, Region> regions,
-														   Map<String, Region> subregions, Map<String, Region> municipalities,
-														   GeographicBoundingBoxXPathCustomExtractor originalBBoxExtractor) {
+	private BestMatchingRegionListCustomExtractor(ObjectMapper objectMapper, Map<String, Region> countries, Map<String, Region> regions,
+												  Map<String, Region> subregions, Map<String, Region> municipalities,
+												  GeographicBoundingBoxCustomExtractor originalBBoxExtractor) {
 		this.objectMapper = objectMapper;
 		this.countries = countries;
 		this.regions = regions;
@@ -47,15 +47,15 @@ public class BestMatchingRegionXPathNodeListCustomExtractor implements XPathNode
 		this.originalBBoxExtractor = originalBBoxExtractor;
 	}
 
-	public static BestMatchingRegionXPathNodeListCustomExtractor create(ObjectMapper objectMapper, Map<String, Region> countries, Map<String, Region> regions,
-																		Map<String, Region> subregions, Map<String, Region> municipalities,
-																		GeographicBoundingBoxXPathCustomExtractor originalExtractor) {
-		return new BestMatchingRegionXPathNodeListCustomExtractor(objectMapper, countries, regions, subregions, municipalities, originalExtractor);
+	public static BestMatchingRegionListCustomExtractor create(ObjectMapper objectMapper, Map<String, Region> countries, Map<String, Region> regions,
+															   Map<String, Region> subregions, Map<String, Region> municipalities,
+															   GeographicBoundingBoxCustomExtractor originalExtractor) {
+		return new BestMatchingRegionListCustomExtractor(objectMapper, countries, regions, subregions, municipalities, originalExtractor);
 	}
 
 	@Override
-	public Object process(XPath xPath, NodeList nodeList) throws XPathException {
-		Region dataRegion = getCommonDataRegion(xPath, nodeList);
+	public Object process(DocumentQuerier documentQuerier, List<QueryResult> queryResults) throws XPathException {
+		Region dataRegion = getCommonDataRegion(documentQuerier, queryResults);
 		if (dataRegion == null) {
 			return objectMapper.createObjectNode();
 		}
@@ -131,11 +131,11 @@ public class BestMatchingRegionXPathNodeListCustomExtractor implements XPathNode
 	}
 
 	@SuppressWarnings("unchecked")
-	private Region getCommonDataRegion(XPath xPath, NodeList nodeList) throws XPathException {
+	private Region getCommonDataRegion(DocumentQuerier documentQuerier, List<QueryResult> queryResults) throws XPathException {
 		//For loop to get the XPathException thrown
 		List<List<Double>> coordinatesList = new ArrayList<>();
-		for (int i = 0; i < nodeList.getLength(); ++i) {
-			coordinatesList.add((List<Double>) originalBBoxExtractor.process(xPath, nodeList.item(i)));
+		for (int i = 0; i < queryResults.size(); ++i) {
+			coordinatesList.add((List<Double>) originalBBoxExtractor.process(documentQuerier, queryResults.get(i)));
 		}
 
 		return coordinatesList.stream()

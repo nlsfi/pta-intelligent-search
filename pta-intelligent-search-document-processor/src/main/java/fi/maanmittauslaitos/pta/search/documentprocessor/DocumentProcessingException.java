@@ -6,6 +6,10 @@ public class DocumentProcessingException extends Exception {
 	public DocumentProcessingException(Throwable cause) {
 		super(cause);
 	}
+
+	public DocumentProcessingException(String message) {
+		super(message);
+	}
 	
 	public DocumentProcessingException(String message, Throwable cause) {
 		super(message, cause);

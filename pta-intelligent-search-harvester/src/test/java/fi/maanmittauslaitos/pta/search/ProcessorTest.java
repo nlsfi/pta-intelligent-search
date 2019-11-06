@@ -5,8 +5,8 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessorFactory;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
+import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl;
+import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl.FieldExtractorType;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 import fi.maanmittauslaitos.pta.search.text.StopWordsProcessor;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
@@ -66,19 +66,19 @@ public class ProcessorTest {
 		configuration.getTextProcessingChains().put("abstractProcessor", abstractChain);
 
 		{
-			XPathFieldExtractorConfiguration idExtractor = new XPathFieldExtractorConfiguration();
+			FieldExtractorConfigurationImpl idExtractor = new FieldExtractorConfigurationImpl();
 			idExtractor.setField("@id");
 			idExtractor.setType(FieldExtractorType.FIRST_MATCHING_VALUE);
-			idExtractor.setXpath("//gmd:fileIdentifier/*/text()");
+			idExtractor.setQuery("//gmd:fileIdentifier/*/text()");
 
 			configuration.getFieldExtractors().add(idExtractor);
 		}
 
 		{
-			XPathFieldExtractorConfiguration keywordExtractor = new XPathFieldExtractorConfiguration();
+			FieldExtractorConfigurationImpl keywordExtractor = new FieldExtractorConfigurationImpl();
 			keywordExtractor.setField("avainsanat");
 			keywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
-			keywordExtractor.setXpath("//gmd:MD_Keywords/gmd:keyword/*/text()");
+			keywordExtractor.setQuery("//gmd:MD_Keywords/gmd:keyword/*/text()");
 
 			//keywordExtractor.setTextProcessorName("abstractProcessor");
 
@@ -86,10 +86,10 @@ public class ProcessorTest {
 		}
 
 		{
-			XPathFieldExtractorConfiguration abstractExtractor = new XPathFieldExtractorConfiguration();
+			FieldExtractorConfigurationImpl abstractExtractor = new FieldExtractorConfigurationImpl();
 			abstractExtractor.setField("sisalto");
 			abstractExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
-			abstractExtractor.setXpath("//gmd:abstract/*/text()");
+			abstractExtractor.setQuery("//gmd:abstract/*/text()");
 
 			abstractExtractor.setTextProcessorName("abstractProcessor");
 
@@ -97,7 +97,7 @@ public class ProcessorTest {
 		}
 
 
-		DocumentProcessor processor = new DocumentProcessorFactory().createProcessor(configuration);
+		DocumentProcessor processor = DocumentProcessorFactory.getInstance().createXmlProcessor(configuration);
 
 		Document document;
 		try (FileInputStream fis = new FileInputStream("src/test/resources/metadata/1719dcdd-0f24-4406-a347-354532c97bde.xml")) {

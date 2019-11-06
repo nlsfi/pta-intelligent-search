@@ -1,31 +1,31 @@
 package fi.maanmittauslaitos.pta.search.documentprocessor;
 
-import javax.xml.xpath.XPath;
-
-import org.w3c.dom.Document;
+import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuerier;
 
 public interface FieldExtractorConfiguration {
 
 	/**
 	 * Name of the field where the extracted value should be stored
+	 *
 	 * @return
 	 */
-	public String getField();
+	String getField();
 
-	public void setField(String field);
-	
+	void setField(String field);
+
 	/**
 	 * Process the document and returns the raw value. If this configuration has a text processor configured,
 	 * that is not applied within this function.
-	 * 
-	 * @param doc
+	 *
+	 * @param document
 	 * @return
 	 */
-	public Object process(Document doc, XPath xpath) throws DocumentProcessingException;
+	Object process(Document document, DocumentQuerier documentQuerier) throws DocumentProcessingException;
 
-	
-	public String getTextProcessorName();
-	public void setTextProcessorName(String textProcessorName);
 
-	public FieldExtractorConfiguration copy();
+	String getTextProcessorName();
+
+	void setTextProcessorName(String textProcessorName);
+
+	FieldExtractorConfiguration copy();
 }

@@ -1,5 +1,17 @@
 package fi.maanmittauslaitos.pta.search;
 
+import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessorFactory;
+import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl;
+import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl.FieldExtractorType;
+import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
+import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
+import org.apache.commons.io.IOUtils;
+import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.vocabulary.SKOS;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
@@ -8,19 +20,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.io.IOUtils;
-import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.vocabulary.SKOS;
-
-import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessorFactory;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
-import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
-import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 
 /**
  * This class is used to produce training data for maui. It uses an input directory of metadata xml and uses
@@ -41,32 +40,32 @@ public class GenerateMauiData {
 		configuration.getNamespaces().put("xlink", "http://www.w3.org/1999/xlink");
 		
 		// Id
-		XPathFieldExtractorConfiguration idExtractor = new XPathFieldExtractorConfiguration();
+		FieldExtractorConfigurationImpl idExtractor = new FieldExtractorConfigurationImpl();
 		idExtractor.setField("@id");
 		idExtractor.setType(FieldExtractorType.FIRST_MATCHING_VALUE);
-		idExtractor.setXpath("//gmd:fileIdentifier/*/text()");
+		idExtractor.setQuery("//gmd:fileIdentifier/*/text()");
 		
 		configuration.getFieldExtractors().add(idExtractor);
 		
 		// Abstract text
-		XPathFieldExtractorConfiguration abstractExtractor = new XPathFieldExtractorConfiguration();
+		FieldExtractorConfigurationImpl abstractExtractor = new FieldExtractorConfigurationImpl();
 		abstractExtractor.setField("abstract");
 		abstractExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
-		abstractExtractor.setXpath("//gmd:abstract/*/text()");
+		abstractExtractor.setQuery("//gmd:abstract/*/text()");
 		
 		configuration.getFieldExtractors().add(abstractExtractor);
 		
 		// Annotated keywords
-		XPathFieldExtractorConfiguration annotatedKeywordExtractor = new XPathFieldExtractorConfiguration();
+		FieldExtractorConfigurationImpl annotatedKeywordExtractor = new FieldExtractorConfigurationImpl();
 		annotatedKeywordExtractor.setField("annotated_keywords_uri");
 		annotatedKeywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
-		annotatedKeywordExtractor.setXpath("//gmd:descriptiveKeywords/*/gmd:keyword/gmx:Anchor/@xlink:href");
+		annotatedKeywordExtractor.setQuery("//gmd:descriptiveKeywords/*/gmd:keyword/gmx:Anchor/@xlink:href");
 		
 		//annotatedKeywordExtractor.setTextProcessorName("isInOntologyFilterProcessor");
 		
 		configuration.getFieldExtractors().add(annotatedKeywordExtractor);
-		
-		return new DocumentProcessorFactory().createProcessor(configuration);
+
+		return DocumentProcessorFactory.getInstance().createXmlProcessor(configuration);
 		
 	}
 	

@@ -1,6 +1,11 @@
 package fi.maanmittauslaitos.pta.search.documentprocessor;
 
-import static org.junit.Assert.*;
+import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl.FieldExtractorType;
+import fi.maanmittauslaitos.pta.search.text.ExistsInSetProcessor;
+import fi.maanmittauslaitos.pta.search.text.RegexProcessor;
+import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.FileInputStream;
 import java.util.Arrays;
@@ -8,18 +13,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessorFactory;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
-import fi.maanmittauslaitos.pta.search.text.ExistsInSetProcessor;
-import fi.maanmittauslaitos.pta.search.text.RegexProcessor;
-import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class ExampleMetadataTest {
 	private DocumentProcessor processor;
@@ -34,48 +31,48 @@ public class ExampleMetadataTest {
 		configuration.getNamespaces().put("gmx", "http://www.isotc211.org/2005/gmx");
 		
 		configuration.getNamespaces().put("xlink", "http://www.w3.org/1999/xlink");
-		
-		
-		XPathFieldExtractorConfiguration idExtractor = new XPathFieldExtractorConfiguration();
+
+
+		FieldExtractorConfigurationImpl idExtractor = new FieldExtractorConfigurationImpl();
 		idExtractor.setField("@id");
 		idExtractor.setType(FieldExtractorType.FIRST_MATCHING_VALUE);
-		idExtractor.setXpath("//gmd:fileIdentifier/*/text()");
+		idExtractor.setQuery("//gmd:fileIdentifier/*/text()");
 		
 		configuration.getFieldExtractors().add(idExtractor);
 
-		XPathFieldExtractorConfiguration keywordExtractor = new XPathFieldExtractorConfiguration();
+		FieldExtractorConfigurationImpl keywordExtractor = new FieldExtractorConfigurationImpl();
 		keywordExtractor.setField("avainsanat");
 		keywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
-		keywordExtractor.setXpath("//gmd:MD_Keywords/gmd:keyword/*/text()");
+		keywordExtractor.setQuery("//gmd:MD_Keywords/gmd:keyword/*/text()");
 		keywordExtractor.setTextProcessorName("noWhitespace");
 		
 		configuration.getFieldExtractors().add(keywordExtractor);
-		
-		XPathFieldExtractorConfiguration onlineResourceExtractor = new XPathFieldExtractorConfiguration();
+
+		FieldExtractorConfigurationImpl onlineResourceExtractor = new FieldExtractorConfigurationImpl();
 		onlineResourceExtractor.setField("onlineResource");
 		onlineResourceExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
-		onlineResourceExtractor.setXpath("//gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine/*[contains(translate(gmd:protocol/*/text(),\"WFS\",\"wfs\"),\"wfs\")]/gmd:linkage/gmd:URL/text()");
+		onlineResourceExtractor.setQuery("//gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine/*[contains(translate(gmd:protocol/*/text(),\"WFS\",\"wfs\"),\"wfs\")]/gmd:linkage/gmd:URL/text()");
 		
 		configuration.getFieldExtractors().add(onlineResourceExtractor);
-		
-		XPathFieldExtractorConfiguration isServiceExtractor = new XPathFieldExtractorConfiguration();
+
+		FieldExtractorConfigurationImpl isServiceExtractor = new FieldExtractorConfigurationImpl();
 		isServiceExtractor.setField("isService");
 		isServiceExtractor.setType(FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE);
-		isServiceExtractor.setXpath("//gmd:identificationInfo/srv:SV_ServiceIdentification");
+		isServiceExtractor.setQuery("//gmd:identificationInfo/srv:SV_ServiceIdentification");
 		
 		configuration.getFieldExtractors().add(isServiceExtractor);
 
-		XPathFieldExtractorConfiguration isDatasetExtractor = new XPathFieldExtractorConfiguration();
+		FieldExtractorConfigurationImpl isDatasetExtractor = new FieldExtractorConfigurationImpl();
 		isDatasetExtractor.setField("isDataset");
 		isDatasetExtractor.setType(FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE);
-		isDatasetExtractor.setXpath("//gmd:identificationInfo/gmd:MD_DataIdentification");
+		isDatasetExtractor.setQuery("//gmd:identificationInfo/gmd:MD_DataIdentification");
 		
 		configuration.getFieldExtractors().add(isDatasetExtractor);
-		
-		XPathFieldExtractorConfiguration annotatedKeywordExtractor = new XPathFieldExtractorConfiguration();
+
+		FieldExtractorConfigurationImpl annotatedKeywordExtractor = new FieldExtractorConfigurationImpl();
 		annotatedKeywordExtractor.setField("annotated_keywords_uri");
 		annotatedKeywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
-		annotatedKeywordExtractor.setXpath("//gmd:descriptiveKeywords/*/gmd:keyword/gmx:Anchor/@xlink:href");
+		annotatedKeywordExtractor.setQuery("//gmd:descriptiveKeywords/*/gmd:keyword/gmx:Anchor/@xlink:href");
 		
 		annotatedKeywordExtractor.setTextProcessorName("isInOntologyFilterProcessor");
 		
@@ -99,9 +96,9 @@ public class ExampleMetadataTest {
 		isInOntologyFilterProcessor.getChain().add(allowInOntology);
 		
 		configuration.getTextProcessingChains().put("isInOntologyFilterProcessor", isInOntologyFilterProcessor);
-		
-		
-		processor = new DocumentProcessorFactory().createProcessor(configuration);
+
+
+		processor = DocumentProcessorFactory.getInstance().createXmlProcessor(configuration);
 		
 	}
 	

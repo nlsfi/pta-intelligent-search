@@ -13,17 +13,18 @@ import fi.maanmittauslaitos.pta.search.codelist.OrganisationNormaliserTextRewrit
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration;
-import fi.maanmittauslaitos.pta.search.documentprocessor.XPathFieldExtractorConfiguration.FieldExtractorType;
+import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl;
+import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl.FieldExtractorType;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import fi.maanmittauslaitos.pta.search.index.ElasticsearchDocumentSink;
 import fi.maanmittauslaitos.pta.search.index.LocalArchiveDocumentSink;
-import fi.maanmittauslaitos.pta.search.metadata.BestMatchingRegionXPathNodeListCustomExtractor;
-import fi.maanmittauslaitos.pta.search.metadata.GeographicBoundingBoxXPathCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.BestMatchingRegionListCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.GeographicBoundingBoxCustomExtractor;
 import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataExtractorConfigurationFactory;
 import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataFields;
-import fi.maanmittauslaitos.pta.search.metadata.ResponsiblePartyXPathCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.MetadataExtractorConfigurationFactory;
+import fi.maanmittauslaitos.pta.search.metadata.ResponsiblePartyCustomExtractor;
 import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.source.csw.CSWHarvesterSource;
 import fi.maanmittauslaitos.pta.search.source.csw.LocalCSWHarvesterSource;
@@ -168,7 +169,7 @@ public class HarvesterConfig {
 
 
 	public DocumentProcessor getCSWRecordProcessor() throws ParserConfigurationException, IOException {
-		ISOMetadataExtractorConfigurationFactory factory = new ISOMetadataExtractorConfigurationFactory();
+		MetadataExtractorConfigurationFactory factory = new ISOMetadataExtractorConfigurationFactory();
 
 		// Basic configuration
 		DocumentProcessingConfiguration configuration = factory.createMetadataDocumentProcessingConfiguration();
@@ -243,10 +244,10 @@ public class HarvesterConfig {
 		configuration.getTextProcessingChains().put("isInOntologyFilterProcessor", isInOntologyFilterProcessor);
 
 
-		XPathFieldExtractorConfiguration annotatedKeywordExtractor = new XPathFieldExtractorConfiguration();
+		FieldExtractorConfigurationImpl annotatedKeywordExtractor = new FieldExtractorConfigurationImpl();
 		annotatedKeywordExtractor.setField("annotated_keywords_uri");
 		annotatedKeywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
-		annotatedKeywordExtractor.setXpath("//gmd:descriptiveKeywords/*/gmd:keyword/gmx:Anchor/@xlink:href");
+		annotatedKeywordExtractor.setQuery("//gmd:descriptiveKeywords/*/gmd:keyword/gmx:Anchor/@xlink:href");
 
 		annotatedKeywordExtractor.setTextProcessorName("isInOntologyFilterProcessor");
 
@@ -276,10 +277,10 @@ public class HarvesterConfig {
 
 		configuration.getTextProcessingChains().put("organisationNameTextProcessor", organisationNameTextProcessor);
 
-		XPathFieldExtractorConfiguration organisationForSearch = new XPathFieldExtractorConfiguration();
+		FieldExtractorConfigurationImpl organisationForSearch = new FieldExtractorConfigurationImpl();
 		organisationForSearch.setField("organisationName_text");
 		organisationForSearch.setType(FieldExtractorType.ALL_MATCHING_VALUES);
-		organisationForSearch.setXpath("//gmd:contact//gmd:organisationName//text()");
+		organisationForSearch.setQuery("//gmd:contact//gmd:organisationName//text()");
 
 		organisationForSearch.setTextProcessorName("organisationNameTextProcessor");
 
@@ -291,8 +292,8 @@ public class HarvesterConfig {
 		orgRewriter.setOrganisationNormaliser(organisationNormaliser);
 
 		FieldExtractorConfiguration fec = configuration.getFieldExtractor(ISOMetadataFields.ORGANISATIONS);
-		XPathFieldExtractorConfiguration x = (XPathFieldExtractorConfiguration) fec;
-		ResponsiblePartyXPathCustomExtractor rpxpce = (ResponsiblePartyXPathCustomExtractor) x.getCustomExtractor();
+		FieldExtractorConfigurationImpl x = (FieldExtractorConfigurationImpl) fec;
+		ResponsiblePartyCustomExtractor rpxpce = (ResponsiblePartyCustomExtractor) x.getCustomExtractor();
 		rpxpce.setOrganisationNameRewriter(orgRewriter);
 
 
@@ -326,13 +327,13 @@ public class HarvesterConfig {
 
 
 		// Extract bounding box area
-		XPathFieldExtractorConfiguration bboxFec = (XPathFieldExtractorConfiguration)
+		FieldExtractorConfigurationImpl bboxFec = (FieldExtractorConfigurationImpl)
 				configuration.getFieldExtractor(ISOMetadataFields.GEOGRAPHIC_BOUNDING_BOX);
 
-		XPathFieldExtractorConfiguration bboxAreaFec = (XPathFieldExtractorConfiguration) bboxFec.copy();
-		final GeographicBoundingBoxXPathCustomExtractor originalBboxCustomExtractor = (GeographicBoundingBoxXPathCustomExtractor) bboxAreaFec.getCustomExtractor();
-		bboxAreaFec.setCustomExtractor((xPath, node) -> {
-			Object original = originalBboxCustomExtractor.process(xPath, node);
+		FieldExtractorConfigurationImpl bboxAreaFec = (FieldExtractorConfigurationImpl) bboxFec.copy();
+		final GeographicBoundingBoxCustomExtractor originalBboxCustomExtractor = (GeographicBoundingBoxCustomExtractor) bboxAreaFec.getCustomExtractor();
+		bboxAreaFec.setCustomExtractor((documentQuery, queryResult) -> {
+			Object original = originalBboxCustomExtractor.process(documentQuery, queryResult);
 			@SuppressWarnings("unchecked")
 			List<Double> coords = (List<Double>) original;
 			if (coords == null) {
@@ -348,10 +349,10 @@ public class HarvesterConfig {
 		configuration.getFieldExtractors().add(getBestMatchingRegions(bboxFec));
 
 
-		return factory.getDocumentProcessorFactory().createProcessor(configuration);
+		return factory.getDocumentProcessorFactory().createXmlProcessor(configuration);
 	}
 
-	private XPathFieldExtractorConfiguration getBestMatchingRegions(XPathFieldExtractorConfiguration bboxFec) {
+	private FieldExtractorConfigurationImpl getBestMatchingRegions(FieldExtractorConfigurationImpl bboxFec) {
 		ObjectReader listReader = objectMapper.readerFor(new TypeReference<List<Double>>() {
 		});
 
@@ -360,10 +361,10 @@ public class HarvesterConfig {
 		Map<String, Region> subregions = RegionFactory.readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_subregions.json");
 		Map<String, Region> municipalities = RegionFactory.readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_municipalities.json");
 
-		XPathFieldExtractorConfiguration regionFec = (XPathFieldExtractorConfiguration) bboxFec.copy();
-		final GeographicBoundingBoxXPathCustomExtractor originalBboxCustomExtractor = (GeographicBoundingBoxXPathCustomExtractor) regionFec.getCustomExtractor();
+		FieldExtractorConfigurationImpl regionFec = (FieldExtractorConfigurationImpl) bboxFec.copy();
+		final GeographicBoundingBoxCustomExtractor originalBboxCustomExtractor = (GeographicBoundingBoxCustomExtractor) regionFec.getCustomExtractor();
 
-		BestMatchingRegionXPathNodeListCustomExtractor customExtractor = BestMatchingRegionXPathNodeListCustomExtractor.create(
+		BestMatchingRegionListCustomExtractor customExtractor = BestMatchingRegionListCustomExtractor.create(
 				objectMapper, countries, regions, subregions, municipalities, originalBboxCustomExtractor);
 
 		regionFec.setCustomNodeListExtractor(customExtractor);
