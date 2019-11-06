@@ -17,7 +17,7 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 	public void testMaastotietokantaOrganisations() throws Exception {
 		Document document = createMaastotietokantaDocument();
 		
-		List<ResponsibleParty> organisations = document.getListValue(ISOMetadataFields.ORGANISATIONS, ResponsibleParty.class);
+		List<ResponsibleParty> organisations = document.getListValue(ResultMetadataFields.ORGANISATIONS, ResponsibleParty.class);
 
 		assertEquals(1, organisations.size());
 		ResponsibleParty party = organisations.get(0);
@@ -35,7 +35,7 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 	public void testStatFiWFSOrganisations() throws Exception {
 		Document document = createStatFiWFS();
 		
-		List<ResponsibleParty> organisations = document.getListValue(ISOMetadataFields.ORGANISATIONS, ResponsibleParty.class);
+		List<ResponsibleParty> organisations = document.getListValue(ResultMetadataFields.ORGANISATIONS, ResponsibleParty.class);
 
 		assertEquals(2, organisations.size());
 		ResponsibleParty party1 = organisations.get(0);
@@ -58,7 +58,7 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 	public void testStatFiWFSModifiedOrganisations() throws Exception {
 		Document document = createStatFiWFS_modified();
 		
-		List<ResponsibleParty> organisations = document.getListValue(ISOMetadataFields.ORGANISATIONS, ResponsibleParty.class);
+		List<ResponsibleParty> organisations = document.getListValue(ResultMetadataFields.ORGANISATIONS, ResponsibleParty.class);
 
 		assertEquals(2, organisations.size());
 		ResponsibleParty party1 = organisations.get(0);
@@ -80,7 +80,7 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 	public void testLukeTietoaineistosarjaOrganisations() throws Exception {
 		Document document = createLukeTietoaineistosarja();
 		
-		List<ResponsibleParty> organisations = document.getListValue(ISOMetadataFields.ORGANISATIONS, ResponsibleParty.class);
+		List<ResponsibleParty> organisations = document.getListValue(ResultMetadataFields.ORGANISATIONS, ResponsibleParty.class);
 
 		assertEquals(1, organisations.size());
 		ResponsibleParty party = organisations.get(0);
@@ -97,7 +97,7 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 	public void testLukeTietoaineistosarjaOrganisations_fromCSW() throws Exception {
 		Document document = createLukeTietoaineistosarja_fromCSW();
 		
-		List<ResponsibleParty> organisations = document.getListValue(ISOMetadataFields.ORGANISATIONS, ResponsibleParty.class);
+		List<ResponsibleParty> organisations = document.getListValue(ResultMetadataFields.ORGANISATIONS, ResponsibleParty.class);
 
 		assertEquals(1, organisations.size());
 		ResponsibleParty party = organisations.get(0);
@@ -111,7 +111,7 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 	
 	@Test
 	public void testOrgNameRewrite() throws Exception {
-		FieldExtractorConfiguration fec = processor.getDocumentProcessingConfiguration().getFieldExtractor(ISOMetadataFields.ORGANISATIONS);
+		FieldExtractorConfiguration fec = processor.getDocumentProcessingConfiguration().getFieldExtractor(ResultMetadataFields.ORGANISATIONS);
 		FieldExtractorConfigurationImpl xfec = (FieldExtractorConfigurationImpl) fec;
 		ResponsiblePartyCustomExtractor rpxpce = (ResponsiblePartyCustomExtractor) xfec.getCustomExtractor();
 		
@@ -130,7 +130,7 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 		
 		Document document = createMaastotietokantaDocument();
 		
-		List<ResponsibleParty> organisations = document.getListValue(ISOMetadataFields.ORGANISATIONS, ResponsibleParty.class);
+		List<ResponsibleParty> organisations = document.getListValue(ResultMetadataFields.ORGANISATIONS, ResponsibleParty.class);
 
 		assertEquals(1, organisations.size());
 		ResponsibleParty party = organisations.get(0);
@@ -147,7 +147,7 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 	public void testChooseCorrectOrganisationForSatakunnanRakennusinvestointienWFS() throws Exception {
 		Document document = createSatakunnanRakennusinvestointienWFS();
 		
-		List<ResponsibleParty> organisations = document.getListValue(ISOMetadataFields.ORGANISATIONS, ResponsibleParty.class);
+		List<ResponsibleParty> organisations = document.getListValue(ResultMetadataFields.ORGANISATIONS, ResponsibleParty.class);
 
 		assertEquals(1, organisations.size());
 		ResponsibleParty party = organisations.get(0);

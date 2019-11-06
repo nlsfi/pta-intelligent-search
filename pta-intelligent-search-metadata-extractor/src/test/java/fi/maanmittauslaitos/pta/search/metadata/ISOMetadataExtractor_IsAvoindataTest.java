@@ -12,7 +12,7 @@ public class ISOMetadataExtractor_IsAvoindataTest extends BaseMetadataExtractorT
 	public void testStatFiWFSIsAvoindata() throws Exception {
 		Document document = createStatFiWFS();
 		
-		Boolean isAvoindata = document.getValue(ISOMetadataFields.IS_AVOINDATA, Boolean.class);
+		Boolean isAvoindata = document.getValue(ResultMetadataFields.IS_AVOINDATA, Boolean.class);
 		assertEquals(Boolean.TRUE, isAvoindata);
 	}
 	
@@ -21,7 +21,7 @@ public class ISOMetadataExtractor_IsAvoindataTest extends BaseMetadataExtractorT
 	public void testStatFiWFS_modifiedIsNotAvoindata() throws Exception {
 		Document document = createStatFiWFS_modified();
 		
-		Boolean isAvoindata = document.getValue(ISOMetadataFields.IS_AVOINDATA, Boolean.class);
+		Boolean isAvoindata = document.getValue(ResultMetadataFields.IS_AVOINDATA, Boolean.class);
 		assertEquals(Boolean.FALSE, isAvoindata);
 	}
 	
@@ -30,7 +30,7 @@ public class ISOMetadataExtractor_IsAvoindataTest extends BaseMetadataExtractorT
 	public void testMaastotietokantaIsAvoindata() throws Exception {
 		Document document = createMaastotietokantaDocument();
 		
-		Boolean isAvoindata = document.getValue(ISOMetadataFields.IS_AVOINDATA, Boolean.class);
+		Boolean isAvoindata = document.getValue(ResultMetadataFields.IS_AVOINDATA, Boolean.class);
 		assertEquals(Boolean.TRUE, isAvoindata);
 	}
 	
@@ -38,7 +38,7 @@ public class ISOMetadataExtractor_IsAvoindataTest extends BaseMetadataExtractorT
 	public void testLukeAIneistosarjaIsAvoindata() throws Exception {
 		Document document = createLukeTietoaineistosarja();
 		
-		Boolean isAvoindata = document.getValue(ISOMetadataFields.IS_AVOINDATA, Boolean.class);
+		Boolean isAvoindata = document.getValue(ResultMetadataFields.IS_AVOINDATA, Boolean.class);
 		assertEquals(Boolean.TRUE, isAvoindata);
 	}
 	
@@ -46,7 +46,7 @@ public class ISOMetadataExtractor_IsAvoindataTest extends BaseMetadataExtractorT
 	public void testLukeAIneistosarjaIsAvoindata_fromCSW() throws Exception {
 		Document document = createLukeTietoaineistosarja_fromCSW();
 		
-		Boolean isAvoindata = document.getValue(ISOMetadataFields.IS_AVOINDATA, Boolean.class);
+		Boolean isAvoindata = document.getValue(ResultMetadataFields.IS_AVOINDATA, Boolean.class);
 		assertEquals(Boolean.TRUE, isAvoindata);
 	}
 

@@ -14,7 +14,7 @@ public class ISOMetadataExtractor_DistributionFormatsTest extends BaseMetadataEx
 	public void testMaastotietokantaDistributionFormats() throws Exception {
 		Document document = createMaastotietokantaDocument();
 		
-		List<String> distributionFormats = document.getListValue(ISOMetadataFields.DISTRIBUTION_FORMATS,  String.class);
+		List<String> distributionFormats = document.getListValue(ResultMetadataFields.DISTRIBUTION_FORMATS,  String.class);
 		assertArrayEquals(new String[] {
 				"GML", "Mapinfo MIF/MID", "ESRI Shapefile"
 			}, distributionFormats.toArray());
@@ -24,7 +24,7 @@ public class ISOMetadataExtractor_DistributionFormatsTest extends BaseMetadataEx
 	public void testStatFiDistributionFormats() throws Exception {
 		Document document = createStatFiWFS();
 		
-		List<String> distributionFormats = document.getListValue(ISOMetadataFields.DISTRIBUTION_FORMATS,  String.class);
+		List<String> distributionFormats = document.getListValue(ResultMetadataFields.DISTRIBUTION_FORMATS,  String.class);
 		
 		assertArrayEquals(new String[] {
 			}, distributionFormats.toArray());
@@ -34,7 +34,7 @@ public class ISOMetadataExtractor_DistributionFormatsTest extends BaseMetadataEx
 	public void testLukeAineistosarjaDistributionFormats() throws Exception {
 		Document document = createLukeTietoaineistosarja();
 		
-		List<String> distributionFormats = document.getListValue(ISOMetadataFields.DISTRIBUTION_FORMATS,  String.class);
+		List<String> distributionFormats = document.getListValue(ResultMetadataFields.DISTRIBUTION_FORMATS,  String.class);
 		assertArrayEquals(new String[] {
 				"Unknown"
 			}, distributionFormats.toArray());
@@ -44,7 +44,7 @@ public class ISOMetadataExtractor_DistributionFormatsTest extends BaseMetadataEx
 	public void testLukeAineistosarjaDistributionFormats_fromCSW() throws Exception {
 		Document document = createLukeTietoaineistosarja_fromCSW();
 		
-		List<String> distributionFormats = document.getListValue(ISOMetadataFields.DISTRIBUTION_FORMATS,  String.class);
+		List<String> distributionFormats = document.getListValue(ResultMetadataFields.DISTRIBUTION_FORMATS,  String.class);
 		assertArrayEquals(new String[] {
 				"Unknown"
 			}, distributionFormats.toArray());

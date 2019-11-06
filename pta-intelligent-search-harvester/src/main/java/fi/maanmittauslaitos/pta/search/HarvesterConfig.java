@@ -22,7 +22,7 @@ import fi.maanmittauslaitos.pta.search.index.LocalArchiveDocumentSink;
 import fi.maanmittauslaitos.pta.search.metadata.BestMatchingRegionListCustomExtractor;
 import fi.maanmittauslaitos.pta.search.metadata.GeographicBoundingBoxCustomExtractor;
 import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataExtractorConfigurationFactory;
-import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataFields;
+import fi.maanmittauslaitos.pta.search.metadata.ResultMetadataFields;
 import fi.maanmittauslaitos.pta.search.metadata.MetadataExtractorConfigurationFactory;
 import fi.maanmittauslaitos.pta.search.metadata.ResponsiblePartyCustomExtractor;
 import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
@@ -185,7 +185,7 @@ public class HarvesterConfig {
 		TextProcessingChain abstractChain = createAbstractProcessingChain(terminologyProcessor, wordCombinationProcessor);
 		configuration.getTextProcessingChains().put("abstractProcessor", abstractChain);
 
-		FieldExtractorConfiguration abstractUri = configuration.getFieldExtractor(ISOMetadataFields.ABSTRACT).copy();
+		FieldExtractorConfiguration abstractUri = configuration.getFieldExtractor(ResultMetadataFields.ABSTRACT).copy();
 		abstractUri.setField(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI);
 		abstractUri.setTextProcessorName("abstractProcessor");
 
@@ -195,7 +195,7 @@ public class HarvesterConfig {
 		TextProcessingChain abstractParentsChain = createAbstractParentProcessingChain(terminologyProcessor, wordCombinationProcessor, model);
 		configuration.getTextProcessingChains().put("abstractParentProcessor", abstractParentsChain);
 
-		FieldExtractorConfiguration abstract2Uri = configuration.getFieldExtractor(ISOMetadataFields.ABSTRACT).copy();
+		FieldExtractorConfiguration abstract2Uri = configuration.getFieldExtractor(ResultMetadataFields.ABSTRACT).copy();
 		abstract2Uri.setField(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI_PARENTS);
 		abstract2Uri.setTextProcessorName("abstractParentProcessor");
 
@@ -209,7 +209,7 @@ public class HarvesterConfig {
 
 		configuration.getTextProcessingChains().put("mauiProcessor", mauiChain);
 
-		FieldExtractorConfiguration abstractMauiUri = configuration.getFieldExtractor(ISOMetadataFields.ABSTRACT).copy();
+		FieldExtractorConfiguration abstractMauiUri = configuration.getFieldExtractor(ResultMetadataFields.ABSTRACT).copy();
 		abstractMauiUri.setField(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI);
 		abstractMauiUri.setTextProcessorName("mauiProcessor");
 
@@ -219,7 +219,7 @@ public class HarvesterConfig {
 		TextProcessingChain mauiParentsChain = createMauiParentProcessingChain(mauiTextProcessor, model);
 		configuration.getTextProcessingChains().put("mauiParentsProcessor", mauiParentsChain);
 
-		FieldExtractorConfiguration abstractMauiParentsUri = configuration.getFieldExtractor(ISOMetadataFields.ABSTRACT).copy();
+		FieldExtractorConfiguration abstractMauiParentsUri = configuration.getFieldExtractor(ResultMetadataFields.ABSTRACT).copy();
 		abstractMauiParentsUri.setField(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI_PARENTS);
 		abstractMauiParentsUri.setTextProcessorName("mauiParentsProcessor");
 
@@ -230,7 +230,7 @@ public class HarvesterConfig {
 		TextProcessingChain keywordChain = createKeywordProcessingChain(terminologyProcessor, wordCombinationProcessor);
 		configuration.getTextProcessingChains().put("keywordProcessor", keywordChain);
 
-		FieldExtractorConfiguration keywordsUri = configuration.getFieldExtractor(ISOMetadataFields.KEYWORDS_ALL).copy();
+		FieldExtractorConfiguration keywordsUri = configuration.getFieldExtractor(ResultMetadataFields.KEYWORDS_ALL).copy();
 		keywordsUri.setField(PTAElasticSearchMetadataConstants.FIELD_KEYWORDS_URI);
 		keywordsUri.setTextProcessorName("keywordProcessor");
 
@@ -254,15 +254,15 @@ public class HarvesterConfig {
 		configuration.getFieldExtractors().add(annotatedKeywordExtractor);
 
 		// Copy the title to titleSort (which is a keyword field to allow sorting)
-		FieldExtractorConfiguration titleFiSort = configuration.getFieldExtractor(ISOMetadataFields.TITLE).copy();
+		FieldExtractorConfiguration titleFiSort = configuration.getFieldExtractor(ResultMetadataFields.TITLE).copy();
 		titleFiSort.setField("titleFiSort");
 		configuration.getFieldExtractors().add(titleFiSort);
 
-		FieldExtractorConfiguration titleSvSort = configuration.getFieldExtractor(ISOMetadataFields.TITLE_SV).copy();
+		FieldExtractorConfiguration titleSvSort = configuration.getFieldExtractor(ResultMetadataFields.TITLE_SV).copy();
 		titleSvSort.setField("titleSvSort");
 		configuration.getFieldExtractors().add(titleSvSort);
 
-		FieldExtractorConfiguration titleEnSort = configuration.getFieldExtractor(ISOMetadataFields.TITLE_EN).copy();
+		FieldExtractorConfiguration titleEnSort = configuration.getFieldExtractor(ResultMetadataFields.TITLE_EN).copy();
 		titleEnSort.setField("titleEnSort");
 		configuration.getFieldExtractors().add(titleEnSort);
 
@@ -291,7 +291,7 @@ public class HarvesterConfig {
 		OrganisationNormaliserTextRewriter orgRewriter = new OrganisationNormaliserTextRewriter();
 		orgRewriter.setOrganisationNormaliser(organisationNormaliser);
 
-		FieldExtractorConfiguration fec = configuration.getFieldExtractor(ISOMetadataFields.ORGANISATIONS);
+		FieldExtractorConfiguration fec = configuration.getFieldExtractor(ResultMetadataFields.ORGANISATIONS);
 		FieldExtractorConfigurationImpl x = (FieldExtractorConfigurationImpl) fec;
 		ResponsiblePartyCustomExtractor rpxpce = (ResponsiblePartyCustomExtractor) x.getCustomExtractor();
 		rpxpce.setOrganisationNameRewriter(orgRewriter);
@@ -304,7 +304,7 @@ public class HarvesterConfig {
 		inspireThemes.setHeuristicSearchLanguagePriority("fi", "en", "sv");
 
 		FieldExtractorConfiguration inspireFieldExtractorConfiguration =
-				configuration.getFieldExtractor(ISOMetadataFields.KEYWORDS_INSPIRE);
+				configuration.getFieldExtractor(ResultMetadataFields.KEYWORDS_INSPIRE);
 
 		TextProcessingChain inspireThemeNormalizer = new TextProcessingChain();
 		inspireThemeNormalizer.getChain().add(input -> {
@@ -328,7 +328,7 @@ public class HarvesterConfig {
 
 		// Extract bounding box area
 		FieldExtractorConfigurationImpl bboxFec = (FieldExtractorConfigurationImpl)
-				configuration.getFieldExtractor(ISOMetadataFields.GEOGRAPHIC_BOUNDING_BOX);
+				configuration.getFieldExtractor(ResultMetadataFields.GEOGRAPHIC_BOUNDING_BOX);
 
 		FieldExtractorConfigurationImpl bboxAreaFec = (FieldExtractorConfigurationImpl) bboxFec.copy();
 		final GeographicBoundingBoxCustomExtractor originalBboxCustomExtractor = (GeographicBoundingBoxCustomExtractor) bboxAreaFec.getCustomExtractor();

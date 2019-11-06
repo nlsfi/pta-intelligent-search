@@ -36,7 +36,7 @@ public class ISOMetadataExtractorTest {
 	public void testTitle() throws Exception {
 		Document document = createMaastotietokantaDocument();
 		
-		String titleValue = document.getValue(ISOMetadataFields.TITLE, String.class);
+		String titleValue = document.getValue(ResultMetadataFields.TITLE, String.class);
 		assertEquals("Maastotietokanta", titleValue);
 		
 	}

@@ -12,9 +12,9 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 	public void testMaastotietokantaAbstract() throws Exception {
 		Document document = createMaastotietokantaDocument();
 
-		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT, String.class).size());
+		assertEquals(1, document.getListValue(ResultMetadataFields.ABSTRACT, String.class).size());
 
-		String value = document.getValue(ISOMetadataFields.ABSTRACT, String.class);
+		String value = document.getValue(ResultMetadataFields.ABSTRACT, String.class);
 		assertEquals(
 				"Maanmittauslaitoksen Maastotietokanta on koko Suomen kattava maastoa kuvaava aineisto. Sen tärkeimpiä kohderyhmiä ovat liikenneverkko, rakennukset ja rakenteet, hallintorajat, nimistö, maankäyttö, vedet ja korkeussuhteet.\n"
 						+ "\n"
@@ -30,9 +30,9 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 	public void testMaastotietokantaAbstract_doubleText() throws Exception {
 		Document document = createMaastotietokantaDocument_doubleText();
 
-		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT, String.class).size());
+		assertEquals(1, document.getListValue(ResultMetadataFields.ABSTRACT, String.class).size());
 
-		String value = document.getValue(ISOMetadataFields.ABSTRACT, String.class);
+		String value = document.getValue(ResultMetadataFields.ABSTRACT, String.class);
 		assertEquals(
 				"Maanmittauslaitoksen Maastotietokanta on koko Suomen kattava maastoa kuvaava aineisto. Sen tärkeimpiä kohderyhmiä ovat liikenneverkko, rakennukset ja rakenteet, hallintorajat, nimistö, maankäyttö, vedet ja korkeussuhteet.\n"
 						+ "\n"
@@ -48,9 +48,9 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 	public void testMaastotietokantaAbstractSV() throws Exception {
 		Document document = createMaastotietokantaDocument();
 
-		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT_SV, String.class).size());
+		assertEquals(1, document.getListValue(ResultMetadataFields.ABSTRACT_SV, String.class).size());
 
-		String value = document.getValue(ISOMetadataFields.ABSTRACT_SV, String.class);
+		String value = document.getValue(ResultMetadataFields.ABSTRACT_SV, String.class);
 		assertEquals(
 				"Lantmäteriverkets Terrängdatabas är ett material som täcker och beskriver terrängen i hela Finland. De viktigaste objekten är trafikledsnätet, byggnader och konstruktioner, de administrativa gränserna, namnbeståndet, markanvändning, vattendrag och höjdförhållanden.\n"
 						+ "\n"
@@ -66,9 +66,9 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 	public void testMaastotietokantaAbstractEN() throws Exception {
 		Document document = createMaastotietokantaDocument();
 
-		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT_EN, String.class).size());
+		assertEquals(1, document.getListValue(ResultMetadataFields.ABSTRACT_EN, String.class).size());
 
-		String value = document.getValue(ISOMetadataFields.ABSTRACT_EN, String.class);
+		String value = document.getValue(ResultMetadataFields.ABSTRACT_EN, String.class);
 		assertEquals(
 				"The Topographic database is a dataset depicting the terrain of all of Finland. The key objects in the Topographic database are the road network, buildings and constructions, administrative borders, geographic names, land use, waterways and elevation.\n"
 						+ "\n"
@@ -84,9 +84,9 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 	public void testStatFiWFSAbstract() throws Exception {
 		Document document = createStatFiWFS();
 
-		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT, String.class).size());
+		assertEquals(1, document.getListValue(ResultMetadataFields.ABSTRACT, String.class).size());
 
-		String value = document.getValue(ISOMetadataFields.ABSTRACT, String.class);
+		String value = document.getValue(ResultMetadataFields.ABSTRACT, String.class);
 		assertEquals(
 				"Tilastokeskuksen palvelurajapinta on WFS-rajapintapalvelu, jonka kautta on saatavilla seuraavat INSPIRE:n ja paikkatietolain velvoittamat aineistot:\n"
 						+ "1) Tilastoyksiköt: Tilastoissa käytetyt aluejaot (kunta, suuralue, maakunta, seutukunta, AVI-alue, ELY-alue)\n"
@@ -108,9 +108,9 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 	public void testStatFiWFSAbstractSV() throws Exception {
 		Document document = createStatFiWFS();
 
-		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT_SV, String.class).size());
+		assertEquals(1, document.getListValue(ResultMetadataFields.ABSTRACT_SV, String.class).size());
 
-		String value = document.getValue(ISOMetadataFields.ABSTRACT_SV, String.class);
+		String value = document.getValue(ResultMetadataFields.ABSTRACT_SV, String.class);
 		assertEquals(
 				"Statistikcentralens servicegränssnitt är gränssnittsservicen WFS. Följande material, som motsvarar förpliktelserna i INSPIRE och i lagen om en infrastruktur för geografisk information, är tillgängligt i servicen:\n"
 						+ "\n"
@@ -132,9 +132,9 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 	public void testStatFiWFSAbstractEN() throws Exception {
 		Document document = createStatFiWFS();
 
-		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT_EN, String.class).size());
+		assertEquals(1, document.getListValue(ResultMetadataFields.ABSTRACT_EN, String.class).size());
 
-		String value = document.getValue(ISOMetadataFields.ABSTRACT_EN, String.class);
+		String value = document.getValue(ResultMetadataFields.ABSTRACT_EN, String.class);
 		assertEquals(
 				"Statistics Finland's Web Service is a WFS interface service through which the following data required by INSPIRE and national legislation on geographic information are available:\n"
 						+ "\n"
@@ -157,9 +157,9 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 	public void testLukeAineistosarjaAbstract() throws Exception {
 		Document document = createLukeTietoaineistosarja();
 
-		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT, String.class).size());
+		assertEquals(1, document.getListValue(ResultMetadataFields.ABSTRACT, String.class).size());
 
-		String value = document.getValue(ISOMetadataFields.ABSTRACT, String.class);
+		String value = document.getValue(ResultMetadataFields.ABSTRACT, String.class);
 		assertEquals(
 				"Metsäntutkimuslaitos (Metla) kehitti niin sanotun valtakunnan metsien monilähteiseninventoinnin (MVMI) ja otti sen käyttöön vuonna 1990. Maastotietojen, satelliittikuvien ja muun numeerisen paikkatiedon avulla tuotetaan kuntakohtaiset metsävara-arviot ja karttamuotoisia metsävaratietoja. Suurimpaan osaan maata on tuotettu 5 kattavaa karttateemajoukkoa ja Lappiin 4.  Uusimmassa, vuoden 2009 inventoinnissa on 43 teemaa, puutavaralajitilavuuksien lisäksi puulajeittaiset ja puusto-ositeittaiset biomassat. Ensimmäinen koko maan tuote valmistettiin vuosina 1990-1994; uusimmat ovat vuosilta 2005, 2007 ja 2009. MVMI 2011 valmistuu alkuvuonna 2013. Ensimmäisessä vaiheessa vapaassa jakelussa ovat vuoden 2009 karttamuotoiset tulokset. Jatkossa uudet teemat tuotetaan yhden tai kahden vuoden välein. Metla on päättänyt laittaa karttamuotoisetteemat avoimesti jaettavaksi. Aineisto on rasterimuodossa, 20mx20m hilassa ETRS-TM35FIN-koordinaattijärjestelmässä ja kattaa metsätalouden maan (VMI-maaluokista metsä-, kitu- ja joutomaan). Tässä aineistossa muu maa ja vesialueet on rajattu pois käyttäen maastotietokannan elementtejä, jotka lähinnä vastaavat VMI:n muita maaluokkia.\n" + 
 				"Aineistojen latauspalvelu on osoitteessa http://kartta.luke.fi/",
@@ -170,16 +170,16 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 	public void testLukeAineistosarjaAbstractSV() throws Exception {
 		Document document = createLukeTietoaineistosarja();
 
-		assertEquals(0, document.getListValue(ISOMetadataFields.ABSTRACT_SV, String.class).size());
+		assertEquals(0, document.getListValue(ResultMetadataFields.ABSTRACT_SV, String.class).size());
 	}
 
 	@Test
 	public void testLukeAineistosarjaAbstractEN() throws Exception {
 		Document document = createLukeTietoaineistosarja();
 
-		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT_EN, String.class).size());
+		assertEquals(1, document.getListValue(ResultMetadataFields.ABSTRACT_EN, String.class).size());
 
-		String value = document.getValue(ISOMetadataFields.ABSTRACT_EN, String.class);
+		String value = document.getValue(ResultMetadataFields.ABSTRACT_EN, String.class);
 		assertEquals(
 				"The Finnish Forest Research Institute (Metla) developed a method called multi-source national forest inventory (MS-NFI). The first operative results were calculated in 1990. Small area forest resource estimates, in here municipality level estimates, and estimates of variables in map form are calculated using field data from the Finnish national forest inventory, satellite images and other digital georeferenced data, such as topographic database of the National Land Survey of Finland. Five sets of estimates have been produced for the most part of the country until now and four sets for Lapland. The number of the map form themes in the most recent version, from year 2009, is 43. In addition to the volumes by tree species and timber assortments, the biomass by tree species groups and tree compartments have been estimated.\n" +
 				"\n" +
@@ -191,9 +191,9 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 	public void testLukeAineistosarjaAbstract_fromCSW() throws Exception {
 		Document document = createLukeTietoaineistosarja_fromCSW();
 
-		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT, String.class).size());
+		assertEquals(1, document.getListValue(ResultMetadataFields.ABSTRACT, String.class).size());
 
-		String value = document.getValue(ISOMetadataFields.ABSTRACT, String.class);
+		String value = document.getValue(ResultMetadataFields.ABSTRACT, String.class);
 		assertEquals(
 				"Metsäntutkimuslaitos (Metla) kehitti niin sanotun valtakunnan metsien monilähteiseninventoinnin (MVMI) ja otti sen käyttöön vuonna 1990. Maastotietojen, satelliittikuvien ja muun numeerisen paikkatiedon avulla tuotetaan kuntakohtaiset metsävara-arviot ja karttamuotoisia metsävaratietoja. Suurimpaan osaan maata on tuotettu 5 kattavaa karttateemajoukkoa ja Lappiin 4.  Uusimmassa, vuoden 2009 inventoinnissa on 43 teemaa, puutavaralajitilavuuksien lisäksi puulajeittaiset ja puusto-ositeittaiset biomassat. Ensimmäinen koko maan tuote valmistettiin vuosina 1990-1994; uusimmat ovat vuosilta 2005, 2007 ja 2009. MVMI 2011 valmistuu alkuvuonna 2013. Ensimmäisessä vaiheessa vapaassa jakelussa ovat vuoden 2009 karttamuotoiset tulokset. Jatkossa uudet teemat tuotetaan yhden tai kahden vuoden välein. Metla on päättänyt laittaa karttamuotoisetteemat avoimesti jaettavaksi. Aineisto on rasterimuodossa, 20mx20m hilassa ETRS-TM35FIN-koordinaattijärjestelmässä ja kattaa metsätalouden maan (VMI-maaluokista metsä-, kitu- ja joutomaan). Tässä aineistossa muu maa ja vesialueet on rajattu pois käyttäen maastotietokannan elementtejä, jotka lähinnä vastaavat VMI:n muita maaluokkia.\n" + 
 				"Aineistojen latauspalvelu on osoitteessa http://kartta.luke.fi/",
@@ -204,16 +204,16 @@ public class ISOMetadataExtractor_AbstractTest extends BaseMetadataExtractorTest
 	public void testLukeAineistosarjaAbstractSV_fromCSW() throws Exception {
 		Document document = createLukeTietoaineistosarja_fromCSW();
 
-		assertEquals(0, document.getListValue(ISOMetadataFields.ABSTRACT_SV, String.class).size());
+		assertEquals(0, document.getListValue(ResultMetadataFields.ABSTRACT_SV, String.class).size());
 	}
 
 	@Test
 	public void testLukeAineistosarjaAbstractEN_fromCSW() throws Exception {
 		Document document = createLukeTietoaineistosarja_fromCSW();
 
-		assertEquals(1, document.getListValue(ISOMetadataFields.ABSTRACT_EN, String.class).size());
+		assertEquals(1, document.getListValue(ResultMetadataFields.ABSTRACT_EN, String.class).size());
 
-		String value = document.getValue(ISOMetadataFields.ABSTRACT_EN, String.class);
+		String value = document.getValue(ResultMetadataFields.ABSTRACT_EN, String.class);
 		assertEquals(
 				"The Finnish Forest Research Institute (Metla) developed a method called multi-source national forest inventory (MS-NFI). The first operative results were calculated in 1990. Small area forest resource estimates, in here municipality level estimates, and estimates of variables in map form are calculated using field data from the Finnish national forest inventory, satellite images and other digital georeferenced data, such as topographic database of the National Land Survey of Finland. Five sets of estimates have been produced for the most part of the country until now and four sets for Lapland. The number of the map form themes in the most recent version, from year 2009, is 43. In addition to the volumes by tree species and timber assortments, the biomass by tree species groups and tree compartments have been estimated.\n" +
 				"\n" +

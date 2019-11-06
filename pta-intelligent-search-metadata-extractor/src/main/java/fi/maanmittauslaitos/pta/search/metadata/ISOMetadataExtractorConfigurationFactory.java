@@ -32,13 +32,13 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 
 		// Id extractor
 		extractors.add(createXPathExtractor(
-				ISOMetadataFields.ID,
+				ResultMetadataFields.ID,
 				FieldExtractorType.FIRST_MATCHING_VALUE,
 				"//gmd:fileIdentifier/*/text()"));
 
 		// Title extractors
 		extractors.add(createXPathExtractor(
-				ISOMetadataFields.TITLE,
+				ResultMetadataFields.TITLE,
 				FieldExtractorType.FIRST_MATCHING_VALUE,
 				"(" +
 						"//gmd:identificationInfo/*/gmd:citation/*/gmd:title//gmd:LocalisedCharacterString[" +
@@ -48,7 +48,7 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 						")/text()"));
 
 		extractors.add(createXPathExtractor(
-				ISOMetadataFields.TITLE_SV,
+				ResultMetadataFields.TITLE_SV,
 				FieldExtractorType.FIRST_MATCHING_VALUE,
 				"(" +
 						"//gmd:identificationInfo/*/gmd:citation/*/gmd:title//gmd:LocalisedCharacterString[" +
@@ -56,7 +56,7 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 						")/text()"));
 
 		extractors.add(createXPathExtractor(
-				ISOMetadataFields.TITLE_EN,
+				ResultMetadataFields.TITLE_EN,
 				FieldExtractorType.FIRST_MATCHING_VALUE,
 				"(" +
 						"//gmd:identificationInfo/*/gmd:citation/*/gmd:title//gmd:LocalisedCharacterString[" +
@@ -64,7 +64,7 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 
 		// Abstract extractors
 		extractors.add(createXPathExtractor(
-				ISOMetadataFields.ABSTRACT,
+				ResultMetadataFields.ABSTRACT,
 				FieldExtractorType.FIRST_MATCHING_VALUE,
 				"(" +
 						"//gmd:identificationInfo/*/gmd:abstract//gmd:LocalisedCharacterString[" +
@@ -74,14 +74,14 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 						")/text()"));
 
 		extractors.add(createXPathExtractor(
-				ISOMetadataFields.ABSTRACT_SV,
+				ResultMetadataFields.ABSTRACT_SV,
 				FieldExtractorType.FIRST_MATCHING_VALUE,
 				"(" +
 						"//gmd:identificationInfo/*/gmd:abstract//gmd:LocalisedCharacterString[" +
 						matches("@locale", "'#SV'") + "])/text()"));
 
 		extractors.add(createXPathExtractor(
-				ISOMetadataFields.ABSTRACT_EN,
+				ResultMetadataFields.ABSTRACT_EN,
 				FieldExtractorType.FIRST_MATCHING_VALUE,
 				"(" +
 						"//gmd:identificationInfo/*/gmd:abstract//gmd:LocalisedCharacterString[" +
@@ -89,7 +89,7 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 
 		// isService 
 		extractors.add(createXPathExtractor(
-				ISOMetadataFields.IS_SERVICE,
+				ResultMetadataFields.IS_SERVICE,
 				FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE,
 				"//gmd:hierarchyLevel/gmd:MD_ScopeCode["
 						+ matches("@codeList", "'http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode'")
@@ -99,7 +99,7 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 
 		// isDataset
 		extractors.add(createXPathExtractor(
-				ISOMetadataFields.IS_DATASET,
+				ResultMetadataFields.IS_DATASET,
 				FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE,
 				"//gmd:hierarchyLevel/gmd:MD_ScopeCode["
 						+ matches("@codeList", "'http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode'")
@@ -110,7 +110,7 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 
 		// isAvoindata
 		extractors.add(createXPathExtractor(
-				ISOMetadataFields.IS_AVOINDATA,
+				ResultMetadataFields.IS_AVOINDATA,
 				FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE,
 				"//gmd:identificationInfo/*/gmd:descriptiveKeywords/*/gmd:keyword/*[" +
 						matches("text()", "'avoindata.fi'") +
@@ -118,20 +118,20 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 
 		// Topic categories
 		extractors.add(createXPathExtractor(
-				ISOMetadataFields.TOPIC_CATEGORIES,
+				ResultMetadataFields.TOPIC_CATEGORIES,
 				FieldExtractorType.ALL_MATCHING_VALUES,
 				"//gmd:identificationInfo/*/gmd:topicCategory/gmd:MD_TopicCategoryCode/text()"));
 
 		// Keywords
 		extractors.add(createXPathExtractor(
-				ISOMetadataFields.KEYWORDS_ALL,
+				ResultMetadataFields.KEYWORDS_ALL,
 				FieldExtractorType.ALL_MATCHING_VALUES,
 				"//gmd:identificationInfo/*/gmd:descriptiveKeywords/*/gmd:keyword/gco:CharacterString[" +
 						doesntMatch("text()", "'avoindata.fi'") + "]/text()"));
 
 		// Inspire themes
 		extractors.add(createXPathExtractor(
-				ISOMetadataFields.KEYWORDS_INSPIRE,
+				ResultMetadataFields.KEYWORDS_INSPIRE,
 				FieldExtractorType.ALL_MATCHING_VALUES,
 				"//gmd:identificationInfo/*/gmd:descriptiveKeywords/*[" +
 						matches("gmd:thesaurusName/gmd:CI_Citation/gmd:title/*/text()", "'GEMET - INSPIRE themes, version 1.0'") +
@@ -139,27 +139,27 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 
 		// Distribution Formats
 		extractors.add(createXPathExtractor(
-				ISOMetadataFields.DISTRIBUTION_FORMATS,
+				ResultMetadataFields.DISTRIBUTION_FORMATS,
 				FieldExtractorType.ALL_MATCHING_VALUES,
 				"//gmd:distributionInfo/*/gmd:distributionFormat/*/gmd:name/gco:*/text()"));
 
 
 		// Datestamp
 		extractors.add(createXPathExtractor(
-				ISOMetadataFields.DATESTAMP,
+				ResultMetadataFields.DATESTAMP,
 				FieldExtractorType.FIRST_MATCHING_VALUE,
 				"//gmd:MD_Metadata/gmd:dateStamp/*/text()"));
 
 
 		// Organisation names + roles
 		extractors.add(createXPathExtractor(
-				ISOMetadataFields.ORGANISATIONS,
+				ResultMetadataFields.ORGANISATIONS,
 				new ResponsiblePartyCustomExtractor(),
 				"//gmd:MD_Metadata/gmd:identificationInfo/*/gmd:pointOfContact/gmd:CI_ResponsibleParty"));
 
 		// Geographic bounding box
 		extractors.add(createXPathExtractor(
-				ISOMetadataFields.GEOGRAPHIC_BOUNDING_BOX,
+				ResultMetadataFields.GEOGRAPHIC_BOUNDING_BOX,
 				new GeographicBoundingBoxCustomExtractor(),
 				"//gmd:MD_Metadata/gmd:identificationInfo/*/*[self::gmd:extent or self::srv:extent]/*/gmd:geographicElement/gmd:EX_GeographicBoundingBox"));
 

@@ -14,7 +14,7 @@ public class ISOMetadataExtractor_TopicCategoriesTest extends BaseMetadataExtrac
 	public void testMaastotietokantaTopicCategories() throws Exception {
 		Document document = createMaastotietokantaDocument();
 		
-		List<String> categories = document.getListValue(ISOMetadataFields.TOPIC_CATEGORIES,  String.class);
+		List<String> categories = document.getListValue(ResultMetadataFields.TOPIC_CATEGORIES,  String.class);
 		assertArrayEquals(categories.toArray(), new String[] {
 				"imageryBaseMapsEarthCover",
 				"location",
@@ -32,7 +32,7 @@ public class ISOMetadataExtractor_TopicCategoriesTest extends BaseMetadataExtrac
 	public void testStatFiWFSTopicCategories() throws Exception {
 		Document document = createStatFiWFS();
 		
-		List<String> categories = document.getListValue(ISOMetadataFields.TOPIC_CATEGORIES,  String.class);
+		List<String> categories = document.getListValue(ResultMetadataFields.TOPIC_CATEGORIES,  String.class);
 		assertArrayEquals(categories.toArray(), new String[] {});
 	}
 
@@ -40,7 +40,7 @@ public class ISOMetadataExtractor_TopicCategoriesTest extends BaseMetadataExtrac
 	public void testStatFiWFSTopicCategories_modified() throws Exception {
 		Document document = createStatFiWFS_modified();
 		
-		List<String> categories = document.getListValue(ISOMetadataFields.TOPIC_CATEGORIES,  String.class);
+		List<String> categories = document.getListValue(ResultMetadataFields.TOPIC_CATEGORIES,  String.class);
 		assertArrayEquals(categories.toArray(), new String[] {"location"});
 	}
 

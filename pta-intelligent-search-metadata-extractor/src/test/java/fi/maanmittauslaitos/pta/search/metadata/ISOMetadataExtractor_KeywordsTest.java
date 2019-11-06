@@ -15,7 +15,7 @@ public class ISOMetadataExtractor_KeywordsTest extends BaseMetadataExtractorTest
 		Document document = createMaastotietokantaDocument();
 		
 		
-		List<String> keywords = document.getListValue(ISOMetadataFields.KEYWORDS_ALL,  String.class);
+		List<String> keywords = document.getListValue(ResultMetadataFields.KEYWORDS_ALL,  String.class);
 		assertArrayEquals(new String[] {
 				// Note that avoindata.fi is not here since it's read into it's own field
 				"Rataverkko",
@@ -52,7 +52,7 @@ public class ISOMetadataExtractor_KeywordsTest extends BaseMetadataExtractorTest
 	public void testStatFiWFSKeywordsAll() throws Exception {
 		Document document = createStatFiWFS();
 		
-		List<String> keywords = document.getListValue(ISOMetadataFields.KEYWORDS_ALL,  String.class);
+		List<String> keywords = document.getListValue(ResultMetadataFields.KEYWORDS_ALL,  String.class);
 		
 		assertArrayEquals(new String[] {
 				"Tietokohdepalvelu",
@@ -64,7 +64,7 @@ public class ISOMetadataExtractor_KeywordsTest extends BaseMetadataExtractorTest
 	public void testLukeAineistosarjaKeywordsAll() throws Exception {
 		Document document = createLukeTietoaineistosarja();
 		
-		List<String> keywords = document.getListValue(ISOMetadataFields.KEYWORDS_ALL,  String.class);
+		List<String> keywords = document.getListValue(ResultMetadataFields.KEYWORDS_ALL,  String.class);
 		
 		assertArrayEquals(new String[] {
 				"Maanpeite",
@@ -87,7 +87,7 @@ public class ISOMetadataExtractor_KeywordsTest extends BaseMetadataExtractorTest
 	public void testLukeAineistosarjaKeywordsAll_fromCSW() throws Exception {
 		Document document = createLukeTietoaineistosarja_fromCSW();
 		
-		List<String> keywords = document.getListValue(ISOMetadataFields.KEYWORDS_ALL,  String.class);
+		List<String> keywords = document.getListValue(ResultMetadataFields.KEYWORDS_ALL,  String.class);
 		
 		assertArrayEquals(new String[] {
 				"Maanpeite",

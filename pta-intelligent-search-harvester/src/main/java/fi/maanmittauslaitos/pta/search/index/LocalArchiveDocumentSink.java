@@ -2,7 +2,7 @@ package fi.maanmittauslaitos.pta.search.index;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
-import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataFields;
+import fi.maanmittauslaitos.pta.search.metadata.ResultMetadataFields;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTracker;
 import org.apache.log4j.Logger;
 
@@ -45,7 +45,7 @@ public class LocalArchiveDocumentSink implements DocumentSink {
     }
 
     private void writeDocumentToFile(Document doc) throws IOException {
-        String id = doc.getValue(ISOMetadataFields.ID, String.class);
+        String id = doc.getValue(ResultMetadataFields.ID, String.class);
         ObjectMapper objectMapper = new ObjectMapper();
         try (FileOutputStream out = new FileOutputStream(new File(localArchiveDocumentSink.toFile(), id + ".json"))) {
             //String content = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(doc);

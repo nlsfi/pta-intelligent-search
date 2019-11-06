@@ -1,6 +1,6 @@
 package fi.maanmittauslaitos.pta.search.metadata;
 
-public class ISOMetadataFields {
+public class ResultMetadataFields {
 	public static final String ID = "@id";
 	
 	public static final String DATESTAMP = "datestamp";

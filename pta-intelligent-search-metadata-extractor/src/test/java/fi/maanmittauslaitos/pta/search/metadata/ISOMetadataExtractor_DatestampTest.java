@@ -16,7 +16,7 @@ public class ISOMetadataExtractor_DatestampTest extends BaseMetadataExtractorTes
 	public void testMaastotietokantaDatestamp_String() throws Exception {
 		Document document = createMaastotietokantaDocument();
 		
-		String value = document.getValue(ISOMetadataFields.DATESTAMP, String.class);
+		String value = document.getValue(ResultMetadataFields.DATESTAMP, String.class);
 		assertEquals("2018-04-03T11:03:13", value);
 	}
 
@@ -26,7 +26,7 @@ public class ISOMetadataExtractor_DatestampTest extends BaseMetadataExtractorTes
 		
 		LocalDateTime expected = LocalDateTime.of(2018, 4, 3, 11, 3, 13);
 				
-		LocalDateTime value = document.getValue(ISOMetadataFields.DATESTAMP, LocalDateTime.class);
+		LocalDateTime value = document.getValue(ResultMetadataFields.DATESTAMP, LocalDateTime.class);
 		assertEquals(expected, value);
 	}
 
@@ -35,7 +35,7 @@ public class ISOMetadataExtractor_DatestampTest extends BaseMetadataExtractorTes
 	public void testStatFiWFSDatestamp_String() throws Exception {
 		Document document = createStatFiWFS();
 		
-		String value = document.getValue(ISOMetadataFields.DATESTAMP, String.class);
+		String value = document.getValue(ResultMetadataFields.DATESTAMP, String.class);
 		assertEquals("2018-03-16T10:20:21", value);
 	}
 
@@ -46,7 +46,7 @@ public class ISOMetadataExtractor_DatestampTest extends BaseMetadataExtractorTes
 		
 		LocalDateTime expected = LocalDateTime.of(2018, 3, 16, 10, 20, 21);
 		
-		LocalDateTime value = document.getValue(ISOMetadataFields.DATESTAMP, LocalDateTime.class);
+		LocalDateTime value = document.getValue(ResultMetadataFields.DATESTAMP, LocalDateTime.class);
 		assertEquals(expected, value);
 	}
 
@@ -54,7 +54,7 @@ public class ISOMetadataExtractor_DatestampTest extends BaseMetadataExtractorTes
 	public void testStatFiWFSModifiedDatestamp_String() throws Exception {
 		Document document = createStatFiWFS_modified();
 		
-		String value = document.getValue(ISOMetadataFields.DATESTAMP, String.class);
+		String value = document.getValue(ResultMetadataFields.DATESTAMP, String.class);
 		assertEquals("2018-03-16T10:20:21-03:00", value);
 	}
 
@@ -65,7 +65,7 @@ public class ISOMetadataExtractor_DatestampTest extends BaseMetadataExtractorTes
 		ZoneOffset offset = ZoneOffset.ofHours(-3);
 		
 		OffsetDateTime expected = OffsetDateTime.of(2018, 3, 16, 10, 20, 21, 0, offset);
-		OffsetDateTime value = document.getValue(ISOMetadataFields.DATESTAMP, OffsetDateTime.class);
+		OffsetDateTime value = document.getValue(ResultMetadataFields.DATESTAMP, OffsetDateTime.class);
 		assertEquals(expected, value);
 	}
 	
@@ -75,7 +75,7 @@ public class ISOMetadataExtractor_DatestampTest extends BaseMetadataExtractorTes
 		Document document = createLukeTietoaineistosarja();
 		
 		LocalDateTime expected = LocalDateTime.of(2018, 1, 23, 14, 52, 17, 0);
-		LocalDateTime value = document.getValue(ISOMetadataFields.DATESTAMP, LocalDateTime.class);
+		LocalDateTime value = document.getValue(ResultMetadataFields.DATESTAMP, LocalDateTime.class);
 		assertEquals(expected, value);
 	}
 	
@@ -85,7 +85,7 @@ public class ISOMetadataExtractor_DatestampTest extends BaseMetadataExtractorTes
 		Document document = createLukeTietoaineistosarja_fromCSW();
 		
 		LocalDateTime expected = LocalDateTime.of(2018, 1, 23, 14, 52, 17, 0);
-		LocalDateTime value = document.getValue(ISOMetadataFields.DATESTAMP, LocalDateTime.class);
+		LocalDateTime value = document.getValue(ResultMetadataFields.DATESTAMP, LocalDateTime.class);
 		assertEquals(expected, value);
 	}
 }

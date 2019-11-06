@@ -11,7 +11,7 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl.FieldExtractorType;
-import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataFields;
+import fi.maanmittauslaitos.pta.search.metadata.ResultMetadataFields;
 import fi.maanmittauslaitos.pta.search.metadata.MetadataExtractorConfigurationFactory;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -26,7 +26,7 @@ public class CKANMetadataExtractorConfigurationFactory extends MetadataExtractor
 
 		// Id extractor
 		extractors.add(createJsonPathExtractor(
-				ISOMetadataFields.ID,
+				ResultMetadataFields.ID,
 				FieldExtractorType.FIRST_MATCHING_VALUE,
 				"$.id"));
 
@@ -34,13 +34,13 @@ public class CKANMetadataExtractorConfigurationFactory extends MetadataExtractor
 
 		// isService
 		extractors.add(createJsonPathExtractor(
-				ISOMetadataFields.IS_SERVICE,
+				ResultMetadataFields.IS_SERVICE,
 				FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE,
 				"$.num_resources"));
 
 		// isDataset
 		extractors.add(createJsonPathExtractor(
-				ISOMetadataFields.IS_DATASET,
+				ResultMetadataFields.IS_DATASET,
 				FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE,
 				"$.package_id"));
 

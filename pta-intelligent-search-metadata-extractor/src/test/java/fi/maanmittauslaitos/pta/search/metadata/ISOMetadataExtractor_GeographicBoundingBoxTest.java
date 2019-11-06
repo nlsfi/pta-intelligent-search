@@ -14,7 +14,7 @@ public class ISOMetadataExtractor_GeographicBoundingBoxTest extends BaseMetadata
 	public void testLukeAineistosarjaBbox() throws Exception {
 		Document document = createLukeTietoaineistosarja();
 		
-		List<Double> bbox = document.getValue(ISOMetadataFields.GEOGRAPHIC_BOUNDING_BOX, List.class);
+		List<Double> bbox = document.getValue(ResultMetadataFields.GEOGRAPHIC_BOUNDING_BOX, List.class);
 		
 		assertEquals(4, bbox.size());
 		assertEquals(19.47, bbox.get(0), 0.001);
@@ -27,7 +27,7 @@ public class ISOMetadataExtractor_GeographicBoundingBoxTest extends BaseMetadata
 	public void testYlojarviBbox() throws Exception {
 		Document document = createYlojarviAineisto();
 		
-		List<List> bboxes = document.getListValue(ISOMetadataFields.GEOGRAPHIC_BOUNDING_BOX, List.class);
+		List<List> bboxes = document.getListValue(ResultMetadataFields.GEOGRAPHIC_BOUNDING_BOX, List.class);
 		
 		assertEquals(1, bboxes.size());
 		
@@ -44,7 +44,7 @@ public class ISOMetadataExtractor_GeographicBoundingBoxTest extends BaseMetadata
 	public void testLiikennevirastoAvoinWFS() throws Exception {
 		Document document = createLiikennevirastoAvoinWFS();
 		
-		List<Double> bbox = document.getValue(ISOMetadataFields.GEOGRAPHIC_BOUNDING_BOX, List.class);
+		List<Double> bbox = document.getValue(ResultMetadataFields.GEOGRAPHIC_BOUNDING_BOX, List.class);
 		
 		assertEquals(4, bbox.size());
 		assertEquals(19,   bbox.get(0), 0.01);

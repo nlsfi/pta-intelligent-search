@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
 import fi.maanmittauslaitos.pta.search.documentprocessor.XmlDocument;
-import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataFields;
+import fi.maanmittauslaitos.pta.search.metadata.ResultMetadataFields;
 import fi.maanmittauslaitos.pta.search.metadata.model.ResponsibleParty;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +24,7 @@ public class JSONSerialisationTest {
 	@Test
 	public void testBasics() throws JsonProcessingException {
 		Document document = new XmlDocument();
-		document.getFields().put(ISOMetadataFields.ID, "1234");
+		document.getFields().put(ResultMetadataFields.ID, "1234");
 		
 		String jsonString = objectMapper.writeValueAsString(document);
 		
@@ -38,7 +38,7 @@ public class JSONSerialisationTest {
 		org.setIsoRole("bar");
 
 		Document document = new XmlDocument();
-		document.getFields().put(ISOMetadataFields.ORGANISATIONS, Arrays.asList(org));
+		document.getFields().put(ResultMetadataFields.ORGANISATIONS, Arrays.asList(org));
 		
 		String jsonString = objectMapper.writeValueAsString(document);
 		

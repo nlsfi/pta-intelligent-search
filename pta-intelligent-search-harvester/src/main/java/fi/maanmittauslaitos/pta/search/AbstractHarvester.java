@@ -8,7 +8,7 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingExcep
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import fi.maanmittauslaitos.pta.search.index.SinkProcessingException;
-import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataFields;
+import fi.maanmittauslaitos.pta.search.metadata.ResultMetadataFields;
 import fi.maanmittauslaitos.pta.search.source.Harvestable;
 import fi.maanmittauslaitos.pta.search.source.HarvesterInputStream;
 import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
@@ -213,7 +213,7 @@ public abstract class AbstractHarvester implements CommandLineRunner {
 	}
 
 	private void writeDocumentToFile(Document doc) throws IOException {
-		String id = doc.getValue(ISOMetadataFields.ID, String.class);
+		String id = doc.getValue(ResultMetadataFields.ID, String.class);
 		ObjectMapper objectMapper = new ObjectMapper();
 		try (FileOutputStream out = new FileOutputStream("indexed-documents/" + id + ".json")) {
 			objectMapper.writeValue(out, doc.getFields());

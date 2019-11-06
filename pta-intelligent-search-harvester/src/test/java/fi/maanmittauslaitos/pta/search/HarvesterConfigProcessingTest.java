@@ -7,7 +7,7 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataExtractorConfigurationFactory;
-import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataFields;
+import fi.maanmittauslaitos.pta.search.metadata.ResultMetadataFields;
 import fi.maanmittauslaitos.pta.search.metadata.MetadataExtractorConfigurationFactory;
 import fi.maanmittauslaitos.pta.search.text.RDFTerminologyMatcherProcessor;
 import fi.maanmittauslaitos.pta.search.text.WordCombinationProcessor;
@@ -51,7 +51,7 @@ public class HarvesterConfigProcessingTest {
 		configuration.getTextProcessingChains().put("abstractProcessor",
 				conf.createAbstractProcessingChain(terminologyProcessor, wordCombinationProcessor));
 
-		FieldExtractorConfiguration abstractUri = configuration.getFieldExtractor(ISOMetadataFields.ABSTRACT).copy();
+		FieldExtractorConfiguration abstractUri = configuration.getFieldExtractor(ResultMetadataFields.ABSTRACT).copy();
 		abstractUri.setField(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI);
 		abstractUri.setTextProcessorName("abstractProcessor");
 		configuration.getFieldExtractors().add(abstractUri);
@@ -60,7 +60,7 @@ public class HarvesterConfigProcessingTest {
 		configuration.getTextProcessingChains().put("keywordProcessor",
 				conf.createKeywordProcessingChain(terminologyProcessor, wordCombinationProcessor));
 
-		FieldExtractorConfiguration keywordsUri = configuration.getFieldExtractor(ISOMetadataFields.KEYWORDS_ALL).copy();
+		FieldExtractorConfiguration keywordsUri = configuration.getFieldExtractor(ResultMetadataFields.KEYWORDS_ALL).copy();
 		keywordsUri.setField(PTAElasticSearchMetadataConstants.FIELD_KEYWORDS_URI);
 		keywordsUri.setTextProcessorName("keywordProcessor");
 		configuration.getFieldExtractors().add(keywordsUri);

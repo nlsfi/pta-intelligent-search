@@ -12,7 +12,7 @@ public class ISOMetadataExtractor_IsDatasetTest extends BaseMetadataExtractorTes
 	public void testMaastotietokantaIsDataset() throws Exception {
 		Document document = createMaastotietokantaDocument();
 		
-		Boolean isDataset = document.getValue(ISOMetadataFields.IS_DATASET, Boolean.class);
+		Boolean isDataset = document.getValue(ResultMetadataFields.IS_DATASET, Boolean.class);
 		assertEquals(Boolean.TRUE, isDataset);
 	}
 	
@@ -20,7 +20,7 @@ public class ISOMetadataExtractor_IsDatasetTest extends BaseMetadataExtractorTes
 	public void testMaastotietokantaIsDataset_modified() throws Exception {
 		Document document = createMaastotietokantaDocument_modified();
 		
-		Boolean isDataset = document.getValue(ISOMetadataFields.IS_DATASET, Boolean.class);
+		Boolean isDataset = document.getValue(ResultMetadataFields.IS_DATASET, Boolean.class);
 		assertEquals(Boolean.TRUE, isDataset);
 	}
 
@@ -29,7 +29,7 @@ public class ISOMetadataExtractor_IsDatasetTest extends BaseMetadataExtractorTes
 	public void testStatFiWFSIsNotDataset() throws Exception {
 		Document document = createStatFiWFS();
 		
-		Boolean isDataset = document.getValue(ISOMetadataFields.IS_DATASET, Boolean.class);
+		Boolean isDataset = document.getValue(ResultMetadataFields.IS_DATASET, Boolean.class);
 		assertEquals(Boolean.FALSE, isDataset);
 	}
 
@@ -37,7 +37,7 @@ public class ISOMetadataExtractor_IsDatasetTest extends BaseMetadataExtractorTes
 	public void testLukeAineistosarjaIsDataset() throws Exception {
 		Document document = createLukeTietoaineistosarja();
 		
-		Boolean isDataset = document.getValue(ISOMetadataFields.IS_DATASET, Boolean.class);
+		Boolean isDataset = document.getValue(ResultMetadataFields.IS_DATASET, Boolean.class);
 		assertEquals(Boolean.TRUE, isDataset);
 	}
 	
@@ -45,7 +45,7 @@ public class ISOMetadataExtractor_IsDatasetTest extends BaseMetadataExtractorTes
 	public void testLukeAineistosarjaIsDataset_fromCSW() throws Exception {
 		Document document = createLukeTietoaineistosarja_fromCSW();
 		
-		Boolean isDataset = document.getValue(ISOMetadataFields.IS_DATASET, Boolean.class);
+		Boolean isDataset = document.getValue(ResultMetadataFields.IS_DATASET, Boolean.class);
 		assertEquals(Boolean.TRUE, isDataset);
 	}
 }
