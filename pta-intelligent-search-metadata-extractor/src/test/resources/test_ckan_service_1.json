@@ -18,11 +18,12 @@
   "author_email": "author@test.fi",
   "legislation_eu": "https://eur-lex.europa.eu/legal-content/FI/TXT/?uri=CELEX:32016L2284",
   "legislation_national": "https://www.finlex.fi/fi/laki/ajantasa/2014/20140527",
-  "tag_keyword": "",
+  "tag_keyword": "keyword",
   "state": "active",
   "version": null,
   "license_id": null,
   "type": "test-reports",
+  "resources": [],
   "num_resources": 2,
   "reporting_person_email": "test.test@test.fi",
   "tags": [],
@@ -44,7 +45,7 @@
     "id": "8741f861-6384-445e-baef-5fe38bc43caa",
     "approval_status": "approved"
   },
-  "name": "test name",
+  "name": "service-1 name",
   "isopen": false,
   "reporting_organization_others": [
     "ELY",
@@ -56,9 +57,9 @@
     "VTT"
   ],
   "url": null,
-  "notes": "test notes",
+  "notes": "service-1 notes",
   "license_title": null,
   "reporting_person": "test person",
-  "title": "test title",
+  "title": "service-1 title",
   "revision_id": "05b7f181-d538-45f6-8a3a-a8870dbf85a5"
 }

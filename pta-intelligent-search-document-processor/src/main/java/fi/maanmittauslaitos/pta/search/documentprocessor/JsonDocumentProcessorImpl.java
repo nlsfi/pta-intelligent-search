@@ -11,16 +11,15 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.query.JsonDocumentQuery
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 import org.apache.commons.io.IOUtils;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 public class JsonDocumentProcessorImpl extends DocumentProcessor {
-	private DocumentProcessingConfiguration configuration;
-	private JsonDocumentQueryImpl documentQuerier;
+	private final DocumentProcessingConfiguration configuration;
+	private final JsonDocumentQueryImpl documentQuerier;
 
-	JsonDocumentProcessorImpl(DocumentProcessingConfiguration configuration) throws ParserConfigurationException {
+	JsonDocumentProcessorImpl(DocumentProcessingConfiguration configuration) {
 		this.configuration = configuration;
 		this.documentQuerier = JsonDocumentQueryImpl.create(createJsonPathConfiguration());
 	}
@@ -32,7 +31,7 @@ public class JsonDocumentProcessorImpl extends DocumentProcessor {
 		return Configuration.builder()
 				.jsonProvider(jsonProvider)
 				.mappingProvider(mappingProvider)
-				.options(Option.ALWAYS_RETURN_LIST, Option.DEFAULT_PATH_LEAF_TO_NULL)
+				.options(Option.ALWAYS_RETURN_LIST, Option.DEFAULT_PATH_LEAF_TO_NULL, Option.SUPPRESS_EXCEPTIONS)
 				.build();
 	}
 
@@ -52,7 +51,7 @@ public class JsonDocumentProcessorImpl extends DocumentProcessor {
 
 	@Override
 	public Document processDocument(InputStream is) throws DocumentProcessingException {
-		Map<String, TextProcessingChain> textProcessingChains = configuration.getTextProcessingChains();
+		Map<String, TextProcessingChain> textProcessingChains = getConfiguration().getTextProcessingChains();
 		String content;
 
 		try {

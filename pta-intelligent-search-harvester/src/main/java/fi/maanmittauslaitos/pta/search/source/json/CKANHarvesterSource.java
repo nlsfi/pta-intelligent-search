@@ -2,6 +2,7 @@ package fi.maanmittauslaitos.pta.search.source.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fi.maanmittauslaitos.pta.search.HarvestingException;
 import fi.maanmittauslaitos.pta.search.source.Harvestable;
@@ -19,6 +20,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -42,22 +44,49 @@ public class CKANHarvesterSource extends HarvesterSource {
 	}
 
 
-	List<JsonNode> readJsonToNodes(JsonNode json) {
+	/**
+	 * Read JSON to nodes including service and datasets
+	 *
+	 * @param serviceJson Parsed JSON as JsonNode
+	 * @return list of original service and all datasets (resources) including the original service as a field
+	 */
+	List<JsonNode> readJsonToNodes(JsonNode serviceJson) {
 		ArrayList<JsonNode> jsons = new ArrayList<>();
+		ObjectNode serviceJsonObjNode = (ObjectNode) serviceJson;
+		// removes also from original JsonNode object "serviceJson"
+		JsonNode datasets = serviceJsonObjNode.remove("resources");
 
-		ObjectNode objectNodeJson = (ObjectNode) json;
-		// removes also from original JsonNode object "json"
-		JsonNode res = objectNodeJson.remove("resources");
-		jsons.add(json);
+		// Service metadata will contain empty array of resources
+		serviceJsonObjNode.set("resources", objectMapper.createArrayNode());
+		jsons.add(serviceJson);
 
-		if (res != null) {
-			if (res.isArray()) {
-				res.forEach(jsons::add);
+		if (datasets != null) {
+			if (datasets.isArray()) {
+				datasets.forEach(datasetNode -> {
+
+					// Dataset metadata contains service metadata and only the related dataset metadata
+					// in the resources array
+					JsonNode modifiedDatasetNode = serviceJson.deepCopy();
+					ArrayNode resources = objectMapper.createArrayNode();
+					resources.add(datasetNode);
+					ObjectNode resObjNode = (ObjectNode) modifiedDatasetNode;
+					resObjNode.set("resources", resources);
+
+					jsons.add(modifiedDatasetNode);
+				});
 			} else {
-				jsons.add(res);
+				jsons.add(datasets);
 			}
 		}
 		return jsons;
+	}
+
+	String getIdentifierFromJsonNode(JsonNode node) {
+		return Optional.ofNullable((ArrayNode) node.get("resources"))
+				.filter(arrNode -> arrNode.size() > 0)
+				.map(arr -> arr.get(0))
+				.map(firstRes -> firstRes.get("id").textValue())
+				.orElse(node.get("id").textValue());
 	}
 
 	private String getQuery() {
@@ -76,7 +105,8 @@ public class CKANHarvesterSource extends HarvesterSource {
 		private int numberOfRecordsProcessed = 0;
 		private int numberOfRowsProcessed = 0;
 		private Integer numberOfRecordsInService;
-		private LinkedList<JSONHarvestable> localItems = null;
+
+		private LinkedList<JSONHarvestable> localItems;
 
 		CKANIterator() {
 			localItems = new LinkedList<>();
@@ -138,7 +168,7 @@ public class CKANHarvesterSource extends HarvesterSource {
 						localItems = StreamSupport.stream(results.spliterator(), false)
 								.map(CKANHarvesterSource.this::readJsonToNodes)
 								.flatMap(Collection::stream)
-								.map(node -> JSONHarvestable.create(node.get("id").textValue(), node))
+								.map(node -> JSONHarvestable.create(getIdentifierFromJsonNode(node), node))
 								.collect(Collectors.toCollection(LinkedList::new));
 					}
 				} else {

@@ -2,6 +2,7 @@ package fi.maanmittauslaitos.pta.search.source;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import fi.maanmittauslaitos.pta.search.source.csw.LocalCSWHarvesterSource;
 import fi.maanmittauslaitos.pta.search.source.json.LocalCKANHarvesterSource;
 import org.junit.Test;
@@ -10,6 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,8 +37,16 @@ public class LocalHarvesterSourceTest {
 			Harvestable next = iterator.next();
 			HarvesterInputStream inputStream = source.getInputStream(next);
 			JsonNode jsonNode = objectMapper.readTree(inputStream);
-			ids.add(jsonNode.get("id").textValue());
-			assertThat(jsonNode.get("id").textValue()).isEqualTo(next.getIdentifier());
+			ArrayNode datasetArray = (ArrayNode) jsonNode.get("resources");
+			assertThat(datasetArray.size()).isLessThanOrEqualTo(1);
+
+			String id = Optional.of(datasetArray)
+					.filter(arrNode -> arrNode.size() > 0)
+					.map(arrNode -> arrNode.get(0))
+					.map(node -> node.get("id").textValue())
+					.orElse(jsonNode.get("id").textValue());
+			ids.add(id);
+			assertThat(id).isEqualTo(next.getIdentifier());
 		}
 		assertThat(ids).containsExactlyInAnyOrder(
 				"kissa-service-id", "kissa-dataset-1", "kissa-dataset-2",

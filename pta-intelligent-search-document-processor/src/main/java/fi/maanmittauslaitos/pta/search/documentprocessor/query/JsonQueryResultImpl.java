@@ -1,18 +1,31 @@
 package fi.maanmittauslaitos.pta.search.documentprocessor.query;
 
-public class JsonQueryResultImpl implements QueryResult {
-	String value;
+import java.util.List;
 
-	private JsonQueryResultImpl(String value) {
+public class JsonQueryResultImpl implements QueryResult {
+	private final List<Object> rawValue;
+	private final String value;
+
+
+	private JsonQueryResultImpl(String value, List<Object> rawValue) {
 		this.value = value;
+		this.rawValue = rawValue;
 	}
 
-	public static JsonQueryResultImpl create(String value) {
-		return new JsonQueryResultImpl(value);
+	public static JsonQueryResultImpl create(String value, List<Object> rawValue) {
+		return new JsonQueryResultImpl(value, rawValue);
 	}
 
 	@Override
 	public String getValue() {
 		return value;
+	}
+
+	public List<Object> getRawValue() {
+		return rawValue;
+	}
+
+	public List getGenericRawValue() {
+		return rawValue;
 	}
 }

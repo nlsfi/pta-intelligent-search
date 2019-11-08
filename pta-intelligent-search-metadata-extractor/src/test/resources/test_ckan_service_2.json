@@ -9,9 +9,13 @@
   "private": false,
   "maintainer_email": null,
   "num_tags": 0,
-  "reporting_organization": "ORGANIZATION",
-  "tag_inspire_theme": [],
-  "id": "service-1-id",
+  "reporting_organization": null,
+  "tag_inspire_theme": [
+    "br",
+    "au",
+    "hy"
+  ],
+  "id": "service-2-id",
   "metadata_created": "2019-10-01T07:21:44.216120",
   "metadata_modified": "2019-10-11T07:50:15.143089",
   "author": "test",
@@ -23,30 +27,7 @@
   "version": null,
   "license_id": null,
   "type": "test-reports",
-  "resources": [
-    {
-      "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-      "cache_url": null,
-      "hash": "",
-      "description": "Description of dataset 1",
-      "name": "dataset-1 name",
-      "format": "XLSX",
-      "url": "https://ckan.test.fi/fi/dataset/service-1-id/resource/dataset-1-id/download/test.xlsx",
-      "datastore_active": false,
-      "cache_last_updated": null,
-      "package_id": "service-1-id",
-      "created": "2019-10-01T07:25:06.104132",
-      "state": "active",
-      "mimetype_inner": null,
-      "last_modified": "2019-10-01T07:25:06.082938",
-      "position": 0,
-      "revision_id": "3a73581a-1cb7-4f33-b2da-0fd07da2fa0d",
-      "url_type": "upload",
-      "id": "dataset-1-id",
-      "resource_type": null,
-      "size": 2094342
-    }
-  ],
+  "resources": [],
   "num_resources": 2,
   "reporting_person_email": "test.test@test.fi",
   "tags": [],
@@ -55,6 +36,33 @@
   "creator_user_id": "56b8b029-7855-4e79-abda-981364ea02f9",
   "additional_info": "",
   "relationships_as_subject": [],
+  "spatial": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          24.831,
+          60.130
+        ],
+        [
+          25.271,
+          60.130
+        ],
+        [
+          25.271,
+          60.298
+        ],
+        [
+          24.831,
+          60.298
+        ],
+        [
+          24.831,
+          60.130
+        ]
+      ]
+    ]
+  },
   "organization": {
     "description": "Organisaation description",
     "created": "2018-11-02T09:14:50.546388",
@@ -68,23 +76,13 @@
     "id": "8741f861-6384-445e-baef-5fe38bc43caa",
     "approval_status": "approved"
   },
-  "name": "service-1 name",
+  "name": "service-2 name",
   "isopen": false,
-  "reporting_organization_others": [
-    "ELY",
-    "KEHA",
-    "EA",
-    "LUKE",
-    "TK",
-    "TUKES",
-    "VTT"
-  ],
+  "reporting_organization_others": [],
   "url": null,
-  "notes": "service-1 notes",
+  "notes": "service-2 notes",
   "license_title": null,
   "reporting_person": "test person",
-  "title": "service-1 title",
+  "title": "service-2 title",
   "revision_id": "05b7f181-d538-45f6-8a3a-a8870dbf85a5"
 }
-
-

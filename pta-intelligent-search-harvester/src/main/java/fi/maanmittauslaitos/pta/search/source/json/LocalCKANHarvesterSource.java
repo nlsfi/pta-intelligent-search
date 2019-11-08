@@ -55,7 +55,7 @@ public class LocalCKANHarvesterSource extends CKANHarvesterSource {
 		private final URL resourceRootURL;
 		private int numberOfRecordsProcessed = 0;
 		private Integer numberOfRecordsInService;
-		private LinkedList<JSONHarvestable> localItems = null;
+		private LinkedList<JSONHarvestable> localItems;
 
 		LocalCKANIterator(URL resourceRootURL) {
 			localItems = new LinkedList<>();
@@ -90,7 +90,7 @@ public class LocalCKANHarvesterSource extends CKANHarvesterSource {
 					localItems = Arrays.stream(resources)
 							.map(file -> readJsonToNodes(readJson(file)))
 							.flatMap(Collection::stream)
-							.map(node -> JSONHarvestable.create(node.get("id").textValue(), node))
+							.map(node -> JSONHarvestable.create(getIdentifierFromJsonNode(node), node))
 							.collect(Collectors.toCollection(LinkedList::new));
 				}
 				numberOfRecordsInService = localItems.size();
