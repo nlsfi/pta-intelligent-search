@@ -1,7 +1,5 @@
 package fi.maanmittauslaitos.pta.search.documentprocessor;
 
-import com.jayway.jsonpath.Configuration;
-
 import javax.xml.parsers.ParserConfigurationException;
 
 public class DocumentProcessorFactory {
@@ -28,8 +26,8 @@ public class DocumentProcessorFactory {
 		return new XmlDocumentProcessorImpl(configuration);
 	}
 
-	public DocumentProcessor createJsonProcessor(DocumentProcessingConfiguration configuration, Configuration jsonPathConfiguration) throws ParserConfigurationException {
-		return new JsonDocumentProcessorImpl(configuration, jsonPathConfiguration);
+	public DocumentProcessor createJsonProcessor(DocumentProcessingConfiguration configuration) throws ParserConfigurationException {
+		return new JsonDocumentProcessorImpl(configuration);
 	}
 
 }

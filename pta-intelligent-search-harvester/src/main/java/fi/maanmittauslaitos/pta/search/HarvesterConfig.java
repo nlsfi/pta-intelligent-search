@@ -20,11 +20,11 @@ import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import fi.maanmittauslaitos.pta.search.index.ElasticsearchDocumentSink;
 import fi.maanmittauslaitos.pta.search.index.LocalArchiveDocumentSink;
 import fi.maanmittauslaitos.pta.search.metadata.BestMatchingRegionListCustomExtractor;
-import fi.maanmittauslaitos.pta.search.metadata.GeographicBoundingBoxCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.GeographicBoundingBoxXmlCustomExtractor;
 import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataExtractorConfigurationFactory;
-import fi.maanmittauslaitos.pta.search.metadata.ResultMetadataFields;
 import fi.maanmittauslaitos.pta.search.metadata.MetadataExtractorConfigurationFactory;
-import fi.maanmittauslaitos.pta.search.metadata.ResponsiblePartyCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.ResponsiblePartyXmlCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.ResultMetadataFields;
 import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.source.csw.CSWHarvesterSource;
 import fi.maanmittauslaitos.pta.search.source.csw.LocalCSWHarvesterSource;
@@ -293,7 +293,7 @@ public class HarvesterConfig {
 
 		FieldExtractorConfiguration fec = configuration.getFieldExtractor(ResultMetadataFields.ORGANISATIONS);
 		FieldExtractorConfigurationImpl x = (FieldExtractorConfigurationImpl) fec;
-		ResponsiblePartyCustomExtractor rpxpce = (ResponsiblePartyCustomExtractor) x.getCustomExtractor();
+		ResponsiblePartyXmlCustomExtractor rpxpce = (ResponsiblePartyXmlCustomExtractor) x.getCustomExtractor();
 		rpxpce.setOrganisationNameRewriter(orgRewriter);
 
 
@@ -331,7 +331,7 @@ public class HarvesterConfig {
 				configuration.getFieldExtractor(ResultMetadataFields.GEOGRAPHIC_BOUNDING_BOX);
 
 		FieldExtractorConfigurationImpl bboxAreaFec = (FieldExtractorConfigurationImpl) bboxFec.copy();
-		final GeographicBoundingBoxCustomExtractor originalBboxCustomExtractor = (GeographicBoundingBoxCustomExtractor) bboxAreaFec.getCustomExtractor();
+		final GeographicBoundingBoxXmlCustomExtractor originalBboxCustomExtractor = (GeographicBoundingBoxXmlCustomExtractor) bboxAreaFec.getCustomExtractor();
 		bboxAreaFec.setCustomExtractor((documentQuery, queryResult) -> {
 			Object original = originalBboxCustomExtractor.process(documentQuery, queryResult);
 			@SuppressWarnings("unchecked")
@@ -362,7 +362,7 @@ public class HarvesterConfig {
 		Map<String, Region> municipalities = RegionFactory.readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_municipalities.json");
 
 		FieldExtractorConfigurationImpl regionFec = (FieldExtractorConfigurationImpl) bboxFec.copy();
-		final GeographicBoundingBoxCustomExtractor originalBboxCustomExtractor = (GeographicBoundingBoxCustomExtractor) regionFec.getCustomExtractor();
+		final GeographicBoundingBoxXmlCustomExtractor originalBboxCustomExtractor = (GeographicBoundingBoxXmlCustomExtractor) regionFec.getCustomExtractor();
 
 		BestMatchingRegionListCustomExtractor customExtractor = BestMatchingRegionListCustomExtractor.create(
 				objectMapper, countries, regions, subregions, municipalities, originalBboxCustomExtractor);

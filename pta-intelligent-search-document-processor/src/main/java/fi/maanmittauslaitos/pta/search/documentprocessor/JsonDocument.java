@@ -1,13 +1,16 @@
 package fi.maanmittauslaitos.pta.search.documentprocessor;
 
-public class JsonDocument extends Document {
-	private String content;
+import com.jayway.jsonpath.DocumentContext;
 
-	public String getContent() {
-		return content;
+public class JsonDocument extends Document {
+	private DocumentContext documentContext;
+
+
+	public DocumentContext getDocumentContext() {
+		return documentContext;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	void setDocumentContext(DocumentContext documentContext) {
+		this.documentContext = documentContext;
 	}
 }

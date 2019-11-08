@@ -4,7 +4,8 @@ package fi.maanmittauslaitos.pta.search.metadata;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuerier;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
+import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuery;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.QueryResult;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 import fi.maanmittauslaitos.pta.search.utils.Region;
@@ -52,9 +53,9 @@ public class BestMatchingRegionListCustomExtractorTest {
 	public final JUnitSoftAssertions softly = new JUnitSoftAssertions();
 
 	@Mock
-	private GeographicBoundingBoxCustomExtractor mockBBoxExtractor;
+	private GeographicBoundingBoxXmlCustomExtractor mockBBoxExtractor;
 	@Mock
-	private DocumentQuerier mockDocumentQuerier;
+	private DocumentQuery mockDocumentQuery;
 	@Mock
 	private List<QueryResult> mockQueryResultList;
 
@@ -72,10 +73,10 @@ public class BestMatchingRegionListCustomExtractorTest {
 
 
 	@Test
-	public void testWithSingleBbox() throws XPathException {
-		when(mockBBoxExtractor.process(any(DocumentQuerier.class), any(QueryResult.class))).thenReturn(Arrays.asList(25.26078, 61.83952, 26.25, 62.5));
+	public void testWithSingleBbox() throws XPathException, DocumentProcessingException {
+		when(mockBBoxExtractor.process(any(DocumentQuery.class), any(QueryResult.class))).thenReturn(Arrays.asList(25.26078, 61.83952, 26.25, 62.5));
 
-		JsonNode processed = (JsonNode) extractor.process(mockDocumentQuerier, mockQueryResultList);
+		JsonNode processed = (JsonNode) extractor.process(mockDocumentQuery, mockQueryResultList);
 		assertThat(processed).isNotEmpty();
 
 		softly.assertThat(processed.get(countryField).get(nameField).textValue()).isEqualTo("Suomi");
@@ -89,9 +90,9 @@ public class BestMatchingRegionListCustomExtractorTest {
 	}
 
 	@Test
-	public void testWithMultipleBbox() throws XPathException {
+	public void testWithMultipleBbox() throws XPathException, DocumentProcessingException {
 		when(mockQueryResultList.size()).thenReturn(7);
-		when(mockBBoxExtractor.process(any(DocumentQuerier.class), any(QueryResult.class))).thenReturn(
+		when(mockBBoxExtractor.process(any(DocumentQuery.class), any(QueryResult.class))).thenReturn(
 				Arrays.asList(25.1141, 62.0671, 25.1604, 62.0902),
 				Arrays.asList(25.135, 61.9691, 25.1652, 61.9898),
 				Arrays.asList(25.1065, 61.8406, 25.2356, 61.9622),
@@ -101,7 +102,7 @@ public class BestMatchingRegionListCustomExtractorTest {
 				Arrays.asList(24.7446, 61.8451, 24.8593, 61.8709)
 		);
 
-		JsonNode processed = (JsonNode) extractor.process(mockDocumentQuerier, mockQueryResultList);
+		JsonNode processed = (JsonNode) extractor.process(mockDocumentQuery, mockQueryResultList);
 		assertThat(processed).isNotEmpty();
 
 		softly.assertThat(processed.get(countryField).get(nameField).textValue()).isEqualTo("Suomi");
@@ -112,22 +113,22 @@ public class BestMatchingRegionListCustomExtractorTest {
 	}
 
 	@Test
-	public void testNullBBox() throws XPathException {
-		when(mockBBoxExtractor.process(any(DocumentQuerier.class), any(QueryResult.class))).thenReturn(null);
-		assertThat((JsonNode) extractor.process(mockDocumentQuerier, mockQueryResultList)).isEmpty();
+	public void testNullBBox() throws XPathException, DocumentProcessingException {
+		when(mockBBoxExtractor.process(any(DocumentQuery.class), any(QueryResult.class))).thenReturn(null);
+		assertThat((JsonNode) extractor.process(mockDocumentQuery, mockQueryResultList)).isEmpty();
 	}
 
 	@Test
-	public void testEmptyBBox() throws XPathException {
-		when(mockBBoxExtractor.process(any(DocumentQuerier.class), any(QueryResult.class))).thenReturn(Collections.emptyList());
-		assertThat((JsonNode) extractor.process(mockDocumentQuerier, mockQueryResultList)).isEmpty();
+	public void testEmptyBBox() throws XPathException, DocumentProcessingException {
+		when(mockBBoxExtractor.process(any(DocumentQuery.class), any(QueryResult.class))).thenReturn(Collections.emptyList());
+		assertThat((JsonNode) extractor.process(mockDocumentQuery, mockQueryResultList)).isEmpty();
 	}
 
 	@Test
-	public void testXPathException() throws XPathException {
+	public void testXPathException() throws XPathException, DocumentProcessingException {
 		String message = "testException";
-		when(mockBBoxExtractor.process(any(DocumentQuerier.class), any(QueryResult.class))).thenThrow(new XPathException(message));
-		assertThatExceptionOfType(XPathException.class).isThrownBy(() -> extractor.process(mockDocumentQuerier, mockQueryResultList))
+		when(mockBBoxExtractor.process(any(DocumentQuery.class), any(QueryResult.class))).thenThrow(new XPathException(message));
+		assertThatExceptionOfType(XPathException.class).isThrownBy(() -> extractor.process(mockDocumentQuery, mockQueryResultList))
 				.withMessage(message);
 	}
 }

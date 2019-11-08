@@ -1,18 +1,12 @@
 package fi.maanmittauslaitos.pta.search.metadata.json;
 
-import com.jayway.jsonpath.Configuration;
-import com.jayway.jsonpath.Option;
-import com.jayway.jsonpath.spi.json.JacksonJsonProvider;
-import com.jayway.jsonpath.spi.json.JsonProvider;
-import com.jayway.jsonpath.spi.mapper.JacksonMappingProvider;
-import com.jayway.jsonpath.spi.mapper.MappingProvider;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl.FieldExtractorType;
-import fi.maanmittauslaitos.pta.search.metadata.ResultMetadataFields;
 import fi.maanmittauslaitos.pta.search.metadata.MetadataExtractorConfigurationFactory;
+import fi.maanmittauslaitos.pta.search.metadata.ResultMetadataFields;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.util.List;
@@ -48,22 +42,10 @@ public class CKANMetadataExtractorConfigurationFactory extends MetadataExtractor
 		return configuration;
 	}
 
-	private Configuration createJsonPathConfiguration() {
-		JsonProvider jsonProvider = new JacksonJsonProvider();
-		MappingProvider mappingProvider = new JacksonMappingProvider();
-
-		//TODO: check configuration
-		return Configuration.builder()
-				.jsonProvider(jsonProvider)
-				.mappingProvider(mappingProvider)
-				.options(Option.ALWAYS_RETURN_LIST, Option.DEFAULT_PATH_LEAF_TO_NULL)
-				.build();
-	}
-
 	@Override
 	public DocumentProcessor createMetadataDocumentProcessor() throws ParserConfigurationException {
 		DocumentProcessingConfiguration configuration = createMetadataDocumentProcessingConfiguration();
-		return getDocumentProcessorFactory().createJsonProcessor(configuration, createJsonPathConfiguration());
+		return getDocumentProcessorFactory().createJsonProcessor(configuration);
 	}
 
 	private FieldExtractorConfiguration createJsonPathExtractor(String field, FieldExtractorType type, String jsonPath) {

@@ -6,7 +6,7 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingExcep
 
 import java.util.List;
 
-public interface DocumentQuerier {
+public interface DocumentQuery {
 
 	List<QueryResult> process(String query, Document document) throws DocumentProcessingException;
 

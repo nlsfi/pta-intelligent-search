@@ -1,8 +1,13 @@
 package fi.maanmittauslaitos.pta.search.documentprocessor;
 
 import com.jayway.jsonpath.Configuration;
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuerier;
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.JsonDocumentQuerierImpl;
+import com.jayway.jsonpath.Option;
+import com.jayway.jsonpath.spi.json.JacksonJsonProvider;
+import com.jayway.jsonpath.spi.json.JsonProvider;
+import com.jayway.jsonpath.spi.mapper.JacksonMappingProvider;
+import com.jayway.jsonpath.spi.mapper.MappingProvider;
+import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuery;
+import fi.maanmittauslaitos.pta.search.documentprocessor.query.JsonDocumentQueryImpl;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 import org.apache.commons.io.IOUtils;
 
@@ -13,15 +18,26 @@ import java.util.Map;
 
 public class JsonDocumentProcessorImpl extends DocumentProcessor {
 	private DocumentProcessingConfiguration configuration;
-	private JsonDocumentQuerierImpl documentQuerier;
+	private JsonDocumentQueryImpl documentQuerier;
 
-	JsonDocumentProcessorImpl(DocumentProcessingConfiguration configuration, Configuration jsonPathConfiguration) throws ParserConfigurationException {
+	JsonDocumentProcessorImpl(DocumentProcessingConfiguration configuration) throws ParserConfigurationException {
 		this.configuration = configuration;
-		this.documentQuerier = JsonDocumentQuerierImpl.create(jsonPathConfiguration);
+		this.documentQuerier = JsonDocumentQueryImpl.create(createJsonPathConfiguration());
+	}
+
+	private static Configuration createJsonPathConfiguration() {
+		JsonProvider jsonProvider = new JacksonJsonProvider();
+		MappingProvider mappingProvider = new JacksonMappingProvider();
+
+		return Configuration.builder()
+				.jsonProvider(jsonProvider)
+				.mappingProvider(mappingProvider)
+				.options(Option.ALWAYS_RETURN_LIST, Option.DEFAULT_PATH_LEAF_TO_NULL)
+				.build();
 	}
 
 	@Override
-	protected DocumentQuerier getDocumentQuerier() {
+	protected DocumentQuery getDocumentQuerier() {
 		return documentQuerier;
 	}
 
@@ -45,7 +61,7 @@ public class JsonDocumentProcessorImpl extends DocumentProcessor {
 			throw new DocumentProcessingException(e);
 		}
 		JsonDocument ret = new JsonDocument();
-		ret.setContent(content);
+		ret.setDocumentContext(documentQuerier.parseJsonString(content));
 
 		return processDocument(textProcessingChains, ret);
 	}

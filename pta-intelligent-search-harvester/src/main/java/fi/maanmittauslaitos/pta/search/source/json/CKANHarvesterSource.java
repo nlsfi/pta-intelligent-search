@@ -11,7 +11,9 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -63,7 +65,11 @@ public class CKANHarvesterSource extends HarvesterSource {
 	}
 
 	public void setQuery(String query) {
-		this.query = query;
+		try {
+			this.query = URLEncoder.encode(query, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			this.query = URLEncoder.encode(query);
+		}
 	}
 
 	private class CKANIterator implements Iterator<Harvestable> {
@@ -116,7 +122,7 @@ public class CKANHarvesterSource extends HarvesterSource {
 
 			try (InputStream is = new URL(reqUrl.toString()).openStream()) {
 				JsonNode response = objectMapper.readTree(is);
-				if (response.has("success") && response.get("success").booleanValue()) {
+				if (response.has("success") && response.get("success") != null && response.get("success").booleanValue()) {
 					JsonNode result = response.get("result");
 					int count = result.get("count").intValue();
 					if (count > 0) {

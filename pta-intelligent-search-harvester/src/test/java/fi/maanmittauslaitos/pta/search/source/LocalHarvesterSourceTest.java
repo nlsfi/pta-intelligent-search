@@ -18,6 +18,7 @@ public class LocalHarvesterSourceTest {
 	private static final String LOCAL_CSW_SOURCE_DIR = "testcsws";
 	private static final ObjectMapper objectMapper = new ObjectMapper();
 
+
 	@Test
 	public void testLocalCKANSource() throws IOException {
 		URL localDir = getClass().getClassLoader().getResource(LOCAL_JSON_SOURCE_DIR);

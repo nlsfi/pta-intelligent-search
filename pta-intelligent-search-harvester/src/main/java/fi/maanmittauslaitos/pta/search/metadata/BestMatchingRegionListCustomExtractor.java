@@ -2,8 +2,9 @@ package fi.maanmittauslaitos.pta.search.metadata;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
 import fi.maanmittauslaitos.pta.search.documentprocessor.ListCustomExtractor;
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuerier;
+import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuery;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.QueryResult;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
 import fi.maanmittauslaitos.pta.search.utils.Region;
@@ -34,11 +35,11 @@ public class BestMatchingRegionListCustomExtractor implements ListCustomExtracto
 	private final Map<String, Region> regions;
 	private final Map<String, Region> subregions;
 	private final Map<String, Region> municipalities;
-	private final GeographicBoundingBoxCustomExtractor originalBBoxExtractor;
+	private final GeographicBoundingBoxXmlCustomExtractor originalBBoxExtractor;
 
 	private BestMatchingRegionListCustomExtractor(ObjectMapper objectMapper, Map<String, Region> countries, Map<String, Region> regions,
 												  Map<String, Region> subregions, Map<String, Region> municipalities,
-												  GeographicBoundingBoxCustomExtractor originalBBoxExtractor) {
+												  GeographicBoundingBoxXmlCustomExtractor originalBBoxExtractor) {
 		this.objectMapper = objectMapper;
 		this.countries = countries;
 		this.regions = regions;
@@ -49,13 +50,13 @@ public class BestMatchingRegionListCustomExtractor implements ListCustomExtracto
 
 	public static BestMatchingRegionListCustomExtractor create(ObjectMapper objectMapper, Map<String, Region> countries, Map<String, Region> regions,
 															   Map<String, Region> subregions, Map<String, Region> municipalities,
-															   GeographicBoundingBoxCustomExtractor originalExtractor) {
+															   GeographicBoundingBoxXmlCustomExtractor originalExtractor) {
 		return new BestMatchingRegionListCustomExtractor(objectMapper, countries, regions, subregions, municipalities, originalExtractor);
 	}
 
 	@Override
-	public Object process(DocumentQuerier documentQuerier, List<QueryResult> queryResults) throws XPathException {
-		Region dataRegion = getCommonDataRegion(documentQuerier, queryResults);
+	public Object process(DocumentQuery documentQuery, List<QueryResult> queryResults) throws XPathException, DocumentProcessingException {
+		Region dataRegion = getCommonDataRegion(documentQuery, queryResults);
 		if (dataRegion == null) {
 			return objectMapper.createObjectNode();
 		}
@@ -131,11 +132,11 @@ public class BestMatchingRegionListCustomExtractor implements ListCustomExtracto
 	}
 
 	@SuppressWarnings("unchecked")
-	private Region getCommonDataRegion(DocumentQuerier documentQuerier, List<QueryResult> queryResults) throws XPathException {
+	private Region getCommonDataRegion(DocumentQuery documentQuery, List<QueryResult> queryResults) throws XPathException, DocumentProcessingException {
 		//For loop to get the XPathException thrown
 		List<List<Double>> coordinatesList = new ArrayList<>();
 		for (int i = 0; i < queryResults.size(); ++i) {
-			coordinatesList.add((List<Double>) originalBBoxExtractor.process(documentQuerier, queryResults.get(i)));
+			coordinatesList.add((List<Double>) originalBBoxExtractor.process(documentQuery, queryResults.get(i)));
 		}
 
 		return coordinatesList.stream()

@@ -1,7 +1,7 @@
 package fi.maanmittauslaitos.pta.search.documentprocessor;
 
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuerier;
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.XmlDocumentQuerierImpl;
+import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuery;
+import fi.maanmittauslaitos.pta.search.documentprocessor.query.XmlDocumentQueryImpl;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -15,7 +15,7 @@ import java.util.Map;
 public class XmlDocumentProcessorImpl extends DocumentProcessor {
 	private final DocumentBuilder builder;
 	private final DocumentProcessingConfiguration configuration;
-	private XmlDocumentQuerierImpl documentQuerier;
+	private XmlDocumentQueryImpl documentQuerier;
 
 	XmlDocumentProcessorImpl(DocumentProcessingConfiguration configuration) throws ParserConfigurationException {
 		this.configuration = configuration;
@@ -33,7 +33,7 @@ public class XmlDocumentProcessorImpl extends DocumentProcessor {
 
 		XPath xPath = XPathFactory.newInstance().newXPath();
 		xPath.setNamespaceContext(nsContext);
-		this.documentQuerier = XmlDocumentQuerierImpl.create(xPath);
+		this.documentQuerier = XmlDocumentQueryImpl.create(xPath);
 
 	}
 
@@ -44,7 +44,7 @@ public class XmlDocumentProcessorImpl extends DocumentProcessor {
 
 
 	@Override
-	public DocumentQuerier getDocumentQuerier() {
+	public DocumentQuery getDocumentQuerier() {
 		return documentQuerier;
 	}
 

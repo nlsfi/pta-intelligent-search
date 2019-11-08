@@ -1,6 +1,6 @@
 package fi.maanmittauslaitos.pta.search.documentprocessor;
 
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuerier;
+import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuery;
 
 public interface FieldExtractorConfiguration {
 
@@ -20,7 +20,7 @@ public interface FieldExtractorConfiguration {
 	 * @param document
 	 * @return
 	 */
-	Object process(Document document, DocumentQuerier documentQuerier) throws DocumentProcessingException;
+	Object process(Document document, DocumentQuery documentQuery) throws DocumentProcessingException;
 
 
 	String getTextProcessorName();

@@ -1,6 +1,6 @@
 package fi.maanmittauslaitos.pta.search.documentprocessor;
 
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuerier;
+import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuery;
 import fi.maanmittauslaitos.pta.search.text.TextProcessingChain;
 
 import java.io.InputStream;
@@ -9,7 +9,7 @@ import java.util.Map;
 
 public abstract class DocumentProcessor {
 
-	protected abstract DocumentQuerier getDocumentQuerier();
+	protected abstract DocumentQuery getDocumentQuerier();
 
 	public abstract DocumentProcessingConfiguration getDocumentProcessingConfiguration();
 

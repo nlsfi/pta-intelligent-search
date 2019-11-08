@@ -113,7 +113,7 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 	public void testOrgNameRewrite() throws Exception {
 		FieldExtractorConfiguration fec = processor.getDocumentProcessingConfiguration().getFieldExtractor(ResultMetadataFields.ORGANISATIONS);
 		FieldExtractorConfigurationImpl xfec = (FieldExtractorConfigurationImpl) fec;
-		ResponsiblePartyCustomExtractor rpxpce = (ResponsiblePartyCustomExtractor) xfec.getCustomExtractor();
+		ResponsiblePartyXmlCustomExtractor rpxpce = (ResponsiblePartyXmlCustomExtractor) xfec.getCustomExtractor();
 		
 		rpxpce.setOrganisationNameRewriter(new TextRewriter() {
 			

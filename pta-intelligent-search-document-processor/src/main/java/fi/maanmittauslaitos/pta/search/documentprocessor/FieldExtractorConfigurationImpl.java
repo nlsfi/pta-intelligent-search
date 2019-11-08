@@ -1,6 +1,6 @@
 package fi.maanmittauslaitos.pta.search.documentprocessor;
 
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuerier;
+import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuery;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.QueryResult;
 
 import javax.xml.xpath.XPathException;
@@ -65,15 +65,15 @@ public class FieldExtractorConfigurationImpl extends AbstractFieldExtractorConfi
 	}
 
 	@Override
-	public Object process(Document doc, DocumentQuerier documentQuerier) throws DocumentProcessingException {
-		List<QueryResult> nodeList = documentQuerier.process(getQuery(), doc);
+	public Object process(Document doc, DocumentQuery documentQuery) throws DocumentProcessingException {
+		List<QueryResult> queryResultList = documentQuery.process(getQuery(), doc);
 
 
 		switch (getType()) {
 			case FIRST_MATCHING_VALUE: {
 				List<String> ret = new ArrayList<>();
-				if (nodeList.size() > 0) {
-					String value = nodeList.get(0).getValue();
+				if (queryResultList.size() > 0) {
+					String value = queryResultList.get(0).getValue();
 					if (value != null) {
 						value = value.trim();
 					}
@@ -83,7 +83,7 @@ public class FieldExtractorConfigurationImpl extends AbstractFieldExtractorConfi
 			}
 			case ALL_MATCHING_VALUES: {
 				List<String> ret = new ArrayList<>();
-				for (QueryResult queryResult : nodeList) {
+				for (QueryResult queryResult : queryResultList) {
 					String value = queryResult.getValue();
 					if (value != null) {
 						value = value.trim();
@@ -93,7 +93,7 @@ public class FieldExtractorConfigurationImpl extends AbstractFieldExtractorConfi
 				return ret;
 			}
 			case TRUE_IF_MATCHES_OTHERWISE_FALSE: {
-				boolean matches = nodeList.size() > 0;
+				boolean matches = queryResultList.size() > 0;
 				return matches;
 			}
 
@@ -104,8 +104,8 @@ public class FieldExtractorConfigurationImpl extends AbstractFieldExtractorConfi
 				}
 				try {
 					List<Object> ret = new ArrayList<>();
-					for (QueryResult queryResult : nodeList) {
-						Object obj = extractor.process(documentQuerier, queryResult);
+					for (QueryResult queryResult : queryResultList) {
+						Object obj = extractor.process(documentQuery, queryResult);
 						if (obj != null) {
 							ret.add(obj);
 						}
@@ -122,7 +122,7 @@ public class FieldExtractorConfigurationImpl extends AbstractFieldExtractorConfi
 					throw new IllegalArgumentException("Missing CustomListExtractor in CUSTOM_CLASS_SINGLE_VALUE configuration");
 				}
 				try {
-					Object obj = extractor.process(documentQuerier, nodeList);
+					Object obj = extractor.process(documentQuery, queryResultList);
 					return obj != null ? obj : Collections.emptyList();
 				} catch (XPathException xpe) {
 					throw new DocumentProcessingException(xpe);

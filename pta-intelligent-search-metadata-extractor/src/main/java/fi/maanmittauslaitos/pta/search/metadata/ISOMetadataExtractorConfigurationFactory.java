@@ -154,13 +154,13 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 		// Organisation names + roles
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.ORGANISATIONS,
-				new ResponsiblePartyCustomExtractor(),
+				new ResponsiblePartyXmlCustomExtractor(),
 				"//gmd:MD_Metadata/gmd:identificationInfo/*/gmd:pointOfContact/gmd:CI_ResponsibleParty"));
 
 		// Geographic bounding box
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.GEOGRAPHIC_BOUNDING_BOX,
-				new GeographicBoundingBoxCustomExtractor(),
+				new GeographicBoundingBoxXmlCustomExtractor(),
 				"//gmd:MD_Metadata/gmd:identificationInfo/*/*[self::gmd:extent or self::srv:extent]/*/gmd:geographicElement/gmd:EX_GeographicBoundingBox"));
 
 		return configuration;

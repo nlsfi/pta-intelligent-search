@@ -2,9 +2,9 @@ package fi.maanmittauslaitos.pta.search.metadata;
 
 import fi.maanmittauslaitos.pta.search.documentprocessor.CustomExtractor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuerier;
+import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuery;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.QueryResult;
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.XmlDocumentQuerierImpl;
+import fi.maanmittauslaitos.pta.search.documentprocessor.query.XmlDocumentQueryImpl;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.XmlQueryResultImpl;
 import fi.maanmittauslaitos.pta.search.metadata.model.ResponsibleParty;
 import fi.maanmittauslaitos.pta.search.metadata.model.TextRewriter;
@@ -20,8 +20,8 @@ import javax.xml.xpath.XPathExpression;
 
 import static fi.maanmittauslaitos.pta.search.metadata.utils.XPathHelper.matches;
 
-public class ResponsiblePartyCustomExtractor implements CustomExtractor {
-	private static final Logger logger = LogManager.getLogger(ResponsiblePartyCustomExtractor.class);
+public class ResponsiblePartyXmlCustomExtractor implements CustomExtractor {
+	private static final Logger logger = LogManager.getLogger(ResponsiblePartyXmlCustomExtractor.class);
 	
 	private TextRewriter organisationNameRewriter = new TextRewriter() {
 		
@@ -45,12 +45,12 @@ public class ResponsiblePartyCustomExtractor implements CustomExtractor {
 	}
 
 	@Override
-	public Object process(DocumentQuerier documentQuerier, QueryResult queryResult) throws XPathException, DocumentProcessingException {
-		if (!(documentQuerier instanceof XmlDocumentQuerierImpl)) {
-			throw new DocumentProcessingException("documentQuerier was not instance of XmlDocumentQuerierImpl");
+	public Object process(DocumentQuery documentQuery, QueryResult queryResult) throws XPathException, DocumentProcessingException {
+		if (!(documentQuery instanceof XmlDocumentQueryImpl)) {
+			throw new DocumentProcessingException("This extractor should only be used for XML Documents");
 		}
 
-		return process(((XmlDocumentQuerierImpl) documentQuerier).getxPath(), ((XmlQueryResultImpl) queryResult).getNode());
+		return process(((XmlDocumentQueryImpl) documentQuery).getxPath(), ((XmlQueryResultImpl) queryResult).getNode());
 	}
 
 	private Object process(XPath xPath, Node node) throws XPathException {

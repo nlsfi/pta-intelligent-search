@@ -12,16 +12,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class XmlDocumentQuerierImpl implements DocumentQuerier {
+public class XmlDocumentQueryImpl implements DocumentQuery {
 
 	private final XPath xPath;
 
-	private XmlDocumentQuerierImpl(XPath xPath) {
+	private XmlDocumentQueryImpl(XPath xPath) {
 		this.xPath = xPath;
 	}
 
-	public static XmlDocumentQuerierImpl create(XPath xPath) {
-		return new XmlDocumentQuerierImpl(xPath);
+	public static XmlDocumentQueryImpl create(XPath xPath) {
+		return new XmlDocumentQueryImpl(xPath);
 	}
 
 	public XPath getxPath() {
