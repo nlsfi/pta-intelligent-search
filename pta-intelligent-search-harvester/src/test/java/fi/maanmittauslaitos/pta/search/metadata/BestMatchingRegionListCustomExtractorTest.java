@@ -68,7 +68,7 @@ public class BestMatchingRegionListCustomExtractorTest {
 		when(mockQueryResultList.size()).thenReturn(1);
 		ObjectMapper objectMapper = new ObjectMapper();
 		extractor = BestMatchingRegionListCustomExtractor.create(
-				objectMapper, countries, regions, subregions, municipalities, mockBBoxExtractor);
+				objectMapper, countries, regions, subregions, municipalities, mockBBoxExtractor, Collections.emptyList());
 	}
 
 

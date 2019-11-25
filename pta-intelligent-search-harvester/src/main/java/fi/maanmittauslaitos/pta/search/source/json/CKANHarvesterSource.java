@@ -8,6 +8,7 @@ import fi.maanmittauslaitos.pta.search.HarvestingException;
 import fi.maanmittauslaitos.pta.search.source.Harvestable;
 import fi.maanmittauslaitos.pta.search.source.HarvesterInputStream;
 import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
@@ -40,7 +41,8 @@ public class CKANHarvesterSource extends HarvesterSource {
 
 	@Override
 	public HarvesterInputStream getInputStream(Harvestable harvestable) {
-		return null;
+		JSONHarvestable jsonHarvestable = (JSONHarvestable) harvestable;
+		return HarvesterInputStream.wrap(IOUtils.toInputStream(jsonHarvestable.getContent().toString()));
 	}
 
 
@@ -130,8 +132,7 @@ public class CKANHarvesterSource extends HarvesterSource {
 			}
 			JSONHarvestable harvestable = localItems.removeFirst();
 
-			if (!harvestable.getContent().has("package_id")) {
-				// service, not offering
+			if (harvestable.isService()) {
 				numberOfRecordsProcessed++;
 			}
 
@@ -139,7 +140,7 @@ public class CKANHarvesterSource extends HarvesterSource {
 		}
 
 		private void getNextRow() {
-			int startPosition = numberOfRowsProcessed;
+			int startPosition = numberOfRecordsProcessed;
 			int maxRows = getBatchSize();
 			logger.debug("Requesting records startPosition = " + startPosition + ",maxRecords = " + maxRows);
 

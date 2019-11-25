@@ -10,6 +10,7 @@ import fi.maanmittauslaitos.pta.search.codelist.InspireThemesImpl;
 import fi.maanmittauslaitos.pta.search.codelist.ODFOrganisationNameNormaliserImpl;
 import fi.maanmittauslaitos.pta.search.codelist.OrganisationNormaliser;
 import fi.maanmittauslaitos.pta.search.codelist.OrganisationNormaliserTextRewriter;
+import fi.maanmittauslaitos.pta.search.documentprocessor.CustomExtractor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
@@ -25,6 +26,9 @@ import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataExtractorConfiguratio
 import fi.maanmittauslaitos.pta.search.metadata.MetadataExtractorConfigurationFactory;
 import fi.maanmittauslaitos.pta.search.metadata.ResponsiblePartyXmlCustomExtractor;
 import fi.maanmittauslaitos.pta.search.metadata.ResultMetadataFields;
+import fi.maanmittauslaitos.pta.search.metadata.json.CKANMetadataExtractorConfigurationFactory;
+import fi.maanmittauslaitos.pta.search.metadata.json.GeographicBoundingBoxCKANCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.json.ResponsiblePartyCKANCustomExtractor;
 import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.source.csw.CSWHarvesterSource;
 import fi.maanmittauslaitos.pta.search.source.csw.LocalCSWHarvesterSource;
@@ -42,6 +46,7 @@ import fi.maanmittauslaitos.pta.search.text.TextSplitterProcessor;
 import fi.maanmittauslaitos.pta.search.text.WordCombinationProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactory;
+import fi.maanmittauslaitos.pta.search.utils.HarvesterContainer;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTracker;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTrackerImpl;
 import fi.maanmittauslaitos.pta.search.utils.Region;
@@ -70,6 +75,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
 
@@ -95,6 +101,21 @@ public class HarvesterConfig {
 		this.finnishStemmer = getFinnishStemmer();
 		this.wellKnownPostfixes = getWellKnownPostfixes();
 	}
+
+	public Collection<HarvesterContainer> getHarvesterContainers() throws IOException, ParserConfigurationException {
+		return Arrays.asList(
+				HarvesterContainer.create(getCKANSource(), getCKANRecordProcessor())
+				//,HarvesterContainer.create(getCSWSource(), getCSWRecordProcessor())
+		);
+	}
+
+	public Collection<HarvesterContainer> getLocalHarvesterContainers() throws IOException, ParserConfigurationException {
+		return Arrays.asList(
+				HarvesterContainer.create(getLocalCKANSource(), getCKANRecordProcessor()),
+				HarvesterContainer.create(getLocalCSWSource(), getCSWRecordProcessor())
+		);
+	}
+
 
 	private Collection<String> getWellKnownPostfixes() throws IOException {
 		URL resource = HarvesterConfig.class.getClassLoader().getResource("nls.fi/pta-intelligent-search/well-known-postfixes-fi.txt");
@@ -165,6 +186,189 @@ public class HarvesterConfig {
 		localArchiveDocumentSink.setTracker(harvesterTracker);
 		localArchiveDocumentSink.setOutputFileName(sinkfile);
 		return localArchiveDocumentSink;
+	}
+
+	public DocumentProcessor getCKANRecordProcessor() throws ParserConfigurationException, IOException {
+		MetadataExtractorConfigurationFactory factory = new CKANMetadataExtractorConfigurationFactory();
+
+		// Basic configuration
+		DocumentProcessingConfiguration configuration = factory.createMetadataDocumentProcessingConfiguration();
+
+		// Ontology models and and text processors TODO: yhteistä
+		Model model = getTerminologyModel();
+		RDFTerminologyMatcherProcessor terminologyProcessor = createTerminologyMatcher(model);
+		WordCombinationProcessor wordCombinationProcessor = createWordCombinationProcessor(model);
+
+		// Set up abstract processor (abstract => abstract_uri)
+		TextProcessingChain abstractChain = createAbstractProcessingChain(terminologyProcessor, wordCombinationProcessor);
+		configuration.getTextProcessingChains().put("abstractProcessor", abstractChain);
+
+		FieldExtractorConfiguration abstractUri = configuration.getFieldExtractor(ResultMetadataFields.ABSTRACT).copy();
+		abstractUri.setField(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI);
+		abstractUri.setTextProcessorName("abstractProcessor");
+
+		configuration.getFieldExtractors().add(abstractUri);
+
+		// Abstract processor that determines the parents of
+		TextProcessingChain abstractParentsChain = createAbstractParentProcessingChain(terminologyProcessor, wordCombinationProcessor, model);
+		configuration.getTextProcessingChains().put("abstractParentProcessor", abstractParentsChain);
+
+		FieldExtractorConfiguration abstract2Uri = configuration.getFieldExtractor(ResultMetadataFields.ABSTRACT).copy();
+		abstract2Uri.setField(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI_PARENTS);
+		abstract2Uri.setTextProcessorName("abstractParentProcessor");
+
+		configuration.getFieldExtractors().add(abstract2Uri);
+
+
+		// Set up maui chain for abstract (abstract => abstract_maui_uri)
+		MauiTextProcessor mauiTextProcessor = createMauiProcessingChain();
+		TextProcessingChain mauiChain = new TextProcessingChain();
+		mauiChain.getChain().add(mauiTextProcessor);
+
+		configuration.getTextProcessingChains().put("mauiProcessor", mauiChain);
+
+		FieldExtractorConfiguration abstractMauiUri = configuration.getFieldExtractor(ResultMetadataFields.ABSTRACT).copy();
+		abstractMauiUri.setField(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI);
+		abstractMauiUri.setTextProcessorName("mauiProcessor");
+
+		configuration.getFieldExtractors().add(abstractMauiUri);
+
+		// Set up maui chain for abstract (abstract => abstract_maui_uri_parents)
+		TextProcessingChain mauiParentsChain = createMauiParentProcessingChain(mauiTextProcessor, model);
+		configuration.getTextProcessingChains().put("mauiParentsProcessor", mauiParentsChain);
+
+		FieldExtractorConfiguration abstractMauiParentsUri = configuration.getFieldExtractor(ResultMetadataFields.ABSTRACT).copy();
+		abstractMauiParentsUri.setField(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI_PARENTS);
+		abstractMauiParentsUri.setTextProcessorName("mauiParentsProcessor");
+
+		configuration.getFieldExtractors().add(abstractMauiParentsUri);
+
+
+		// Keyword to uri detection (keywords => keywords_uri)
+		TextProcessingChain keywordChain = createKeywordProcessingChain(terminologyProcessor, wordCombinationProcessor);
+		configuration.getTextProcessingChains().put("keywordProcessor", keywordChain);
+
+		FieldExtractorConfiguration keywordsUri = configuration.getFieldExtractor(ResultMetadataFields.KEYWORDS_ALL).copy();
+		keywordsUri.setField(PTAElasticSearchMetadataConstants.FIELD_KEYWORDS_URI);
+		keywordsUri.setTextProcessorName("keywordProcessor");
+
+		configuration.getFieldExtractors().add(keywordsUri);
+
+		// Annotated keywords
+		TextProcessingChain isInOntologyFilterProcessor = createIsInOntologyProcessor(terminologyProcessor);
+
+		configuration.getTextProcessingChains().put("isInOntologyFilterProcessor", isInOntologyFilterProcessor);
+
+		// TODO: Xpath-hommat eriäviä
+
+		// Copy the title to titleSort (which is a keyword field to allow sorting)
+		FieldExtractorConfiguration titleFiSort = configuration.getFieldExtractor(ResultMetadataFields.TITLE).copy();
+		titleFiSort.setField("titleFiSort");
+		configuration.getFieldExtractors().add(titleFiSort);
+
+		FieldExtractorConfiguration titleSvSort = configuration.getFieldExtractor(ResultMetadataFields.TITLE_SV).copy();
+		titleSvSort.setField("titleSvSort");
+		configuration.getFieldExtractors().add(titleSvSort);
+
+		FieldExtractorConfiguration titleEnSort = configuration.getFieldExtractor(ResultMetadataFields.TITLE_EN).copy();
+		titleEnSort.setField("titleEnSort");
+		configuration.getFieldExtractors().add(titleEnSort);
+
+
+		// Extract all organisation names in a text field for full-text search purposes
+		TextProcessingChain organisationNameTextProcessor = new TextProcessingChain();
+		RegexProcessor whitespaceRemoval = new RegexProcessor();
+		whitespaceRemoval.setPattern(Pattern.compile("^\\s*$"));
+		whitespaceRemoval.setIncludeMatches(false);
+
+		organisationNameTextProcessor.getChain().add(whitespaceRemoval);
+
+		configuration.getTextProcessingChains().put("organisationNameTextProcessor", organisationNameTextProcessor);
+
+		FieldExtractorConfigurationImpl organisationForSearch = new FieldExtractorConfigurationImpl();
+		organisationForSearch.setField("organisationName_text");
+		organisationForSearch.setType(FieldExtractorType.ALL_MATCHING_VALUES);
+		organisationForSearch.setQuery("//gmd:contact//gmd:organisationName//text()");
+
+		organisationForSearch.setTextProcessorName("organisationNameTextProcessor");
+
+		configuration.getFieldExtractors().add(organisationForSearch);
+
+		// Modify organisation extractor to canonicalize organisation names
+		OrganisationNormaliser organisationNormaliser = loadOrganisationNormaliser();
+		OrganisationNormaliserTextRewriter orgRewriter = new OrganisationNormaliserTextRewriter();
+		orgRewriter.setOrganisationNormaliser(organisationNormaliser);
+
+		FieldExtractorConfiguration fec = configuration.getFieldExtractor(ResultMetadataFields.ORGANISATIONS);
+		FieldExtractorConfigurationImpl x = (FieldExtractorConfigurationImpl) fec;
+		//TODO: tässä ero!
+		ResponsiblePartyCKANCustomExtractor rpxpce = (ResponsiblePartyCKANCustomExtractor) x.getListCustomExtractor();
+		rpxpce.setOrganisationNameRewriter(orgRewriter);
+
+
+		// Configure INSPIRE theme extractor to normalize the theme to
+		final InspireThemesImpl inspireThemes = new InspireThemesImpl();
+		inspireThemes.setCanonicalLanguage("fi"); // Normalize the records to Finnish
+		inspireThemes.setModel(loadModels(RDFFormat.RDFXML, "/inspire-theme.rdf.gz"));
+		inspireThemes.setHeuristicSearchLanguagePriority("fi", "en", "sv");
+
+		FieldExtractorConfiguration inspireFieldExtractorConfiguration =
+				configuration.getFieldExtractor(ResultMetadataFields.KEYWORDS_INSPIRE);
+
+		TextProcessingChain inspireThemeNormalizer = new TextProcessingChain();
+		inspireThemeNormalizer.getChain().add(input -> {
+			List<String> ret = new ArrayList<>();
+
+			for (String str : input) {
+				String value = inspireThemes.getCanonicalName(str);
+				if (value == null) {
+					value = str;
+				}
+				ret.add(value);
+			}
+
+			return ret;
+		});
+
+		configuration.getTextProcessingChains().put("inspireThemeNormalizer", inspireThemeNormalizer);
+
+		inspireFieldExtractorConfiguration.setTextProcessorName("inspireThemeNormalizer");
+
+
+		// Extract bounding box area
+		FieldExtractorConfigurationImpl bboxFec = (FieldExtractorConfigurationImpl)
+				configuration.getFieldExtractor(ResultMetadataFields.GEOGRAPHIC_BOUNDING_BOX);
+
+		FieldExtractorConfigurationImpl bboxAreaFec = (FieldExtractorConfigurationImpl) bboxFec.copy();
+		final GeographicBoundingBoxCKANCustomExtractor originalBboxCustomExtractor = (GeographicBoundingBoxCKANCustomExtractor) bboxAreaFec.getCustomExtractor();
+
+		bboxAreaFec.setCustomExtractor((documentQuery, queryResult) -> {
+			List<Double> coords;
+			if (queryResult != null) {
+				Object original = originalBboxCustomExtractor.process(documentQuery, queryResult);
+				coords = (List<Double>) original;
+			} else {
+				coords = (List<Double>) bboxFec.getDefaultValue();
+			}
+
+			if (coords == null) {
+				return null;
+			} else {
+				return (coords.get(2) - coords.get(0)) * (coords.get(3) - coords.get(1));
+			}
+		});
+		bboxAreaFec.setField("geographicBoundingBoxArea");
+		bboxAreaFec.setDefaultValue(Optional.ofNullable(bboxFec.getDefaultValue())
+				.map(coords -> (List<Double>) coords)
+				.map(coords -> (coords.get(2) - coords.get(0)) * (coords.get(3) - coords.get(1)))
+				.orElse(null)
+		);
+		configuration.getFieldExtractors().add(bboxAreaFec);
+
+		// Best matching regions
+		configuration.getFieldExtractors().add(getBestMatchingRegions(bboxFec));
+
+		return factory.getDocumentProcessorFactory().createJsonProcessor(configuration);
 	}
 
 
@@ -362,12 +566,13 @@ public class HarvesterConfig {
 		Map<String, Region> municipalities = RegionFactory.readRegionResource(objectMapper, listReader, "data/well_known_location_bboxes_municipalities.json");
 
 		FieldExtractorConfigurationImpl regionFec = (FieldExtractorConfigurationImpl) bboxFec.copy();
-		final GeographicBoundingBoxXmlCustomExtractor originalBboxCustomExtractor = (GeographicBoundingBoxXmlCustomExtractor) regionFec.getCustomExtractor();
+		final CustomExtractor originalBboxCustomExtractor = regionFec.getCustomExtractor();
 
+		List<Double> defaultCoordinates = (List<Double>) Optional.ofNullable(bboxFec.getDefaultValue()).orElse(Collections.emptyList());
 		BestMatchingRegionListCustomExtractor customExtractor = BestMatchingRegionListCustomExtractor.create(
-				objectMapper, countries, regions, subregions, municipalities, originalBboxCustomExtractor);
+				objectMapper, countries, regions, subregions, municipalities, originalBboxCustomExtractor, defaultCoordinates);
 
-		regionFec.setCustomNodeListExtractor(customExtractor);
+		regionFec.setListCustomExtractor(customExtractor);
 		regionFec.setField(PTAElasticSearchMetadataConstants.FIELD_BEST_MATCHING_REGIONS);
 		regionFec.setType(FieldExtractorType.CUSTOM_CLASS_SINGLE_VALUE);
 

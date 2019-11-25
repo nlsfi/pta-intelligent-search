@@ -12,6 +12,7 @@ import fi.maanmittauslaitos.pta.search.metadata.ResultMetadataFields;
 import fi.maanmittauslaitos.pta.search.source.Harvestable;
 import fi.maanmittauslaitos.pta.search.source.HarvesterInputStream;
 import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
+import fi.maanmittauslaitos.pta.search.utils.HarvesterContainer;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTracker;
 import org.apache.jena.ext.com.google.common.collect.Streams;
 import org.apache.log4j.Logger;
@@ -20,9 +21,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.DefaultApplicationArguments;
 
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -42,9 +43,7 @@ public abstract class AbstractHarvester implements CommandLineRunner {
 
 	abstract protected DocumentSink getDocumentSink(HarvesterConfig config, HarvesterTracker harvesterTracker, ApplicationArguments args);
 
-	abstract protected DocumentProcessor getDocumentProcessor(HarvesterConfig config) throws ParserConfigurationException, IOException;
-
-	abstract protected HarvesterSource getHarvesterSource(HarvesterConfig config) throws XPathExpressionException, ParserConfigurationException;
+	abstract protected Collection<HarvesterContainer> getHarvesterContainers(HarvesterConfig config) throws ParserConfigurationException, IOException;
 
 	protected Optional<String> parseArgument(String optionName, ApplicationArguments args) {
 		return Optional.ofNullable(args.getOptionValues(optionName))
@@ -68,9 +67,7 @@ public abstract class AbstractHarvester implements CommandLineRunner {
 
 		HarvesterConfig config = getConfig();
 		HarvesterTracker tracker = config.getHarvesterTracker();
-		HarvesterSource source = getHarvesterSource(config);
-		DocumentProcessor processor = getDocumentProcessor(config);
-		DocumentSink sink = getDocumentSink(config, tracker, arguments);
+
 
 		boolean store = arguments.containsOption("store");
 
@@ -83,13 +80,17 @@ public abstract class AbstractHarvester implements CommandLineRunner {
 					String.join(",\n", tracker.getIdentifiersByType(IdentifierType.SKIPPED_DUE_PROCESSING_EXCEPTION)));
 		}
 
-		sink.startIndexing();
-
-
-
 		logger.info("Starting harvesting with " + nThreads + " threads");
 
-		harvestAsynchronously(tracker, source, processor, sink, store, nThreads);
+		DocumentSink sink = getDocumentSink(config, tracker, arguments);
+		sink.startIndexing();
+
+		for (HarvesterContainer container : getHarvesterContainers(config)) {
+			HarvesterSource source = container.getSource();
+			DocumentProcessor processor = container.getProcessor();
+
+			harvestAsynchronously(tracker, source, processor, sink, store, nThreads);
+		}
 
 		int deleted = sink.stopIndexing();
 

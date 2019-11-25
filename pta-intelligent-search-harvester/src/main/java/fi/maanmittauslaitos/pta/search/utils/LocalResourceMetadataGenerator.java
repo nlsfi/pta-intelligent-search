@@ -2,7 +2,6 @@ package fi.maanmittauslaitos.pta.search.utils;
 
 import fi.maanmittauslaitos.pta.search.AbstractHarvester;
 import fi.maanmittauslaitos.pta.search.HarvesterConfig;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import fi.maanmittauslaitos.pta.search.source.Harvestable;
 import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
@@ -13,6 +12,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 
 public class LocalResourceMetadataGenerator extends AbstractHarvester {
 
@@ -25,20 +25,15 @@ public class LocalResourceMetadataGenerator extends AbstractHarvester {
 	}
 
 	@Override
+	protected Collection<HarvesterContainer> getHarvesterContainers(HarvesterConfig config) throws ParserConfigurationException, IOException {
+		return config.getLocalHarvesterContainers();
+	}
+
+	@Override
 	protected DocumentSink getDocumentSink(HarvesterConfig config, HarvesterTracker harvesterTracker, ApplicationArguments args) {
 		String sinkfile = parseArgument(SINKFILE_ARGUMENT, args).orElse(DEFAULT_SINKFILE_NAME);
 		logger.debug("Sinkfile is " + sinkfile);
 		return config.getLocalDocumentSink(sinkfile, harvesterTracker);
-	}
-
-	@Override
-	protected DocumentProcessor getDocumentProcessor(HarvesterConfig config) throws ParserConfigurationException, IOException {
-		return config.getCSWRecordProcessor();
-	}
-
-	@Override
-	protected HarvesterSource getHarvesterSource(HarvesterConfig config) {
-		return config.getLocalCSWSource();
 	}
 
 	private void downloadXmlFiles() throws IOException {

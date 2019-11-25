@@ -9,6 +9,7 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
 import fi.maanmittauslaitos.pta.search.documentprocessor.JsonDocument;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -53,6 +54,8 @@ public class JsonDocumentQueryImpl implements DocumentQuery {
 		} catch (MappingException e) {
 			// In case of mapping exception, just store the raw value and let post processing take care of it
 			results = Collections.singletonList(JsonQueryResultImpl.create(null, rawValue));
+		} catch (IllegalArgumentException e) {
+			results = new ArrayList<>();
 		}
 		return results;
 	}

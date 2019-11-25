@@ -195,7 +195,7 @@ public class CKANMetadataExtractorConfigurationFactory extends MetadataExtractor
 	private FieldExtractorConfiguration createCustomListJsonPathExtractor(String field, ListCustomExtractor extractor, String jsonPath) {
 		FieldExtractorConfigurationImpl ret = (FieldExtractorConfigurationImpl) createJsonPathExtractor(field,
 				FieldExtractorType.CUSTOM_CLASS_SINGLE_VALUE, jsonPath);
-		ret.setCustomNodeListExtractor(extractor);
+		ret.setListCustomExtractor(extractor);
 		return ret;
 	}
 

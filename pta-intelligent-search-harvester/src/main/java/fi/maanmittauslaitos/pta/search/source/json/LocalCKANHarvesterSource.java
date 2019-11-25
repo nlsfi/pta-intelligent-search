@@ -4,8 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fi.maanmittauslaitos.pta.search.HarvestingException;
 import fi.maanmittauslaitos.pta.search.source.Harvestable;
-import fi.maanmittauslaitos.pta.search.source.HarvesterInputStream;
-import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -36,11 +34,6 @@ public class LocalCKANHarvesterSource extends CKANHarvesterSource {
 		return new LocalCKANIterator(resourceRootURL);
 	}
 
-	@Override
-	public HarvesterInputStream getInputStream(Harvestable harvestable) {
-		JSONHarvestable jsonHarvestable = (JSONHarvestable) harvestable;
-		return HarvesterInputStream.wrap(IOUtils.toInputStream(jsonHarvestable.getContent().toString()));
-	}
 
 	private JsonNode readJson(File file) {
 		try {
@@ -54,7 +47,7 @@ public class LocalCKANHarvesterSource extends CKANHarvesterSource {
 	private class LocalCKANIterator implements Iterator<Harvestable> {
 		private final URL resourceRootURL;
 		private int numberOfRecordsProcessed = 0;
-		private Integer numberOfRecordsInService;
+		private Integer numberOfRecordsInService = 0;
 		private LinkedList<JSONHarvestable> localItems;
 
 		LocalCKANIterator(URL resourceRootURL) {
@@ -65,7 +58,7 @@ public class LocalCKANHarvesterSource extends CKANHarvesterSource {
 
 		@Override
 		public boolean hasNext() {
-			return numberOfRecordsProcessed < numberOfRecordsInService;
+			return numberOfRecordsProcessed < numberOfRecordsInService || localItems.size() > 0;
 		}
 
 
@@ -79,13 +72,18 @@ public class LocalCKANHarvesterSource extends CKANHarvesterSource {
 				return null;
 			}
 
-			numberOfRecordsProcessed++;
-			return localItems.removeFirst();
+			JSONHarvestable harvestable = localItems.removeFirst();
+			if (harvestable.isService()) {
+				numberOfRecordsProcessed++;
+			}
+
+			return harvestable;
 		}
 
 		private void getLocalItems() {
 			if (resourceRootURL != null) {
 				File[] resources = new File(resourceRootURL.getPath()).listFiles();
+				numberOfRecordsInService = resources.length;
 				if (resources != null) {
 					localItems = Arrays.stream(resources)
 							.map(file -> readJsonToNodes(readJson(file)))
@@ -93,7 +91,6 @@ public class LocalCKANHarvesterSource extends CKANHarvesterSource {
 							.map(node -> JSONHarvestable.create(getIdentifierFromJsonNode(node), node))
 							.collect(Collectors.toCollection(LinkedList::new));
 				}
-				numberOfRecordsInService = localItems.size();
 			}
 		}
 	}

@@ -11,6 +11,7 @@ import fi.maanmittauslaitos.pta.search.source.HarvesterInputStream;
 import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.source.csw.CSWHarvestable;
 import fi.maanmittauslaitos.pta.search.source.csw.LocalHarvestable;
+import fi.maanmittauslaitos.pta.search.utils.HarvesterContainer;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTracker;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTracker.IdentifierType;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTrackerImpl;
@@ -31,6 +32,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -291,13 +294,8 @@ public class AbstractHarvesterTest {
 		}
 
 		@Override
-		protected DocumentProcessor getDocumentProcessor(HarvesterConfig config) {
-			return mockProcessor;
-		}
-
-		@Override
-		protected HarvesterSource getHarvesterSource(HarvesterConfig config) {
-			return mockSource;
+		protected Collection<HarvesterContainer> getHarvesterContainers(HarvesterConfig config) {
+			return Collections.singleton(HarvesterContainer.create(mockSource, mockProcessor));
 		}
 	}
 }

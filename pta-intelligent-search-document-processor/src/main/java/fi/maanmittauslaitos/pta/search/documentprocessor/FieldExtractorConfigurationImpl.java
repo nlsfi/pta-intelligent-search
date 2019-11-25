@@ -16,7 +16,7 @@ public class FieldExtractorConfigurationImpl extends AbstractFieldExtractorConfi
 	private Object defaultValue;
 	private List<String> extraQueries = Collections.emptyList();
 	private CustomExtractor customExtractor;
-	private ListCustomExtractor customNodeListExtractor;
+	private ListCustomExtractor listCustomExtractor;
 	private ExtractorTrimmer trimmer = String::trim;
 
 	@Override
@@ -25,7 +25,11 @@ public class FieldExtractorConfigurationImpl extends AbstractFieldExtractorConfi
 
 		ret.setType(getType());
 		ret.setQuery(getQuery());
+		ret.setDefaultValue(getDefaultValue());
+		ret.setExtraQueries(getExtraQueries());
 		ret.setCustomExtractor(getCustomExtractor());
+		ret.setListCustomExtractor(getListCustomExtractor());
+		ret.setTrimmer(getTrimmer());
 	}
 
 	public void setType(FieldExtractorType type) {
@@ -44,8 +48,12 @@ public class FieldExtractorConfigurationImpl extends AbstractFieldExtractorConfi
 		this.query = query;
 	}
 
-	public Optional<Object> getDefaultValue() {
-		return Optional.ofNullable(defaultValue);
+	public Object getDefaultValue() {
+		return defaultValue;
+	}
+
+	private Optional<Object> getDefaultValueAsOptional() {
+		return Optional.ofNullable(getDefaultValue());
 	}
 
 	public void setDefaultValue(Object defaultValue) {
@@ -121,7 +129,7 @@ public class FieldExtractorConfigurationImpl extends AbstractFieldExtractorConfi
 					}
 
 					if (ret.isEmpty() || ret.contains(null)) {
-						getDefaultValue().ifPresent(e -> {
+						getDefaultValueAsOptional().ifPresent(e -> {
 							ret.add(e);
 							ret.removeAll(Collections.singleton(null));
 						});
@@ -139,7 +147,7 @@ public class FieldExtractorConfigurationImpl extends AbstractFieldExtractorConfi
 				}
 				try {
 					Object obj = extractor.process(documentQuery, queryResultList);
-					return obj != null ? obj : getDefaultValue().orElse(Collections.emptyList());
+					return obj != null ? obj : getDefaultValueAsOptional().orElse(Collections.emptyList());
 				} catch (XPathException xpe) {
 					throw new DocumentProcessingException(xpe);
 				}
@@ -196,16 +204,16 @@ public class FieldExtractorConfigurationImpl extends AbstractFieldExtractorConfi
 	}
 
 	public ListCustomExtractor getListCustomExtractor() {
-		return customNodeListExtractor;
+		return listCustomExtractor;
 	}
 
-	public void setCustomNodeListExtractor(ListCustomExtractor customNodeListExtractor) {
-		this.customNodeListExtractor = customNodeListExtractor;
+	public void setListCustomExtractor(ListCustomExtractor listCustomExtractor) {
+		this.listCustomExtractor = listCustomExtractor;
 	}
 
 	private void populateWithDefault(List<String> ret) {
 		if (ret.isEmpty() || ret.contains(null)) {
-			getDefaultValue()
+			getDefaultValueAsOptional()
 					.filter(val -> val instanceof String)
 					.ifPresent(val -> {
 						ret.removeIf(Objects::isNull);
