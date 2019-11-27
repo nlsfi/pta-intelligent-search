@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csw:GetRecordByIdResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
+    <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gml="http://www.opengis.net/gml"
+                     xmlns:gco="http://www.isotc211.org/2005/gco"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:schemaLocation="http://www.isotc211.org/2005/gmd https://www.isotc211.org/2005/gmd/gmd.xsd http://www.isotc211.org/2005/gmx https://www.isotc211.org/2005/gmx/gmx.xsd">
+        <gmd:fileIdentifier>
+            <gco:CharacterString>1562cd14-356d-4ef5-8df8-36031b543eae</gco:CharacterString>
+        </gmd:fileIdentifier>
+        <gmd:language>
+            <gco:CharacterString>fin</gco:CharacterString>
+        </gmd:language>
+        <gmd:hierarchyLevel>
+            <gmd:MD_ScopeCode codeListValue="dataset"
+                              codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"/>
+        </gmd:hierarchyLevel>
+        <gmd:hierarchyLevelName>
+            <gco:CharacterString>Aineisto</gco:CharacterString>
+        </gmd:hierarchyLevelName>
+        <gmd:contact>
+            <gmd:CI_ResponsibleParty>
+                <gmd:organisationName>
+                    <gco:CharacterString>Sitowise</gco:CharacterString>
+                </gmd:organisationName>
+                <gmd:contactInfo>
+                    <gmd:CI_Contact>
+                        <gmd:address>
+                            <gmd:CI_Address>
+                                <gmd:electronicMailAddress>
+                                    <gco:CharacterString>yleiskaava@sitowise.com</gco:CharacterString>
+                                </gmd:electronicMailAddress>
+                            </gmd:CI_Address>
+                        </gmd:address>
+                    </gmd:CI_Contact>
+                </gmd:contactInfo>
+                <gmd:role>
+                    <gmd:CI_RoleCode
+                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"
+                            codeListValue="pointOfContact"/>
+                </gmd:role>
+            </gmd:CI_ResponsibleParty>
+        </gmd:contact>
+        <gmd:dateStamp>
+            <gco:DateTime>2019-06-14T16:46:12</gco:DateTime>
+        </gmd:dateStamp>
+        <gmd:identificationInfo>
+            <gmd:MD_DataIdentification>
+                <gmd:citation>
+                    <gmd:CI_Citation>
+                        <gmd:title>
+                            <gco:CharacterString>Yleiskaavapalvelun aineistot</gco:CharacterString>
+                        </gmd:title>
+                        <gmd:date>
+                            <gmd:CI_Date>
+                                <gmd:date>
+                                    <gco:Date>2015-06-11</gco:Date>
+                                </gmd:date>
+                                <gmd:dateType>
+                                    <gmd:CI_DateTypeCode codeListValue="publication"
+                                                         codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"/>
+                                </gmd:dateType>
+                            </gmd:CI_Date>
+                        </gmd:date>
+                        <gmd:date>
+                            <gmd:CI_Date>
+                                <gmd:date>
+                                    <gco:Date>2014-12-31</gco:Date>
+                                </gmd:date>
+                                <gmd:dateType>
+                                    <gmd:CI_DateTypeCode codeListValue="creation"
+                                                         codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"/>
+                                </gmd:dateType>
+                            </gmd:CI_Date>
+                        </gmd:date>
+                        <gmd:identifier>
+                            <gmd:RS_Identifier>
+                                <gmd:code>
+                                    <gco:CharacterString>1002025</gco:CharacterString>
+                                </gmd:code>
+                                <gmd:codeSpace>
+                                    <gco:CharacterString>FI</gco:CharacterString>
+                                </gmd:codeSpace>
+                            </gmd:RS_Identifier>
+                        </gmd:identifier>
+                    </gmd:CI_Citation>
+                </gmd:citation>
+                <gmd:abstract>
+                    <gco:CharacterString>Yleiskaavapalvelun aineistot on päivitetty 14.6.2019. Palveluun on päivitetty
+                        yleiskaavoja, jotka on toimitettu ylläpitäjälle päivitysajankohtaan mennessä.
+
+                        Yleiskaavapalvelussa on paikkatietoina yhdelmiä Suomen nykyisistä yleiskaavoista. Aineisto
+                        sisältää yleiskaavoista kaavatilanteen karttayhdelmät, hakemistokartat eri kaavojen
+                        keskeisimmillä ominaisuustiedoilla sekä kaavamerkinnät ja -määräykset. Em. aineistot kattavat
+                        maankäyttö- ja rakennuslain yleiskaavoituksen vuodesta 2000 lähtien sekä vanhan rakennuslain
+                        mukaisesti vahvistetut yleiskaavat siltä osin kun ne eivät ole kumoutuneet. Kaava-aineisto
+                        kootaan jo kunnan hyväksymisvaiheessa (ja kuntien yhteisten yleiskaavojen tapauksessa
+                        vahvistusvaiheessa vuoden 2016 lakimuutokseen asti), joten oikaisukehotusten ja
+                        valitusprosessien keskeneräisyyden vuoksi kaikki uusimmat yleiskaava-alueet eivät ole
+                        lainvoimaisia. Yleiskaavatiedot on kerätty kunnista ja konsulteilta sekä ELY-keskusten ja Suomen
+                        ympäristökeskuksen aineistoista. Aineisto päivittyy neljä kertaa vuodessa: maaliskuussa,
+                        kesäkuussa, syyskuussa ja joulukuussa.
+
+                        Aineisto sisältää lähes kaikki Suomessa (lukuun ottamatta Ahvenanmaata) voimassa olevat
+                        yleiskaavat.
+                        -Rakennuslain (370/1958) mukaisista yleiskaavoista valtion ympäristöhallinnon vahvistamat
+                        yleiskaavat.
+                        -Maankäyttö- ja rakennuslain (5.2.1999/132) mukaan laaditut kuntien hyväksymät yleiskaavat ja
+                        kuntien yhteiset yleiskaavat sekä vuoden 2016 lakimuutokseen asti ympäristöministeriön
+                        vahvistamat kuntien yhteiset yleiskaavat.
+                        -Muutokset näihin kaavoihin.
+
+
+                        Yleiskaavoista ylläpidettävät tiedot ovat
+
+                        Kaavakarttojen rasteriyhdelmät, erikseen yleiskaavatilanne ja teemayleiskaavat (esim.
+                        vaihekaava, strateginen tai maanalainen yleiskaava), jotka voivat olla päällekkäin voimassa. Jos
+                        samassa kaavassa on päällekkäisiä karttalehtiä, rasterina esitetään niistä vain yksi ja muut on
+                        liitetty pdf-muodossa kaavamerkintöjen ja -määräysten yhteyteen. Mikäli kaavakartalla on
+                        merkintöjä rajauksen ulkopuolella, ne ovat leikkaantuneet pois mosaiikkiyhdistelmän luonnissa.
+
+                        Kaavojen hakemistokartat vektoreina, erikseen yleiskaavojen hakemisto ja teemayleiskaavojen
+                        hakemisto (voivat olla päällekkäin voimassa).
+
+                        Kaavakohtaisesti keskeisimmät ominaisuustiedot:
+
+                        Tunnus, yleiskaavan yksilöivä tunnus on muodostettu 3-merkkisestä kuntakoodista, välinumerosta
+                        (ei vanhan rakennuslain kaavoilla) ja järjestysnumerosta etunollineen. Maankäyttö- ja
+                        rakennuslain yleiskaavoilla kuntakoodi on vuoteen 2013 asti hyväksytyillä 2013-14 kuntajaon
+                        mukainen ja siitä lähtien hyväksymisvuoden kunnan mukainen sekä sen perässä on teemakaavoilla
+                        numero 2 ja muilla yleiskaavoilla 1. Kuntien yhteisillä yleiskaavoilla on tunnuksessa vain yhden
+                        kunnan koodi. Vanhan rakennuslain mukaisesti vahvistetuilla yleiskaavoilla tunnuksen kuntanumero
+                        perustuu vuoden 2004 kuntajakoon. Kaavaan saattaa kuulua useita toisistaan erillisiä alueita.
+                        Nimi, yleiskaavan nimi. Kaavan hyväksyneen kunnan nimi saattaa esiintyä kentän alussa, kyseessä
+                        ei välttämättä ole nykyinen sijaintikunta.
+                        Päätöksen päiväys, päivämäärä jolloin kunta on hyväksynyt maankäyttö- ja rakennuslain
+                        yleiskaavan tai kuntien yhteinen yleiskaava on vahvistettu tahi vuoden 2016 lakimuutoksen
+                        jälkeen hyväksytty taikka vanhan rakennuslain yleiskaava on vahvistunut. Rakennuslain kaavoista
+                        on viimeisin vahvistumispäiväys, jolloin joku toimivaltainen viranomainen tai oikeusistuin on
+                        kyseiseen yleiskaavaan muutoksen tehnyt. Valitusprosessien keston takia vanhan rakennuslain
+                        viimeinen yleiskaava vahvistui vasta huhtikuun lopussa 2006, maankäyttö- ja rakennuslain tultua
+                        voimaan vuonna 2000.
+                        Tyypittely, yleiskaavan luokittelu maankäyttö- ja rakennuslain mukaisiin kunnan hyväksymiin tai
+                        kuntien yhteisiin taikka rakennuslain vahvistettuihin.
+                        Oikeusvaikutteisuus, yleiskaavan luokittelu oikeusvaikutteisiin, osin oikeusvaikutteisiin tai ei
+                        oikeusvaikutteisiin. Vanhan rakennuslain mukaisesti vahvistetuilla yleiskaavoilla luokka on aina
+                        oikeusvaikutteinen, vaikka kaava sisältäisi myös kunnan hyväksymispäätöksen varaan jääneitä
+                        alueita, koska ulkorajaus kattaa vain vahvistuneet alueet. Aineistoissa ei ole ollenkaan vanhan
+                        rakennuslain mukaisia vain kunnan hyväksymiä yleiskaavoja, joita valtion viranomainen ei ole
+                        vahvistanut.
+                        (Pinta-ala, yleiskaava-alueen nykyinen pinta-ala, eikä alkuperäisen kaavan suunnittelualueen.
+                        Kenttä on saatavissa vain vektoriaineiston mukana.)
+                        Lisätietoja, huomautuksina mm. kirjattu ne kaavatapaukset joissa on havaittu, ettei kaava ole
+                        tullut voimaan sellaisena kuin se on numeeristettu. Kaava-aineisto kootaan jo kunnan
+                        hyväksymisvaiheessa (ja kuntien yhteisten yleiskaavojen tapauksessa vahvistusvaiheessa vuoden
+                        2016 lakimuutokseen asti), joten oikaisukehotusten ja valitusprosessien keskeneräisyyden vuoksi
+                        kaikki uusimmat yleiskaavat eivät ole lainvoimaisia. Muutoksenhaun takia osalla kaava-aluetta
+                        voi olla myöhäisempi voimaantulon päiväys. Vanhan rakennuslain mukaisiin yleiskaavoihin on myös
+                        tehty kuvankäsittelyllä vahvistusmerkintöjä. Joistakin kaavoista ei ole saatu kaikkia kartta-
+                        tai legendalehtiä. Samassa kaavassa saattaa olla voimassa päällekkäin useita karttalehtiä,
+                        jolloin vain yksi niistä näytetään rasterina ja muut legendan yhteydessä. Kuntien yhteisistä
+                        yleiskaavoista on listattu kunnat, joiden alueella kaava on sijainnut laatimisen aikaan.
+
+                        Linkitykset kaavamerkintöihin ja -määräyksiin. Tiedostot ovat pdf-muotoisia ja useampien
+                        legendalehtien tapauksessa monisivuisia. Jos samassa kaavassa on päällekkäisiä karttalehtiä,
+                        rasterina niistä on vain keskeisin ja muut on liitetty tähän legendalehtien jälkeen.
+
+                        Aineisto on saatavilla rajapinnan kautta seuraavissa koordinaatistoissa:
+
+                        EPSG:3067, ETRS89 / ETRS-TM35FIN
+                        EPSG:2393, KKJ / Finland Uniform Coordinate System
+                        EPSG:3873 - EPSG:3885, ETRS89/GKxxFIN-kaistat 19-31
+                        EPSG:4326, WGS84
+                        EPSG:3857, WGS84 Web Mercator (Auxiliary Sphere)
+                        EPSG:900913, Google Mercator
+                    </gco:CharacterString>
+                </gmd:abstract>
+                <gmd:pointOfContact>
+                    <gmd:CI_ResponsibleParty>
+                        <gmd:organisationName>
+                            <gco:CharacterString>Suomen ympäristökeskus (SYKE)</gco:CharacterString>
+                        </gmd:organisationName>
+                        <gmd:contactInfo>
+                            <gmd:CI_Contact>
+                                <gmd:address>
+                                    <gmd:CI_Address>
+                                        <gmd:electronicMailAddress>
+                                            <gco:CharacterString>alu_tuki@ymparisto.fi</gco:CharacterString>
+                                        </gmd:electronicMailAddress>
+                                    </gmd:CI_Address>
+                                </gmd:address>
+                                <gmd:onlineResource>
+                                    <gmd:CI_OnlineResource>
+                                        <gmd:linkage>
+                                            <gmd:URL/>
+                                        </gmd:linkage>
+                                        <gmd:protocol gco:nilReason="missing">
+                                            <gco:CharacterString/>
+                                        </gmd:protocol>
+                                        <gmd:name gco:nilReason="missing">
+                                            <gco:CharacterString/>
+                                        </gmd:name>
+                                        <gmd:description gco:nilReason="missing">
+                                            <gco:CharacterString/>
+                                        </gmd:description>
+                                    </gmd:CI_OnlineResource>
+                                </gmd:onlineResource>
+                                <gmd:hoursOfService gco:nilReason="missing">
+                                    <gco:CharacterString/>
+                                </gmd:hoursOfService>
+                                <gmd:contactInstructions gco:nilReason="missing">
+                                    <gco:CharacterString/>
+                                </gmd:contactInstructions>
+                            </gmd:CI_Contact>
+                        </gmd:contactInfo>
+                        <gmd:role>
+                            <gmd:CI_RoleCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"
+                                    codeListValue="owner"/>
+                        </gmd:role>
+                    </gmd:CI_ResponsibleParty>
+                </gmd:pointOfContact>
+                <gmd:pointOfContact>
+                    <gmd:CI_ResponsibleParty>
+                        <gmd:individualName gco:nilReason="missing">
+                            <gco:CharacterString/>
+                        </gmd:individualName>
+                        <gmd:organisationName>
+                            <gco:CharacterString>Sitowise</gco:CharacterString>
+                        </gmd:organisationName>
+                        <gmd:positionName gco:nilReason="missing">
+                            <gco:CharacterString/>
+                        </gmd:positionName>
+                        <gmd:contactInfo>
+                            <gmd:CI_Contact>
+                                <gmd:phone>
+                                    <gmd:CI_Telephone>
+                                        <gmd:voice gco:nilReason="missing">
+                                            <gco:CharacterString/>
+                                        </gmd:voice>
+                                        <gmd:facsimile gco:nilReason="missing">
+                                            <gco:CharacterString/>
+                                        </gmd:facsimile>
+                                    </gmd:CI_Telephone>
+                                </gmd:phone>
+                                <gmd:address>
+                                    <gmd:CI_Address>
+                                        <gmd:deliveryPoint gco:nilReason="missing">
+                                            <gco:CharacterString/>
+                                        </gmd:deliveryPoint>
+                                        <gmd:city gco:nilReason="missing">
+                                            <gco:CharacterString/>
+                                        </gmd:city>
+                                        <gmd:administrativeArea gco:nilReason="missing">
+                                            <gco:CharacterString/>
+                                        </gmd:administrativeArea>
+                                        <gmd:postalCode gco:nilReason="missing">
+                                            <gco:CharacterString/>
+                                        </gmd:postalCode>
+                                        <gmd:country gco:nilReason="missing">
+                                            <gco:CharacterString/>
+                                        </gmd:country>
+                                        <gmd:electronicMailAddress>
+                                            <gco:CharacterString>yleiskaava@sitowise.com</gco:CharacterString>
+                                        </gmd:electronicMailAddress>
+                                    </gmd:CI_Address>
+                                </gmd:address>
+                            </gmd:CI_Contact>
+                        </gmd:contactInfo>
+                        <gmd:role>
+                            <gmd:CI_RoleCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode"
+                                    codeListValue="originator"/>
+                        </gmd:role>
+                    </gmd:CI_ResponsibleParty>
+                </gmd:pointOfContact>
+                <gmd:graphicOverview>
+                    <gmd:MD_BrowseGraphic>
+                        <gmd:fileName>
+                            <gco:CharacterString>
+                                http://www.paikkatietohakemisto.fi/geonetwork/srv/api/records/1562cd14-356d-4ef5-8df8-36031b543eae/attachments/aYleiskaavat_paivitystyotila_s.png
+                            </gco:CharacterString>
+                        </gmd:fileName>
+                        <gmd:fileDescription>
+                            <gco:CharacterString>thumbnail</gco:CharacterString>
+                        </gmd:fileDescription>
+                    </gmd:MD_BrowseGraphic>
+                </gmd:graphicOverview>
+                <gmd:graphicOverview>
+                    <gmd:MD_BrowseGraphic>
+                        <gmd:fileName>
+                            <gco:CharacterString>
+                                http://www.paikkatietohakemisto.fi/geonetwork/srv/api/records/1562cd14-356d-4ef5-8df8-36031b543eae/attachments/aYleiskaavat_paivitystyotila.png
+                            </gco:CharacterString>
+                        </gmd:fileName>
+                        <gmd:fileDescription>
+                            <gco:CharacterString>large_thumbnail</gco:CharacterString>
+                        </gmd:fileDescription>
+                    </gmd:MD_BrowseGraphic>
+                </gmd:graphicOverview>
+                <gmd:descriptiveKeywords>
+                    <gmd:MD_Keywords>
+                        <gmd:keyword>
+                            <gco:CharacterString>Aluesuunnittelu / kiinteistöjärjestelmä</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:keyword>
+                            <gco:CharacterString>Maankäyttö</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:keyword>
+                            <gco:CharacterString>Yleiskaavoitus</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:type>
+                            <gmd:MD_KeywordTypeCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"
+                                    codeListValue="theme"/>
+                        </gmd:type>
+                        <gmd:thesaurusName>
+                            <gmd:CI_Citation>
+                                <gmd:title>
+                                    <gco:CharacterString>Paikkatietohakemiston asiasanasto</gco:CharacterString>
+                                </gmd:title>
+                                <gmd:date>
+                                    <gmd:CI_Date>
+                                        <gmd:date>
+                                            <gco:Date>2010-02-03</gco:Date>
+                                        </gmd:date>
+                                        <gmd:dateType>
+                                            <gmd:CI_DateTypeCode
+                                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                                    codeListValue="publication"/>
+                                        </gmd:dateType>
+                                    </gmd:CI_Date>
+                                </gmd:date>
+                                <gmd:identifier>
+                                    <gmd:MD_Identifier>
+                                        <gmd:code>
+                                            <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                        xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.asiasanasto">
+                                                geonetwork.thesaurus.external.theme.asiasanasto
+                                            </gmx:Anchor>
+                                        </gmd:code>
+                                    </gmd:MD_Identifier>
+                                </gmd:identifier>
+                            </gmd:CI_Citation>
+                        </gmd:thesaurusName>
+                    </gmd:MD_Keywords>
+                </gmd:descriptiveKeywords>
+                <gmd:descriptiveKeywords>
+                    <gmd:MD_Keywords>
+                        <gmd:keyword>
+                            <gco:CharacterString>Aluesuunnittelun, rajoitusten ja sääntelyn piiriin kuuluvat alueet ja
+                                raportointiyksiköt
+                            </gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:keyword>
+                            <gco:CharacterString>Maankäyttö</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:type>
+                            <gmd:MD_KeywordTypeCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"
+                                    codeListValue="theme"/>
+                        </gmd:type>
+                        <gmd:thesaurusName>
+                            <gmd:CI_Citation>
+                                <gmd:title>
+                                    <gco:CharacterString>GEMET - INSPIRE themes, version 1.0</gco:CharacterString>
+                                </gmd:title>
+                                <gmd:date>
+                                    <gmd:CI_Date>
+                                        <gmd:date>
+                                            <gco:Date>2008-06-01</gco:Date>
+                                        </gmd:date>
+                                        <gmd:dateType>
+                                            <gmd:CI_DateTypeCode
+                                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                                    codeListValue="publication"/>
+                                        </gmd:dateType>
+                                    </gmd:CI_Date>
+                                </gmd:date>
+                                <gmd:identifier>
+                                    <gmd:MD_Identifier>
+                                        <gmd:code>
+                                            <gmx:Anchor xmlns:gmx="http://www.isotc211.org/2005/gmx"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                        xlink:href="http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/thesaurus.download?ref=external.theme.inspire-theme">
+                                                geonetwork.thesaurus.external.theme.inspire-theme
+                                            </gmx:Anchor>
+                                        </gmd:code>
+                                    </gmd:MD_Identifier>
+                                </gmd:identifier>
+                            </gmd:CI_Citation>
+                        </gmd:thesaurusName>
+                    </gmd:MD_Keywords>
+                </gmd:descriptiveKeywords>
+                <gmd:descriptiveKeywords>
+                    <gmd:MD_Keywords>
+                        <gmd:keyword>
+                            <gco:CharacterString>Ei-Inspire</gco:CharacterString>
+                        </gmd:keyword>
+                        <gmd:type>
+                            <gmd:MD_KeywordTypeCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_KeywordTypeCode"
+                                    codeListValue="theme"/>
+                        </gmd:type>
+                    </gmd:MD_Keywords>
+                </gmd:descriptiveKeywords>
+                <gmd:resourceConstraints>
+                    <gmd:MD_Constraints>
+                        <gmd:useLimitation>
+                            <gco:CharacterString>
+                                http://www.ymparisto.fi/fi-FI/Elinympariston_tietopalvelu_Liiteri/Yleiskaavapalvelu/Yleiskaavapalvelun_kayttoehdot
+                            </gco:CharacterString>
+                        </gmd:useLimitation>
+                    </gmd:MD_Constraints>
+                </gmd:resourceConstraints>
+                <gmd:resourceConstraints>
+                    <gmd:MD_LegalConstraints>
+                        <gmd:accessConstraints>
+                            <gmd:MD_RestrictionCode codeListValue="license"
+                                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode"/>
+                        </gmd:accessConstraints>
+                        <gmd:useConstraints>
+                            <gmd:MD_RestrictionCode
+                                    codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_RestrictionCode"
+                                    codeListValue="license"/>
+                        </gmd:useConstraints>
+                        <gmd:otherConstraints>
+                            <gco:CharacterString>Ei muita rajoitteita.</gco:CharacterString>
+                        </gmd:otherConstraints>
+                    </gmd:MD_LegalConstraints>
+                </gmd:resourceConstraints>
+                <gmd:resourceConstraints>
+                    <gmd:MD_SecurityConstraints>
+                        <gmd:classification>
+                            <gmd:MD_ClassificationCode codeListValue="unclassified"
+                                                       codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ClassificationCode"/>
+                        </gmd:classification>
+                    </gmd:MD_SecurityConstraints>
+                </gmd:resourceConstraints>
+                <gmd:spatialResolution>
+                    <gmd:MD_Resolution>
+                        <gmd:equivalentScale>
+                            <gmd:MD_RepresentativeFraction>
+                                <gmd:denominator>
+                                    <gco:Integer>50000</gco:Integer>
+                                </gmd:denominator>
+                            </gmd:MD_RepresentativeFraction>
+                        </gmd:equivalentScale>
+                    </gmd:MD_Resolution>
+                </gmd:spatialResolution>
+                <gmd:language>
+                    <gco:CharacterString>fin</gco:CharacterString>
+                </gmd:language>
+                <gmd:topicCategory>
+                    <gmd:MD_TopicCategoryCode>planningCadastre</gmd:MD_TopicCategoryCode>
+                </gmd:topicCategory>
+                <gmd:extent>
+                    <gmd:EX_Extent>
+                        <gmd:geographicElement>
+                            <gmd:EX_GeographicBoundingBox>
+                                <gmd:westBoundLongitude>
+                                    <gco:Decimal>19.08886999</gco:Decimal>
+                                </gmd:westBoundLongitude>
+                                <gmd:eastBoundLongitude>
+                                    <gco:Decimal>31.58671339</gco:Decimal>
+                                </gmd:eastBoundLongitude>
+                                <gmd:southBoundLatitude>
+                                    <gco:Decimal>59.45414258</gco:Decimal>
+                                </gmd:southBoundLatitude>
+                                <gmd:northBoundLatitude>
+                                    <gco:Decimal>70.09229321</gco:Decimal>
+                                </gmd:northBoundLatitude>
+                            </gmd:EX_GeographicBoundingBox>
+                        </gmd:geographicElement>
+                        <gmd:temporalElement>
+                            <gmd:EX_TemporalExtent>
+                                <gmd:extent>
+                                    <gml:TimePeriod gml:id="d61239e407a1051934">
+                                        <gml:beginPosition>1977-09-13T12:00:00</gml:beginPosition>
+                                        <gml:endPosition>2017-12-15T00:00:00</gml:endPosition>
+                                    </gml:TimePeriod>
+                                </gmd:extent>
+                            </gmd:EX_TemporalExtent>
+                        </gmd:temporalElement>
+                    </gmd:EX_Extent>
+                </gmd:extent>
+            </gmd:MD_DataIdentification>
+        </gmd:identificationInfo>
+        <gmd:distributionInfo>
+            <gmd:MD_Distribution>
+                <gmd:transferOptions>
+                    <gmd:MD_DigitalTransferOptions>
+                        <gmd:onLine>
+                            <gmd:CI_OnlineResource>
+                                <gmd:linkage>
+                                    <gmd:URL>
+                                        http://www.ymparisto.fi/fi-FI/Elinympariston_tietopalvelu_Liiteri/Yleiskaavapalvelu/Yleiskaavapalvelu
+                                    </gmd:URL>
+                                </gmd:linkage>
+                                <gmd:protocol>
+                                    <gco:CharacterString>WWW:LINK-1.0-http--related</gco:CharacterString>
+                                </gmd:protocol>
+                                <gmd:applicationProfile gco:nilReason="missing">
+                                    <gco:CharacterString/>
+                                </gmd:applicationProfile>
+                                <gmd:name>
+                                    <gco:CharacterString>Yleiskaavapalvelu</gco:CharacterString>
+                                </gmd:name>
+                                <gmd:function>
+                                    <gmd:CI_OnLineFunctionCode
+                                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_OnLineFunctionCode"
+                                            codeListValue="order"/>
+                                </gmd:function>
+                            </gmd:CI_OnlineResource>
+                        </gmd:onLine>
+                    </gmd:MD_DigitalTransferOptions>
+                </gmd:transferOptions>
+            </gmd:MD_Distribution>
+        </gmd:distributionInfo>
+        <gmd:dataQualityInfo>
+            <gmd:DQ_DataQuality>
+                <gmd:scope>
+                    <gmd:DQ_Scope>
+                        <gmd:level>
+                            <gmd:MD_ScopeCode codeListValue="dataset"
+                                              codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"/>
+                        </gmd:level>
+                    </gmd:DQ_Scope>
+                </gmd:scope>
+                <gmd:report>
+                    <gmd:DQ_DomainConsistency>
+                        <gmd:result>
+                            <gmd:DQ_ConformanceResult>
+                                <gmd:specification>
+                                    <gmd:CI_Citation>
+                                        <gmd:title>
+                                            <gco:CharacterString>KOMISSION ASETUS (EU) N:o 1089/2010, annettu 23 päivänä
+                                                marraskuuta 2010, Euroopan parlamentin ja neuvoston direktiivin
+                                                2007/2/EY täytäntöönpanosta paikkatietoaineistojen ja -palvelujen
+                                                yhteentoimivuuden osalta
+                                            </gco:CharacterString>
+                                        </gmd:title>
+                                        <gmd:date>
+                                            <gmd:CI_Date>
+                                                <gmd:date>
+                                                    <gco:Date>2010-12-08</gco:Date>
+                                                </gmd:date>
+                                                <gmd:dateType>
+                                                    <gmd:CI_DateTypeCode
+                                                            codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode"
+                                                            codeListValue="publication"/>
+                                                </gmd:dateType>
+                                            </gmd:CI_Date>
+                                        </gmd:date>
+                                    </gmd:CI_Citation>
+                                </gmd:specification>
+                                <gmd:explanation>
+                                    <gco:CharacterString>Tieto lisätään myöhemmin</gco:CharacterString>
+                                </gmd:explanation>
+                                <gmd:pass>
+                                    <gco:Boolean>false</gco:Boolean>
+                                </gmd:pass>
+                            </gmd:DQ_ConformanceResult>
+                        </gmd:result>
+                    </gmd:DQ_DomainConsistency>
+                </gmd:report>
+                <gmd:lineage>
+                    <gmd:LI_Lineage>
+                        <gmd:statement>
+                            <gco:CharacterString>Aineistot muodostavat kokoelman voimassa olevista yleiskaavoista aina
+                                vuodesta 1977 nykypäivään asti. Ympäristöministeriö, Suomen ympäristökeskus (SYKE) ja
+                                Sitowise Oy (aiemmin Sito Oy) ovat tuottaneet kokonaisuuden Suomen yleiskaavoista
+                                (lukuun ottamatta Ahvenanmaata). Aineistoja päivitetään 4 kertaa vuodessa ja
+                                ajantasaistus perustuu kuntien ilmoituksiin sekä ELY-keskusten tietoihin yleiskaavoista
+                                mm. USPA-asianhallintajärjestelmään kirjattujen yleiskaavoja koskevien päätösten avulla.
+                                Aineistoissa havaituista puutteista ja virheistä toivotaan palautetta ylläpitäjälle
+                                korjausten suorittamiseksi osoitteeseen yleiskaava@sitowise.com
+
+                                Maankäyttö- ja rakennuslain mukaan laaditut yleiskaavat on Sitowise kerännyt kunnista,
+                                konsulteilta ja ELY-keskuksilta lähinnä pdf-muodossa, muuntanut aineiston kuviksi ja
+                                asemoinut ETRS-TM35FIN koordinaatistoon. Maankäyttö- ja rakennuslain kaavojen rajausten
+                                lähtökohtana ovat olleet ELYjen ja SYKEn koostamat GISALU-aineistot (Kuntakaavoituksen
+                                ja kulttuuriympäristön paikkatiedot), joita Sitowise on edelleen täydentänyt.
+
+                                Vanhan rakennuslain mukaisesti vahvistetut yleiskaavat on SYKE koonnut ensisijaisesti
+                                ympäristöministeriön yleiskaava-arkistosta, sekä lisäksi alueellisista
+                                ympäristökeskuksista (nykyisten ELY-keskusten ympäristö- ja luonnonvarat -vastuualue) ja
+                                korkeimmasta hallinto-oikeudesta skannattaviksi. Skannaukseen on pyritty saamaan ns.
+                                leimattu kaavakartta, josta näkyvät myös vahvistamisen yhteydessä tehdyt alueelliset
+                                muutokset ja muut vahvistusmerkinnät. Aina tämä ei kuitenkaan ole ollut mahdollista,
+                                joten lähdekarttojen joukossa voi olla jokunen ei-virallinen kaavakin ja muutamiin
+                                karttoihin vahvistusmerkintöjä on tehty kuvankäsittelyllä. Rasteroidut kaavat on
+                                skannauksen jälkeen oikaistu yhtenäiskoordinaatistoon. Alkuperäisten kaavojen mittakaava
+                                on 1:2 000 - 1:50 000, sijaintitarkkuus vaihtelee siten rasterikuvien oikaisusta johtuen
+                                kaavalehtien sisälläkin. Rasterikuvien sijainti suhteessa perus-CD:hen vaihtelee
+                                muutamasta metristä muutamiin kymmeniin metreihin riippuen kaavakartan mittakaavasta ja
+                                kuvan osasta. Suurimittakaavaisissa kaavoissa sijaintitarkkuus on suhteellisesti
+                                heikoin, koska kaavan sijainti määriteltiin 1:20 000 peruskartan päällä. Pikselikoko on
+                                pääsääntöisesti 0,1 mm ja vanhimmissa skannauksissa 0,07-0,25 mm eli kaavan
+                                mittakaavasta riippuen 0,5-4 maastometriä. Rasterit on muunnettu YKJ:stä
+                                EUREF-FIN-koordinaatistoon kesällä 2014. Aineisto ei sisällä Ahvenanmaan tietoja
+                                (maankäyttö- ja rakennuslaki ei Ahvenanmaalla voimassa). Rasterien pohjalta on tehty
+                                vastaava vektorimuotoinen aineisto digitoimalla kaavojen ulkorajoina pääsääntöisesti
+                                vahvistusraja, ei koko kaava-alueen rajaa tai aluevarausten ulkorajoja. Lisätietoja
+                                alkuperäisistä rastereista
+                                http://metatieto.ymparisto.fi:8080/geoportal/catalog/search/resource/details.page?uuid=%7B1377662D-F6F1-48F7-86A0-ADD001F08CE1%7D
+                                ja vektoreista
+                                http://metatieto.ymparisto.fi:8080/geoportal/catalog/search/resource/details.page?uuid=%7B1E200F2D-7983-42C1-84AF-459FD31AB4EC%7D
+                            </gco:CharacterString>
+                        </gmd:statement>
+                    </gmd:LI_Lineage>
+                </gmd:lineage>
+            </gmd:DQ_DataQuality>
+        </gmd:dataQualityInfo>
+        <gmd:dataQualityInfo>
+            <gmd:DQ_DataQuality>
+                <gmd:scope>
+                    <gmd:DQ_Scope>
+                        <gmd:level>
+                            <gmd:MD_ScopeCode codeListValue="dataset"
+                                              codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"/>
+                        </gmd:level>
+                    </gmd:DQ_Scope>
+                </gmd:scope>
+            </gmd:DQ_DataQuality>
+        </gmd:dataQualityInfo>
+        <gmd:dataQualityInfo>
+            <gmd:DQ_DataQuality>
+                <gmd:scope>
+                    <gmd:DQ_Scope>
+                        <gmd:level>
+                            <gmd:MD_ScopeCode codeListValue="dataset"
+                                              codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode"/>
+                        </gmd:level>
+                    </gmd:DQ_Scope>
+                </gmd:scope>
+            </gmd:DQ_DataQuality>
+        </gmd:dataQualityInfo>
+    </gmd:MD_Metadata>
+</csw:GetRecordByIdResponse>
+
