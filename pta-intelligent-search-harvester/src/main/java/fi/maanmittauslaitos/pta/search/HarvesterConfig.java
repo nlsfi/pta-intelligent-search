@@ -46,9 +46,9 @@ import fi.maanmittauslaitos.pta.search.text.TextSplitterProcessor;
 import fi.maanmittauslaitos.pta.search.text.WordCombinationProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactory;
-import fi.maanmittauslaitos.pta.search.utils.HarvesterContainer;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTracker;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTrackerImpl;
+import fi.maanmittauslaitos.pta.search.utils.HarvesterWrapper;
 import fi.maanmittauslaitos.pta.search.utils.Region;
 import fi.maanmittauslaitos.pta.search.utils.RegionFactory;
 import org.apache.commons.io.IOUtils;
@@ -95,6 +95,7 @@ public class HarvesterConfig {
 	private final ObjectMapper objectMapper;
 	private final Stemmer finnishStemmer;
 	private final Collection<String> wellKnownPostfixes;
+	private Model terminologyModel;
 
 	public HarvesterConfig() throws IOException {
 		this.objectMapper = new ObjectMapper();
@@ -102,17 +103,17 @@ public class HarvesterConfig {
 		this.wellKnownPostfixes = getWellKnownPostfixes();
 	}
 
-	public Collection<HarvesterContainer> getHarvesterContainers() throws IOException, ParserConfigurationException {
+	public Collection<HarvesterWrapper> getHarvesterWrappers() throws IOException, ParserConfigurationException {
 		return Arrays.asList(
-				HarvesterContainer.create(getCKANSource(), getCKANRecordProcessor())
-				//,HarvesterContainer.create(getCSWSource(), getCSWRecordProcessor())
+				HarvesterWrapper.create(getCKANSource(), getCKANRecordProcessor(), objectMapper)
+				, HarvesterWrapper.create(getCSWSource(), getCSWRecordProcessor(), objectMapper)
 		);
 	}
 
-	public Collection<HarvesterContainer> getLocalHarvesterContainers() throws IOException, ParserConfigurationException {
+	public Collection<HarvesterWrapper> getLocalHarvesterWrappers() throws IOException, ParserConfigurationException {
 		return Arrays.asList(
-				HarvesterContainer.create(getLocalCKANSource(), getCKANRecordProcessor()),
-				HarvesterContainer.create(getLocalCSWSource(), getCSWRecordProcessor())
+				HarvesterWrapper.create(getLocalCKANSource(), getCKANRecordProcessor(), objectMapper)
+				, HarvesterWrapper.create(getLocalCSWSource(), getCSWRecordProcessor(), objectMapper)
 		);
 	}
 
@@ -139,14 +140,17 @@ public class HarvesterConfig {
 
 	public HarvesterSource getCSWSource() {
 		HarvesterSource source = new CSWHarvesterSource();
+		source.setMetadataType(HarvesterSource.MetadataType.CSW);
 		source.setBatchSize(10);
-		source.setOnlineResource("https://paikkatietohakemisto.fi/geonetwork/srv/en/csw");
+		source.setOnlineResource("https://paikkatietohakemisto.fi");
+		source.setApiPath("geonetwork/srv/en/csw");
 		//source.setOnlineResource("http://demo.paikkatietohakemisto.fi/geonetwork/srv/en/csw");
 		return source;
 	}
 
 	public HarvesterSource getLocalCSWSource() {
 		LocalCSWHarvesterSource source = new LocalCSWHarvesterSource();
+		source.setMetadataType(HarvesterSource.MetadataType.CSW);
 		URL cswRoot = this.getClass().getClassLoader().getResource(LOCAL_CSW_SOURCE_DIR);
 		source.setResourceRootURL(cswRoot);
 		return source;
@@ -154,19 +158,22 @@ public class HarvesterConfig {
 
 	public HarvesterSource getCKANSource() {
 		CKANHarvesterSource source = new CKANHarvesterSource(objectMapper);
+		source.setMetadataType(HarvesterSource.MetadataType.CKAN);
 		source.setBatchSize(10);
-		source.setOnlineResource("https://ckan.ymparisto.fi/api/3/action/package_search");
+		source.setOnlineResource("https://ckan.ymparisto.fi");
+		source.setApiPath("api/3/action/package_search");
 		source.setQuery("type:envi-reports");
 		return source;
 	}
 
 	public HarvesterSource getLocalCKANSource() {
 		LocalCKANHarvesterSource source = new LocalCKANHarvesterSource(objectMapper);
+		source.setMetadataType(HarvesterSource.MetadataType.CKAN);
 		source.setResourceRootURL(this.getClass().getClassLoader().getResource(LOCAL_CKAN_SOURCE_DIR));
 		return source;
 	}
 
-	DocumentSink getDocumentSink(HarvesterTracker harvesterTracker) {
+	public DocumentSink getDocumentSink(HarvesterTracker harvesterTracker) {
 		ElasticsearchDocumentSink ret = new ElasticsearchDocumentSink();
 		ret.setTracker(harvesterTracker);
 		ret.setHostname("localhost");
@@ -194,105 +201,7 @@ public class HarvesterConfig {
 		// Basic configuration
 		DocumentProcessingConfiguration configuration = factory.createMetadataDocumentProcessingConfiguration();
 
-		// Ontology models and and text processors TODO: yhteistä
-		Model model = getTerminologyModel();
-		RDFTerminologyMatcherProcessor terminologyProcessor = createTerminologyMatcher(model);
-		WordCombinationProcessor wordCombinationProcessor = createWordCombinationProcessor(model);
-
-		// Set up abstract processor (abstract => abstract_uri)
-		TextProcessingChain abstractChain = createAbstractProcessingChain(terminologyProcessor, wordCombinationProcessor);
-		configuration.getTextProcessingChains().put("abstractProcessor", abstractChain);
-
-		FieldExtractorConfiguration abstractUri = configuration.getFieldExtractor(ResultMetadataFields.ABSTRACT).copy();
-		abstractUri.setField(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI);
-		abstractUri.setTextProcessorName("abstractProcessor");
-
-		configuration.getFieldExtractors().add(abstractUri);
-
-		// Abstract processor that determines the parents of
-		TextProcessingChain abstractParentsChain = createAbstractParentProcessingChain(terminologyProcessor, wordCombinationProcessor, model);
-		configuration.getTextProcessingChains().put("abstractParentProcessor", abstractParentsChain);
-
-		FieldExtractorConfiguration abstract2Uri = configuration.getFieldExtractor(ResultMetadataFields.ABSTRACT).copy();
-		abstract2Uri.setField(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI_PARENTS);
-		abstract2Uri.setTextProcessorName("abstractParentProcessor");
-
-		configuration.getFieldExtractors().add(abstract2Uri);
-
-
-		// Set up maui chain for abstract (abstract => abstract_maui_uri)
-		MauiTextProcessor mauiTextProcessor = createMauiProcessingChain();
-		TextProcessingChain mauiChain = new TextProcessingChain();
-		mauiChain.getChain().add(mauiTextProcessor);
-
-		configuration.getTextProcessingChains().put("mauiProcessor", mauiChain);
-
-		FieldExtractorConfiguration abstractMauiUri = configuration.getFieldExtractor(ResultMetadataFields.ABSTRACT).copy();
-		abstractMauiUri.setField(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI);
-		abstractMauiUri.setTextProcessorName("mauiProcessor");
-
-		configuration.getFieldExtractors().add(abstractMauiUri);
-
-		// Set up maui chain for abstract (abstract => abstract_maui_uri_parents)
-		TextProcessingChain mauiParentsChain = createMauiParentProcessingChain(mauiTextProcessor, model);
-		configuration.getTextProcessingChains().put("mauiParentsProcessor", mauiParentsChain);
-
-		FieldExtractorConfiguration abstractMauiParentsUri = configuration.getFieldExtractor(ResultMetadataFields.ABSTRACT).copy();
-		abstractMauiParentsUri.setField(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI_PARENTS);
-		abstractMauiParentsUri.setTextProcessorName("mauiParentsProcessor");
-
-		configuration.getFieldExtractors().add(abstractMauiParentsUri);
-
-
-		// Keyword to uri detection (keywords => keywords_uri)
-		TextProcessingChain keywordChain = createKeywordProcessingChain(terminologyProcessor, wordCombinationProcessor);
-		configuration.getTextProcessingChains().put("keywordProcessor", keywordChain);
-
-		FieldExtractorConfiguration keywordsUri = configuration.getFieldExtractor(ResultMetadataFields.KEYWORDS_ALL).copy();
-		keywordsUri.setField(PTAElasticSearchMetadataConstants.FIELD_KEYWORDS_URI);
-		keywordsUri.setTextProcessorName("keywordProcessor");
-
-		configuration.getFieldExtractors().add(keywordsUri);
-
-		// Annotated keywords
-		TextProcessingChain isInOntologyFilterProcessor = createIsInOntologyProcessor(terminologyProcessor);
-
-		configuration.getTextProcessingChains().put("isInOntologyFilterProcessor", isInOntologyFilterProcessor);
-
-		// TODO: Xpath-hommat eriäviä
-
-		// Copy the title to titleSort (which is a keyword field to allow sorting)
-		FieldExtractorConfiguration titleFiSort = configuration.getFieldExtractor(ResultMetadataFields.TITLE).copy();
-		titleFiSort.setField("titleFiSort");
-		configuration.getFieldExtractors().add(titleFiSort);
-
-		FieldExtractorConfiguration titleSvSort = configuration.getFieldExtractor(ResultMetadataFields.TITLE_SV).copy();
-		titleSvSort.setField("titleSvSort");
-		configuration.getFieldExtractors().add(titleSvSort);
-
-		FieldExtractorConfiguration titleEnSort = configuration.getFieldExtractor(ResultMetadataFields.TITLE_EN).copy();
-		titleEnSort.setField("titleEnSort");
-		configuration.getFieldExtractors().add(titleEnSort);
-
-
-		// Extract all organisation names in a text field for full-text search purposes
-		TextProcessingChain organisationNameTextProcessor = new TextProcessingChain();
-		RegexProcessor whitespaceRemoval = new RegexProcessor();
-		whitespaceRemoval.setPattern(Pattern.compile("^\\s*$"));
-		whitespaceRemoval.setIncludeMatches(false);
-
-		organisationNameTextProcessor.getChain().add(whitespaceRemoval);
-
-		configuration.getTextProcessingChains().put("organisationNameTextProcessor", organisationNameTextProcessor);
-
-		FieldExtractorConfigurationImpl organisationForSearch = new FieldExtractorConfigurationImpl();
-		organisationForSearch.setField("organisationName_text");
-		organisationForSearch.setType(FieldExtractorType.ALL_MATCHING_VALUES);
-		organisationForSearch.setQuery("//gmd:contact//gmd:organisationName//text()");
-
-		organisationForSearch.setTextProcessorName("organisationNameTextProcessor");
-
-		configuration.getFieldExtractors().add(organisationForSearch);
+		addCommonProcessorConfiguration(configuration);
 
 		// Modify organisation extractor to canonicalize organisation names
 		OrganisationNormaliser organisationNormaliser = loadOrganisationNormaliser();
@@ -301,39 +210,9 @@ public class HarvesterConfig {
 
 		FieldExtractorConfiguration fec = configuration.getFieldExtractor(ResultMetadataFields.ORGANISATIONS);
 		FieldExtractorConfigurationImpl x = (FieldExtractorConfigurationImpl) fec;
-		//TODO: tässä ero!
+
 		ResponsiblePartyCKANCustomExtractor rpxpce = (ResponsiblePartyCKANCustomExtractor) x.getListCustomExtractor();
 		rpxpce.setOrganisationNameRewriter(orgRewriter);
-
-
-		// Configure INSPIRE theme extractor to normalize the theme to
-		final InspireThemesImpl inspireThemes = new InspireThemesImpl();
-		inspireThemes.setCanonicalLanguage("fi"); // Normalize the records to Finnish
-		inspireThemes.setModel(loadModels(RDFFormat.RDFXML, "/inspire-theme.rdf.gz"));
-		inspireThemes.setHeuristicSearchLanguagePriority("fi", "en", "sv");
-
-		FieldExtractorConfiguration inspireFieldExtractorConfiguration =
-				configuration.getFieldExtractor(ResultMetadataFields.KEYWORDS_INSPIRE);
-
-		TextProcessingChain inspireThemeNormalizer = new TextProcessingChain();
-		inspireThemeNormalizer.getChain().add(input -> {
-			List<String> ret = new ArrayList<>();
-
-			for (String str : input) {
-				String value = inspireThemes.getCanonicalName(str);
-				if (value == null) {
-					value = str;
-				}
-				ret.add(value);
-			}
-
-			return ret;
-		});
-
-		configuration.getTextProcessingChains().put("inspireThemeNormalizer", inspireThemeNormalizer);
-
-		inspireFieldExtractorConfiguration.setTextProcessorName("inspireThemeNormalizer");
-
 
 		// Extract bounding box area
 		FieldExtractorConfigurationImpl bboxFec = (FieldExtractorConfigurationImpl)
@@ -365,9 +244,6 @@ public class HarvesterConfig {
 		);
 		configuration.getFieldExtractors().add(bboxAreaFec);
 
-		// Best matching regions
-		configuration.getFieldExtractors().add(getBestMatchingRegions(bboxFec));
-
 		return factory.getDocumentProcessorFactory().createJsonProcessor(configuration);
 	}
 
@@ -378,11 +254,69 @@ public class HarvesterConfig {
 		// Basic configuration
 		DocumentProcessingConfiguration configuration = factory.createMetadataDocumentProcessingConfiguration();
 
+		addCommonProcessorConfiguration(configuration);
 
+		FieldExtractorConfigurationImpl annotatedKeywordExtractor = new FieldExtractorConfigurationImpl();
+		annotatedKeywordExtractor.setField("annotated_keywords_uri");
+		annotatedKeywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
+		annotatedKeywordExtractor.setQuery("//gmd:descriptiveKeywords/*/gmd:keyword/gmx:Anchor/@xlink:href");
+
+		annotatedKeywordExtractor.setTextProcessorName("isInOntologyFilterProcessor");
+
+		configuration.getFieldExtractors().add(annotatedKeywordExtractor);
+
+		// Modify organisation extractor to canonicalize organisation names
+		OrganisationNormaliser organisationNormaliser = loadOrganisationNormaliser();
+		OrganisationNormaliserTextRewriter orgRewriter = new OrganisationNormaliserTextRewriter();
+		orgRewriter.setOrganisationNormaliser(organisationNormaliser);
+
+		FieldExtractorConfiguration fec = configuration.getFieldExtractor(ResultMetadataFields.ORGANISATIONS);
+		FieldExtractorConfigurationImpl x = (FieldExtractorConfigurationImpl) fec;
+		ResponsiblePartyXmlCustomExtractor rpxpce = (ResponsiblePartyXmlCustomExtractor) x.getCustomExtractor();
+		rpxpce.setOrganisationNameRewriter(orgRewriter);
+
+		// Extract bounding box area
+		FieldExtractorConfigurationImpl bboxFec = (FieldExtractorConfigurationImpl)
+				configuration.getFieldExtractor(ResultMetadataFields.GEOGRAPHIC_BOUNDING_BOX);
+
+		FieldExtractorConfigurationImpl bboxAreaFec = (FieldExtractorConfigurationImpl) bboxFec.copy();
+		final GeographicBoundingBoxXmlCustomExtractor originalBboxCustomExtractor = (GeographicBoundingBoxXmlCustomExtractor) bboxAreaFec.getCustomExtractor();
+		bboxAreaFec.setCustomExtractor((documentQuery, queryResult) -> {
+			Object original = originalBboxCustomExtractor.process(documentQuery, queryResult);
+			@SuppressWarnings("unchecked")
+			List<Double> coords = (List<Double>) original;
+			if (coords == null) {
+				return null;
+			} else {
+				return (coords.get(2) - coords.get(0)) * (coords.get(3) - coords.get(1));
+			}
+		});
+		bboxAreaFec.setField("geographicBoundingBoxArea");
+		configuration.getFieldExtractors().add(bboxAreaFec);
+
+		return factory.getDocumentProcessorFactory().createXmlProcessor(configuration);
+	}
+
+	private void addCommonProcessorConfiguration(DocumentProcessingConfiguration configuration) throws IOException {
 		// Ontology models and and text processors
-		Model model = getTerminologyModel();
-		RDFTerminologyMatcherProcessor terminologyProcessor = createTerminologyMatcher(model);
-		WordCombinationProcessor wordCombinationProcessor = createWordCombinationProcessor(model);
+		if (terminologyModel == null) {
+			terminologyModel = getTerminologyModel();
+		}
+		RDFTerminologyMatcherProcessor terminologyProcessor = createTerminologyMatcher(terminologyModel);
+		WordCombinationProcessor wordCombinationProcessor = createWordCombinationProcessor(terminologyModel);
+
+		// Copy the title to titleSort (which is a keyword field to allow sorting)
+		FieldExtractorConfiguration titleFiSort = configuration.getFieldExtractor(ResultMetadataFields.TITLE).copy();
+		titleFiSort.setField("titleFiSort");
+		configuration.getFieldExtractors().add(titleFiSort);
+
+		FieldExtractorConfiguration titleSvSort = configuration.getFieldExtractor(ResultMetadataFields.TITLE_SV).copy();
+		titleSvSort.setField("titleSvSort");
+		configuration.getFieldExtractors().add(titleSvSort);
+
+		FieldExtractorConfiguration titleEnSort = configuration.getFieldExtractor(ResultMetadataFields.TITLE_EN).copy();
+		titleEnSort.setField("titleEnSort");
+		configuration.getFieldExtractors().add(titleEnSort);
 
 
 		// Set up abstract processor (abstract => abstract_uri)
@@ -396,7 +330,7 @@ public class HarvesterConfig {
 		configuration.getFieldExtractors().add(abstractUri);
 
 		// Abstract processor that determines the parents of
-		TextProcessingChain abstractParentsChain = createAbstractParentProcessingChain(terminologyProcessor, wordCombinationProcessor, model);
+		TextProcessingChain abstractParentsChain = createAbstractParentProcessingChain(terminologyProcessor, wordCombinationProcessor, terminologyModel);
 		configuration.getTextProcessingChains().put("abstractParentProcessor", abstractParentsChain);
 
 		FieldExtractorConfiguration abstract2Uri = configuration.getFieldExtractor(ResultMetadataFields.ABSTRACT).copy();
@@ -420,7 +354,7 @@ public class HarvesterConfig {
 		configuration.getFieldExtractors().add(abstractMauiUri);
 
 		// Set up maui chain for abstract (abstract => abstract_maui_uri_parents)
-		TextProcessingChain mauiParentsChain = createMauiParentProcessingChain(mauiTextProcessor, model);
+		TextProcessingChain mauiParentsChain = createMauiParentProcessingChain(mauiTextProcessor, terminologyModel);
 		configuration.getTextProcessingChains().put("mauiParentsProcessor", mauiParentsChain);
 
 		FieldExtractorConfiguration abstractMauiParentsUri = configuration.getFieldExtractor(ResultMetadataFields.ABSTRACT).copy();
@@ -428,48 +362,6 @@ public class HarvesterConfig {
 		abstractMauiParentsUri.setTextProcessorName("mauiParentsProcessor");
 
 		configuration.getFieldExtractors().add(abstractMauiParentsUri);
-
-
-		// Keyword to uri detection (keywords => keywords_uri)
-		TextProcessingChain keywordChain = createKeywordProcessingChain(terminologyProcessor, wordCombinationProcessor);
-		configuration.getTextProcessingChains().put("keywordProcessor", keywordChain);
-
-		FieldExtractorConfiguration keywordsUri = configuration.getFieldExtractor(ResultMetadataFields.KEYWORDS_ALL).copy();
-		keywordsUri.setField(PTAElasticSearchMetadataConstants.FIELD_KEYWORDS_URI);
-		keywordsUri.setTextProcessorName("keywordProcessor");
-
-		configuration.getFieldExtractors().add(keywordsUri);
-
-		// Extra matchers that are used to match things not matched by pta-intelligent-search-metadata-extractor
-
-		// Annotated keywords
-		TextProcessingChain isInOntologyFilterProcessor = createIsInOntologyProcessor(terminologyProcessor);
-
-		configuration.getTextProcessingChains().put("isInOntologyFilterProcessor", isInOntologyFilterProcessor);
-
-
-		FieldExtractorConfigurationImpl annotatedKeywordExtractor = new FieldExtractorConfigurationImpl();
-		annotatedKeywordExtractor.setField("annotated_keywords_uri");
-		annotatedKeywordExtractor.setType(FieldExtractorType.ALL_MATCHING_VALUES);
-		annotatedKeywordExtractor.setQuery("//gmd:descriptiveKeywords/*/gmd:keyword/gmx:Anchor/@xlink:href");
-
-		annotatedKeywordExtractor.setTextProcessorName("isInOntologyFilterProcessor");
-
-		configuration.getFieldExtractors().add(annotatedKeywordExtractor);
-
-		// Copy the title to titleSort (which is a keyword field to allow sorting)
-		FieldExtractorConfiguration titleFiSort = configuration.getFieldExtractor(ResultMetadataFields.TITLE).copy();
-		titleFiSort.setField("titleFiSort");
-		configuration.getFieldExtractors().add(titleFiSort);
-
-		FieldExtractorConfiguration titleSvSort = configuration.getFieldExtractor(ResultMetadataFields.TITLE_SV).copy();
-		titleSvSort.setField("titleSvSort");
-		configuration.getFieldExtractors().add(titleSvSort);
-
-		FieldExtractorConfiguration titleEnSort = configuration.getFieldExtractor(ResultMetadataFields.TITLE_EN).copy();
-		titleEnSort.setField("titleEnSort");
-		configuration.getFieldExtractors().add(titleEnSort);
-
 
 		// Extract all organisation names in a text field for full-text search purposes
 		TextProcessingChain organisationNameTextProcessor = new TextProcessingChain();
@@ -490,15 +382,21 @@ public class HarvesterConfig {
 
 		configuration.getFieldExtractors().add(organisationForSearch);
 
-		// Modify organisation extractor to canonicalize organisation names
-		OrganisationNormaliser organisationNormaliser = loadOrganisationNormaliser();
-		OrganisationNormaliserTextRewriter orgRewriter = new OrganisationNormaliserTextRewriter();
-		orgRewriter.setOrganisationNormaliser(organisationNormaliser);
 
-		FieldExtractorConfiguration fec = configuration.getFieldExtractor(ResultMetadataFields.ORGANISATIONS);
-		FieldExtractorConfigurationImpl x = (FieldExtractorConfigurationImpl) fec;
-		ResponsiblePartyXmlCustomExtractor rpxpce = (ResponsiblePartyXmlCustomExtractor) x.getCustomExtractor();
-		rpxpce.setOrganisationNameRewriter(orgRewriter);
+		// Keyword to uri detection (keywords => keywords_uri)
+		TextProcessingChain keywordChain = createKeywordProcessingChain(terminologyProcessor, wordCombinationProcessor);
+		configuration.getTextProcessingChains().put("keywordProcessor", keywordChain);
+
+		FieldExtractorConfiguration keywordsUri = configuration.getFieldExtractor(ResultMetadataFields.KEYWORDS_ALL).copy();
+		keywordsUri.setField(PTAElasticSearchMetadataConstants.FIELD_KEYWORDS_URI);
+		keywordsUri.setTextProcessorName("keywordProcessor");
+
+		configuration.getFieldExtractors().add(keywordsUri);
+
+		// Annotated keywords
+		TextProcessingChain isInOntologyFilterProcessor = createIsInOntologyProcessor(terminologyProcessor);
+
+		configuration.getTextProcessingChains().put("isInOntologyFilterProcessor", isInOntologyFilterProcessor);
 
 
 		// Configure INSPIRE theme extractor to normalize the theme to
@@ -529,31 +427,11 @@ public class HarvesterConfig {
 
 		inspireFieldExtractorConfiguration.setTextProcessorName("inspireThemeNormalizer");
 
-
-		// Extract bounding box area
+		// Best matching regions
 		FieldExtractorConfigurationImpl bboxFec = (FieldExtractorConfigurationImpl)
 				configuration.getFieldExtractor(ResultMetadataFields.GEOGRAPHIC_BOUNDING_BOX);
 
-		FieldExtractorConfigurationImpl bboxAreaFec = (FieldExtractorConfigurationImpl) bboxFec.copy();
-		final GeographicBoundingBoxXmlCustomExtractor originalBboxCustomExtractor = (GeographicBoundingBoxXmlCustomExtractor) bboxAreaFec.getCustomExtractor();
-		bboxAreaFec.setCustomExtractor((documentQuery, queryResult) -> {
-			Object original = originalBboxCustomExtractor.process(documentQuery, queryResult);
-			@SuppressWarnings("unchecked")
-			List<Double> coords = (List<Double>) original;
-			if (coords == null) {
-				return null;
-			} else {
-				return (coords.get(2) - coords.get(0)) * (coords.get(3) - coords.get(1));
-			}
-		});
-		bboxAreaFec.setField("geographicBoundingBoxArea");
-		configuration.getFieldExtractors().add(bboxAreaFec);
-
-		// Best matching regions
 		configuration.getFieldExtractors().add(getBestMatchingRegions(bboxFec));
-
-
-		return factory.getDocumentProcessorFactory().createXmlProcessor(configuration);
 	}
 
 	private FieldExtractorConfigurationImpl getBestMatchingRegions(FieldExtractorConfigurationImpl bboxFec) {

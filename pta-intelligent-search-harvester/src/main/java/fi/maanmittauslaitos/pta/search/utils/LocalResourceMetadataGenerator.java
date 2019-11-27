@@ -25,8 +25,8 @@ public class LocalResourceMetadataGenerator extends AbstractHarvester {
 	}
 
 	@Override
-	protected Collection<HarvesterContainer> getHarvesterContainers(HarvesterConfig config) throws ParserConfigurationException, IOException {
-		return config.getLocalHarvesterContainers();
+	protected Collection<HarvesterWrapper> getHarvesterWrappers(HarvesterConfig config) throws ParserConfigurationException, IOException {
+		return config.getLocalHarvesterWrappers();
 	}
 
 	@Override

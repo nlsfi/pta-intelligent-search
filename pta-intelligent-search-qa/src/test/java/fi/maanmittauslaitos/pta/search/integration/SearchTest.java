@@ -31,6 +31,8 @@ public class SearchTest extends SearchTestBase {
 
 		List<String> ids = Arrays.asList(
 				"495e0dca-c439-4447-948b-171b976a2863",
+				"c57bd9a5-feb7-4d31-8ace-526054fabe0e",
+				"55a6c54a-2647-4e17-bb90-a0751a29f5c9",
 				"49491ac8-2d28-4483-b9a4-c5e689765e57",
 				"199db687-fca8-4860-bde5-7e6d1b1af15d",
 				"00168bde-de18-4760-b452-967fbb1c9845",
@@ -49,6 +51,20 @@ public class SearchTest extends SearchTestBase {
 		// In the testcase the serach them was "nationwide" and language set to English
 		SearchResponse response = getSearchResponse("testcase_kansallinen.json", nDocs);
 		then(response.getHits()).hasSize(nDocs - 3);
+	}
+
+	@Test
+	public void ckanDocumentsHarvestedAsWell() throws IOException, URISyntaxException {
+		SearchResponse response = getSearchResponse("testcase_vesien_laatu.json", 1000);
+		then(response.getHits())
+				.extracting(SearchHit::getId)
+				.contains(
+						"c57bd9a5-feb7-4d31-8ace-526054fabe0e", //CKAN
+						"55a6c54a-2647-4e17-bb90-a0751a29f5c9", //CKAN
+						"5e0b6e6c-5122-489d-9d6c-57dd4a1bfcdf", //CKAN
+						"67f47ee3-cd16-44d3-b6fd-8eb9faa374a5",  //CSW
+						"ade1283b-0e69-4166-a52a-261d04f32cd0"
+				);
 	}
 
 	@Test

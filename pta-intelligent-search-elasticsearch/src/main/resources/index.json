@@ -44,6 +44,17 @@
             "organisationName":      { "type": "keyword" }
           }
         },
+        "catalog": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "keyword"
+            },
+            "type": {
+              "type": "keyword"
+            }
+          }
+        },
         "bestMatchingRegion": {
           "type": "object",
           "properties": {

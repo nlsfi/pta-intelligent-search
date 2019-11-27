@@ -249,8 +249,10 @@ public class ElasticsearchDocumentSink implements DocumentSink {
 				if (!"updated".equals(foo.getResult()) && !"created".equals(foo.getResult())) {
 					logger.warn("Unknown 'result' in response from ElasticSearch: '"+foo.getResult()+"'. created = "+foo.isCreated());
 				}
-				
-				ret = Boolean.TRUE.equals(foo.isCreated()) ? IndexResult.INSERTED : IndexResult.UPDATED;
+
+				Boolean created = foo.isCreated();
+
+				ret = Boolean.TRUE.equals(foo.isCreated()) || "created".equals(foo.getResult()) ? IndexResult.INSERTED : IndexResult.UPDATED;
 				
 				if (ret == IndexResult.INSERTED || ret == IndexResult.UPDATED) {
 					idsIndexed.add(id);

@@ -12,8 +12,8 @@ import fi.maanmittauslaitos.pta.search.metadata.ResultMetadataFields;
 import fi.maanmittauslaitos.pta.search.source.Harvestable;
 import fi.maanmittauslaitos.pta.search.source.HarvesterInputStream;
 import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
-import fi.maanmittauslaitos.pta.search.utils.HarvesterContainer;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTracker;
+import fi.maanmittauslaitos.pta.search.utils.HarvesterWrapper;
 import org.apache.jena.ext.com.google.common.collect.Streams;
 import org.apache.log4j.Logger;
 import org.springframework.boot.ApplicationArguments;
@@ -43,7 +43,7 @@ public abstract class AbstractHarvester implements CommandLineRunner {
 
 	abstract protected DocumentSink getDocumentSink(HarvesterConfig config, HarvesterTracker harvesterTracker, ApplicationArguments args);
 
-	abstract protected Collection<HarvesterContainer> getHarvesterContainers(HarvesterConfig config) throws ParserConfigurationException, IOException;
+	abstract protected Collection<HarvesterWrapper> getHarvesterWrappers(HarvesterConfig config) throws ParserConfigurationException, IOException;
 
 	protected Optional<String> parseArgument(String optionName, ApplicationArguments args) {
 		return Optional.ofNullable(args.getOptionValues(optionName))
@@ -85,10 +85,11 @@ public abstract class AbstractHarvester implements CommandLineRunner {
 		DocumentSink sink = getDocumentSink(config, tracker, arguments);
 		sink.startIndexing();
 
-		for (HarvesterContainer container : getHarvesterContainers(config)) {
-			HarvesterSource source = container.getSource();
-			DocumentProcessor processor = container.getProcessor();
+		for (HarvesterWrapper wrapper : getHarvesterWrappers(config)) {
+			HarvesterSource source = wrapper.getSource();
+			DocumentProcessor processor = wrapper.getProcessor();
 
+			logger.info(String.format("Starting harvesting metadata from %s", source.getOnlineResource()));
 			harvestAsynchronously(tracker, source, processor, sink, store, nThreads);
 		}
 

@@ -1,21 +1,20 @@
 package fi.maanmittauslaitos.pta.search.api.search;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Consumer;
-
-import org.apache.log4j.Logger;
-import org.elasticsearch.search.SearchHit;
-
 import fi.maanmittauslaitos.pta.search.api.Language;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.Hit;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.HitText;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.HitText.HitOrganisation;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
+import org.apache.log4j.Logger;
+import org.elasticsearch.search.SearchHit;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 
 public class SearchHitToAPIHit implements Consumer<SearchHit> {
 	static Logger logger = Logger.getLogger(SearchHitToAPIHit.class);
@@ -63,7 +62,7 @@ public class SearchHitToAPIHit implements Consumer<SearchHit> {
 					Map<String,String> localisedOrganisationName = (Map<String,String>)o.get("localisedOrganisationName");
 					name = localisedOrganisationName.get(lang.toString());
 				}
-				String role = o.get("isoRole").toString();
+				String role = String.valueOf(o.get("isoRole"));
 				
 				HitOrganisation org = new HitOrganisation();
 				org.setName(name);

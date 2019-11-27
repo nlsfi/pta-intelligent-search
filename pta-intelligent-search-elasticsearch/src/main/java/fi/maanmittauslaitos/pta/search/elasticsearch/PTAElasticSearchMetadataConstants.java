@@ -79,4 +79,21 @@ public class PTAElasticSearchMetadataConstants {
 	 * Property name for best matching municipality
 	 */
 	public static final String FIELD_BEST_MATCHING_REGIONS_MUNICIPALITY = "municipality";
+
+	/**
+	 * Property name for catalog
+	 */
+	public static final String FIELD_CATALOG = "catalog";
+
+	/**
+	 * Property name for catalog url
+	 */
+	public static final String FIELD_CATALOG_URL = "url";
+
+	/**
+	 * Property name for catalog type
+	 */
+	public static final String FIELD_CATALOG_TYPE = "type";
+
+
 }

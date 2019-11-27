@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import static fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl.FieldExtractorType.DEFAULT_VALUE;
+
 public class FieldExtractorConfigurationImpl extends AbstractFieldExtractorConfiguration {
 	private FieldExtractorType type;
 	private String query;
@@ -78,10 +80,15 @@ public class FieldExtractorConfigurationImpl extends AbstractFieldExtractorConfi
 
 	@Override
 	public Object process(Document doc, DocumentQuery documentQuery) throws DocumentProcessingException {
+		FieldExtractorType type = getType();
+
+		if (type.equals(DEFAULT_VALUE)) {
+			return getDefaultValue();
+		}
+
 		List<QueryResult> queryResultList = documentQuery.process(getQuery(), doc);
 
-
-		switch (getType()) {
+		switch (type) {
 			case FIRST_MATCHING_VALUE: {
 				List<String> ret = new ArrayList<>();
 				if (queryResultList.size() > 0) {
@@ -190,7 +197,7 @@ public class FieldExtractorConfigurationImpl extends AbstractFieldExtractorConfi
 			}
 
 			default:
-				throw new IllegalArgumentException("Unknown type of field extractor: " + getType());
+				throw new IllegalArgumentException("Unknown type of field extractor: " + type);
 		}
 
 	}
@@ -226,6 +233,7 @@ public class FieldExtractorConfigurationImpl extends AbstractFieldExtractorConfi
 		FIRST_MATCHING_VALUE,
 		ALL_MATCHING_VALUES,
 		TRUE_IF_MATCHES_OTHERWISE_FALSE,
+		DEFAULT_VALUE,
 		CUSTOM_CLASS,
 		CUSTOM_CLASS_SINGLE_VALUE,
 		FIRST_MATCHING_FROM_MULTIPLE_QUERIES

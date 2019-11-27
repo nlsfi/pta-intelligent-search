@@ -40,7 +40,7 @@ public class CSWHarvesterSource extends HarvesterSource {
 	private HarvesterInputStream readRecord(String id) {
 		logger.debug("Requesting record with id" + id);
 
-		StringBuilder reqUrl = new StringBuilder(getOnlineResource());
+		StringBuilder reqUrl = new StringBuilder(String.format("%s/%s", getOnlineResource(), getApiPath()));
 		if (reqUrl.indexOf("?") == -1) {
 			reqUrl.append("?");
 		} else if (reqUrl.charAt(reqUrl.length() - 1) != '&') {
@@ -110,7 +110,7 @@ public class CSWHarvesterSource extends HarvesterSource {
 
 			try {
 
-				StringBuilder reqUrl = new StringBuilder(getOnlineResource());
+				StringBuilder reqUrl = new StringBuilder(String.format("%s/%s", getOnlineResource(), getApiPath()));
 				if (reqUrl.indexOf("?") == -1) {
 					reqUrl.append("?");
 				} else if (reqUrl.charAt(reqUrl.length() - 1) != '&') {

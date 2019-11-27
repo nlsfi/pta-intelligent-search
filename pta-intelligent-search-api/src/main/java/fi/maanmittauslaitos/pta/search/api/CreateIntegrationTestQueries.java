@@ -71,7 +71,8 @@ public class CreateIntegrationTestQueries implements ApplicationRunner {
 				ConversionHelper.create(Collections.singletonList("oulu")),
 				ConversionHelper.create(Collections.singletonList("rakennukset")),
 				ConversionHelper.create("testcase_rakennukset_biota", Collections.singletonList("rakennukset"),
-						ImmutableMap.of("topicCategories", Collections.singletonList("biota")))
+						ImmutableMap.of("topicCategories", Collections.singletonList("biota"))),
+				ConversionHelper.create(Arrays.asList("vesien", "laatu"))
 		).forEach(helper -> generateTestCaseQuery(helper, outputDir));
 	}
 

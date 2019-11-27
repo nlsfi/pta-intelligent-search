@@ -11,10 +11,10 @@ import fi.maanmittauslaitos.pta.search.source.HarvesterInputStream;
 import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.source.csw.CSWHarvestable;
 import fi.maanmittauslaitos.pta.search.source.csw.LocalHarvestable;
-import fi.maanmittauslaitos.pta.search.utils.HarvesterContainer;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTracker;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTracker.IdentifierType;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTrackerImpl;
+import fi.maanmittauslaitos.pta.search.utils.HarvesterWrapper;
 import org.assertj.core.api.JUnitSoftAssertions;
 import org.junit.After;
 import org.junit.Before;
@@ -294,8 +294,9 @@ public class AbstractHarvesterTest {
 		}
 
 		@Override
-		protected Collection<HarvesterContainer> getHarvesterContainers(HarvesterConfig config) {
-			return Collections.singleton(HarvesterContainer.create(mockSource, mockProcessor));
+		protected Collection<HarvesterWrapper> getHarvesterWrappers(HarvesterConfig config) {
+			return Collections.singleton(new HarvesterWrapper(mockSource, mockProcessor) {
+			});
 		}
 	}
 }

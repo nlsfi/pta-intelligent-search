@@ -144,7 +144,7 @@ public class CKANHarvesterSource extends HarvesterSource {
 			int maxRows = getBatchSize();
 			logger.debug("Requesting records startPosition = " + startPosition + ",maxRecords = " + maxRows);
 
-			StringBuilder reqUrl = new StringBuilder(getOnlineResource());
+			StringBuilder reqUrl = new StringBuilder(String.format("%s/%s", getOnlineResource(), getApiPath()));
 			reqUrl.append("?");
 			reqUrl.append(String.format("q=%s", getQuery()));
 			reqUrl.append(String.format("&rows=%s&start=%s", maxRows, startPosition));
