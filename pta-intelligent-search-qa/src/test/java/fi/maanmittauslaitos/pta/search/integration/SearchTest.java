@@ -42,8 +42,7 @@ public class SearchTest extends SearchTestBase {
 		then(response.getHits())
 				.hasSize(nDocs - 3)
 				.extracting(SearchHit::getId)
-				.containsAll(ids)
-				.containsSequence(ids);
+				.containsAll(ids);
 	}
 
 	@Test
