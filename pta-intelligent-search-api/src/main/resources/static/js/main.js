@@ -156,8 +156,19 @@ $(document).ready(function() {
 				tmp.append(desc);
 				
 				var link = $('<a></a>');
-				link.text('Avaa paikkatietohakemistossa');
-				link.attr('href', 'http://www.paikkatietohakemisto.fi/geonetwork/srv/eng/catalog.search#/metadata/'+osuma.id);
+				link.text('Avaa katalogissa');
+				if (osuma.catalog.type === "CSW") {
+					link.attr('href', osuma.catalog.url + '/geonetwork/srv/eng/catalog.search#/metadata/' + osuma.id);
+				} else if (osuma.catalog.type === "CKAN") {
+					if (osuma.types.includes("isService")) {
+						link.attr('href', osuma.catalog.url + '/api/3/action/package_show?id=' + osuma.id);
+					} else {
+						link.attr('href', osuma.catalog.url + '/api/3/action/resource_show?id=' + osuma.id);
+					}
+				} else {
+					link.attr('href', 'unknown_type')
+				}
+
 				link.attr('target', '_blank');
 				
 				tmp.append(link);

@@ -16,6 +16,10 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
+import static fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants.FIELD_CATALOG;
+import static fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants.FIELD_CATALOG_TYPE;
+import static fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants.FIELD_CATALOG_URL;
+
 public class SearchHitToAPIHit implements Consumer<SearchHit> {
 	static Logger logger = Logger.getLogger(SearchHitToAPIHit.class);
 	
@@ -36,8 +40,7 @@ public class SearchHitToAPIHit implements Consumer<SearchHit> {
 
 		@SuppressWarnings("unchecked")
 		List<Map<String, Object>> organisations = (List<Map<String, Object>>)t.getSourceAsMap().get("organisations");
-		
-		
+
 		for (Language lang : Language.values()) {
 			String titleField = "title";
 			String abstractField = "abstract";
@@ -71,6 +74,7 @@ public class SearchHitToAPIHit implements Consumer<SearchHit> {
 				text.getOrganisations().add(org);
 			}
 
+
 			osuma.getText().add(text);
 		}
 
@@ -88,6 +92,15 @@ public class SearchHitToAPIHit implements Consumer<SearchHit> {
 		osuma.setDistributionFormats(extractListValue(t.getSourceAsMap().get("distributionFormats")));
 		osuma.setKeywordsInspire(extractListValue(t.getSourceAsMap().get("keywordsInspire")));
 		osuma.setTopicCategories(extractListValue(t.getSourceAsMap().get("topicCategories")));
+
+		@SuppressWarnings("unchecked")
+		Map<String, Object> catalog = (Map<String, Object>) t.getSourceAsMap().get(FIELD_CATALOG);
+
+		SearchResult.Catalog hitCatalog = new SearchResult.Catalog();
+		hitCatalog.setType(String.valueOf(catalog.getOrDefault(FIELD_CATALOG_TYPE, "")));
+		hitCatalog.setUrl(String.valueOf(catalog.getOrDefault(FIELD_CATALOG_URL, "")));
+
+		osuma.setCatalog(hitCatalog);
 		
 		tulos.getHits().add(osuma);
 	}
