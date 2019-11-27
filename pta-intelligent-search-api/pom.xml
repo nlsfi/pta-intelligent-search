@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nls.fi</groupId>
 	<artifactId>pta-intelligent-search-api</artifactId>
-	<version>0.9-SNAPSHOT</version>
+	<version>1.0-SNAPSHOT</version>
 
 
 	<parent>
@@ -39,7 +39,7 @@
 		<dependency>
 			<groupId>nls.fi</groupId>
 			<artifactId>pta-intelligent-search-metadata-annotation</artifactId>
-			<version>0.9-SNAPSHOT</version>
+			<version>1.0-SNAPSHOT</version>
 
 			<exclusions>
 				<exclusion>
@@ -56,7 +56,7 @@
 		<dependency>
 			<groupId>nls.fi</groupId>
 			<artifactId>pta-intelligent-search-elasticsearch</artifactId>
-			<version>0.9-SNAPSHOT</version>
+			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
