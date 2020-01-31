@@ -1,4 +1,4 @@
-package fi.maanmittauslaitos.pta.search.metadata;
+package fi.maanmittauslaitos.pta.search.metadata.extractor;
 
 import fi.maanmittauslaitos.pta.search.documentprocessor.CustomExtractor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
@@ -14,6 +14,7 @@ import javax.xml.xpath.XPathException;
 import javax.xml.xpath.XPathExpression;
 import java.util.Arrays;
 
+//TODO: change to XPathCustomExtractor
 public class GeographicBoundingBoxXmlCustomExtractor implements CustomExtractor {
 
 	private Double getDoubleValue(String elementName, XPath xPath, Node node)

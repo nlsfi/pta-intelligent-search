@@ -3,6 +3,7 @@ package fi.maanmittauslaitos.pta.search.metadata;
 import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl;
+import fi.maanmittauslaitos.pta.search.metadata.extractor.ResponsiblePartyXmlCustomExtractor;
 import fi.maanmittauslaitos.pta.search.metadata.model.ResponsibleParty;
 import fi.maanmittauslaitos.pta.search.metadata.model.TextRewriter;
 import org.junit.Test;

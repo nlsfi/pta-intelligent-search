@@ -1,11 +1,6 @@
-package fi.maanmittauslaitos.pta.search.metadata;
+package fi.maanmittauslaitos.pta.search.metadata.extractor;
 
-import fi.maanmittauslaitos.pta.search.documentprocessor.CustomExtractor;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuery;
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.QueryResult;
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.XmlDocumentQueryImpl;
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.XmlQueryResultImpl;
+import fi.maanmittauslaitos.pta.search.metadata.model.EmptyNodeList;
 import fi.maanmittauslaitos.pta.search.metadata.model.ResponsibleParty;
 import fi.maanmittauslaitos.pta.search.metadata.model.TextRewriter;
 import org.apache.logging.log4j.LogManager;
@@ -18,9 +13,15 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathException;
 import javax.xml.xpath.XPathExpression;
 
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import static fi.maanmittauslaitos.pta.search.metadata.utils.XPathHelper.matches;
 
-public class ResponsiblePartyXmlCustomExtractor implements CustomExtractor {
+public class ResponsiblePartyXmlCustomExtractor extends XPathCustomExtractor {
 	private static final Logger logger = LogManager.getLogger(ResponsiblePartyXmlCustomExtractor.class);
 	
 	private TextRewriter organisationNameRewriter = new TextRewriter() {
@@ -45,15 +46,7 @@ public class ResponsiblePartyXmlCustomExtractor implements CustomExtractor {
 	}
 
 	@Override
-	public Object process(DocumentQuery documentQuery, QueryResult queryResult) throws XPathException, DocumentProcessingException {
-		if (!(documentQuery instanceof XmlDocumentQueryImpl)) {
-			throw new DocumentProcessingException("This extractor should only be used for XML Documents");
-		}
-
-		return process(((XmlDocumentQueryImpl) documentQuery).getxPath(), ((XmlQueryResultImpl) queryResult).getNode());
-	}
-
-	private Object process(XPath xPath, Node node) throws XPathException {
+	public Object process(XPath xPath, Node node) throws XPathException {
 		ResponsibleParty ret = new ResponsibleParty();
 		
 		String organisationName;
@@ -106,6 +99,16 @@ public class ResponsiblePartyXmlCustomExtractor implements CustomExtractor {
 				logger.info("Unable to extract localized organisation name", e);
 			}
 		}
+
+		XPathExpression emailsExpr =
+				xPath.compile("./gmd:contactInfo/*/gmd:address/*/gmd:electronicMailAddress/gco:CharacterString");
+		NodeList emailsNodeList = Optional.of((NodeList) emailsExpr.evaluate(node, XPathConstants.NODESET)).orElse(new EmptyNodeList());
+		List<String> emails = IntStream.range(0, emailsNodeList.getLength())
+				.mapToObj(emailsNodeList::item)
+				.map(Node::getTextContent)
+				.filter(Objects::nonNull)
+				.collect(Collectors.toList());
+		ret.setEmail(emails);
 		
 		ret.setOrganisationName(organisationName);
 		ret.setIsoRole(isoRole);
