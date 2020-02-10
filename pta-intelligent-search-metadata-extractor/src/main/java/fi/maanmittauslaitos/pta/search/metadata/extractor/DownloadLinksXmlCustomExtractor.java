@@ -7,16 +7,23 @@ import org.w3c.dom.Node;
 
 import javax.xml.xpath.*;
 
-public class DownloadLinksXPathCustomExtractor extends XPathCustomExtractor {
-    private static Logger logger = LogManager.getLogger(DownloadLinksXPathCustomExtractor.class);
-    
+public class DownloadLinksXmlCustomExtractor extends XmlCustomExtractor {
+    private static Logger logger = LogManager.getLogger(DownloadLinksXmlCustomExtractor.class);
+
+    public DownloadLinksXmlCustomExtractor() {
+        super();
+    }
+
+    public DownloadLinksXmlCustomExtractor(boolean isThrowException) {
+        super(isThrowException);
+    }
+
     @Override
     public Object process(XPath xPath, Node node) throws XPathException {
 
         MetadataDownloadLink link = null;
 
         try {
-            link = new MetadataDownloadLink();
             XPathExpression urlExpr =
                     xPath.compile("./*/gmd:linkage/gmd:URL/text()");
             String url = (String) urlExpr.evaluate(node, XPathConstants.STRING);
@@ -33,15 +40,20 @@ public class DownloadLinksXPathCustomExtractor extends XPathCustomExtractor {
                     xPath.compile("./*/gmd:description/gco:CharacterString/text()");
             String desc = (String) descExpr.evaluate(node, XPathConstants.STRING);
 
-
+            link = new MetadataDownloadLink();
             link.setDesc(desc);
             link.setProtocol(protocol);
             link.setTitle(title);
             link.setUrl(url);
         } catch (XPathExpressionException e) {
-            logger.debug("Error reading data from node", e);
+            handleExtractorException(e, null);
         }
 
         return link;
+    }
+
+    @Override
+    protected Logger getLogger() {
+        return logger;
     }
 }

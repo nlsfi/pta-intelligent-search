@@ -1,8 +1,6 @@
-package fi.maanmittauslaitos.pta.search.metadata.json;
+package fi.maanmittauslaitos.pta.search.metadata.json.extractor;
 
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
-import fi.maanmittauslaitos.pta.search.documentprocessor.ListCustomExtractor;
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuery;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.JsonDocumentQueryImpl;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.QueryResult;
 import fi.maanmittauslaitos.pta.search.metadata.model.ResponsibleParty;
@@ -13,9 +11,17 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResponsiblePartyCKANCustomExtractor implements ListCustomExtractor {
+public class ResponsiblePartyCKANCustomExtractor extends JsonPathListCustomExtractor {
 
 	private static final Logger logger = LogManager.getLogger(ResponsiblePartyCKANCustomExtractor.class);
+
+	public ResponsiblePartyCKANCustomExtractor() {
+		super();
+	}
+
+	public ResponsiblePartyCKANCustomExtractor(boolean isThrowException) {
+		super(isThrowException);
+	}
 
 	private TextRewriter organisationNameRewriter = new TextRewriter() {
 
@@ -39,22 +45,14 @@ public class ResponsiblePartyCKANCustomExtractor implements ListCustomExtractor 
 	}
 
 	@Override
-	public Object process(DocumentQuery documentQuery, List<QueryResult> queryResults) throws DocumentProcessingException {
-		if (!(documentQuery instanceof JsonDocumentQueryImpl)) {
-			throw new DocumentProcessingException("This extractor should only be used for Json Documents");
-		}
-
-		JsonDocumentQueryImpl jsonDocumentQuery = (JsonDocumentQueryImpl) documentQuery;
-
-
+	public Object process(JsonDocumentQueryImpl query, List<QueryResult> queryResult) throws DocumentProcessingException {
 		if (logger.isTraceEnabled()) {
 			logger.trace("Reading organisation information");
 		}
-
+		List<ResponsibleParty> responsibleParties = new ArrayList<>();
 		try {
-			List<ResponsibleParty> responsibleParties = new ArrayList<>();
-			for (QueryResult mainQueryResult : queryResults) {
-				jsonDocumentQuery.process("", mainQueryResult).stream()
+			for (QueryResult mainQueryResult : queryResult) {
+				query.process("", mainQueryResult).stream()
 						.map(QueryResult::getValue)
 						.map(organisationName -> {
 							ResponsibleParty ret = new ResponsibleParty();
@@ -72,13 +70,16 @@ public class ResponsiblePartyCKANCustomExtractor implements ListCustomExtractor 
 						})
 						.forEach(responsibleParties::add);
 			}
-
-			return responsibleParties;
 		} catch (RuntimeException e) {
-			throw new DocumentProcessingException(e);
+			handleExtractorException(e, null);
 		}
 
+		return responsibleParties;
 
 	}
 
+	@Override
+	protected Logger getLogger() {
+		return logger;
+	}
 }

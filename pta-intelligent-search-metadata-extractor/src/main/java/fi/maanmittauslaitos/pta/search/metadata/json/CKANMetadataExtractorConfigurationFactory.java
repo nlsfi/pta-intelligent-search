@@ -1,22 +1,26 @@
 package fi.maanmittauslaitos.pta.search.metadata.json;
 
-import fi.maanmittauslaitos.pta.search.documentprocessor.CustomExtractor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl.FieldExtractorType;
-import fi.maanmittauslaitos.pta.search.documentprocessor.ListCustomExtractor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.QueryResult;
 import fi.maanmittauslaitos.pta.search.metadata.MetadataExtractorConfigurationFactory;
 import fi.maanmittauslaitos.pta.search.metadata.ResultMetadataFields;
+import fi.maanmittauslaitos.pta.search.metadata.json.extractor.DownloadLinksCkanCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.json.extractor.GeographicBoundingBoxCKANCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.json.extractor.ResponsiblePartyCKANCustomExtractor;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static fi.maanmittauslaitos.pta.search.metadata.utils.JsonPathHelper.*;
 
 public class CKANMetadataExtractorConfigurationFactory extends MetadataExtractorConfigurationFactory {
 
@@ -59,6 +63,20 @@ public class CKANMetadataExtractorConfigurationFactory extends MetadataExtractor
 			{"ac-mf", "Atmospheric Conditions and meteorological geographical features"}
 	}).collect(Collectors.toMap(data -> data[0], data -> data[1]));
 
+	private static final boolean DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW = true;
+
+	private Map<String, Boolean> customExtractorExceptionThrowingConfig;
+
+	public CKANMetadataExtractorConfigurationFactory() {
+		this.customExtractorExceptionThrowingConfig = new HashMap<>();
+	}
+
+	public CKANMetadataExtractorConfigurationFactory(Map<String, Boolean> customExtractorExceptionSettings) {
+		if (customExtractorExceptionSettings == null) {
+			customExtractorExceptionSettings = new HashMap<>();
+		}
+		this.customExtractorExceptionThrowingConfig = customExtractorExceptionSettings;
+	}
 
 	@Override
 	public DocumentProcessingConfiguration createMetadataDocumentProcessingConfiguration() {
@@ -155,55 +173,80 @@ public class CKANMetadataExtractorConfigurationFactory extends MetadataExtractor
 		// Organisation names + roles
 		extractors.add(createCustomListJsonPathExtractor(
 				ResultMetadataFields.ORGANISATIONS,
-				new ResponsiblePartyCKANCustomExtractor(),
+				new ResponsiblePartyCKANCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.ORGANISATIONS, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
 				"$.['reporting_organization','reporting_organization_others']"
 		));
 
 		// Geographic bounding box
 		FieldExtractorConfigurationImpl bboxExtractor = (FieldExtractorConfigurationImpl) createCustomJsonPathExtractor(
 				ResultMetadataFields.GEOGRAPHIC_BOUNDING_BOX,
-				new GeographicBoundingBoxCKANCustomExtractor(),
+				new GeographicBoundingBoxCKANCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.GEOGRAPHIC_BOUNDING_BOX, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
 				"$.spatial.coordinates.*.*"
 		);
 		bboxExtractor.setDefaultValue(DEFAULT_BOUNDING_BOX_FOR_CKAN_METADATA);
 		extractors.add(bboxExtractor);
+
+		// download links
+		extractors.add(createCustomListJsonPathExtractor(
+				ResultMetadataFields.DOWNLOAD_LINKS,
+				new DownloadLinksCkanCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.DOWNLOAD_LINKS, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
+				"$.resources[0].['url', 'name']"
+		));
+
+		// CKAN custom field used to extract creation date
+		FieldExtractorConfigurationImpl creationDateExtractor = (FieldExtractorConfigurationImpl) createFirstMatchingJsonPathExtractor(
+				ResultMetadataFields.CKAN_CREATION_DATE,
+				"$.resources[0].created", "$.metadata_created"
+		);
+		creationDateExtractor.setTrimmer(dStamp -> dStamp != null ? dStamp.trim().split("\\.")[0] : null);
+		extractors.add(creationDateExtractor);
+
+
+		// organizations
+		extractors.add(createCustomListJsonPathExtractor(
+				ResultMetadataFields.ORGANISATIONS_RESOURCE,
+				new ResponsiblePartyCKANCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.ORGANISATIONS_RESOURCE, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
+				"$.['reporting_organization','reporting_person_email']"
+
+		));
+
+		extractors.add(createCustomListJsonPathExtractor(
+				ResultMetadataFields.ORGANISATIONS_METADATA,
+				new ResponsiblePartyCKANCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.ORGANISATIONS_METADATA, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
+				"$.['author', 'author_email']"
+
+		));
+
+		// we use a dummy key so the fields are parsed in the same format as the default org config and thus we can use the default
+		// ResponsiblePartyCKANCustomExtractor for this also.
+		extractors.add(createCustomListJsonPathExtractor(
+				ResultMetadataFields.ORGANISATIONS_OTHER,
+				new ResponsiblePartyCKANCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.ORGANISATIONS_OTHER, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
+				"$.['a_key_that_should_never_exist_or_else_this_might_break', 'reporting_organization_others']"
+		));
+
+		// Keywords
+		extractors.add(createJsonPathExtractor(
+				ResultMetadataFields.KEYWORDS_ALL,
+				FieldExtractorConfigurationImpl.FieldExtractorType.ALL_MATCHING_VALUES,
+				"$.tag_keyword"
+		));
+
 
 		return configuration;
 	}
 
 	@Override
 	public DocumentProcessor createMetadataDocumentProcessor() throws ParserConfigurationException {
-		DocumentProcessingConfiguration configuration = createMetadataDocumentProcessingConfiguration();
+		return createMetadataDocumentProcessor(null);
+	}
+
+	@Override
+	public DocumentProcessor createMetadataDocumentProcessor(DocumentProcessingConfiguration configuration) throws ParserConfigurationException {
+		if (configuration == null ) {
+			configuration = createMetadataDocumentProcessingConfiguration();
+		}
 		return getDocumentProcessorFactory().createJsonProcessor(configuration);
-	}
-
-	private FieldExtractorConfiguration createJsonPathExtractor(String field, FieldExtractorType type, String jsonPath) {
-		FieldExtractorConfigurationImpl ret = new FieldExtractorConfigurationImpl();
-		ret.setField(field);
-		ret.setType(type);
-		ret.setQuery(jsonPath);
-		return ret;
-	}
-
-	private FieldExtractorConfiguration createCustomJsonPathExtractor(String field, CustomExtractor extractor, String jsonPath) {
-		FieldExtractorConfigurationImpl ret = (FieldExtractorConfigurationImpl) createJsonPathExtractor(field,
-				FieldExtractorType.CUSTOM_CLASS, jsonPath);
-		ret.setCustomExtractor(extractor);
-		return ret;
-	}
-
-	private FieldExtractorConfiguration createCustomListJsonPathExtractor(String field, ListCustomExtractor extractor, String jsonPath) {
-		FieldExtractorConfigurationImpl ret = (FieldExtractorConfigurationImpl) createJsonPathExtractor(field,
-				FieldExtractorType.CUSTOM_CLASS_SINGLE_VALUE, jsonPath);
-		ret.setListCustomExtractor(extractor);
-		return ret;
-	}
-
-	private FieldExtractorConfiguration createFirstMatchingJsonPathExtractor(String field, String... jsonPaths) {
-		FieldExtractorConfigurationImpl ret = (FieldExtractorConfigurationImpl) createJsonPathExtractor(field,
-				FieldExtractorType.FIRST_MATCHING_FROM_MULTIPLE_QUERIES, jsonPaths[0]);
-		ret.setExtraQueries(Arrays.asList(jsonPaths).subList(1, jsonPaths.length));
-		return ret;
 	}
 
 }

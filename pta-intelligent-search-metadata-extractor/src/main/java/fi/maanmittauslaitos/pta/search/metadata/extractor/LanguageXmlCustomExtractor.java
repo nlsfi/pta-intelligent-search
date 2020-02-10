@@ -10,9 +10,17 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 
-public class LanguageXPathCustomExtractor extends XPathCustomExtractor {
+public class LanguageXmlCustomExtractor extends XmlCustomExtractor {
 
-    private Logger logger = LogManager.getLogger(LanguageXPathCustomExtractor.class);
+    private Logger logger = LogManager.getLogger(LanguageXmlCustomExtractor.class);
+
+    public LanguageXmlCustomExtractor() {
+        super();
+    }
+
+    public LanguageXmlCustomExtractor(boolean isThrowException) {
+        super(isThrowException);
+    }
 
     /**
      * Languages can apperantly be  in two different formats (at least).
@@ -61,9 +69,14 @@ public class LanguageXPathCustomExtractor extends XPathCustomExtractor {
             }
 
         } catch (XPathExpressionException e) {
-            logger.debug("Error reading data from node", e);
+            handleExtractorException(e, null);
         }
 
         return language;
+    }
+
+    @Override
+    protected Logger getLogger() {
+        return logger;
     }
 }

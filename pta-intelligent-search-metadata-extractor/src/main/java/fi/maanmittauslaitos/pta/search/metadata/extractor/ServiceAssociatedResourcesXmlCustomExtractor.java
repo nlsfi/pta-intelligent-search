@@ -7,9 +7,17 @@ import org.w3c.dom.Node;
 
 import javax.xml.xpath.*;
 
-public class ServiceAssociatedResourcesXPathCustomExtractor extends XPathCustomExtractor {
+public class ServiceAssociatedResourcesXmlCustomExtractor extends XmlCustomExtractor {
 
-    private Logger logger = LogManager.getLogger(ServiceAssociatedResourcesXPathCustomExtractor.class);
+    private Logger logger = LogManager.getLogger(ServiceAssociatedResourcesXmlCustomExtractor.class);
+
+    public ServiceAssociatedResourcesXmlCustomExtractor() {
+        super();
+    }
+
+    public ServiceAssociatedResourcesXmlCustomExtractor(boolean isThrowException) {
+        super(isThrowException);
+    }
 
     @Override
     public Object process(XPath xPath, Node node) throws XPathException {
@@ -27,10 +35,15 @@ public class ServiceAssociatedResourcesXPathCustomExtractor extends XPathCustomE
             associatedResource.setType("isDataset");
 
         } catch (XPathExpressionException e) {
-            logger.debug("Error reading data from node", e);
+            handleExtractorException(e, null);
         }
 
 
         return associatedResource;
+    }
+
+    @Override
+    protected Logger getLogger() {
+        return logger;
     }
 }

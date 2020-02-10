@@ -2,6 +2,12 @@ package fi.maanmittauslaitos.pta.search.metadata.model;
 
 public class MetadataAssociatedResource {
 
+    public static final String PTH_RESOURCE_TYPE_SERVICE = "service";
+    public static final String PTH_RESOURCE_TYPE_DATASET = "dataset";
+    public static final String PTH_RESOURCE_TYPE_SERIES = "series";
+    public static final String PTH_RESOURCE_TYPE_OTHER = "other";
+
+
     private String metadataId;
     private String title;
     private String type;
@@ -37,5 +43,13 @@ public class MetadataAssociatedResource {
 
     public void setPortalMetadataLink(String portalMetadataLink) {
         this.portalMetadataLink = portalMetadataLink;
+    }
+
+    public boolean isService() {
+        return PTH_RESOURCE_TYPE_SERVICE.equals(this.type);
+    }
+
+    public boolean isDataset() {
+        return PTH_RESOURCE_TYPE_DATASET.equals(this.type) || PTH_RESOURCE_TYPE_SERIES.equals(type);
     }
 }

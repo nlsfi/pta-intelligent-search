@@ -21,9 +21,17 @@ import java.util.stream.IntStream;
 
 import static fi.maanmittauslaitos.pta.search.metadata.utils.XPathHelper.matches;
 
-public class ResponsiblePartyXmlCustomExtractor extends XPathCustomExtractor {
+public class ResponsiblePartyXmlCustomExtractor extends XmlCustomExtractor {
 	private static final Logger logger = LogManager.getLogger(ResponsiblePartyXmlCustomExtractor.class);
-	
+
+	public ResponsiblePartyXmlCustomExtractor() {
+		super();
+	}
+
+	public ResponsiblePartyXmlCustomExtractor(boolean isThrowException) {
+		super(isThrowException);
+	}
+
 	private TextRewriter organisationNameRewriter = new TextRewriter() {
 		
 		@Override
@@ -47,73 +55,84 @@ public class ResponsiblePartyXmlCustomExtractor extends XPathCustomExtractor {
 
 	@Override
 	public Object process(XPath xPath, Node node) throws XPathException {
-		ResponsibleParty ret = new ResponsibleParty();
-		
-		String organisationName;
-		String isoRole;
-		
-		if (logger.isTraceEnabled()) {
-			logger.trace("Reading organisation information");
-		}
-		
-		XPathExpression nameExpr =
-				xPath.compile("./gmd:organisationName/gco:CharacterString/text()");
-		organisationName = (String)nameExpr.evaluate(node, XPathConstants.STRING);
-		
-		organisationName = getOrganisationNameRewriter().rewrite(organisationName);
+		ResponsibleParty ret = null;
 
-		XPathExpression isoRoleExpr =
-				xPath.compile("./gmd:role/gmd:CI_RoleCode[" +
-						matches("@codeList", "'http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode'") +
-						"]/@codeListValue");
-		isoRole = (String)isoRoleExpr.evaluate(node, XPathConstants.STRING);
-		
-		if (logger.isTraceEnabled()) {
-			logger.trace("\tOrganisation role: "+isoRole);
-			logger.trace("\tCanonical name: "+organisationName);
-		}
-		
-		XPathExpression localisedNameExpr = 
-				xPath.compile("./gmd:organisationName/gmd:PT_FreeText/*/gmd:LocalisedCharacterString");
-		
-		NodeList names = (NodeList)localisedNameExpr.evaluate(node, XPathConstants.NODESET);
-		for (int i = 0; i < names.getLength(); i++) {
-			Node localisedNameNode = names.item(i);
-			try {
-				
-				String language = localisedNameNode.getAttributes().getNamedItem("locale").getNodeValue();
-				if (language.startsWith("#")) {
-					language = language.substring(1);
-				}
-				String value = localisedNameNode.getTextContent();
-				
-				value = getOrganisationNameRewriter().rewrite(value, language);
-				
-				ret.getLocalisedOrganisationName().put(language, value);
-				
-				if (logger.isTraceEnabled()) {
-					logger.trace("\tLocalized organisation name: "+value+" ("+language+")");
-				}
-				
-			} catch(Exception e) {
-				logger.info("Unable to extract localized organisation name", e);
+		try {
+			String organisationName;
+			String isoRole;
+
+			if (logger.isTraceEnabled()) {
+				logger.trace("Reading organisation information");
 			}
-		}
 
-		XPathExpression emailsExpr =
-				xPath.compile("./gmd:contactInfo/*/gmd:address/*/gmd:electronicMailAddress/gco:CharacterString");
-		NodeList emailsNodeList = Optional.of((NodeList) emailsExpr.evaluate(node, XPathConstants.NODESET)).orElse(new EmptyNodeList());
-		List<String> emails = IntStream.range(0, emailsNodeList.getLength())
-				.mapToObj(emailsNodeList::item)
-				.map(Node::getTextContent)
-				.filter(Objects::nonNull)
-				.collect(Collectors.toList());
-		ret.setEmail(emails);
-		
-		ret.setOrganisationName(organisationName);
-		ret.setIsoRole(isoRole);
-		
+			XPathExpression nameExpr =
+					xPath.compile("./gmd:organisationName/gco:CharacterString/text()");
+			organisationName = (String)nameExpr.evaluate(node, XPathConstants.STRING);
+
+			organisationName = getOrganisationNameRewriter().rewrite(organisationName);
+
+			XPathExpression isoRoleExpr =
+					xPath.compile("./gmd:role/gmd:CI_RoleCode[" +
+							matches("@codeList", "'http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode'") +
+							"]/@codeListValue");
+			isoRole = (String)isoRoleExpr.evaluate(node, XPathConstants.STRING);
+
+			if (logger.isTraceEnabled()) {
+				logger.trace("\tOrganisation role: "+isoRole);
+				logger.trace("\tCanonical name: "+organisationName);
+			}
+
+			XPathExpression localisedNameExpr =
+					xPath.compile("./gmd:organisationName/gmd:PT_FreeText/*/gmd:LocalisedCharacterString");
+
+			NodeList names = (NodeList)localisedNameExpr.evaluate(node, XPathConstants.NODESET);
+			ret = new ResponsibleParty();
+
+			for (int i = 0; i < names.getLength(); i++) {
+				Node localisedNameNode = names.item(i);
+				try {
+
+					String language = localisedNameNode.getAttributes().getNamedItem("locale").getNodeValue();
+					if (language.startsWith("#")) {
+						language = language.substring(1);
+					}
+					String value = localisedNameNode.getTextContent();
+
+					value = getOrganisationNameRewriter().rewrite(value, language);
+
+					ret.getLocalisedOrganisationName().put(language, value);
+
+					if (logger.isTraceEnabled()) {
+						logger.trace("\tLocalized organisation name: "+value+" ("+language+")");
+					}
+
+				} catch(Exception e) {
+					logger.info("Unable to extract localized organisation name", e);
+				}
+			}
+
+			XPathExpression emailsExpr =
+					xPath.compile("./gmd:contactInfo/*/gmd:address/*/gmd:electronicMailAddress/gco:CharacterString");
+			NodeList emailsNodeList = Optional.of((NodeList) emailsExpr.evaluate(node, XPathConstants.NODESET)).orElse(new EmptyNodeList());
+			List<String> emails = IntStream.range(0, emailsNodeList.getLength())
+					.mapToObj(emailsNodeList::item)
+					.map(Node::getTextContent)
+					.filter(Objects::nonNull)
+					.collect(Collectors.toList());
+			ret.setEmail(emails);
+
+			ret.setOrganisationName(organisationName);
+			ret.setIsoRole(isoRole);
+
+		} catch (XPathException e) {
+			handleExtractorException(e, null);
+		}
 		return ret;
+	}
+
+	@Override
+	protected Logger getLogger() {
+		return logger;
 	}
 
 }

@@ -1,26 +1,31 @@
-package fi.maanmittauslaitos.pta.search.metadata.json;
+package fi.maanmittauslaitos.pta.search.metadata.json.extractor;
 
-import fi.maanmittauslaitos.pta.search.documentprocessor.CustomExtractor;
-import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuery;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.JsonDocumentQueryImpl;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.JsonQueryResultImpl;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.QueryResult;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class GeographicBoundingBoxCKANCustomExtractor implements CustomExtractor {
+public class GeographicBoundingBoxCKANCustomExtractor extends JsonPathCustomExtractor {
+
+	private static Logger logger = LogManager.getLogger(GeographicBoundingBoxCKANCustomExtractor.class);
+
+	public GeographicBoundingBoxCKANCustomExtractor() {
+		super();
+	}
+
+	public GeographicBoundingBoxCKANCustomExtractor(boolean isThrowException) {
+		super(isThrowException);
+	}
 
 	@Override
-	public Object process(DocumentQuery documentQuery, QueryResult queryResult) throws DocumentProcessingException {
+	public Object process(JsonDocumentQueryImpl query, QueryResult queryResult) throws RuntimeException {
 		Double[] ret = new Double[4];
-
-		if (!(documentQuery instanceof JsonDocumentQueryImpl)) {
-			throw new DocumentProcessingException("This extractor should only be used for Json Documents");
-		}
 
 		List<List<Double>> coordinates;
 		try {
@@ -48,10 +53,19 @@ public class GeographicBoundingBoxCKANCustomExtractor implements CustomExtractor
 			ret[3] = Ys.stream().max(Double::compareTo).orElseThrow(MissingCoordException::new);
 
 		} catch (RuntimeException e) {
-			return null;
+			if (e instanceof MissingCoordException) {
+				return null;
+			} else {
+				handleExtractorException(e, null);
+			}
 		}
 
 		return Arrays.asList(ret);
+	}
+
+	@Override
+	protected Logger getLogger() {
+		return logger;
 	}
 
 	private static class MissingCoordException extends RuntimeException {
