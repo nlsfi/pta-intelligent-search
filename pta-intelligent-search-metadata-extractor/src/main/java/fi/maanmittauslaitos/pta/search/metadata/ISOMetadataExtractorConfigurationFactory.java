@@ -149,7 +149,7 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 				ResultMetadataFields.KEYWORDS_ALL,
 				FieldExtractorType.ALL_MATCHING_VALUES,
 				"//gmd:identificationInfo/*/gmd:descriptiveKeywords/*/gmd:keyword/*[" +
-						doesntMatch("text()", "'avoindata.fi'") + "]/text()"));
+						doesntMatch("text()", "'avoindata.fi'") + "and normalize-space(.//text())]/text()"));
 
 		// Inspire themes
 		extractors.add(createXPathExtractor(
