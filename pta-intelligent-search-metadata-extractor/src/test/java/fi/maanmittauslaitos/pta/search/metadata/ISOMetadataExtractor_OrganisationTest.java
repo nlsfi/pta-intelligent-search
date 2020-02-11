@@ -25,6 +25,9 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 		
 		assertEquals("Maanmittauslaitos", party.getOrganisationName());
 		assertEquals("owner", party.getIsoRole());
+
+		assertEquals(1, party.getEmail().size());
+		assertEquals("asiakaspalvelu@maanmittauslaitos.fi", party.getEmail().get(0));
 		
 		assertEquals(2, party.getLocalisedOrganisationName().size());
 		assertEquals("National Land Survey of Finland", party.getLocalisedOrganisationName().get("EN"));
@@ -43,6 +46,9 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 		
 		assertEquals("Tilastokeskus", party1.getOrganisationName());
 		assertEquals("originator", party1.getIsoRole());
+
+		assertEquals(1, party1.getEmail().size());
+		assertEquals("inspire@stat.fi", party1.getEmail().get(0));
 		
 		assertEquals(0, party1.getLocalisedOrganisationName().size());
 		
@@ -50,6 +56,9 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 		
 		assertEquals("Tilastokeskus", party2.getOrganisationName());
 		assertEquals("publisher", party2.getIsoRole());
+
+		assertEquals(1, party2.getEmail().size());
+		assertEquals("inspire@stat.fi", party2.getEmail().get(0));
 		
 		assertEquals(0, party2.getLocalisedOrganisationName().size());
 	}
@@ -66,14 +75,20 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 		
 		assertEquals("Tilastokeskus", party1.getOrganisationName());
 		assertEquals("originator", party1.getIsoRole());
-		
+
+		assertEquals(1, party1.getEmail().size());
+		assertEquals("inspire@stat.fi", party1.getEmail().get(0));
+
 		assertEquals(0, party1.getLocalisedOrganisationName().size());
 		
 		ResponsibleParty party2 = organisations.get(1);
 		
 		assertEquals("Tilastokeskus", party2.getOrganisationName());
 		assertEquals("publisher", party2.getIsoRole());
-		
+
+		assertEquals(1, party2.getEmail().size());
+		assertEquals("inspire@stat.fi", party2.getEmail().get(0));
+
 		assertEquals(0, party2.getLocalisedOrganisationName().size());
 	}
 
@@ -85,7 +100,10 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 
 		assertEquals(1, organisations.size());
 		ResponsibleParty party = organisations.get(0);
-		
+
+		assertEquals(1, party.getEmail().size());
+		assertEquals("mvmi@luke.fi", party.getEmail().get(0));
+
 		assertEquals("Luonnonvarakeskus (Luke)", party.getOrganisationName());
 		assertEquals("owner", party.getIsoRole());
 		
@@ -102,7 +120,10 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 
 		assertEquals(1, organisations.size());
 		ResponsibleParty party = organisations.get(0);
-		
+
+		assertEquals(1, party.getEmail().size());
+		assertEquals("mvmi@luke.fi", party.getEmail().get(0));
+
 		assertEquals("Luonnonvarakeskus (Luke)", party.getOrganisationName());
 		assertEquals("owner", party.getIsoRole());
 
@@ -138,7 +159,10 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 		
 		assertEquals("canon", party.getOrganisationName());
 		assertEquals("owner", party.getIsoRole());
-		
+
+		assertEquals(1, party.getEmail().size());
+		assertEquals("asiakaspalvelu@maanmittauslaitos.fi", party.getEmail().get(0));
+
 		assertEquals(2, party.getLocalisedOrganisationName().size());
 		assertEquals("canon-EN", party.getLocalisedOrganisationName().get("EN"));
 		assertEquals("canon-SV", party.getLocalisedOrganisationName().get("SV"));
@@ -152,6 +176,9 @@ public class ISOMetadataExtractor_OrganisationTest extends BaseMetadataExtractor
 
 		assertEquals(1, organisations.size());
 		ResponsibleParty party = organisations.get(0);
+
+		assertEquals(1, party.getEmail().size());
+		assertEquals("liisa.nummelin@pori.fi", party.getEmail().get(0));
 		
 		assertEquals("Satakunnan museo", party.getOrganisationName());
 		assertEquals("pointOfContact", party.getIsoRole());
