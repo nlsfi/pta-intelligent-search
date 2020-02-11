@@ -1,7 +1,7 @@
 package fi.maanmittauslaitos.pta.search.metadata.extractor;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
 
 import javax.xml.xpath.XPath;
@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 public class GeographicBoundingBoxXmlCustomExtractor extends XmlCustomExtractor {
 
-	private static Logger logger = LogManager.getLogger(GeographicBoundingBoxXmlCustomExtractor.class);
+	private static Logger logger = LoggerFactory.getLogger(GeographicBoundingBoxXmlCustomExtractor.class);
 
 	public GeographicBoundingBoxXmlCustomExtractor() {
 		super();

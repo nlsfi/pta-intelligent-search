@@ -1,6 +1,6 @@
 package fi.maanmittauslaitos.pta.search.metadata.model;
 
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 
 public abstract class NonThrowingCustomExtractor {
 

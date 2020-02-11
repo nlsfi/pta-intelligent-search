@@ -5,8 +5,8 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.query.JsonDocumentQuery
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.JsonQueryResultImpl;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.QueryResult;
 import fi.maanmittauslaitos.pta.search.metadata.model.MetadataDownloadLink;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class DownloadLinksCkanCustomExtractor extends JsonPathListCustomExtractor {
 
-    private static final Logger logger = LogManager.getLogger(DownloadLinksCkanCustomExtractor.class);
+    private static final Logger logger = LoggerFactory.getLogger(DownloadLinksCkanCustomExtractor.class);
 
     public DownloadLinksCkanCustomExtractor() {
         super();

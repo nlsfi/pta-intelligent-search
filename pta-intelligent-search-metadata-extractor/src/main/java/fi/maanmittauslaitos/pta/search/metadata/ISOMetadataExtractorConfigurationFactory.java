@@ -145,6 +145,7 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 				"//gmd:identificationInfo/*/gmd:topicCategory/gmd:MD_TopicCategoryCode/text()"));
 
 		// Keywords
+		// TODO: add test for KMTK keywords
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.KEYWORDS_ALL,
 				FieldExtractorType.ALL_MATCHING_VALUES,

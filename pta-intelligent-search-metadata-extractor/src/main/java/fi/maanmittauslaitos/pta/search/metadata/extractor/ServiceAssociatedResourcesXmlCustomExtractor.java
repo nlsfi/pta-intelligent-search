@@ -1,15 +1,16 @@
 package fi.maanmittauslaitos.pta.search.metadata.extractor;
 
 import fi.maanmittauslaitos.pta.search.metadata.model.MetadataAssociatedResource;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.w3c.dom.Node;
 
 import javax.xml.xpath.*;
 
 public class ServiceAssociatedResourcesXmlCustomExtractor extends XmlCustomExtractor {
 
-    private Logger logger = LogManager.getLogger(ServiceAssociatedResourcesXmlCustomExtractor.class);
+    private Logger logger = LoggerFactory.getLogger(ServiceAssociatedResourcesXmlCustomExtractor.class);
 
     public ServiceAssociatedResourcesXmlCustomExtractor() {
         super();

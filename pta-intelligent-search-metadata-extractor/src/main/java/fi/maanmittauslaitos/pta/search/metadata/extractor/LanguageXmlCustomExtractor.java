@@ -1,8 +1,8 @@
 package fi.maanmittauslaitos.pta.search.metadata.extractor;
 
 import fi.maanmittauslaitos.pta.search.metadata.utils.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
 
 import javax.xml.xpath.XPath;
@@ -12,7 +12,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 public class LanguageXmlCustomExtractor extends XmlCustomExtractor {
 
-    private Logger logger = LogManager.getLogger(LanguageXmlCustomExtractor.class);
+    private Logger logger = LoggerFactory.getLogger(LanguageXmlCustomExtractor.class);
 
     public LanguageXmlCustomExtractor() {
         super();

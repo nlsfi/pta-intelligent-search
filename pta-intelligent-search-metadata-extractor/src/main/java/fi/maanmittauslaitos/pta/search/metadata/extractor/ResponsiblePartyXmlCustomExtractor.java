@@ -3,8 +3,8 @@ package fi.maanmittauslaitos.pta.search.metadata.extractor;
 import fi.maanmittauslaitos.pta.search.metadata.model.EmptyNodeList;
 import fi.maanmittauslaitos.pta.search.metadata.model.ResponsibleParty;
 import fi.maanmittauslaitos.pta.search.metadata.model.TextRewriter;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -22,7 +22,8 @@ import java.util.stream.IntStream;
 import static fi.maanmittauslaitos.pta.search.metadata.utils.XPathHelper.matches;
 
 public class ResponsiblePartyXmlCustomExtractor extends XmlCustomExtractor {
-	private static final Logger logger = LogManager.getLogger(ResponsiblePartyXmlCustomExtractor.class);
+
+	private static final Logger logger = LoggerFactory.getLogger(ResponsiblePartyXmlCustomExtractor.class);
 
 	public ResponsiblePartyXmlCustomExtractor() {
 		super();

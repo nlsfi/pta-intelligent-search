@@ -106,4 +106,24 @@ public class ISOMetadataExtractor_KeywordsTest extends BaseMetadataExtractorTest
 			}, keywords.toArray());
 	}
 
+
+	@Test
+	public void testKMTKAllKeywordsParsed() throws Exception {
+		Document document = createKMTKRakennukset();
+
+		List<String> keywords = document.getListValue(ResultMetadataFields.KEYWORDS_ALL,  String.class);
+
+		assertArrayEquals(new String[] {
+				"Rakennukset",
+				"Rakennettu ympäristö",
+				"Rakennusten käyttötarkoitus",
+
+				"Rakennukset ja rakennelmat",
+				"Rakennukset",
+				"Suomi",
+				"Kansallinen"
+		}, keywords.toArray());
+
+	}
+
 }
