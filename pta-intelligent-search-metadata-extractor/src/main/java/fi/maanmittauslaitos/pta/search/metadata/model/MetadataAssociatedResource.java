@@ -11,7 +11,7 @@ public class MetadataAssociatedResource {
     private String metadataId;
     private String title;
     private String type;
-    private String portalMetadataLink;
+    private String url;
 
     public String getMetadataId() {
         return metadataId;
@@ -37,19 +37,19 @@ public class MetadataAssociatedResource {
         this.type = type;
     }
 
-    public String getPortalMetadataLink() {
-        return portalMetadataLink;
-    }
-
-    public void setPortalMetadataLink(String portalMetadataLink) {
-        this.portalMetadataLink = portalMetadataLink;
-    }
-
     public boolean isService() {
         return PTH_RESOURCE_TYPE_SERVICE.equals(this.type);
     }
 
     public boolean isDataset() {
         return PTH_RESOURCE_TYPE_DATASET.equals(this.type) || PTH_RESOURCE_TYPE_SERIES.equals(type);
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

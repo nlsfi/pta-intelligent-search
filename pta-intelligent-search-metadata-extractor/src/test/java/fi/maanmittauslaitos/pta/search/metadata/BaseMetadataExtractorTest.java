@@ -123,5 +123,14 @@ public abstract class BaseMetadataExtractorTest {
 		}
 		return document;
 	}
+
+	protected Document createAaltohavainnotAssociatedResourcesDocument()
+			throws DocumentProcessingException, IOException, FileNotFoundException {
+		Document document;
+		try (FileInputStream fis = new FileInputStream("src/test/resources/26259eec-b437-4f10-86bd-8045b39a82d3_associatedresources_fromcsw.xml")) {
+			document = processor.processDocument(fis);
+		}
+		return document;
+	}
 	
 }

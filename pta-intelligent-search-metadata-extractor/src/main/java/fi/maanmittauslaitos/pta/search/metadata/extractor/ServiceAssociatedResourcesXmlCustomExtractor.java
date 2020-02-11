@@ -35,6 +35,11 @@ public class ServiceAssociatedResourcesXmlCustomExtractor extends XmlCustomExtra
             // A service can't be linked to another service -> always data sets, so we hard-code it here
             associatedResource.setType("isDataset");
 
+            XPathExpression urlExpr =
+                    xPath.compile("./@xlink:href");
+            String url = (String)urlExpr.evaluate(node, XPathConstants.STRING);
+            associatedResource.setUrl(url);
+
         } catch (XPathExpressionException e) {
             handleExtractorException(e, null);
         }

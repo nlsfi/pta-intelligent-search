@@ -364,8 +364,8 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 				"(//gmd:identificationInfo/*/srv:operatesOn)"));
 
 
-		// TODO: add comments explaining ADDITIONAL ?
 		// Additional extractors for other documents
+		// A resources additional resources need to be queried in a separate query, so its included under a separate topic/group
 		// Associated resources
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.ADDITIONAL.ASSOCIATED_RESOURCES,
