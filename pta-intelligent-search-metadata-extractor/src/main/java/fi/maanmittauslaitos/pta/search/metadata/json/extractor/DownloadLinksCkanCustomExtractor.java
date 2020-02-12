@@ -55,11 +55,13 @@ public class DownloadLinksCkanCustomExtractor extends JsonPathListCustomExtracto
                                 String url = getValueSafishly(res, "url", DEFAULT_PARSED_VALUE);
                                 String protocol = parseUrlProtocol(url);
                                 String title = getValueSafishly(res, "name", DEFAULT_PARSED_VALUE);
+                                String description = getValueSafishly(res, "description", DEFAULT_PARSED_VALUE);
 
                                 link.setDesc(DEFAULT_PARSED_VALUE);
                                 link.setProtocol(protocol);
                                 link.setTitle(title);
                                 link.setUrl(url);
+                                link.setDesc(description);
                                 links.add(link);
                             });
                 });

@@ -8,9 +8,10 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigura
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.QueryResult;
 import fi.maanmittauslaitos.pta.search.metadata.MetadataExtractorConfigurationFactory;
 import fi.maanmittauslaitos.pta.search.metadata.ResultMetadataFields;
+import fi.maanmittauslaitos.pta.search.metadata.json.extractor.ResponsiblePartyCKANCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.json.extractor.SimpleResponsiblePartyCKANCustomExtractor;
 import fi.maanmittauslaitos.pta.search.metadata.json.extractor.DownloadLinksCkanCustomExtractor;
 import fi.maanmittauslaitos.pta.search.metadata.json.extractor.GeographicBoundingBoxCKANCustomExtractor;
-import fi.maanmittauslaitos.pta.search.metadata.json.extractor.ResponsiblePartyCKANCustomExtractor;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.util.Arrays;
@@ -173,7 +174,7 @@ public class CKANMetadataExtractorConfigurationFactory extends MetadataExtractor
 		// Organisation names + roles
 		extractors.add(createCustomListJsonPathExtractor(
 				ResultMetadataFields.ORGANISATIONS,
-				new ResponsiblePartyCKANCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.ORGANISATIONS, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
+				new SimpleResponsiblePartyCKANCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.ORGANISATIONS, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
 				"$.['reporting_organization','reporting_organization_others']"
 		));
 
@@ -190,7 +191,7 @@ public class CKANMetadataExtractorConfigurationFactory extends MetadataExtractor
 		extractors.add(createCustomListJsonPathExtractor(
 				ResultMetadataFields.DOWNLOAD_LINKS,
 				new DownloadLinksCkanCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.DOWNLOAD_LINKS, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
-				"$.resources[0].['url', 'name']"
+				"$.resources[0].['url', 'name', 'description']"
 		));
 
 		// CKAN custom field used to extract creation date
@@ -221,7 +222,7 @@ public class CKANMetadataExtractorConfigurationFactory extends MetadataExtractor
 		// ResponsiblePartyCKANCustomExtractor for this also.
 		extractors.add(createCustomListJsonPathExtractor(
 				ResultMetadataFields.ORGANISATIONS_OTHER,
-				new ResponsiblePartyCKANCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.ORGANISATIONS_OTHER, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
+				new SimpleResponsiblePartyCKANCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.ORGANISATIONS_OTHER, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
 				"$.['a_key_that_should_never_exist_or_else_this_might_break', 'reporting_organization_others']"
 		));
 

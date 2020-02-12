@@ -101,7 +101,7 @@ public class ResponsiblePartyXmlCustomExtractor extends XmlCustomExtractor {
 
 					value = getOrganisationNameRewriter().rewrite(value, language);
 
-					ret.getLocalisedOrganisationName().put(language, value);
+					ret.getLocalizedPartyName().put(language, value);
 
 					if (logger.isTraceEnabled()) {
 						logger.trace("\tLocalized organisation name: "+value+" ("+language+")");
@@ -122,7 +122,7 @@ public class ResponsiblePartyXmlCustomExtractor extends XmlCustomExtractor {
 					.collect(Collectors.toList());
 			ret.setEmail(emails);
 
-			ret.setOrganisationName(organisationName);
+			ret.setPartyName(organisationName);
 			ret.setIsoRole(isoRole);
 
 		} catch (XPathException e) {

@@ -2,14 +2,18 @@ package fi.maanmittauslaitos.pta.search.metadata.json.extractor;
 
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.JsonDocumentQueryImpl;
+import fi.maanmittauslaitos.pta.search.documentprocessor.query.JsonQueryResultImpl;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.QueryResult;
 import fi.maanmittauslaitos.pta.search.metadata.model.ResponsibleParty;
 import fi.maanmittauslaitos.pta.search.metadata.model.TextRewriter;
+import fi.maanmittauslaitos.pta.search.metadata.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class ResponsiblePartyCKANCustomExtractor extends JsonPathListCustomExtractor {
 
@@ -45,32 +49,50 @@ public class ResponsiblePartyCKANCustomExtractor extends JsonPathListCustomExtra
 	}
 
 	@Override
-	public Object process(JsonDocumentQueryImpl query, List<QueryResult> queryResult) throws DocumentProcessingException {
-		if (logger.isTraceEnabled()) {
-			logger.trace("Reading organisation information");
-		}
+	public Object process(JsonDocumentQueryImpl query, List<QueryResult> queryResults) throws DocumentProcessingException {
 		List<ResponsibleParty> responsibleParties = new ArrayList<>();
+
 		try {
-			for (QueryResult mainQueryResult : queryResult) {
-				query.process("", mainQueryResult).stream()
-						.map(QueryResult::getValue)
-						.map(organisationName -> {
-							ResponsibleParty ret = new ResponsibleParty();
-							String cleanedOrganisationName = getOrganisationNameRewriter().rewrite(organisationName);
+			ResponsibleParty rp = new ResponsibleParty();
+			queryResults.stream()
+					.filter(r -> r instanceof JsonQueryResultImpl)
+					.map(r -> (JsonQueryResultImpl) r)
+					.forEach(result -> {
+						List<Object> rawResList = result.getRawValue();
+						rawResList.stream()
+								.filter(rawResult -> rawResult instanceof Map || rawResult instanceof String)
+								.forEach(rawResult -> {
+									String org = DEFAULT_PARSED_VALUE;
+									String email = null;
+									String role = DEFAULT_PARSED_VALUE;
+									// Two values are grabbed for the reporting organisation (resource responsible party), so it is parsed as a map
+									if (rawResult instanceof Map) {
+										Map<String, Object> res = (Map<String,Object>) rawResult;
+										org = getValueSafishly(res, "reporting_organization", DEFAULT_PARSED_VALUE);
+										email = getValueSafishly(res, "reporting_person_email", DEFAULT_PARSED_VALUE);
+										// hard-coded to owner (is the resource owner"
+										role = "owner";
+									}
 
-							if (logger.isTraceEnabled()) {
-								//logger.trace("\tOrganisation role: "+isoRole);
-								logger.trace("\tCanonical name: " + cleanedOrganisationName);
-							}
-							ret.setOrganisationName(cleanedOrganisationName);
-							ret.getLocalisedOrganisationName().put("FI",
-									getOrganisationNameRewriter().rewrite(organisationName, "FI"));
+									if(StringUtils.isEmpty(org) && StringUtils.isEmpty(email)) {
+										Map<String, Object> res = (Map<String,Object>) rawResult;
+										org = getValueSafishly(res, "author", DEFAULT_PARSED_VALUE);
+										email = getValueSafishly(res, "author_email", DEFAULT_PARSED_VALUE);
+									}
+									String cleanedOrganisationName = getOrganisationNameRewriter().rewrite(org);
 
-							return ret;
-						})
-						.forEach(responsibleParties::add);
-			}
-		} catch (RuntimeException e) {
+									rp.setIsoRole(role);
+									rp.setEmail(Collections.singletonList(email));
+									rp.setPartyName(cleanedOrganisationName);
+									rp.getLocalizedPartyName().put("FI", getOrganisationNameRewriter().rewrite(org, "FI"));
+
+								});
+
+					});
+
+			responsibleParties.add(rp);
+
+		} catch (RuntimeException  e) {
 			handleExtractorException(e, null);
 		}
 

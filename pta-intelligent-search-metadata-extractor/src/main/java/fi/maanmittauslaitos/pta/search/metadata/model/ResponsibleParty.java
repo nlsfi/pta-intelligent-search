@@ -6,39 +6,63 @@ import java.util.List;
 import java.util.Map;
 
 public class ResponsibleParty {
-	private String organisationName;
 	private String isoRole;
-	private Map<String, String> localisedOrganisationName;
 	private List<String> email;
+	private String partyName;
+	private Map<String, String> localizedPartyName;
 
 	public ResponsibleParty() {
 		email = new ArrayList<>();
-		localisedOrganisationName = new HashMap<>();
+		localizedPartyName = new HashMap<>();
 	}
 
 	public ResponsibleParty(ResponsibleParty responsibleParty) {
 		if (responsibleParty != null) {
 			this.email = responsibleParty.getEmail();
-			this.organisationName = responsibleParty.getOrganisationName();
+			this.partyName = responsibleParty.getPartyName();
 			this.isoRole = responsibleParty.getIsoRole();
-			this.localisedOrganisationName = responsibleParty.getLocalisedOrganisationName();
+			this.localizedPartyName = responsibleParty.getLocalizedPartyName();
 		}
 	}
 
+	/**
+	 * Deprecated in favor of more general semantics.
+	 *
+	 * @deprecated use {@link #setPartyName(String)} ()} instead.
+	 */
+	@Deprecated
 	public void setOrganisationName(String organisationName) {
-		this.organisationName = organisationName;
+		setPartyName(organisationName);
 	}
-	
+
+	/**
+	 * Deprecated in favor of more general semantics.
+	 *
+	 * @deprecated use {@link #getPartyName()} ()} instead.
+	 */
+	@Deprecated
 	public String getOrganisationName() {
-		return organisationName;
+		return getPartyName();
 	}
-	
+
+	/**
+	 * Deprecated in favor of more general semantics.
+	 *
+	 * @deprecated use {@link #setLocalizedPartyName(Map)} ()} instead.
+	 */
+	@Deprecated
 	public void setLocalisedOrganisationName(Map<String, String> localisedOrganisationName) {
-		this.localisedOrganisationName = localisedOrganisationName;
+		setLocalizedPartyName(localisedOrganisationName);
 	}
-	
+
+	/**
+	 * Deprecated in favor of more general semantics.
+	 *
+	 * @deprecated use {@link #getLocalizedPartyName()} instead.
+	 */
+	@Deprecated
 	public Map<String, String> getLocalisedOrganisationName() {
-		return localisedOrganisationName;
+		return getLocalizedPartyName();
 	}
 	
 	public void setIsoRole(String isoRole) {
@@ -61,5 +85,21 @@ public class ResponsibleParty {
 		if(email != null){
 			this.email.add(email);
 		}
+	}
+
+	public String getPartyName() {
+		return partyName;
+	}
+
+	public void setPartyName(String partyName) {
+		this.partyName = partyName;
+	}
+
+	public Map<String, String> getLocalizedPartyName() {
+		return localizedPartyName;
+	}
+
+	public void setLocalizedPartyName(Map<String, String> localizedPartyName) {
+		this.localizedPartyName = localizedPartyName;
 	}
 }
