@@ -7,8 +7,6 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.query.QueryResult;
 import fi.maanmittauslaitos.pta.search.metadata.model.ResponsibleParty;
 import fi.maanmittauslaitos.pta.search.metadata.model.TextRewriter;
 import fi.maanmittauslaitos.pta.search.metadata.utils.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,16 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ResponsiblePartyCKANCustomExtractor extends JsonPathListCustomExtractor {
-
-	private static final Logger logger = LoggerFactory.getLogger(ResponsiblePartyCKANCustomExtractor.class);
-
-	public ResponsiblePartyCKANCustomExtractor() {
-		super();
-	}
-
-	public ResponsiblePartyCKANCustomExtractor(boolean isThrowException) {
-		super(isThrowException);
-	}
 
 	private TextRewriter organisationNameRewriter = new TextRewriter() {
 
@@ -93,15 +81,10 @@ public class ResponsiblePartyCKANCustomExtractor extends JsonPathListCustomExtra
 			responsibleParties.add(rp);
 
 		} catch (RuntimeException  e) {
-			handleExtractorException(e, null);
+			throw new DocumentProcessingException(e);
 		}
 
 		return responsibleParties;
 
-	}
-
-	@Override
-	protected Logger getLogger() {
-		return logger;
 	}
 }

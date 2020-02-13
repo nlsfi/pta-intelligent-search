@@ -1,5 +1,6 @@
 package fi.maanmittauslaitos.pta.search.metadata.extractor;
 
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
 import fi.maanmittauslaitos.pta.search.metadata.model.EmptyNodeList;
 import fi.maanmittauslaitos.pta.search.metadata.model.ResponsibleParty;
 import fi.maanmittauslaitos.pta.search.metadata.model.TextRewriter;
@@ -25,14 +26,6 @@ public class ResponsiblePartyXmlCustomExtractor extends XmlCustomExtractor {
 
 	private static final Logger logger = LoggerFactory.getLogger(ResponsiblePartyXmlCustomExtractor.class);
 
-	public ResponsiblePartyXmlCustomExtractor() {
-		super();
-	}
-
-	public ResponsiblePartyXmlCustomExtractor(boolean isThrowException) {
-		super(isThrowException);
-	}
-
 	private TextRewriter organisationNameRewriter = new TextRewriter() {
 		
 		@Override
@@ -55,7 +48,7 @@ public class ResponsiblePartyXmlCustomExtractor extends XmlCustomExtractor {
 	}
 
 	@Override
-	public Object process(XPath xPath, Node node) throws XPathException {
+	public Object process(XPath xPath, Node node) throws DocumentProcessingException {
 		ResponsibleParty ret = null;
 
 		try {
@@ -126,14 +119,9 @@ public class ResponsiblePartyXmlCustomExtractor extends XmlCustomExtractor {
 			ret.setIsoRole(isoRole);
 
 		} catch (XPathException e) {
-			handleExtractorException(e, null);
+			throw new DocumentProcessingException(e);
 		}
 		return ret;
-	}
-
-	@Override
-	protected Logger getLogger() {
-		return logger;
 	}
 
 }

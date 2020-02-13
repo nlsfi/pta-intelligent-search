@@ -1,5 +1,6 @@
 package fi.maanmittauslaitos.pta.search.metadata.extractor;
 
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
@@ -14,14 +15,6 @@ public class GeographicBoundingBoxXmlCustomExtractor extends XmlCustomExtractor 
 
 	private static Logger logger = LoggerFactory.getLogger(GeographicBoundingBoxXmlCustomExtractor.class);
 
-	public GeographicBoundingBoxXmlCustomExtractor() {
-		super();
-	}
-
-	public GeographicBoundingBoxXmlCustomExtractor(boolean isThrowException) {
-		super(isThrowException);
-	}
-
 	private Double getDoubleValue(String elementName, XPath xPath, Node node)
 			throws XPathException, MissingCoordException
 	{
@@ -35,7 +28,7 @@ public class GeographicBoundingBoxXmlCustomExtractor extends XmlCustomExtractor 
 	}
 
 	@Override
-	public Object process(XPath xPath, Node node) throws RuntimeException {
+	public Object process(XPath xPath, Node node) throws DocumentProcessingException {
 		Double [] ret = new Double[4];
 
 		try {
@@ -47,15 +40,10 @@ public class GeographicBoundingBoxXmlCustomExtractor extends XmlCustomExtractor 
 			if (e instanceof MissingCoordException) {
 				return null;
 			} else {
-				handleExtractorException(e, null);
+				throw new DocumentProcessingException(e);
 			}
 		}
 		return Arrays.asList(ret);
-	}
-
-	@Override
-	protected Logger getLogger() {
-		return logger;
 	}
 
 	private static class MissingCoordException extends Exception {

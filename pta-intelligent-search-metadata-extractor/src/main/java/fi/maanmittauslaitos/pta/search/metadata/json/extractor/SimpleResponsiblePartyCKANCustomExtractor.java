@@ -11,17 +11,12 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Does not parse email for given query result
+ */
 public class SimpleResponsiblePartyCKANCustomExtractor extends JsonPathListCustomExtractor {
 
 	private static final Logger logger = LoggerFactory.getLogger(SimpleResponsiblePartyCKANCustomExtractor.class);
-
-	public SimpleResponsiblePartyCKANCustomExtractor() {
-		super();
-	}
-
-	public SimpleResponsiblePartyCKANCustomExtractor(boolean isThrowException) {
-		super(isThrowException);
-	}
 
 	private TextRewriter organisationNameRewriter = new TextRewriter() {
 
@@ -71,15 +66,10 @@ public class SimpleResponsiblePartyCKANCustomExtractor extends JsonPathListCusto
 						.forEach(responsibleParties::add);
 			}
 		} catch (RuntimeException e) {
-			handleExtractorException(e, null);
+			throw new DocumentProcessingException(e);
 		}
 
 		return responsibleParties;
 
-	}
-
-	@Override
-	protected Logger getLogger() {
-		return logger;
 	}
 }

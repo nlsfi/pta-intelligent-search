@@ -7,9 +7,7 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigura
 import fi.maanmittauslaitos.pta.search.metadata.extractor.*;
 
 import javax.xml.parsers.ParserConfigurationException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static fi.maanmittauslaitos.pta.search.metadata.utils.ISOMetadataExtractorUtil.createXPathExtractor;
 import static fi.maanmittauslaitos.pta.search.metadata.utils.XPathHelper.doesntMatch;
@@ -17,24 +15,6 @@ import static fi.maanmittauslaitos.pta.search.metadata.utils.XPathHelper.matches
 
 
 public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorConfigurationFactory {
-
-
-	private static final boolean DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW = true;
-
-	private Map<String, Boolean> customExtractorExceptionThrowingConfig;
-
-	public ISOMetadataExtractorConfigurationFactory() {
-		this.customExtractorExceptionThrowingConfig = new HashMap<>();
-
-	}
-
-	public ISOMetadataExtractorConfigurationFactory(Map<String, Boolean> customExtractorExceptionSettings) {
-		if (customExtractorExceptionSettings == null) {
-			customExtractorExceptionSettings = new HashMap<>();
-		}
-		this.customExtractorExceptionThrowingConfig = customExtractorExceptionSettings;
-	}
-
 
 	@Override
 	public DocumentProcessingConfiguration createMetadataDocumentProcessingConfiguration() throws ParserConfigurationException {
@@ -207,14 +187,14 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 		// Get all identification info dates
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.DATE_IDENTIFICATION_INFO,
-				new DateXmlCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.DATE_IDENTIFICATION_INFO, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
+				new DateXmlCustomExtractor(),
 				"(//gmd:identificationInfo/*/gmd:citation/*/gmd:date)"));
 
 		// maintenance frequency
 
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.MAINENANCE_FREQUENCY,
-				new CodeListValueXmlCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.MAINENANCE_FREQUENCY, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
+				new CodeListValueXmlCustomExtractor(),
 				"(//gmd:identificationInfo/*/gmd:resourceMaintenance/*/gmd:maintenanceAndUpdateFrequency/*[@codeListValue])"));
 
 		/*
@@ -224,13 +204,13 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 		// Organisation names + roles
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.ORGANISATIONS,
-				new ResponsiblePartyXmlCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.ORGANISATIONS, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
+				new ResponsiblePartyXmlCustomExtractor(),
 				"//gmd:MD_Metadata/gmd:identificationInfo/*/gmd:pointOfContact/gmd:CI_ResponsibleParty"));
 
 
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.ORGANISATIONS_METADATA,
-				new ResponsiblePartyXmlCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.ORGANISATIONS_METADATA, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
+				new ResponsiblePartyXmlCustomExtractor(),
 				"//gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty"));
 
 		/*
@@ -239,13 +219,13 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 		// Metadata language
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.LANGUAGE_METADATA,
-				new LanguageXmlCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.LANGUAGE_METADATA, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
+				new LanguageXmlCustomExtractor(),
 				"(/csw:GetRecordByIdResponse/*/gmd:language)"));
 
 		//Resource language
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.LANGUAGE_RESOURCE,
-				new LanguageXmlCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.LANGUAGE_RESOURCE, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
+				new LanguageXmlCustomExtractor(),
 				"(//gmd:identificationInfo/*/gmd:language)"));
 
 
@@ -311,7 +291,7 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 		// Geographic bounding box
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.GEOGRAPHIC_BOUNDING_BOX,
-				new GeographicBoundingBoxXmlCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.GEOGRAPHIC_BOUNDING_BOX, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
+				new GeographicBoundingBoxXmlCustomExtractor(),
 				"//gmd:MD_Metadata/gmd:identificationInfo/*/*[self::gmd:extent or self::srv:extent]/*/gmd:geographicElement/gmd:EX_GeographicBoundingBox"));
 
 		extractors.add(createXPathExtractor(
@@ -355,12 +335,12 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.DOWNLOAD_LINKS,
-				new DownloadLinksXmlCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.DOWNLOAD_LINKS, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
+				new DownloadLinksXmlCustomExtractor(),
 				"(//gmd:distributionInfo/*/gmd:transferOptions/*/gmd:onLine)"));
 
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.SERVICE_ASSOCIATED_RESOURCES,
-				new ServiceAssociatedResourcesXmlCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.SERVICE_ASSOCIATED_RESOURCES, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
+				new ServiceAssociatedResourcesXmlCustomExtractor(),
 				"(//gmd:identificationInfo/*/srv:operatesOn)"));
 
 
@@ -369,7 +349,7 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 		// Associated resources
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.ADDITIONAL.ASSOCIATED_RESOURCES,
-				new AssociatedResourcesXmlCustomExtractor(customExtractorExceptionThrowingConfig.getOrDefault(ResultMetadataFields.ADDITIONAL.ASSOCIATED_RESOURCES, DEFAULT_CUSTOM_EXTRACTOR_IS_EXCEPTION_THROW)),
+				new AssociatedResourcesXmlCustomExtractor(),
 				"(//csw:SearchResults/csw:BriefRecord)"));
 
 		return configuration;

@@ -18,14 +18,6 @@ public class DownloadLinksCkanCustomExtractor extends JsonPathListCustomExtracto
 
     private static final Logger logger = LoggerFactory.getLogger(DownloadLinksCkanCustomExtractor.class);
 
-    public DownloadLinksCkanCustomExtractor() {
-        super();
-    }
-
-    public DownloadLinksCkanCustomExtractor(boolean isThrowException) {
-        super(isThrowException);
-    }
-
     private String parseUrlProtocol(String url) {
         try {
             URL tempUrl = new URL(url);
@@ -66,14 +58,9 @@ public class DownloadLinksCkanCustomExtractor extends JsonPathListCustomExtracto
                             });
                 });
         } catch (RuntimeException e) {
-            handleExtractorException(e, null);
+            throw new DocumentProcessingException(e);
         }
 
         return links;
-    }
-
-    @Override
-    protected Logger getLogger() {
-        return logger;
     }
 }

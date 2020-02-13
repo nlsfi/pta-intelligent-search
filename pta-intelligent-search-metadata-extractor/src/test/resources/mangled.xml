@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  "Tietoaineistosarja" by Luonnonvarakeskus, downloaded 2018-05-30
+  http://www.paikkatietohakemisto.fi/geonetwork/srv/api/records/2e5565ff-f17f-42a5-9435-d6353f2db46f/formatters/xml
+  -->
+<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd"
+                 xmlns:gts="http://www.isotc211.org/2005/gts"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:xlink="http://www.w3.org/1999/xlink"
+                 xmlns:gco="http://www.isotc211.org/2005/gco"
+                 xmlns:gml="http://www.opengis.net/gml"
+                 xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd">
+    <gmd:fileIdentifier/>
+</gmd:MD_Metadata>

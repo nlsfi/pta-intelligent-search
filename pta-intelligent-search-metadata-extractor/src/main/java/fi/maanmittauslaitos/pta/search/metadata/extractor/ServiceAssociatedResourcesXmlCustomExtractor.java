@@ -1,5 +1,6 @@
 package fi.maanmittauslaitos.pta.search.metadata.extractor;
 
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
 import fi.maanmittauslaitos.pta.search.metadata.model.MetadataAssociatedResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,16 +13,8 @@ public class ServiceAssociatedResourcesXmlCustomExtractor extends XmlCustomExtra
 
     private Logger logger = LoggerFactory.getLogger(ServiceAssociatedResourcesXmlCustomExtractor.class);
 
-    public ServiceAssociatedResourcesXmlCustomExtractor() {
-        super();
-    }
-
-    public ServiceAssociatedResourcesXmlCustomExtractor(boolean isThrowException) {
-        super(isThrowException);
-    }
-
     @Override
-    public Object process(XPath xPath, Node node) throws XPathException {
+    public Object process(XPath xPath, Node node) throws DocumentProcessingException {
         MetadataAssociatedResource associatedResource = null;
 
         try {
@@ -41,15 +34,10 @@ public class ServiceAssociatedResourcesXmlCustomExtractor extends XmlCustomExtra
             associatedResource.setUrl(url);
 
         } catch (XPathExpressionException e) {
-            handleExtractorException(e, null);
+            throw new DocumentProcessingException(e);
         }
 
 
         return associatedResource;
-    }
-
-    @Override
-    protected Logger getLogger() {
-        return logger;
     }
 }

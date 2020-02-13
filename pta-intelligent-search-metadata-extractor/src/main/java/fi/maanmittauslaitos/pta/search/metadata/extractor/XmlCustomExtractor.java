@@ -6,23 +6,14 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuery;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.QueryResult;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.XmlDocumentQueryImpl;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.XmlQueryResultImpl;
-import fi.maanmittauslaitos.pta.search.metadata.model.NonThrowingCustomExtractor;
 import org.w3c.dom.Node;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathException;
 
-public abstract class XmlCustomExtractor extends NonThrowingCustomExtractor implements CustomExtractor {
+public abstract class XmlCustomExtractor implements CustomExtractor {
 
-    public abstract Object process(XPath xPath, Node node) throws XPathException;
-
-    public XmlCustomExtractor() {
-        super();
-    }
-
-    public XmlCustomExtractor(boolean isThrowException) {
-        super(isThrowException);
-    }
+    public abstract Object process(XPath xPath, Node node) throws DocumentProcessingException;
 
     @Override
     public Object process(DocumentQuery documentQuery, QueryResult queryResult) throws XPathException, DocumentProcessingException {

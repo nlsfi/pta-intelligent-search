@@ -1,5 +1,6 @@
 package fi.maanmittauslaitos.pta.search.metadata.extractor;
 
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
 import fi.maanmittauslaitos.pta.search.metadata.model.CodeListValue;
 import fi.maanmittauslaitos.pta.search.metadata.model.MetadataDate;
 import org.slf4j.Logger;
@@ -15,16 +16,8 @@ public class DateXmlCustomExtractor extends XmlCustomExtractor {
 
     private static Logger logger = LoggerFactory.getLogger(DateXmlCustomExtractor.class);
 
-    public DateXmlCustomExtractor() {
-        super();
-    }
-
-    public DateXmlCustomExtractor(boolean isThrowException) {
-        super(isThrowException);
-    }
-
     @Override
-    public Object process(XPath xPath, Node node) throws XPathException {
+    public Object process(XPath xPath, Node node) throws DocumentProcessingException {
         logger.trace("Processing related resources");
 
         MetadataDate date = null;
@@ -46,14 +39,9 @@ public class DateXmlCustomExtractor extends XmlCustomExtractor {
             date.setType(dateTypeValue);
 
         } catch (XPathException e) {
-            handleExtractorException(e, null);
+            throw new DocumentProcessingException(e);
         }
 
         return date;
-    }
-
-    @Override
-    protected Logger getLogger() {
-        return logger;
     }
 }

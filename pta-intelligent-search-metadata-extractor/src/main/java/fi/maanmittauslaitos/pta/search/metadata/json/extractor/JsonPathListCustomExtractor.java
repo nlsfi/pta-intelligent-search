@@ -5,26 +5,16 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.ListCustomExtractor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuery;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.JsonDocumentQueryImpl;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.QueryResult;
-import fi.maanmittauslaitos.pta.search.metadata.model.NonThrowingCustomExtractor;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public abstract class JsonPathListCustomExtractor extends NonThrowingCustomExtractor implements ListCustomExtractor {
-
-    public JsonPathListCustomExtractor() {
-        super();
-    }
-
-    public JsonPathListCustomExtractor(boolean isThrowException) {
-        super(isThrowException);
-    }
+public abstract class JsonPathListCustomExtractor implements ListCustomExtractor {
 
     public abstract Object process(JsonDocumentQueryImpl query, List<QueryResult> queryResult) throws DocumentProcessingException;
 
     protected static final String DEFAULT_PARSED_VALUE = "";
-
 
     protected String getValueSafishly(Map<String, Object> map, String key, String defaultValue) {
         Object obj = map.getOrDefault(key, defaultValue);

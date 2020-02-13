@@ -1,5 +1,6 @@
 package fi.maanmittauslaitos.pta.search.metadata.extractor;
 
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
 import fi.maanmittauslaitos.pta.search.metadata.model.CodeListValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,16 +12,8 @@ public class CodeListValueXmlCustomExtractor extends XmlCustomExtractor {
 
     private static Logger logger = LoggerFactory.getLogger(CodeListValueXmlCustomExtractor.class);
 
-    public CodeListValueXmlCustomExtractor() {
-        super();
-    }
-
-    public CodeListValueXmlCustomExtractor(boolean isThrowException) {
-        super(isThrowException);
-    }
-
     @Override
-    public Object process(XPath xPath, Node node) throws XPathException {
+    public Object process(XPath xPath, Node node) throws DocumentProcessingException {
         logger.trace("Processing related resources");
         CodeListValue value = null;
         try {
@@ -39,13 +32,9 @@ public class CodeListValueXmlCustomExtractor extends XmlCustomExtractor {
             value.setValue(val);
 
         }catch (XPathExpressionException e) {
-            handleExtractorException(e, null);
+            throw new DocumentProcessingException(e);
         }
         return value;
     }
 
-    @Override
-    protected Logger getLogger() {
-        return logger;
-    }
 }

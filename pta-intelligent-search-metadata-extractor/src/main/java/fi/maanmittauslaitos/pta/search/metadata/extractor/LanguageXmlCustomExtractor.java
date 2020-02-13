@@ -1,5 +1,6 @@
 package fi.maanmittauslaitos.pta.search.metadata.extractor;
 
+import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
 import fi.maanmittauslaitos.pta.search.metadata.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,14 +14,6 @@ import javax.xml.xpath.XPathExpressionException;
 public class LanguageXmlCustomExtractor extends XmlCustomExtractor {
 
     private Logger logger = LoggerFactory.getLogger(LanguageXmlCustomExtractor.class);
-
-    public LanguageXmlCustomExtractor() {
-        super();
-    }
-
-    public LanguageXmlCustomExtractor(boolean isThrowException) {
-        super(isThrowException);
-    }
 
     /**
      * Languages can apperantly be  in two different formats (at least).
@@ -44,7 +37,7 @@ public class LanguageXmlCustomExtractor extends XmlCustomExtractor {
      * @return
      */
     @Override
-    public Object process(XPath xPath, Node node) {
+    public Object process(XPath xPath, Node node) throws DocumentProcessingException {
         String language = null;
         try {
             XPathExpression langGcoExpr =
@@ -69,14 +62,9 @@ public class LanguageXmlCustomExtractor extends XmlCustomExtractor {
             }
 
         } catch (XPathExpressionException e) {
-            handleExtractorException(e, null);
+            throw new DocumentProcessingException(e);
         }
 
         return language;
-    }
-
-    @Override
-    protected Logger getLogger() {
-        return logger;
     }
 }

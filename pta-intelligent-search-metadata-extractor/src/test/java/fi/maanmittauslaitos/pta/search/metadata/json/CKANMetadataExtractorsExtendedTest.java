@@ -118,7 +118,6 @@ public class CKANMetadataExtractorsExtendedTest {
                 "VTT"
         );
 
-
         softly.assertThat(responsibleParties.size()).isEqualTo(orgs.size());
 
         IntStream.range(0, orgs.size()).forEach(i -> {
