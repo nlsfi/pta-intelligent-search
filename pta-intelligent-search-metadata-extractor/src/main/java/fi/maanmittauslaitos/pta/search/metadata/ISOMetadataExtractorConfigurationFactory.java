@@ -10,8 +10,7 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigura
 import javax.xml.parsers.ParserConfigurationException;
 import java.util.List;
 
-import static fi.maanmittauslaitos.pta.search.metadata.utils.XPathHelper.doesntMatch;
-import static fi.maanmittauslaitos.pta.search.metadata.utils.XPathHelper.matches;
+import static fi.maanmittauslaitos.pta.search.metadata.utils.XPathHelper.*;
 
 
 public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorConfigurationFactory {
@@ -92,7 +91,7 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 				ResultMetadataFields.IS_SERVICE,
 				FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE,
 				"//gmd:hierarchyLevel/gmd:MD_ScopeCode["
-						+ matches("@codeList", "'http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode'")
+                        + endsWith("@codeList", "'gmxCodelists.xml#MD_ScopeCode'", true)
 						+ " and "
 						+ matches("@codeListValue", "'service'")
 						+ "]"));
@@ -102,7 +101,7 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 				ResultMetadataFields.IS_DATASET,
 				FieldExtractorType.TRUE_IF_MATCHES_OTHERWISE_FALSE,
 				"//gmd:hierarchyLevel/gmd:MD_ScopeCode["
-						+ matches("@codeList", "'http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ScopeCode'")
+                        + endsWith("@codeList", "'gmxCodelists.xml#MD_ScopeCode'", true)
 						+ " and "
 						+ "(" + matches("@codeListValue", "'dataset'") + " or " + matches("@codeListValue", "'series'") + ")"
 						+ "]"));
