@@ -8,6 +8,7 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingExcep
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuery;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.QueryResult;
 import fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants;
+import fi.maanmittauslaitos.pta.search.metadata.extractor.GeographicBoundingBoxXmlCustomExtractor;
 import fi.maanmittauslaitos.pta.search.utils.Region;
 import fi.maanmittauslaitos.pta.search.utils.RegionFactory;
 import org.assertj.core.api.JUnitSoftAssertions;
