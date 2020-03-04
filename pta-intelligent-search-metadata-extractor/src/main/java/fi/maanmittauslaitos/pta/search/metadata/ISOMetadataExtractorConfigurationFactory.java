@@ -4,7 +4,6 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfi
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl.FieldExtractorType;
-import fi.maanmittauslaitos.pta.search.metadata.extractor.AssociatedResourcesXmlCustomExtractor;
 import fi.maanmittauslaitos.pta.search.metadata.extractor.CodeListValueXmlCustomExtractor;
 import fi.maanmittauslaitos.pta.search.metadata.extractor.DateXmlCustomExtractor;
 import fi.maanmittauslaitos.pta.search.metadata.extractor.DownloadLinksXmlCustomExtractor;
@@ -33,12 +32,8 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 		configuration.getNamespaces().put("gco", "http://www.isotc211.org/2005/gco");
 		configuration.getNamespaces().put("srv", "http://www.isotc211.org/2005/srv");
 		configuration.getNamespaces().put("gmx", "http://www.isotc211.org/2005/gmx");
-
 		configuration.getNamespaces().put("xlink", "http://www.w3.org/1999/xlink");
-
-		configuration.getNamespaces().put("csw", "http://www.opengis.net/cat/csw/2.0.2");
 		configuration.getNamespaces().put("dc", "http://purl.org/dc/elements/1.1/");
-
 
 		List<FieldExtractorConfiguration> extractors = configuration.getFieldExtractors();
 
@@ -118,8 +113,6 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 						+ " and "
 						+ "(" + matches("@codeListValue", "'dataset'") + " or " + matches("@codeListValue", "'series'") + ")"
 						+ "]"));
-
-
 		// isAvoindata
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.IS_AVOINDATA,
@@ -312,14 +305,6 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 				new ServiceAssociatedResourcesXmlCustomExtractor(),
 				"(//gmd:identificationInfo/*/srv:operatesOn)"));
 
-
-		// Additional extractors for other documents
-		// A resources additional resources need to be queried in a separate query, so its included under a separate topic/group
-		// Associated resources
-		extractors.add(createXPathExtractor(
-				ResultMetadataFields.ADDITIONAL.ASSOCIATED_RESOURCES,
-				new AssociatedResourcesXmlCustomExtractor(),
-				"(//csw:SearchResults/csw:BriefRecord)"));
 
 		return configuration;
 	}

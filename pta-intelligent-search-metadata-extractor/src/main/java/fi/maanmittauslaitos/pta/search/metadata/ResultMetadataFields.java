@@ -57,12 +57,4 @@ public class ResultMetadataFields {
 	public static final String MAINTENANCE_FREQUENCY = "maintenanceFrequency";
 	public static final String DATE_IDENTIFICATION_INFO = "dateIdentificationInfo";
 	public static final String CKAN_CREATION_DATE = "ckanDateCreation";
-
-	/**
-	 * Fields relating to metadata, but not found in the normal query response
-	 */
-	public class ADDITIONAL {
-		public static final String ASSOCIATED_RESOURCES = "associatedResources";
-	}
-	
 }

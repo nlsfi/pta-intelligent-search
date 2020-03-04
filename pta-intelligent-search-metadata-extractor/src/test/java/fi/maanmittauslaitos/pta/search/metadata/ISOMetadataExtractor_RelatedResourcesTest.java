@@ -28,21 +28,6 @@ public class ISOMetadataExtractor_RelatedResourcesTest extends BaseMetadataExtra
     }
 
     @Test
-    public void testAaltohavainnot_AssociatedResources() throws Exception {
-        Document document = createAaltohavainnotAssociatedResourcesDocument();
-
-        List<MetadataAssociatedResource> resources = document.getListValue(ResultMetadataFields.ADDITIONAL.ASSOCIATED_RESOURCES, MetadataAssociatedResource.class);
-
-        assertEquals(1, resources.size());
-
-        MetadataAssociatedResource res = resources.get(0);
-        assertEquals("INSPIRE latauspalvelu; sää-, säteily-, merihavaintoaineistot sekä ennusteet ja säätutkahavainnot", res.getTitle());
-        assertEquals("service", res.getType());
-        assertEquals("9fec2667-ccdd-431b-99e0-fd2ed5de4ca1", res.getMetadataId());
-        assertNull(res.getUrl());
-    }
-
-    @Test
     public void testStatFi_ServiceAssociatedResources() throws Exception {
         Document document = createStatFiWFS();
 
