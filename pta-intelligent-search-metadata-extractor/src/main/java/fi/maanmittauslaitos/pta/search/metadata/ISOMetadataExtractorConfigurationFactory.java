@@ -147,7 +147,7 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 				FieldExtractorType.ALL_MATCHING_VALUES,
 				"//gmd:identificationInfo/*/gmd:descriptiveKeywords/*[" +
 						matches("gmd:thesaurusName/gmd:CI_Citation/gmd:title/*/text()", "'GEMET - INSPIRE themes, version 1.0'") +
-						"]/gmd:keyword/*/text()"));
+						"]/gmd:keyword/gco:CharacterString/text()"));
 
 		// Distribution Formats
 		extractors.add(createXPathExtractor(
@@ -229,7 +229,7 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.LANGUAGE_METADATA,
 				new LanguageXmlCustomExtractor(),
-				"(//gmd:MD_Metadata/*/gmd:language)"));
+				"(//gmd:MD_Metadata/gmd:language)"));
 
 		//Resource language
 		extractors.add(createXPathExtractor(
