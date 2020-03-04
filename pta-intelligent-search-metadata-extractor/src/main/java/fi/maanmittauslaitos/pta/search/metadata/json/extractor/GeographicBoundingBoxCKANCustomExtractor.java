@@ -41,7 +41,7 @@ public class GeographicBoundingBoxCKANCustomExtractor extends JsonPathCustomExtr
 			ret[2] = Xs.stream().max(Double::compareTo).orElseThrow(MissingCoordException::new);
 			ret[3] = Ys.stream().max(Double::compareTo).orElseThrow(MissingCoordException::new);
 
-		} catch (RuntimeException e) {
+		} catch (Exception e) {
 			if (e instanceof MissingCoordException) {
 				return null;
 			} else {

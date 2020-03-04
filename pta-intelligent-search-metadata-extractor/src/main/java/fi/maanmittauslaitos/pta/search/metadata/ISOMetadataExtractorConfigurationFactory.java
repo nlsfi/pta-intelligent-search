@@ -4,7 +4,14 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfi
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl.FieldExtractorType;
-import fi.maanmittauslaitos.pta.search.metadata.extractor.*;
+import fi.maanmittauslaitos.pta.search.metadata.extractor.AssociatedResourcesXmlCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.extractor.CodeListValueXmlCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.extractor.DateXmlCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.extractor.DownloadLinksXmlCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.extractor.GeographicBoundingBoxXmlCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.extractor.LanguageXmlCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.extractor.ResponsiblePartyXmlCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.extractor.ServiceAssociatedResourcesXmlCustomExtractor;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.util.List;
@@ -15,6 +22,9 @@ import static fi.maanmittauslaitos.pta.search.metadata.utils.XPathHelper.matches
 
 
 public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorConfigurationFactory {
+
+	public static final String XPATH_CRS_ROOT = "//gmd:referenceSystemInfo/*/gmd:referenceSystemIdentifier";
+
 
 	@Override
 	public DocumentProcessingConfiguration createMetadataDocumentProcessingConfiguration() throws ParserConfigurationException {
@@ -137,7 +147,7 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 				FieldExtractorType.ALL_MATCHING_VALUES,
 				"//gmd:identificationInfo/*/gmd:descriptiveKeywords/*[" +
 						matches("gmd:thesaurusName/gmd:CI_Citation/gmd:title/*/text()", "'GEMET - INSPIRE themes, version 1.0'") +
-						"]/gmd:keyword/gco:CharacterString/text()"));
+						"]/gmd:keyword/*/text()"));
 
 		// Distribution Formats
 		extractors.add(createXPathExtractor(
@@ -150,14 +160,13 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.IMAGE_OVERVIEW_URL,
 				FieldExtractorType.ALL_MATCHING_VALUES,
-//                "(//gmd:identificationInfo/*/gmd:graphicOverview/gmd:MD_BrowseGraphic[gmd:fileDescription/gco:CharacterString[text()='thumbnail']]/gmd:fileName/gco:CharacterString/text())"));
-				"(//gmd:identificationInfo/*/gmd:graphicOverview/*/gmd:fileName/gco:CharacterString/text())"));
+				"(//gmd:identificationInfo/*/gmd:graphicOverview/*/gmd:fileName/*/text())"));
 
 		// rerource id
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.RESOURCE_ID,
 				FieldExtractorType.FIRST_MATCHING_VALUE,
-				"(//gmd:identificationInfo/*/gmd:citation/*/gmd:identifier/*/gmd:code/gco:CharacterString/text())"));
+				"(//gmd:identificationInfo/*/gmd:citation/*/gmd:identifier/*/gmd:code/*/text())"));
 
 
 
@@ -165,7 +174,7 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.LINEAGE,
 				FieldExtractorType.FIRST_MATCHING_VALUE,
-				"(//gmd:dataQualityInfo/*/gmd:lineage/*/gmd:statement/gco:CharacterString/text())"));
+				"(//gmd:dataQualityInfo/*/gmd:lineage/*/gmd:statement/*/text())"));
 
 
 		/*
@@ -193,7 +202,7 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 		// maintenance frequency
 
 		extractors.add(createXPathExtractor(
-				ResultMetadataFields.MAINENANCE_FREQUENCY,
+				ResultMetadataFields.MAINTENANCE_FREQUENCY,
 				new CodeListValueXmlCustomExtractor(),
 				"(//gmd:identificationInfo/*/gmd:resourceMaintenance/*/gmd:maintenanceAndUpdateFrequency/*[@codeListValue])"));
 
@@ -220,15 +229,13 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.LANGUAGE_METADATA,
 				new LanguageXmlCustomExtractor(),
-				"(/csw:GetRecordByIdResponse/*/gmd:language)"));
+				"(//gmd:MD_Metadata/*/gmd:language)"));
 
 		//Resource language
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.LANGUAGE_RESOURCE,
 				new LanguageXmlCustomExtractor(),
 				"(//gmd:identificationInfo/*/gmd:language)"));
-
-
 
 		/*
 		 Constraints
@@ -237,7 +244,7 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.CONSTRAINT_USE_LIMITATION,
 				FieldExtractorType.FIRST_MATCHING_VALUE,
-				"(//gmd:identificationInfo/*/gmd:resourceConstraints/*/gmd:useLimitation/gco:CharacterString/text())"));
+				"(//gmd:identificationInfo/*/gmd:resourceConstraints/*/gmd:useLimitation/*/text())"));
 
 		// access limitation
 		extractors.add(createXPathExtractor(
@@ -248,19 +255,18 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.CONSTRAINT_OTHER,
 				FieldExtractorType.FIRST_MATCHING_VALUE,
-				"(//gmd:identificationInfo/*/gmd:resourceConstraints/*/gmd:otherConstraints/gco:CharacterString/text())"));
+				"(//gmd:identificationInfo/*/gmd:resourceConstraints/*/gmd:otherConstraints/*/text())"));
 
 		/*
 			Spatial data
 		 */
-		final String XPATH_CRS_ROOT = "//gmd:referenceSystemInfo/*/gmd:referenceSystemIdentifier";
 		// CRS code
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.CRS_CODE,
 				FieldExtractorType.FIRST_MATCHING_VALUE,
 				"(" +
 						XPATH_CRS_ROOT +
-						"/*/gmd:code/gco:CharacterString/text())"));
+						"/*/gmd:code/*/text())"));
 
 		// CRS code space
 		extractors.add(createXPathExtractor(
@@ -268,7 +274,7 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 				FieldExtractorType.FIRST_MATCHING_VALUE,
 				"(" +
 						XPATH_CRS_ROOT +
-						"/*/gmd:codeSpace/gco:CharacterString/text())"));
+						"/*/gmd:codeSpace/*/text())"));
 
 		// CRS version
 		extractors.add(createXPathExtractor(
@@ -276,55 +282,18 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 				FieldExtractorType.FIRST_MATCHING_VALUE,
 				"(" +
 						XPATH_CRS_ROOT +
-						"/*/gmd:version/gco:CharacterString/text())"));
+						"/*/gmd:version/*/text())"));
 		// Scale data
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.SCALE_DENOMINATOR,
 				FieldExtractorType.FIRST_MATCHING_VALUE,
 				"(//gmd:identificationInfo/*/gmd:spatialResolution/*/gmd:equivalentScale/*/gmd:denominator/gco:Integer/text())"));
 
-		// Extent
-		// North / Top
-		final String XPATH_EXTENT_ROOT = "//gmd:identificationInfo/*/*[self::gmd:extent or self::srv:extent]/*/gmd:geographicElement";
-
-
 		// Geographic bounding box
 		extractors.add(createXPathExtractor(
 				ResultMetadataFields.GEOGRAPHIC_BOUNDING_BOX,
 				new GeographicBoundingBoxXmlCustomExtractor(),
 				"//gmd:MD_Metadata/gmd:identificationInfo/*/*[self::gmd:extent or self::srv:extent]/*/gmd:geographicElement/gmd:EX_GeographicBoundingBox"));
-
-		extractors.add(createXPathExtractor(
-				ResultMetadataFields.EXTENT_NORTH_BOUND,
-				FieldExtractorType.FIRST_MATCHING_VALUE,
-				"(" +
-						XPATH_EXTENT_ROOT +
-						"/*/gmd:northBoundLatitude/gco:Decimal/text())"));
-
-		// South / bottom
-		extractors.add(createXPathExtractor(
-				ResultMetadataFields.EXTENT_SOUTH_BOUND,
-				FieldExtractorType.FIRST_MATCHING_VALUE,
-				"(" +
-						XPATH_EXTENT_ROOT +
-						"/*/gmd:southBoundLatitude/gco:Decimal/text())"));
-
-		// East / right
-		extractors.add(createXPathExtractor(
-				ResultMetadataFields.EXTENT_EAST_BOUND,
-				FieldExtractorType.FIRST_MATCHING_VALUE,
-				"(" +
-						XPATH_EXTENT_ROOT +
-						"/*/gmd:eastBoundLongitude/gco:Decimal/text())"));
-
-		// West / left
-		extractors.add(createXPathExtractor(
-				ResultMetadataFields.EXTENT_WEST_BOUND,
-				FieldExtractorType.FIRST_MATCHING_VALUE,
-				"(" +
-						XPATH_EXTENT_ROOT +
-						"/*/gmd:westBoundLongitude/gco:Decimal/text())"));
-
 
 		// Classification
 		// List of possible values found at http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml#MD_ClassificationCode
@@ -358,14 +327,11 @@ public class ISOMetadataExtractorConfigurationFactory extends MetadataExtractorC
 
 	@Override
 	public DocumentProcessor createMetadataDocumentProcessor() throws ParserConfigurationException {
-		return createMetadataDocumentProcessor(null);
+		return createMetadataDocumentProcessor(createMetadataDocumentProcessingConfiguration());
 	}
 
 	@Override
 	public DocumentProcessor createMetadataDocumentProcessor(DocumentProcessingConfiguration configuration) throws ParserConfigurationException {
-		if (configuration == null ) {
-			configuration = createMetadataDocumentProcessingConfiguration();
-		}
 		return getDocumentProcessorFactory().createXmlProcessor(configuration);
 	}
 }

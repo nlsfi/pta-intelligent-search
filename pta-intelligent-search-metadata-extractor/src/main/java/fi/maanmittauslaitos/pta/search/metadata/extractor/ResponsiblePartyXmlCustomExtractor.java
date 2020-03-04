@@ -60,7 +60,7 @@ public class ResponsiblePartyXmlCustomExtractor extends XmlCustomExtractor {
 			}
 
 			XPathExpression nameExpr =
-					xPath.compile("./gmd:organisationName/gco:CharacterString/text()");
+					xPath.compile("./gmd:organisationName/*/text()");
 			organisationName = (String)nameExpr.evaluate(node, XPathConstants.STRING);
 
 			organisationName = getOrganisationNameRewriter().rewrite(organisationName);

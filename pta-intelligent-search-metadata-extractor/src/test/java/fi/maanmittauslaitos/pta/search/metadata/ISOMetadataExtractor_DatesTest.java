@@ -115,7 +115,7 @@ public class ISOMetadataExtractor_DatesTest extends BaseMetadataExtractorTest {
     public void testCreateMaastotietokanta_MaintenanceFrequency() throws Exception {
         Document document = createMaastotietokantaDocument();
 
-        CodeListValue value = document.getValue(ResultMetadataFields.MAINENANCE_FREQUENCY, CodeListValue.class);
+        CodeListValue value = document.getValue(ResultMetadataFields.MAINTENANCE_FREQUENCY, CodeListValue.class);
         assertEquals("continual", value.getValue());
         assertEquals("http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_MaintenanceFrequencyCode", value.getList());
         assertEquals("gmd:MD_MaintenanceFrequencyCode", value.getType());

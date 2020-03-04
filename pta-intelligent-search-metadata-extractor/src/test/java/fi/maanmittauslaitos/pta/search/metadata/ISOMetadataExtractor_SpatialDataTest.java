@@ -92,34 +92,4 @@ public class ISOMetadataExtractor_SpatialDataTest extends BaseMetadataExtractorT
         assertEquals(70.5, bbox.get(3), 0.01);
     }
 
-    @Test
-    public void testMaastotietokanta_ExtentNorth() throws Exception {
-        Document document = createMaastotietokantaDocument();
-
-        String value = document.getValue(ResultMetadataFields.EXTENT_NORTH_BOUND, String.class);
-        assertEquals("70.09229553", value);
-    }
-    @Test
-    public void testMaastotietokanta_ExtentSouth() throws Exception {
-        Document document = createMaastotietokantaDocument();
-
-        String value = document.getValue(ResultMetadataFields.EXTENT_SOUTH_BOUND, String.class);
-        assertEquals("59.45414258", value);
-    }
-    @Test
-    public void testMaastotietokanta_ExtentEast() throws Exception {
-        Document document = createMaastotietokantaDocument();
-
-        String value = document.getValue(ResultMetadataFields.EXTENT_EAST_BOUND, String.class);
-        assertEquals("31.58672881", value);
-    }
-    @Test
-    public void testMaastotietokanta_ExtentWest() throws Exception {
-        Document document = createMaastotietokantaDocument();
-
-        String value = document.getValue(ResultMetadataFields.EXTENT_WEST_BOUND, String.class);
-        assertEquals("19.08317359", value);
-    }
-
-
 }

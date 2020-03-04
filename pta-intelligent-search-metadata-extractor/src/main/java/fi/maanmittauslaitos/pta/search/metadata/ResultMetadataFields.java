@@ -48,17 +48,13 @@ public class ResultMetadataFields {
 	public static final String LANGUAGE_METADATA = "languageMetadata";
 	public static final String LANGUAGE_RESOURCE = "languageResource";
 	public static final String SCALE_DENOMINATOR = "scaleDenominator";
-	public static final String EXTENT_NORTH_BOUND = "extentNorth";
-	public static final String EXTENT_SOUTH_BOUND = "extentSouth";
-	public static final String EXTENT_EAST_BOUND = "extentEast";
-	public static final String EXTENT_WEST_BOUND = "extentWest";
 	public static final String DOWNLOAD_LINKS = "downloadLinks";
 	public static final String CLASSIFICATION = "classification";
 	public static final String SERVICE_ASSOCIATED_RESOURCES = "serviceAssociatedResources";
 	public static final String ORGANISATIONS_METADATA = "organisationsMetadata";
 	public static final String ORGANISATIONS_RESOURCE = "organisationsResource";
 	public static final String ORGANISATIONS_OTHER = "organisationsOther";
-	public static final String MAINENANCE_FREQUENCY = "maintenanceFrequency";
+	public static final String MAINTENANCE_FREQUENCY = "maintenanceFrequency";
 	public static final String DATE_IDENTIFICATION_INFO = "dateIdentificationInfo";
 	public static final String CKAN_CREATION_DATE = "ckanDateCreation";
 

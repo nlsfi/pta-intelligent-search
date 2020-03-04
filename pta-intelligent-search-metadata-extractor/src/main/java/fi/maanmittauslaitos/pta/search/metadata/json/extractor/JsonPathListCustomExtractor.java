@@ -16,7 +16,7 @@ public abstract class JsonPathListCustomExtractor implements ListCustomExtractor
 
     protected static final String DEFAULT_PARSED_VALUE = "";
 
-    protected String getValueSafishly(Map<String, Object> map, String key, String defaultValue) {
+    protected String getValueSafely(Map<String, Object> map, String key, String defaultValue) {
         Object obj = map.getOrDefault(key, defaultValue);
         return Objects.toString(obj);
     }

@@ -41,7 +41,7 @@ public class LanguageXmlCustomExtractor extends XmlCustomExtractor {
         String language = null;
         try {
             XPathExpression langGcoExpr =
-                    xPath.compile("./gco:CharacterString/text()");
+                    xPath.compile("./*/text()");
             String langGco = (String) langGcoExpr.evaluate(node, XPathConstants.STRING);
 
             XPathExpression langGmdExpr =

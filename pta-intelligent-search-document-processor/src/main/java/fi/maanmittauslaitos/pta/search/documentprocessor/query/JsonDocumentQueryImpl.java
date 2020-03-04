@@ -76,7 +76,7 @@ public class JsonDocumentQueryImpl implements DocumentQuery {
 					.flatMap(Collection::stream)
 					.map(o -> JsonQueryResultImpl.create(String.valueOf(o), Collections.singletonList(o)))
 					.collect(Collectors.toList());
-		} catch (RuntimeException e) {
+		} catch (Exception e) {
 			throw new DocumentProcessingException(e);
 		}
 	}

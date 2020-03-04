@@ -65,7 +65,7 @@ public class SimpleResponsiblePartyCKANCustomExtractor extends JsonPathListCusto
 						})
 						.forEach(responsibleParties::add);
 			}
-		} catch (RuntimeException e) {
+		} catch (Exception e) {
 			throw new DocumentProcessingException(e);
 		}
 

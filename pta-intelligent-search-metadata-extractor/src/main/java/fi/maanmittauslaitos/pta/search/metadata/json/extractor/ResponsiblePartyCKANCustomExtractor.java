@@ -56,16 +56,16 @@ public class ResponsiblePartyCKANCustomExtractor extends JsonPathListCustomExtra
 									// Two values are grabbed for the reporting organisation (resource responsible party), so it is parsed as a map
 									if (rawResult instanceof Map) {
 										Map<String, Object> res = (Map<String,Object>) rawResult;
-										org = getValueSafishly(res, "reporting_organization", DEFAULT_PARSED_VALUE);
-										email = getValueSafishly(res, "reporting_person_email", DEFAULT_PARSED_VALUE);
+										org = getValueSafely(res, "reporting_organization", DEFAULT_PARSED_VALUE);
+										email = getValueSafely(res, "reporting_person_email", DEFAULT_PARSED_VALUE);
 										// hard-coded to owner (is the resource owner"
 										role = "owner";
 									}
 
 									if(StringUtils.isEmpty(org) && StringUtils.isEmpty(email)) {
 										Map<String, Object> res = (Map<String,Object>) rawResult;
-										org = getValueSafishly(res, "author", DEFAULT_PARSED_VALUE);
-										email = getValueSafishly(res, "author_email", DEFAULT_PARSED_VALUE);
+										org = getValueSafely(res, "author", DEFAULT_PARSED_VALUE);
+										email = getValueSafely(res, "author_email", DEFAULT_PARSED_VALUE);
 									}
 									String cleanedOrganisationName = getOrganisationNameRewriter().rewrite(org);
 
@@ -80,7 +80,7 @@ public class ResponsiblePartyCKANCustomExtractor extends JsonPathListCustomExtra
 
 			responsibleParties.add(rp);
 
-		} catch (RuntimeException  e) {
+		} catch (Exception  e) {
 			throw new DocumentProcessingException(e);
 		}
 

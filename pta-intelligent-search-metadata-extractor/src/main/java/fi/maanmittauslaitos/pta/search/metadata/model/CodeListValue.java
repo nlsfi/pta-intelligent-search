@@ -2,9 +2,19 @@ package fi.maanmittauslaitos.pta.search.metadata.model;
 
 import java.util.Objects;
 
+/*  POJO for CSW CodeListValues. Some CodeListValues aren't parsed as this, but some could be changed to use this.
+    If not directly, maybe as a superclass for a more specific impl. These include:
+    - Metadata language
+    - Resource Language
+    - Metadata type (service, series, dataset)
+    - Responsible parties' roles
+    - Dates (used to define the date type, e.g. publication, creation)
+    - Keyword types
+    - Restrictions
+*/
+// TODO Implement broader CodeListValue usage where applicable, see above comment for details.
 public class CodeListValue {
 
-    // TODO: PAIK-1949 re-evaluate these location
     public static final String VALUE_DATE_TYPE_CODE = "gmd:CI_DateTypeCode";
     public static final String VALUE_MAINTENANCE_FREQUENCY_CODE = "gmd:MD_MaintenanceFrequencyCode";
 

@@ -44,10 +44,10 @@ public class DownloadLinksCkanCustomExtractor extends JsonPathListCustomExtracto
                             .forEach(rawResult -> {
                                 MetadataDownloadLink link = new MetadataDownloadLink();
                                 Map<String, Object> res = (Map<String,Object>) rawResult;
-                                String url = getValueSafishly(res, "url", DEFAULT_PARSED_VALUE);
+                                String url = getValueSafely(res, "url", DEFAULT_PARSED_VALUE);
                                 String protocol = parseUrlProtocol(url);
-                                String title = getValueSafishly(res, "name", DEFAULT_PARSED_VALUE);
-                                String description = getValueSafishly(res, "description", DEFAULT_PARSED_VALUE);
+                                String title = getValueSafely(res, "name", DEFAULT_PARSED_VALUE);
+                                String description = getValueSafely(res, "description", DEFAULT_PARSED_VALUE);
 
                                 link.setDesc(DEFAULT_PARSED_VALUE);
                                 link.setProtocol(protocol);
@@ -57,7 +57,7 @@ public class DownloadLinksCkanCustomExtractor extends JsonPathListCustomExtracto
                                 links.add(link);
                             });
                 });
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             throw new DocumentProcessingException(e);
         }
 

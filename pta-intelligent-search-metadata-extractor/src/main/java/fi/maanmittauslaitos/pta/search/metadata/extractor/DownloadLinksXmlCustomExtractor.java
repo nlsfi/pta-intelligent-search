@@ -6,7 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
 
-import javax.xml.xpath.*;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
 
 public class DownloadLinksXmlCustomExtractor extends XmlCustomExtractor {
     private static Logger logger = LoggerFactory.getLogger(DownloadLinksXmlCustomExtractor.class);
@@ -22,15 +25,15 @@ public class DownloadLinksXmlCustomExtractor extends XmlCustomExtractor {
             String url = (String) urlExpr.evaluate(node, XPathConstants.STRING);
 
             XPathExpression titleExpr =
-                    xPath.compile("./*/gmd:name/gco:CharacterString/text()");
+                    xPath.compile("./*/gmd:name/*/text()");
             String title = (String) titleExpr.evaluate(node, XPathConstants.STRING);
 
             XPathExpression protocolExpr =
-                    xPath.compile("./*/gmd:protocol/gco:CharacterString/text()");
+                    xPath.compile("./*/gmd:protocol/*/text()");
             String protocol = (String) protocolExpr.evaluate(node, XPathConstants.STRING);
 
             XPathExpression descExpr =
-                    xPath.compile("./*/gmd:description/gco:CharacterString/text()");
+                    xPath.compile("./*/gmd:description/*/text()");
             String desc = (String) descExpr.evaluate(node, XPathConstants.STRING);
 
             link = new MetadataDownloadLink();

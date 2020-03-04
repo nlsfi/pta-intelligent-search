@@ -202,8 +202,10 @@ public class CKANMetadataExtractorConfigurationFactory extends MetadataExtractor
 
 		));
 
-		// we use a dummy key so the fields are parsed in the same format as the default org config and thus we can use the default
-		// ResponsiblePartyCKANCustomExtractor for this also.
+		// we use a dummy key (a_key_that_should_never_exist_or_else_this_might_break) so the fields are parsed in the same format as the default org config and thus we can use the default
+		// ResponsiblePartyCKANCustomExtractor for this also. This could be made cleaner by making a another extractor or
+		// changing the format in which SimpleResponsiblePartyCKANCustomExtractor receives and read the org data.
+		// FIXME This hack should be fixed at an appropriate time. See comment above for tips.
 		extractors.add(createCustomListJsonPathExtractor(
 				ResultMetadataFields.ORGANISATIONS_OTHER,
 				new SimpleResponsiblePartyCKANCustomExtractor(),
@@ -223,14 +225,11 @@ public class CKANMetadataExtractorConfigurationFactory extends MetadataExtractor
 
 	@Override
 	public DocumentProcessor createMetadataDocumentProcessor() throws ParserConfigurationException {
-		return createMetadataDocumentProcessor(null);
+		return createMetadataDocumentProcessor(createMetadataDocumentProcessingConfiguration());
 	}
 
 	@Override
 	public DocumentProcessor createMetadataDocumentProcessor(DocumentProcessingConfiguration configuration) throws ParserConfigurationException {
-		if (configuration == null ) {
-			configuration = createMetadataDocumentProcessingConfiguration();
-		}
 		return getDocumentProcessorFactory().createJsonProcessor(configuration);
 	}
 
