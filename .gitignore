@@ -1,3 +1,6 @@
+.vagrant
+harvester_tracker.json
+
 .project
 .idea
 .settings

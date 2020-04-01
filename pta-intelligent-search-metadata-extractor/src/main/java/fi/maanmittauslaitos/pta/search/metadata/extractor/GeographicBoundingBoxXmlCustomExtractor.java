@@ -1,11 +1,8 @@
-package fi.maanmittauslaitos.pta.search.metadata;
+package fi.maanmittauslaitos.pta.search.metadata.extractor;
 
-import fi.maanmittauslaitos.pta.search.documentprocessor.CustomExtractor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingException;
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.DocumentQuery;
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.QueryResult;
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.XmlDocumentQueryImpl;
-import fi.maanmittauslaitos.pta.search.documentprocessor.query.XmlQueryResultImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
 
 import javax.xml.xpath.XPath;
@@ -14,7 +11,9 @@ import javax.xml.xpath.XPathException;
 import javax.xml.xpath.XPathExpression;
 import java.util.Arrays;
 
-public class GeographicBoundingBoxXmlCustomExtractor implements CustomExtractor {
+public class GeographicBoundingBoxXmlCustomExtractor extends XmlCustomExtractor {
+
+	private static Logger logger = LoggerFactory.getLogger(GeographicBoundingBoxXmlCustomExtractor.class);
 
 	private Double getDoubleValue(String elementName, XPath xPath, Node node)
 			throws XPathException, MissingCoordException
@@ -27,23 +26,22 @@ public class GeographicBoundingBoxXmlCustomExtractor implements CustomExtractor 
 		}
 		return ret;
 	}
-	
+
 	@Override
-	public Object process(DocumentQuery documentQuery, QueryResult queryResult) throws XPathException, DocumentProcessingException {
+	public Object process(XPath xPath, Node node) throws DocumentProcessingException {
 		Double [] ret = new Double[4];
-		if (!(documentQuery instanceof XmlDocumentQueryImpl)) {
-			throw new DocumentProcessingException("This extractor should only be used for XML Documents");
-		}
-		XPath xPath = ((XmlDocumentQueryImpl) documentQuery).getxPath();
-		Node node = ((XmlQueryResultImpl) queryResult).getNode();
 
 		try {
 			ret[0] = getDoubleValue("westBoundLongitude", xPath, node);
 			ret[1] = getDoubleValue("southBoundLatitude", xPath, node);
 			ret[2] = getDoubleValue("eastBoundLongitude", xPath, node);
 			ret[3] = getDoubleValue("northBoundLatitude", xPath, node);
-		} catch(MissingCoordException e) {
-			return null;
+		} catch(MissingCoordException | XPathException e) {
+			if (e instanceof MissingCoordException) {
+				return null;
+			} else {
+				throw new DocumentProcessingException(e);
+			}
 		}
 		return Arrays.asList(ret);
 	}

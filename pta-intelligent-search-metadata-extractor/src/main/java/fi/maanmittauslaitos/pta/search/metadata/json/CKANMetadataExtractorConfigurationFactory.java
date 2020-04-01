@@ -1,15 +1,17 @@
 package fi.maanmittauslaitos.pta.search.metadata.json;
 
-import fi.maanmittauslaitos.pta.search.documentprocessor.CustomExtractor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessingConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.DocumentProcessor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfiguration;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl;
 import fi.maanmittauslaitos.pta.search.documentprocessor.FieldExtractorConfigurationImpl.FieldExtractorType;
-import fi.maanmittauslaitos.pta.search.documentprocessor.ListCustomExtractor;
 import fi.maanmittauslaitos.pta.search.documentprocessor.query.QueryResult;
 import fi.maanmittauslaitos.pta.search.metadata.MetadataExtractorConfigurationFactory;
 import fi.maanmittauslaitos.pta.search.metadata.ResultMetadataFields;
+import fi.maanmittauslaitos.pta.search.metadata.json.extractor.DownloadLinksCkanCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.json.extractor.GeographicBoundingBoxCKANCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.json.extractor.ResponsiblePartyCKANCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.json.extractor.SimpleResponsiblePartyCKANCustomExtractor;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.util.Arrays;
@@ -17,6 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static fi.maanmittauslaitos.pta.search.metadata.utils.JsonPathHelper.*;
 
 public class CKANMetadataExtractorConfigurationFactory extends MetadataExtractorConfigurationFactory {
 
@@ -58,7 +62,6 @@ public class CKANMetadataExtractorConfigurationFactory extends MetadataExtractor
 			{"mf", "Meteorological geographical features"},
 			{"ac-mf", "Atmospheric Conditions and meteorological geographical features"}
 	}).collect(Collectors.toMap(data -> data[0], data -> data[1]));
-
 
 	@Override
 	public DocumentProcessingConfiguration createMetadataDocumentProcessingConfiguration() {
@@ -155,7 +158,7 @@ public class CKANMetadataExtractorConfigurationFactory extends MetadataExtractor
 		// Organisation names + roles
 		extractors.add(createCustomListJsonPathExtractor(
 				ResultMetadataFields.ORGANISATIONS,
-				new ResponsiblePartyCKANCustomExtractor(),
+				new SimpleResponsiblePartyCKANCustomExtractor(),
 				"$.['reporting_organization','reporting_organization_others']"
 		));
 
@@ -168,42 +171,66 @@ public class CKANMetadataExtractorConfigurationFactory extends MetadataExtractor
 		bboxExtractor.setDefaultValue(DEFAULT_BOUNDING_BOX_FOR_CKAN_METADATA);
 		extractors.add(bboxExtractor);
 
+		// download links
+		extractors.add(createCustomListJsonPathExtractor(
+				ResultMetadataFields.DOWNLOAD_LINKS,
+				new DownloadLinksCkanCustomExtractor(),
+				"$.resources[0].['url', 'name', 'description']"
+		));
+
+		// CKAN custom field used to extract creation date
+		FieldExtractorConfigurationImpl creationDateExtractor = (FieldExtractorConfigurationImpl) createFirstMatchingJsonPathExtractor(
+				ResultMetadataFields.CKAN_CREATION_DATE,
+				"$.resources[0].created", "$.metadata_created"
+		);
+		creationDateExtractor.setTrimmer(dStamp -> dStamp != null ? dStamp.trim().split("\\.")[0] : null);
+		extractors.add(creationDateExtractor);
+
+
+		// organizations
+		extractors.add(createCustomListJsonPathExtractor(
+				ResultMetadataFields.ORGANISATIONS_RESOURCE,
+				new ResponsiblePartyCKANCustomExtractor(),
+				"$.['reporting_organization','reporting_person_email']"
+
+		));
+
+		extractors.add(createCustomListJsonPathExtractor(
+				ResultMetadataFields.ORGANISATIONS_METADATA,
+				new ResponsiblePartyCKANCustomExtractor(),
+				"$.['author', 'author_email']"
+
+		));
+
+		// we use a dummy key (a_key_that_should_never_exist_or_else_this_might_break) so the fields are parsed in the same format as the default org config and thus we can use the default
+		// ResponsiblePartyCKANCustomExtractor for this also. This could be made cleaner by making a another extractor or
+		// changing the format in which SimpleResponsiblePartyCKANCustomExtractor receives and read the org data.
+		// FIXME This hack should be fixed at an appropriate time. See comment above for tips.
+		extractors.add(createCustomListJsonPathExtractor(
+				ResultMetadataFields.ORGANISATIONS_OTHER,
+				new SimpleResponsiblePartyCKANCustomExtractor(),
+				"$.['a_key_that_should_never_exist_or_else_this_might_break', 'reporting_organization_others']"
+		));
+
+		// Keywords
+		extractors.add(createJsonPathExtractor(
+				ResultMetadataFields.KEYWORDS_ALL,
+				FieldExtractorConfigurationImpl.FieldExtractorType.ALL_MATCHING_VALUES,
+				"$.tag_keyword"
+		));
+
+
 		return configuration;
 	}
 
 	@Override
 	public DocumentProcessor createMetadataDocumentProcessor() throws ParserConfigurationException {
-		DocumentProcessingConfiguration configuration = createMetadataDocumentProcessingConfiguration();
+		return createMetadataDocumentProcessor(createMetadataDocumentProcessingConfiguration());
+	}
+
+	@Override
+	public DocumentProcessor createMetadataDocumentProcessor(DocumentProcessingConfiguration configuration) throws ParserConfigurationException {
 		return getDocumentProcessorFactory().createJsonProcessor(configuration);
-	}
-
-	private FieldExtractorConfiguration createJsonPathExtractor(String field, FieldExtractorType type, String jsonPath) {
-		FieldExtractorConfigurationImpl ret = new FieldExtractorConfigurationImpl();
-		ret.setField(field);
-		ret.setType(type);
-		ret.setQuery(jsonPath);
-		return ret;
-	}
-
-	private FieldExtractorConfiguration createCustomJsonPathExtractor(String field, CustomExtractor extractor, String jsonPath) {
-		FieldExtractorConfigurationImpl ret = (FieldExtractorConfigurationImpl) createJsonPathExtractor(field,
-				FieldExtractorType.CUSTOM_CLASS, jsonPath);
-		ret.setCustomExtractor(extractor);
-		return ret;
-	}
-
-	private FieldExtractorConfiguration createCustomListJsonPathExtractor(String field, ListCustomExtractor extractor, String jsonPath) {
-		FieldExtractorConfigurationImpl ret = (FieldExtractorConfigurationImpl) createJsonPathExtractor(field,
-				FieldExtractorType.CUSTOM_CLASS_SINGLE_VALUE, jsonPath);
-		ret.setListCustomExtractor(extractor);
-		return ret;
-	}
-
-	private FieldExtractorConfiguration createFirstMatchingJsonPathExtractor(String field, String... jsonPaths) {
-		FieldExtractorConfigurationImpl ret = (FieldExtractorConfigurationImpl) createJsonPathExtractor(field,
-				FieldExtractorType.FIRST_MATCHING_FROM_MULTIPLE_QUERIES, jsonPaths[0]);
-		ret.setExtraQueries(Arrays.asList(jsonPaths).subList(1, jsonPaths.length));
-		return ret;
 	}
 
 }

@@ -113,5 +113,15 @@ public abstract class BaseMetadataExtractorTest {
 		}
 		return document;
 	}
-	
+
+
+	protected Document createKMTKRakennukset()
+			throws DocumentProcessingException, IOException, FileNotFoundException {
+		Document document;
+		try (FileInputStream fis = new FileInputStream("src/test/resources/7cf70c7f-0fd7-4d87-86a8-7fdeb814520f.xml")) {
+			document = processor.processDocument(fis);
+		}
+		return document;
+	}
+
 }

@@ -21,14 +21,14 @@ import fi.maanmittauslaitos.pta.search.index.DocumentSink;
 import fi.maanmittauslaitos.pta.search.index.ElasticsearchDocumentSink;
 import fi.maanmittauslaitos.pta.search.index.LocalArchiveDocumentSink;
 import fi.maanmittauslaitos.pta.search.metadata.BestMatchingRegionListCustomExtractor;
-import fi.maanmittauslaitos.pta.search.metadata.GeographicBoundingBoxXmlCustomExtractor;
 import fi.maanmittauslaitos.pta.search.metadata.ISOMetadataExtractorConfigurationFactory;
 import fi.maanmittauslaitos.pta.search.metadata.MetadataExtractorConfigurationFactory;
-import fi.maanmittauslaitos.pta.search.metadata.ResponsiblePartyXmlCustomExtractor;
 import fi.maanmittauslaitos.pta.search.metadata.ResultMetadataFields;
+import fi.maanmittauslaitos.pta.search.metadata.extractor.GeographicBoundingBoxXmlCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.extractor.ResponsiblePartyXmlCustomExtractor;
 import fi.maanmittauslaitos.pta.search.metadata.json.CKANMetadataExtractorConfigurationFactory;
-import fi.maanmittauslaitos.pta.search.metadata.json.GeographicBoundingBoxCKANCustomExtractor;
-import fi.maanmittauslaitos.pta.search.metadata.json.ResponsiblePartyCKANCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.json.extractor.GeographicBoundingBoxCKANCustomExtractor;
+import fi.maanmittauslaitos.pta.search.metadata.json.extractor.SimpleResponsiblePartyCKANCustomExtractor;
 import fi.maanmittauslaitos.pta.search.source.HarvesterSource;
 import fi.maanmittauslaitos.pta.search.source.csw.CSWHarvesterSource;
 import fi.maanmittauslaitos.pta.search.source.csw.LocalCSWHarvesterSource;
@@ -211,7 +211,7 @@ public class HarvesterConfig {
 		FieldExtractorConfiguration fec = configuration.getFieldExtractor(ResultMetadataFields.ORGANISATIONS);
 		FieldExtractorConfigurationImpl x = (FieldExtractorConfigurationImpl) fec;
 
-		ResponsiblePartyCKANCustomExtractor rpxpce = (ResponsiblePartyCKANCustomExtractor) x.getListCustomExtractor();
+		SimpleResponsiblePartyCKANCustomExtractor rpxpce = (SimpleResponsiblePartyCKANCustomExtractor) x.getListCustomExtractor();
 		rpxpce.setOrganisationNameRewriter(orgRewriter);
 
 		// Extract bounding box area

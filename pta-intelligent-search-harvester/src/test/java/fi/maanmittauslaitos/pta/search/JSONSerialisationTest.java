@@ -42,7 +42,7 @@ public class JSONSerialisationTest {
 		
 		String jsonString = objectMapper.writeValueAsString(document);
 		
-		assertEquals("{\"fields\":{\"organisations\":[{\"organisationName\":\"foo\",\"isoRole\":\"bar\",\"localisedOrganisationName\":{}}]},\"dom\":null}", jsonString);
+		assertEquals("{\"fields\":{\"organisations\":[{\"isoRole\":\"bar\",\"email\":[],\"partyName\":\"foo\",\"localizedPartyName\":{},\"organisationName\":\"foo\",\"localisedOrganisationName\":{}}]},\"dom\":null}", jsonString);
 	}
 
 }
