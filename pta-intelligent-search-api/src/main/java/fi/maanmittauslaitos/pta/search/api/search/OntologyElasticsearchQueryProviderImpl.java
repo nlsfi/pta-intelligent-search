@@ -74,8 +74,12 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		this.requireExactWordMatch = requireExactWordMatch;
 	}
 
-	public void setWordSynonyms(Map<String, List<String>> synonymWords) {
+	public void setSynonymWords(Map<String, List<String>> synonymWords) {
 	    this.synonymsWords = synonymWords;
+    }
+
+    public Map<String, List<String>> getSynonymsWords(){
+	    return synonymsWords;
     }
 
 	public Set<String> getRequireExactWordMatch() {
@@ -262,14 +266,13 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
     private List<String> createSynonymList(Collection<String> searchTerms) {
         List<String> synonymList = new ArrayList<>();
         for(String term : searchTerms) {
-            List<String> termSynonyms = synonymsWords.get(term);
-            if(termSynonyms != null && termSynonyms.size() > 0) {
-                for (String synonym : termSynonyms) {
-                	if(synonym != term) {
+            List<String> searchTermSynonyms = getSynonymsWords().get(term);
+            if(searchTermSynonyms != null && searchTermSynonyms.size() > 0) {
+                for (String synonym : searchTermSynonyms) {
+                	if(!synonym.equals(term)) {
 						synonymList.add(synonym);
 					}
                 }
-                //synonymList.remove(term);
             }
         }
         return synonymList.stream().distinct().collect(Collectors.toList());

@@ -522,7 +522,7 @@ public class ApplicationConfiguration {
 		queryProvider.setRegionNameContainer(regionNameContainer);
 
 		queryProvider.setRequireExactWordMatch(exactMatchWords);
-		queryProvider.setWordSynonyms(synonymWords);
+		queryProvider.setSynonymWords(synonymWords);
 
 		ret.setQueryProvider(queryProvider);
 		ret.setHintProvider(hintProvider);
