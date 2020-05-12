@@ -56,6 +56,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.zip.GZIPInputStream;
 
 import static java.util.Objects.requireNonNull;
@@ -398,25 +399,7 @@ public class ApplicationConfiguration {
 		InputStream is = null;
 
 		try {
-			String filename = System.getProperty("EXACT_MATCH_FILE");
-			if (filename != null && filename.length() > 0) {
-				logger.info("Loading exact word match file from '" + filename + "' (configured via system property EXACT_MATCH_FILE)");
-				is = new FileInputStream(filename);
-			}
-
-			if (is == null) {
-				filename = "./exact_match_words.txt";
-				File f = new File(filename);
-				if (f.exists()) {
-					logger.info("Loading exact word match file 'exact_match_words.txt' from process CWD");
-					is = new FileInputStream(f);
-				}
-			}
-
-			if (is == null) {
-				logger.info("Loading exact word match file 'exact_match_words.txt' from classpath");
-				is = ApplicationConfiguration.class.getResourceAsStream("/exact_match_words.txt");
-			}
+			is = loadFile("EXACT_MATCH_FILE", "exact_match_words.txt");
 
 			Set<String> ret = new HashSet<>();
 
@@ -444,6 +427,66 @@ public class ApplicationConfiguration {
 	}
 
 	@Bean
+	@Qualifier("SynonymWords")
+	public Map<String, List<String>> synonymWords() throws IOException{
+		InputStream is = null;
+		Map<String, List<String>> synonymMap = new HashMap<>();
+		try {
+			is = loadFile("SYNONYM_WORDS_FILE", "synonyms.csv");
+
+			if(is != null) {
+				BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+
+				String line;
+				while ((line = br.readLine()) != null) {
+					List<String> wordList = Arrays.stream(line.split(","))
+							.map(String::trim)
+							.collect(Collectors.toList());
+
+					for(String word : wordList) {
+						synonymMap.put(word, wordList);
+					}
+				}
+			}
+		} finally {
+			if(is != null) {
+				try {
+					is.close();
+				} catch(IOException e) {
+					throw e;
+				}
+			}
+		}
+		return synonymMap;
+	}
+
+	private InputStream loadFile(String propertyName, String name) throws IOException {
+	    InputStream is = null;
+
+        String filename = System.getProperty(propertyName);
+        if (filename != null && filename.length() > 0) {
+            logger.info("Loading file from '" + filename + "' (configured via system property " + propertyName +")");
+            is = new FileInputStream(filename);
+        }
+
+        if (is == null) {
+            filename = "./" + name;
+            File f = new File(filename);
+            if (f.exists()) {
+                logger.info("Loading file '" + filename + "' from process CWD");
+                is = new FileInputStream(f);
+            }
+        }
+
+        if (is == null) {
+            logger.info("Loading file '" + name + "' from classpath");
+            is = ApplicationConfiguration.class.getResourceAsStream("/" + name);
+        }
+
+        return is;
+    }
+
+	@Bean
 	public RegionNameContainer regionNameContainer(@Qualifier("StemmersPerLanguage") Map<Language, Stemmer> stemmers) {
 		String countryResource = "data/well_known_location_bboxes_countries.json";
 		String regionResource = "data/well_known_location_bboxes_regions.json";
@@ -457,7 +500,8 @@ public class ApplicationConfiguration {
 	@Bean
 	public HakuKone hakuKone(Map<Language, TextProcessor> queryTextProcessors, ElasticsearchQueryAPI elasticsearchAPI,
 							 Model model, HintProvider hintProvider, @Qualifier("exactMatchWords") Set<String> exactMatchWords,
-							 @Qualifier("StemmersPerLanguage") Map<Language, Stemmer> stemmers, RegionNameContainer regionNameContainer) throws IOException {
+							 @Qualifier("StemmersPerLanguage") Map<Language, Stemmer> stemmers,
+                             RegionNameContainer regionNameContainer, @Qualifier("SynonymWords") Map<String, List<String>> synonymWords) throws IOException {
 		FacetedElasticsearchHakuKoneImpl ret = new FacetedElasticsearchHakuKoneImpl();
 		ret.setDistributionFormatsFacetTermMaxSize(100);
 		ret.setInspireKeywordsFacetTermMaxSize(100);
@@ -478,6 +522,7 @@ public class ApplicationConfiguration {
 		queryProvider.setRegionNameContainer(regionNameContainer);
 
 		queryProvider.setRequireExactWordMatch(exactMatchWords);
+		queryProvider.setSynonymWords(synonymWords);
 
 		ret.setQueryProvider(queryProvider);
 		ret.setHintProvider(hintProvider);

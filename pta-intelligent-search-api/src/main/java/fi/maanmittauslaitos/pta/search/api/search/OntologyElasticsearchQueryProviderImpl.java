@@ -20,11 +20,8 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder;
 import org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants.FIELD_BEST_MATCHING_REGIONS;
 import static fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants.FIELD_BEST_MATCHING_REGIONS_NAME;
@@ -37,6 +34,7 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	private Set<IRI> relationPredicates = new HashSet<>();
 
 	private Set<String> requireExactWordMatch = new HashSet<>();
+	private Map<String, List<String>> synonymsWords = new HashMap<>();
 	private Map<Language, TextProcessor> textProcessors;
 	private Model model;
 
@@ -75,6 +73,14 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 	public void setRequireExactWordMatch(Set<String> requireExactWordMatch) {
 		this.requireExactWordMatch = requireExactWordMatch;
 	}
+
+	public void setSynonymWords(Map<String, List<String>> synonymWords) {
+	    this.synonymsWords = synonymWords;
+    }
+
+    public Map<String, List<String>> getSynonymsWords(){
+	    return synonymsWords;
+    }
 
 	public Set<String> getRequireExactWordMatch() {
 		return requireExactWordMatch;
@@ -169,10 +175,9 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 			logger.info("Hakusanat: " + pyynto.getQuery() + ", kieli: " + lang + ", tunnistetut termit: " + pyyntoTerms);
 		}
 
-
 		addOntologicalTermQueries(pyyntoTerms, boolQuery);
 		addFreetextQueries(pyynto.getQuery(), boolQuery);
-
+        addSynonymQueries(pyynto.getQuery(), boolQuery);
 
 		BoolQueryBuilder mustQuery = QueryBuilders.boolQuery();
 		mustQuery.should(boolQuery);
@@ -222,15 +227,19 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 				.orElse(RegionNameSearchResult.NO_REGION_FOUND);
 	}
 
+	private void addFreeTextQuery(String searchTerm, BoolQueryBuilder boolQuery) {
+        DisMaxQueryBuilder disMax = QueryBuilders.disMaxQuery();
+
+        disMax.add(freetextQuery("abstract", searchTerm, basicWordMatchWeight, basicWordMatchFuzzyWeight));
+        disMax.add(freetextQuery("title", searchTerm, titleWordMatchWeight, titleWordMatchFuzzyWeight));
+        disMax.add(freetextQuery("organisationName_text", searchTerm, organisationNameMatchWeight, organisationNameMatchFuzzyWeight));
+
+        boolQuery.should().add(disMax);
+    }
+
 	private void addFreetextQueries(Collection<String> words, BoolQueryBuilder boolQuery) {
 		for (String sana : words) {
-			DisMaxQueryBuilder disMax = QueryBuilders.disMaxQuery();
-
-			disMax.add(freetextQuery("abstract", sana, basicWordMatchWeight, basicWordMatchFuzzyWeight));
-			disMax.add(freetextQuery("title", sana, titleWordMatchWeight, titleWordMatchFuzzyWeight));
-			disMax.add(freetextQuery("organisationName_text", sana, organisationNameMatchWeight, organisationNameMatchFuzzyWeight));
-
-			boolQuery.should().add(disMax);
+            addFreeTextQuery(sana, boolQuery);
 		}
 	}
 
@@ -247,6 +256,27 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		}
 		return query;
 	}
+
+    private void addSynonymQueries(Collection<String> searchTerms, BoolQueryBuilder boolQuery) {
+        for (String searchTerm : createSynonymList(searchTerms)) {
+            addFreeTextQuery(searchTerm, boolQuery);
+        }
+    }
+
+    private List<String> createSynonymList(Collection<String> searchTerms) {
+        List<String> synonymList = new ArrayList<>();
+        for(String term : searchTerms) {
+            List<String> searchTermSynonyms = getSynonymsWords().get(term);
+            if(searchTermSynonyms != null && searchTermSynonyms.size() > 0) {
+                for (String synonym : searchTermSynonyms) {
+                    if(!synonym.equals(term)) {
+                        synonymList.add(synonym);
+                    }
+                }
+            }
+        }
+        return synonymList.stream().distinct().collect(Collectors.toList());
+    }
 
 	private void addOntologicalTermQueries(Collection<String> terms, BoolQueryBuilder boolQuery) {
 		for (String term : terms) {
