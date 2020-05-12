@@ -269,9 +269,9 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
             List<String> searchTermSynonyms = getSynonymsWords().get(term);
             if(searchTermSynonyms != null && searchTermSynonyms.size() > 0) {
                 for (String synonym : searchTermSynonyms) {
-                	if(!synonym.equals(term)) {
-						synonymList.add(synonym);
-					}
+                    if(!synonym.equals(term)) {
+                        synonymList.add(synonym);
+                    }
                 }
             }
         }
