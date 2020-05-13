@@ -39,6 +39,7 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 	private static final String FACETS_DISTRIBUTION_FORMATS = "distributionFormats";
 	private static final String FACETS_TOPIC_CATEGORIES     = "topicCategories";
 	private static final String FACETS_ORGANISATIONS        = "organisations";
+	private static final String FACETS_CATALOG        		= "sourceCatalog";
 	
 	private static final String FACETS_TYPES                = "types";
 	
@@ -55,7 +56,7 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 			
 	private static final List<String> FACETS_TERMS_ALL = Collections.unmodifiableList(
 			Arrays.asList(FACETS_INSPIRE_KEYWORDS, FACETS_DISTRIBUTION_FORMATS,
-					FACETS_TOPIC_CATEGORIES, FACETS_ORGANISATIONS
+					FACETS_TOPIC_CATEGORIES, FACETS_ORGANISATIONS, FACETS_CATALOG
 					));
 	
 	
@@ -70,7 +71,8 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 	private int topicCategoriesFacetTermMaxSize = 10;
 	private int distributionFormatsFacetTermMaxSize = 10;
 	private int organisationsFacetTermMaxSize = 10;
-	
+	private int catalogFacetTermMaxSize = 2; //Catalog size should be increased if more catalogs are added
+
 	public void setQueryProvider(ElasticsearchQueryProvider queryProvider) {
 		this.queryProvider = queryProvider;
 	}
@@ -117,6 +119,10 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 	
 	public int getOrganisationsFacetTermMaxSize() {
 		return organisationsFacetTermMaxSize;
+	}
+
+	public int getCatalogFacetTermMaxSize() {
+		return catalogFacetTermMaxSize;
 	}
 	
 	public void setTopicCategoriesFacetTermMaxSize(int topicCategoriesFacetTermMaxSize) {
@@ -173,6 +179,7 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_TOPIC_CATEGORIES).field("topicCategories").size(getTopicCategoriesFacetTermMaxSize()));
 		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_DISTRIBUTION_FORMATS).field("distributionFormats").size(getDistributionFormatsFacetTermMaxSize()));
 		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_ORGANISATIONS).field("organisations.organisationName").size(getOrganisationsFacetTermMaxSize()));
+		sourceBuilder.aggregation(AggregationBuilders.terms(FACETS_CATALOG).field("catalog.url").size(getCatalogFacetTermMaxSize()));
 		
 		// The "type" in the facet response is built out of these four separate queries
 		sourceBuilder.aggregation(AggregationBuilders.sum(FACETS_TYPE_ISSERVICE).field("isService"));
@@ -206,6 +213,8 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 		tulos.getFacets().put(FACETS_ORGANISATIONS,        readFacetValues(aggregations, FACETS_ORGANISATIONS));
 		tulos.getFacets().put(FACETS_TOPIC_CATEGORIES,     readFacetValues(aggregations, FACETS_TOPIC_CATEGORIES));
 		tulos.getFacets().put(FACETS_DISTRIBUTION_FORMATS, readFacetValues(aggregations, FACETS_DISTRIBUTION_FORMATS));
+		tulos.getFacets().put(FACETS_CATALOG, 			   readFacetValues(aggregations, FACETS_CATALOG));
+		//TODO:
 		
 		// Type facet
 		tulos.getFacets().put(FACETS_TYPES, combineParsedSumFacets(aggregations, FACETS_TYPE_ALL));
@@ -227,11 +236,13 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 					String field;
 					if (facetTerm.equals(FACETS_ORGANISATIONS)) {
 						field = "organisations.organisationName";
+					} else if(facetTerm.equals(FACETS_CATALOG)){
+						field = "catalog.url";
 					} else {
 						field = facetTerm;
 					}
 					TermQueryBuilder term = QueryBuilders.termQuery(field, value);
-					
+
 					facetFilters.add(term);
 				}
 			}
