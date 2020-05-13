@@ -214,7 +214,6 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 		tulos.getFacets().put(FACETS_TOPIC_CATEGORIES,     readFacetValues(aggregations, FACETS_TOPIC_CATEGORIES));
 		tulos.getFacets().put(FACETS_DISTRIBUTION_FORMATS, readFacetValues(aggregations, FACETS_DISTRIBUTION_FORMATS));
 		tulos.getFacets().put(FACETS_CATALOG, 			   readFacetValues(aggregations, FACETS_CATALOG));
-		//TODO:
 		
 		// Type facet
 		tulos.getFacets().put(FACETS_TYPES, combineParsedSumFacets(aggregations, FACETS_TYPE_ALL));
