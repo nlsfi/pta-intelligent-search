@@ -39,7 +39,7 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 	private static final String FACETS_DISTRIBUTION_FORMATS = "distributionFormats";
 	private static final String FACETS_TOPIC_CATEGORIES     = "topicCategories";
 	private static final String FACETS_ORGANISATIONS        = "organisations";
-	private static final String FACETS_CATALOG        		= "sourceCatalog";
+	private static final String FACETS_CATALOG        	    = "sourceCatalog";
 	
 	private static final String FACETS_TYPES                = "types";
 	
