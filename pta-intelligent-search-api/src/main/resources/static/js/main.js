@@ -84,8 +84,10 @@ $(document).ready(function() {
 		var sort = readSortFromUI();
 		console.log('sort', sort);
 
+		var queryArray = (hakusanat.match(/(?:[^\s"]+|"[^"]*")+/g) || []).map(str => str.replace(/"/g,'')).filter(function(v) { return v.length > 0; });
+		
 		var query = {
-			query: hakusanat.split(/\s+/).filter(function(v) { return v.length > 0; }),
+			query: queryArray,
 			skip: skip,
 			pageSize: pageSize,
 			facets: facetQuery,
