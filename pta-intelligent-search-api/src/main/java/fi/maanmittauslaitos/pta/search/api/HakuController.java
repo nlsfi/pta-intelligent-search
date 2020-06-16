@@ -7,6 +7,18 @@ import fi.maanmittauslaitos.pta.search.api.model.SearchResult;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.QueryLanguage;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.QueryLanguageScore;
 import fi.maanmittauslaitos.pta.search.api.search.HakuKone;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.info.License;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.log4j.Logger;
 import org.elasticsearch.common.collect.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +30,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@OpenAPIDefinition(
+		info = @Info(
+				title = "PTA Intelligent Search API",
+				version = "1.0", description = "", license = @License(name = "", url = ""), contact = @Contact(url = "", name = "", email = "")
+		)
+)
+@Tag(name = "search api", description = "Search for something")
 @RestController
 public class HakuController {
 	
@@ -32,9 +51,13 @@ public class HakuController {
 	@Autowired
 	@Qualifier("PreferredLanguages")
 	private List<Language> languagesInPreferenceOrder;
-	
+
+	@Operation(summary = "Search stuff", description = "Search for things here")
+	@ApiResponses(value={
+			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = SearchResult.class))))
+	})
 	@RequestMapping(value = "/v1/search", method = RequestMethod.POST)
-	public SearchResult hae(@RequestBody SearchQuery pyynto, @RequestParam("X-CLIENT-LANG") Optional<String> lang) throws IOException
+	public SearchResult hae(@Parameter(description="Request body") @RequestBody SearchQuery pyynto, @Parameter(description="The language of the search terms can be specified using this parameter, if left empty the language will be deduced") @RequestParam("X-CLIENT-LANG") Optional<String> lang) throws IOException
 	{
 		String defaultLanguageStr = languagesInPreferenceOrder.get(0).toString();
 		
