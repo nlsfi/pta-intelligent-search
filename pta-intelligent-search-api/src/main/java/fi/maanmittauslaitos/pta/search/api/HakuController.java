@@ -57,7 +57,7 @@ public class HakuController {
 			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = SearchResult.class))))
 	})
 	@RequestMapping(value = "/v1/search", method = RequestMethod.POST)
-	public SearchResult hae(@Parameter(description="Request body") @RequestBody SearchQuery pyynto, @Parameter(description="The language of the search terms can be specified using this parameter, if left empty the language will be deduced") @RequestParam("X-CLIENT-LANG") Optional<String> lang) throws IOException
+	public SearchResult hae(@Parameter(description="Request body") @RequestBody SearchQuery pyynto, @Parameter(description="The language of the search terms can be specified using this parameter, if left empty the language will be deduced", example = "FI") @RequestParam("X-CLIENT-LANG") Optional<String> lang) throws IOException
 	{
 		String defaultLanguageStr = languagesInPreferenceOrder.get(0).toString();
 		

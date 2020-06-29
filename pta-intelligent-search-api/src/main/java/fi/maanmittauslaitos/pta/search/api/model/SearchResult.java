@@ -1,17 +1,24 @@
 package fi.maanmittauslaitos.pta.search.api.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class SearchResult {
+	@Schema(description = "Start index of pagination", example = "0")
 	private Long startIndex;
+	@Schema(description = "Number of hits contained in the response", example = "1")
 	private Long totalHits;
+	@Schema(description = "The language used for the query")
 	private QueryLanguage queryLanguage;
+	@Schema(description = "List of hits")
 	private List<Hit> hits = new ArrayList<>();
+	@Schema(description = "Hints used for the search")
 	private List<String> hints = new ArrayList<>();
-
+	@Schema(description = "Facets that are contained in the results")
 	private Map<String, List<Facet>> facets = new HashMap<>();
 
 	public void setStartIndex(Long startIndex) {
@@ -63,15 +70,25 @@ public class SearchResult {
 	}
 
 	public static class Hit {
+		@Schema(description = "")
 		private List<HitText> text = new ArrayList<>();
+		@Schema(description = "")
 		private Double score;
+		@Schema(description = "")
 		private String id;
+		@Schema(description = "")
 		private String dateStamp;
+		@Schema(description = "")
 		private Catalog catalog;
+		@Schema(description = "")
 		private List<String> types = new ArrayList<>();
+		@Schema(description = "")
 		private List<String> topicCategories = new ArrayList<>();
+		@Schema(description = "")
 		private List<String> keywordsInspire = new ArrayList<>();
+		@Schema(description = "")
 		private List<String> distributionFormats = new ArrayList<>();
+
 
 		// Possibly hidden in API response
 		private List<String> abstractUris = new ArrayList<>();
@@ -168,6 +185,7 @@ public class SearchResult {
 
 	}
 
+	@Schema(description = "")
 	public static class HitText {
 		private String lang;
 		private String title;
@@ -214,6 +232,7 @@ public class SearchResult {
 			return ret;
 		}
 
+		@Schema(description = "")
 		public static class HitOrganisation {
 			private String name;
 			private String role;
@@ -236,8 +255,11 @@ public class SearchResult {
 		}
 	}
 
+	@Schema(description = "")
 	public static class Facet {
+		@Schema(description = "")
 		private String id;
+		@Schema(description = "")
 		private Long count;
 
 		public void setCount(Long count) {
@@ -264,9 +286,13 @@ public class SearchResult {
 		}
 	}
 
+	@Schema(description = "Describes the language used for the search.")
 	public static class QueryLanguage {
+		@Schema(description = "The language used for querying", example = "FI")
 		private String used;
+		@Schema(description = "The language that was deduced by the search", example = "FI")
 		private String deduced;
+		@Schema(description = "The score", example = "1")
 		private List<QueryLanguageScore> scores;
 
 		public void setUsed(String used) {
