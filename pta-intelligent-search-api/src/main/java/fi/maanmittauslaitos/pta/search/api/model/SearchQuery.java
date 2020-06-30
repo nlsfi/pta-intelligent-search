@@ -15,11 +15,11 @@ public class SearchQuery {
 	private Long skip;
 	@Schema(description = "Determines how many results are returned per page", example = "10")
 	private Long pageSize;
-	@Schema(description = "The list of strings you wish to search", example = "[\"laser\", \"keilaus\"]")
+	@Schema(description = "The list of strings you wish to search", example = "[\"kuopio\"]")
 	private List<String> query = new ArrayList<>();
 	@Schema(required = false, description = "The language of search terms can be forced to be one of FI, SV, or EN", example="FI", allowableValues = {"FI", "SV", "EN"})
 	private String queryLanguage;
-	@Schema(description = "List of facets to filter the search by", example = "{\"organisations\": [\"organisations\"]}")
+	@Schema(description = "List of facets to filter the search by", allowableValues = {"organisations", "topicCategories", "keywordsInspire", "sourceCatalog", "types", "distributionFormats"}, example = "{\"types\":[\"isService\"],\"keywordsInspire\":[\"Ortoilmakuvat\"]}")
 	private Map<String, List<String>> facets = new HashMap<String, List<String>>();
 	@Schema(description = "Sorting order")
 	private List<Sort> sort = new ArrayList<>();

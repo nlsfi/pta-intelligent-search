@@ -12,13 +12,13 @@ public class SearchResult {
 	private Long startIndex;
 	@Schema(description = "Number of hits contained in the response", example = "1")
 	private Long totalHits;
-	@Schema(description = "The language used for the query")
+	@Schema(description = "The language used for the query", example = "FI")
 	private QueryLanguage queryLanguage;
 	@Schema(description = "List of hits")
 	private List<Hit> hits = new ArrayList<>();
-	@Schema(description = "Hints used for the search")
+	@Schema(description = "Hints used for the search", example = "[]")
 	private List<String> hints = new ArrayList<>();
-	@Schema(description = "Facets that are contained in the results")
+	@Schema(description = "Facets that are contained in the results", example = "{\"types\": [{\"id\": \"isService\",\"count\": 1}]}")
 	private Map<String, List<Facet>> facets = new HashMap<>();
 
 	public void setStartIndex(Long startIndex) {
@@ -70,28 +70,30 @@ public class SearchResult {
 	}
 
 	public static class Hit {
-		@Schema(description = "")
+		@Schema(description = "List of result data")
 		private List<HitText> text = new ArrayList<>();
-		@Schema(description = "")
+		@Schema(description = "Score determines how well result matches the search terms", example = "1")
 		private Double score;
-		@Schema(description = "")
+		@Schema(description = "The elastic search index id", example = "c43810c7-b9a8-4641-a8d0-2a25071ae22e")
 		private String id;
-		@Schema(description = "")
+		@Schema(description = "Result date", example = "2020-01-27T10:39:23")
 		private String dateStamp;
-		@Schema(description = "")
+		@Schema(description = "The catalog that the result is from")
 		private Catalog catalog;
-		@Schema(description = "")
+		@Schema(description = "List of included types", example = "[\"isService\"]")
 		private List<String> types = new ArrayList<>();
-		@Schema(description = "")
+		@Schema(description = "List of included topic categories", example = "[\"category\"]")
 		private List<String> topicCategories = new ArrayList<>();
-		@Schema(description = "")
+		@Schema(description = "List of included keywords", example = "[\"Osoitteet\", \"Ortoilmakuvat\"]")
 		private List<String> keywordsInspire = new ArrayList<>();
-		@Schema(description = "")
+		@Schema(description = "List of included distribution formats", example = "[]")
 		private List<String> distributionFormats = new ArrayList<>();
 
-
+		//TODO: describe
 		// Possibly hidden in API response
+		@Schema(description = "")
 		private List<String> abstractUris = new ArrayList<>();
+		@Schema(description = "")
 		private List<String> abstractTopicUris = new ArrayList<>();
 
 
@@ -185,11 +187,15 @@ public class SearchResult {
 
 	}
 
-	@Schema(description = "")
+	@Schema(description = "Document that matched search query")
 	public static class HitText {
+		@Schema(description = "Text language", example = "FI")
 		private String lang;
+		@Schema(description = "Text title", example = "Lorem ipsum")
 		private String title;
+		@Schema(description = "Text abstract", example = "orem ipsum dolor sit amet, consectetur adipiscing elit. Duis et mattis nisl.")
 		private String abstractText;
+		@Schema(description = "List of organisations that hit text belongs to")
 		private List<HitOrganisation> organisations = new ArrayList<>();
 
 		public void setAbstractText(String abstractText) {
@@ -232,9 +238,11 @@ public class SearchResult {
 			return ret;
 		}
 
-		@Schema(description = "")
+		@Schema(description = "Organisation that the search result belongs to")
 		public static class HitOrganisation {
+			@Schema(description = "Organisation name", example = "Kuopion kaupunki")
 			private String name;
+			@Schema(description = "Organisation role", example = "")
 			private String role;
 
 			public void setName(String name) {
@@ -255,11 +263,11 @@ public class SearchResult {
 		}
 	}
 
-	@Schema(description = "")
+	@Schema(description = "Search result facets")
 	public static class Facet {
-		@Schema(description = "")
+		@Schema(description = "Facet id")
 		private String id;
-		@Schema(description = "")
+		@Schema(description = "Number of results corresponding to this id")
 		private Long count;
 
 		public void setCount(Long count) {
@@ -320,8 +328,11 @@ public class SearchResult {
 		}
 	}
 
+	@Schema(description = "Query language score")
 	public static class QueryLanguageScore {
+		@Schema(description = "Query language code", example = "FI")
 		private String language;
+		@Schema(description = "Weighted score of the language when query language was deduced", example = "1")
 		private Integer score;
 
 		public void setLanguage(String language) {
@@ -342,7 +353,9 @@ public class SearchResult {
 	}
 
 	public static class Catalog {
+		@Schema(description = "Catalog url", example = "https://paikkatietohakemisto.fi")
 		private String url;
+		@Schema(description = "Catlog type", example = "CSW")
 		private String type;
 
 		public String getUrl() {
