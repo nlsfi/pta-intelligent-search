@@ -52,7 +52,7 @@ public class HakuController {
 	@Qualifier("PreferredLanguages")
 	private List<Language> languagesInPreferenceOrder;
 
-	@Operation(summary = "Search stuff", description = "Search for things here")
+	@Operation(summary = "Search for services and datasets in Paikkatietoalusta", description = "Perform queries to identify relevant services and datasets. This service provides accurate search results by utilizing ontological dictionaries. Queries can be refined by specifying topics, data providers and themes.")
 	@ApiResponses(value={
 			@ApiResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = SearchResult.class))))
 	})

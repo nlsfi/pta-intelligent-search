@@ -16,9 +16,9 @@ public class SearchResult {
 	private QueryLanguage queryLanguage;
 	@Schema(description = "List of hits")
 	private List<Hit> hits = new ArrayList<>();
-	@Schema(description = "Hints used for the search", example = "[]")
+	@Schema(description = "Hints used for the search (deprecated)", example = "[]")
 	private List<String> hints = new ArrayList<>();
-	@Schema(description = "Facets that are contained in the results", example = "{\"types\": [{\"id\": \"isService\",\"count\": 1}]}")
+	@Schema(description = "Facets that are contained in the results that can be used to refine the query", example = "{\"types\": [{\"id\": \"isService\",\"count\": 1}]}")
 	private Map<String, List<Facet>> facets = new HashMap<>();
 
 	public void setStartIndex(Long startIndex) {
@@ -70,7 +70,7 @@ public class SearchResult {
 	}
 
 	public static class Hit {
-		@Schema(description = "List of result data")
+		@Schema(description = "Textual descriptions of the results in multiple languages")
 		private List<HitText> text = new ArrayList<>();
 		@Schema(description = "Score determines how well result matches the search terms", example = "1")
 		private Double score;
@@ -80,20 +80,20 @@ public class SearchResult {
 		private String dateStamp;
 		@Schema(description = "The catalog that the result is from")
 		private Catalog catalog;
-		@Schema(description = "List of included types", example = "[\"isService\"]")
+		@Schema(description = "List of included types (possible values include isService, isDataset, isAvoindata, isPtaAineisto)", example = "[\"isService\"]")
 		private List<String> types = new ArrayList<>();
 		@Schema(description = "List of included topic categories", example = "[\"category\"]")
 		private List<String> topicCategories = new ArrayList<>();
-		@Schema(description = "List of included keywords", example = "[\"Osoitteet\", \"Ortoilmakuvat\"]")
+		@Schema(description = "List of included INSPIRE keywords", example = "[\"Osoitteet\", \"Ortoilmakuvat\"]")
 		private List<String> keywordsInspire = new ArrayList<>();
 		@Schema(description = "List of included distribution formats", example = "[]")
 		private List<String> distributionFormats = new ArrayList<>();
 
 		//TODO: describe
 		// Possibly hidden in API response
-		@Schema(description = "")
+		@Schema(description = "URIs referencing ontological dictionary terms identified from the record description")
 		private List<String> abstractUris = new ArrayList<>();
-		@Schema(description = "")
+		@Schema(description = "URIs referencing ontological dictionary terms identified from the category topics")
 		private List<String> abstractTopicUris = new ArrayList<>();
 
 
