@@ -91,8 +91,6 @@ public class SearchResult {
 
 		//TODO: describe
 		// Possibly hidden in API response
-		@Schema(description = "URIs referencing ontological dictionary terms identified from the record description")
-		private List<String> abstractUris = new ArrayList<>();
 		@Schema(description = "URIs referencing ontological dictionary terms identified from the category topics")
 		private List<String> abstractTopicUris = new ArrayList<>();
 
@@ -167,14 +165,6 @@ public class SearchResult {
 
 		public List<String> getAbstractTopicUris() {
 			return abstractTopicUris;
-		}
-
-		public void setAbstractUris(List<String> abstractUris) {
-			this.abstractUris = abstractUris;
-		}
-
-		public List<String> getAbstractUris() {
-			return abstractUris;
 		}
 
 		public Catalog getCatalog() {

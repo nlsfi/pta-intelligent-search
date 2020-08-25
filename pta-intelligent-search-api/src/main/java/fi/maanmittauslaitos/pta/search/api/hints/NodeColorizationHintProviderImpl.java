@@ -85,11 +85,6 @@ public class NodeColorizationHintProviderImpl implements HintProvider {
 			public List<String> getHints(SearchResponse response, List<Hit> hits) {
 						
 				Set<IRI> iris = new HashSet<>();
-				for (Hit hit : hits) {
-					for (String uri : hit.getAbstractUris()) {
-						iris.add(vf.createIRI(uri));
-					}
-				}
 				
 				Map<IRI, Double> colorized = colorize(iris);
 				

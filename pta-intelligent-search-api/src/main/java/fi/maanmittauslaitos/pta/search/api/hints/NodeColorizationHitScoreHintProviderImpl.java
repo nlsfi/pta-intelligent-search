@@ -78,11 +78,6 @@ public class NodeColorizationHitScoreHintProviderImpl extends AbstractHintProvid
 						iris.add(new AbstractMap.SimpleEntry<IRI, Double>(vf.createIRI(uri), hit.getScore()));
 					}
 		
-					// Use raw abstract uris just-in-case
-					for (String uri : hit.getAbstractUris()) {
-						iris.add(new AbstractMap.SimpleEntry<IRI, Double>(vf.createIRI(uri), hit.getScore() * 0.1));
-					}
-		
 				}
 				
 				Map<IRI, Double> colorized = colorize(iris);
