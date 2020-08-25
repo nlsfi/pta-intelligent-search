@@ -70,15 +70,9 @@ public class NodeColorizationHitScoreHintProviderImpl extends AbstractHintProvid
 		return new HintExtractor() {
 			
 			@Override
+			//TODO: Check if this does anything anymore
 			public List<String> getHints(SearchResponse response, List<Hit> hits) {
 				Set<Entry<IRI, Double>> iris = new HashSet<>();
-				for (Hit hit : hits) {
-					// Topics are stronger hints
-					for (String uri : hit.getAbstractTopicUris()) {
-						iris.add(new AbstractMap.SimpleEntry<IRI, Double>(vf.createIRI(uri), hit.getScore()));
-					}
-		
-				}
 				
 				Map<IRI, Double> colorized = colorize(iris);
 				

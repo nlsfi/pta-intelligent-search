@@ -89,12 +89,6 @@ public class SearchResult {
 		@Schema(description = "List of included distribution formats", example = "[]")
 		private List<String> distributionFormats = new ArrayList<>();
 
-		//TODO: describe
-		// Possibly hidden in API response
-		@Schema(description = "URIs referencing ontological dictionary terms identified from the category topics")
-		private List<String> abstractTopicUris = new ArrayList<>();
-
-
 		public void setText(List<HitText> text) {
 			this.text = text;
 		}
@@ -157,14 +151,6 @@ public class SearchResult {
 
 		public List<String> getTypes() {
 			return types;
-		}
-
-		public void setAbstractTopicUris(List<String> abstractTopicUris) {
-			this.abstractTopicUris = abstractTopicUris;
-		}
-
-		public List<String> getAbstractTopicUris() {
-			return abstractTopicUris;
 		}
 
 		public Catalog getCatalog() {
