@@ -12,8 +12,6 @@ public class SearchResult {
 	private Long startIndex;
 	@Schema(description = "Number of hits contained in the response", example = "1")
 	private Long totalHits;
-	@Schema(description = "The language used for the query", example = "FI")
-	private QueryLanguage queryLanguage;
 	@Schema(description = "List of hits")
 	private List<Hit> hits = new ArrayList<>();
 	@Schema(description = "Hints used for the search (deprecated)", example = "[]")
@@ -35,14 +33,6 @@ public class SearchResult {
 
 	public Long getTotalHits() {
 		return totalHits;
-	}
-
-	public void setQueryLanguage(QueryLanguage queryLanguage) {
-		this.queryLanguage = queryLanguage;
-	}
-
-	public QueryLanguage getQueryLanguage() {
-		return queryLanguage;
 	}
 
 	public List<String> getHints() {
@@ -267,64 +257,6 @@ public class SearchResult {
 			ret.setId(id);
 			ret.setCount(count);
 			return ret;
-		}
-	}
-
-	@Schema(description = "Describes the language used for the search.")
-	public static class QueryLanguage {
-		@Schema(description = "The language used for querying", example = "FI")
-		private String used;
-		@Schema(description = "The language that was deduced by the search", example = "FI")
-		private String deduced;
-		@Schema(description = "The score", example = "1")
-		private List<QueryLanguageScore> scores;
-
-		public void setUsed(String used) {
-			this.used = used;
-		}
-
-		public String getUsed() {
-			return used;
-		}
-
-		public void setDeduced(String deduced) {
-			this.deduced = deduced;
-		}
-
-		public String getDeduced() {
-			return deduced;
-		}
-
-		public void setScores(List<QueryLanguageScore> scores) {
-			this.scores = scores;
-		}
-
-		public List<QueryLanguageScore> getScores() {
-			return scores;
-		}
-	}
-
-	@Schema(description = "Query language score")
-	public static class QueryLanguageScore {
-		@Schema(description = "Query language code", example = "FI")
-		private String language;
-		@Schema(description = "Weighted score of the language when query language was deduced", example = "1")
-		private Integer score;
-
-		public void setLanguage(String language) {
-			this.language = language;
-		}
-
-		public String getLanguage() {
-			return language;
-		}
-
-		public void setScore(Integer score) {
-			this.score = score;
-		}
-
-		public Integer getScore() {
-			return score;
 		}
 	}
 

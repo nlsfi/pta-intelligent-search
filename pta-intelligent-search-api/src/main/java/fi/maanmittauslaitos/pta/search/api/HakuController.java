@@ -4,8 +4,6 @@ import fi.maanmittauslaitos.pta.search.api.language.LanguageDetectionResult;
 import fi.maanmittauslaitos.pta.search.api.language.LanguageDetector;
 import fi.maanmittauslaitos.pta.search.api.model.SearchQuery;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult;
-import fi.maanmittauslaitos.pta.search.api.model.SearchResult.QueryLanguage;
-import fi.maanmittauslaitos.pta.search.api.model.SearchResult.QueryLanguageScore;
 import fi.maanmittauslaitos.pta.search.api.search.HakuKone;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
@@ -82,24 +80,7 @@ public class HakuController {
 		
 		SearchResult tulos = hakukone.haku(pyynto, language);
 		
-		QueryLanguage queryLanguage = createQueryLanguage(language, detection.v1(), detection.v2());
-		tulos.setQueryLanguage(queryLanguage);
-		
 		return tulos;
-	}
-
-	private QueryLanguage createQueryLanguage(Language used, Language deduced, LanguageDetectionResult ldr) {
-		QueryLanguage ret = new QueryLanguage();
-		ret.setUsed(used.toString());
-		ret.setDeduced(deduced.toString());
-		ret.setScores(new ArrayList<>());
-		for (Language lang : ldr.getPotentialLanguages()) {
-			QueryLanguageScore qls = new QueryLanguageScore();
-			qls.setLanguage(lang.toString());
-			qls.setScore(ldr.getScoreForLanguage(lang));
-			ret.getScores().add(qls);
-		}
-		return ret;
 	}
 
 	private Tuple<Language, LanguageDetectionResult> deduceLanguage(SearchQuery pyynto, Language languageHint) {
