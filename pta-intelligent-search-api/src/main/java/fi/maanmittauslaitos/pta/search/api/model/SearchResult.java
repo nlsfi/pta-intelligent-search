@@ -14,8 +14,9 @@ public class SearchResult {
 	private Long totalHits;
 	@Schema(description = "List of hits")
 	private List<Hit> hits = new ArrayList<>();
-	@Schema(description = "Hints used for the search (deprecated)", example = "[]")
-	private List<String> hints = new ArrayList<>();
+	//Hints, can be added back to search results by uncommenting the realted code in this file as well as FacetedElasticSearchhakuKoneImpl
+	//@Schema(description = "Hints used for the search (deprecated)", example = "[]")
+	//private List<String> hints = new ArrayList<>();
 	@Schema(description = "Facets that are contained in the results that can be used to refine the query", example = "{\"types\": [{\"id\": \"isService\",\"count\": 1}]}")
 	private Map<String, List<Facet>> facets = new HashMap<>();
 
@@ -34,7 +35,7 @@ public class SearchResult {
 	public Long getTotalHits() {
 		return totalHits;
 	}
-
+	/*
 	public List<String> getHints() {
 		return hints;
 	}
@@ -42,7 +43,7 @@ public class SearchResult {
 	public void setHints(List<String> hints) {
 		this.hints = hints;
 	}
-
+	*/
 	public List<Hit> getHits() {
 		return hits;
 	}

@@ -219,7 +219,7 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 		tulos.getFacets().put(FACETS_TYPES, combineParsedSumFacets(aggregations, FACETS_TYPE_ALL));
 		
 		// Do the hints	
-		tulos.setHints(hintExtractor.getHints(response, tulos.getHits()));
+		//tulos.setHints(hintExtractor.getHints(response, tulos.getHits()));
 		
 		return tulos;
 	}
