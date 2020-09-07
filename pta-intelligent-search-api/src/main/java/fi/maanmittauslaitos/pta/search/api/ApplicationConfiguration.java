@@ -3,7 +3,9 @@ package fi.maanmittauslaitos.pta.search.api;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
+import fi.maanmittauslaitos.pta.search.api.hints.AbstractHintProvider;
 import fi.maanmittauslaitos.pta.search.api.hints.FacetHintProviderImpl;
+import fi.maanmittauslaitos.pta.search.api.hints.HintExtractor;
 import fi.maanmittauslaitos.pta.search.api.hints.HintProvider;
 import fi.maanmittauslaitos.pta.search.api.language.LanguageDetector;
 import fi.maanmittauslaitos.pta.search.api.language.LuceneAnalyzerStemmer;
@@ -34,6 +36,7 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -539,6 +542,16 @@ public class ApplicationConfiguration {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**");
+			}
+		};
+	}
+
+	@Bean
+	public HintProvider emptyHintProvider() {
+		return new AbstractHintProvider() {
+			@Override
+			public HintExtractor registerHintProvider(List<String> pyyntoTerms, SearchSourceBuilder searchSourceBuilder, Language language) {
+				return null;
 			}
 		};
 	}

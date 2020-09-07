@@ -83,7 +83,7 @@ public class HakuController {
 		return tulos;
 	}
 
-	private Tuple<Language, LanguageDetectionResult> deduceLanguage(SearchQuery pyynto, Language languageHint) {
+	public Tuple<Language, LanguageDetectionResult> deduceLanguage(SearchQuery pyynto, Language languageHint) {
 		Language language;
 		
 		LanguageDetectionResult ldr = languageDetector.detectLanguage(pyynto.getQuery());
