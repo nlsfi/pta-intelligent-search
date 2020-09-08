@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nls.fi</groupId>
 	<artifactId>pta-intelligent-search-metadata-annotation</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.2-SNAPSHOT</version>
 
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>nls.fi</groupId>
 			<artifactId>pta-intelligent-search-metadata-extractor</artifactId>
-			<version>1.1-SNAPSHOT</version>
+			<version>1.2-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
