@@ -1,17 +1,23 @@
 package fi.maanmittauslaitos.pta.search.api.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class SearchResult {
+	@Schema(description = "Start index of pagination", example = "0")
 	private Long startIndex;
+	@Schema(description = "Number of hits contained in the response", example = "1")
 	private Long totalHits;
-	private QueryLanguage queryLanguage;
+	@Schema(description = "List of hits")
 	private List<Hit> hits = new ArrayList<>();
-	private List<String> hints = new ArrayList<>();
-
+	//Hints, can be added back to search results by uncommenting the realted code in this file as well as FacetedElasticSearchhakuKoneImpl
+	//@Schema(description = "Hints used for the search (deprecated)", example = "[]")
+	//private List<String> hints = new ArrayList<>();
+	@Schema(description = "Facets that are contained in the results that can be used to refine the query", example = "{\"types\": [{\"id\": \"isService\",\"count\": 1}]}")
 	private Map<String, List<Facet>> facets = new HashMap<>();
 
 	public void setStartIndex(Long startIndex) {
@@ -29,15 +35,7 @@ public class SearchResult {
 	public Long getTotalHits() {
 		return totalHits;
 	}
-
-	public void setQueryLanguage(QueryLanguage queryLanguage) {
-		this.queryLanguage = queryLanguage;
-	}
-
-	public QueryLanguage getQueryLanguage() {
-		return queryLanguage;
-	}
-
+	/*
 	public List<String> getHints() {
 		return hints;
 	}
@@ -45,7 +43,7 @@ public class SearchResult {
 	public void setHints(List<String> hints) {
 		this.hints = hints;
 	}
-
+	*/
 	public List<Hit> getHits() {
 		return hits;
 	}
@@ -63,20 +61,24 @@ public class SearchResult {
 	}
 
 	public static class Hit {
+		@Schema(description = "Textual descriptions of the results in multiple languages")
 		private List<HitText> text = new ArrayList<>();
+		@Schema(description = "Score determines how well result matches the search terms", example = "1")
 		private Double score;
+		@Schema(description = "The elastic search index id", example = "c43810c7-b9a8-4641-a8d0-2a25071ae22e")
 		private String id;
+		@Schema(description = "Result date", example = "2020-01-27T10:39:23")
 		private String dateStamp;
+		@Schema(description = "The catalog that the result is from")
 		private Catalog catalog;
+		@Schema(description = "List of included types (possible values include isService, isDataset, isAvoindata, isPtaAineisto)", example = "[\"isService\"]")
 		private List<String> types = new ArrayList<>();
+		@Schema(description = "List of included topic categories", example = "[\"category\"]")
 		private List<String> topicCategories = new ArrayList<>();
+		@Schema(description = "List of included INSPIRE keywords", example = "[\"Osoitteet\", \"Ortoilmakuvat\"]")
 		private List<String> keywordsInspire = new ArrayList<>();
+		@Schema(description = "List of included distribution formats", example = "[]")
 		private List<String> distributionFormats = new ArrayList<>();
-
-		// Possibly hidden in API response
-		private List<String> abstractUris = new ArrayList<>();
-		private List<String> abstractTopicUris = new ArrayList<>();
-
 
 		public void setText(List<HitText> text) {
 			this.text = text;
@@ -142,22 +144,6 @@ public class SearchResult {
 			return types;
 		}
 
-		public void setAbstractTopicUris(List<String> abstractTopicUris) {
-			this.abstractTopicUris = abstractTopicUris;
-		}
-
-		public List<String> getAbstractTopicUris() {
-			return abstractTopicUris;
-		}
-
-		public void setAbstractUris(List<String> abstractUris) {
-			this.abstractUris = abstractUris;
-		}
-
-		public List<String> getAbstractUris() {
-			return abstractUris;
-		}
-
 		public Catalog getCatalog() {
 			return catalog;
 		}
@@ -168,10 +154,15 @@ public class SearchResult {
 
 	}
 
+	@Schema(description = "Document that matched search query")
 	public static class HitText {
+		@Schema(description = "Text language", example = "FI")
 		private String lang;
+		@Schema(description = "Text title", example = "Lorem ipsum")
 		private String title;
+		@Schema(description = "Text abstract", example = "orem ipsum dolor sit amet, consectetur adipiscing elit. Duis et mattis nisl.")
 		private String abstractText;
+		@Schema(description = "List of organisations that hit text belongs to")
 		private List<HitOrganisation> organisations = new ArrayList<>();
 
 		public void setAbstractText(String abstractText) {
@@ -214,8 +205,11 @@ public class SearchResult {
 			return ret;
 		}
 
+		@Schema(description = "Organisation that the search result belongs to")
 		public static class HitOrganisation {
+			@Schema(description = "Organisation name", example = "Kuopion kaupunki")
 			private String name;
+			@Schema(description = "Organisation role", example = "")
 			private String role;
 
 			public void setName(String name) {
@@ -236,8 +230,11 @@ public class SearchResult {
 		}
 	}
 
+	@Schema(description = "Search result facets")
 	public static class Facet {
+		@Schema(description = "Facet id")
 		private String id;
+		@Schema(description = "Number of results corresponding to this id")
 		private Long count;
 
 		public void setCount(Long count) {
@@ -264,59 +261,10 @@ public class SearchResult {
 		}
 	}
 
-	public static class QueryLanguage {
-		private String used;
-		private String deduced;
-		private List<QueryLanguageScore> scores;
-
-		public void setUsed(String used) {
-			this.used = used;
-		}
-
-		public String getUsed() {
-			return used;
-		}
-
-		public void setDeduced(String deduced) {
-			this.deduced = deduced;
-		}
-
-		public String getDeduced() {
-			return deduced;
-		}
-
-		public void setScores(List<QueryLanguageScore> scores) {
-			this.scores = scores;
-		}
-
-		public List<QueryLanguageScore> getScores() {
-			return scores;
-		}
-	}
-
-	public static class QueryLanguageScore {
-		private String language;
-		private Integer score;
-
-		public void setLanguage(String language) {
-			this.language = language;
-		}
-
-		public String getLanguage() {
-			return language;
-		}
-
-		public void setScore(Integer score) {
-			this.score = score;
-		}
-
-		public Integer getScore() {
-			return score;
-		}
-	}
-
 	public static class Catalog {
+		@Schema(description = "Catalog url", example = "https://paikkatietohakemisto.fi")
 		private String url;
+		@Schema(description = "Catlog type", example = "CSW")
 		private String type;
 
 		public String getUrl() {

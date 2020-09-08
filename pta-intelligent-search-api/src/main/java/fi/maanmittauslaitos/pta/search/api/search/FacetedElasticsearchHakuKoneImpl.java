@@ -195,9 +195,7 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 		SearchRequest request = new SearchRequest(PTAElasticSearchMetadataConstants.INDEX);
 		request.types(PTAElasticSearchMetadataConstants.TYPE);
 		request.source(sourceBuilder);
-		
-		HintExtractor hintExtractor = getHintProvider().registerHintProvider(getQueryProvider().getPyyntoTerms(pyynto, language), sourceBuilder, language);
-		
+
 		SearchResponse response = client.search(request);
 		
 		SearchHits hits = response.getHits();
@@ -219,7 +217,7 @@ public class FacetedElasticsearchHakuKoneImpl implements HakuKone {
 		tulos.getFacets().put(FACETS_TYPES, combineParsedSumFacets(aggregations, FACETS_TYPE_ALL));
 		
 		// Do the hints	
-		tulos.setHints(hintExtractor.getHints(response, tulos.getHits()));
+		//tulos.setHints(hintExtractor.getHints(response, tulos.getHits()));
 		
 		return tulos;
 	}

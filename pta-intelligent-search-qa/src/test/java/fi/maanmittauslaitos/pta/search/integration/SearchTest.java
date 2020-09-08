@@ -136,7 +136,7 @@ public class SearchTest extends SearchTestBase {
 	}
 
 	@Test
-	public void HSLBeforeHSY() throws Exception {
+	public void HSLAndNoHSY() throws Exception {
 		SearchResponse response = getSearchResponse("testcase_hsl.json", "a93a10c6-a3dc-46f3-8ab9-260f423a4b9e");
 
 		List<String> hslIds = Arrays.asList(
@@ -153,12 +153,8 @@ public class SearchTest extends SearchTestBase {
 		then(response.getHits())
 				.extracting(SearchHit::getId)
 				.containsAll(hslIds)
-				.containsSubsequence(hslIds.get(0), hsyIds.get(0))
-				.containsSubsequence(hslIds.get(1), hsyIds.get(0))
-				.containsSubsequence(hslIds.get(1), hsyIds.get(0))
-				.containsSubsequence(hslIds.get(2), hsyIds.get(0))
-				.containsSubsequence(hslIds.get(3), hsyIds.get(0))
-				.containsSubsequence(hslIds.get(4), hsyIds.get(0))
+				.doesNotContain(hsyIds.get(0))
+				.contains(hslIds.get(0), hslIds.get(1), hslIds.get(2), hslIds.get(3), hslIds.get(4))
 		;
 	}
 

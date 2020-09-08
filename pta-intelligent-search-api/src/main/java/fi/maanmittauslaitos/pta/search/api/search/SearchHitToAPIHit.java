@@ -85,8 +85,6 @@ public class SearchHitToAPIHit implements Consumer<SearchHit> {
 		processTypeField(t, "isPtaAineisto", osuma);
 		
 		osuma.setId(t.getId());
-		osuma.setAbstractUris(extractListValue(t.getSourceAsMap().get(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_URI)));
-		osuma.setAbstractTopicUris(extractListValue(t.getSourceAsMap().get(PTAElasticSearchMetadataConstants.FIELD_ABSTRACT_MAUI_URI)));
 		osuma.setScore((double)t.getScore());
 		osuma.setDateStamp(extractStringValue(t.getSourceAsMap().get("datestamp")));
 		osuma.setDistributionFormats(extractListValue(t.getSourceAsMap().get("distributionFormats")));
