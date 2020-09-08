@@ -136,7 +136,7 @@ public class SearchTest extends SearchTestBase {
 	}
 
 	@Test
-	public void HSYAndNoHSL() throws Exception {
+	public void HSLAndNoHSY() throws Exception {
 		SearchResponse response = getSearchResponse("testcase_hsl.json", "a93a10c6-a3dc-46f3-8ab9-260f423a4b9e");
 
 		List<String> hslIds = Arrays.asList(
