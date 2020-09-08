@@ -37,7 +37,8 @@ public class HakuControllerTest {
 
         LanguageDetectionResult detectionResult = result.v2();
 
-        Assert.assertEquals(Arrays.asList(Language.EN, Language.SV), detectionResult.getPotentialLanguages());
+        Assert.assertTrue(detectionResult.getPotentialLanguages().contains(Language.EN));
+        Assert.assertTrue(detectionResult.getPotentialLanguages().contains(Language.SV));
 
         for(Language language : detectionResult.getTopLanguages()) {
             Assert.assertEquals(1, detectionResult.getScoreForLanguage(language));
@@ -55,7 +56,8 @@ public class HakuControllerTest {
 
         LanguageDetectionResult detectionResult = result.v2();
 
-        Assert.assertEquals(Arrays.asList(Language.EN, Language.SV), detectionResult.getPotentialLanguages());
+        Assert.assertTrue(detectionResult.getPotentialLanguages().contains(Language.EN));
+        Assert.assertTrue(detectionResult.getPotentialLanguages().contains(Language.SV));
 
         for(Language language : detectionResult.getTopLanguages()) {
             Assert.assertEquals(1, detectionResult.getScoreForLanguage(language));
@@ -73,7 +75,8 @@ public class HakuControllerTest {
 
         LanguageDetectionResult detectionResult = result.v2();
 
-        Assert.assertEquals(Arrays.asList(Language.EN, Language.SV), detectionResult.getPotentialLanguages());
+        Assert.assertTrue(detectionResult.getPotentialLanguages().contains(Language.EN));
+        Assert.assertTrue(detectionResult.getPotentialLanguages().contains(Language.SV));
 
         for(Language language : detectionResult.getTopLanguages()) {
             Assert.assertEquals(1, detectionResult.getScoreForLanguage(language));
