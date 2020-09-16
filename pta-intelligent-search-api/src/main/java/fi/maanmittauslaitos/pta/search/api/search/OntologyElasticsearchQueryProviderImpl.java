@@ -15,12 +15,14 @@ import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.DisMaxQueryBuilder;
+import org.elasticsearch.index.query.MatchPhraseQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder;
 import org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders;
 
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static fi.maanmittauslaitos.pta.search.elasticsearch.PTAElasticSearchMetadataConstants.FIELD_BEST_MATCHING_REGIONS;
@@ -243,16 +245,32 @@ public class OntologyElasticsearchQueryProviderImpl implements ElasticsearchQuer
 		}
 	}
 
-	private QueryBuilder freetextQuery(String field, String word, double weight, double fuzzyWeight) {
-		DisMaxQueryBuilder query = QueryBuilders.disMaxQuery();
-		query.add(QueryBuilders.termQuery(field, word)
-				.boost((float) weight));
+	private static Pattern HAS_WHITESPACE = Pattern.compile("\\S\\s+\\S");
 
-		if (!getRequireExactWordMatch().contains(word)) {
-			query.add(
-					QueryBuilders.fuzzyQuery(field, word)
-							.boost((float) fuzzyWeight)
-			);
+	public boolean isMultiWord(String word) {
+		return HAS_WHITESPACE.matcher(word).find();
+	}
+	
+	private QueryBuilder freetextQuery(String field, String word, double weight, double fuzzyWeight) {
+		QueryBuilder query;
+		if (isMultiWord(word)) {
+			MatchPhraseQueryBuilder matchPhraseQuery = QueryBuilders.matchPhraseQuery(field, word);
+			matchPhraseQuery.boost((float)weight);
+			
+			query = matchPhraseQuery;
+		} else {
+			DisMaxQueryBuilder dismaxQuery = QueryBuilders.disMaxQuery();
+			dismaxQuery.add(QueryBuilders.termQuery(field, word)
+					.boost((float) weight));
+	
+			if (!getRequireExactWordMatch().contains(word)) {
+				dismaxQuery.add(
+						QueryBuilders.fuzzyQuery(field, word)
+								.boost((float) fuzzyWeight)
+				);
+			}
+
+			query = dismaxQuery;
 		}
 		return query;
 	}
