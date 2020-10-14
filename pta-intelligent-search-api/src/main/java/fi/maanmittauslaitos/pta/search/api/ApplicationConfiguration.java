@@ -42,6 +42,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.web.filter.ForwardedHeaderFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -554,5 +555,11 @@ public class ApplicationConfiguration {
 				return null;
 			}
 		};
+	}
+	
+	// Make sure the server respects x-forwarded-{for|host|proto|port}
+	@Bean
+	public ForwardedHeaderFilter forwardedHeaderFilter() {
+		return new ForwardedHeaderFilter();
 	}
 }
