@@ -24,14 +24,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @OpenAPIDefinition(
 		info = @Info(
 				title = "PTA Intelligent Search API",
-				version = "1.0", description = "", license = @License(name = "", url = ""), contact = @Contact(url = "", name = "", email = "")
+				version = "1.0", description = "This API provides a search for geospatial data and services. The API responds with results from Paikkatietohakemisto and Syke Environmental reports. The search uses natural language processing techniques to index and search records via a simple interface. Queries can be further refined by categories and keywords.", license = @License(name = "", url = ""), contact = @Contact(url = "", name = "", email = "")
 		)
 )
 @Tag(name = "search api", description = "Search for something")
