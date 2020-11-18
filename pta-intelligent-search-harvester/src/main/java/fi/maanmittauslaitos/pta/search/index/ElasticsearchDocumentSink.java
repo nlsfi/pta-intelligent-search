@@ -6,6 +6,7 @@ import fi.maanmittauslaitos.pta.search.documentprocessor.Document;
 import fi.maanmittauslaitos.pta.search.index.ElasticsearchSearchIdsResponse.Hit;
 import fi.maanmittauslaitos.pta.search.utils.HarvesterTracker;
 import org.apache.log4j.Logger;
+import org.apache.xerces.impl.dv.util.Base64;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,7 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * This sink indexes an entire source and finally reomves all documents from ES that were not part of the inde
+ * This sink indexes an entire source and finally removes all documents from ES that were not part of the inde
  * @author v2
  *
  */
@@ -32,6 +33,9 @@ public class ElasticsearchDocumentSink implements DocumentSink {
 	private String index;
 	private String type;
 	private String idField;
+	
+	private String username;
+	private String password;
 	
 	private String defaultResponseCharset = "UTF-8";
 	
@@ -89,6 +93,22 @@ public class ElasticsearchDocumentSink implements DocumentSink {
 		return idField;
 	}
 	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	
 	public void setDefaultResponseCharset(String defaultResponseCharset) {
 		this.defaultResponseCharset = defaultResponseCharset;
 	}
@@ -144,8 +164,8 @@ public class ElasticsearchDocumentSink implements DocumentSink {
 				logger.debug("Requesting list of IDs with pageSize "+pageSize+(from == null ? "" : " (starting from entry "+from+")"));
 				
 				URL url = getSearchIdURL(pageSize, from);
-				HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
-
+				HttpURLConnection httpCon = openConnection(url);
+				
 				int code = httpCon.getResponseCode();
 				if (code != 200) {
 					throw new SinkProcessingException(new Exception("ES returned HTTP "+code));
@@ -183,6 +203,23 @@ public class ElasticsearchDocumentSink implements DocumentSink {
 		idsIndexed = ConcurrentHashMultiset.create();
 	}
 	
+	private HttpURLConnection openConnection(URL url) throws IOException {
+		HttpURLConnection ret = (HttpURLConnection)url.openConnection();
+		String authorization = createAuthorization();
+		if (authorization != null) {
+			ret.addRequestProperty("Authorization", authorization);
+		}
+		return ret;
+	}
+
+	private String createAuthorization() {
+		if (getUsername() == null || getPassword() == null) {
+			return null;
+		}
+		String authString = getUsername()+":"+getPassword();
+		return "Basic "+Base64.encode(authString.getBytes());
+	}
+
 	@Override
 	public int stopIndexing() throws SinkProcessingException {
 		// Remove all IDs that were not indexed during the indexing process
@@ -210,7 +247,7 @@ public class ElasticsearchDocumentSink implements DocumentSink {
 		boolean ret = true;
 		URL deleteURL = getURL(id);
 		
-		HttpURLConnection httpCon = (HttpURLConnection) deleteURL.openConnection();
+		HttpURLConnection httpCon = openConnection(deleteURL);
 		
 		httpCon.setRequestMethod("DELETE");
 		int code = httpCon.getResponseCode();
@@ -228,7 +265,7 @@ public class ElasticsearchDocumentSink implements DocumentSink {
 			String id = doc.getValue(getIdField(), String.class);
 			
 			URL url = getURL(id);
-			HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+			HttpURLConnection httpCon = openConnection(url);
 			
 			httpCon.setRequestProperty("Content-Type", "application/json");
 			httpCon.setDoOutput(true);
@@ -249,8 +286,6 @@ public class ElasticsearchDocumentSink implements DocumentSink {
 				if (!"updated".equals(foo.getResult()) && !"created".equals(foo.getResult())) {
 					logger.warn("Unknown 'result' in response from ElasticSearch: '"+foo.getResult()+"'. created = "+foo.isCreated());
 				}
-
-				Boolean created = foo.isCreated();
 
 				ret = Boolean.TRUE.equals(foo.isCreated()) || "created".equals(foo.getResult()) ? IndexResult.INSERTED : IndexResult.UPDATED;
 				

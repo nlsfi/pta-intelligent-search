@@ -24,6 +24,11 @@ import fi.maanmittauslaitos.pta.search.text.WordCombinationProcessor;
 import fi.maanmittauslaitos.pta.search.text.stemmer.Stemmer;
 import fi.maanmittauslaitos.pta.search.text.stemmer.StemmerFactory;
 import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.analysis.sv.SwedishAnalyzer;
@@ -35,7 +40,9 @@ import org.eclipse.rdf4j.rio.Rio;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.client.RestClientBuilder.HttpClientConfigCallback;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -314,15 +321,34 @@ public class ApplicationConfiguration {
 	@Bean
 	@Profile("default")
 	public ElasticsearchQueryAPI elasticsearchClient() throws UnknownHostException {
-		return new ElasticsearchQueryAPIImpl();
+		String username = System.getenv("ES_USERNAME");
+		String password = System.getenv("ES_PASSWORD");
+		
+		return new ElasticsearchQueryAPIImpl(username, password);
 	}
 
 	public static class ElasticsearchQueryAPIImpl implements ElasticsearchQueryAPI, DisposableBean {
 		private RestHighLevelClient client;
 
-		public ElasticsearchQueryAPIImpl() {
-			client = new RestHighLevelClient(
-					RestClient.builder(new HttpHost("localhost", 9200, "http")));
+		public ElasticsearchQueryAPIImpl(String username, String password) {
+			RestClientBuilder builder = RestClient.builder(new HttpHost("localhost", 9200, "http"));
+			
+			if (username != null && password != null) {
+				final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+				credentialsProvider.setCredentials(AuthScope.ANY, 
+						new UsernamePasswordCredentials(username, password));
+				
+				builder = builder.setHttpClientConfigCallback(new HttpClientConfigCallback() {
+			        @Override
+			        public HttpAsyncClientBuilder customizeHttpClient(
+			                HttpAsyncClientBuilder httpClientBuilder) {
+			            return httpClientBuilder
+			                .setDefaultCredentialsProvider(credentialsProvider);
+			        }
+			    });
+			}
+
+			client = new RestHighLevelClient(builder);
 		}
 
 		@Override

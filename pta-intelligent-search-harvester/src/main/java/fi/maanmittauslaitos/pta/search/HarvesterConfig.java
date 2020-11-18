@@ -174,11 +174,17 @@ public class HarvesterConfig {
 	}
 
 	public DocumentSink getDocumentSink(HarvesterTracker harvesterTracker) {
+		String username = System.getenv("ES_USERNAME");
+		String password = System.getenv("ES_PASSWORD");
+		
+		
 		ElasticsearchDocumentSink ret = new ElasticsearchDocumentSink();
 		ret.setTracker(harvesterTracker);
 		ret.setHostname("localhost");
 		ret.setPort(9200);
 		ret.setProtocol("http");
+		ret.setUsername(username);
+		ret.setPassword(password);
 
 		ret.setIndex(PTAElasticSearchMetadataConstants.INDEX);
 		ret.setType(PTAElasticSearchMetadataConstants.TYPE);
