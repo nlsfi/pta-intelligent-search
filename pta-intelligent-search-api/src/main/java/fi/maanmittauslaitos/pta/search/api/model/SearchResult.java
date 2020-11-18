@@ -14,7 +14,7 @@ public class SearchResult {
 	private Long totalHits;
 	@Schema(description = "List of hits")
 	private List<Hit> hits = new ArrayList<>();
-	//Hints, can be added back to search results by uncommenting the realted code in this file as well as FacetedElasticSearchhakuKoneImpl
+	//Hints, can be added back to search results by uncommenting the related code in this file as well as FacetedElasticSearchhakuKoneImpl
 	//@Schema(description = "Hints used for the search (deprecated)", example = "[]")
 	//private List<String> hints = new ArrayList<>();
 	@Schema(description = "Facets that are contained in the results that can be used to refine the query", example = "{\"types\": [{\"id\": \"isService\",\"count\": 1}]}")
@@ -79,7 +79,9 @@ public class SearchResult {
 		private List<String> keywordsInspire = new ArrayList<>();
 		@Schema(description = "List of included distribution formats", example = "[]")
 		private List<String> distributionFormats = new ArrayList<>();
-
+		@Schema(description = "Download links")
+		private List<DownloadLink> downloadLinks = new ArrayList<>();
+		
 		public void setText(List<HitText> text) {
 			this.text = text;
 		}
@@ -151,9 +153,61 @@ public class SearchResult {
 		public void setCatalog(Catalog catalog) {
 			this.catalog = catalog;
 		}
+		
+		public void setDownloadLinks(List<DownloadLink> downloadLinks) {
+			this.downloadLinks = downloadLinks;
+		}
+		
+		public List<DownloadLink> getDownloadLinks() {
+			return downloadLinks;
+		}
 
 	}
 
+	@Schema(description = "Link to download the dataset")
+	public static class DownloadLink {
+		@Schema(description = "Title for the link", example = "Tilastokeskuksen palvelurajapinta (WMS) Väestöruutuaineisto 1 km x 1 km")
+		private String title;
+		@Schema(description = "Protocol for the link contents", example = "OGC:WMS-1.3.0-http-get-capabilities")
+		private String protocol;
+		@Schema(description = "Link to resource", example = "http://geo.stat.fi/geoserver/vaestoruutu/wms?service=wms&%20version=1.3.0&request=GetCapabilities")
+		private String url;
+		@Schema(description = "Description of this link", example = "Tilastokeskuksen palvelurajapinta (WMS) Väestöruutuaineisto")
+		private String desc;
+		
+		public void setDesc(String desc) {
+			this.desc = desc;
+		}
+		
+		public String getDesc() {
+			return desc;
+		}
+		
+		public void setProtocol(String protocol) {
+			this.protocol = protocol;
+		}
+		
+		public String getProtocol() {
+			return protocol;
+		}
+		
+		public void setTitle(String title) {
+			this.title = title;
+		}
+		
+		public String getTitle() {
+			return title;
+		}
+		
+		public void setUrl(String url) {
+			this.url = url;
+		}
+		
+		public String getUrl() {
+			return url;
+		}
+	}
+	
 	@Schema(description = "Document that matched search query")
 	public static class HitText {
 		@Schema(description = "Text language", example = "FI")

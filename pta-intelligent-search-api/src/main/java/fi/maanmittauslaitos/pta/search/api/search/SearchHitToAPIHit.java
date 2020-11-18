@@ -2,6 +2,7 @@ package fi.maanmittauslaitos.pta.search.api.search;
 
 import fi.maanmittauslaitos.pta.search.api.Language;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult;
+import fi.maanmittauslaitos.pta.search.api.model.SearchResult.DownloadLink;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.Hit;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.HitText;
 import fi.maanmittauslaitos.pta.search.api.model.SearchResult.HitText.HitOrganisation;
@@ -88,6 +89,7 @@ public class SearchHitToAPIHit implements Consumer<SearchHit> {
 		osuma.setScore((double)t.getScore());
 		osuma.setDateStamp(extractStringValue(t.getSourceAsMap().get("datestamp")));
 		osuma.setDistributionFormats(extractListValue(t.getSourceAsMap().get("distributionFormats")));
+		osuma.setDownloadLinks(extractDownloadLinks(t.getSourceAsMap().get("downloadLinks")));
 		osuma.setKeywordsInspire(extractListValue(t.getSourceAsMap().get("keywordsInspire")));
 		osuma.setTopicCategories(extractListValue(t.getSourceAsMap().get("topicCategories")));
 
@@ -101,6 +103,25 @@ public class SearchHitToAPIHit implements Consumer<SearchHit> {
 		osuma.setCatalog(hitCatalog);
 		
 		tulos.getHits().add(osuma);
+	}
+
+	private List<DownloadLink> extractDownloadLinks(Object object) {
+		List<DownloadLink> ret = new ArrayList<SearchResult.DownloadLink>();
+		
+		if (object instanceof Collection) {
+			
+			for (Map<String,Object> o : (Collection<Map<String,Object>>)object) {
+				DownloadLink dl = new DownloadLink();
+				dl.setTitle((String)o.get("title"));
+				dl.setProtocol((String)o.get("protocol"));
+				dl.setUrl((String)o.get("url"));
+				dl.setDesc((String)o.get("desc"));
+				ret.add(dl);
+			}
+			
+		}
+		
+		return ret;
 	}
 
 	private List<String> extractListValue(Object obj) {
